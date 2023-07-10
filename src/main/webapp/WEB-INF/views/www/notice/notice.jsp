@@ -385,22 +385,22 @@
 							<li class="nav-item" role="presentation">
 								<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
 									data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-									aria-selected="true">Home</button>
+									aria-selected="true">전체</button>
 							</li>
 							<li class="nav-item" role="presentation">
 								<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
 									data-bs-target="#pills-profile" type="button" role="tab"
-									aria-controls="pills-profile" aria-selected="false">Profile</button>
+									aria-controls="pills-profile" aria-selected="false">펀딩</button>
 							</li>
 							<li class="nav-item" role="presentation">
 								<button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
 									data-bs-target="#pills-contact" type="button" role="tab"
-									aria-controls="pills-contact" aria-selected="false">Contact</button>
+									aria-controls="pills-contact" aria-selected="false">스토어</button>
 							</li>
 							<li class="nav-item" role="presentation">
 								<button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill"
 									data-bs-target="#pills-disabled" type="button" role="tab"
-									aria-controls="pills-disabled" aria-selected="false" disabled>Disabled</button>
+									aria-controls="pills-disabled" aria-selected="false" disabled>기부</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContent">
