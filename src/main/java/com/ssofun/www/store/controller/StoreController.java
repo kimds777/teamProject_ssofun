@@ -201,7 +201,7 @@ public class StoreController {
 
 	            System.out.println("파일명: " + multipartFile.getOriginalFilename());
 
-	            String rootFolder = "C:/uploadFiles/";
+	            String rootFolder = "C:/ssofunUploadFiles/";
 
 	            String saveFileName = multipartFile.getOriginalFilename();
 
