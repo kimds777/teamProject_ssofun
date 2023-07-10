@@ -17,12 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssofun.admin.store.service.StoreAdminService;
-import com.ssofun.dto.DeliveryDto;
-import com.ssofun.dto.ProductCategoryDto;
-import com.ssofun.dto.ProductCategoryTypeDto;
-import com.ssofun.dto.ProductDto;
-import com.ssofun.dto.ProductOrderItemDto;
-import com.ssofun.dto.ProductThumbnailDto;
+import com.ssofun.dto.*;
 
 @Controller
 @RequestMapping("/admin/*")
