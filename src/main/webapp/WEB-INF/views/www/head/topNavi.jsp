@@ -12,7 +12,8 @@
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
 
-<link href="../../resources/css/style.css" rel="stylesheet"	type="text/css">
+<link href="../../resources/css/main.css" rel="stylesheet"	type="text/css">
+<link href="../../resources/css/head.css" rel="stylesheet"	type="text/css">
 <link href="../../resources/css/productPage.css" rel="stylesheet" type="text/css">
 <link href="../../resources/css/productOrder.css" rel="stylesheet" type="text/css">
 <link href="../../resources/css/cartPage.css" rel="stylesheet" type="text/css">

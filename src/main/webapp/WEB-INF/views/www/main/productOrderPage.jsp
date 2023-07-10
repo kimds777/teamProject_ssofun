@@ -18,13 +18,9 @@
 <title>Document</title>
 </head>
 <body>
-	<div class="container">
-        <div class="row">
-        	<div class="col">
-        		<jsp:include page="../head/topNavi.jsp"></jsp:include>
-        	</div>
-        </div>
-    </div>
+
+     <jsp:include page="../head/topNavi.jsp"></jsp:include>
+
 	
 	 <div class="container">
        <div class="row">

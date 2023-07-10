@@ -19,14 +19,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
-        <div class="row">
-        	<div class="col">
-        		<jsp:include page="../head/topNavi.jsp"></jsp:include>
-        	</div>
-        </div>
-    </div>
-
+	
+	<jsp:include page="../head/topNavi.jsp"></jsp:include>
+        
 	<div class="con">
 		<div class="container">
 			<div class="row">
@@ -36,7 +31,7 @@
 							<c:forEach items="${detail }" var="list">
 								<div class="row">
 									<div class="col">
-										<img src="/uploadFiles/${list.thumbnail_name}"
+										<img src="/ssofunUploadFiles/${list.thumbnail_name}"
 											alt="thumb image" class="thumbnail-img"
 											style="width: 65px; height: 65px;">
 									</div>
@@ -98,6 +93,7 @@
 
 						<div class="row">
 							<div class="col-pyment">결제금액</div>
+							<div class="col"></div>
 							<div class="col-last">
 								<div class="row">
 									<div class="col-pay">

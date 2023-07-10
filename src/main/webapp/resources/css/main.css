@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+ul, li{
+	list-style-type: none;
+	text-align: center
+}
+a { 
+	text-decoration:none;
+	color: inherit; /* 링크의 색상 제거 */ 
+}
+.baby-product-link:hover .col-ex {
+    color: #0073e9;
+    text-decoration: underline;
+}
+.baby-product-link {
+    display: block;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+}
+.shopping-menu-list li a:hover {
+    text-decoration: none;
+}
+p{
+	color:gray;
+	width : 51px;
+	height : 20px;
+}
+.c1 {
+	width : 1200px;
+	height : 100px;
+}
+
+.r1{
+	margin-top: 17px;
+}
+
+.r2{
+	margin-top: 12px;	
+}
+.r3{
+	margin-top: 30px;
+	width:200px;
+}
+.row-radius{
+	border-radius:10%;
+}
+.col-name{
+	width : 55px;
+	height : 40px;
+}
+.col-ex {
+  height: 50px; /* 텍스트 영역의 높이를 지정합니다. */
+  display: -webkit-box; /* Webkit 기반 브라우저에서 사용하는 flexbox 컨테이너로 설정합니다. */
+  -webkit-line-clamp: 2; /* 텍스트를 2줄로 제한합니다. */
+  -webkit-box-orient: vertical; /* 텍스트를 세로 방향으로 정렬합니다. */
+  text-overflow: ellipsis;
+  overflow: hidden; /* 텍스트를 넘치는 부분을 숨깁니다. */
+}
+.col-won1 {
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    margin-top: 16px;
+}
+
+.col-won2 {
+	width: 100px;
+	height: 30px;
+	color: #BFBFBF;
+	margin-top: 16px;
+}
+.col-a{
+	width:408px;
+	border-bottom: 1px solid; black;
+}
+.banner {
+	width: 1200px;
+	height: 350px;
+	margin-bottom: 44px
+}
+
+.ca {
+	margin-bottom: 72px
+}
+
+.Image {
+	margin-bottom: 44px;
+	
+}
+.img-rounded {
+	border-radius: 2%;
+}
+.col-review{
+	width: 120px;
+	height: 35px;
+	margin-top : 20px;
+	font-size : 24px;
+}
+.col-foot{
+	background-color:#D9D9D9;
+	height:124px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

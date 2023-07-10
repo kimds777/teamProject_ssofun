@@ -114,18 +114,7 @@ p {
 	height: 46px;
 }
 
-.col-won1 {
-	width: 150px;
-	height: 46px;
-	font-size: 30px;
-}
 
-.col-won2 {
-	width: 100px;
-	height: 30px;
-	color: #BFBFBF;
-	margin-top: 16px;
-}
 
 .col-ship {
 	width: 290px;
@@ -289,13 +278,6 @@ p {
 	cursor: pointer;
 }
 
-.col-review{
-	width: 120px;
-	height: 35px;
-	margin-top : 109px;
-	font-size : 24px;
-}
-
 .col-review-box{
 	width: 150px;
 	height: 150px;
@@ -324,17 +306,6 @@ p {
 	color: black;
 }
 
-.renewal-header {
-	position: relative;
-	height: 50px;
-	background-color: #fff;
-	border-bottom: 1px solid #eee;
-}
-
-.search-header {
-	width: 1200px;
-	margin: 0 auto;
-}
 
 .category-btn {
 	position: absolute;

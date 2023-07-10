@@ -26,17 +26,6 @@ td {
 	color: black;
 }
 
-.renewal-header {
-	position: relative;
-	height: 50px;
-	background-color: #fff;
-	border-bottom: 1px solid #eee;
-}
-
-.search-header {
-	width: 1200px;
-	margin: 0 auto;
-}
 
 .category-btn {
 	position: absolute;
