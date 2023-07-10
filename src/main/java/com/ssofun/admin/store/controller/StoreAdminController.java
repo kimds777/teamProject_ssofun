@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,13 +30,29 @@ public class StoreAdminController {
    
    // 관리자 메인페이지 
    @RequestMapping("adminMainPage")
-   public String adminMainPage() {
+   public String adminMainPage(HttpSession session) {
+	   
+	  AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+	  
+	  session.setAttribute("shopAdmin", shopAdmin);
+	   
       return "admin/adminMainPage";
    }
    
+   // 로그아웃
+   @RequestMapping("logoutProcess")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:./adminMainPage";
+	}
+   
    // 상품등록 페이지 
    @RequestMapping("productInsertPage")
-   public String productInsertPage() {
+   public String productInsertPage(ProductCategoryTypeDto productCategoryTypeDto, Model model) {
+	   
+	   List<ProductCategoryTypeDto> categoryTypeList = storeAdminService.categoryTypeList(productCategoryTypeDto);
+	   
+	   model.addAttribute("categoryTypeList", categoryTypeList);
       
       return "admin/productInsertPage";
    }
@@ -77,20 +95,21 @@ public class StoreAdminController {
          }
          
       }
-      
-      storeAdminService.productThumbnaillInsert(params,productThumbnailList);
-      storeAdminService.productcategoryInsert(productCategoryDto);
       storeAdminService.productInsert(productDto);
+      storeAdminService.productcategoryInsert(productCategoryDto);
+      storeAdminService.productThumbnaillInsert(params,productThumbnailList);
+      
+
       
       return "redirect:./adminMainPage";
    }
    
    // 상품 리스트페이지
    @RequestMapping("productListPage")
-   public String productListPage(ProductCategoryDto productCategoryDto, Model model) {
+   public String productListPage(ProductCategoryDto productCategoryDto,Model model) {
 	   
 	   List<ProductCategoryDto> productList = storeAdminService.selectAll(productCategoryDto);
-	   
+	  	   
 	   model.addAttribute("productList", productList);
 	   
 	   return "admin/productListPage";
@@ -227,13 +246,16 @@ public class StoreAdminController {
 	   return "redirect:./orderItemInsertPage";
    }
    
-   // 상품아이템리스트
+   // 오더리스트
    @RequestMapping("orderItemListPage")
-   public String orderItemListPage(ProductOrderItemDto productOrderItemDto,ProductCategoryDto productCategoryDto, Model model) {
+   public String orderItemListPage( Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto) {
 	   
-	   List<ProductOrderItemDto> productOrderItemList = storeAdminService.productOrderItemList(productOrderItemDto);
+	   List<ProductOrderItemDto> orderItemCategoryList = storeAdminService.productOrderItemList(productOrderItemDto);
 	   
-	   model.addAttribute("productOrderItemList", productOrderItemList);
+	   List<ProductOrderStatusDto> orderStatusList = storeAdminService.orderStatusList(productOrderStatusDto);
+	   
+	   model.addAttribute("orderItemCategoryList", orderItemCategoryList);
+	   model.addAttribute("orderStatusList", orderStatusList);
 	   
 	   return "admin/orderItemListPage";
    }

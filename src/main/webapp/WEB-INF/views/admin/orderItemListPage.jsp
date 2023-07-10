@@ -8,17 +8,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tables | Gull Admin Template</title>
+    <title>Dashboard v1 | Gull Admin Template</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
-    <link href="../resources/dist-assets/css/themes/lite-purple.min.css" rel="stylesheet" />
-    <link href="../resources/dist-assets/css/plugins/perfect-scrollbar.min.css" rel="stylesheet" />
+    <link href="../resources/dist-assets/css/themes/lite-purple.css" rel="stylesheet" />
+    <link href="../resources/dist-assets/css/plugins/perfect-scrollbar.css" rel="stylesheet" />
 </head>
 
 <body class="text-left">
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
             <div class="logo">
-                <img src="../resources/dist-assets/images/logo.png" alt="">
+                <img src="../../resources/dist-assets/images/logo.png" alt="">
             </div>
             <div class="menu-toggle">
                 <div></div>
@@ -27,48 +27,6 @@
             </div>
             <div class="d-flex align-items-center">
                 <!-- Mega menu -->
-                <div class="dropdown mega-menu d-none d-md-block">
-                    <a href="#" class="btn text-muted dropdown-toggle mr-3" id="dropdownMegaMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mega Menu</a>
-                    <div class="dropdown-menu text-left" aria-labelledby="dropdownMenuButton">
-                        <div class="row m-0">
-                            <div class="col-md-4 p-4 bg-img">
-                                <h2 class="title">Mega Menu <br> Sidebar</h2>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores natus laboriosam fugit, consequatur.
-                                </p>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem odio amet eos dolore suscipit placeat.</p>
-                                <button class="btn btn-lg btn-rounded btn-outline-warning">Learn More</button>
-                            </div>
-                            <div class="col-md-4 p-4">
-                                <p class="text-primary text--cap border-bottom-primary d-inline-block">Features</p>
-                                <div class="menu-icon-grid w-auto p-0">
-                                    <a href="#"><i class="i-Shop-4"></i> Home</a>
-                                    <a href="#"><i class="i-Library"></i> UI Kits</a>
-                                    <a href="#"><i class="i-Drop"></i> Apps</a>
-                                    <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
-                                    <a href="#"><i class="i-Checked-User"></i> Sessions</a>
-                                    <a href="#"><i class="i-Ambulance"></i> Support</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 p-4">
-                                <p class="text-primary text--cap border-bottom-primary d-inline-block">Components</p>
-                                <ul class="links">
-                                    <li><a href="accordion.html">Accordion</a></li>
-                                    <li><a href="alerts.html">Alerts</a></li>
-                                    <li><a href="buttons.html">Buttons</a></li>
-                                    <li><a href="badges.html">Badges</a></li>
-                                    <li><a href="carousel.html">Carousels</a></li>
-                                    <li><a href="lists.html">Lists</a></li>
-                                    <li><a href="popover.html">Popover</a></li>
-                                    <li><a href="tables.html">Tables</a></li>
-                                    <li><a href="datatables.html">Datatables</a></li>
-                                    <li><a href="modals.html">Modals</a></li>
-                                    <li><a href="nouislider.html">Sliders</a></li>
-                                    <li><a href="tabs.html">Tabs</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- / Mega menu -->
                 <div class="search-bar">
                     <input type="text" placeholder="Search">
@@ -78,6 +36,24 @@
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
+							<c:if test="${empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link"
+										href="./loginPage">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
+							<c:if test="${!empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
+									</li>
+									<li class="nav-item"><a class="nav-link"
+										href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
                 <!-- Grid menu Dropdown -->
                 <div class="dropdown">

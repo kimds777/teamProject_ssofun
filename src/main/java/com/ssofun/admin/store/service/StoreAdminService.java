@@ -7,12 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssofun.admin.store.mapper.StoreAdminSqlMapper;
-import com.ssofun.dto.DeliveryDto;
-import com.ssofun.dto.ProductCategoryDto;
-import com.ssofun.dto.ProductCategoryTypeDto;
-import com.ssofun.dto.ProductDto;
-import com.ssofun.dto.ProductOrderItemDto;
-import com.ssofun.dto.ProductThumbnailDto;
+import com.ssofun.dto.*;
 
 @Service
 public class StoreAdminService {
@@ -24,6 +19,20 @@ public class StoreAdminService {
    public List<ProductCategoryDto> selectAll(ProductCategoryDto productCategoryDto) {
       List<ProductCategoryDto> list = storeAdminSqlMapper.selectAll(productCategoryDto);
       return list;
+   }
+   
+   // 카테고리타입리스트
+   public List<ProductCategoryTypeDto> categoryTypeList(ProductCategoryTypeDto productCategoryTypeDto){
+	   List<ProductCategoryTypeDto> categoryTypeList = storeAdminSqlMapper.categoryTypeList(productCategoryTypeDto);
+	   return categoryTypeList;
+   }
+   
+   // 진행상태리스트
+   public List<ProductOrderStatusDto> orderStatusList(ProductOrderStatusDto productOrderStatusDto){
+	   
+	   List<ProductOrderStatusDto> orderStatusList = storeAdminSqlMapper.orderStatusList(productOrderStatusDto);
+	   
+	   return orderStatusList;
    }
    
    //  상품등록
@@ -130,5 +139,13 @@ public class StoreAdminService {
 	// 택배사등록
 	public void deliveryInsert(DeliveryDto deliveryDto) {
 		storeAdminSqlMapper.deliveryInsert(deliveryDto);
+	}
+	
+	// 카테고리별 오더리스트
+	public List<ProductOrderItemDto> orderItemCategoryList(ProductOrderItemDto productOrderItemDto){
+		
+		List<ProductOrderItemDto> orderItemCategoryList = storeAdminSqlMapper.orderItemCategoryList(productOrderItemDto);
+		
+		return orderItemCategoryList;
 	}
 }
