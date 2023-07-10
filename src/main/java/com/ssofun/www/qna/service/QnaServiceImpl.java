@@ -35,7 +35,7 @@ public class QnaServiceImpl {
 
 		qnaSqlMapper.insertQna(tb_QnaDto);
 
-		int qnaId = qnaSqlMapper.selectQnaByLatestQnaId();//pk�̸��ٲٱ� 
+		int qnaId = qnaSqlMapper.selectQnaByLatestQnaId();
 		
 		for(Qna_ImageDto Qna_ImageDto:Qna_ImageDtoList) {
 			
@@ -72,12 +72,10 @@ public class QnaServiceImpl {
 	public Map<String, Object> getQnaData(int qna_id) {
 		
 		Map<String, Object> map = new HashMap<>();
-		
-		
-		
+
+	
 		QnaDto QnaDto = qnaSqlMapper.selectQnaDataBYQnaId(qna_id);
 			
-		System.out.println(QnaDto);
 		
 		List<Qna_ImageDto> Qna_ImageDtoList= qnaSqlMapper.selectQnaImageByQnaId(qna_id);
 	
@@ -109,8 +107,8 @@ public class QnaServiceImpl {
 	}
 	
 	
-	//qna answer가져오기
-	public void
+	
+
 	
 }
 

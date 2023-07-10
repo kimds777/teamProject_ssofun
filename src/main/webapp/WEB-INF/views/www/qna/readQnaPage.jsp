@@ -142,28 +142,36 @@
      
                         </div>
 
-                        <div class="row mt-3">
-                            <div class="col hr-col"><hr class="hr-1"></div>
-                        </div>
-
-                        <div class="row mt-3">
-
-                            <div class="col-1"><i class="bi bi-chat-square-text-fill fs-2"></i></div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col"><p class="nine-font-1">문의한 내용에 대한 답변입니다.</p></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col eight-font">2023.06.28. 월요일</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col ten-font">
-                                Lorem ipsum dolor sit amet consectetur. A orci in egestas nunc varius sed in a ornare. Ut odio enim nunc fusce eu et. Duis sed aenean in eu duis dui. Sed bibendum ut a ut. Consequat duis condimentum imperdiet nunc in odio. Sed sit malesuada tincidunt posuere tempus sociis nulla mauris. Risus non praesent vitae id orci orci.
-                                Malesuada nibh gravida feugiat mi tristique cras amet justo nulla. Ac nunc velit praesent curabitur purus. Habitant et dolor volutpat facilisis ullamcorper sit. Sem ac neque pretium elit arcu ac volutpat. Augue sed eu id duis est. Mauris eget nisl libero et. Ac lectus convallis leo ultrices libero nascetur felis feugiat. Cursus quisque et pellentesque blandit tortor morbi aliquet. Vulputate eu maecenas proin consectetur pellentesque consequat cursus magna nec. Eu cursus purus.
-                            </div>
-                        </div>
+						<c:if test="${data.QnaDto.answer_contents != null }">
+	                        <div class="row mt-3">
+	                            <div class="col hr-col"><hr class="hr-1"></div>
+	                        </div>
+	
+	                        <div class="row mt-3">
+	
+	                            <div class="col-1"><i class="bi bi-chat-square-text-fill fs-2"></i></div>
+	                            <div class="col">
+	                                <div class="row">
+	                                    <div class="col"><p class="nine-font-1">문의한 내용에 대한 답변입니다.</p></div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col eight-font">2023.06.28. 월요일</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="row mt-3">
+	                            <div class="col ten-font">
+	                                ${data.QnaDto.answer_contents}
+	                              
+	                            </div>
+	                        </div>
+	                        
+	                        
+	                      </c:if>  
+	                        
+	                        
+	                        
+	                        
                     </div>
                 </div>
          

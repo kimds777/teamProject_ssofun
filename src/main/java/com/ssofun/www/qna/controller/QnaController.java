@@ -176,12 +176,26 @@ public class QnaController {
 
 	    QnaDto QnaDto = (QnaDto) map.get("QnaDto");
 	    String contents = QnaDto.getContents();
+	    String answerContents = QnaDto.getAnswer_contents();
+	    
+	    
+	    
+	    
 	    
 	    // html escape
+	    if(answerContents!=null) {
+	    answerContents = StringEscapeUtils.escapeHtml4(answerContents);
+	    answerContents = answerContents.replaceAll("\n", "<br>");
+	    QnaDto.setAnswer_contents(answerContents);
+	    
+	    }
+	    
 	    contents = StringEscapeUtils.escapeHtml4(contents);
 	    contents = contents.replaceAll("\n", "<br>");
 	    QnaDto.setContents(contents);
-
+	    
+	    
+	    System.out.println("answer:"+answerContents);
 	    model.addAttribute("data", map);
 
 	    return "www/qna/readQnaPage";

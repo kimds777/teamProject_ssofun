@@ -52,11 +52,7 @@
 		SELECT * FROM tb_qna WHERE qna_id = #{qna_id}
 	</select>
 	
-	
-<!-- qna_id로 답변만 가져옴 -->
-	<select id="selectQnaAnswerByQnaId" resultMap="com.ssofun.dto.QnaDto">
-		SELECT answer_contents FROM tb_qna WHERE qna_id = #{qna_id};
-	</select>
+
 	
 	
 	
