@@ -37,4 +37,6 @@ public interface QnaSqlMapper {
 	public List<Qna_ImageDto> selectQnaImageByQnaId(int qna_id);
 	
 	
+	//qna_id로 qna답변가져옴
+	public void selectQnaAnswerByQnaId(int qna_id);
 }

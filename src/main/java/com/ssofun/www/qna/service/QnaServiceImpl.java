@@ -108,6 +108,10 @@ public class QnaServiceImpl {
 		return userDto;
 	}
 	
+	
+	//qna answer가져오기
+	public void
+	
 }
 
 
