@@ -57,7 +57,7 @@
 	    FROM tb_product_thumbnail
 	    GROUP BY product_id
 	) AS t ON p.product_id = t.product_id
-	WHERE p.used_fg = 1 AND a.admin_id = 4
+	WHERE p.used_fg = 1 AND a.admin_id = #{admin_id}
 	ORDER BY product_category_type_id,product_id,p.created_at
 	LIMIT 0,1000	
 </select>

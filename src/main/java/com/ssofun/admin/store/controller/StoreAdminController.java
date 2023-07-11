@@ -112,6 +112,10 @@ public class StoreAdminController {
 	   public String productListPage(HyunMinProductJoinDto hyunMinProductJoinDto,Model model,HttpSession session) {
 		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   	   
+		   
+		   int id = shopAdmin.getAdmin_id();
+		   hyunMinProductJoinDto.setAdmin_id(id);
 		   
 		   List<HyunMinProductJoinDto> productList = storeAdminService.selectAll(hyunMinProductJoinDto);
 		  	   
@@ -260,11 +264,15 @@ public class StoreAdminController {
 		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   
-		   List<ProductOrderItemDto> orderItemCategoryList = storeAdminService.productOrderItemList(productOrderItemDto);
 		   
 		   List<ProductOrderStatusDto> orderStatusList = storeAdminService.orderStatusList(productOrderStatusDto);
 		   
 		   session.setAttribute("shopAdmin", shopAdmin);
+		   
+		   int id = shopAdmin.getAdmin_id();
+		   productOrderItemDto.setAdmin_id(id);		   
+		   List<ProductOrderItemDto> orderItemCategoryList = storeAdminService.productOrderItemList(productOrderItemDto);
+		   
 		   model.addAttribute("orderItemCategoryList", orderItemCategoryList);
 		   model.addAttribute("orderStatusList", orderStatusList);
 		   
