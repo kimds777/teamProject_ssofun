@@ -18,13 +18,8 @@
 <title>Document</title>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<jsp:include page="../head/topNavi.jsp"></jsp:include>
-			</div>
-		</div>
-	</div>
+
+	<jsp:include page="../head/topNavi.jsp"></jsp:include>
 
 	<div class="container">
 		<div class="row">
@@ -57,13 +52,32 @@
 											<td class="event-check"><input type="checkbox"
 												class="itemCheck" onclick="toggleItemCheck()"></td>
 											<td class="td-image"><img
-												src="/uploadFiles/${item.thumbnail_name}"
+												src="/ssofunUploadFiles/${item.thumbnail_name}"
 												style="width: 75px; height: 75px;"></td>
 												
 											<td class="td-productInfo">
 												<div class="product-name">${item.product_name}</div>
 												
-											
+												<div class="cart-price">
+												<div class="option-select">
+												<div class="button_quantity">
+														<span class="custom-element">
+															<button class="prod-quantity__plus"
+																onclick="changeQuantity('+')">+</button> 
+															<input
+															type="text" id="prod-quantity" value="1"
+															class="prod-quantity__input" min="1" maxlength="6"
+															autocomplete="off" oninput="changeQuantity(this.value)">
+															<button class="prod-quantity__minus"
+																onclick="changeQuantity('-')">-</button>
+														</span>
+													</div>
+												</div>
+													
+												<div class="option-price">
+												<fmt:formatNumber value="${item.price}" type="number" pattern="#,###원" />
+												</div>
+												</div>
 											</td>
 												
 											<td class="td-price"><fmt:formatNumber

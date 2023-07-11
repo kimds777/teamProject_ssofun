@@ -16,13 +16,9 @@
 
 </head>
 <body>
-	 <div class="container">
-        <div class="row">
-        	<div class="col">
-        		<jsp:include page="../head/topNavi.jsp"></jsp:include>
-        	</div>
-        </div>
-    </div>
+	
+	<jsp:include page="../head/topNavi.jsp"></jsp:include>
+     
 	
 	<div class="container">
 		<div class="row">
@@ -43,7 +39,7 @@
 				<c:forEach items="${list }" var="product">
 				<div class="col-a Image "><a class="baby-product-link" href="./productPage?id=${product.product_id }">
 					<div class="row">
-					<div class="col text-center"><img src="/uploadFiles/${product.thumbnail_name}" style="width:380px; height:380px;" class="img-rounded">
+					<div class="col text-center"><img src="/ssofunUploadFiles/${product.thumbnail_name}" style="width:380px; height:380px;" class="img-rounded">
 					</div>
 					</div>
 					<div class="row r1">
