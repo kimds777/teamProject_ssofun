@@ -21,7 +21,7 @@ public class IntegratedAuthenticationController {
 	public String userLoginPage(HttpSession session) {
 		
 		if(session.getAttribute("user") != null) {
-			return "redirect:./testHome";
+			return "redirect:./testSystemHome";
 		}
 		
 		return "integratedAuthentication/userLoginPage";
