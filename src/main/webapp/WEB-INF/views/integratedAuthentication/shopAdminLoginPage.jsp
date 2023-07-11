@@ -170,12 +170,12 @@
 						</div>
 						<div class="row my-1">
 							<div class="col">
-								<input type="text" class="form-control" placeholder="아이디">
+								<input type="text" class="form-control" placeholder="아이디" name="login_account">
 							</div>
 						</div>
 						<div class="row my-1">
 							<div class="col">
-								<input type="password" class="form-control" placeholder="패스워드">
+								<input type="password" class="form-control" placeholder="패스워드" name="login_password">
 							</div>
 						</div>
 						<div class="row my-2">

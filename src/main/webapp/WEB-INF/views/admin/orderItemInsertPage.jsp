@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
 
@@ -7,17 +8,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Form Basic | Gull Admin Template</title>
+    <title>Dashboard v1 | Gull Admin Template</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
-    <link href="../resources/dist-assets/css/themes/lite-purple.min.css" rel="stylesheet" />
-    <link href="../resources/dist-assets/css/plugins/perfect-scrollbar.min.css" rel="stylesheet" />
+    <link href="../resources/dist-assets/css/themes/lite-purple.css" rel="stylesheet" />
+    <link href="../resources/dist-assets/css/plugins/perfect-scrollbar.css" rel="stylesheet" />
 </head>
 
 <body class="text-left">
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
             <div class="logo">
-                <img src="../resources/dist-assets/images/logo.png" alt="">
+                <img src="../../resources/dist-assets/images/logo.png" alt="">
             </div>
             <div class="menu-toggle">
                 <div></div>
@@ -35,6 +36,24 @@
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
+							<c:if test="${empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link"
+										href="./loginPage">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
+							<c:if test="${!empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
+									</li>
+									<li class="nav-item"><a class="nav-link"
+										href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
                 <!-- Grid menu Dropdown -->
                 <div class="dropdown">

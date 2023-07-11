@@ -8,17 +8,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Form Basic | Gull Admin Template</title>
+    <title>Dashboard v1 | Gull Admin Template</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
-    <link href="../resources/dist-assets/css/themes/lite-purple.min.css" rel="stylesheet" />
-    <link href="../resources/dist-assets/css/plugins/perfect-scrollbar.min.css" rel="stylesheet" />
+    <link href="../resources/dist-assets/css/themes/lite-purple.css" rel="stylesheet" />
+    <link href="../resources/dist-assets/css/plugins/perfect-scrollbar.css" rel="stylesheet" />
 </head>
 
 <body class="text-left">
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
             <div class="logo">
-                <img src="../resources/dist-assets/images/logo.png" alt="">
+                <img src="../../resources/dist-assets/images/logo.png" alt="">
             </div>
             <div class="menu-toggle">
                 <div></div>
@@ -36,6 +36,24 @@
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
+							<c:if test="${empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link"
+										href="./loginPage">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
+							<c:if test="${!empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
+									</li>
+									<li class="nav-item"><a class="nav-link"
+										href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
                 <!-- Grid menu Dropdown -->
                 <div class="dropdown">
@@ -48,72 +66,6 @@
                             <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
                             <a href="#"><i class="i-Checked-User"></i> Sessions</a>
                             <a href="#"><i class="i-Ambulance"></i> Support</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Notificaiton -->
-                <div class="dropdown">
-                    <div class="badge-top-container" role="button" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="badge badge-primary">3</span>
-                        <i class="i-Bell text-muted header-icon"></i>
-                    </div>
-                    <!-- Notification dropdown -->
-                    <div class="dropdown-menu dropdown-menu-right notification-dropdown rtl-ps-none" aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Speach-Bubble-6 text-primary mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>New message</span>
-                                    <span class="badge badge-pill badge-primary ml-1 mr-1">new</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">10 sec ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">James: Hey! are you busy?</p>
-                            </div>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Receipt-3 text-success mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>New order received</span>
-                                    <span class="badge badge-pill badge-success ml-1 mr-1">new</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">2 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">1 Headphone, 3 iPhone x</p>
-                            </div>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Empty-Box text-danger mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>Product out of stock</span>
-                                    <span class="badge badge-pill badge-danger ml-1 mr-1">3</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">10 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">Headphone E67, R98, XL90, Q77</p>
-                            </div>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Data-Power text-success mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>Server Up!</span>
-                                    <span class="badge badge-pill badge-success ml-1 mr-1">3</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">14 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">Server rebooted successfully</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -169,7 +121,7 @@
                      <li>공란</li>
                  </ul>
              </div>
-             <form action="productInsertProcess" method="post" enctype="multipart/form-data">
+             <form id="productForm" action="productInsertProcess" method="post" enctype="multipart/form-data">
              <div class="separator-breadcrumb border-top"></div>
              <div class="row">
                  <div class="col-md-12">
@@ -212,17 +164,14 @@
                             <div class="card-body">
                                 <div class="card-title mb-3">상품썸네일등록</div>
                                 <div class="row">
-                                	
-                                    <div class="col-md-6 form-group mb-3">
-                                        <label for="product_id">상품 아이디</label>
-                                        <input class="form-control" id="product_id" name="product_id" type="text" placeholder="상품 아이디 나중에 없어질 녀석" />
-                                    </div>
-                                   <div class="col-md-6 input-group mb-3">
-                                          <div class="input-group-prepend"><span class="input-group-text" id="inputGroupFileAddon01">업로드 파일</span></div>
-                                          <div class="custom-file">
-                                              <input id="thumbnail_files" name="thumbnail_files" type="file" multiple="multiple" />     
-                                          </div>
-                                      </div>
+									<div class="col-md-6 input-group mb-3">
+									    <div class="input-group-prepend">
+									        <span class="input-group-text" id="inputGroupFileAddon01">업로드 파일</span>
+									    </div>
+									    <div class="custom-file">
+									        <input id="thumbnail_files" name="thumbnail_files" type="file" multiple="multiple" />
+									    </div>
+									</div>
                                 </div>
                             </div>
                         </div>
@@ -237,26 +186,22 @@
 	                        <div class="card mb-4">
 	                            <div class="card-body">
 	                        <div class="card-title mb-3">상품카테고리등록</div>
-	                        	<div class="row">
-                                	<div class="col-md-6 form-group mb-3">
-                                   		<label for="picker1">카테고리타입아이디</label>
-                                       		<select name="product_category_type_id" class="form-control form-control-rounded">
-                                            	<option>카테고리타입아이디 선택</option>
-                                                <option value="3">런닝화</option>
-                                                <option value="2">반팔티</option>
-                                                <option value="4">반바지</option>
-                                            </select>
-                                   	</div>
-	                               	<div class="col-md-6 form-group mb-3">
-	                                    <label for="name">상품 아이디</label>
-	                                       <input class="form-control" id="product_id" name="product_id" type="text" placeholder="상품아이디를 입력해주세요." />
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                <button id="submitAllBtn" class="btn btn-primary">상품등록</button>
+								<div class="row">
+								    <div class="col-md-6 form-group mb-3">
+								        <label for="picker1">카테고리타입아이디</label>
+								        <select name="product_category_type_id" class="form-control form-control-rounded">
+								            <option>카테고리타입아이디 선택</option>
+								            <c:forEach items="${categoryTypeList}" var="categoryType">
+								                <option value="${categoryType.this_parent_id}">${categoryType.name}</option>
+								            </c:forEach>
+								        </select>
+								    </div>
+								</div>
+							</div>
+	                     </div>
+	                  </div>
+	               </div>
+	                <button id="submitAllBtn" class="btn btn-primary" onclick="submitForm()">상품등록</button>
 	                </form>
                 <!-- end of main-content -->
                 

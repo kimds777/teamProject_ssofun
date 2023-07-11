@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
 
@@ -35,6 +36,24 @@
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
+							<c:if test="${empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link"
+										href="./loginPage">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
+							<c:if test="${!empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
+									</li>
+									<li class="nav-item"><a class="nav-link"
+										href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
                 <!-- Grid menu Dropdown -->
                 <div class="dropdown">

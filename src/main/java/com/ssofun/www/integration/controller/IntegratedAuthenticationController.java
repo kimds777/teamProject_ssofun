@@ -47,7 +47,7 @@ public class IntegratedAuthenticationController {
 	public String adminLoginPage(HttpSession session) {
 		
 		if(session.getAttribute("shopAdmin") != null) {
-			return "redirect:./testHome";
+			return "redirect:./adminMainPage";
 		}
 		
 		return "integratedAuthentication/shopAdminLoginPage";
@@ -65,7 +65,7 @@ public class IntegratedAuthenticationController {
 		
 		session.setAttribute("shopAdmin", shopAdmin);
 		
-		return "redirect:./testHome";
+		return "redirect:./adminMainPage";
 	}
 	
 	@RequestMapping("sysadmin/loginPage")
