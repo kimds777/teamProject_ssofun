@@ -20,7 +20,7 @@
         <div class="row one">
             <div class="col">
                 <div class="row">
-                    <div class="col one-2"><p class="one-font">LOGOㄹㄹㄹㄹ</p></div>
+                    <div class="col one-2"><p class="one-font">LOGO다시수정</p></div>
                     <div class="col one-1"><p class="one-font">펀딩</p></div>
                     <div class="col one-1"><p class="one-font">스토어</p></div>
                     <div class="col-4 one-1"></div>
