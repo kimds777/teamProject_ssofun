@@ -83,7 +83,8 @@ public class QnaController {
 				if(multipartFile.isEmpty()) {
 					continue;
 				}
-				System.out.println("���ϸ�: "+multipartFile.getOriginalFilename());
+				
+				System.out.println("파일이름: "+multipartFile.getOriginalFilename());
 				
 			
 				String rootFolder = "C:/ssofunUploadFiles/";
@@ -137,8 +138,8 @@ public class QnaController {
 	//
 	public List<QnaDto> qnaListsProcess(Model model, HttpSession session ) {
 		
-		session.getAttribute("sessionUser");//����ȯ�ؼ� ����
-		int userId = (int)((UserDto)session.getAttribute("sessionUser")).getUser_id();//���ǿ��� �α����� �����ID ������
+		session.getAttribute("sessionUser");
+		int userId = (int)((UserDto)session.getAttribute("sessionUser")).getUser_id();
 	
 			List<QnaDto> qnaList = qnaService.getQnaList(userId);
 			if(model != null) {
