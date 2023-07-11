@@ -19,7 +19,7 @@
     .borderline{border: 1px solid #D6D6D6; padding: 30px;}
     .four-font{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0;}
     .four-font-1{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0; color:#666666;}
-    .hr-1{ border: none;border-top: 1px solid black;}/*잘안보여서 임시로 black함*/
+    .hr-1{ border: none; border-top: 1px solid black;}/*잘안보여서 임시로 black함*/
     /*.hr-col{padding: 0; line-height: 3px; }*/
     .five-font{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0; font-size: 12px; }
     .c-five-font{padding: 0;}

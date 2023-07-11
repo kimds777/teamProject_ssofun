@@ -10,13 +10,14 @@ public class QnaDto {
 	private String title;
 	private String contents;
 	private String answer_contents;
+	private Date answer_created_at;
 	private Date created_at;
 	private int used_fg;
 	public QnaDto() {
 		super();
 	}
 	public QnaDto(int qna_id, int admin_id, int user_id, int qna_category_id, String title, String contents,
-			String answer_contents, Date created_at, int used_fg) {
+			String answer_contents, Date answer_created_at, Date created_at, int used_fg) {
 		super();
 		this.qna_id = qna_id;
 		this.admin_id = admin_id;
@@ -25,6 +26,7 @@ public class QnaDto {
 		this.title = title;
 		this.contents = contents;
 		this.answer_contents = answer_contents;
+		this.answer_created_at = answer_created_at;
 		this.created_at = created_at;
 		this.used_fg = used_fg;
 	}
@@ -69,6 +71,12 @@ public class QnaDto {
 	}
 	public void setAnswer_contents(String answer_contents) {
 		this.answer_contents = answer_contents;
+	}
+	public Date getAnswer_created_at() {
+		return answer_created_at;
+	}
+	public void setAnswer_created_at(Date answer_created_at) {
+		this.answer_created_at = answer_created_at;
 	}
 	public Date getCreated_at() {
 		return created_at;

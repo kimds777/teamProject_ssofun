@@ -90,14 +90,14 @@ public class SystemAdminController {
 	}
 	
 
-	@RequestMapping("systemAdminQnaMain")
+	@RequestMapping("systemAdminQnaMainPage")
 	public String systemAdminQnaMain(Model model, HttpSession session ) {
 
 
 		getUnansweredQnaListProcess(model, session);
 		answerCompletedQnaList(model, session);
 		
-			return"www/systemadmin/systemAdminQnaMain";
+			return"www/systemadmin/systemAdminQnaMainPage";
 	}
 	
 	
