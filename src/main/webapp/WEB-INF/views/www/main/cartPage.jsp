@@ -83,42 +83,45 @@
 											<td class="td-price"><fmt:formatNumber
 													value="${item.price}" type="number" pattern="#,###원" /></td>
 											<td class="td-quantity">${item.total_count}</td>
-											<td class="td-shipping">0원</td>
+											<td class="td-shipping">무료</td>
 											<td class="td-total"><fmt:formatNumber
 													value="${subtotal}" type="number" pattern="#,###원" /></td>
 											<td class="td-delete"><a
 												href="./deleteCartProcess?user_id=${item.user_id}&product_id=${item.product_id}">X</a></td>
 										</tr>
 									</c:forEach>
+									
+									<tr>
+										<td colspan="8">
+											<div class="cart-total-price">
+												<div class="row">
+													<div class="col-price">총 상품가격</div>
+													<div class="col-shipping">총 배송비</div>
+													<div class="col-sale">총 할인</div>
+													<div class="col-total">총 주문금액</div>
+												</div>
+												<div class="row">
+													<div class="col">총 상품가격</div>
+													<div class="col">+</div>
+													<div class="col">총 배송비</div>
+													<div class="col">-</div>
+													<div class="col">총 할인</div>
+													<div class="col">총 주문금액</div>
+												</div>
+											</div>
+										</td>
+									</tr>
 								</table>
 
 
 							</div>
 						</div>
 					</div>
+					
+					
 				</div>
 
-				<div class="row">
-					<div class="col">
-						<div class="cart-total-price">
-							<div class="row">
-							 <div class="col-price">총 상품가격</div>
-							 <div class="col-shipping">총 배송비</div>
-							 <div class="col-sale">총 할인</div>
-							 <div class="col-total">총 주문금액</div>
-							</div>
-							
-							<div class="row">
-							 <div class="col">총 상품가격</div>
-							 <div class="col">+</div>
-							 <div class="col">총 배송비</div>
-							 <div class="col">-</div>
-							 <div class="col">총 할인</div>
-							 <div class="col">총 주문금액</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			<div class="col"></div>
 		</div>

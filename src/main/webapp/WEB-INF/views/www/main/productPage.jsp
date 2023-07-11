@@ -307,6 +307,7 @@
 		        },
 		        error: function(){
 		            alert("로그인을 하셔야 이용 가능합니다.");
+		            location.href = 'loginPage'
 		        }
 		  	});
 		}
