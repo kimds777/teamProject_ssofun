@@ -187,8 +187,8 @@
                             
                                 <form action="./writeQnaAnswerProcess" method="post" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-1"><i class="bi bi-chat-square-text fs-2" style="color: #1D212A;"></i></div>
-                                        <div class="col-11"><p class="three-font mt-1">답변작성란</p></div>
+                                        <div class="col-1" ><i class="bi bi-chat-square-text fs-2" style="color: #1D212A;  margin-left: 10px;"></i></div>
+                                        <div class="col-11"><p class="three-font mt-1" style="padding:0px; margin-left: 0px;">답변작성란</p></div>
                                         <div class="col-1"></div>
                                         
         
@@ -199,7 +199,7 @@
 
 
                                     <div class="row mt-3">
-                                        <div class="col-10"><textarea name="answer_contents" id="answer_contents" class="form-control" placeholder="문의에 대한 답변작성란입니다." id="floatingTextarea2" style="height: 250px; width: 1000px; resize: none;"></textarea></div>    
+                                        <div class="col-10"><textarea name="answer_contents" id="answer_contents" class="form-control" placeholder="문의에 대한 답변작성란입니다." id="floatingTextarea2" style="height: 250px; width: 1000px; resize: none; text-align: center;"></textarea></div>    
                                     </div>
                                     
 
@@ -212,11 +212,10 @@
                                         </div>    
                                         
                                     </div>
-                                    <div class="row mt-3">
+                                    <div class="row mt-2">
                                         <div class="col"></div>
                                         <div class="col-10">
                                             <div class="row"><div class="col"><p class="seven-font">· 5mb이하만 첨부가 가능합니다.</p></div></div>
-                                            <div class="row"><div class="col"><p class="seven-font">· 문의 내용과 관련이 없거나 음란 및 불법적인 내용은 답변이 불가능할 수 있습니다.</p></div></div>
                                             <div class="row"><div class="col"><p class="seven-font">· 최대 5개까지의 파일을 첨부할 수 있습니다.</p></div></div>
                                         </div>    
                                         <div class="col"></div>
