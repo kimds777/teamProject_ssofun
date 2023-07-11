@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssofun.admin.store.mapper.StoreAdminSqlMapper;
+import com.ssofun.dto.DeliveryCompanyDto;
 import com.ssofun.dto.DeliveryDto;
 import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.ProductCategoryDto;
@@ -90,7 +91,6 @@ public class StoreAdminService {
 		// 상품수정
 		public void productUpdate(ProductDto productDto) {
 		    storeAdminSqlMapper.productUpdate(productDto);
-		    storeAdminSqlMapper.productUpdateUsedFg(productDto);
 		}
 		// 상품Used_Fg 0 
 		public void productDelete(ProductDto productDto) {
@@ -141,6 +141,12 @@ public class StoreAdminService {
 		// 배송중
 		public void deliveryingUpdate(ProductOrderItemDto productOrderItemDto) {
 			storeAdminSqlMapper.deliveryingUpdate(productOrderItemDto);
+		}
+		
+		// 택배사리스트
+		public List<DeliveryCompanyDto> deliveryCompanyList(DeliveryCompanyDto deliveryCompanyDto){
+			List<DeliveryCompanyDto> deliveryCompanyList = storeAdminSqlMapper.deliveryCompanyList(deliveryCompanyDto);
+			return deliveryCompanyList;
 		}
 		
 		// 택배사등록

@@ -74,6 +74,9 @@
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
                 </div>
+                <div class="nav justify-content-end">
+                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
+                </div>
             </div>
             <div style="margin: auto"></div>
             <div class="header-part-right">
@@ -221,23 +224,25 @@
 									                <th scope="col">상품명</th>
 									                <th scope="col">수량</th>
 									                <th scope="col">가격</th>
+									                <th scope="col">할인가</th>
 									            </tr>
 									        </thead>
 									        <tbody>
-										        <c:forEach items="${orderItemCategoryList}" var="orderItemCategoryList">
+										        <c:forEach items="${orderItemList}" var="orderItemList">
 										            <tr>
 										            	<th scope="row">
 										            		<label class="checkbox checkbox-outline-info">
                                                             <input type="checkbox" checked="" /><span class="checkmark"></span>
                                                             </label>
                                                         </th>
-										                <td>${orderItemCategoryList.product_order_item_id}</td>
-										                <td>${orderItemCategoryList.created_at}</td>
-										                <td>${orderItemCategoryList.recipient_name}</td>
-										                <td>${orderItemCategoryList.order_status_name}</td>
-										                <td><a href="orderItemDetailPage?product_order_item_id=${orderItemCategoryList.product_order_item_id}">${orderItemCategoryList.product_name}</a></td>										                										      										    
-										                <td>${orderItemCategoryList.count}</td>
-										                <td>${orderItemCategoryList.price}</td>										                										                
+										                <td>${orderItemList.product_order_item_id}</td>
+										                <td>${orderItemList.created_at}</td>
+										                <td>${orderItemList.recipient_name}</td>
+										                <td>${orderItemList.order_status_name}</td>
+										                <td><a href="orderItemDetailPage?product_order_item_id=${orderItemList.product_order_item_id}">${orderItemList.product_name}</a></td>										                										      										    
+										                <td>${orderItemList.count}</td>
+										                <td>${orderItemList.price}</td>
+										                <td>${orderItemList.price_sale}</td>										                										                
 										            </tr>
 										        </c:forEach>
 										    </tbody>

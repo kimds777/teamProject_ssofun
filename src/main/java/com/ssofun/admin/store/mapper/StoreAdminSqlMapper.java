@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ssofun.dto.DeliveryCompanyDto;
 import com.ssofun.dto.DeliveryDto;
 import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.ProductCategoryDto;
@@ -43,8 +44,11 @@ public interface StoreAdminSqlMapper {
 	   public HyunMinProductJoinDto productDetail(int product_id);
 	   public List<ProductThumbnailDto> productThumbnailDetail(int product_id);
 	   
-	   // 상품수정
+	   // 상품수정 찐
 	   public void productUpdate(ProductDto ProductDto);
+	   
+	   // 상품수정
+	   public void productUpdate1(ProductDto ProductDto);
 	   public void productUpdateUsedFg(ProductDto ProductDto);
 	   // 상품삭제
 	   public void productDelete(ProductDto ProductDto);
@@ -67,6 +71,8 @@ public interface StoreAdminSqlMapper {
 	   public void adminCheckUpdate(ProductOrderItemDto productOrderItemDto); // 판매자확인완료
 	   public void deliveryingUpdate(ProductOrderItemDto productOrderItemDto); // 배송중
 	   
+	   // 택배사리스트
+	   public List<DeliveryCompanyDto> deliveryCompanyList(DeliveryCompanyDto deliveryCompanyDto);
 	   // 택배사등록
 	   public void deliveryInsert(DeliveryDto deliveryDto);
 	   

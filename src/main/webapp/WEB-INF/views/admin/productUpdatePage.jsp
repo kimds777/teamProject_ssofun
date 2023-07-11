@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
+<style>
+.thumbnailTable {
+    width: 100%;
+    background-color: transparent;
+}
+</style>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -30,6 +36,9 @@
                 <div class="search-bar">
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
+                </div>
+                <div class="nav justify-content-end">
+                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
                 </div>
             </div>
             <div style="margin: auto"></div>
@@ -256,7 +265,7 @@
 		                            <thead>
 		                                <tr>
 		                                    <th scope="row" class="th1">카테고리타입아이디</th>
-		                                    <th scope="col"><input type="text" name="product_category_type_id" value="${productDetail.product_category_type_id}"></th>
+		                                    <th scope="col">${productDetail.product_category_type_id}</th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
@@ -264,6 +273,7 @@
 		                                </tr>
 		                                <tr>
 		                                    <th scope="row" class="th1">상품아이디</th>
+		                                    <input type="hidden" name="product_id" value="${productDetail.product_id}">
 		                                    <th scope="col">${productDetail.product_id}</th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
@@ -280,7 +290,7 @@
 		                                </tr>
 		                                <tr>
 		                                    <th scope="row" class="th1">카테고리명</th>
-		                                    <th scope="col"><input type="text" name="category_type_name" value="${productDetail.category_type_name}"></th>
+		                                    <th scope="col">${productDetail.category_type_name}</th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
@@ -288,7 +298,7 @@
 		                                </tr>
 		                                <tr>
 		                                    <th scope="row" class="th1">상품명</th>
-		                                    <th scope="col"><input type="text" name="product_name" value="${productDetail.product_name}"></th>
+		                                    <th scope="col"><input type="text" name="name" value="${productDetail.product_name}"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
@@ -311,6 +321,14 @@
 		                                    <th scope="col"></th>
 		                                </tr>
 		                                <tr>
+		                                    <th scope="row" class="th1">파일명</th>
+		                                    <th scope="col"><input type="text" name="thumbnail_name" value="${productDetail.thumbnail_name}"></th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                </tr>
+		                                <tr>
 		                                    <th scope="row" class="th1">상세설명</th>
 		                                    <th scope="col"><input type="text" name="contents" value="${productDetail.contents}"></th>
 		                                    <th scope="col"></th>
@@ -321,14 +339,6 @@
 		                                <tr>
 		                                    <th scope="row" class="th1">등록일</th>
 		                                    <th scope="col">${productDetail.created_at}</th>
-		                                    <th scope="col"></th>
-		                                    <th scope="col"></th>
-		                                    <th scope="col"></th>
-		                                    <th scope="col"></th>
-		                                </tr>
-		                                <tr>
-		                                    <th scope="row" class="th1">등록여부</th>
-		                                    <th scope="col">${productDetail.product_used_fg}</th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>

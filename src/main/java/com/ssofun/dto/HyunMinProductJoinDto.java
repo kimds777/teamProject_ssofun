@@ -3,17 +3,17 @@ package com.ssofun.dto;
 import java.util.Date;
 
 public class HyunMinProductJoinDto {
-	private int product_category_type_id;
-	private int product_id;
-	private int admin_id;
-	private String biz_name;
-	private String category_type_name;
-	private String product_name;
-	private int price;
-	private int price_sale;
-	private String contents;
-	private Date created_at;
-	private String thumbnail_name;
+	private int product_category_type_id; // FK
+	private int product_id; // FK
+	private int admin_id; // 관리자id
+	private String biz_name; // 회사명
+	private String category_type_name; // 카테고리명
+	private String product_name; // 상품명
+	private int price; // 가격
+	private int price_sale; // 할인가
+	private String contents; // 상세보기내용
+	private Date created_at; // 등록일
+	private String thumbnail_name; // 파일명
 	public HyunMinProductJoinDto() {
 		super();
 	}

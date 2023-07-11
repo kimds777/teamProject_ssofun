@@ -32,6 +32,9 @@
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
                 </div>
+                <div class="nav justify-content-end">
+                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
+                </div>
             </div>
             <div style="margin: auto"></div>
             <div class="header-part-right">
@@ -236,11 +239,31 @@
 											        <h3 class="ul-widget1__title">진행상태</h3>
 											    </div>
 												<span class="ul-widget__desc text-mute">
+												<c:choose>
+												    <c:when test="${orderItemDetail.product_order_status_id == 3}">
 												    <form id="orderStatusForm" action="orderStatusProcess" method="post">
 												    	<input type="hidden" name="product_order_item_id" value="${orderItemDetail.product_order_item_id}">												        
 												        <input type="submit" name="order_status_name" value="${orderItemDetail.order_status_name}">
 												        <input type="hidden" name="orderStatusProcessUrl" value="orderStatusProcess">
 												    </form>
+												    </c:when>
+												    <c:when test="${orderItemDetail.product_order_status_id == 4}">
+												    <form id="orderStatusForm" action="orderStatusProcess" method="post">
+												    	<input type="hidden" name="product_order_item_id" value="${orderItemDetail.product_order_item_id}">												        
+												        <input type="submit" name="order_status_name" value="${orderItemDetail.order_status_name}">
+												        <input type="hidden" name="orderStatusProcessUrl" value="orderStatusProcess">
+												    </form>
+												    </c:when>
+												    <c:when test="${orderItemDetail.product_order_status_id == 5}">
+												        <span class="ul-widget__desc text-mute">${orderItemDetail.order_status_name}</span>
+												    </c:when>
+												  	<c:when test="${orderItemDetail.product_order_status_id == 6}">
+												        <span class="ul-widget__desc text-mute">${orderItemDetail.order_status_name}</span>
+												    </c:when>
+												    <c:otherwise>
+												        <span class="ul-widget__desc text-mute">${orderItemDetail.order_status_name}</span>
+												    </c:otherwise>
+												</c:choose>    
 												</span>
 											</div>
                                         </div>
@@ -281,25 +304,25 @@
                                         </div>
                                      </div>
                                    </div>
-                                   <c:if test="${orderItemDetail.order_status_name eq '판매자확인완료'}">
+                                   <c:if test="${orderItemDetail.product_order_status_id == 4}">
                                    <div class="card mt-4">
                                     <div class="card-body">
-                                    <h4 class="card-title mb-3">택배사등록</h4>
+                                    <h4 class="card-title mb-3">발송등록</h4>
                                         <!-- begin::widget-stats-1-->
                                         <!-- form태그 -->
-                                        <form action="deliveryInsertProcess" method="post">
+                                        <form id="deliveryForm" action="deliveryInsertProcess" method="post">
                                         <div class="ul-widget1">
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">택배사선택</h3>
                                                 </div>
                                                 <span class="ul-widget__desc text-mute">
-                                                <select name="delivery_company_id" class="form-control form-control-rounded">
-                                            		<option>택배사선택</option>
-                                                	<option value="1">로젠택배</option>
-                                                	<option value="2">CJ대한통운</option>
-                                               		<option value="3">한진택배</option>
-                                            	</select>
+										        <select name="delivery_company_id" class="form-control form-control-rounded">
+										            <option>택배사선택</option>
+										            <c:forEach items="${deliveryCompanyList}" var="deliveryCompanyList">
+										                <option value="${deliveryCompanyList.delivery_company_id}">${deliveryCompanyList.name}</option>
+										            </c:forEach>
+										        </select>
                                                 </span>
                                             </div>
                                             <div class="ul-widget__item">
@@ -317,7 +340,7 @@
                                                     <h3 class="ul-widget1__title">등록</h3>
                                                 </div>
                                                 <span class="ul-widget__desc text-mute">
-                                                	<button id="submitDeliveryBtn" class="btn btn-outline-dark m-1" onclick="submitForms()">택배사등록</button>
+                                                	<button id="submitDeliveryBtn" class="btn btn-outline-dark m-1" onclick="submitForms()">발송등록</button>
 
                                                 </span>
                                             </div>
@@ -423,8 +446,9 @@
 </body>
 <script>
 function submitForms() {
-  document.getElementById('deliveryForm').submit();
-  document.getElementById('orderStatusForm').submit();
+    document.getElementById("orderStatusForm").submit();  // 폼 1 제출
+    document.getElementById("deliveryForm").submit();     // 폼 2 제출
 }
+
 </script>
 </html>
