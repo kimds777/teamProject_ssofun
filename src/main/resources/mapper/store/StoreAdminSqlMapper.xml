@@ -108,7 +108,7 @@
    INSERT INTO tb_product_category(product_category_type_id,product_id)
    VALUES(
          #{product_category_type_id},
-         (SELECT MAX(product_id) FROM tb_product)
+         9
       )
 </insert>
 

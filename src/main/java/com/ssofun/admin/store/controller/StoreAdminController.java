@@ -96,9 +96,9 @@ public class StoreAdminController {
          
       }
       storeAdminService.productInsert(productDto);
-      storeAdminService.productcategoryInsert(productCategoryDto);
       System.out.println("카테고리"+productCategoryDto.getProduct_id());
       storeAdminService.productThumbnaillInsert(params,productThumbnailList);
+      storeAdminService.productcategoryInsert(productCategoryDto);
       System.out.println("썸네일 " + params.getProduct_id());
       
 
