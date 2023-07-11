@@ -79,7 +79,7 @@
 <insert id="productThumbnaillInsert">
    INSERT INTO tb_product_thumbnail(product_id,name,order_list) 
       VALUES(
-         (SELECT LAST_INSERT_ID()),
+         (SELECT MAX(product_id) FROM tb_product),
          #{name},
          #{order_list}
          )
@@ -108,7 +108,7 @@
    INSERT INTO tb_product_category(product_category_type_id,product_id)
    VALUES(
          #{product_category_type_id},
-         (SELECT LAST_INSERT_ID())
+         (SELECT MAX(product_id) FROM tb_product)
       )
 </insert>
 

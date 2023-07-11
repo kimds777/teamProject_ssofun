@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ssofun.admin.store.service.StoreAdminService;
 import com.ssofun.dto.*;
+import com.ssofun.admin.store.service.StoreAdminService;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -97,7 +97,9 @@ public class StoreAdminController {
       }
       storeAdminService.productInsert(productDto);
       storeAdminService.productcategoryInsert(productCategoryDto);
+      System.out.println("카테고리"+productCategoryDto.getProduct_id());
       storeAdminService.productThumbnaillInsert(params,productThumbnailList);
+      System.out.println("썸네일 " + params.getProduct_id());
       
 
       
