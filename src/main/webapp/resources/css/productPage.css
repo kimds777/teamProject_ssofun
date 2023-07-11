@@ -10,6 +10,12 @@ a {
 	color: inherit; /* 링크의 색상 제거 */
 }
 
+p {
+	color: gray;
+	width: 56px;
+	height: 20px;
+}
+
 .thumbnail-img:hover {
 	border: 2px solid #346aff;
 	z-index: 1;
@@ -68,12 +74,6 @@ a {
 	text-decoration: none;
 }
 
-p {
-	color: gray;
-	width: 51px;
-	height: 20px;
-}
-
 .c1 {
 	width: 1200px;
 	height: 100px;
@@ -86,11 +86,6 @@ p {
 
 .row-box {
 	padding: 0px 1px;
-}
-
-.col-name {
-	width: 55px;
-	height: 40px;
 }
 
 .col-ex {
@@ -112,20 +107,10 @@ p {
 	font-size: 30px;
 	width: 69px;
 	height: 46px;
+	margin-right: 20px;
 }
 
-.col-won1 {
-	width: 150px;
-	height: 46px;
-	font-size: 30px;
-}
 
-.col-won2 {
-	width: 100px;
-	height: 30px;
-	color: #BFBFBF;
-	margin-top: 16px;
-}
 
 .col-ship {
 	width: 290px;
@@ -289,13 +274,6 @@ p {
 	cursor: pointer;
 }
 
-.col-review{
-	width: 120px;
-	height: 35px;
-	margin-top : 109px;
-	font-size : 24px;
-}
-
 .col-review-box{
 	width: 150px;
 	height: 150px;
@@ -306,10 +284,6 @@ p {
 
 .Image {
 	margin-bottom: 44px;
-}
-
-.img-rounded {
-	border-radius: 2%;
 }
 
 .col-foot {
@@ -324,17 +298,6 @@ p {
 	color: black;
 }
 
-.renewal-header {
-	position: relative;
-	height: 50px;
-	background-color: #fff;
-	border-bottom: 1px solid #eee;
-}
-
-.search-header {
-	width: 1200px;
-	margin: 0 auto;
-}
 
 .category-btn {
 	position: absolute;

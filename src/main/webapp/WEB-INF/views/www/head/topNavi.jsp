@@ -12,10 +12,16 @@
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
 
-<link href="../../resources/css/style.css" rel="stylesheet"	type="text/css">
-<link href="../../resources/css/productPage.css" rel="stylesheet" type="text/css">
-<link href="../../resources/css/productOrder.css" rel="stylesheet" type="text/css">
-<link href="../../resources/css/cartPage.css" rel="stylesheet" type="text/css">
+<link href="../../resources/css/head.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/main.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/productPage.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/productOrder.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/cartPage.css" rel="stylesheet"
+	type="text/css">
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -57,7 +63,8 @@
 									</li>
 									<li class="nav-item"><a class="nav-link"
 										href="./logoutProcess">로그아웃</a></li>
-									<li class="nav-item"><a class="nav-link" href="./cartPage?id=${sessionUser.user_id	 }">장바구니</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="./cartPage?id=${sessionUser.user_id	 }">장바구니</a></li>
 									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
 									</li>
 								</ul>
@@ -70,7 +77,7 @@
 			<div class="col"></div>
 		</div>
 	</div>
-
+	
 	<div class="renewal-header">
 		<div class="search-header">
 			<div class="category-btn">
@@ -85,12 +92,15 @@
 										<li>남성패션</li>
 									</ul>
 								</div>
-							</div></li>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

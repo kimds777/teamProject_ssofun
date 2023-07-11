@@ -91,10 +91,10 @@
 	<insert id="insertByOrderItem">
 	    insert into tb_product_order_item(product_order_id, product_id, product_order_status_id, delivery_recipient_id, count)
 	    values(
-	        (SELECT LAST_INSERT_ID()),
+	        (SELECT MAX(product_order_id) from tb_product_order),
 	        #{product_id},
 	        1,
-	        (SELECT LAST_INSERT_ID()),
+	        (SELECT MAX(delivery_recipient_id) from tb_delivery_recipient),
 	        #{count}
 	    )
 	</insert>
