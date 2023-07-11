@@ -12,7 +12,7 @@
 	<div class="col-1 text-center fw-bold">업체관리</div>
 	<div class="col-1 text-center fw-bold">회원관리</div>
 	<div class="col-1 text-center fw-bold">사이트 관리</div>
-	<div class="col-1 text-center fw-bold">QnA</div>
+	<div class="col-1 text-center fw-bold"><a href="">QnA</a></div>
 	<div class="col-1 text-center fw-bold">공지사항</div>
 </div>
   
