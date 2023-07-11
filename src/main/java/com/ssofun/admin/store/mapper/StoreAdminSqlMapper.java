@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssofun.dto.DeliveryDto;
+import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
 import com.ssofun.dto.ProductDto;
@@ -15,7 +16,7 @@ import com.ssofun.dto.ProductThumbnailDto;
 public interface StoreAdminSqlMapper {
 
 	   // 모든상품리스트
-	   public List<ProductCategoryDto> selectAll(ProductCategoryDto productCategoryDto);
+	   public List<HyunMinProductJoinDto> selectAll(HyunMinProductJoinDto hyunMinProductJoinDto);
 	   
 	   // 카테고리타입리스트
 	   public List<ProductCategoryTypeDto> categoryTypeList(ProductCategoryTypeDto productCategoryTypeDto);
@@ -39,7 +40,7 @@ public interface StoreAdminSqlMapper {
 	   public void productcategoryInsert(ProductCategoryDto productCategoryDto);
 	   
 	  // 상품상세보기
-	   public ProductCategoryDto productDetail(int product_id);
+	   public HyunMinProductJoinDto productDetail(int product_id);
 	   public List<ProductThumbnailDto> productThumbnailDetail(int product_id);
 	   
 	   // 상품수정

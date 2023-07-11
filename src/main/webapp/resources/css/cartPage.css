@@ -20,17 +20,7 @@ a {
 	color: black;
 }
 
-.renewal-header {
-	position: relative;
-	height: 50px;
-	background-color: #fff;
-	border-bottom: 1px solid #eee;
-}
 
-.search-header {
-	width: 1200px;
-	margin: 0 auto;
-}
 
 .category-btn {
 	position: absolute;
@@ -194,10 +184,27 @@ a {
 }
 
 .option-price{
+	color: #888;
     float: right;
     font-size: 12px;
     line-height: 24px;
 }
+
+.option-select{
+    float: right;
+    font-size: 12px;
+}
+
+.prod-quantity__plus{
+	
+}
+.prod-quantity__minus{
+	
+}
+.prod-quantity__input{
+	text-align: center;
+}
+
 
 .td-price{
 	border-bottom: 1px solid #e4e4e4;

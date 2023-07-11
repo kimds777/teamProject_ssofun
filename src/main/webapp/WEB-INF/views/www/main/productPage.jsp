@@ -36,7 +36,7 @@
 							<c:forEach items="${detail }" var="list">
 								<div class="row">
 									<div class="col">
-										<img src="/uploadFiles/${list.thumbnail_name}"
+										<img src="/ssofunUploadFiles/${list.thumbnail_name}"
 											alt="thumb image" class="thumbnail-img"
 											style="width: 65px; height: 65px;">
 									</div>
@@ -58,7 +58,7 @@
 						<div class="row">
 							<div class="col">${detail[0].product_name}</div>
 						</div>
-
+						
 						<div class="row">
 							<div class="col-won2">
 								<del>
@@ -98,6 +98,7 @@
 
 						<div class="row">
 							<div class="col-pyment">결제금액</div>
+							<div class="col"></div>
 							<div class="col-last">
 								<div class="row">
 									<div class="col-pay">

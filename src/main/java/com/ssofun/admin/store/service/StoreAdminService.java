@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssofun.admin.store.mapper.StoreAdminSqlMapper;
 import com.ssofun.dto.DeliveryDto;
+import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
 import com.ssofun.dto.ProductDto;
@@ -22,8 +23,8 @@ public class StoreAdminService {
 	   private StoreAdminSqlMapper storeAdminSqlMapper;
 	   
 	   // 모든 상품리스트
-	   public List<ProductCategoryDto> selectAll(ProductCategoryDto productCategoryDto) {
-	      List<ProductCategoryDto> list = storeAdminSqlMapper.selectAll(productCategoryDto);
+	   public List<HyunMinProductJoinDto> selectAll(HyunMinProductJoinDto hyunMinProductJoinDto) {
+	      List<HyunMinProductJoinDto> list = storeAdminSqlMapper.selectAll(hyunMinProductJoinDto);
 	      return list;
 	   }
 	   
@@ -75,9 +76,9 @@ public class StoreAdminService {
 	   }
 	   
 	   // 상품상세보기
-	   public ProductCategoryDto productDetail(int product_id) {
-		   ProductCategoryDto productCategoryDto = storeAdminSqlMapper.productDetail(product_id);
-		   return productCategoryDto;
+	   public HyunMinProductJoinDto productDetail(int product_id) {
+		   HyunMinProductJoinDto productDto = storeAdminSqlMapper.productDetail(product_id);
+		   return productDto;
 	   }
 	   public List<ProductThumbnailDto> productThumbnailDetail(int product_id){
 		   

@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ssofun.admin.store.service.StoreAdminService;
 import com.ssofun.dto.*;
+import com.ssofun.www.integration.service.IntegratedAuthenticationService;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -27,15 +28,26 @@ public class StoreAdminController {
    
 	   @Autowired
 	   private StoreAdminService storeAdminService;
+	   @Autowired
+	   private IntegratedAuthenticationService integratedAuthenticationService;
 	   
 	   // 관리자 메인페이지 
 	   @RequestMapping("adminMainPage")
-	   public String adminMainPage(HttpSession session) {
-		   
-		   session.getAttribute("shopAdmin");
+	   public String adminMainPage(HttpSession session,Model model) {
+		  	   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   session.setAttribute("shopAdmin", shopAdmin);
 		   
 	      return "admin/adminMainPage";
 	   }
+	   
+		@RequestMapping("logoutProcess")
+		public String logout(HttpSession session) {
+			
+			session.invalidate(); // session 저장공간 날리기
+			
+			return "admin/adminMainPage";
+		}
 	   
 	   // 상품등록 페이지 
 	   @RequestMapping("productInsertPage")
@@ -97,10 +109,13 @@ public class StoreAdminController {
 	   
 	   // 상품 리스트페이지
 	   @RequestMapping("productListPage")
-	   public String productListPage(ProductCategoryDto productCategoryDto,Model model) {
+	   public String productListPage(HyunMinProductJoinDto hyunMinProductJoinDto,Model model,HttpSession session) {
 		   
-		   List<ProductCategoryDto> productList = storeAdminService.selectAll(productCategoryDto);
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   
+		   List<HyunMinProductJoinDto> productList = storeAdminService.selectAll(hyunMinProductJoinDto);
 		  	   
+		   session.setAttribute("shopAdmin", shopAdmin);
 		   model.addAttribute("productList", productList);
 		   
 		   return "admin/productListPage";
@@ -123,12 +138,14 @@ public class StoreAdminController {
 	   
 	   // 상품상세보기
 	   @RequestMapping("productDetailPage")
-	   public String productDetailProcess(int product_id, Model model) {
+	   public String productDetailProcess(int product_id, Model model,HttpSession session) {
 	      
-		   ProductCategoryDto productDetail = storeAdminService.productDetail(product_id);
-		   List<ProductThumbnailDto> productThumbnailDetail = storeAdminService.productThumbnailDetail(product_id);
-		   System.out.println(productDetail.getProduct_id());
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   
+		   HyunMinProductJoinDto productDetail = storeAdminService.productDetail(product_id);
+		   List<ProductThumbnailDto> productThumbnailDetail = storeAdminService.productThumbnailDetail(product_id);
+		   
+		   session.setAttribute("shopAdmin", shopAdmin);
 		   model.addAttribute("productDetail", productDetail);
 		   model.addAttribute("productThumbnailDetail", productThumbnailDetail);
 		   
@@ -155,7 +172,7 @@ public class StoreAdminController {
 	   @RequestMapping("productUpdatePage")
 	   public String productUpdatePage(int product_id, Model model) {
 		   
-		   ProductCategoryDto productDetail = storeAdminService.productDetail(product_id);
+		   HyunMinProductJoinDto productDetail = storeAdminService.productDetail(product_id);
 		   List<ProductThumbnailDto> productThumbnailDetail = storeAdminService.productThumbnailDetail(product_id);
 		   
 		   model.addAttribute("productDetail", productDetail);
@@ -203,7 +220,7 @@ public class StoreAdminController {
 	           }
 	       }
 
-	       ProductCategoryDto pId = storeAdminService.productDetail(product_id);
+	       HyunMinProductJoinDto pId = storeAdminService.productDetail(product_id);
 	       storeAdminService.productUpdate(productDto);
 	       storeAdminService.productThumbnailUpdate(params, productThumbnailList);
 	       storeAdminService.productcategoryUpdate(productCategoryDto);
