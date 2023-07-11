@@ -57,7 +57,7 @@
 	    FROM tb_product_thumbnail
 	    GROUP BY product_id
 	) AS t ON p.product_id = t.product_id
-	WHERE p.used_fg = 1 AND a.admin_id = 4
+	WHERE p.used_fg = 1 AND a.admin_id = #{admin_id}
 	ORDER BY product_category_type_id,product_id,p.created_at
 	LIMIT 0,1000	
 </select>
@@ -141,7 +141,7 @@
 <select id="selectByProductId" resultType="com.ssofun.dto.ProductDto">
 	SELECT * FROM tb_product WHERE product_id = #{product_id}
 </select>
-<insert id="productUpdate">
+<insert id="productUpdate2">
 	INSERT INTO tb_product(admin_id,name,price,price_sale,contents,created_at,used_fg) 
 		VALUES(
 			#{admin_id},
@@ -164,6 +164,13 @@
 	UPDATE tb_product 
 		SET used_fg = 0
 		WHERE product_id = #{product_id}
+</update>
+
+<!-- 상품수정 찐 -->
+<update id="productUpdate">
+	UPDATE tb_product
+	SET name = #{name}, price = #{price}, price_sale = #{price_sale}, contents = #{contents}, created_at = CURRENT_TIMESTAMP()
+	WHERE product_id = #{product_id}
 </update>
 <!-- 썸네일수정 -->
 <insert id="productThumbnaillUpdate">
@@ -228,7 +235,7 @@
 	    FROM tb_product_thumbnail
 	    GROUP BY product_id
 	) AS t ON p.product_id = t.product_id
-	WHERE a.admin_id = 1
+	WHERE a.admin_id = #{admin_id}
 	ORDER BY poi.created_at DESC
 </select>
 <!-- N번 관리자가 판매하는 상품중 하나의 상품 상세보기 -->
@@ -263,7 +270,7 @@
 	    FROM tb_product_thumbnail
 	    GROUP BY product_id
 	) AS t ON p.product_id = t.product_id
-	WHERE a.admin_id = 1 AND product_order_item_id = #{product_order_item_id}
+	WHERE product_order_item_id = #{product_order_item_id}
 	ORDER BY poi.created_at DESC
 </select>
 
@@ -274,11 +281,17 @@
 	WHERE product_order_item_id = #{product_order_item_id}
 </update>
 
+<!-- 택배사리스트 -->
+<select id="deliveryCompanyList" resultType="com.ssofun.dto.DeliveryCompanyDto">
+	SELECT * FROM tb_delivery_company
+</select>
+
 <!-- 택배사입력 -->
 <insert id="deliveryInsert">
-	INSERT INTO tb_delivery(delivery_company_id,delivery_recipient_id,invoice_no,created_at,used_fg) 
+	INSERT INTO tb_delivery(delivery_company_id,delivery_status_id,delivery_recipient_id,invoice_no,created_at,used_fg) 
 	VALUES(
 			#{delivery_company_id},
+			NULL,
 			#{delivery_recipient_id},
 			#{invoice_no},
 			CURRENT_TIMESTAMP(),
@@ -316,7 +329,7 @@
 	    FROM tb_product_thumbnail
 	    GROUP BY product_id
 	) AS t ON p.product_id = t.product_id
-	WHERE a.admin_id = 1 AND pos.product_order_status_id = #{product_order_status_id}
+	WHERE a.admin_id = #{admin_id} AND pos.product_order_status_id = #{product_order_status_id}
 	ORDER BY poi.created_at DESC
 </select>
 

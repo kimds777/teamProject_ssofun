@@ -3,24 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
-
-<head>
 <style>
 .thumbnailTable {
     width: 100%;
     background-color: transparent;
 }
-
-.th1{
-	width:150px;
-	text-align: left;
-}
-.th2{
-	width:150px;
-	padding: 0.75rem;
-	text-align: left;
-}
 </style>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -47,6 +36,9 @@
                 <div class="search-bar">
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
+                </div>
+                <div class="nav justify-content-end">
+                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
                 </div>
             </div>
             <div style="margin: auto"></div>
@@ -82,6 +74,72 @@
                             <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
                             <a href="#"><i class="i-Checked-User"></i> Sessions</a>
                             <a href="#"><i class="i-Ambulance"></i> Support</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Notificaiton -->
+                <div class="dropdown">
+                    <div class="badge-top-container" role="button" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="badge badge-primary">3</span>
+                        <i class="i-Bell text-muted header-icon"></i>
+                    </div>
+                    <!-- Notification dropdown -->
+                    <div class="dropdown-menu dropdown-menu-right notification-dropdown rtl-ps-none" aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
+                        <div class="dropdown-item d-flex">
+                            <div class="notification-icon">
+                                <i class="i-Speach-Bubble-6 text-primary mr-1"></i>
+                            </div>
+                            <div class="notification-details flex-grow-1">
+                                <p class="m-0 d-flex align-items-center">
+                                    <span>New message</span>
+                                    <span class="badge badge-pill badge-primary ml-1 mr-1">new</span>
+                                    <span class="flex-grow-1"></span>
+                                    <span class="text-small text-muted ml-auto">10 sec ago</span>
+                                </p>
+                                <p class="text-small text-muted m-0">James: Hey! are you busy?</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-item d-flex">
+                            <div class="notification-icon">
+                                <i class="i-Receipt-3 text-success mr-1"></i>
+                            </div>
+                            <div class="notification-details flex-grow-1">
+                                <p class="m-0 d-flex align-items-center">
+                                    <span>New order received</span>
+                                    <span class="badge badge-pill badge-success ml-1 mr-1">new</span>
+                                    <span class="flex-grow-1"></span>
+                                    <span class="text-small text-muted ml-auto">2 hours ago</span>
+                                </p>
+                                <p class="text-small text-muted m-0">1 Headphone, 3 iPhone x</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-item d-flex">
+                            <div class="notification-icon">
+                                <i class="i-Empty-Box text-danger mr-1"></i>
+                            </div>
+                            <div class="notification-details flex-grow-1">
+                                <p class="m-0 d-flex align-items-center">
+                                    <span>Product out of stock</span>
+                                    <span class="badge badge-pill badge-danger ml-1 mr-1">3</span>
+                                    <span class="flex-grow-1"></span>
+                                    <span class="text-small text-muted ml-auto">10 hours ago</span>
+                                </p>
+                                <p class="text-small text-muted m-0">Headphone E67, R98, XL90, Q77</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-item d-flex">
+                            <div class="notification-icon">
+                                <i class="i-Data-Power text-success mr-1"></i>
+                            </div>
+                            <div class="notification-details flex-grow-1">
+                                <p class="m-0 d-flex align-items-center">
+                                    <span>Server Up!</span>
+                                    <span class="badge badge-pill badge-success ml-1 mr-1">3</span>
+                                    <span class="flex-grow-1"></span>
+                                    <span class="text-small text-muted ml-auto">14 hours ago</span>
+                                </p>
+                                <p class="text-small text-muted m-0">Server rebooted successfully</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -207,7 +265,7 @@
 		                            <thead>
 		                                <tr>
 		                                    <th scope="row" class="th1">카테고리타입아이디</th>
-		                                    <th scope="col"><input type="text" name="product_category_type_id" value="${productDetail.product_category_type_id}"></th>
+		                                    <th scope="col">${productDetail.product_category_type_id}</th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
@@ -215,6 +273,7 @@
 		                                </tr>
 		                                <tr>
 		                                    <th scope="row" class="th1">상품아이디</th>
+		                                    <input type="hidden" name="product_id" value="${productDetail.product_id}">
 		                                    <th scope="col">${productDetail.product_id}</th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
@@ -231,7 +290,7 @@
 		                                </tr>
 		                                <tr>
 		                                    <th scope="row" class="th1">카테고리명</th>
-		                                    <th scope="col"><input type="text" name="category_type_name" value="${productDetail.category_type_name}"></th>
+		                                    <th scope="col">${productDetail.category_type_name}</th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
@@ -239,7 +298,7 @@
 		                                </tr>
 		                                <tr>
 		                                    <th scope="row" class="th1">상품명</th>
-		                                    <th scope="col"><input type="text" name="product_name" value="${productDetail.product_name}"></th>
+		                                    <th scope="col"><input type="text" name="name" value="${productDetail.product_name}"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
@@ -262,6 +321,14 @@
 		                                    <th scope="col"></th>
 		                                </tr>
 		                                <tr>
+		                                    <th scope="row" class="th1">파일명</th>
+		                                    <th scope="col"><input type="text" name="thumbnail_name" value="${productDetail.thumbnail_name}"></th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                </tr>
+		                                <tr>
 		                                    <th scope="row" class="th1">상세설명</th>
 		                                    <th scope="col"><input type="text" name="contents" value="${productDetail.contents}"></th>
 		                                    <th scope="col"></th>
@@ -272,14 +339,6 @@
 		                                <tr>
 		                                    <th scope="row" class="th1">등록일</th>
 		                                    <th scope="col">${productDetail.created_at}</th>
-		                                    <th scope="col"></th>
-		                                    <th scope="col"></th>
-		                                    <th scope="col"></th>
-		                                    <th scope="col"></th>
-		                                </tr>
-		                                <tr>
-		                                    <th scope="row" class="th1">등록여부</th>
-		                                    <th scope="col">${productDetail.product_used_fg}</th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>

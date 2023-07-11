@@ -112,6 +112,10 @@ public class StoreAdminController {
 	   public String productListPage(HyunMinProductJoinDto hyunMinProductJoinDto,Model model,HttpSession session) {
 		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   	   
+		   
+		   int id = shopAdmin.getAdmin_id();
+		   hyunMinProductJoinDto.setAdmin_id(id);
 		   
 		   List<HyunMinProductJoinDto> productList = storeAdminService.selectAll(hyunMinProductJoinDto);
 		  	   
@@ -186,44 +190,8 @@ public class StoreAdminController {
 	   public String productUpdateProcess(int product_id,ProductDto productDto, ProductThumbnailDto params,
 			   ProductCategoryDto productCategoryDto,MultipartFile[] thumbnail_files) {
 
-	       int totalFiles = thumbnail_files.length; // 등록된 이미지 파일의 총 개수
 
-	       List<ProductThumbnailDto> productThumbnailList = new ArrayList<>();
-
-	       // 파일 저장 로직
-	       if (totalFiles > 0) { // 파일이 있을 때
-
-	           for (int i = 0; i < totalFiles; i++) {
-	               MultipartFile multipartFile = thumbnail_files[i];
-
-	               if (multipartFile.isEmpty()) {
-	                   continue;
-	               }
-
-	               System.out.println("파일명 " + multipartFile.getOriginalFilename());
-
-	               String rootFolder = "C:/ssofunUploadFiles/";
-
-	               String saveFileName = multipartFile.getOriginalFilename(); // 파일명 저장
-
-	               try {
-	                   multipartFile.transferTo(new File(rootFolder + saveFileName));
-	               } catch (Exception e) {
-	                   e.printStackTrace();
-	               }
-
-	               ProductThumbnailDto productThumbnailDto = new ProductThumbnailDto();
-	               productThumbnailDto.setName(saveFileName);
-	               productThumbnailDto.setOrder_list(i);
-
-	               productThumbnailList.add(productThumbnailDto);
-	           }
-	       }
-
-	       HyunMinProductJoinDto pId = storeAdminService.productDetail(product_id);
 	       storeAdminService.productUpdate(productDto);
-	       storeAdminService.productThumbnailUpdate(params, productThumbnailList);
-	       storeAdminService.productcategoryUpdate(productCategoryDto);
 	       
 	       return "redirect:./adminMainPage";
 	   }
@@ -256,13 +224,24 @@ public class StoreAdminController {
 	   
 	   // 오더리스트
 	   @RequestMapping("orderItemListPage")
-	   public String orderItemListPage( Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto) {
+	   public String orderItemListPage( Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto, HttpSession session) {
 		   
-		   List<ProductOrderItemDto> orderItemCategoryList = storeAdminService.productOrderItemList(productOrderItemDto);
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   
 		   
 		   List<ProductOrderStatusDto> orderStatusList = storeAdminService.orderStatusList(productOrderStatusDto);
 		   
-		   model.addAttribute("orderItemCategoryList", orderItemCategoryList);
+		   session.setAttribute("shopAdmin", shopAdmin);
+		   
+		   int id = shopAdmin.getAdmin_id();
+		   productOrderItemDto.setAdmin_id(id);		   
+		   List<ProductOrderItemDto> orderItemList = storeAdminService.productOrderItemList(productOrderItemDto);
+		   
+		   for(ProductOrderItemDto poi : orderItemList) {
+			   System.out.println(poi.getProduct_order_item_id());
+		   }
+		   
+		   model.addAttribute("orderItemList", orderItemList);
 		   model.addAttribute("orderStatusList", orderStatusList);
 		   
 		   return "admin/orderItemListPage";
@@ -270,11 +249,14 @@ public class StoreAdminController {
 	   
 	   // 관리자 판매상품 상세보기
 	   @RequestMapping("orderItemDetailPage")
-	   public String orderItemDetailPage(Model model ,int product_order_item_id) {
+	   public String orderItemDetailPage(Model model ,int product_order_item_id, DeliveryCompanyDto deliveryCompanyDto) {
+		   
+		   List<DeliveryCompanyDto> deliveryCompanyList = storeAdminService.deliveryCompanyList(deliveryCompanyDto);
 		   
 		   ProductOrderItemDto orderItemDetail = storeAdminService.orderItemDetail(product_order_item_id);
-		   
+		  	   
 		   model.addAttribute("orderItemDetail", orderItemDetail);
+		   model.addAttribute("deliveryCompanyList", deliveryCompanyList);
 		   
 		   return "admin/orderItemDetailPage";
 	   }
@@ -285,14 +267,13 @@ public class StoreAdminController {
 		   
 		   ProductOrderItemDto orderItemDetail = storeAdminService.orderItemDetail(product_order_item_id);
 		   
-		   System.out.println(orderItemDetail.getProduct_order_item_id());
-		   System.out.println(orderItemDetail.getProduct_order_status_id());
-		   
 		   if(orderItemDetail.getProduct_order_status_id() == 3) {
 			   storeAdminService.adminCheckUpdate(productOrderItemDto);
+			   System.out.println("3"+orderItemDetail.getOrder_status_name());
 			   return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id;
 		   }else if(orderItemDetail.getProduct_order_status_id() == 4) {
 			   storeAdminService.deliveryingUpdate(productOrderItemDto);
+			   System.out.println("4"+orderItemDetail.getOrder_status_name());
 			   return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id;
 		   }
 		   return "redirect:./orderItemListPage";

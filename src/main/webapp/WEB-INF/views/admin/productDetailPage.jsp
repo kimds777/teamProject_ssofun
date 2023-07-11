@@ -37,6 +37,9 @@
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
                 </div>
+                <div class="nav justify-content-end">
+                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
+                </div>
             </div>
             <div style="margin: auto"></div>
             <div class="header-part-right">

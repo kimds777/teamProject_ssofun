@@ -101,13 +101,14 @@ public class StoreController {
 		System.out.println(amount);
 		System.out.println(count);
 		System.out.println(sessionUser);
-		if(sessionUser == null) {
-			return "redirect:./loginPage";
-		}else {
+		if(sessionUser != null) {
 			session.setAttribute("sessionUser", sessionUser);	
 			session.setAttribute("amount", amount);
 	        session.setAttribute("count", count);
 			return "redirect:./productOrderPage?id=" + id;
+		}else {
+			session.invalidate(); // 세션 무효화
+			return "redirect:./loginPage";
 		}	
 	}
 	
