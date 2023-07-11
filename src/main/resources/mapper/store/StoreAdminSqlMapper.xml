@@ -228,7 +228,7 @@
 	    FROM tb_product_thumbnail
 	    GROUP BY product_id
 	) AS t ON p.product_id = t.product_id
-	WHERE a.admin_id = 1
+	WHERE a.admin_id = #{admin_id}
 	ORDER BY poi.created_at DESC
 </select>
 <!-- N번 관리자가 판매하는 상품중 하나의 상품 상세보기 -->

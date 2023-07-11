@@ -26,6 +26,7 @@ public class ProductOrderItemDto {
 	private String address_default; // 기본주소
 	private String address_detail; // 상세주소
 	private String request_message; // 배송요청사항
+	private int admin_id; // 관리자ID
 	
 	public ProductOrderItemDto() {
 		super();
@@ -212,5 +213,14 @@ public class ProductOrderItemDto {
 
 	public void setRequest_message(String request_message) {
 		this.request_message = request_message;
+	}
+
+	public int getAdmin_id() {
+		return admin_id;
+	}
+
+	public void setAdmin_id(int admin_id) {
+		this.admin_id = admin_id;
 	}	
+	
 }

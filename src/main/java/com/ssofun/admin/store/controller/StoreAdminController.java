@@ -256,12 +256,15 @@ public class StoreAdminController {
 	   
 	   // 오더리스트
 	   @RequestMapping("orderItemListPage")
-	   public String orderItemListPage( Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto) {
+	   public String orderItemListPage( Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto, HttpSession session) {
+		   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   
 		   List<ProductOrderItemDto> orderItemCategoryList = storeAdminService.productOrderItemList(productOrderItemDto);
 		   
 		   List<ProductOrderStatusDto> orderStatusList = storeAdminService.orderStatusList(productOrderStatusDto);
 		   
+		   session.setAttribute("shopAdmin", shopAdmin);
 		   model.addAttribute("orderItemCategoryList", orderItemCategoryList);
 		   model.addAttribute("orderStatusList", orderStatusList);
 		   
