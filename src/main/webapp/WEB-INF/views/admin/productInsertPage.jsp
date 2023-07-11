@@ -129,10 +129,7 @@
                          <div class="card-body">
                              <div class="card-title mb-3">상품등록</div>
                              <div class="row">
-                                 <div class="col-md-6 form-group mb-3">
-                                     <label for="admin_id">관리자 아이디</label>
-                                     <input class="form-control" id="admin_id" name="admin_id" type="text" placeholder="관리자 아이디 나중에 없어질 녀석" />
-                                 </div>
+                                     <input class="form-control" id="admin_id" name="admin_id" type="hidden" value="${shopAdmin.admin_id}"/>
                                  <div class="col-md-6 form-group mb-3">
                                      <label for="name">상품이름</label>
                                      <input class="form-control" id="name" name="name" type="text" placeholder="상품이름을 입력해주세요." />
@@ -192,7 +189,7 @@
 								        <select name="product_category_type_id" class="form-control form-control-rounded">
 								            <option>카테고리타입아이디 선택</option>
 								            <c:forEach items="${categoryTypeList}" var="categoryType">
-								                <option value="${categoryType.this_parent_id}">${categoryType.name}</option>
+								                <option value="${categoryType.product_category_type_id}">${categoryType.name}</option>
 								            </c:forEach>
 								        </select>
 								    </div>

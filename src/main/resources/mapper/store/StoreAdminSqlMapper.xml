@@ -34,7 +34,7 @@
 </select>
 
 <!-- 모든상품리스트 -->
-<select id="selectAll" resultType="com.ssofun.dto.ProductCategoryDto">
+<select id="selectAll" resultType="com.ssofun.dto.HyunMinProductJoinDto">
 	SELECT 
 	    pc.product_category_type_id,  
 	    pc.product_id,
@@ -47,9 +47,9 @@
 	    p.contents,
 	    p.created_at,
 	    t.name AS thumbnail_name
-	FROM tb_product_category pc
+	FROM tb_product p
+    INNER JOIN tb_product_category pc ON p.product_id = pc.product_id
 	INNER JOIN tb_product_category_type pct ON pc.product_category_type_id = pct.product_category_type_id
-	INNER JOIN tb_product p ON pc.product_id = p.product_id
 	INNER JOIN tb_admin a ON p.admin_id = a.admin_id
 	INNER JOIN tb_biz b ON a.biz_id = b.biz_id
 	INNER JOIN(
@@ -57,7 +57,7 @@
 	    FROM tb_product_thumbnail
 	    GROUP BY product_id
 	) AS t ON p.product_id = t.product_id
-	WHERE p.admin_id = 1 AND p.used_fg = 1 
+	WHERE p.used_fg = 1 AND a.admin_id = 4
 	ORDER BY product_category_type_id,product_id,p.created_at
 	LIMIT 0,1000	
 </select>
@@ -113,7 +113,7 @@
 </insert>
 
 <!-- 상품상세보기 -->
-<select id="productDetail" resultType="com.ssofun.dto.ProductCategoryDto">
+<select id="productDetail" resultType="com.ssofun.dto.HyunMinProductJoinDto">
 	SELECT 
 	    pc.product_category_type_id,  
 	    pc.product_id,
@@ -126,13 +126,13 @@
 	    p.contents,
 	    p.created_at,
     	p.used_fg AS product_used_fg
-	FROM tb_product_category pc
+	FROM tb_product p
+	INNER JOIN tb_product_category pc ON p.product_id = pc.product_id
 	INNER JOIN tb_product_category_type pct ON pc.product_category_type_id = pct.product_category_type_id
-	INNER JOIN tb_product p ON pc.product_id = p.product_id
 	INNER JOIN tb_admin a ON p.admin_id = a.admin_id
 	INNER JOIN tb_biz b ON a.biz_id = b.biz_id
-	WHERE p.product_id = #{product_id} AND p.admin_id = 1 AND p.used_fg = 1
-</select>
+	WHERE p.product_id = #{product_id} AND p.used_fg = 1
+</select>	
 <select id="productThumbnailDetail" resultType="com.ssofun.dto.ProductThumbnailDto">
 	SELECT * FROM tb_product_thumbnail WHERE product_id = #{product_id}
 </select>
