@@ -36,7 +36,7 @@ import com.ssofun.dto.PaymentDto;
 import com.ssofun.www.funding.service.FundingServiceImpl;
 
 @Controller
-@RequestMapping("funding/*")
+@RequestMapping("www/funding/*")
 public class FundingController {
 
 	@Autowired
@@ -46,7 +46,7 @@ public class FundingController {
 
 //	펀딩 리스트 페이지 ----------------------------------------------------------------------------------------
 
-	@RequestMapping("fundingListPage")
+	@RequestMapping("www/fundingListPage")
 	public String fundingListPage() {
 		return "funding/fundingListPage";
 	}
