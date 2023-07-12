@@ -127,7 +127,15 @@
 	                        </div>
                             <div class="col-2">
                                 <div class="row">
-                                    <div class="col"><p class="center1">접수대기</p></div>
+                                    <div class="col"><p class="center1">
+                                    	<c:if test="${empty qna.answer_contents }">
+                                    	 답변대기
+                                    	</c:if>
+                                    	<c:if test="${!empty qna.answer_contents }">
+                                    	 답변완료
+                                    	</c:if>
+                                    
+                                    </p></div>
                                 </div>
                             </div>
                         </div>

@@ -124,6 +124,8 @@ public class SystemAdminController {
 	    model.addAttribute("data",map);
 		
 		
+	    
+	    
 		
 		
 		return"systemadmin/systemAdminReadQnaPage";

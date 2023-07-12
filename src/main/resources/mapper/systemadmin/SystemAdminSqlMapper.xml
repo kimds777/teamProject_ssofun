@@ -30,8 +30,8 @@
 	</select>
 
 
-	<update id="">
-		UPDATE tb_qna SET answer_contents = #{answer_contents} WHERE qna_id = #{qna_id}
+	<update id="updateQnaAnswer">
+		UPDATE tb_qna SET answer_contents = #{answer_contents},answer_created_at = now() WHERE qna_id = #{qna_id}
 	</update>
 
 </mapper>

@@ -97,25 +97,35 @@
 
 
                    		<div class="row">
-                            <div class="col-1"><input type="button" class="qnabutton" value="답변대기"></div>
+                            <div class="col-1">
+                            	        <c:if test="${!empty qna.answer_contents }">
+                                    	<input type="button" class="qnabutton" value="답변대기">
+                                    	</c:if>
+                                    	<c:if test="${empty qna.answer_contents }">
+                                    	 <input type="button" class="qnabutton" value="답변완료">
+                                    	</c:if>
+                            
+                            </div>
                             <div class="col-5">
                               
                                 <div class="row">
-                                    <div class="col"><p class="nine-font">${data.QnaDto.title}</p></div>
+                                    <div class="col"><p class="nine-font" style="margin:0;">${data.QnaDto.title}</p></div>
                                 </div>
                                 <div class="row"></div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-2 eight-font"><fmt:formatDate pattern="yyyy. MM. dd. (E)" value="${data.QnaDto.created_at }"/></div>
+                        </div>
+                        
+                        <div class="row mt">
+                            <div class="col hr-col"><hr class="hr-1" style="color:darkgrey"></div>
                         </div>
 
                         <div class="row mt-3">
                             <div class="col ten-font">
 								${data.QnaDto.contents}
-								
-
-
                             </div>
                         </div>
 
@@ -145,28 +155,75 @@
                         <div class="row mt-3">
                             <div class="col hr-col"><hr class="hr-1"></div>
                         </div>
-
-                        <div class="row mt-3">
-
-                            <div class="col-1"><i class="bi bi-chat-square-text-fill fs-2"></i></div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col"><p class="nine-font-1">문의한 내용에 대한 답변입니다.</p></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col eight-font">2023.06.28. 월요일</div>
-                                </div>
-                            </div>
+                        
+                        
+                        
+                        
+                  		<c:if test="${empty data.QnaDto.answer_contents }">
+                  			
+                  <!-- 
+                  			<div class="row mt-3">
+	                            <div class="col-1"><i class="bi bi-chat-square-text fs-2" style="color: #1D212A;  margin-left: 10px;"></i></div>
+	                            <div class="col">
+	                                <div class="row">
+	                                    <div class="col"><p class="nine-font" style="margin:0;">문의내용 확인중입니다.</p></div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="row mt">
+	                            <div class="col hr-col"><hr class="hr-1"></div>
+	                        </div>
+                 	 -->
+                  		
+                  		</c:if>
+                  		
+                  		
+                  		
+                  		                        
+                  		<c:if test="${!empty data.QnaDto.answer_contents }">
+                  			
+               			<div class="row">
+                            <div class="col hr-col"><hr class="hr-1"></div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col ten-font">
-                                Lorem ipsum dolor sit amet consectetur. A orci in egestas nunc varius sed in a ornare. Ut odio enim nunc fusce eu et. Duis sed aenean in eu duis dui. Sed bibendum ut a ut. Consequat duis condimentum imperdiet nunc in odio. Sed sit malesuada tincidunt posuere tempus sociis nulla mauris. Risus non praesent vitae id orci orci.
-                                Malesuada nibh gravida feugiat mi tristique cras amet justo nulla. Ac nunc velit praesent curabitur purus. Habitant et dolor volutpat facilisis ullamcorper sit. Sem ac neque pretium elit arcu ac volutpat. Augue sed eu id duis est. Mauris eget nisl libero et. Ac lectus convallis leo ultrices libero nascetur felis feugiat. Cursus quisque et pellentesque blandit tortor morbi aliquet. Vulputate eu maecenas proin consectetur pellentesque consequat cursus magna nec. Eu cursus purus.
-                            </div>
+                 
+
+
+                   	
+                           
+                            
+                              
+                        <div class="row">
+                        	<div class="col-1"><i class="bi bi-chat-square-text fs-2" style="color: #1D212A;  margin-left: 10px;"></i></div>
+                            <div class="col"><p class="nine-font" style="margin:0;">문의한 내용에 대한 답변입니다.</p></div>
                         </div>
+                        <div class="row"></div>
+                           
+                       
+               	        <div class="row">
+                            <div class="col eight-font"><fmt:formatDate pattern="yyyy. MM. dd. (E)" value="${data.QnaDto.answer_created_at }"/></div>
+                        </div>
+                        <div class="row mt">
+                            <div class="col hr-col"><hr class="hr-1" style="color:darkgrey"></div>
+                        </div>	
+                  				
+
+	                        
+	                        <div class="row mt-3">
+	                            <div class="col ten-font">
+	                                ${data.QnaDto.answer_contents }
+	                            </div>
+	                        </div>
+	                        
+		                    <div class="row mt-3">
+	                            <div class="col hr-col"><hr class="hr-1"></div>
+	                        </div>
+                  		</c:if>
+       
                     </div>
                 </div>
-         
+  				<div class="row mt-3">
+  					<div class="col"></div>
+  				</div>
             </div>
   
         </div>

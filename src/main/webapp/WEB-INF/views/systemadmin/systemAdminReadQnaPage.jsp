@@ -188,7 +188,6 @@
 	                    
 		                    <!-- 답변이 있을 때 -->
 		                    	<c:choose>
-		                    			
 			                    		<c:when test="${!empty data.tb_QnaDto.answer_contents}">
 		                 		
 		                               
@@ -202,8 +201,6 @@
 		                                        </div>
 		                                    </div>
 		            
-			                    		
-			                    	
 			                    		</c:when>
 			                    		
 			                    		<c:when test="${empty data.tb_QnaDto.answer_contents}">
@@ -231,7 +228,7 @@
 			                                    <div class="row  mt-5">
 			                                        <div class="col-1"><p class="six-font">첨부파일</p></div>
 			                                        <div class="col-10">
-			                                        	// <label for="fileSelect" id="fileSelect" for="input-file">파일첨부</label> 
+			                                        	 <label for="fileSelect" id="fileSelect" for="input-file">파일첨부</label> 
 			                                            <div class="filecustom"><input type="file" name="qnaFiles" id="qna_image_id" multiple accept="image/*"></div> 
 			                                        </div>    
 			                                        
@@ -256,9 +253,11 @@
 			                                </form>
 				                    		
 			                    		</c:when>
-		                    		
-
-			
+			                    		<c:otherwise>
+			                    			
+			                    		
+			                    		</c:otherwise>
+		                   
 		                    	</c:choose>
 		                    
 		                 

@@ -24,4 +24,7 @@ public interface SystemAdminSqlMapper {
 	
 	
 	public List<QnaDto> selectQnaNotNullAnswer();
+	
+	//QnA답변넣기
+	public void updateQnaAnswer(QnaDto qnaDto);
 }

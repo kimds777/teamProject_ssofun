@@ -212,7 +212,7 @@
                                 <div class="row"><div class="col"><p class="seven-font">· 문의 내용과 관련이 없거나 음란 및 불법적인 내용은 답변이 불가능할 수 있습니다.</p></div></div>
                                 <div class="row"><div class="col"><p class="seven-font">· 최대 5개까지의 파일을 첨부할 수 있습니다.</p></div></div>
                             </div>    
-                            <div class="col"></div>
+                            <!-- <div class="col"></div> -->
                         </div>
 
                         <div class="row mt-3">

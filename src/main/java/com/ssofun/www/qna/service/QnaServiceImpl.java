@@ -28,16 +28,16 @@ public class QnaServiceImpl {
 	}
 
 	
-	//qna
-	public void writeQna(QnaDto tb_QnaDto, List<Qna_ImageDto> Qna_ImageDtoList){
+	//qna 유저 글입력
+	public void writeQna(QnaDto	qnaDto, List<Qna_ImageDto> Qna_ImageDtoList){
 		
 		
 
-		qnaSqlMapper.insertQna(tb_QnaDto);
+		qnaSqlMapper.insertQna(qnaDto);
 
-		int qnaId = qnaSqlMapper.selectQnaByLatestQnaId();//pk�̸��ٲٱ� 
+		int qnaId = qnaSqlMapper.selectQnaByLatestQnaId();//pk로 userid로 qna정보가져옴
 		
-		for(Qna_ImageDto Qna_ImageDto:Qna_ImageDtoList) {
+		for(Qna_ImageDto Qna_ImageDto:Qna_ImageDtoList) {//목록으로 출력
 			
 			Qna_ImageDto.setQna_id(qnaId);
 			qnaSqlMapper.insertQnaImage(Qna_ImageDto);
@@ -59,7 +59,7 @@ public class QnaServiceImpl {
 //	}
 //	
 	
-	//qna
+	//user_id로 작성한 qna글목록가져옴
 	public List<QnaDto> getQnaList(int user_id){
 		
 		

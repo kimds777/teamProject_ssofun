@@ -61,7 +61,9 @@ public class QnaController {
 
 	@RequestMapping("customerServiceMainPage")
 	public String customerServiceMainPage(HttpSession session) {
-		UserDto userDto =(UserDto)session.getAttribute("sessionUser");
+		
+		//로그인유지 UserDto userDto =(UserDto)session.getAttribute("sessionUser");
+		
 		return"www/qna/customerServiceMainPage";
 	}
 	
@@ -83,7 +85,7 @@ public class QnaController {
 				if(multipartFile.isEmpty()) {
 					continue;
 				}
-				System.out.println("���ϸ�: "+multipartFile.getOriginalFilename());
+				System.out.println("파일이름: "+multipartFile.getOriginalFilename());
 				
 			
 				String rootFolder = "C:/ssofunUploadFiles/";
@@ -122,7 +124,7 @@ public class QnaController {
 		
 		
 		UserDto sessionUser= (UserDto)session.getAttribute("sessionUser");
-		String userEmail = sessionUser.getEmail();
+		//String userEmail = sessionUser.getEmail();
 		long userId = sessionUser.getUser_id();
 		sessionUser.getUser_id();
 				

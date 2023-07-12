@@ -62,6 +62,10 @@ public class SystemAdminServiceImpl {
 	return map;
 }
 
+	//qna답변 삽입(업데이트)
+	public void updateQnaAnswer(QnaDto qnaDto) {
+		systemAdminSqlMapper.updateQnaAnswer(qnaDto);
+	}
 
 	
 }
