@@ -18,13 +18,7 @@
 <title>Document</title>
 </head>
 <body>
-	<div class="container">
-        <div class="row">
-        	<div class="col">
-        		<jsp:include page="../head/topNavi.jsp"></jsp:include>
-        	</div>
-        </div>
-    </div>
+	<jsp:include page="../../include/fundingHeader.jsp"/>
 	
 	 <div class="container">
        <div class="row">

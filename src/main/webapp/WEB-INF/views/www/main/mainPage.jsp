@@ -14,10 +14,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <title>Insert title here</title>
 
+<link href="../../resources/css/main.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/main.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/productPage.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/productOrder.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/cartPage.css" rel="stylesheet"
+	type="text/css">
+
 </head>
 <body>
-	
-	<jsp:include page="../head/topNavi.jsp"></jsp:include>
+
+	<jsp:include page="../../include/fundingHeader.jsp"/>
      
 	
 	<div class="container">
