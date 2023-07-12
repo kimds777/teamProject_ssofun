@@ -41,6 +41,12 @@ public class FundingController {
 
 	@Autowired
 	private FundingServiceImpl fundingService;
+	
+	
+	@RequestMapping("fundingMainPage")
+	public String fundingMainPage() {
+		return "www/funding/fundingMainPage";
+	}
 
 
 

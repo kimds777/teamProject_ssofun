@@ -210,7 +210,7 @@ a {
 }
 .prod-quantity__input{
 	border: 1px solid #ddd;;
-	
+	font-weight: bold;
 	text-align: center;
 }
 

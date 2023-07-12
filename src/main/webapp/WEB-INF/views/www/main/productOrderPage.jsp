@@ -71,7 +71,7 @@
                                     <td class="customer-td1">우편번호</td>
                                     <td class="customer-td2">
                                         <input type="text" name="address_post" id="address_post" placeholder="우편번호">
-                                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                                        <input type="button" onclick="address_input()" value="우편번호 찾기">
                                     </td>
                                 </tr>
                                 <tr>
@@ -146,8 +146,7 @@
                 <div class="row">
                     <div class="col-agreebtn">
 	                    <input type="hidden" name="amount" value="${amount}" readonly/>
-						<input type="hidden" name="count" value="${count}" readonly/>
-						<input type="hidden" name="user_id" value="${sessionUser.user_id }" readonly/>
+						<input type="hidden" name="count" value="${count}" readonly/>						
 						<input type="hidden" name="product_id" id="productId" readonly/>
                         <button class="prod-buy-btn">구매하기</button>            
                     </div>
@@ -169,7 +168,7 @@
     
     
     //주소 입력 api
-    function sample6_execDaumPostcode() {
+    function address_input() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.

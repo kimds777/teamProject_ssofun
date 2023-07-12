@@ -123,7 +123,10 @@ public class StoreController {
 	
 	// 주문페이지 
 	@RequestMapping("productOrderProcess")
-	public String productOrderProcess(ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto, ProductDto pDto) {
+	public String productOrderProcess(ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto, ProductDto pDto, HttpSession session) {
+		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+		int id = sessionUser.getUser_id();
+		porDto.setUser_id(id);
 		storeService.registRecipient(recipiDto);
 		storeService.registProductOrder(porDto);
 		storeService.registOrderItem(poiDto);
@@ -133,7 +136,10 @@ public class StoreController {
 	
 	// 장바구니 페이지
 	@RequestMapping("cartPage")
-	public String cartPage(int id, Model model) {
+	public String cartPage(Model model, HttpSession session) {
+		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+		int id = sessionUser.getUser_id();
+		System.out.println(id);
 		List<ProductUserDto> list = storeService.getCartList(id);
 		model.addAttribute("list",list);
 		return "www/main/cartPage";
@@ -150,12 +156,10 @@ public class StoreController {
 	@RequestMapping("cartProcess")
 	public String cartProcess(ProductCart cartDto, ProductUserDto Std, HttpSession session) {
 		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
-		if(sessionUser !=null) {
-			storeService.registCart(cartDto);
-			return "1";
-		}else {
-			return "0";
-		}
+		int id = sessionUser.getUser_id();
+		cartDto.setUser_id(id);
+		storeService.registCart(cartDto);
+		return "1";
 	}
 	
 	//==등록 관련
