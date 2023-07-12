@@ -39,7 +39,7 @@ p{
 }
 .r3{
 	margin-top: 10px;
-	width:200px;
+	width:210px;
 }
 .row-radius{
 	border-radius:10%;
@@ -57,7 +57,7 @@ p{
   overflow: hidden; /* 텍스트를 넘치는 부분을 숨깁니다. */
 }
 .col-won1 {
-    width: 100px;
+    width: 110px;
     height: 30px;
     font-size: 18px;
     margin-top: 16px;

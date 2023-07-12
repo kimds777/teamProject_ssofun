@@ -344,6 +344,19 @@
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                </tr>
+		                                <tr>
+		                                    <th scope="row" class="th1">등록일</th>
+		                                    <th scope="col">
+		                                    <%-- <c:forEach items="${productThumbnailDetail}" var="thumbnail">
+		                                    ${thumbnail.name}
+		                                    </c:forEach> --%>
+		                                    <input type="file" name="name" value="">         
+		                                    </th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                    <th scope="col"></th>
+		                                </tr>		                                
 		                            </thead>
 		                        </table>
 		                        <table class="thumbnailTable">

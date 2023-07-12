@@ -93,7 +93,7 @@
 	    values(
 	        (SELECT MAX(product_order_id) from tb_product_order),
 	        #{product_id},
-	        1,
+	        3,
 	        (SELECT MAX(delivery_recipient_id) from tb_delivery_recipient),
 	        #{count}
 	    )

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ssofun.admin.store.mapper.StoreAdminSqlMapper;
 import com.ssofun.dto.DeliveryCompanyDto;
 import com.ssofun.dto.DeliveryDto;
+import com.ssofun.dto.HyunMinDeliveryJoinDto;
 import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
@@ -152,6 +153,8 @@ public class StoreAdminService {
 		// 택배사등록
 		public void deliveryInsert(DeliveryDto deliveryDto) {
 			storeAdminSqlMapper.deliveryInsert(deliveryDto);
+			System.out.println("서비스부분"+deliveryDto.getDelivery_company_id());
+			System.out.println("서비스부분"+deliveryDto);
 		}
 		
 		// 카테고리별 오더리스트
@@ -160,5 +163,19 @@ public class StoreAdminService {
 			List<ProductOrderItemDto> orderItemCategoryList = storeAdminSqlMapper.orderItemCategoryList(productOrderItemDto);
 			
 			return orderItemCategoryList;
+		}
+		
+		// 발송리스트
+		public List<DeliveryDto> deliveryList(DeliveryDto deliveryDto){
+			List<DeliveryDto> deliveryList = storeAdminSqlMapper.deliveryList(deliveryDto);
+			return deliveryList;
+		}
+		
+		// 발송상세보기
+		public HyunMinDeliveryJoinDto deliveryDetail(int delivery_recipient_id) {
+			
+			HyunMinDeliveryJoinDto deliveryDetail = storeAdminSqlMapper.deliveryDetail(delivery_recipient_id);
+			
+			return deliveryDetail;
 		}
 	}

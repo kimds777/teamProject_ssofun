@@ -18,8 +18,7 @@
 <title>Document</title>
 </head>
 <body>
-
-	<jsp:include page="../head/topNavi.jsp"></jsp:include>
+	<jsp:include page="../../include/fundingHeader.jsp" />
 
 	<div class="container">
 		<div class="row">
@@ -33,7 +32,6 @@
 						<hr>
 						<div class="row">
 							<div class="col-customer">
-
 								<table class="customer-table">
 									<tr>
 										<td class="all-event-check"><input type="checkbox"
@@ -46,7 +44,6 @@
 										<td class="td-total">합계</td>
 										<td class="td-delete"></td>
 									</tr>
-									
 									<c:forEach items="${list}" var="item" varStatus="status">
 										<c:set var="subtotal" value="${item.price * item.total_count}"></c:set>
 										<tr>
@@ -55,51 +52,47 @@
 											<td class="td-image"><img
 												src="/ssofunUploadFiles/${item.thumbnail_name}"
 												style="width: 75px; height: 75px;"></td>
-
 											<td class="td-productInfo">
 												<div class="product-name">${item.product_name}</div>
-
 												<div class="cart-price">
 													<div class="option-select">
 														<div class="button_quantity">
 															<span class="custom-element">
 																<button class="prod-quantity__plus"
-																	onclick="changeQuantity('+', 'prod-quantity-${status.index + 1}', ${status.index})">+</button>
-																<input type="text"
-																id="prod-quantity-${status.index + 1}"
+																	onclick="changeQuantity('+', 'prod-quantity-${status.index}', ${status.index})">+</button>
+																<input type="text" id="prod-quantity-${status.index}"
 																value="${item.total_count}" class="prod-quantity__input"
 																min="1" maxlength="6" autocomplete="off"
-																onchange="updateCount(${status.index})">
+																onchange="updateQuantity(${status.index}, this.value)">
 																<button class="prod-quantity__minus"
-																	onclick="changeQuantity('-', 'prod-quantity-${status.index + 1}', ${status.index})">-</button>
+																	onclick="changeQuantity('-', 'prod-quantity-${status.index}', ${status.index})">-</button>
 															</span>
 														</div>
 													</div>
-
-													<div class="option-price">
-														<fmt:formatNumber value="${subtotal}" type="number"
-															pattern="#,###원" />
-													</div>
+													
+													
 												</div>
 											</td>
 
-											<td class="td-price"><fmt:formatNumber
-													value="${item.price}" type="number" pattern="#,###원" /></td>
-											<td class="td-quantity" id="td-quantity-${status.index + 1}">
-												<span id="item-count-${status.index + 1}">${item.total_count}</span>
-											</td>
+											<td class="td-price"><span class="price-${status.index}">
+													<fmt:formatNumber value="${item.price}" type="number"
+														pattern="#,###원" />
+											</span></td>
 
+											<td class="td-quantity"><span
+												id="quantity-${status.index}">${item.total_count}</span></td>
 											<td class="td-shipping">무료</td>
-											<td class="td-total"><fmt:formatNumber
-													value="${subtotal}" type="number" pattern="#,###원" /></td>
+											
+											<td class="td-total">
+												 <span id="display-price-${status.index}"></span> 																						
+											</td>
+													
 											<td class="td-delete"><a
 												href="./deleteCartProcess?user_id=${item.user_id}&product_id=${item.product_id}">
 													<i class="bi bi-x-square" style="font-size: 1rem;"></i>
 											</a></td>
 										</tr>
 									</c:forEach>
-
-
 
 									<tr>
 										<td colspan="8">
@@ -110,79 +103,120 @@
 													<div class="col-sale">총 할인</div>
 													<div class="col-total">총 주문금액</div>
 												</div>
-												<div class="row">
-													<div class="col">총 상품가격</div>
-													<div class="col">+</div>
-													<div class="col">총 배송비</div>
-													<div class="col">-</div>
+												<div class="row">													
+													<div id="total-price" class="col"></div>
+													<div class="col-plus"><i class="bi bi-plus-square"></i></div>
+													<div class="col">0원</div>
+													<div class="col-minus"><i class="bi bi-dash-square"></i></i></div>
 													<div class="col">총 할인</div>
-													<div class="col">총 주문금액</div>
+													<div class="col-equal"><img src="../../resources/img/img_equals.gif"></div>
+													<div id="total-price" class="col"></div>
+													
 												</div>
 											</div>
 										</td>
 									</tr>
 								</table>
-
-
 							</div>
 						</div>
 					</div>
-
-
 				</div>
-
-
 			</div>
 			<div class="col"></div>
 		</div>
 	</div>
 
 	<script>
-		//체크박스
-		function toggleAllChecks() {
-			var allCheck = document.getElementById('allCheck');
-			var itemChecks = document.getElementsByClassName('itemCheck');
+        function toggleAllChecks() {
+            var allCheck = document.getElementById('allCheck');
+            var itemChecks = document.getElementsByClassName('itemCheck');
 
-			for (var i = 0; i < itemChecks.length; i++) {
-				itemChecks[i].checked = allCheck.checked;
-			}
+            for (var i = 0; i < itemChecks.length; i++) {
+                itemChecks[i].checked = allCheck.checked;
+            }
+        }
+
+        function toggleItemCheck() {
+            var allCheck = document.getElementById('allCheck');
+            var itemChecks = document.getElementsByClassName('itemCheck');
+
+            var isAnyUnchecked = false;
+
+            for (var i = 0; i < itemChecks.length; i++) {
+                if (!itemChecks[i].checked) {
+                    isAnyUnchecked = true;
+                    break;
+                }
+            }
+
+            allCheck.checked = !isAnyUnchecked;
+        }
+
+        function changeQuantity(operation, inputId, index) {
+            var input = document.getElementById(inputId);
+            var value = parseInt(input.value);
+
+            if (operation === "+") {
+                value += 1;
+            } else if (operation === "-") {
+                value -= 1;
+            }
+
+            if (value < 1) {
+                alert("1개 이상부터 구매하실 수 있습니다.");
+                value = 1;
+            }
+
+            input.value = value.toString();
+            updateQuantity(index);
+            updateAmount(index);
+        }
+
+        function updateQuantity(index) {
+            var quantitySpan = document.getElementById('quantity-' + index);
+            var inputId = 'prod-quantity-' + index;
+            var quantityInput = document.getElementById(inputId);
+            quantitySpan.innerText = quantityInput.value;
+        }
+
+        function updateAmount(index) {
+            var amountDisplay = document.getElementById('display-price-' + index);
+            var priceElement = document.querySelector('.price-' + index);
+            var price = parseInt(priceElement.textContent.replace(/[^0-9]/g, ''));
+            var quantityElement = document.getElementById('quantity-' + index);
+            var quantity = parseInt(quantityElement.textContent);
+            
+            var totalAmount = price * quantity;
+            
+            amountDisplay.innerText = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalAmount).replace(/₩|KRW/g, '') + '원';
+        }
+
+        // 초기화
+        var displayPriceElements = document.querySelectorAll('[id^="display-price-"]');
+		for (var i = 0; i < displayPriceElements.length; i++) {
+		    updateAmount(i);
 		}
+		
+		function calculateTotalAmount() {
+			  var totalPrice = 0;
 
-		function toggleItemCheck() {
-			var allCheck = document.getElementById('allCheck');
-			var itemChecks = document.getElementsByClassName('itemCheck');
+			  var displayPriceElements = document.querySelectorAll('[id^="display-price-"]');
+			  for (var i = 0; i < displayPriceElements.length; i++) {
+			    var priceText = displayPriceElements[i].textContent;
+			    var price = parseInt(priceText.replace(/[^0-9]/g, ''));
+			    totalPrice += price;
+			  }
 
-			var isAnyUnchecked = false;
-
-			for (var i = 0; i < itemChecks.length; i++) {
-				if (!itemChecks[i].checked) {
-					isAnyUnchecked = true;
-					break;
-				}
+			  var totalPriceElement = document.getElementById('total-price');
+			  totalPriceElement.textContent = totalPrice + '원';
 			}
 
-			allCheck.checked = !isAnyUnchecked;
-		}
+			calculateTotalAmount();
 
-		// +,- 수량 변경
-		function changeQuantity(operation, inputId) {
-			var input = document.getElementById(inputId);
-			var value = parseInt(input.value);
 
-			if (operation === "+") {
-				value += 1;
-			} else if (operation === "-") {
-				value -= 1;
-			}
 
-			if (value < 1) {
-				alert("1개 이상부터 구매하실 수 있습니다.");
-				value = 1; // 최소값인 1로 설정
-			}
 
-			input.value = value.toString();
-		}
-	</script>
+    </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

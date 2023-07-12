@@ -224,7 +224,7 @@ public class StoreAdminController {
 	   
 	   // 오더리스트
 	   @RequestMapping("orderItemListPage")
-	   public String orderItemListPage( Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto, HttpSession session) {
+	   public String orderItemListPage(Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto, HttpSession session) {
 		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   
@@ -236,27 +236,31 @@ public class StoreAdminController {
 		   int id = shopAdmin.getAdmin_id();
 		   productOrderItemDto.setAdmin_id(id);		   
 		   List<ProductOrderItemDto> orderItemList = storeAdminService.productOrderItemList(productOrderItemDto);
-		   
-		   for(ProductOrderItemDto poi : orderItemList) {
-			   System.out.println(poi.getProduct_order_item_id());
+		  
+		   for(ProductOrderItemDto po : orderItemList) {
+			   System.out.println("제발요 : "+po.getDelivery_recipient_id());
 		   }
 		   
 		   model.addAttribute("orderItemList", orderItemList);
 		   model.addAttribute("orderStatusList", orderStatusList);
-		   
+		  		    
 		   return "admin/orderItemListPage";
 	   }
 	   
 	   // 관리자 판매상품 상세보기
 	   @RequestMapping("orderItemDetailPage")
-	   public String orderItemDetailPage(Model model ,int product_order_item_id, DeliveryCompanyDto deliveryCompanyDto) {
+	   public String orderItemDetailPage(Model model ,int product_order_item_id, 
+			   DeliveryCompanyDto deliveryCompanyDto, int delivery_recipient_id) {
 		   
 		   List<DeliveryCompanyDto> deliveryCompanyList = storeAdminService.deliveryCompanyList(deliveryCompanyDto);
 		   
 		   ProductOrderItemDto orderItemDetail = storeAdminService.orderItemDetail(product_order_item_id);
+		   
+		   HyunMinDeliveryJoinDto deliveryDetail = storeAdminService.deliveryDetail(delivery_recipient_id);
 		  	   
 		   model.addAttribute("orderItemDetail", orderItemDetail);
 		   model.addAttribute("deliveryCompanyList", deliveryCompanyList);
+		   model.addAttribute("deliveryDetail", deliveryDetail);
 		   
 		   return "admin/orderItemDetailPage";
 	   }
@@ -269,21 +273,24 @@ public class StoreAdminController {
 		   
 		   if(orderItemDetail.getProduct_order_status_id() == 3) {
 			   storeAdminService.adminCheckUpdate(productOrderItemDto);
-			   System.out.println("3"+orderItemDetail.getOrder_status_name());
 			   return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id;
-		   }else if(orderItemDetail.getProduct_order_status_id() == 4) {
-			   storeAdminService.deliveryingUpdate(productOrderItemDto);
-			   System.out.println("4"+orderItemDetail.getOrder_status_name());
+		   }else {
 			   return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id;
 		   }
-		   return "redirect:./orderItemListPage";
 	   }
 	   
 	   // 택배사등록
 	   @RequestMapping("deliveryInsertProcess")
-	   public String deliveryInsertProcess(DeliveryDto deliveryDto,int product_order_item_id) {
+	   public String deliveryInsertProcess(DeliveryDto deliveryDto,int product_order_item_id
+			   , int delivery_recipient_id) {
+		   
+		   ProductOrderItemDto productOrderItemDto = new ProductOrderItemDto();
+		   productOrderItemDto.setProduct_order_item_id(product_order_item_id);
+		   storeAdminService.deliveryingUpdate(productOrderItemDto);
+		   
 		   
 		   storeAdminService.deliveryInsert(deliveryDto);
+		   deliveryDto.setDelivery_recipient_id(delivery_recipient_id);
 		   
 		   return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id;
 	  }

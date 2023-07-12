@@ -169,10 +169,10 @@ p {
 
 .col-last {
 	margin-top: 63px;
-	width: 237px;
+	width: 260px;
 	height: 40px;
 	float: right;
-	padding: 0 0 0 26px;
+	padding: 0 0 0 9px;
 }
 
 .col-pay {
@@ -184,7 +184,7 @@ p {
 
 .col-but {
 	margin-top: 1px;
-	width: 110px;
+	width: 140px;
 	height: 40px;
 }
 
@@ -215,6 +215,27 @@ p {
 	width: 300px;
 	height: 55px;
 	float: left;
+}
+
+.prod-quantity__plus{
+	border: 1px solid #ddd;;
+	background-color: #fff;
+	width: 64px;
+    height: 34px;
+}
+.prod-quantity__minus{
+	border: 1px solid #ddd;;
+	background-color: #fff;
+	width: 64px;
+    height: 34px;
+	
+}
+.prod-quantity__input{
+	border: 1px solid #ddd;;
+	font-weight: bold;
+	text-align: center;
+	width: 44px;
+    height: 34px;
 }
 
 
