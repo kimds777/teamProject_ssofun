@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col"><!--상단 네비-->
-                <jsp:include page="../../include/systemAdminNavi.jsp"></jsp:include>
+                <jsp:include page="../include/systemAdminNavi.jsp"></jsp:include>
             </div>
         </div>
 

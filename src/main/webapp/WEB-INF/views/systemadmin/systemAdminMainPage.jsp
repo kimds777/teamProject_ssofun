@@ -14,72 +14,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
     <!-- <script type="text/javascript"> </script>-->
 
-   <!-- <style>
-        a {
-            text-decoration-line: none;
-        }
 
-        .leftside1 {
-            background-color: #13161C;
-            height: 180px;
-        }
 
-        .leftside2 {
-            background-color: #1D212A;
-        }
 
-        .leftside3 {
-            background-color: #1D212A;
-            height: 700px;
-        }
-
-        .leftsidepontstyle1 {
-            color: #B3B8C3;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 400;
-            margin-bottom: 0;
-            text-decoration: none;
-        }
-
-        /*leftsideicolor{color: #B3B8C3;}*/
-        .leftsideicolor {
-            color: white;
-        }
-
-        #leftsideicolor {
-            color: white;
-        }
-
-        .leftsidefontstyle1 {
-            color: #6F737E;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 400;
-        }
-
-        .adminimage {
-            color: #F5F5F5
-        }
-
-        .adminid {
-            color: #F5F5F5;
-            text-align: center;
-            font-size: 15px;
-        }
-
-        .adminimage {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background-color: white;
-        }
-
-        .adminimagecol {
-            width: 100px;
-            height: 100px;
-            border-radius: 30%;
-            overflow: hidden;
-        }
-    </style> --> 
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
     <title>Document</title>
@@ -89,7 +26,7 @@
     <div class="container">
         <div class="row">
             <div class="col"><!--상단 네비-->
-                <jsp:include page="../../include/systemAdminNavi.jsp"></jsp:include>
+                <jsp:include page="../include/systemAdminNavi.jsp"></jsp:include>
             </div>
         </div>
 

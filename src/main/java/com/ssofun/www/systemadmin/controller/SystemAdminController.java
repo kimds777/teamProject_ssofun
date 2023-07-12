@@ -16,7 +16,7 @@ import com.ssofun.dto.*;
 import com.ssofun.www.systemadmin.service.SystemAdminServiceImpl;
 
 @Controller
-@RequestMapping("www/systemadmin/*")
+@RequestMapping("systemadmin/*")
 public class SystemAdminController {
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class SystemAdminController {
 	@RequestMapping("systemAdminLoginPage")
 	public String systemAdminLoginPage() {
 		
-		return"www/systemadmin/systemAdminLoginPage";
+		return"systemadmin/systemAdminLoginPage";
 	}
 	
 	
@@ -54,7 +54,7 @@ public class SystemAdminController {
 	
 	@RequestMapping("systemAdminMainPage")
 	public String systemAdminMainPage() {
-		return"www/systemadmin/systemAdminMainPage";
+		return"systemadmin/systemAdminMainPage";
 	}
 	
 	
@@ -97,7 +97,7 @@ public class SystemAdminController {
 		getUnansweredQnaListProcess(model, session);
 		answerCompletedQnaList(model, session);
 		
-			return"www/systemadmin/systemAdminQnaMainPage";
+			return"systemadmin/systemAdminQnaMainPage";
 	}
 	
 	
@@ -126,7 +126,7 @@ public class SystemAdminController {
 		
 		
 		
-		return"www/systemadmin/systemAdminReadQnaPage";
+		return"systemadmin/systemAdminReadQnaPage";
 	}
 	
 	@RequestMapping("writeQnaAnswerProcess")
@@ -134,7 +134,7 @@ public class SystemAdminController {
 		
 		
 		
-		return"www/systemadmin/systemAdminQnaMain";
+		return"systemadmin/systemAdminQnaMain";
 	}
 
 	
