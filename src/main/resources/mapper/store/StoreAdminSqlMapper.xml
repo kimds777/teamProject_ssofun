@@ -221,7 +221,8 @@
 		pos.name AS order_status_name,
 	    p.name AS product_name,
 	    poi.count,
-	    p.price
+	    p.price,
+	    dr.delivery_recipient_id
 	FROM tb_product_order_item poi
 		INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
 		INNER JOIN tb_product p ON poi.product_id = p.product_id
@@ -338,4 +339,17 @@
 	UPDATE tb_product_order_item SET product_order_status_id = 5 
 	WHERE product_order_item_id = #{product_order_item_id}
 </update>
+
+<!-- 발송리스트 -->
+<select id="deliveryList" resultType="com.ssofun.dto.DeliveryDto">
+	SELECT * FROM tb_delivery	
+</select>
+<!-- 발송상세보기 -->
+<select id="deliveryDetail" resultType="com.ssofun.dto.HyunMinDeliveryJoinDto">
+SELECT d.delivery_id, dr.delivery_recipient_id, dc.name, d.invoice_no, d.created_at  
+FROM tb_delivery d
+	INNER JOIN tb_delivery_company dc ON dc.delivery_company_id = d.delivery_company_id
+    INNER JOIN tb_delivery_recipient dr ON d.delivery_recipient_id = dr.delivery_recipient_id
+WHERE dr.delivery_recipient_id = #{delivery_recipient_id}
+</select>
 </mapper>

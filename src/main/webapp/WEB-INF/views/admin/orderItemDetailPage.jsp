@@ -304,7 +304,8 @@
                                         </div>
                                      </div>
                                    </div>
-                                   <c:if test="${orderItemDetail.product_order_status_id == 4}">
+                                   <c:choose>
+                                   <c:when test="${orderItemDetail.product_order_status_id == 4}">
                                    <div class="card mt-4">
                                     <div class="card-body">
                                     <h4 class="card-title mb-3">발송등록</h4>
@@ -348,8 +349,54 @@
                                         </form>
                                      </div>
                                   </div>
-                               </c:if>        
-            			    </div>
+                               </c:when>
+                               <c:when test="${orderItemDetail.product_order_status_id == 5}">
+                                   <div class="card mt-4">
+                                    <div class="card-body">
+                                    <h4 class="card-title mb-3">발송정보</h4>
+                                        <!-- begin::widget-stats-1-->
+                                        <div class="ul-widget1">
+                                            <div class="ul-widget__item">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">발송번호</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_id}
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">주문자번호</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_recipient_id}                                                
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">택배사명</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.name}                                                
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">운송장번호</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.invoice_no}                                                
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">발송일</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.created_at }                                                
+                                                </span>
+                                            </div>
+                                        </div>
+                                     </div>
+                                  </div>                               		
+                               </c:when>
+                    	   </c:choose>      
+            			</div>
             					
             					
       		<!-- end of row-->
@@ -444,11 +491,4 @@
     <script src="../resources/dist-assets/js/scripts/script.min.js"></script>
     <script src="../resources/dist-assets/js/scripts/sidebar.large.script.min.js"></script>
 </body>
-<script>
-function submitForms() {
-    document.getElementById("orderStatusForm").submit();  // 폼 1 제출
-    document.getElementById("deliveryForm").submit();     // 폼 2 제출
-}
-
-</script>
 </html>

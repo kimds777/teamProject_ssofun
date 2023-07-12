@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ssofun.dto.DeliveryCompanyDto;
 import com.ssofun.dto.DeliveryDto;
+import com.ssofun.dto.HyunMinDeliveryJoinDto;
 import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
@@ -78,4 +79,9 @@ public interface StoreAdminSqlMapper {
 	   
 	   // 카테고리별 오더리스트
 	   public List<ProductOrderItemDto> orderItemCategoryList(ProductOrderItemDto productOrderItemDto);
+	   
+	   // 발송리스트
+	   public List<DeliveryDto> deliveryList(DeliveryDto deliveryDto);
+	   // 발송상세보기
+	   public HyunMinDeliveryJoinDto deliveryDetail(int delivery_recipient_id);
 	}
