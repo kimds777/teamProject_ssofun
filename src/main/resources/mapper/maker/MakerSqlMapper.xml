@@ -5,7 +5,7 @@
 
 
 	<!-- 창작자 정보 입력 -->
-	<insert id="insertUserCreator" parameterType="com.ssofun.www.funding.dto.UserCreatorDto" keyProperty="user_creator_id">
+	<insert id="insertUserCreator" parameterType="com.ssofun.dto.UserCreatorDto" keyProperty="user_creator_id">
 		INSERT INTO tb_user_creator(user_id,name,email,phone,creator_type,biz_no) 
 		VALUES(#{user_id},#{name},#{email},#{phone},#{creator_type},#{biz_no})
 		
@@ -23,7 +23,7 @@
 	
 	<!-- 태그 정보 입력 -->
 	
-	<insert id="insertTag" parameterType="com.ssofun.www.funding.dto.FundingTagDto" keyProperty="funding_tag_id">
+	<insert id="insertTag" parameterType="com.ssofun.dto.FundingTagDto" keyProperty="funding_tag_id">
 		INSERT INTO tb_funding_tag(name) VALUES(#{name})
 	
 		<!-- PK 조회를 위한 selectKey -->
@@ -33,7 +33,7 @@
 	</insert>
 	
 	<!-- 펀딩 정보 입력 -->
-	<!--<insert id="insertFunding" parameterType="com.ssofun.www.funding.dto.FundingDto" keyProperty="funding_id">
+	<!--<insert id="insertFunding" parameterType="com.ssofun.dto.FundingDto" keyProperty="funding_id">
 		INSERT INTO tb_funding(funding_category_id,funding_tag_id,user_creator_id,funding_code,title,contents,description,target_price,adult_fg,delivery_from) 
 		VALUES(#{funding_category_id},#{funding_tag_id},#{user_creator_id},#{funding_code},#{fundingDto.title},#{fundingDto.contents},#{fundingDto.description},
 			#{fundingDto.target_price},#{adult_fg},#{deliveryFrom})
@@ -57,7 +57,7 @@
 	</select>
 	
 	<!-- 리워드 정보 입력 -->
-	<insert id="insertFundingReward" parameterType="com.ssofun.www.funding.dto.FundingRewardDto" keyProperty="funding_reward_id">
+	<insert id="insertFundingReward" parameterType="com.ssofun.dto.FundingRewardDto" keyProperty="funding_reward_id">
 		INSERT INTO tb_funding_reward(funding_id,title,description,price,delivery_price,stock_max,buy_count,start_from,close_at,delivery_from) 
 		VALUES(#{funding_id},#{title},#{description},#{price},#{delivery_price},#{stock_max},#{buy_count},#{start_from},#{close_at},#{delivery_from})
 		
@@ -66,7 +66,7 @@
 		  SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	<!-- <insert id="insertFundingReward" parameterType="com.ssofun.www.funding.dto.FundingRewardDto" keyProperty="funding_reward_id">
+	<!-- <insert id="insertFundingReward" parameterType="com.ssofun.dto.FundingRewardDto" keyProperty="funding_reward_id">
 		INSERT INTO tb_funding_reward(funding_id,title,description,price,delivery_price,buy_count,start_from,close_at,delivery_from) 
 		VALUES(#{funding_id},#{title},#{description},#{price},#{delivery_price},#{buy_count},#{start_from],#{close_at},#{delivery_from})
 		
