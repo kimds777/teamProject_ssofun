@@ -299,15 +299,22 @@
 		        },
 		        success: function(res){
 		        	if(res==1){
-		        		location.href = 'cartPage?id='+userId
+		        		location.href = 'cartPage'
 		        	}
 		        	else{
 		        		alert("실패");
 		        	}
 		        },
 		        error: function(){
-		            alert("로그인을 하셔야 이용 가능합니다.");
-		            location.href = 'loginPage'
+		        	 if (confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?") == true){ 
+		        		   //true는 확인버튼을 눌렀을 때 코드 작성
+		        		    location.href = 'loginPage'
+		        		   console.log("완료되었습니다.");
+		        		 }else{
+		        		   // false는 취소버튼을 눌렀을 때, 취소됨
+		        		   console.log("취소되었습니다");
+		        		 }
+		           
 		        }
 		  	});
 		}
