@@ -117,6 +117,8 @@ public class StoreController {
 	@RequestMapping("productOrderPage")
 	public String productOrderPage(int id,  Model model) {
 		List<ProductDto> list = storeService.getItemListDetail(id);
+		List<ProductUserDto> cartlist = storeService.getCartList(id);
+		model.addAttribute("cartlist",cartlist);
 		model.addAttribute("detail", list);
 		return "www/main/productOrderPage";
 	}

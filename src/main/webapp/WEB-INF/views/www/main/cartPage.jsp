@@ -63,14 +63,12 @@
 																<input type="text" id="prod-quantity-${status.index}"
 																value="${item.total_count}" class="prod-quantity__input"
 																min="1" maxlength="6" autocomplete="off"
-																onchange="updateQuantity(${status.index}, this.value)">
+																oninput="updateQuantity(${status.index}, this.value); updateAmount(${status.index})">
 																<button class="prod-quantity__minus"
 																	onclick="changeQuantity('-', 'prod-quantity-${status.index}', ${status.index})">-</button>
 															</span>
 														</div>
-													</div>
-													
-													
+													</div>	
 												</div>
 											</td>
 
@@ -79,8 +77,10 @@
 														pattern="#,###원" />
 											</span></td>
 
-											<td class="td-quantity"><span
-												id="quantity-${status.index}">${item.total_count}</span></td>
+											<td class="td-quantity">
+											<span id="quantity-${status.index}">${item.total_count}</span>
+											</td>
+												
 											<td class="td-shipping">무료</td>
 											
 											<td class="td-total">
@@ -98,21 +98,35 @@
 										<td colspan="8">
 											<div class="cart-total-price">
 												<div class="row">
-													<div class="col-price">총 상품가격</div>
-													<div class="col-shipping">총 배송비</div>
-													<div class="col-sale">총 할인</div>
-													<div class="col-total">총 주문금액</div>
-												</div>
-												<div class="row">													
-													<div id="total-price" class="col"></div>
-													<div class="col-plus"><i class="bi bi-plus-square"></i></div>
-													<div class="col">0원</div>
-													<div class="col-minus"><i class="bi bi-dash-square"></i></i></div>
-													<div class="col">총 할인</div>
-													<div class="col-equal"><img src="../../resources/img/img_equals.gif"></div>
-													<div id="total-price" class="col"></div>
+													<div class="center">
 													
-												</div>
+													<div class="col-price">										
+													<span class="s-price">총 상품가격</span>
+													<em id="total-price" class="e-price"></em>
+													</div>
+													
+													<div class="col-plus"><i class="bi bi-plus-square"></i></div>
+													
+													<div class="col-shipping">
+													<span class="s-shipping">배송비</span>
+													<em class="e-shipping">0원</em>
+													</div>
+													
+													<div class="col-minus"><i class="bi bi-dash-square"></i></div>
+													
+													<div class="col-sale">
+													<span class="s-sale">할인금액</span>
+													<em class="e-sale">0원</em>
+													</div>
+													
+													<div class="col-equal"><img src="../../resources/img/img_equals.gif"></div>
+													<div class="col-total">
+													<span class="s-total">주문금액</span>
+													<em id="final-order-price" class="e-total">0원</em>
+													</div>
+													
+													</div>
+												</div>											
 											</div>
 										</td>
 									</tr>
@@ -120,6 +134,18 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-buy-btn">
+							 <form action="./productProcess" method="post">
+					            <input type="hidden" name="id" id="productId" value="" />
+					            <input type="hidden" name="amount" id="productAmount" value="" />
+					            <input type="hidden" name="count" id="productCount" value="" />
+					            <input type="hidden" name="user_id" id="userId" value="${sessionUser.user_id }" readonly/>
+					            <button class="prod-buy-btn" onclick="setProductValues()">구매하기</button>
+					        </form>	
+						</div>
 				</div>
 			</div>
 			<div class="col"></div>
@@ -151,34 +177,42 @@
 
             allCheck.checked = !isAnyUnchecked;
         }
-
+		
+        // 버튼으로 수량 변경
         function changeQuantity(operation, inputId, index) {
             var input = document.getElementById(inputId);
             var value = parseInt(input.value);
 
-            if (operation === "+") {
-                value += 1;
-            } else if (operation === "-") {
-                value -= 1;
-            }
+            
+            if (isNaN(value)) {
+            	value = 1;
+      	    } else {
+      	      if (operation === '+') {
+      	    	value += 1;
+      	      } else if (operation === '-' && value > 1) {
+      	    	value -= 1;
+      	      }
+      	    }
 
             if (value < 1) {
                 alert("1개 이상부터 구매하실 수 있습니다.");
                 value = 1;
             }
 
-            input.value = value.toString();
+            input.value = value;
             updateQuantity(index);
             updateAmount(index);
         }
-
+		
+        // 수량 표시
         function updateQuantity(index) {
             var quantitySpan = document.getElementById('quantity-' + index);
             var inputId = 'prod-quantity-' + index;
             var quantityInput = document.getElementById(inputId);
             quantitySpan.innerText = quantityInput.value;
         }
-
+		
+        // 합계 표시
         function updateAmount(index) {
             var amountDisplay = document.getElementById('display-price-' + index);
             var priceElement = document.querySelector('.price-' + index);
@@ -189,6 +223,7 @@
             var totalAmount = price * quantity;
             
             amountDisplay.innerText = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalAmount).replace(/₩|KRW/g, '') + '원';
+            calculateTotalAmount(); // 총 가격도 업데이트
         }
 
         // 초기화
@@ -197,6 +232,7 @@
 		    updateAmount(i);
 		}
 		
+		// 총 상품 가격 표시
 		function calculateTotalAmount() {
 			  var totalPrice = 0;
 
@@ -208,7 +244,11 @@
 			  }
 
 			  var totalPriceElement = document.getElementById('total-price');
-			  totalPriceElement.textContent = totalPrice + '원';
+			  totalPriceElement.textContent = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice).replace(/₩|KRW/g, '') + '원';
+			  
+			  //주문금액
+			  var finalOrderPriceElement = document.getElementById('final-order-price');
+			  finalOrderPriceElement.textContent = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice).replace(/₩|KRW/g, '') + '원';
 			}
 
 			calculateTotalAmount();

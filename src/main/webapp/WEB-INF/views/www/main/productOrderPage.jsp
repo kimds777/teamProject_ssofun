@@ -106,6 +106,20 @@
                                 </tr>
                 		</table>
                 		</c:if>
+                		
+                		<c:forEach items="${cartlist }" var="list">
+                		<c:if test="${not empty list}">
+                        <h2 class="customer-h2">배송상품</h2>
+                        <table class="customer-table">
+                                <tr>
+                                    <td class="customer-td1">상품명</td>
+                                    <td class="customer-td2">list.product_name}</td>
+                                     <td class="customer-td1">수량</td>
+                                    <td class="customer-td2">${list.total_count }개</td>
+                                </tr>
+                		</table>
+                		</c:if>
+                		</c:forEach>
                 	</div>
                 </div>           
                 

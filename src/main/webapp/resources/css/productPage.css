@@ -110,7 +110,12 @@ p {
 	margin-right: 20px;
 }
 
-
+.col-won1{
+	width: 110px;
+    height: 30px;
+    font-size: 18px;
+    margin-top: 16px;
+}
 
 .col-ship {
 	width: 290px;
@@ -169,7 +174,7 @@ p {
 
 .col-last {
 	margin-top: 63px;
-	width: 260px;
+	width: 270px;
 	height: 40px;
 	float: right;
 	padding: 0 0 0 9px;
@@ -177,7 +182,7 @@ p {
 
 .col-pay {
 	margin-top: 3px;
-	width: 120px;
+	width: 130px;
 	height: 20px;
 	font-size: 18px;
 }
