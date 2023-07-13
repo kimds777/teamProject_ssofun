@@ -302,6 +302,7 @@
 										        <h4 class="ul-widget1__title">고객정보</h4>
 										    </div>
 										</div>
+
                                         <!-- begin::widget-stats-1-->
                                         <div class="ul-widget1">
                                             <div class="ul-widget__item">
@@ -398,18 +399,11 @@
                                                 <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_id}
                                                 </span>
                                             </div>
-                                            <%-- <div class="ul-widget__item">
-                                                <div class="ul-widget__info">
-                                                    <h3 class="ul-widget1__title">주문자번호</h3>
-                                                </div>
-                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_recipient_id}                                                
-                                                </span>
-                                            </div> --%>
                                             <div class="ul-widget__item delivery_div">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">택배사명</h3>
                                                 </div>
-                                                <span class="ul-widget__desc text-mute">${deliveryDetail.name}                                                
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_company_name}                                                
                                                 </span>
                                             </div>
                                             <div class="ul-widget__item delivery_div">
@@ -423,7 +417,91 @@
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">발송일</h3>
                                                 </div>
-                                                <span class="ul-widget__desc text-mute">${deliveryDetail.created_at }                                                
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_created_at}                                                
+                                                </span>
+                                            </div>
+                                        </div>
+                                     </div>
+                                  </div>                               		
+                               </c:when>
+                               <c:when test="${orderItemDetail.product_order_status_id == 6}">
+                                   <div class="card mt-3">
+                                    <div class="card-body deliveryDetail_col">
+                                    <div class="ul-widget__item">
+                                    		<div class="ul-widget__info h_title">
+                                    			<h4 class="ul-widget1__title delivery_h4">발송정보</h4>
+                                    		</div>
+                                    </div>
+                                        <!-- begin::widget-stats-1-->
+                                        <div class="ul-widget1">
+                                            <div class="ul-widget__item delivery_div">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">발송번호</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_id}
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item delivery_div">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">택배사명</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_company_name}                                                
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item delivery_div">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">운송장번호</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.invoice_no}                                                
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">발송일</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_created_at}                                                
+                                                </span>
+                                            </div>
+                                        </div>
+                                     </div>
+                                  </div>                               		
+                               </c:when>
+                               <c:when test="${orderItemDetail.product_order_status_id == 7}">
+                                   <div class="card mt-3">
+                                    <div class="card-body deliveryDetail_col">
+                                    <div class="ul-widget__item">
+                                    		<div class="ul-widget__info h_title">
+                                    			<h4 class="ul-widget1__title delivery_h4">발송정보</h4>
+                                    		</div>
+                                    </div>
+                                        <!-- begin::widget-stats-1-->
+                                        <div class="ul-widget1">
+                                            <div class="ul-widget__item delivery_div">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">발송번호</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_id}
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item delivery_div">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">택배사명</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_company_name}                                                
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item delivery_div">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">운송장번호</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.invoice_no}                                                
+                                                </span>
+                                            </div>
+                                            <div class="ul-widget__item">
+                                                <div class="ul-widget__info">
+                                                    <h3 class="ul-widget1__title">발송일</h3>
+                                                </div>
+                                                <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_created_at}                                                
                                                 </span>
                                             </div>
                                         </div>

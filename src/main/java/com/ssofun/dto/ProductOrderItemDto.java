@@ -30,7 +30,7 @@ public class ProductOrderItemDto {
 	private int delivery_id; // 발송ID
 	private String invoice_no; // 운송장번호
 	private Date delivery_created_at; // 발송일
-	private String delivery_company_name;
+	private String delivery_company_name; // 택배사명
 	
 	public ProductOrderItemDto() {
 		super();

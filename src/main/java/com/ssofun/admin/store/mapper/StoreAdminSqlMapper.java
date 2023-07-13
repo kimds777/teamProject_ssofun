@@ -83,5 +83,5 @@ public interface StoreAdminSqlMapper {
 	   // 발송리스트
 	   public List<DeliveryDto> deliveryList(DeliveryDto deliveryDto);
 	   // 발송상세보기
-	   public HyunMinDeliveryJoinDto deliveryDetail(int delivery_id);
+	   public ProductOrderItemDto deliveryDetail(int product_order_item_id);
 	}

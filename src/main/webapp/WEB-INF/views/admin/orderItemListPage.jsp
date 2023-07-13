@@ -188,44 +188,87 @@
                         <div class="card text-left">
                             <div class="card-body">
                                 <h4 class="card-title mb-3">주문리스트</h4>
-									<div class="table-responsive">
-									    <table class="table table-striped">
-									        <thead>
-									            <tr>
-									            	<th scope="col">#</th>
-									                <th scope="col">NO</th>
-									                <th scope="col">주문일</th>
-									                <th scope="col">고객명</th>
-									                <th scope="col">진행상태</th>
-									                <th scope="col">상품명</th>
-									                <th scope="col">수량</th>
-									                <th scope="col">가격</th>
-									                <th scope="col">할인가</th>
-									            </tr>
-									        </thead>
-									        <tbody>
-										        <c:forEach items="${orderItemList}" var="orderItemList">
-										            <tr>
-										            	<th scope="row">
-										            		<label class="checkbox checkbox-outline-info">
-                                                            <input type="checkbox" checked="" /><span class="checkmark"></span>
-                                                            </label>
-                                                        </th>
-										                <td>${orderItemList.product_order_item_id}</td>
-										                <td>${orderItemList.created_at}</td>
-										                <td>${orderItemList.recipient_name}</td>
-										                <td>${orderItemList.order_status_name}</td>
-										                <td>
-										                <a href="orderItemDetailPage?product_order_item_id=${orderItemList.product_order_item_id}">${orderItemList.product_name}</a>
-										                </td>										                										      										    
-										                <td>${orderItemList.count}</td>
-										                <td>${orderItemList.price}</td>
-										                <td>${orderItemList.price_sale}</td>										                										                
-										            </tr>
-										        </c:forEach>
-										    </tbody>
-										</table>
-									</div>
+                                <ul class="nav justify-content-end">
+									<li class="nav-item">
+									    <a class="nav-link" href="./orderItemListPage?product_order_status_id=3">결제완료</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="./orderItemListPage?product_order_status_id=4">판매자확인완료</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="./orderItemListPage?product_order_status_id=5">배송중</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="./orderItemListPage?product_order_status_id=6">배송완료</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="./orderItemListPage?product_order_status_id=7">구매확정</a>
+									</li>
+								</ul>
+								<div class="table-responsive">
+								    <table class="table table-striped">
+								        <thead>
+								            <tr>
+								                <th scope="col">#</th>
+								                <th scope="col">NO</th>
+								                <th scope="col">주문일</th>
+								                <th scope="col">고객명</th>
+								                <th scope="col">진행상태</th>
+								                <th scope="col">상품명</th>
+								                <th scope="col">수량</th>
+								                <th scope="col">가격</th>
+								                <th scope="col">할인가</th>
+								            </tr>
+								        </thead>
+								        <tbody>
+<%-- 								            <c:choose> --%>
+<%-- 								                <c:when test="${empty orderItemCategoryList.product_order_status_id}"> --%>
+								                    <c:forEach items="${orderItemList}" var="orderItem">
+								                        <tr>
+								                            <th scope="row">
+								                                <label class="checkbox checkbox-outline-info">
+								                                    <input type="checkbox" checked="" /><span class="checkmark"></span>
+								                                </label>
+								                            </th>
+								                            <td>${orderItem.product_order_item_id}</td>
+								                            <td>${orderItem.created_at}</td>
+								                            <td>${orderItem.recipient_name}</td>
+								                            <td>${orderItem.order_status_name}</td>
+								                            <td>
+								                                <a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
+								                            </td>										                										      										    
+								                            <td>${orderItem.count}</td>
+								                            <td>${orderItem.price}</td>
+								                            <td>${orderItem.price_sale}</td>										                										                
+								                        </tr>
+								                    </c:forEach>
+									                <%--</c:when>
+									                 <c:otherwise>
+								                    <c:forEach items="${orderItemCategoryList}" var="orderItem">
+								                        <tr>
+								                            <th scope="row">
+								                                <label class="checkbox checkbox-outline-info">
+								                                    <input type="checkbox" checked="" /><span class="checkmark"></span>
+								                                </label>
+								                            </th>
+								                            <td>${orderItem.product_order_item_id}</td>
+								                            <td>${orderItem.created_at}</td>
+								                            <td>${orderItem.recipient_name}</td>
+								                            <td>${orderItem.order_status_name}</td>
+								                            <td>
+								                                <a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
+								                            </td>										                										      										    
+								                            <td>${orderItem.count}</td>
+								                            <td>${orderItem.price}</td>
+								                            <td>${orderItem.price_sale}</td>										                										                
+								                        </tr>
+								                    </c:forEach>
+								                </c:otherwise>
+								            </c:choose> --%>
+								        </tbody>
+								    </table>									 
+								</div>
+
                 				</div>            
                 <!-- end of row-->
                 <!-- end of main-content -->

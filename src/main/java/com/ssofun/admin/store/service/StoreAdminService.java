@@ -171,9 +171,9 @@ public class StoreAdminService {
 		}
 		
 		// 발송상세보기
-		public HyunMinDeliveryJoinDto deliveryDetail(int delivery_id) {
+		public ProductOrderItemDto deliveryDetail(int product_order_item_id) {
 			
-			HyunMinDeliveryJoinDto deliveryDetail = storeAdminSqlMapper.deliveryDetail(delivery_id);
+			ProductOrderItemDto deliveryDetail = storeAdminSqlMapper.deliveryDetail(product_order_item_id);
 			
 			return deliveryDetail;
 		}

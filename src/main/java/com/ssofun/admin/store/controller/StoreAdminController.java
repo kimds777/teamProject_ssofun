@@ -224,7 +224,7 @@ public class StoreAdminController {
 	   
 	   // 오더리스트
 	   @RequestMapping("orderItemListPage")
-	   public String orderItemListPage(Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto, HttpSession session) {
+	   public String orderItemListPage(Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto,HttpSession session) {
 		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   
@@ -236,8 +236,10 @@ public class StoreAdminController {
 		   int id = shopAdmin.getAdmin_id();
 		   productOrderItemDto.setAdmin_id(id);		   
 		   List<ProductOrderItemDto> orderItemList = storeAdminService.productOrderItemList(productOrderItemDto);
+		   List<ProductOrderItemDto> orderItemCategoryList = storeAdminService.orderItemCategoryList(productOrderItemDto);
 		 
 		   model.addAttribute("orderItemList", orderItemList);
+		   model.addAttribute("orderItemCategoryList", orderItemCategoryList);
 		   model.addAttribute("orderStatusList", orderStatusList);
 		  		    
 		   return "admin/orderItemListPage";
@@ -252,13 +254,9 @@ public class StoreAdminController {
 		   
 		   ProductOrderItemDto orderItemDetail = storeAdminService.orderItemDetail(product_order_item_id);
 		   
-
-		   if(delivery_id != 0) {
-			   HyunMinDeliveryJoinDto deliveryDetail = storeAdminService.deliveryDetail(delivery_id);
-			   model.addAttribute("deliveryDetail", deliveryDetail);
-		   }
+		   ProductOrderItemDto deliveryDetail = storeAdminService.deliveryDetail(product_order_item_id);
 		   
-		  	   
+		   model.addAttribute("deliveryDetail", deliveryDetail);   
 		   model.addAttribute("orderItemDetail", orderItemDetail);
 		   model.addAttribute("deliveryCompanyList", deliveryCompanyList);
 		   
@@ -292,7 +290,7 @@ public class StoreAdminController {
 	       productOrderItemDto.setProduct_order_item_id(product_order_item_id);
 	       storeAdminService.deliveryingUpdate(productOrderItemDto);
 
-	       return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id + "&delivery_id=" + deliveryDto.getDelivery_id();
+	       return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id;
 
 
 	   }
