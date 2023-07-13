@@ -14,20 +14,32 @@
 </head>
 <body>
      
-    <div class="container container1">
-        <div class="row one">
-            <div class="col">
-                <div class="row">
-                    <div class="col one-2"><p class="one-font">LOGO</p></div>
-                    <div class="col one-1"><p class="one-font">펀딩</p></div>
-                    <div class="col one-1"><p class="one-font">스토어</p></div>
-                    <div class="col-4 one-1"></div>
-                    <div class="col one-1"><a href="../qna/loginPage" class="one-font-1"><p class="one-font">로그인</p></a></div>
-                    <div class="col one-1"><p class="one-font">고객센터</p></div>
-                </div>
-            </div>
-        </div>
+<div class="container container1">
+    
+    <!--헤더 영역-->
+    	<jsp:include page="../../include/fundingHeader.jsp"/>
+    	
+    	
+    	
+    	<!--
+	   	 <div class="row one">
+	            <div class="col">
+	                <div class="row">
+	                    <div class="col one-2"><p class="one-font">LOGO</p></div>
+	                    <div class="col one-1"><p class="one-font">펀딩</p></div>
+	                    <div class="col one-1"><p class="one-font">스토어</p></div>
+	                    <div class="col-4 one-1"></div>
+	                    <div class="col one-1"><a href="../qna/loginPage" class="one-font-1"><p class="one-font">로그인</p></a></div>
+	                    <div class="col one-1"><p class="one-font">고객센터</p></div>
+	                </div>
+	            </div>
+	        </div>
+	      -->        
+	        
     </div>
+
+
+
 
     <div class="backgroundcolor">
         <div class="container mb-3">
