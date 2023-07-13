@@ -98,10 +98,10 @@
 
                    		<div class="row">
                             <div class="col-1">
-                            	        <c:if test="${!empty qna.answer_contents }">
+                            	        <c:if test="${empty data.QnaDto.answer_contents }">
                                     	<input type="button" class="qnabutton" value="답변대기">
                                     	</c:if>
-                                    	<c:if test="${empty qna.answer_contents }">
+                                    	<c:if test="${!empty data.QnaDto.answer_contents}">
                                     	 <input type="button" class="qnabutton" value="답변완료">
                                     	</c:if>
                             
@@ -111,13 +111,11 @@
                                 <div class="row">
                                     <div class="col"><p class="nine-font" style="margin:0;">${data.QnaDto.title}</p></div>
                                 </div>
-                                <div class="row"></div>
+                                <div class="row"> <div class="col eight-font"><fmt:formatDate pattern="yyyy. MM. dd. (E)" value="${data.QnaDto.created_at }"/></div></div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-2 eight-font"><fmt:formatDate pattern="yyyy. MM. dd. (E)" value="${data.QnaDto.created_at }"/></div>
-                        </div>
+     
                         
                         <div class="row mt">
                             <div class="col hr-col"><hr class="hr-1" style="color:darkgrey"></div>
@@ -161,7 +159,7 @@
                         
                   		<c:if test="${empty data.QnaDto.answer_contents }">
                   			
-                  <!-- 
+                  <!-- 글넣을지말지
                   			<div class="row mt-3">
 	                            <div class="col-1"><i class="bi bi-chat-square-text fs-2" style="color: #1D212A;  margin-left: 10px;"></i></div>
 	                            <div class="col">
@@ -173,7 +171,7 @@
 	                        <div class="row mt">
 	                            <div class="col hr-col"><hr class="hr-1"></div>
 	                        </div>
-                 	 -->
+                 	-->
                   		
                   		</c:if>
                   		
@@ -181,27 +179,19 @@
                   		
                   		                        
                   		<c:if test="${!empty data.QnaDto.answer_contents }">
-                  			
-               			<div class="row">
-                            <div class="col hr-col"><hr class="hr-1"></div>
-                        </div>
-                 
-
-
-                   	
-                           
+           
+              
                             
                               
                         <div class="row">
                         	<div class="col-1"><i class="bi bi-chat-square-text fs-2" style="color: #1D212A;  margin-left: 10px;"></i></div>
-                            <div class="col"><p class="nine-font" style="margin:0;">문의한 내용에 대한 답변입니다.</p></div>
+                            <div class="col">
+                            	<div class="row"><div class="col"><p class="nine-font" style="margin:0;">문의한 내용에 대한 답변입니다.</p></div></div>
+                            	<div class="row"><div class="col eight-font"><fmt:formatDate pattern="yyyy. MM. dd. (E)" value="${data.QnaDto.answer_created_at }"/></div></div>
+                 
+                            </div>
                         </div>
-                        <div class="row"></div>
-                           
-                       
-               	        <div class="row">
-                            <div class="col eight-font"><fmt:formatDate pattern="yyyy. MM. dd. (E)" value="${data.QnaDto.answer_created_at }"/></div>
-                        </div>
+
                         <div class="row mt">
                             <div class="col hr-col"><hr class="hr-1" style="color:darkgrey"></div>
                         </div>	

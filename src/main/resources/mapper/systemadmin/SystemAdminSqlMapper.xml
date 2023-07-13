@@ -9,7 +9,7 @@
 	</select>
 
 	<select id="selectQnaByNonAnswer" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where answer_contents is null order by admin_id DESC
+		select * from tb_qna where answer_contents is null order by qna_id DESC
 	</select>
 	
 	
@@ -26,7 +26,7 @@
 	</select>
 	
 	<select id="selectQnaNotNullAnswer" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where answer_contents is not null order by admin_id DESC
+		select * from tb_qna where answer_contents is not null order by qna_id DESC
 	</select>
 
 

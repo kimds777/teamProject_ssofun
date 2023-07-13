@@ -95,7 +95,7 @@
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
-                                    <a class="navbar-brand text-black">고객센터메인페이지</a>
+                                    <a class="navbar-brand text-black">1:1문의관리페이지</a>
                                     <form class="d-flex" role="search">
                                         <input class="form-control me-2" type="search" placeholder="Search"
                                             aria-label="Search">
@@ -114,7 +114,7 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">답변미등록 qna</p></div>
-                                <div class="col c-five-font"><p class="five-font mt-2">답변 미등록 qna목록입니다.(ASC)</p></div>
+                                <div class="col c-five-font"><p class="five-font mt-2">답변 미등록 qna목록입니다.(글등록일순)</p></div>
                                 <div class="col-2">
                                 </div>
                             
@@ -139,13 +139,14 @@
                                         
                                         <div class="col-2">
                                             <p class="center1">
-                                                <fmt:formatDate pattern="yy. MM. dd. (E) hh:mm:ss" value="${unansweredQna.created_at }"/>
+                                                <fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${unansweredQna.created_at }"/>
                                             </p>
                                         </div>
                                         <div class="col-2">
                                             <div class="row">
-                                                <div class="col"><p class="center1">접수대기</p></div>
+                                                <div class="col"><p class="center1">답변대기</p></div>
                                             </div>
+                                            
                                         </div>
                                     </div>
 
@@ -164,7 +165,7 @@
 
                             <div class="row">
                                 <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">답변완료 qna</p></div>
-                                <div class="col c-five-font"><p class="five-font mt-2">답변완료 qna목록입니다.</p></div>
+                                <div class="col c-five-font"><p class="five-font mt-2">답변완료 qna목록입니다.(최신순)</p></div>
                                 <div class="col-2">
 
 
@@ -178,7 +179,7 @@
                                 <div class="col-1"><p class="center1">번호</p></div>
                                 <div class="col"><p class="five-font">제목</p></div>
                                 <div class="col-2"><p class="center1">작성자</p></div>
-                                <div class="col-2"><p class="center1">작성일</p></div>
+                                <div class="col-2"><p class="center1">답변일</p></div>
                                 <div class="col-2"><p class="center1">문의상태</p></div>
                             </div>
                             
@@ -191,12 +192,12 @@
                                     
                                     <div class="col-2">
                                         <p class="center1">
-                                            <fmt:formatDate pattern="yy. MM. dd. (E) hh:mm:ss" value="${answerCompletedQna.created_at }"/>
+                                            <fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${answerCompletedQna.answer_created_at }"/>
                                         </p>
                                     </div>
                                     <div class="col-2">
                                         <div class="row">
-                                            <div class="col"><p class="center1">접수대기</p></div>
+                                            <div class="col"><p class="center1">답변완료</p></div>
                                         </div>
                                     </div>
                                 </div>

@@ -110,6 +110,7 @@ public class SystemAdminController {
 		Map<String, Object> map = systemAdminService.getQnaData(qna_id);
 		QnaDto QnaDto = (QnaDto)map.get("QnaDto");
 		String contents = QnaDto.getContents();
+		String answer_contents = QnaDto.getAnswer_contents();
 		
 		
 		//int userId = QnaDto.getUser_id();
@@ -121,10 +122,18 @@ public class SystemAdminController {
 	    QnaDto.setContents(contents);
 	    
 	    
+	    if(answer_contents!=null) {
+	    answer_contents = StringEscapeUtils.escapeHtml4(answer_contents);
+	    answer_contents = answer_contents.replaceAll("\n", "<br>");
+	    QnaDto.setAnswer_contents(answer_contents);
+	    
+	    }
+	    
+	    
 	    model.addAttribute("data",map);
 		
 		
-	    
+	   
 	    
 		
 		
@@ -132,14 +141,15 @@ public class SystemAdminController {
 	}
 	
 	@RequestMapping("writeQnaAnswerProcess")
-	public String writeQnaAnswerProcess(){
+	public String writeQnaAnswerProcess(QnaDto qnaDto,Model model, HttpSession session){
 		
 		
-		
-		return"systemadmin/systemAdminQnaMain";
-	}
+		getUnansweredQnaListProcess(model, session);
+		answerCompletedQnaList(model, session);
+		systemAdminService.updateQnaAnswer(qnaDto);
 
-	
-	
+		
+		return "systemadmin/systemAdminQnaMainPage";
+	}
 	
 }

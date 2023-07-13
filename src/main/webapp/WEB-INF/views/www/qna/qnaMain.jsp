@@ -116,9 +116,9 @@
                             <div class="col-2"><p class="center1">문의상태</p></div>
                         </div>
                         
-                        <c:forEach items="${qnaList}" var="qna">
+                        <c:forEach items="${qnaList}" var="qna" varStatus="status">
                         <div class="row">
-                            <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${qna.qna_id }</p></div>
+                            <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${status.count}</p></div>
                             <div class="col"><p class="five-font"><a class="readQnalink" href="./readQnaPage?qna_id=${qna.qna_id }">${qna.title }</a></p></div>
                             <div class="col-2">
 	                            <p class="center1">
