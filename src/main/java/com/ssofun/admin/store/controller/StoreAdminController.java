@@ -236,11 +236,7 @@ public class StoreAdminController {
 		   int id = shopAdmin.getAdmin_id();
 		   productOrderItemDto.setAdmin_id(id);		   
 		   List<ProductOrderItemDto> orderItemList = storeAdminService.productOrderItemList(productOrderItemDto);
-		  
-		   for(ProductOrderItemDto po : orderItemList) {
-			   System.out.println("제발요 : "+po.getDelivery_recipient_id());
-		   }
-		   
+		 
 		   model.addAttribute("orderItemList", orderItemList);
 		   model.addAttribute("orderStatusList", orderStatusList);
 		  		    
@@ -250,17 +246,22 @@ public class StoreAdminController {
 	   // 관리자 판매상품 상세보기
 	   @RequestMapping("orderItemDetailPage")
 	   public String orderItemDetailPage(Model model ,int product_order_item_id, 
-			   DeliveryCompanyDto deliveryCompanyDto, int delivery_recipient_id) {
+			   DeliveryCompanyDto deliveryCompanyDto,@RequestParam(value = "delivery_id", defaultValue = "0") int delivery_id) {
 		   
 		   List<DeliveryCompanyDto> deliveryCompanyList = storeAdminService.deliveryCompanyList(deliveryCompanyDto);
 		   
 		   ProductOrderItemDto orderItemDetail = storeAdminService.orderItemDetail(product_order_item_id);
 		   
-		   HyunMinDeliveryJoinDto deliveryDetail = storeAdminService.deliveryDetail(delivery_recipient_id);
+
+		   if(delivery_id != 0) {
+			   HyunMinDeliveryJoinDto deliveryDetail = storeAdminService.deliveryDetail(delivery_id);
+			   model.addAttribute("deliveryDetail", deliveryDetail);
+		   }
+		   
 		  	   
 		   model.addAttribute("orderItemDetail", orderItemDetail);
 		   model.addAttribute("deliveryCompanyList", deliveryCompanyList);
-		   model.addAttribute("deliveryDetail", deliveryDetail);
+		   
 		   
 		   return "admin/orderItemDetailPage";
 	   }
@@ -281,17 +282,18 @@ public class StoreAdminController {
 	   
 	   // 택배사등록
 	   @RequestMapping("deliveryInsertProcess")
-	   public String deliveryInsertProcess(DeliveryDto deliveryDto,int product_order_item_id
-			   , int delivery_recipient_id) {
+	   public String deliveryInsertProcess(DeliveryDto deliveryDto, int product_order_item_id, int delivery_recipient_id) {
 		   
-		   ProductOrderItemDto productOrderItemDto = new ProductOrderItemDto();
-		   productOrderItemDto.setProduct_order_item_id(product_order_item_id);
-		   storeAdminService.deliveryingUpdate(productOrderItemDto);
-		   
-		   
-		   storeAdminService.deliveryInsert(deliveryDto);
-		   deliveryDto.setDelivery_recipient_id(delivery_recipient_id);
-		   
-		   return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id;
-	  }
+	       storeAdminService.deliveryInsert(deliveryDto);
+	       int delivery_id = deliveryDto.getDelivery_id();
+	       deliveryDto.setDelivery_id(delivery_id);
+	       
+	       ProductOrderItemDto productOrderItemDto = new ProductOrderItemDto();
+	       productOrderItemDto.setProduct_order_item_id(product_order_item_id);
+	       storeAdminService.deliveryingUpdate(productOrderItemDto);
+
+	       return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id + "&delivery_id=" + deliveryDto.getDelivery_id();
+
+
+	   }
 }

@@ -27,6 +27,10 @@ public class ProductOrderItemDto {
 	private String address_detail; // 상세주소
 	private String request_message; // 배송요청사항
 	private int admin_id; // 관리자ID
+	private int delivery_id; // 발송ID
+	private String invoice_no; // 운송장번호
+	private Date delivery_created_at; // 발송일
+	private String delivery_company_name;
 	
 	public ProductOrderItemDto() {
 		super();
@@ -221,6 +225,38 @@ public class ProductOrderItemDto {
 
 	public void setAdmin_id(int admin_id) {
 		this.admin_id = admin_id;
+	}
+
+	public int getDelivery_id() {
+		return delivery_id;
+	}
+
+	public void setDelivery_id(int delivery_id) {
+		this.delivery_id = delivery_id;
+	}
+
+	public String getInvoice_no() {
+		return invoice_no;
+	}
+
+	public void setInvoice_no(String invoice_no) {
+		this.invoice_no = invoice_no;
+	}
+
+	public Date getDelivery_created_at() {
+		return delivery_created_at;
+	}
+
+	public void setDelivery_created_at(Date delivery_created_at) {
+		this.delivery_created_at = delivery_created_at;
+	}
+
+	public String getDelivery_company_name() {
+		return delivery_company_name;
+	}
+
+	public void setDelivery_company_name(String delivery_company_name) {
+		this.delivery_company_name = delivery_company_name;
 	}	
 	
 }

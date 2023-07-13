@@ -214,30 +214,31 @@
 
 <!-- N번 관리자가 판매하는 모든상품의 주문내역 -->
 <select id="productOrderItemList" resultType="com.ssofun.dto.ProductOrderItemDto">
-	SELECT 
-		poi.product_order_item_id,
-	    poi.created_at,
-	    dr.name AS recipient_name,
-		pos.name AS order_status_name,
-	    p.name AS product_name,
-	    poi.count,
-	    p.price,
-	    dr.delivery_recipient_id
-	FROM tb_product_order_item poi
-		INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
-		INNER JOIN tb_product p ON poi.product_id = p.product_id
-	    INNER JOIN tb_product_category pc ON p.product_id = pc.product_id
-	    INNER JOIN tb_product_category_type pct ON pc.product_category_type_id = pct.product_category_type_id
-	    INNER JOIN tb_admin a ON p.admin_id = a.admin_id
-	    INNER JOIN tb_biz b ON a.biz_id = b.biz_id
-	    INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
-	    INNER JOIN(
-	    SELECT product_id, MIN(name) AS name
-	    FROM tb_product_thumbnail
-	    GROUP BY product_id
-	) AS t ON p.product_id = t.product_id
-	WHERE a.admin_id = #{admin_id}
-	ORDER BY poi.created_at DESC
+SELECT 
+	poi.product_order_item_id,
+    poi.created_at,
+    dr.name AS recipient_name,
+	pos.name AS order_status_name,
+    p.name AS product_name,
+    poi.count,
+    p.price,
+    dr.delivery_recipient_id
+FROM tb_product_order_item poi
+	INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
+	INNER JOIN tb_product p ON poi.product_id = p.product_id
+    INNER JOIN tb_product_category pc ON p.product_id = pc.product_id
+    INNER JOIN tb_product_category_type pct ON pc.product_category_type_id = pct.product_category_type_id
+    INNER JOIN tb_admin a ON p.admin_id = a.admin_id
+    INNER JOIN tb_biz b ON a.biz_id = b.biz_id
+    INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
+    INNER JOIN tb_product_order po ON poi.product_order_id = po.product_order_id
+    INNER JOIN(
+    SELECT product_id, MIN(name) AS name
+    FROM tb_product_thumbnail
+    GROUP BY product_id
+) AS t ON p.product_id = t.product_id
+WHERE a.admin_id = #{admin_id}
+ORDER BY poi.created_at DESC
 </select>
 <!-- N번 관리자가 판매하는 상품중 하나의 상품 상세보기 -->
 <select id="orderItemDetail" resultType="com.ssofun.dto.ProductOrderItemDto">
@@ -288,7 +289,7 @@
 </select>
 
 <!-- 택배사입력 -->
-<insert id="deliveryInsert">
+<!-- <insert id="deliveryInsert">
 	INSERT INTO tb_delivery(delivery_company_id,delivery_status_id,delivery_recipient_id,invoice_no,created_at,used_fg) 
 	VALUES(
 			#{delivery_company_id},
@@ -298,8 +299,25 @@
 			CURRENT_TIMESTAMP(),
 			1
 		)
+</insert> -->
+<!-- 펀딩 결제전 주문 정보 입력 -->
+<insert id="deliveryInsert" parameterType="com.ssofun.dto.DeliveryCompanyDto" keyProperty="delivery_id">
+	INSERT INTO tb_delivery(delivery_company_id,delivery_status_id,delivery_recipient_id,invoice_no,created_at,used_fg) 
+	VALUE(
+			#{delivery_company_id},
+			NULL,
+			#{delivery_recipient_id},
+			#{invoice_no},
+			CURRENT_TIMESTAMP(),
+			1
+		)
+		
+	 	<!-- PK 조회를 위한 selectKey -->
+		<selectKey keyProperty="delivery_id" resultType="int" order="AFTER">
+		  SELECT LAST_INSERT_ID()
+		</selectKey>
+		
 </insert>
-
 <!--카테고리별 오더리스트 -->	
 <select id="orderItemCategoryList" resultType="com.ssofun.dto.ProductOrderItemDto">
 	SELECT 
@@ -350,6 +368,6 @@ SELECT d.delivery_id, dr.delivery_recipient_id, dc.name, d.invoice_no, d.created
 FROM tb_delivery d
 	INNER JOIN tb_delivery_company dc ON dc.delivery_company_id = d.delivery_company_id
     INNER JOIN tb_delivery_recipient dr ON d.delivery_recipient_id = dr.delivery_recipient_id
-WHERE dr.delivery_recipient_id = #{delivery_recipient_id}
+WHERE d.delivery_id = #{delivery_id}
 </select>
 </mapper>

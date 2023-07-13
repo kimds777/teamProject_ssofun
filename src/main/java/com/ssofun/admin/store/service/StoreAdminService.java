@@ -151,10 +151,9 @@ public class StoreAdminService {
 		}
 		
 		// 택배사등록
-		public void deliveryInsert(DeliveryDto deliveryDto) {
-			storeAdminSqlMapper.deliveryInsert(deliveryDto);
-			System.out.println("서비스부분"+deliveryDto.getDelivery_company_id());
-			System.out.println("서비스부분"+deliveryDto);
+		public int deliveryInsert(DeliveryDto deliveryDto) {
+			int delivery_id = storeAdminSqlMapper.deliveryInsert(deliveryDto);
+			return delivery_id;
 		}
 		
 		// 카테고리별 오더리스트
@@ -172,9 +171,9 @@ public class StoreAdminService {
 		}
 		
 		// 발송상세보기
-		public HyunMinDeliveryJoinDto deliveryDetail(int delivery_recipient_id) {
+		public HyunMinDeliveryJoinDto deliveryDetail(int delivery_id) {
 			
-			HyunMinDeliveryJoinDto deliveryDetail = storeAdminSqlMapper.deliveryDetail(delivery_recipient_id);
+			HyunMinDeliveryJoinDto deliveryDetail = storeAdminSqlMapper.deliveryDetail(delivery_id);
 			
 			return deliveryDetail;
 		}

@@ -75,7 +75,7 @@ public interface StoreAdminSqlMapper {
 	   // 택배사리스트
 	   public List<DeliveryCompanyDto> deliveryCompanyList(DeliveryCompanyDto deliveryCompanyDto);
 	   // 택배사등록
-	   public void deliveryInsert(DeliveryDto deliveryDto);
+	   public int deliveryInsert(DeliveryDto deliveryDto);
 	   
 	   // 카테고리별 오더리스트
 	   public List<ProductOrderItemDto> orderItemCategoryList(ProductOrderItemDto productOrderItemDto);
@@ -83,5 +83,5 @@ public interface StoreAdminSqlMapper {
 	   // 발송리스트
 	   public List<DeliveryDto> deliveryList(DeliveryDto deliveryDto);
 	   // 발송상세보기
-	   public HyunMinDeliveryJoinDto deliveryDetail(int delivery_recipient_id);
+	   public HyunMinDeliveryJoinDto deliveryDetail(int delivery_id);
 	}

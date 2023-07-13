@@ -216,9 +216,7 @@
 										                <td>${orderItemList.recipient_name}</td>
 										                <td>${orderItemList.order_status_name}</td>
 										                <td>
-										                <a href="orderItemDetailPage?product_order_item_id=${orderItemList.product_order_item_id}&delivery_recipient_id=${orderItemList.delivery_recipient_id}">
-      ${orderItemList.product_name}
-   </a>
+										                <a href="orderItemDetailPage?product_order_item_id=${orderItemList.product_order_item_id}">${orderItemList.product_name}</a>
 										                </td>										                										      										    
 										                <td>${orderItemList.count}</td>
 										                <td>${orderItemList.price}</td>
