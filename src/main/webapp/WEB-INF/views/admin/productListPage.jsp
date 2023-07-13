@@ -3,7 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
+<style>
+.th_col1{
+	width: 110px;
+}
 
+</style>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -192,10 +197,9 @@
 									    <table class="table table-striped">
 									        <thead>
 									            <tr>
-									                <th scope="col">카테고리타입아이디</th>
-									                <th scope="col">상품아이디</th>
-									                <th scope="col">회사명</th>
-									                <th scope="col">카테고리명</th>
+									                <th class="th_col1" scope="col">상품번호</th>
+									                <th class="th_col1" scope="col">회사명</th>
+									                <th class="th_col1" scope="col">카테고리명</th>
 									                <th scope="col">상품명</th>
 									                <th scope="col">상품이미지</th>
 									                <th scope="col">가격</th>
@@ -207,8 +211,7 @@
 									        <tbody>
 									            <c:forEach items="${productList}" var="product">
 									                <tr>
-									                    <th scope="row">${product.product_category_type_id}</th>
-									                    <td>${product.product_id}</td>
+									                    <th scope="row">${product.product_id}</th>
 									                    <td>${product.biz_name}</td>
 									                    <td>${product.category_type_name}</td>
 									                    <td><a href="productDetailPage?product_id=${product.product_id }">${product.product_name}</a></td>

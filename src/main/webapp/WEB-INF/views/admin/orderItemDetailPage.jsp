@@ -3,7 +3,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
+<style>
+.right_col{
+	height:766.3px;
+}
 
+.left_col{
+	height:766.3px;
+}
+
+.delivery_h4{
+	height: 10px;
+}
+
+.delivery_div{
+	height: 55px;
+}
+
+.h_title {
+  text-align: right;
+}
+</style>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -185,10 +205,14 @@
             <!-- ============ Body content start ============= -->
                 		<!-- 주문상품에 대한 정보 -->
                         <div class="row mb-4">                      	
-                            <div class="col-md-6 col-lg-6 mt-4 mb-4">
+                            <div class="col-md-6 col-lg-6 mt-4 mb-4 ">
                                 <div class="card text-left">
-                                    <div class="card-body">
-                                    <h4 class="card-title mb-3">주문상품</h4>
+                                    <div class="card-body left_col">
+                                    <div class="ul-widget__item">
+                                    		<div class="ul-widget__info h_title">
+                                    			<h4 class="ul-widget1__title">주문상품</h4>
+                                    		</div>
+                                    </div>
                                         <!-- begin::widget-stats-1-->
                                         <div class="ul-widget1">
                                             <div class="ul-widget__item">
@@ -270,10 +294,14 @@
                                      </div>
                                	</div>
                           	</div>
-							<div class="col-md-6 col-lg-6 mt-4 mb-4">
+							<div class="col-md-6 col-lg-6 mt-4 mb-4 right_col">
                                 <div class="card">
                                     <div class="card-body">
-                                    <h4 class="card-title mb-3">고객정보</h4>
+										<div class="ul-widget__item">
+										    <div class="ul-widget__info" style="text-align: right;">
+										        <h4 class="ul-widget1__title">고객정보</h4>
+										    </div>
+										</div>
                                         <!-- begin::widget-stats-1-->
                                         <div class="ul-widget1">
                                             <div class="ul-widget__item">
@@ -306,9 +334,13 @@
                                    </div>
                                    <c:choose>
                                    <c:when test="${orderItemDetail.product_order_status_id == 4}">
-                                   <div class="card mt-4">
+                                   <div class="card mt-3">
                                     <div class="card-body">
-                                    <h4 class="card-title mb-3">발송등록</h4>
+                                    	<div class="ul-widget__item">
+                                    		<div class="ul-widget__info h_title">
+                                    			<h4 class="ul-widget1__title h_title">발송등록</h4>
+                                    		</div>
+                                    	</div>
                                         <!-- begin::widget-stats-1-->
                                         <!-- form태그 -->
                                         <form id="deliveryForm" action="deliveryInsertProcess" method="post">
@@ -327,8 +359,8 @@
                                                 </span>
                                             </div>
                                             <div class="ul-widget__item">
-                                                <div class="ul-widget__info">
-                                                    <h3 class="ul-widget1__title">운송장번호</h3>
+                                                <div class="ul-widget__info h_title">
+                                                    <h3 class="ul-widget1__title h_title">운송장번호</h3>
                                                 </div>
                                                 <span class="ul-widget__desc text-mute">                                                
                                                 <input class="form-control" id="invoice_no" name="invoice_no" type="text" placeholder="운송장번호를 입력해주세요." />
@@ -340,9 +372,8 @@
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">등록</h3>
                                                 </div>
-                                                <span class="ul-widget__desc text-mute">
+                                                <span class="ul-widget__desc text-mute delivery_btn">
                                                 	<button id="submitDeliveryBtn" class="btn btn-outline-dark m-1" onclick="submitForms()">발송등록</button>
-
                                                 </span>
                                             </div>
                                         </div>
@@ -351,33 +382,37 @@
                                   </div>
                                </c:when>
                                <c:when test="${orderItemDetail.product_order_status_id == 5}">
-                                   <div class="card mt-4">
-                                    <div class="card-body">
-                                    <h4 class="card-title mb-3">발송정보</h4>
+                                   <div class="card mt-3">
+                                    <div class="card-body deliveryDetail_col">
+                                    <div class="ul-widget__item">
+                                    		<div class="ul-widget__info h_title">
+                                    			<h4 class="ul-widget1__title delivery_h4">발송정보</h4>
+                                    		</div>
+                                    </div>
                                         <!-- begin::widget-stats-1-->
                                         <div class="ul-widget1">
-                                            <div class="ul-widget__item">
+                                            <div class="ul-widget__item delivery_div">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">발송번호</h3>
                                                 </div>
                                                 <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_id}
                                                 </span>
                                             </div>
-                                            <div class="ul-widget__item">
+                                            <%-- <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">주문자번호</h3>
                                                 </div>
                                                 <span class="ul-widget__desc text-mute">${deliveryDetail.delivery_recipient_id}                                                
                                                 </span>
-                                            </div>
-                                            <div class="ul-widget__item">
+                                            </div> --%>
+                                            <div class="ul-widget__item delivery_div">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">택배사명</h3>
                                                 </div>
                                                 <span class="ul-widget__desc text-mute">${deliveryDetail.name}                                                
                                                 </span>
                                             </div>
-                                            <div class="ul-widget__item">
+                                            <div class="ul-widget__item delivery_div">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">운송장번호</h3>
                                                 </div>
