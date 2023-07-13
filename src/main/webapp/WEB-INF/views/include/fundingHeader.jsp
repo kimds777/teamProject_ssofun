@@ -17,7 +17,7 @@
                 <div class="col-1"><a href="../funding/fundingListPage">펀딩</a></div>
                 <div class="col-1 me-auto"><a href="../store/mainPage">스토어</a></div>
                 <div class="col-1"><a href="./loginPage">로그인</a></div>
-                <div class="col-1"><a href="./csPage">고객센터</a></div>
+                <div class="col-1"><a href="../qna/customerServiceMainPage">고객센터</a></div>
             </div>
         </div>
 
