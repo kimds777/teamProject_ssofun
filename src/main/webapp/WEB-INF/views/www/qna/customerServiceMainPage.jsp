@@ -88,7 +88,7 @@
                                 <hr class="hr-1">
                                 <div class="row"><div class="col"><p class="four-font">이용약관</p></div></div>
                                 <hr class="hr-1">
-                                <div class="row"><div class="col"><button type="button" id="qnaMainbutton" onclick="location.href='../qna/qnaMain'"><p class="four-font">1:1문의하기</p></button></div></div>
+                                <div class="row"><div class="col"><button type="button" class="qnaMainbutton"  onclick="location.href='../qna/qnaMain'"><p class="four-font">1:1문의하기</p></button></div></div>
                             </div>
                         </div>
                         <div class="row">

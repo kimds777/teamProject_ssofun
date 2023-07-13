@@ -88,13 +88,13 @@
                         <div class="row"><div class="col"><p class="three-font mb-3">고객센터</p></div></div>
                         <div class="row">
                             <div class="col borderline">
-                                <div class="row"><div class="col"><p class="four-font">공지사항</p></div></div>
+                                <div class="row"><div class="col"><p class="four-font" id="four-font-default">공지사항</p></div></div>
                                 <hr class="hr-1">
-                                <div class="row"><div class="col"><p class="four-font">자주찾는질문</p></div></div>
+                                <div class="row"><div class="col"><p class="four-font" id="four-font-default">자주찾는질문</p></div></div>
                                 <hr class="hr-1">
-                                <div class="row"><div class="col"><p class="four-font">이용약관</p></div></div>
+                                <div class="row"><div class="col"><p class="four-font" id="four-font-default">이용약관</p></div></div>
                                 <hr class="hr-1">
-                                <div class="row"><div class="col" ><p class="four-font">1:1문의하기</p></div></div>
+                                <div class="row"><div class="col" ><p class="four-font" id="four-font-active">1:1문의하기</p></div></div>
                             </div>
                         </div>
                         <div class="row">

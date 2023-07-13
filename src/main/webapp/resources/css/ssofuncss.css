@@ -18,6 +18,8 @@
     .three-font{font-family: 'Noto Sans KR', sans-serif; font-weight: 700; margin-bottom: 0;}
     .borderline{border: 1px solid #D6D6D6; padding: 30px;}
     .four-font{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0;}
+    #four-font-default{color:#B3B8C3;}
+    #four-font-active{color: #333333; font-weight: bold;}
     .four-font-1{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0; color:#666666;}
     .hr-1{ border: none; border-top: 1px solid black;}/*잘안보여서 임시로 black함*/
     /*.hr-col{padding: 0; line-height: 3px; }*/
@@ -49,3 +51,5 @@
     
     .qnaImage{ border: #BFBFBF solid 1px; margin-left: 15px;}
     .readQnalink {color: #000000;text-decoration: none;}  
+    
+    .qnaMainbutton{all: unset;}
