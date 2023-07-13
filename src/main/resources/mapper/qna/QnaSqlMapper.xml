@@ -24,7 +24,7 @@
 	
 <!-- 작성된qna글목록가져오기 -->	
 	<select id="qnaListByUserId" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where user_id = #{user_id} order by qna_id ASC
+		select * from tb_qna where user_id = #{user_id} order by qna_id DESC
 	</select>
 	
 	

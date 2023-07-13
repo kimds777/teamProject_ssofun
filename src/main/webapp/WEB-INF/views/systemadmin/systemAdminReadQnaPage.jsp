@@ -128,13 +128,13 @@
                             <div class="row">
                                 <div class="col-1"><p class="center1">번호</p></div>
                                 <div class="col"><p class="five-font">제목</p></div>
-                                <div class="col-2"><p class="center1">작성자</p></div>
+                                <div class="col-2"><p class="center1">작성자(닉네임)</p></div>
                                 <div class="col-2"><p class="center1">작성일</p></div>
                             </div>
                             <div class="row">
                                 <div class="col-1"><p class="center1">${data.QnaDto.qna_id}</p></div>
                                 <div class="col"><p class="five-font">${data.QnaDto.title}</p></div>
-                                <div class="col-2"><p class="center1">${data.QnaDto.user_id}</p></div>
+                                <div class="col-2"><p class="center1">${data.UserDto.nickname}</p></div>
                                 <div class="col-2"><p class="center1"><fmt:formatDate pattern="yyyy. MM. dd. (E)" value="${data.QnaDto.created_at }"/></p></div>
                             </div>
                             <div class="row">

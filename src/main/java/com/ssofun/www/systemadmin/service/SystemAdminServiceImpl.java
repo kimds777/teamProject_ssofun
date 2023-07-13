@@ -1,5 +1,6 @@
 package com.ssofun.www.systemadmin.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class SystemAdminServiceImpl {
 	
 	
 	public List<QnaDto> getUnansweredQnaList() {
+		List<Map<String, Object>> list = new ArrayList<>();
 		
 		List<QnaDto> getUnansweredQnaList = systemAdminSqlMapper.selectQnaByNonAnswer();
 		
@@ -36,6 +38,7 @@ public class SystemAdminServiceImpl {
 		
 		List<QnaDto> answerCompletedQnaList = systemAdminSqlMapper.selectQnaNotNullAnswer();
 		
+		
 		return answerCompletedQnaList;
 	}
 	
@@ -45,17 +48,17 @@ public class SystemAdminServiceImpl {
 
 
 	
-	public Map<String, Object> getQnaData(int qna_id) {
+	public Map<String, Object> getQnaData(int qna_id, int user_id) {
 		
 		Map<String, Object> map = new HashMap<>();
 		
 		
-		
+		UserDto userDto = systemAdminSqlMapper.selectUserDtoByUserId(user_id);
 		QnaDto QnaDto = systemAdminSqlMapper.selectQnaDataBYQnaId(qna_id);
 		
 		List<Qna_ImageDto> Qna_ImageDtoList= systemAdminSqlMapper.selectQnaImageByQnaId(qna_id);
 		
-				
+		map.put("User_Dto", userDto);
 		map.put("QnaDto", QnaDto);
 		map.put("Qna_ImageDtoList", Qna_ImageDtoList);
 		

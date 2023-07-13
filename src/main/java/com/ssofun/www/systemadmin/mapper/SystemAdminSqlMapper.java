@@ -20,11 +20,14 @@ public interface SystemAdminSqlMapper {
 	public List<Qna_ImageDto> selectQnaImageByQnaId(int qna_id);
 	
 	
-	public UserDto selectUserDtoByUserId(int user_id);
+//	public UserDto selectUserDtoByUserId(int user_id);
 	
 	
 	public List<QnaDto> selectQnaNotNullAnswer();
 	
 	//QnA답변넣기
 	public void updateQnaAnswer(QnaDto qnaDto);
+	
+	//이메일로 유저정보가져옴
+	public UserDto selectUserDtoByUserId(int qna_id);
 }

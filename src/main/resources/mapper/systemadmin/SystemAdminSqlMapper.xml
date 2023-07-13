@@ -20,7 +20,10 @@
 	<select id="selectQnaImageByQnaId" resultType="com.ssofun.dto.Qna_ImageDto">
 		select * from tb_qna_image where qna_id = #{qna_id}
 	</select>
-
+	
+	
+	
+<!--user_id로 유저정보가져오기 -->
 	<select id="selectUserDtoByUserId" resultType="com.ssofun.dto.UserDto">
 	 select * from tb_User where user_id = #{user_id}
 	</select>
@@ -33,5 +36,9 @@
 	<update id="updateQnaAnswer">
 		UPDATE tb_qna SET answer_contents = #{answer_contents},answer_created_at = now() WHERE qna_id = #{qna_id}
 	</update>
+	
+	
+
+
 
 </mapper>

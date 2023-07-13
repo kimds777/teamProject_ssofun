@@ -17,7 +17,7 @@
     .search-bar-button{border: 0; background-color: transparent;}
     .three-font{font-family: 'Noto Sans KR', sans-serif; font-weight: 700; margin-bottom: 0;}
     .borderline{border: 1px solid #D6D6D6; padding: 30px;}
-    .four-font{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0;}
+    .four-font{cursor:pointer; font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0;}
     #four-font-default{color:#B3B8C3;}
     #four-font-active{color: #333333; font-weight: bold;}
     .four-font-1{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0; color:#666666;}

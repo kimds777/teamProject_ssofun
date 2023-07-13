@@ -104,10 +104,10 @@ public class SystemAdminController {
 	
 	
 	@RequestMapping("systemAdminReadQnaPage")
-	public String systemAdminReadQnaPage(Model model, int qna_id) {
+	public String systemAdminReadQnaPage(Model model, int qna_id, int user_id) {
 		
 //		String name = UserDto.
-		Map<String, Object> map = systemAdminService.getQnaData(qna_id);
+		Map<String, Object> map = systemAdminService.getQnaData(qna_id,user_id);
 		QnaDto QnaDto = (QnaDto)map.get("QnaDto");
 		String contents = QnaDto.getContents();
 		String answer_contents = QnaDto.getAnswer_contents();
