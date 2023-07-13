@@ -25,20 +25,20 @@ public class SystemAdminServiceImpl {
 	}
 	
 	
-	public List<QnaDto> getUnansweredQnaList() {
+	public List<Map<String, Object>> getUnansweredQnaList() {
 		
+		Map<String, Object> map
 		
 		List<QnaDto> getUnansweredQnaList = systemAdminSqlMapper.selectQnaByNonAnswer();
 		//리스트받아온걸 for문 돌려서 해체한 다음 
 		
 		
 		for(QnaDto qna :getUnansweredQnaList) {
+			Map<String, Object> map = new HashMap<>();
 			
-			QnaDto qnaDto = 
 			int user_id = qna.getUser_id();
-			UserDto userId = systemAdminSqlMapper.selectUserDtoByUserId(user_id);
 			
-			qna.setUser_id(user_id);
+			UserDto userDto = systemAdminSqlMapper.selectById(user_id);
 		}
 		
 		

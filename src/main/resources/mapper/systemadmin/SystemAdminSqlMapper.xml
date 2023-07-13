@@ -13,6 +13,11 @@
 	</select>
 	
 	
+	<select id="selectQnaNotNullAnswer" resultType="com.ssofun.dto.QnaDto">
+		select * from tb_qna where answer_contents is not null order by qna_id DESC
+	</select>
+	
+	
 	<select id="selectQnaDataBYQnaId" resultType="com.ssofun.dto.QnaDto">
 		select * from tb_qna where qna_id = #{qna_id}
 	</select>
@@ -28,9 +33,7 @@
 	 select * from tb_User where user_id = #{user_id}
 	</select>
 	
-	<select id="selectQnaNotNullAnswer" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where answer_contents is not null order by qna_id DESC
-	</select>
+
 
 
 	<update id="updateQnaAnswer">

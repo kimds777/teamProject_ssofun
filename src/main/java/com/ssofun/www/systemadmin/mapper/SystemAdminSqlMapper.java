@@ -9,8 +9,12 @@ public interface SystemAdminSqlMapper {
 	
 	public AdminDto getAdminByIdAndPw(AdminDto AdminDto);
 	
-	
+	//답변있는 qna글 리스트
 	public List<QnaDto>	selectQnaByNonAnswer();
+	
+	
+	//답변없는 qna글 리스트
+	public List<QnaDto> selectQnaNotNullAnswer();
 	
 	
 	public QnaDto selectQnaDataBYQnaId (int qna_id);
@@ -21,9 +25,7 @@ public interface SystemAdminSqlMapper {
 	
 	
 //	public UserDto selectUserDtoByUserId(int user_id);
-	
-	
-	public List<QnaDto> selectQnaNotNullAnswer();
+
 	
 	//QnA답변넣기
 	public void updateQnaAnswer(QnaDto qnaDto);
