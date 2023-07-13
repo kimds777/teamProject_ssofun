@@ -131,7 +131,7 @@
 					            <input type="hidden" name="amount" id="productAmount" value="" />
 					            <input type="hidden" name="count" id="productCount" value="" />
 					            <input type="hidden" name="user_id" id="userId" value="${sessionUser.user_id }" readonly/>
-					            <button class="prod-buy-btn" onclick="setProductValues()">구매하기</button>
+					            <button class="prod-buy-btn" onclick="setProductValues()">바로구매</button>
 					        </form>	
 						</div>
 					</div>

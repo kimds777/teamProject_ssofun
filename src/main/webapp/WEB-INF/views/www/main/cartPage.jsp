@@ -6,6 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script>
+window.onload = function() {
+    toggleAllChecks(); // 페이지 로드 후 자동으로 체크 표시
+};
+</script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -20,16 +25,17 @@
 <body>
 	<jsp:include page="../../include/fundingHeader.jsp" />
 
+	<div class="bg">
 	<div class="container">
 		<div class="row">
 			<div class="col"></div>
-			<div class="col">
+			<div class="col-cart">
+				<div class="cart-ma">
 				<div class="row">
 					<div class="col-title">장바구니</div>
 				</div>
 				<div class="row">
-					<div class="col-contents">
-						<hr>
+					<div class="col-contents">					
 						<div class="row">
 							<div class="col-customer">
 								<table class="customer-table">
@@ -138,45 +144,48 @@
 				
 				<div class="row">
 					<div class="col-buy-btn">
-							 <form action="./productProcess" method="post">
-					            <input type="hidden" name="id" id="productId" value="" />
-					            <input type="hidden" name="amount" id="productAmount" value="" />
-					            <input type="hidden" name="count" id="productCount" value="" />
-					            <input type="hidden" name="user_id" id="userId" value="${sessionUser.user_id }" readonly/>
-					            <button class="prod-buy-btn" onclick="setProductValues()">구매하기</button>
-					        </form>	
-						</div>
+						<form action="./cartOrderPage" method="post">													
+							    <!-- 필요한 다른 상품 정보들도 함께 전송 -->
+							    <input type="hidden" name="amount" id="productAmount" value="" />
+							    <button class="prod-buy-btn" onclick="setProductValues()">구매하기</button>
+						 </form>
+					</div>
 				</div>
+				
 			</div>
 			<div class="col"></div>
+			</div>
 		</div>
 	</div>
-
+	</div>
 	<script>
-        function toggleAllChecks() {
-            var allCheck = document.getElementById('allCheck');
-            var itemChecks = document.getElementsByClassName('itemCheck');
+	// 올체크표시
+	function toggleAllChecks() {
+	    console.log('toggleAllChecks() 함수가 실행되었습니다.');
+	    var allCheck = document.getElementById('allCheck');
+	    var itemChecks = document.getElementsByClassName('itemCheck');
 
-            for (var i = 0; i < itemChecks.length; i++) {
-                itemChecks[i].checked = allCheck.checked;
-            }
-        }
+	    for (var i = 0; i < itemChecks.length; i++) {
+	        itemChecks[i].checked = allCheck.checked;
+	    }
+	}
+	
+	// 각각 체크 표시
+	function toggleItemCheck() {
+	    var allCheck = document.getElementById('allCheck');
+	    var itemChecks = document.getElementsByClassName('itemCheck');
 
-        function toggleItemCheck() {
-            var allCheck = document.getElementById('allCheck');
-            var itemChecks = document.getElementsByClassName('itemCheck');
+	    var isAnyUnchecked = false;
 
-            var isAnyUnchecked = false;
+	    for (var i = 0; i < itemChecks.length; i++) {
+	        if (!itemChecks[i].checked) {
+	            isAnyUnchecked = true;
+	            break;
+	        }
+	    }
 
-            for (var i = 0; i < itemChecks.length; i++) {
-                if (!itemChecks[i].checked) {
-                    isAnyUnchecked = true;
-                    break;
-                }
-            }
-
-            allCheck.checked = !isAnyUnchecked;
-        }
+	    allCheck.checked = !isAnyUnchecked;
+	}
 		
         // 버튼으로 수량 변경
         function changeQuantity(operation, inputId, index) {
@@ -223,6 +232,8 @@
             var totalAmount = price * quantity;
             
             amountDisplay.innerText = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalAmount).replace(/₩|KRW/g, '') + '원';
+              
+            
             calculateTotalAmount(); // 총 가격도 업데이트
         }
 
@@ -234,28 +245,72 @@
 		
 		// 총 상품 가격 표시
 		function calculateTotalAmount() {
-			  var totalPrice = 0;
+		  var totalPrice = 0;
 
-			  var displayPriceElements = document.querySelectorAll('[id^="display-price-"]');
-			  for (var i = 0; i < displayPriceElements.length; i++) {
-			    var priceText = displayPriceElements[i].textContent;
-			    var price = parseInt(priceText.replace(/[^0-9]/g, ''));
-			    totalPrice += price;
-			  }
+		  var itemChecks = document.getElementsByClassName('itemCheck');
+		  var displayPriceElements = document.querySelectorAll('[id^="display-price-"]');
+		  
+		  for (var i = 0; i < itemChecks.length; i++) {
+		    if (itemChecks[i].checked) {
+		      var priceText = displayPriceElements[i].textContent;
+		      var price = parseInt(priceText.replace(/[^0-9]/g, ''));
+		      totalPrice += price;
+		    }
+		  }
 
-			  var totalPriceElement = document.getElementById('total-price');
-			  totalPriceElement.textContent = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice).replace(/₩|KRW/g, '') + '원';
-			  
-			  //주문금액
-			  var finalOrderPriceElement = document.getElementById('final-order-price');
-			  finalOrderPriceElement.textContent = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice).replace(/₩|KRW/g, '') + '원';
-			}
+		  var totalPriceElement = document.getElementById('total-price');
+		  totalPriceElement.textContent = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice).replace(/₩|KRW/g, '') + '원';
 
-			calculateTotalAmount();
+		  // 주문금액
+		  var finalOrderPriceElement = document.getElementById('final-order-price');
+		  finalOrderPriceElement.textContent = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice).replace(/₩|KRW/g, '') + '원';
+		}
+		
+		 // 결제금액, 수량 
+	    function setProductValues() {
+	        // 결제금액과 수량 값을 가져와서 설정
+	        var amountString = document.getElementById("final-order-price").innerText;
+
+	        // amountString을 정수형으로 변환
+	        var amount = parseInt(amountString.replace(/[^0-9]/g, "")); // 숫자 이외의 문자 제거 후 정수형으로 변환
+
+	        // 각 hidden input 요소에 값을 설정
+	        document.getElementById("productAmount").value = amount;
+	    }
+
+		// 전체 체크박스 선택/해제 시 합계 업데이트
+		function updateTotalAmountOnToggleAllChecks() {
+		  var allCheck = document.getElementById('allCheck');
+		  var itemChecks = document.getElementsByClassName('itemCheck');
+
+		  for (var i = 0; i < itemChecks.length; i++) {
+		    itemChecks[i].checked = allCheck.checked;
+		  }
+
+		  calculateTotalAmount();
+		}
+
+		// 체크박스 클릭 시 합계 업데이트
+		function updateTotalAmount() {
+		  calculateTotalAmount();
+		}
+
+		// 체크박스 이벤트 리스너 등록
+		var allCheck = document.getElementById('allCheck');
+		allCheck.addEventListener('click', updateTotalAmountOnToggleAllChecks);
+
+		var itemChecks = document.getElementsByClassName('itemCheck');
+		for (var i = 0; i < itemChecks.length; i++) {
+		  itemChecks[i].addEventListener('click', updateTotalAmount);
+		}
+
+		// 페이지 로드 시 합계 초기화
+		window.onload = function() {
+		  calculateTotalAmount();
+		};
 
 
-
-
+			
     </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

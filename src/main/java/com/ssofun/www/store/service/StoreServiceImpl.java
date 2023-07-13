@@ -79,7 +79,7 @@ public class StoreServiceImpl {
 	public void registOrderItem(ProductOrderItemDto poiDto) {
 		storeSqlMapper.insertByOrderItem(poiDto);
 	}
-		
+	
 	//상품출력
 	public List<ProductDto> getItemList( ProductDto producDto){
 		List<ProductDto> productList = storeSqlMapper.selectProductList(producDto);

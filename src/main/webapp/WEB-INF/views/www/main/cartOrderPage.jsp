@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-				<form action="./productOrderProcess" method="post">
+				<form action="./cartOrderProcess" method="post">
                 <div class="row">
                     <div class="col-customer">
                         <h2 class="delivery-address-h2">받는사람 정보</h2>
@@ -96,25 +96,25 @@
                 <div class="row">
                 	<div class="col-customer">
                 		 <h2 class="customer-h2">배송상품</h2>
-                		<c:if test="${not empty detail}">                       
-                        <table class="customer-table">
-                                <tr>
-                                    <td class="customer-td1">상품명</td>
-                                    <td class="customer-td2">${detail[0].product_name}</td>
-                                     <td class="customer-td1">수량</td>
-                                    <td class="customer-td2">${count }개</td>
-                                </tr>
-                		</table>
-                		</c:if>
-                		
-                	             		           
+                		 	<c:forEach items="${list}" var="item" >
+	                		<c:if test="${not empty item}">                       
+	                        <table class="customer-table">
+	                                <tr>
+	                                    <td class="customer-td1">상품명</td>
+	                                    <td class="customer-td2">${item.product_name}</td>
+	                                     <td class="customer-td1">수량</td>
+	                                    <td class="customer-td2">${item.total_count }개</td>
+	                                </tr>
+	                		</table>
+	                		</c:if>
+	                		</c:forEach>                  		                	             		         
                 	</div>
                 </div>           
                 
                 
                 <div class="row">
                     <div class="col-customer">
-                    	<c:if test="${not empty detail}">
+                    	<c:if test="${not empty list}">
                         <h2 class="customer-h2">결제정보</h2>
                         <table class="customer-table">
                                
@@ -141,9 +141,11 @@
                 
                 <div class="row">
                     <div class="col-agreebtn">
-	                    <input type="hidden" name="amount" value="${amount}" readonly/>
-						<input type="hidden" name="count" value="${count}" readonly/>						
-						<input type="hidden" name="product_id" id="productId" readonly/>
+	                    <input type="hidden" name="amount" value="${amount}" readonly/>						
+						 <c:forEach items="${list}" var="item">
+					        <input type="hidden" name="product_id" value="${item.product_id}" />
+					        <input type="hidden" name="count" value="${item.total_count}" readonly/>
+					    </c:forEach>												
                         <button class="prod-buy-btn">구매하기</button>            
                     </div>
                 </div>

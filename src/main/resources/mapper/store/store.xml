@@ -142,8 +142,8 @@
 		INNER JOIN tb_cart ON tb_user.user_id = tb_cart.user_id
 		INNER JOIN tb_product ON tb_cart.product_id = tb_product.product_id
 		INNER JOIN tb_product_thumbnail ON tb_product.product_id = tb_product_thumbnail.product_id
-		WHERE tb_user.user_id = #{user_id}
-		GROUP BY tb_user.user_id, tb_cart.product_id;
+		WHERE tb_user.user_id = #{user_id} AND tb_user.used_fg=1
+		GROUP BY tb_user.user_id, tb_cart.product_id
 	</select>
 	
 	

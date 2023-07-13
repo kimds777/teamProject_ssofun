@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -105,7 +107,7 @@ public class StoreController {
 			session.setAttribute("sessionUser", sessionUser);	
 			session.setAttribute("amount", amount);
 	        session.setAttribute("count", count);
-			return "redirect:./productOrderPage?id=" + id;
+			return "redirect:./productOrderPage?id="+id;
 		}else {
 			session.invalidate(); // 세션 무효화
 			return "redirect:./loginPage";
@@ -115,10 +117,8 @@ public class StoreController {
 	
 	// 주문페이지 
 	@RequestMapping("productOrderPage")
-	public String productOrderPage(int id,  Model model) {
+	public String productOrderPage(int id,  Model model, HttpSession session) {
 		List<ProductDto> list = storeService.getItemListDetail(id);
-		List<ProductUserDto> cartlist = storeService.getCartList(id);
-		model.addAttribute("cartlist",cartlist);
 		model.addAttribute("detail", list);
 		return "www/main/productOrderPage";
 	}
@@ -163,6 +163,53 @@ public class StoreController {
 		storeService.registCart(cartDto);
 		return "1";
 	}
+	
+	//장바구니 구매페이지
+	@RequestMapping("cartOrderPage")
+	public String cartOrderPage(ProductCart cartDto, ProductUserDto Std, HttpSession session, Model model, int amount) {
+		session.setAttribute("amount", amount);
+		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+		int id = sessionUser.getUser_id();
+		System.out.println(id);
+		List<ProductUserDto> list = storeService.getCartList(id);
+		model.addAttribute("list",list);
+		return "www/main/cartOrderPage";
+	}
+	// 장바구니 주문페이지 
+	@RequestMapping("cartOrderProcess")
+	public String cartOrderProcess(HttpServletRequest request,ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto, ProductDto pDto, HttpSession session, ProductCart cartDto) {
+		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+		int id = sessionUser.getUser_id();
+		porDto.setUser_id(id);
+		storeService.registRecipient(recipiDto);
+		storeService.registProductOrder(porDto);
+		
+		String[] productIds = request.getParameterValues("product_id");
+	    String[] counts = request.getParameterValues("count");
+
+	    if (productIds != null && counts != null && productIds.length == counts.length) {
+	        for (int i = 0; i < productIds.length; i++) {
+	            int productId = Integer.parseInt(productIds[i]);
+	            int count = Integer.parseInt(counts[i]);
+
+	            // ProductOrderItemDto 객체 생성 및 설정
+	            ProductOrderItemDto orderItemDto = new ProductOrderItemDto();
+	            orderItemDto.setProduct_id(productId);
+	            orderItemDto.setCount(count);
+
+	            // 주문 상품 등록
+	            storeService.registOrderItem(orderItemDto);
+	        }
+	    }
+			return "redirect:./orderCompletePage";
+	}
+	
+	@RequestMapping("orderCompletePage")
+	public String orderCompletePage() {
+		
+		return"www/main/orderCompletePage";
+	}
+	
 	
 	//==등록 관련
 	@RequestMapping("adminPage")
