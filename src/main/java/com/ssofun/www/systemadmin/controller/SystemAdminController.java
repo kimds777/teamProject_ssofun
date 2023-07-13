@@ -58,16 +58,17 @@ public class SystemAdminController {
 	}
 	
 	
-	
+//	미답변 qna글의 리스트프로세스
 	public List<QnaDto> getUnansweredQnaListProcess(Model model, HttpSession session){
 		
 //		int adminId = 	((Tb_AdminDto)session.getAttribute("sessionAdmin")).getAdmain_id();
 		
 		
-		
+//		미답변 qna를 리스트에 담음
 		List<QnaDto> getUnansweredQnaList = systemAdminService.getUnansweredQnaList();
 
-			model.addAttribute("getUnansweredQnaList", getUnansweredQnaList);
+//		리스트를 모델에 담아서 넘김
+		model.addAttribute("getUnansweredQnaList", getUnansweredQnaList);
 		
 		
 		return getUnansweredQnaList; 
@@ -94,8 +95,8 @@ public class SystemAdminController {
 	public String systemAdminQnaMain(Model model, HttpSession session ) {
 
 
-		getUnansweredQnaListProcess(model, session);
-		answerCompletedQnaList(model, session);
+		getUnansweredQnaListProcess(model, session);//미답변qna리스트 
+		answerCompletedQnaList(model, session);//답변완료qna리스트
 		
 			return"systemadmin/systemAdminQnaMainPage";
 	}

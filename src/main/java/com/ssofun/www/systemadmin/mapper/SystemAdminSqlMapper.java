@@ -28,7 +28,7 @@ public interface SystemAdminSqlMapper {
 	//QnA답변넣기
 	public void updateQnaAnswer(QnaDto qnaDto);
 	
-	//이메일로 유저정보가져옴
+	//qnaid로 유저정보가져옴
 	public UserDto selectUserDtoByUserId(int qna_id);
 	
 	//userdto랑 qnadto id로 조인하기 

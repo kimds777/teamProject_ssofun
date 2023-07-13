@@ -26,9 +26,24 @@ public class SystemAdminServiceImpl {
 	
 	
 	public List<QnaDto> getUnansweredQnaList() {
-		List<Map<String, Object>> list = new ArrayList<>();
+		
 		
 		List<QnaDto> getUnansweredQnaList = systemAdminSqlMapper.selectQnaByNonAnswer();
+		//리스트받아온걸 for문 돌려서 해체한 다음 
+		
+		
+		for(QnaDto qna :getUnansweredQnaList) {
+			
+			QnaDto qnaDto = 
+			int user_id = qna.getUser_id();
+			UserDto userId = systemAdminSqlMapper.selectUserDtoByUserId(user_id);
+			
+			qna.setUser_id(user_id);
+		}
+		
+		
+		
+		
 		
 		return getUnansweredQnaList;
 	}
@@ -41,10 +56,6 @@ public class SystemAdminServiceImpl {
 		
 		return answerCompletedQnaList;
 	}
-	
-	
-
-
 
 
 	
@@ -54,8 +65,8 @@ public class SystemAdminServiceImpl {
 		
 		
 //		UserDto userDto = systemAdminSqlMapper.;
-		QnaDto qnaDto = systemAdminSqlMapper.selectQnaDataBYQnaId(qna_id);
-		UserDto userDto = systemAdminSqlMapper.selectUserDtoByUserId(qnaDto.getUser_id());
+		QnaDto qnaDto = systemAdminSqlMapper.selectQnaDataBYQnaId(qna_id);//qnaid에 해당되는 qna글정보를 가져옴
+		UserDto userDto = systemAdminSqlMapper.selectUserDtoByUserId(qnaDto.getUser_id());//qnadto에 있는 uesrid를 userdto에 담아서 넘겨옴 
 		
 		
 		List<Qna_ImageDto> Qna_ImageDtoList= systemAdminSqlMapper.selectQnaImageByQnaId(qna_id);

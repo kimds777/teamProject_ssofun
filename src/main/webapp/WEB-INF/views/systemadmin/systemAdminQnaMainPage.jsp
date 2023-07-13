@@ -125,7 +125,7 @@
                             <div class="row">
                                 <div class="col-1"><p class="center1">번호</p></div>
                                 <div class="col"><p class="five-font">제목</p></div>
-                                <div class="col-2"><p class="center1">작성자</p></div>
+                                <div class="col-2"><p class="center1">닉네임</p></div>
                                 <div class="col-2"><p class="center1">작성일</p></div>
                                 <div class="col-2"><p class="center1">문의상태</p></div>
                             </div>
@@ -135,7 +135,7 @@
                                     <div class="row">
                                         <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${unansweredQna.qna_id }</p></div>
                                         <div class="col"><p class="five-font"><a class="readQnalink" href="./systemAdminReadQnaPage?qna_id=${unansweredQna.qna_id }">${unansweredQna.title }</a></p></div>
-                                        <div class="col-2"><p class="center1">${unansweredQna.user_id }</p></div>
+                                        <div class="col-2"><p class="center1">${unansweredQna.nickname }</p></div>
                                         
                                         <div class="col-2">
                                             <p class="center1">
