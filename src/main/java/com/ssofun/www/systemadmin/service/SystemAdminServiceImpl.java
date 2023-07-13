@@ -48,18 +48,20 @@ public class SystemAdminServiceImpl {
 
 
 	
-	public Map<String, Object> getQnaData(int qna_id, int user_id) {
+	public Map<String, Object> getQnaData(int qna_id) {
 		
 		Map<String, Object> map = new HashMap<>();
 		
 		
-		UserDto userDto = systemAdminSqlMapper.selectUserDtoByUserId(user_id);
-		QnaDto QnaDto = systemAdminSqlMapper.selectQnaDataBYQnaId(qna_id);
+//		UserDto userDto = systemAdminSqlMapper.;
+		QnaDto qnaDto = systemAdminSqlMapper.selectQnaDataBYQnaId(qna_id);
+		UserDto userDto = systemAdminSqlMapper.selectUserDtoByUserId(qnaDto.getUser_id());
+		
 		
 		List<Qna_ImageDto> Qna_ImageDtoList= systemAdminSqlMapper.selectQnaImageByQnaId(qna_id);
 		
-		map.put("User_Dto", userDto);
-		map.put("QnaDto", QnaDto);
+		map.put("UserDto", userDto);
+		map.put("QnaDto", qnaDto);
 		map.put("Qna_ImageDtoList", Qna_ImageDtoList);
 		
 	return map;

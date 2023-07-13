@@ -30,4 +30,7 @@ public interface SystemAdminSqlMapper {
 	
 	//이메일로 유저정보가져옴
 	public UserDto selectUserDtoByUserId(int qna_id);
+	
+	//userdto랑 qnadto id로 조인하기 
+	public QnaDto selectById (int id);
 }
