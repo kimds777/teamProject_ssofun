@@ -25,36 +25,59 @@ public class SystemAdminServiceImpl {
 	}
 	
 	
+	//미답변 qna리스트
 	public List<Map<String, Object>> getUnansweredQnaList() {
 		
-		Map<String, Object> map
+		List<Map<String ,Object>> unanswerList = new ArrayList<>();
 		
 		List<QnaDto> getUnansweredQnaList = systemAdminSqlMapper.selectQnaByNonAnswer();
 		//리스트받아온걸 for문 돌려서 해체한 다음 
 		
 		
-		for(QnaDto qna :getUnansweredQnaList) {
+		for(QnaDto qnaDto :getUnansweredQnaList) {
 			Map<String, Object> map = new HashMap<>();
 			
-			int user_id = qna.getUser_id();
+//			QnaDto qnaDto = systemAdminSqlMapper.
+			int userId = qnaDto.getUser_id();
 			
-			UserDto userDto = systemAdminSqlMapper.selectById(user_id);
+			UserDto userDto = systemAdminSqlMapper.selectUserDtoByUserId(userId);
+			
+			map.put("userDto", userDto);
+			map.put("qnaDto",qnaDto);
+		
+			unanswerList.add(map);
+		
 		}
 		
 		
-		
-		
-		
-		return getUnansweredQnaList;
+		return unanswerList;
 	}
 	
 	
-	public List<QnaDto> answerCompletedQnaList() {
+	//답변완료qnalist
+	public List<Map<String, Object>> answerCompletedQnaList() {
+		
+		List<Map<String, Object>> answerCompleteList = new ArrayList<>();
 		
 		List<QnaDto> answerCompletedQnaList = systemAdminSqlMapper.selectQnaNotNullAnswer();
 		
+		for(QnaDto qnaDto:answerCompletedQnaList) {
+			Map<String, Object> map = new HashMap<>();
+			
+			int userId = qnaDto.getUser_id();
+			UserDto userDto = systemAdminSqlMapper.selectUserDtoByUserId(userId);
+			
+			map.put("userDto",userDto);
+			map.put("qnaDto", qnaDto);
+			
+			answerCompleteList.add(map);
+			
+			
 		
-		return answerCompletedQnaList;
+		}
+		
+		
+		return answerCompleteList;
 	}
 
 

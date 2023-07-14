@@ -59,13 +59,13 @@ public class SystemAdminController {
 	
 	
 //	미답변 qna글의 리스트프로세스
-	public List<QnaDto> getUnansweredQnaListProcess(Model model, HttpSession session){
+	public List<Map<String, Object>> getUnansweredQnaListProcess(Model model, HttpSession session){
 		
 //		int adminId = 	((Tb_AdminDto)session.getAttribute("sessionAdmin")).getAdmain_id();
 		
 		
 //		미답변 qna를 리스트에 담음
-		List<QnaDto> getUnansweredQnaList = systemAdminService.getUnansweredQnaList();
+		List<Map<String, Object>> getUnansweredQnaList = systemAdminService.getUnansweredQnaList();
 
 //		리스트를 모델에 담아서 넘김
 		model.addAttribute("getUnansweredQnaList", getUnansweredQnaList);
@@ -76,13 +76,13 @@ public class SystemAdminController {
 	
 	
 	
-	public List<QnaDto> answerCompletedQnaList(Model model, HttpSession session){
+	
+//답변완료 qna글의 리스트프로세스
+	public List<Map<String, Object>> answerCompletedQnaListProcess(Model model, HttpSession session){
 		
 //		int adminId = 	((Tb_AdminDto)session.getAttribute("sessionAdmin")).getAdmain_id();
 		
-
-		
-		List<QnaDto> answerCompletedQnaList = systemAdminService.answerCompletedQnaList();
+		List<Map<String, Object>> answerCompletedQnaList = systemAdminService.answerCompletedQnaList();
 
 			model.addAttribute("answerCompletedQnaList", answerCompletedQnaList);
 		
@@ -96,7 +96,7 @@ public class SystemAdminController {
 
 
 		getUnansweredQnaListProcess(model, session);//미답변qna리스트 
-		answerCompletedQnaList(model, session);//답변완료qna리스트
+		answerCompletedQnaListProcess(model, session);//답변완료qna리스트
 		
 			return"systemadmin/systemAdminQnaMainPage";
 	}
@@ -146,7 +146,7 @@ public class SystemAdminController {
 		
 		
 		getUnansweredQnaListProcess(model, session);
-		answerCompletedQnaList(model, session);
+		answerCompletedQnaListProcess(model, session);
 		systemAdminService.updateQnaAnswer(qnaDto);
 
 		

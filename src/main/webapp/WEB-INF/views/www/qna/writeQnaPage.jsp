@@ -169,10 +169,11 @@
                             <div class="col-10"><p>${sessionUser.email }</p></div>
                             <!-- <div class="col"></div> -->
                         </div>
+    <!-- 카테고리주석                        
                         <div class="row mt-3">
                             <div class="col"><p class="six-font">문의유형</p></div>
                             <div class="col-10">
-                                <div class="row">
+			               <div class="row">
                                     <div class="col">
                                         <select class="form-select" name="selectCategory1" aria-label="Default select example">
                                             <option class="eight-font" selected>문의 유형을 선택해주세요.</option>
@@ -196,9 +197,10 @@
                                     </div>
                                    
                                 </div>
-                            </div>
+ 	          			 </div>
                            
                         </div>
+ -->                        
                         <div class="row mt-3">
                             <div class="col"><p class="six-font">제목</p></div>
                             <div class="col-10"><input type="text" name="title" id="title" class="form-control" placeholder="제목을 입력해주세요." aria-label="First name"></div>

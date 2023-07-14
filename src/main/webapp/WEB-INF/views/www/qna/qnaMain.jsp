@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,7 +136,7 @@
                         
                         <c:forEach items="${qnaList}" var="qna" varStatus="status">
                         <div class="row">
-                            <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${status.count}</p></div>
+                            <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${fn:length(qnaList)-status.count+1}</p></div>
                             <div class="col"><p class="five-font"><a class="readQnalink" href="./readQnaPage?qna_id=${qna.qna_id }">${qna.title }</a></p></div>
                             <div class="col-2">
 	                            <p class="center1">

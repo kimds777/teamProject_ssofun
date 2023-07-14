@@ -125,21 +125,21 @@
                             <div class="row">
                                 <div class="col-1"><p class="center1">번호</p></div>
                                 <div class="col"><p class="five-font">제목</p></div>
-                                <div class="col-2"><p class="center1">닉네임</p></div>
+                                <div class="col-2"><p class="center1">작성자닉네임</p></div>
                                 <div class="col-2"><p class="center1">작성일</p></div>
                                 <div class="col-2"><p class="center1">문의상태</p></div>
                             </div>
                             
                             <c:forEach items="${getUnansweredQnaList}" var="unansweredQna">
-                                <c:if test="${unansweredQna.answer_contents == null }">
+                                <c:if test="${unansweredQna.qnaDto.answer_contents == null }">
                                     <div class="row">
-                                        <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${unansweredQna.qna_id }</p></div>
-                                        <div class="col"><p class="five-font"><a class="readQnalink" href="./systemAdminReadQnaPage?qna_id=${unansweredQna.qna_id }">${unansweredQna.title }</a></p></div>
-                                        <div class="col-2"><p class="center1">${unansweredQna.nickname }</p></div>
+                                        <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${unansweredQna.qnaDto.qna_id }</p></div>
+                                        <div class="col"><p class="five-font"><a class="readQnalink" href="./systemAdminReadQnaPage?qna_id=${unansweredQna.qnaDto.qna_id }">${unansweredQna.qnaDto.title }</a></p></div>
+                                        <div class="col-2"><p class="center1">${unansweredQna.userDto.nickname }</p></div>
                                         
                                         <div class="col-2">
                                             <p class="center1">
-                                                <fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${unansweredQna.created_at }"/>
+                                                <fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${unansweredQna.qnaDto.created_at }"/>
                                             </p>
                                         </div>
                                         <div class="col-2">
@@ -178,21 +178,21 @@
                             <div class="row">
                                 <div class="col-1"><p class="center1">번호</p></div>
                                 <div class="col"><p class="five-font">제목</p></div>
-                                <div class="col-2"><p class="center1">작성자</p></div>
+                                <div class="col-2"><p class="center1">작성자닉네임</p></div>
                                 <div class="col-2"><p class="center1">답변일</p></div>
                                 <div class="col-2"><p class="center1">문의상태</p></div>
                             </div>
                             
                             <c:forEach items="${answerCompletedQnaList}" var="answerCompletedQna">
-                                <c:if test="${answerCompletedQna.answer_contents != null }">
+                                <c:if test="${answerCompletedQna.qnaDto.answer_contents != null }">
                                 <div class="row">
-                                    <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${answerCompletedQna.qna_id }</p></div>
-                                    <div class="col"><p class="five-font"><a class="readQnalink" href="./systemAdminReadQnaPage?qna_id=${answerCompletedQna.qna_id }">${answerCompletedQna.title }</a></p></div>
-                                    <div class="col-2"><p class="center1">${answerCompletedQna.user_id }</p></div>
+                                    <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${answerCompletedQna.qnaDto.qna_id }</p></div>
+                                    <div class="col"><p class="five-font"><a class="readQnalink" href="./systemAdminReadQnaPage?qna_id=${answerCompletedQna.qnaDto.qna_id }">${answerCompletedQna.qnaDto.title }</a></p></div>
+                                    <div class="col-2"><p class="center1">${answerCompletedQna.userDto.nickname }</p></div>
                                     
                                     <div class="col-2">
                                         <p class="center1">
-                                            <fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${answerCompletedQna.answer_created_at }"/>
+                                            <fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${answerCompletedQna.qnaDto.answer_created_at }"/>
                                         </p>
                                     </div>
                                     <div class="col-2">
