@@ -84,7 +84,7 @@
                             <div class="col borderline">
                                 <div class="row"><div class="col"><p class="four-font">공지사항</p></div></div>
                                 <hr class="hr-1">
-                                <div class="row"><div class="col"><p class="four-font">자주찾는질문</p></div></div>
+                                <div class="row"><div class="col"><a href="../faq/faqMainPage"><p class="four-font">자주찾는질문</p></a></div></div>
                                 <hr class="hr-1">
                                 <div class="row"><div class="col"><p class="four-font">이용약관</p></div></div>
                                 <hr class="hr-1">
