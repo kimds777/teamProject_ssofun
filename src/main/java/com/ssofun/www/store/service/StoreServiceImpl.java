@@ -66,6 +66,11 @@ public class StoreServiceImpl {
 		storeSqlMapper.insertByCart(cartDto);
 	}
 	
+	// 장바구니 구매후 물품제거
+	public void updateCart(ProductCart cartDto) {
+		storeSqlMapper.cartUpdate(cartDto);
+	}
+	
 	//배송 받는 사람 등록
 	public void registRecipient(ProductRecipient recipiDto) {
 		storeSqlMapper.insertByRecipient(recipiDto);
@@ -102,9 +107,15 @@ public class StoreServiceImpl {
 		return CartList;
 	}
 	
+	
 	//장바구니 삭제
 	public void deleteCart(ProductCart cartDto) {
 		storeSqlMapper.deleteByCart(cartDto);
+	}
+	
+	//주소 출력
+	public ProductRecipient getRecipient(ProductRecipient reciDto) {
+	    return storeSqlMapper.selectRecipient(reciDto);
 	}
 	
 	// ProductUser 로그인

@@ -101,9 +101,9 @@
 	                        <table class="customer-table">
 	                                <tr>
 	                                    <td class="customer-td1">상품명</td>
-	                                    <td class="customer-td2">${item.product_name}</td>
+	                                    <td class="pname-td2">${item.product_name}</td>
 	                                     <td class="customer-td1">수량</td>
-	                                    <td class="customer-td2">${item.total_count }개</td>
+	                                    <td class="pcount-td2">${item.total_count }개</td>
 	                                </tr>
 	                		</table>
 	                		</c:if>
@@ -141,7 +141,7 @@
                 
                 <div class="row">
                     <div class="col-agreebtn">
-	                    <input type="hidden" name="amount" value="${amount}" readonly/>						
+	                    <input type="hidden" name="amouㅍnt" value="${amount}" readonly/>						
 						 <c:forEach items="${list}" var="item">
 					        <input type="hidden" name="product_id" value="${item.product_id}" />
 					        <input type="hidden" name="count" value="${item.total_count}" readonly/>

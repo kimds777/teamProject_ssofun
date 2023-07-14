@@ -175,9 +175,10 @@ public class StoreController {
 		model.addAttribute("list",list);
 		return "www/main/cartOrderPage";
 	}
+	
 	// 장바구니 주문페이지 
 	@RequestMapping("cartOrderProcess")
-	public String cartOrderProcess(HttpServletRequest request,ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto, ProductDto pDto, HttpSession session, ProductCart cartDto) {
+	public String cartOrderProcess(HttpServletRequest request,ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto, ProductDto pDto, HttpSession session) {
 		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		porDto.setUser_id(id);
@@ -199,15 +200,20 @@ public class StoreController {
 
 	            // 주문 상품 등록
 	            storeService.registOrderItem(orderItemDto);
+	            ProductCart cartDto =  new ProductCart();
+	            cartDto.setProduct_id(productId);
+	            storeService.updateCart(cartDto);
 	        }
 	    }
 			return "redirect:./orderCompletePage";
 	}
 	
+	// 주문 완료페이지
 	@RequestMapping("orderCompletePage")
-	public String orderCompletePage() {
-		
-		return"www/main/orderCompletePage";
+	public String orderCompletePage(ProductRecipient reciDto, Model model) {
+	    ProductRecipient recipient = storeService.getRecipient(reciDto);
+	    model.addAttribute("recipient", recipient);
+	    return "www/main/orderCompletePage";
 	}
 	
 	

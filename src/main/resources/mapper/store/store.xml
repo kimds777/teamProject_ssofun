@@ -99,6 +99,11 @@
 	    )
 	</insert>
 	
+	<!-- 장바구니 주문후 물품 제거 등록 -->
+	<update id="cartUpdate">
+	UPDATE tb_cart SET used_fg=0 WHERE product_id=${product_id}
+	</update>
+	
 	<!-- 장바구니 삭제 -->
 	<delete id="deleteByCart">
 		DELETE FROM tb_cart WHERE user_id = #{user_id} and product_id = #{product_id}
@@ -137,17 +142,20 @@
 	<!-- 장바구니 목록 출력 -->
 	<select id="selectCartList" resultType="com.ssofun.dto.ProductUserDto">
 		SELECT tb_user.user_id, tb_cart.product_id, MIN(tb_product_thumbnail.name) AS thumbnail_name,tb_product.name AS product_name, tb_product.price_sale AS price,
-       (SELECT SUM(count) FROM tb_cart AS c WHERE c.user_id = tb_user.user_id AND c.product_id = tb_cart.product_id) AS total_count
+       (SELECT SUM(count) FROM tb_cart AS c WHERE c.user_id = tb_user.user_id AND c.product_id = tb_cart.product_id AND c.used_fg=1) AS total_count
 		FROM tb_user
 		INNER JOIN tb_cart ON tb_user.user_id = tb_cart.user_id
 		INNER JOIN tb_product ON tb_cart.product_id = tb_product.product_id
 		INNER JOIN tb_product_thumbnail ON tb_product.product_id = tb_product_thumbnail.product_id
-		WHERE tb_user.user_id = #{user_id} AND tb_user.used_fg=1
-		GROUP BY tb_user.user_id, tb_cart.product_id
+		WHERE tb_user.user_id = #{user_id} AND tb_cart.used_fg=1
+		GROUP BY tb_cart.product_id
 	</select>
 	
 	
-	
+	<!-- 주소 출력 -->
+	<select id="selectRecipient" resultType="com.ssofun.dto.ProductRecipient">
+		select * from tb_delivery_recipient order by delivery_recipient_id DESC LIMIT 1
+	</select>
 		
 	
 	<!-- 아래는 테스트 코드 -->

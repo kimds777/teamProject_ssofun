@@ -20,6 +20,9 @@ public interface StoreSqlMapper {
 	// 장바구니 등록
 	public void insertByCart(ProductCart cartDto);
 	
+	// 장바구니 구매후 물품제거
+	public void cartUpdate(ProductCart cartDto);
+	
 	// 배송 받는 사람 등록
 	public void insertByRecipient(ProductRecipient recipiDto);
 	
@@ -50,6 +53,9 @@ public interface StoreSqlMapper {
 	// 장바구니 삭제
 	public void deleteByCart(ProductCart cartDto);	
 	
+	// 주소 출력
+	public ProductRecipient selectRecipient(ProductRecipient reciDto);
+		
 	//테스트상품등록
 	public void insertByItem(ProductDto productDto);
 	
