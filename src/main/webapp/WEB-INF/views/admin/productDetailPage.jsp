@@ -1,12 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
 <style>
+
 .thumbnailTable {
     width: 100%;
     background-color: transparent;
+}
+
+.logo_box{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.home{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.login_box{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.title_box{
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
 }
 </style>
 <head>
@@ -22,9 +48,11 @@
 <body class="text-left">
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
-            <div class="logo">
-                <img src="../../resources/dist-assets/images/logo.png" alt="">
-            </div>
+            <div class="row">
+	            <div class="d-flex col p-0">
+	                <div class="col-1 logo_box"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
+	            </div>
+	        </div>
             <div class="menu-toggle">
                 <div></div>
                 <div></div>
@@ -37,29 +65,24 @@
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
                 </div>
-                <div class="nav justify-content-end">
-                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
-                </div>
+	            <div class="d-flex col p-0">
+	                <div class="col-1 home"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">Home</a></div>
+	        	</div>
             </div>
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
 							<c:if test="${empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item"><a class="nav-link"
-										href="./loginPage">로그인</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
-									</li>
+									<li class="nav-item login_box"><a class="nav-link" href="./loginPage">로그인</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
-									</li>
-									<li class="nav-item"><a class="nav-link"
-										href="./logoutProcess">로그아웃</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
-									</li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
 							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
@@ -147,7 +170,7 @@
                 <!-- User avatar dropdown -->
                 <div class="dropdown">
                     <div class="user col align-self-end">
-                        <img src="../resources/dist-assets/images/faces/1.jpg" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../../resources/img/admin1.jpg" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <div class="dropdown-header">
                                 <i class="i-Lock-User mr-1"></i> Timothy Carlson
@@ -166,22 +189,29 @@
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Order</span></a>
+                    <li class="nav-item" data-item="extrakits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Suitcase"></i><span class="nav-text">Order</span></a>
+                        <div class="triangle"></div>
+                    </li>
+                    <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
-                <!-- Submenu Dashboards-->
+                <!-- Product -->
                 <ul class="childNav" data-parent="uikits">
-                   <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">InsertPage</span></a></li>
-                   <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">ListPage</span></a></li>
-                   <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">CategoryTypeInsertPage</span></a></li>
+                   <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
+                   <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
+                   <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">카테고리타입등록페이지</span></a></li>
                 </ul>
-                <ul class="childNav" data-parent="charts">
-                    <li class="nav-item"><a href="./orderItemInsertPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemInsertPage</span></a></li>
-                    <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemListPage</span></a></li>
+                <!-- Order -->
+                <ul class="childNav" data-parent="extrakits">
+                    <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">주문리스트페이지</span></a></li>
           		</ul>
+          		<!-- Review-->
+                <ul class="childNav" data-parent="charts">
+                    <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
+                </ul>
             <div class="sidebar-overlay"></div>
         	</div>
         </div>
@@ -192,13 +222,15 @@
         	<div class="col mb-3">
             	<div class="card text-left">
                 	<div class="card-body">
-                    	<h4 class="card-title mb-3">상품상세보기</h4>
+                  		<div class="d-flex row p-0">
+					  		<div class="col title_box mb-3 pt-3"><a href="./adminMainPage">상품상세보기</a></div>
+					  	</div>
 							<div class="table-responsive">
 								<table class="table table-striped">
 									<thead>
 										<tr>
 									  		<th scope="row">카테고리타입아이디</th>
-									       		<th scope="col">${productDetail.product_category_type_id}</th>
+									       		<th scope="col">No.&nbsp;${productDetail.product_category_type_id}</th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
@@ -206,20 +238,20 @@
 									  	</tr>
 									  	<tr>
 									  		<th scope="row">상품아이디</th>
-									       		<th scope="col">${productDetail.product_id}</th>
+									       		<th scope="col">No.&nbsp;${productDetail.product_id}</th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									  	</tr>
-									  	<tr>
+<%-- 									  	<tr>
 									  		<th scope="row">관리자아이디</th>
-									       		<th scope="col">${productDetail.admin_id}</th>
+									       		<th scope="col">No&nbsp;${productDetail.admin_id}</th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
-									  	</tr>
+									  	</tr> --%>
 									  	<tr>
 									  		<th scope="row">회사명</th>
 									       		<th scope="col">${productDetail.biz_name}</th>
@@ -246,7 +278,7 @@
 									  	</tr>
 									  	<tr>
 									  		<th scope="row">가격</th>
-									       		<th scope="col">${productDetail.price}</th>
+									       		<th scope="col">${productDetail.price}&nbsp;원</th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
@@ -254,7 +286,7 @@
 									  	</tr>
 									  	<tr>
 									  		<th scope="row">할인가</th>
-									       		<th scope="col">${productDetail.price_sale}</th>
+									       		<th scope="col">${productDetail.price_sale}&nbsp;원</th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
@@ -270,7 +302,9 @@
 									  	</tr>
 									  	<tr>
 									  		<th scope="row">등록일</th>
-									       		<th scope="col">${productDetail.created_at}</th>
+									       		<th scope="col">
+									       			<fmt:formatDate value="${productDetail.created_at}" pattern="yyyy-MM-dd" />								       			
+									       		</th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>
 									       		<th scope="col"></th>

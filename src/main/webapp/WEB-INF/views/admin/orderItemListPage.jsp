@@ -1,9 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
+<style>
 
+.logo_box{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.home{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.login_box{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.title_box{
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.td_No{
+	font-weight: 700;
+}
+
+/* 주문상태에 따른 글자 색상변화 */
+.order-status {
+  /* 기본 스타일 */
+  color: black; /* 기본 글자색 (예시로 검정색) */
+}
+
+/* 주문 상태 ID에 따라 다른 클래스 정의 */
+.status-pending {
+  color: orange; /* 주문 상태가 "pending" 일 때 글자색 (예시로 주황색) */
+}
+
+.status-confirmed {
+  color: blue; /* 주문 상태가 "confirmed" 일 때 글자색 (예시로 파란색) */
+}
+
+.status-shipped {
+  color: green; /* 주문 상태가 "shipped" 일 때 글자색 (예시로 초록색) */
+}
+
+.status-delivered {
+  color: purple; /* 주문 상태가 "delivered" 일 때 글자색 (예시로 보라색) */
+}
+
+</style>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -17,9 +71,11 @@
 <body class="text-left">
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
-            <div class="logo">
-                <img src="../../resources/dist-assets/images/logo.png" alt="">
-            </div>
+            <div class="row">
+	            <div class="d-flex col p-0">
+	                <div class="col-1 logo_box"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
+	            </div>
+	        </div>
             <div class="menu-toggle">
                 <div></div>
                 <div></div>
@@ -32,29 +88,24 @@
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
                 </div>
-                <div class="nav justify-content-end">
-                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
-                </div>
+	            <div class="d-flex col p-0">
+	                <div class="col-1 home"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">Home</a></div>
+	        	</div>
             </div>
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
 							<c:if test="${empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item"><a class="nav-link"
-										href="./loginPage">로그인</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
-									</li>
+									<li class="nav-item login_box"><a class="nav-link" href="./loginPage">로그인</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
-									</li>
-									<li class="nav-item"><a class="nav-link"
-										href="./logoutProcess">로그아웃</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
-									</li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
 							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
@@ -142,7 +193,7 @@
                 <!-- User avatar dropdown -->
                 <div class="dropdown">
                     <div class="user col align-self-end">
-                        <img src="../resources/dist-assets/images/faces/1.jpg" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../../resources/img/admin1.jpg" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <div class="dropdown-header">
                                 <i class="i-Lock-User mr-1"></i> Timothy Carlson
@@ -161,22 +212,29 @@
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Order</span></a>
+                    <li class="nav-item" data-item="extrakits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Suitcase"></i><span class="nav-text">Order</span></a>
+                        <div class="triangle"></div>
+                    </li>
+                    <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
-                <!-- Submenu Dashboards-->
+                <!-- Product -->
                 <ul class="childNav" data-parent="uikits">
-                   <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">InsertPage</span></a></li>
-                   <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">ListPage</span></a></li>
-                   <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">CategoryTypeInsertPage</span></a></li>
+                   <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
+                   <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
+                   <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">카테고리타입등록페이지</span></a></li>
                 </ul>
-                <ul class="childNav" data-parent="charts">
-                    <li class="nav-item"><a href="./orderItemInsertPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemInsertPage</span></a></li>
-                    <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemListPage</span></a></li>
+                <!-- Order -->
+                <ul class="childNav" data-parent="extrakits">
+                    <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">주문리스트페이지</span></a></li>
           		</ul>
+          		<!-- Review-->
+                <ul class="childNav" data-parent="charts">
+                    <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
+                </ul>
             <div class="sidebar-overlay"></div>
         	</div>
         </div>
@@ -187,22 +245,38 @@
                     <div class="col mb-3">
                         <div class="card text-left">
                             <div class="card-body">
-                                <h4 class="card-title mb-3">주문리스트</h4>
+                                <div class="d-flex row p-0">
+					                <div class="col title_box pt-3"><a href="./adminMainPage">주문리스트</a></div>
+					            </div>
+                                <%-- <div class="row">
+								    <div class="col-md-6 form-group mb-3">
+										<form id="myForm" action="orderItemCategoryListPage" method="post">
+										    <select name="product_order_status_id" class="form-control form-control-rounded">
+										        <option>카테고리선택</option>
+										        <c:forEach items="${orderStatusList}" var="orderStatus">
+										            <option value="${orderStatus.product_order_status_id}">${orderStatus.name}</option>
+										        </c:forEach>
+										    </select>
+										</form>
+										
+										<button id="submitButton" onclick="submitForm()" style="display: none;">Submit</button>
+								    </div>
+								</div> --%>
                                 <ul class="nav justify-content-end">
 									<li class="nav-item">
-									    <a class="nav-link" href="./orderItemListPage?product_order_status_id=3">결제완료</a>
+									    <a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=3">결제완료</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="./orderItemListPage?product_order_status_id=4">판매자확인완료</a>
+										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=4">판매자확인완료</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="./orderItemListPage?product_order_status_id=5">배송중</a>
+										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=5">배송중</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="./orderItemListPage?product_order_status_id=6">배송완료</a>
+										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=6">배송완료</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="./orderItemListPage?product_order_status_id=7">구매확정</a>
+										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=7">구매확정</a>
 									</li>
 								</ul>
 								<div class="table-responsive">
@@ -221,55 +295,81 @@
 								            </tr>
 								        </thead>
 								        <tbody>
-<%-- 								            <c:choose> --%>
-<%-- 								                <c:when test="${empty orderItemCategoryList.product_order_status_id}"> --%>
-								                    <c:forEach items="${orderItemList}" var="orderItem">
-								                        <tr>
-								                            <th scope="row">
-								                                <label class="checkbox checkbox-outline-info">
-								                                    <input type="checkbox" checked="" /><span class="checkmark"></span>
-								                                </label>
-								                            </th>
-								                            <td>${orderItem.product_order_item_id}</td>
-								                            <td>${orderItem.created_at}</td>
-								                            <td>${orderItem.recipient_name}</td>
-								                            <td>${orderItem.order_status_name}</td>
-								                            <td>
-								                                <a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
-								                            </td>										                										      										    
-								                            <td>${orderItem.count}</td>
-								                            <td>${orderItem.price}</td>
-								                            <td>${orderItem.price_sale}</td>										                										                
-								                        </tr>
-								                    </c:forEach>
-									                <%--</c:when>
-									                 <c:otherwise>
-								                    <c:forEach items="${orderItemCategoryList}" var="orderItem">
-								                        <tr>
-								                            <th scope="row">
-								                                <label class="checkbox checkbox-outline-info">
-								                                    <input type="checkbox" checked="" /><span class="checkmark"></span>
-								                                </label>
-								                            </th>
-								                            <td>${orderItem.product_order_item_id}</td>
-								                            <td>${orderItem.created_at}</td>
-								                            <td>${orderItem.recipient_name}</td>
-								                            <td>${orderItem.order_status_name}</td>
-								                            <td>
-								                                <a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
-								                            </td>										                										      										    
-								                            <td>${orderItem.count}</td>
-								                            <td>${orderItem.price}</td>
-								                            <td>${orderItem.price_sale}</td>										                										                
-								                        </tr>
-								                    </c:forEach>
-								                </c:otherwise>
-								            </c:choose> --%>
-								        </tbody>
-								    </table>									 
-								</div>
-
-                				</div>            
+								        	<c:forEach items="${orderItemList}" var="orderItem">
+								        		<tr>
+								        			<th scope="row">
+								        				<label class="checkbox checkbox-outline-info">
+								        					<input type="checkbox" checked="" /><span class="checkmark"></span>
+								        				</label>
+								        			</th>
+								        				<td class="td_No">No.&nbsp;${orderItem.product_order_item_id}</td>
+								        				<td><fmt:formatDate value="${orderItem.created_at}" pattern="yyyy-MM-dd" /></td>
+								                        <td class="text-success">${orderItem.recipient_name}&nbsp;님</td>
+								                        <%-- <td class="order-status ${getOrderStatusColor(orderItem.product_order_status_id)}">${orderItem.order_status_name}</td> --%>
+								                        <td>${orderItem.order_status_name}</td>
+								                        <td>
+								                       		<a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
+								                        </td>										                										      										    
+								                        <td>${orderItem.count}&nbsp;개</td>
+								                        <td>${orderItem.price}&nbsp;원</td>
+								                        <td>${orderItem.price_sale}&nbsp;원</td>										                										                
+								              	</tr>
+								           	</c:forEach>
+								     	</tbody>
+								     </table>									 
+								  </div>
+								</div> 
+								<!-- 페이징 버튼 -->
+									<div id="pagination">
+									    <nav aria-label="Page navigation">
+									        <ul class="pagination justify-content-center">
+									            <!-- 이전 페이지 버튼 -->
+									            <li class="page-item" id="prevPage">
+									                <a class="page-link" href="#" aria-label="Previous">
+									                    <span aria-hidden="true">&laquo;</span>
+									                </a>
+									            </li>
+									            <!-- 장식 -->
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(1)">1</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(2)">2</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(3)">3</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(4)">4</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(5)">5</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(6)">6</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(7)">7</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(8)">8</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(9)">9</a>
+									            </li>
+									            <li class="page-item">
+									                <a class="page-link" href="#" onclick="loadPage(10)">10</a>
+									            </li>
+									            <!-- 장식 끝 -->
+									            <!-- 페이지 번호 버튼 -->
+									            <li class="page-item" id="nextPage">
+									                <a class="page-link" href="#" aria-label="Next">
+									                    <span aria-hidden="true">&raquo;</span>
+									                </a>
+									            </li>
+									        </ul>
+									    </nav>
+									</div>           
                 <!-- end of row-->
                 <!-- end of main-content -->
             </div><!-- Footer Start -->
@@ -363,5 +463,38 @@
     <script src="../resources/dist-assets/js/scripts/script.min.js"></script>
     <script src="../resources/dist-assets/js/scripts/sidebar.large.script.min.js"></script>
 </body>
+<script>
+/*     function submitForm() {
+        var form = document.getElementById("myForm");
+        form.submit();
+    }
 
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectElement = document.querySelector("select[name='product_order_status_id']");
+        selectElement.addEventListener("change", function() {
+            var submitButton = document.getElementById("submitButton");
+            if (selectElement.value !== "") {
+                submitButton.style.display = "block"; // 버튼을 보이게 설정
+            } else {
+                submitButton.style.display = "none"; // 버튼을 숨김으로 설정
+            }
+        });
+    }); */
+    
+ /*    function getOrderStatusColor(orderStatusId) {
+    	  switch (orderStatusId) {
+    	    case 3:
+    	      return "status-pending"; // 주문 상태 ID가 3일 때 CSS 클래스 이름 반환
+    	    case 4:
+    	      return "status-confirmed"; // 주문 상태 ID가 4일 때 CSS 클래스 이름 반환
+    	    case 5:
+    	      return "status-shipped"; // 주문 상태 ID가 5일 때 CSS 클래스 이름 반환
+    	    case 6:
+    	      return "status-delivered"; // 주문 상태 ID가 6일 때 CSS 클래스 이름 반환
+    	    default:
+    	      return ""; // 기본 클래스 이름 반환 (기본 글자색이 적용되도록)
+    	  }
+    	} */
+
+</script>
 </html>

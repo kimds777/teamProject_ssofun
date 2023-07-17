@@ -5,10 +5,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="">
 <style>
-.th_col1{
-	width: 110px;
-}
-
 .logo_box{
     margin-left: 20px;
     font-size: 20px;
@@ -29,7 +25,7 @@
 .title_box{
     margin-left: 10px;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 550;
     text-align: left;
 }
 
@@ -226,41 +222,38 @@
                         <div class="card text-left">
                             <div class="card-body">
                                 <div class="d-flex row p-0">
-					                <div class="col title_box mb-4 pt-3"><a href="./adminMainPage">상품리스트</a></div>
+					                <div class="col title_box mb-4 pt-3"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">상품(리뷰,평점)리스트</a></div>
 					            </div>
-									<div class="table-responsive">
-									    <table class="table table-striped">
-									        <thead>
-									            <tr>
-									                <th class="th_col1" scope="col">상품번호</th>
-									                <th class="th_col1" scope="col">회사명</th>
-									                <th class="th_col1" scope="col">카테고리명</th>
-									                <th scope="col">상품명</th>
-									                <th scope="col">상품이미지</th>
-									                <th scope="col">가격</th>
-									                <th scope="col">할인가</th>
-									                <th scope="col">상세설명</th>
-									                <th class="th_col1" scope="col">등록일</th>
-									            </tr>
-									        </thead>
-									        <tbody>
-									            <c:forEach items="${productList}" var="product">
-									                <tr>
-									                    <th class="td_No" scope="row">No.&nbsp;${product.product_id}</th>
-									                    <td>${product.biz_name}</td>
-									                    <td>${product.category_type_name}</td>
-									                    <td><a href="productDetailPage?product_id=${product.product_id }">${product.product_name}</a></td>
-									                    <td><img class="img-fluid img-thumbnail" style="width:75px; height:75px;" src="/ssofunUploadFiles/${product.thumbnail_name}"></td>
-									                    <td>${product.price}&nbsp;원</td>
-									                    <td>${product.price_sale}&nbsp;원</td>
-									                    <td>${product.contents}</td>
-									                    <td><fmt:formatDate value="${product.created_at}" pattern="yyyy-MM-dd" /></td>
-									                </tr>
-									            </c:forEach>
-									        </tbody>
-									    </table>
-									</div>
-									<!-- 페이징 버튼 -->
+								<div class="table-responsive">
+								    <table class="table table-striped">
+								        <thead>
+								            <tr>
+								                <th scope="col">#</th>
+								                <th scope="col">상품번호</th>
+								                <th scope="col">상품명</th>
+								                <th scope="col">리뷰수</th>
+								                <th scope="col">상품평점</th>
+								            </tr>
+								        </thead>
+								        	<tbody>
+								            	<c:forEach items="${productReviewList}" var="productReviewList">
+								                	<tr>
+								                    	<th scope="row">
+								                       		<label class="checkbox checkbox-outline-info">
+								                           		<input type="checkbox" checked="" /><span class="checkmark"></span>
+								                            </label>
+								                       	</th>
+								                       		<td class="td_No">No.&nbsp;${productReviewList.product_id}</td>
+								                        	<td><a href="productDetailReviewListPage?product_id=${productReviewList.product_id}">${productReviewList.name}</a></td>							                										      										    
+								                            <td>${productReviewList.review_cnt}&nbsp;개</td>
+								                            <td>${productReviewList.review_avg_score}&nbsp;점</td>										                										                
+								                        </tr>
+								              	</c:forEach>
+								       		</tbody>
+								  	</table>									 
+								</div>
+                			</div>
+                			<!-- 페이징 버튼 -->
 									<div id="pagination">
 									    <nav aria-label="Page navigation">
 									        <ul class="pagination justify-content-center">
@@ -310,9 +303,7 @@
 									            </li>
 									        </ul>
 									    </nav>
-									</div>									
-                    <!-- end of col-->
-                </div>
+									</div>            
                 <!-- end of row-->
                 <!-- end of main-content -->
             </div><!-- Footer Start -->
@@ -406,95 +397,5 @@
     <script src="../resources/dist-assets/js/scripts/script.min.js"></script>
     <script src="../resources/dist-assets/js/scripts/sidebar.large.script.min.js"></script>
 </body>
-
-<script>
-    // 페이지가 로드되면 초기 페이지 설정을 위해 첫 페이지 데이터를 로드
-    document.addEventListener("DOMContentLoaded", function() {
-        loadPage(1);
-    });
-
-    // 이전 페이지 버튼 클릭 시 이전 페이지 데이터를 로드
-    document.getElementById("prevPage").addEventListener("click", function(event) {
-        var currentPage = getCurrentPage();
-        if (currentPage > 1) {
-            loadPage(currentPage - 1);
-        }
-    });
-
-    // 다음 페이지 버튼 클릭 시 다음 페이지 데이터를 로드
-    document.getElementById("nextPage").addEventListener("click", function(event) {
-        var currentPage = getCurrentPage();
-        var totalPages = getTotalPages();
-        if (currentPage < totalPages) {
-            loadPage(currentPage + 1);
-        }
-    });
-
-    // 현재 페이지 번호 가져오기
-    function getCurrentPage() {
-        var activePage = document.querySelector("#pagination .page-item.active .page-link");
-        return parseInt(activePage.dataset.page);
-    }
-
-    // 전체 페이지 수 가져오기
-    function getTotalPages() {
-        var lastPageLink = document.querySelector("#pagination .page-item:last-child .page-link");
-        return parseInt(lastPageLink.dataset.page);
-    }
-
-    // 해당 페이지 데이터를 서버에서 로드하여 테이블에 업데이트
-    function loadPage(pageNumber) {
-        // AJAX 요청을 사용하여 페이지 데이터를 서버에서 받아옴
-        // 페이지 번호를 서버로 전달하여 해당 페이지의 데이터를 요청
-        // 응답 데이터를 받으면 테이블 내용을 업데이트
-        // 예시 코드이므로 실제 AJAX 요청 및 데이터 처리 코드를 구현해야 함
-
-        // AJAX 요청 및 응답 데이터 처리 예시
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "loadPageData?page=" + pageNumber, true);
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var responseData = JSON.parse(xhr.responseText);
-                updateTable(responseData);
-                updatePagination(pageNumber);
-            }
-        };
-        xhr.send();
-    }
-
-    // 테이블 내용 업데이트
-    function updateTable(data) {
-        var tableBody = document.getElementById("productTableBody");
-        tableBody.innerHTML = "";
-
-        // 받아온 데이터를 사용하여 테이블 내용을 업데이트
-        data.forEach(function(item) {
-            var row = document.createElement("tr");
-            row.innerHTML = `
-                <th scope="row">${item.product_id}</th>
-                <td>${item.biz_name}</td>
-                <td>${item.category_type_name}</td>
-                <td><a href="productDetailPage?product_id=${item.product_id}">${item.product_name}</a></td>
-                <td><img class="img-fluid img-thumbnail" style="width:75px; height:75px;" src="/ssofunUploadFiles/${item.thumbnail_name}"></td>
-                <td>${item.price}</td>
-                <td>${item.price_sale}</td>
-                <td>${item.contents}</td>
-                <td><fmt:formatDate value="${item.created_at}" pattern="yyyy-MM-dd" /></td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-
-    // 페이지네이션 업데이트
-    function updatePagination(activePage) {
-        var paginationItems = document.querySelectorAll("#pagination .page-item");
-        paginationItems.forEach(function(item) {
-            item.classList.remove("active");
-            if (item.querySelector(".page-link").dataset.page === activePage.toString()) {
-                item.classList.add("active");
-            }
-        });
-    }
-</script>
 
 </html>
