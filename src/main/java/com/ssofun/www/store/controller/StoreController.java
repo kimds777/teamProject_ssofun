@@ -1,4 +1,4 @@
-package com.ssofun.www.store.controller;
+	package com.ssofun.www.store.controller;
 
 import java.io.File;
 
@@ -132,7 +132,7 @@ public class StoreController {
 		storeService.registRecipient(recipiDto);
 		storeService.registProductOrder(porDto);
 		storeService.registOrderItem(poiDto);
-		return "redirect:./mainPage";
+		return "redirect:./orderCompletePage";
 	}
 	
 	
@@ -214,6 +214,13 @@ public class StoreController {
 	    ProductRecipient recipient = storeService.getRecipient(reciDto);
 	    model.addAttribute("recipient", recipient);
 	    return "www/main/orderCompletePage";
+	}
+	
+	@RequestMapping("myPage")
+	public String myPage(ProductRecipient reciDto, Model model) {
+	    ProductRecipient recipient = storeService.getRecipient(reciDto);
+	    model.addAttribute("recipient", recipient);
+		return "www/main/myPage";
 	}
 	
 	

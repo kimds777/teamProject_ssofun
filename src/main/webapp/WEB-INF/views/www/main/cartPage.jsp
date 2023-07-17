@@ -146,7 +146,7 @@ window.onload = function() {
 					<div class="col-buy-btn">
 						<form action="./cartOrderPage" method="post">													
 							    <!-- 필요한 다른 상품 정보들도 함께 전송 -->
-							    <input type="hidden" name="amount" id="productAmount" value="" />
+							    <input type="hidden" name="amount" id="productAmount"  value="" />
 							    <button class="prod-buy-btn" onclick="setProductValues()">구매하기</button>
 						 </form>
 					</div>
@@ -266,7 +266,7 @@ window.onload = function() {
 		  finalOrderPriceElement.textContent = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice).replace(/₩|KRW/g, '') + '원';
 		}
 		
-		 // 결제금액, 수량 
+		// 결제금액, 수량 
 	    function setProductValues() {
 	        // 결제금액과 수량 값을 가져와서 설정
 	        var amountString = document.getElementById("final-order-price").innerText;

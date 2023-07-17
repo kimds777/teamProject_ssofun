@@ -6,11 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script>
-window.onload = function() {
-    toggleAllChecks(); // 페이지 로드 후 자동으로 체크 표시
-};
-</script>
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"

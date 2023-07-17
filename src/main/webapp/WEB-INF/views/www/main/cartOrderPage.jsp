@@ -141,7 +141,7 @@
                 
                 <div class="row">
                     <div class="col-agreebtn">
-	                    <input type="hidden" name="amouㅍnt" value="${amount}" readonly/>						
+	                    <input type="hidden" name="amount" value="${amount}" readonly/>						
 						 <c:forEach items="${list}" var="item">
 					        <input type="hidden" name="product_id" value="${item.product_id}" />
 					        <input type="hidden" name="count" value="${item.total_count}" readonly/>

@@ -18,7 +18,7 @@
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
             <div class="logo">
-                <img src="../../resources/dist-assets/images/logo.png" alt="">
+                 <div class="col-1 "><a href="../funding/fundingMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
             </div>
             <div class="menu-toggle">
                 <div></div>
