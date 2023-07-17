@@ -8,11 +8,14 @@ import com.ssofun.dto.DeliveryCompanyDto;
 import com.ssofun.dto.DeliveryDto;
 import com.ssofun.dto.HyunMinDeliveryJoinDto;
 import com.ssofun.dto.HyunMinProductJoinDto;
+import com.ssofun.dto.HyunMinProductReviewListDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
 import com.ssofun.dto.ProductDto;
 import com.ssofun.dto.ProductOrderItemDto;
 import com.ssofun.dto.ProductOrderStatusDto;
+import com.ssofun.dto.ProductReviewDto;
+import com.ssofun.dto.ProductReviewImageDto;
 import com.ssofun.dto.ProductThumbnailDto;
 
 public interface StoreAdminSqlMapper {
@@ -84,4 +87,12 @@ public interface StoreAdminSqlMapper {
 	   public List<DeliveryDto> deliveryList(DeliveryDto deliveryDto);
 	   // 발송상세보기
 	   public ProductOrderItemDto deliveryDetail(int product_order_item_id);
+	   
+	   // 상품리스트(리뷰개수,평점)
+	   public List<HyunMinProductReviewListDto> productReviewList(HyunMinProductReviewListDto hyunMinProductReviewListDto);
+	   
+	   // 상품하나에 대한 리뷰리스트
+	   public List<HyunMinProductReviewListDto> productDetailReviewList(int product_id);
+	   // 상품하나에 대한 리뷰이미지리스트
+	   public List<ProductReviewImageDto> productReviewImageList(int product_id);
 	}

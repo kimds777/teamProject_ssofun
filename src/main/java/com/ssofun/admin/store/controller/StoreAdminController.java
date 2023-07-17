@@ -222,30 +222,26 @@ public class StoreAdminController {
 		   return "redirect:./orderItemInsertPage";
 	   }
 	   
-	   // 오더리스트
+	   // 오더리스트페이지
 	   @RequestMapping("orderItemListPage")
-	   public String orderItemListPage(Model model, ProductOrderItemDto productOrderItemDto, ProductOrderStatusDto productOrderStatusDto,HttpSession session) {
+	   public String orderItemListPage(Model model, ProductOrderItemDto productOrderItemDto, 
+			   ProductOrderStatusDto productOrderStatusDto,HttpSession session) {
 		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
-		   
-		   
-		   List<ProductOrderStatusDto> orderStatusList = storeAdminService.orderStatusList(productOrderStatusDto);
-		   
+		   	   
 		   session.setAttribute("shopAdmin", shopAdmin);
 		   
 		   int id = shopAdmin.getAdmin_id();
 		   productOrderItemDto.setAdmin_id(id);		   
 		   List<ProductOrderItemDto> orderItemList = storeAdminService.productOrderItemList(productOrderItemDto);
-		   List<ProductOrderItemDto> orderItemCategoryList = storeAdminService.orderItemCategoryList(productOrderItemDto);
+		   
 		 
 		   model.addAttribute("orderItemList", orderItemList);
-		   model.addAttribute("orderItemCategoryList", orderItemCategoryList);
-		   model.addAttribute("orderStatusList", orderStatusList);
-		  		    
+		  		  		    
 		   return "admin/orderItemListPage";
 	   }
 	   
-	   // 관리자 판매상품 상세보기
+	   // 관리자 판매상품 상세보기페이지
 	   @RequestMapping("orderItemDetailPage")
 	   public String orderItemDetailPage(Model model ,int product_order_item_id, 
 			   DeliveryCompanyDto deliveryCompanyDto,@RequestParam(value = "delivery_id", defaultValue = "0") int delivery_id) {
@@ -262,6 +258,27 @@ public class StoreAdminController {
 		   
 		   
 		   return "admin/orderItemDetailPage";
+	   }
+	   
+	   // 오더카테고리리스트페이지
+	   @RequestMapping("orderItemCategoryListPage")
+	   public String orderItemCategoryListPage(Model model, ProductOrderItemDto productOrderItemDto, 
+			   HttpSession session, ProductOrderStatusDto productOrderStatusDto) {
+		   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   	   
+		   List<ProductOrderStatusDto> orderStatusList = storeAdminService.orderStatusList(productOrderStatusDto);
+		   
+		   session.setAttribute("shopAdmin", shopAdmin);		   
+		   int id = shopAdmin.getAdmin_id();
+		   productOrderItemDto.setAdmin_id(id);
+		   
+		   List<ProductOrderItemDto> orderItemCategoryList = storeAdminService.orderItemCategoryList(productOrderItemDto);
+		   
+		   model.addAttribute("orderItemCategoryList", orderItemCategoryList);
+		   model.addAttribute("orderStatusList", orderStatusList);
+		   
+		   return "admin/orderItemCategoryListPage";
 	   }
 	   
 	   // 관리자 진행상태처리
@@ -291,7 +308,36 @@ public class StoreAdminController {
 	       storeAdminService.deliveryingUpdate(productOrderItemDto);
 
 	       return "redirect:./orderItemDetailPage?product_order_item_id=" + product_order_item_id;
-
-
+	   }
+	   
+	   // 상품리뷰리스트페이지(리뷰개수,평점)
+	   @RequestMapping("productReviewListPage")
+	   public String productReviewListPage(HyunMinProductReviewListDto hyunMinProductReviewListDto, Model model, HttpSession session) {
+		   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   
+		   session.setAttribute("shopAdmin", shopAdmin);
+		   
+		   int id = shopAdmin.getAdmin_id();
+		   hyunMinProductReviewListDto.setAdmin_id(id);
+		   List<HyunMinProductReviewListDto> productReviewList = storeAdminService.productReviewList(hyunMinProductReviewListDto);
+		   
+		   model.addAttribute("productReviewList", productReviewList);
+		   
+		   return "admin/productReviewListPage";
+	   }
+	   
+	   // 상품하나에 대한 리뷰리스트페이지
+	   @RequestMapping("productDetailReviewListPage")
+	   public String productDetailReviewListPage(Model model, int product_id) {
+		   
+		   List<HyunMinProductReviewListDto> productDetailReviewList = storeAdminService.productDetailReviewList(product_id);
+		   
+		   List<ProductReviewImageDto> productReviewImageList = storeAdminService.productReviewImageList(product_id);
+		   
+		   model.addAttribute("productDetailReviewList", productDetailReviewList);
+		   model.addAttribute("productReviewImageList", productReviewImageList);
+		   
+		   return "admin/productDetailReviewListPage";
 	   }
 }

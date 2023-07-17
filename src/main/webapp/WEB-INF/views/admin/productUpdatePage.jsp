@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
 <style>
@@ -8,6 +9,31 @@
     width: 100%;
     background-color: transparent;
 }
+
+.logo_box{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.home{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.login_box{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.title_box{
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+}
+
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -22,9 +48,11 @@
 <body class="text-left">
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
-            <div class="logo">
-                <img src="../../resources/dist-assets/images/logo.png" alt="">
-            </div>
+            <div class="row">
+	            <div class="d-flex col p-0">
+	                <div class="col-1 logo_box"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
+	            </div>
+	        </div>
             <div class="menu-toggle">
                 <div></div>
                 <div></div>
@@ -37,29 +65,24 @@
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
                 </div>
-                <div class="nav justify-content-end">
-                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
-                </div>
+	            <div class="d-flex col p-0">
+	                <div class="col-1 home"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">Home</a></div>
+	        	</div>
             </div>
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
 							<c:if test="${empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item"><a class="nav-link"
-										href="./loginPage">로그인</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
-									</li>
+									<li class="nav-item login_box"><a class="nav-link" href="./loginPage">로그인</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
-									</li>
-									<li class="nav-item"><a class="nav-link"
-										href="./logoutProcess">로그아웃</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
-									</li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
 							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
@@ -143,77 +166,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- Notificaiton -->
-                <div class="dropdown">
-                    <div class="badge-top-container" role="button" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="badge badge-primary">3</span>
-                        <i class="i-Bell text-muted header-icon"></i>
-                    </div>
-                    <!-- Notification dropdown -->
-                    <div class="dropdown-menu dropdown-menu-right notification-dropdown rtl-ps-none" aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Speach-Bubble-6 text-primary mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>New message</span>
-                                    <span class="badge badge-pill badge-primary ml-1 mr-1">new</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">10 sec ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">James: Hey! are you busy?</p>
-                            </div>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Receipt-3 text-success mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>New order received</span>
-                                    <span class="badge badge-pill badge-success ml-1 mr-1">new</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">2 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">1 Headphone, 3 iPhone x</p>
-                            </div>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Empty-Box text-danger mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>Product out of stock</span>
-                                    <span class="badge badge-pill badge-danger ml-1 mr-1">3</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">10 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">Headphone E67, R98, XL90, Q77</p>
-                            </div>
-                        </div>
-                        <div class="dropdown-item d-flex">
-                            <div class="notification-icon">
-                                <i class="i-Data-Power text-success mr-1"></i>
-                            </div>
-                            <div class="notification-details flex-grow-1">
-                                <p class="m-0 d-flex align-items-center">
-                                    <span>Server Up!</span>
-                                    <span class="badge badge-pill badge-success ml-1 mr-1">3</span>
-                                    <span class="flex-grow-1"></span>
-                                    <span class="text-small text-muted ml-auto">14 hours ago</span>
-                                </p>
-                                <p class="text-small text-muted m-0">Server rebooted successfully</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- Notificaiton End -->
                 <!-- User avatar dropdown -->
                 <div class="dropdown">
                     <div class="user col align-self-end">
-                        <img src="../resources/dist-assets/images/faces/1.jpg" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../../resources/img/admin1.jpg" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <div class="dropdown-header">
                                 <i class="i-Lock-User mr-1"></i> Timothy Carlson
@@ -232,22 +189,29 @@
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Order</span></a>
+                    <li class="nav-item" data-item="extrakits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Suitcase"></i><span class="nav-text">Order</span></a>
+                        <div class="triangle"></div>
+                    </li>
+                    <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
-                <!-- Submenu Dashboards-->
+                <!-- Product -->
                 <ul class="childNav" data-parent="uikits">
-                   <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">InsertPage</span></a></li>
-                   <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">ListPage</span></a></li>
-                   <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">CategoryTypeInsertPage</span></a></li>
+                   <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
+                   <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
+                   <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">카테고리타입등록페이지</span></a></li>
                 </ul>
-                <ul class="childNav" data-parent="charts">
-                    <li class="nav-item"><a href="./orderItemInsertPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemInsertPage</span></a></li>
-                    <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemListPage</span></a></li>
+                <!-- Order -->
+                <ul class="childNav" data-parent="extrakits">
+                    <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">주문리스트페이지</span></a></li>
           		</ul>
+          		<!-- Review-->
+                <ul class="childNav" data-parent="charts">
+                    <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
+                </ul>
             <div class="sidebar-overlay"></div>
         	</div>
         </div>
@@ -259,7 +223,9 @@
 		        <div class="card text-left">
 		            <div class="card-body">
 		                <form action="productUpdateProcess" method="post" enctype="multipart/form-data">
-		                    <h4 class="card-title mb-3">상품수정</h4>
+                                <div class="d-flex row p-0">
+					                <div class="col title_box mb-3 pt-3"><a href="./adminMainPage">상품수정</a></div>
+					            </div>
 		                    <div class="table-responsive">
 		                        <table class="table table-striped">                                
 		                            <thead>
@@ -338,7 +304,9 @@
 		                                </tr>
 		                                <tr>
 		                                    <th scope="row" class="th1">등록일</th>
-		                                    <th scope="col">${productDetail.created_at}</th>
+		                                    <th scope="col">
+		                                    	<fmt:formatDate value="${productDetail.created_at}" pattern="yyyy-MM-dd" />
+		                                    </th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>
 		                                    <th scope="col"></th>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
 
@@ -17,7 +18,7 @@
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
             <div class="logo">
-                <img src="../resources/dist-assets/images/logo.png" alt="">
+                <img src="../../resources/dist-assets/images/logo.png" alt="">
             </div>
             <div class="menu-toggle">
                 <div></div>
@@ -31,10 +32,31 @@
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
                 </div>
+                <div class="nav justify-content-end">
+                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
+                </div>
             </div>
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
+							<c:if test="${empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link"
+										href="./loginPage">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
+							<c:if test="${!empty shopAdmin }">
+								<ul class="nav justify-content-end">
+									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
+									</li>
+									<li class="nav-item"><a class="nav-link"
+										href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
+									</li>
+								</ul>
+							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
                 <!-- Grid menu Dropdown -->
                 <div class="dropdown">
@@ -139,22 +161,31 @@
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
-                    <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Order</span></a>
+                    <li class="nav-item" data-item="extrakits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Suitcase"></i><span class="nav-text">Order</span></a>
+                        <div class="triangle"></div>
+                    </li>
+                    <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
-                <!-- Submenu Dashboards-->
+                <!-- Product -->
                 <ul class="childNav" data-parent="uikits">
                    <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">InsertPage</span></a></li>
                    <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">ListPage</span></a></li>
                    <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">CategoryTypeInsertPage</span></a></li>
                 </ul>
-                <ul class="childNav" data-parent="charts">
+                <!-- Order -->
+                <ul class="childNav" data-parent="extrakits">
                     <li class="nav-item"><a href="./orderItemInsertPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemInsertPage</span></a></li>
                     <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemListPage</span></a></li>
           		</ul>
+          		<!-- Review-->
+                <ul class="childNav" data-parent="charts">
+                    <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">productReviewListPage</span></a></li>
+                    <li class="nav-item"><a href="charts.chartsjs.html"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">ChartJs</span></a></li>
+                </ul>
             <div class="sidebar-overlay"></div>
         	</div>
         </div>
