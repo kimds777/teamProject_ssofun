@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +89,7 @@
 
 
 
-<title>faqMainPage</title>
+<title>faqtop10</title>
 </head>
 <body>
 
@@ -152,7 +154,7 @@
                                 <hr class="hr-1">
                                 <div class="row"><div class="col"><p class="four-font" id="four-font-default">이용약관</p></div></div>
                                 <hr class="hr-1">
-                                <div class="row"><div class="col"><button type="button" class="qnaMainbutton" id="four-font-default" onclick="location.href='../qna/qnaMain'"><p class="four-font">1:1문의하기</p></button></div></div>
+                                <div class="row"><div class="col"><button type="button" class="qnaMainbutton" onclick="location.href='../qna/qnaMain'"><p class="four-font" id="four-font-default" >1:1문의하기</p></button></div></div>
                             </div>
                         </div>
                         <div class="row">
@@ -186,12 +188,12 @@
                         <!--카테고리 버튼 만들기, 반복문돌리기-->
                         <div class="row mt-2">
                             
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" style= "border:none; background-color:#FF6462; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font" style="color: white;">TOP10</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">펀딩</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">스토어</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">배송</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">회원</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">고객센터</p></button></div>                         
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqTopMainPage'" style= "border:none; background-color:#FF6462; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font" style="color: white;">TOP10</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqFundingPage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">펀딩</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqStorePage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">스토어</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqShippingPage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">배송</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqUserPage'"  style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">회원</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqCustomerServicePage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">고객센터</p></button></div>                         
                         </div>
 
                         
@@ -204,20 +206,31 @@
                         <div class="row mt">
                             <div class="col">
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
-
+                                
+								
                                     <!--반복문돌리기 foreach-->
-     
+     								<c:forEach items="${list }" var="map">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1" aria-expanded="false" aria-controls="flush-collapseOne" style="background-color: white;">
-                                                상품미도착 접수가 무엇인가요?, faqtitle
+                                                <div class="row">
+                                                	<div class="col">${map.faqDto.title}</div>
+                                                	<div class="col-2"><fmt:formatDate pattern="yyyy. MM. dd. (E)" value="${map.faqDto.created_at }"/></div>
+                                                </div>
+                                                
                                             </button>
                                         </h2>
                                         <div id="flush-collapseOne1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body"style="background-color: rgb(241, 241, 241);" >
                                                
                                                <div class="row"> 
-                                                    <div class="col"> fnqcontent 내용
+                                                    
+                                                    <div class="col"> 
+                                                    	<p>
+                         									 ${map.faqDto.contents}
+                                                    	</p>
+                                                    	
+                                                    	
                                                         <div class="row">
                                                             <div class="col-1"></div>
                                                             <div class="col">
@@ -274,7 +287,7 @@
 
                                         </div>
                                     </div>
-
+								</c:forEach>
 
                                 </div>
                             </div>

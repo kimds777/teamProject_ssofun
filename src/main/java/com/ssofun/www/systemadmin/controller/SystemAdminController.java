@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssofun.dto.*;
+import com.ssofun.www.faq.service.FaqServiceImpl;
 import com.ssofun.www.systemadmin.service.SystemAdminServiceImpl;
 
 @Controller
@@ -153,4 +155,110 @@ public class SystemAdminController {
 		return "systemadmin/systemAdminQnaMainPage";
 	}
 	
+	
+	
+	
+	
+	
+	
+	//FAQ관리자
+	
+	
+	//FAQ메인페이지(목록)
+	@RequestMapping("systemAdminFaqMainPage")
+	public String systemAdminFaqMainPage(Model model) {
+		
+		List<Map<String, Object>> list = systemAdminService.getfaqList();
+		model.addAttribute("list",list);//request에 담아서 jsp에서 꺼내쓸 수 있음 
+		
+		
+		return"systemadmin/systemAdminFaqMainPage";
+	}
+	
+	
+	
+	
+	//FAQ글작성
+	@RequestMapping("systemAdminWriteFaqPage")
+	public String systemAdminWriteFaqPage() {
+		
+		return"systemadmin/systemAdminWriteFaqPage";
+	}
+	
+	
+	@RequestMapping("systemAdminWriteFaqProcess")
+	public String systemAdminWriteFaqProcess(HttpSession session, FaqDto faqDto) {
+		//세션에 저장된 systemadmin값 가져옴
+		AdminDto systemAdmin = (AdminDto)session.getAttribute("systemAdmin");
+		
+		int adminId = systemAdmin.getAdmin_id();
+		faqDto.setAdmin_id(adminId);
+		
+		systemAdminService.systemAdminCreateFaq(faqDto);
+		
+		System.out.println("컨트롤러"+faqDto.getTitle());
+		
+		return "redirect:./systemAdminFaqMainPage";
+	}
+	
+	
+	//faq상세글보기
+	@RequestMapping("systemAdminReadFaqPage")
+	public String systemAdminReadFaqPage(Model model,int faqId) {
+		 
+		Map<String, Object> map = systemAdminService.getFaqData(faqId);
+		
+		FaqDto faqDto = (FaqDto)map.get("faqDto");
+		String contents = faqDto.getContents();
+		contents =  StringEscapeUtils.escapeHtml4(contents);
+		contents = contents.replaceAll("\n", "<br>");
+		faqDto.setContents(contents);
+		
+		
+		
+		model.addAttribute("faqData",map);
+	
+		return "systemadmin/systemAdminReadFaqPage";
+	}
+	
+	
+	//faq글삭제
+	@RequestMapping("systemAdminFaqDeleteProcess")
+	public String systemAdminFaqDeleteProcess(int faqId) {
+		
+		systemAdminService.deleteFaqData(faqId);
+		
+		return"redirect:./systemAdminFaqMainPage";
+	}
+	
+	
+	
+	//faq글수정
+	@RequestMapping("systemAdminFaqUpdatePage")
+	public String systemAdminFaqUpdatePage(Model model ,@RequestParam("faqId")int faqId) {
+		
+		systemAdminService.getFaqData(faqId);
+		Map<String, Object> map = systemAdminService.getFaqData(faqId);
+		
+		FaqDto faqDto = (FaqDto)map.get("faqDto");
+		String contents = faqDto.getContents();
+		contents =  StringEscapeUtils.escapeHtml4(contents);
+		contents = contents.replaceAll("\n", "<br>");
+		faqDto.setContents(contents);
+		
+		
+		model.addAttribute("faqData",map);
+		
+		System.out.println(faqId);
+		return"systemadmin/systemAdminFaqUpdatePage";
+	}
+	
+	@RequestMapping("systemAdminUpdateFaqProcess")
+	public String systemAdminUpdateFaqProcess(FaqDto faqDto) {
+		systemAdminService.updateFaqData(faqDto);
+		
+		return"redirect:./systemAdminFaqMainPage";
+	}
+	
+
 }

@@ -35,7 +35,7 @@
 	
 
 
-
+<!-- qna답변달기 -->
 	<update id="updateQnaAnswer">
 		UPDATE tb_qna SET answer_contents = #{answer_contents},answer_created_at = now() WHERE qna_id = #{qna_id}
 	</update>
@@ -44,6 +44,69 @@
 		SELECT * FROM tb_qna where id = #{id}
 	</select>
 
+
+
+<!-- faq관련 -->
+
+	<!-- faq글삽입 -->
+	<insert id="systemAdminCreateFaq">
+		INSERT INTO tb_faq(admin_id ,faq_category,title ,contents, created_at,used_fg)
+		VALUES(#{admin_id},#{faq_category},#{title},#{contents}, now(),1)
+	</insert>
+	
+	
+	<!-- faq글목록가져오기 -->
+	<select id="selectAllFaq" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq ORDER BY faq_id DESC;		
+	</select>
+	
+	
+	<!-- adminid에 해당되는 admin정보 가져옴 -->
+	<select id="selectAdminDtoByAdminId" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin where admin_id = #{adminId};
+	</select>
+	
+	
+	<!-- faqId로 해당되는 faq글 가져옴 -->
+	<select id="selectFaqDtoByfaqId" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq WHERE faq_id = #{faqId};
+	</select>
+	
+	<update id="updateFaqDataByFaqId">
+		UPDATE tb_faq SET faq_category = #{faq_category},title = #{title}, contents = #{contents} WHERE faq_id = #{faq_id};	
+	</update>
+
+	<delete id="deleteFaqDataByFaqId">
+		DELETE FROM tb_faq WHERE faq_id = #{faqId};
+	</delete>
+
+
+	<select id="selectFaqFunding" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryFunding'	
+	</select>
+	
+	<select id="selectFaqStore" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryStore'	
+	</select>
+
+	<select id="selectFaqShipping" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryShipping'	
+	</select>
+	
+	<select id="selectFaqUser" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryUser'	
+	</select>
+	
+	<select id="selectFaqCustomerService" resultType="com.ssofun.dto.FaqDto">
+		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryCustomerService'	
+	</select>
+	
+	
 
 
 </mapper>

@@ -19,7 +19,7 @@
 
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
-    <title>Document</title>
+    <title>systemAdminFaqMainPage</title>
 </head>
 
 <body>
@@ -92,11 +92,11 @@
 
 
                 <div class="col">
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
-                                    <a class="navbar-brand text-black">고객센터메인페이지</a>
+                                    <a class="navbar-brand text-black">자주찾는질문관리</a>
                                     <form class="d-flex" role="search">
                                         <input class="form-control me-2" type="search" placeholder="Search"
                                             aria-label="Search">
@@ -109,9 +109,44 @@
                     </div>
 
                     <!--안에 페이지 내용만 바꾸기-->
-                    <div class="row">
-                        <div class="col">밑에 내용옮겨오기
-                        
+                    <div class="row" style="margin-left: 10px;">
+                    
+                        <div class="col">
+                           	<div class="row">
+                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">FAQ관리</p></div>
+                                <div class="col c-five-font"><p class="five-font mt-2">자주찾는질문 전체목록입니다.(글등록일순)</p></div>
+                                <div class="col-2"></div>
+                                <div class="col-2">
+                            		<input type="button" class="writefaqbutton" value="FAQ글작성"  onclick="location.href='systemAdminWriteFaqPage'">
+                            	</div>
+                                
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col hr-col"><hr class="hr-1"></div>
+                            </div>
+                            
+                            
+                            <!-- faq글목록작성하기 -->
+                            <div class="row">
+                                <div class="col-1"><p class="center1">번호</p></div>
+                                <div class="col"><p class="five-font">제목</p></div>
+                                <div class="col-2"><p class="center1">작성한관리자</p></div>
+                                <div class="col-2"><p class="center1">카테고리</p></div>
+                                <div class="col-2"><p class="center1">작성일</p></div>
+                            </div>
+                            
+                            <c:forEach items="${list }" var="map">
+                            
+	                            <div class="row">
+	                                <div class="col-1"><p class="center1">${map.faqDto.faq_id }</p></div>
+	                                <div class="col"><p class="five-font"><a class="readFaqlink" href="./systemAdminReadFaqPage?faqId=${map.faqDto.faq_id }">${map.faqDto.title }</a></p></div>
+	                                <div class="col-2"><p class="center1">${map.adminDto.login_account}</p></div>
+	                                <div class="col-2"><p class="center1">${map.faqDto.faq_category}</p></div>
+	                                <div class="col-2"><p class="center1"><fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${map.faqDto.created_at }"/></p></div>
+	                            </div>
+            
+                            </c:forEach>
 
                         
                         </div>

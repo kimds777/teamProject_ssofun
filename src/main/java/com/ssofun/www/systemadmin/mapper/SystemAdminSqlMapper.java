@@ -7,6 +7,8 @@ import com.ssofun.dto.*;
 public interface SystemAdminSqlMapper {
 
 	
+//Qna관련
+	
 	public AdminDto getAdminByIdAndPw(AdminDto AdminDto);
 	
 	//답변있는 qna글 리스트
@@ -24,7 +26,7 @@ public interface SystemAdminSqlMapper {
 	public List<Qna_ImageDto> selectQnaImageByQnaId(int qna_id);
 	
 	
-//	public UserDto selectUserDtoByUserId(int user_id);
+	//public UserDto selectUserDtoByUserId(int user_id);
 
 	
 	//QnA답변넣기
@@ -34,5 +36,42 @@ public interface SystemAdminSqlMapper {
 	public UserDto selectUserDtoByUserId(int qna_id);
 	
 	//userdto랑 qnadto id로 조인하기 
-	public QnaDto selectById (int id);
+	public List<FaqDto> selectById (int id);
+	
+	
+	
+	
+//faq관련
+	
+	//faq글작성
+	public void systemAdminCreateFaq(FaqDto faqDto);
+	
+	//faq전체글가져옴
+	public List<FaqDto> selectAllFaq();
+	
+	//adminId로 해당되는 admin정보 가져옴
+	public AdminDto selectAdminDtoByAdminId(int adminId);
+	
+	//faqId로 해당되는 faq글정보가져옴
+	public FaqDto selectFaqDtoByfaqId(int faqId); 
+	
+	//faqId로 해당하는 faqdata글수정
+	public void updateFaqDataByFaqId (FaqDto faqDto);
+	
+	//faqId로 해당하는 글삭제
+	public void deleteFaqDataByFaqId(int faq_id);
+	
+	
+	
+	//faq카테고리글목록
+	public List<FaqDto> selectFaqFunding();
+
+	public List<FaqDto> selectFaqStore();
+	
+	public List<FaqDto> selectFaqShipping();
+	
+	public List<FaqDto> selectFaqUser();
+	
+	public List<FaqDto> selectFaqCustomerService();
+	
 }

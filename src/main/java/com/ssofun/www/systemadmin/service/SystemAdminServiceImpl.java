@@ -99,12 +99,75 @@ public class SystemAdminServiceImpl {
 		map.put("Qna_ImageDtoList", Qna_ImageDtoList);
 		
 	return map;
-}
+	}
 
 	//qna답변 삽입(업데이트)
 	public void updateQnaAnswer(QnaDto qnaDto) {
 		systemAdminSqlMapper.updateQnaAnswer(qnaDto);
 	}
-
 	
+	
+	
+	
+	
+	
+
+//faq관련
+	
+	//faq글삽입
+	public void systemAdminCreateFaq(FaqDto faqDto) {
+		systemAdminSqlMapper.systemAdminCreateFaq(faqDto);
+		System.out.println("service:"+faqDto.getTitle());
+	}
+	
+	// faq 글목록
+	public List<Map<String, Object>> getfaqList(){
+		List<Map<String, Object>> list = new ArrayList<>();
+		
+		List<FaqDto> faqDtoList = systemAdminSqlMapper.selectAllFaq();
+		
+		
+		
+		for(FaqDto faqDto : faqDtoList) {
+			Map<String, Object> map = new HashMap<>();
+			
+			int adminId = faqDto.getAdmin_id();
+			 
+			AdminDto adminDto = systemAdminSqlMapper.selectAdminDtoByAdminId(adminId);
+			 
+			 
+			 map.put("adminDto", adminDto);
+			 map.put("faqDto",faqDto);
+			 
+			 list.add(map);
+		}
+		
+		return list;
+	}
+
+
+	public Map<String, Object> getFaqData(int faqId){
+		
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		FaqDto faqDto = systemAdminSqlMapper.selectFaqDtoByfaqId(faqId);
+		AdminDto adminDto = systemAdminSqlMapper.selectAdminDtoByAdminId(faqDto.getAdmin_id());
+		
+		map.put("faqDto", faqDto);
+		map.put("adminDto", adminDto);
+		return map;
+	}
+
+	//faq글수정
+	public void updateFaqData(FaqDto faqDto) {
+		systemAdminSqlMapper.updateFaqDataByFaqId(faqDto);
+	}
+	
+	
+	//faq글삭제
+
+	public void deleteFaqData(int faqId) {
+		systemAdminSqlMapper.deleteFaqDataByFaqId(faqId);
+	}
 }

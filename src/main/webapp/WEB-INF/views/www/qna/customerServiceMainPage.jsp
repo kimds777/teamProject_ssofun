@@ -53,7 +53,7 @@
 
 <form>
 
-    <div class="backgroundcolor">
+    <div class="backgroundcolor"   style="background-image:url('/resources/customerserviceimg/customerServiceMainShakeHand.jpg'); background-repeat:no-repeat; background-size:100% 100%;">
         <div class="container mb-3">
             <div class="row">
                 <div class="col">

@@ -89,7 +89,7 @@
 
 
 
-<title>스토어faq</title>
+<title>펀딩faq</title>
 </head>
 <body>
 
@@ -154,7 +154,7 @@
                                 <hr class="hr-1">
                                 <div class="row"><div class="col"><p class="four-font" id="four-font-default">이용약관</p></div></div>
                                 <hr class="hr-1">
-                                <div class="row"><div class="col"><button type="button" class="qnaMainbutton" onclick="location.href='../qna/qnaMain'"><p class="four-font" id="four-font-default" >1:1문의하기</p></button></div></div>
+                                <div class="row"><div class="col"><button type="button" class="qnaMainbutton" onclick="location.href='../qna/qnaMain'"><p class="four-font"  id="four-font-default" >1:1문의하기</p></button></div></div>
                             </div>
                         </div>
                         <div class="row">
@@ -188,12 +188,13 @@
                         <!--카테고리 버튼 만들기, 반복문돌리기-->
                         <div class="row mt-2">
                             
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqTopMainPage'"  style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">TOP10</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqFundingPage'"  style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">펀딩</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqStorePage'"  style= "border:none; background-color:#FF6462; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font" style="color: white;">스토어</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqShippingPage'"  style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">배송</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqUserPage'"  style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">회원</p></button></div>
-                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqCustomerServicePage'"  style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">고객센터</p></button></div>                         
+                            
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqTopMainPage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">TOP10</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqFundingPage'" style= "border:none; background-color:#FF6462; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font" style="color: white;">펀딩</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqStorePage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">스토어</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqShippingPage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">배송</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqUserPage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">회원</p></button></div>
+                            <div class="col-2" style="margin-right: 0px; text-align: center;"  ><button type="button" onclick="location.href='../faq/faqCustomerServicePage'" style= "border-width: 1px; border-color: #D9D9D9; background-color:white; border-radius: 60px; height: 30px; width: 110px; cursor: pointer;" ><p class="four-font">고객센터</p></button></div>                         
                         </div>
 
                         
@@ -231,7 +232,7 @@
                                                                 <div class="row mt-5" style="height: 110px; border-style: thin white; border-radius: 10px; background-color: white;">
                                                                     <div class="col">
                                                                         <div class="row mt-2">
-                                                                            <div class="col-1">설문</div>
+                                                                            <div class="col-1">설문 |</div>
                                                                             <div class="col-5">문제 해결에 도움이 되셨나요?</div>
                                                                             <div class="col-5">
                                                                                 <div class="row">
@@ -246,13 +247,9 @@
                                                                                             <input type="radio" id="ex_rd2" name="ex_rds">
                                                                                             <label for="ex_rd2">아니요</label>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    
+                                                                                    </div>                                                                                  
                                                                                 </div>
-
-
-                                                                            </div>
-                                                                        
+                                                                            </div>                                                                        
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col hr-col"><hr class="hr-1"></div>
@@ -264,16 +261,13 @@
                                                                             </div>
                                                                             <div class="col"></div>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-1"></div>
                                                         </div>
-                                                    </div>
-                                                    
+                                                    </div>                                                    
                                                </div>
-
                                             </div>
                                             <div class="row">
                                                 <div class="col hr-col"><hr class="hr-1"></div>
@@ -282,6 +276,7 @@
                                         </div>
                                     </div>
 									</c:forEach>
+
                                 </div>
                             </div>
 

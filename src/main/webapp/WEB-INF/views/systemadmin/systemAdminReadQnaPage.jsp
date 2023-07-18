@@ -69,7 +69,7 @@
                             <div class="row mt-3">
                                 <div class="col"><i class="bi bi-patch-question text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="#">자주찾는질문관리</a></div>
+                                        href="../systemadmin/systemAdminFaqMainPage">자주찾는질문관리</a></div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col"><i class="bi bi-book-half text-light" style="margin-right: 0px;">
