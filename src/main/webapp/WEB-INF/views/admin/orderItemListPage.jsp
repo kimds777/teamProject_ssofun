@@ -317,8 +317,8 @@
 								                       		<a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
 								                        </td>										                										      										    
 								                        <td>${orderItem.count}&nbsp;개</td>
-								                        <td>${orderItem.price}&nbsp;원</td>
-								                        <td>${orderItem.price_sale}&nbsp;원</td>										                										                
+														<td><fmt:formatNumber value="${orderItem.price}" type="number" pattern="#,##0"/> 원</td>
+														<td><fmt:formatNumber value="${orderItem.price_sale}" type="number" pattern="#,##0"/> 원</td>								                        									                										                
 								              	</tr>
 								           	</c:forEach>
 								     	</tbody>

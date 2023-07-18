@@ -278,11 +278,14 @@
                                                 <img class="img-fluid img-thumbnail" style="width:75px; height:75px;" src="/ssofunUploadFiles/${orderItemDetail.thumbnail_name}">
                                                 </span>
                                             </div>
-                                            <div class="ul-widget__item">
-                                                <div class="ul-widget__info">
-                                                    <h3 class="ul-widget1__title">가격</h3>
-                                                </div><span class="ul-widget__desc text-mute">${orderItemDetail.price}&nbsp;원</span>
-                                            </div>
+											<div class="ul-widget__item">
+											    <div class="ul-widget__info">
+											        <h3 class="ul-widget1__title">가격</h3>
+											    </div>
+											    <span class="ul-widget__desc text-mute">
+											        <fmt:formatNumber value="${orderItemDetail.price}" type="number" pattern="#,##0"/> 원
+											    </span>
+											</div>
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">수량</h3>

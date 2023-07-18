@@ -47,7 +47,7 @@
 }
 
 .c2{
-	width: 100px;
+	width: 120px;
 }
 
 .c3{
@@ -300,8 +300,8 @@
 									                    <td>${product.category_type_name}</td>
 									                    <td><a href="productDetailPage?product_id=${product.product_id }">${product.product_name}</a></td>
 									                    <td><img class="img-fluid img-thumbnail" style="width:75px; height:75px;" src="/ssofunUploadFiles/${product.thumbnail_name}"></td>
-									                    <td>${product.price}&nbsp;원</td>
-									                    <td>${product.price_sale}&nbsp;원</td>
+														<td><fmt:formatNumber value="${product.price}" type="number" pattern="#,##0"/> 원</td>
+														<td><fmt:formatNumber value="${product.price_sale}" type="number" pattern="#,##0"/> 원</td>
 									                    <td>${product.contents}</td>
 									                    <td><fmt:formatDate value="${product.created_at}" pattern="yyyy-MM-dd" /></td>
 									                </tr>
@@ -544,6 +544,7 @@
             }
         });
     }
+
 </script>
 
 </html>

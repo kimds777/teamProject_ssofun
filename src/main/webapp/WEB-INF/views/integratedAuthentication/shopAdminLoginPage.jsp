@@ -1,9 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="">
+<style>
 
+.thumbnailTable {
+    width: 100%;
+    background-color: transparent;
+}
+
+.logo_box{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.home{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.login_box{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.title_box{
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.contents_th{
+	height: 90px;
+}
+
+.login_title{
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.login_text{
+	font-size: 14px;
+	font-weight: 540;
+}
+
+</style>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -17,9 +63,11 @@
 <body class="text-left">
     <div class="app-admin-wrap layout-sidebar-large">
         <div class="main-header">
-            <div class="logo">
-                <img src="../../resources/dist-assets/images/logo.png" alt="">
-            </div>
+            <div class="row">
+	            <div class="d-flex col p-0">
+	                <div class="col-1 logo_box"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
+	            </div>
+	        </div>
             <div class="menu-toggle">
                 <div></div>
                 <div></div>
@@ -32,29 +80,24 @@
                     <input type="text" placeholder="Search">
                     <i class="search-icon text-muted i-Magnifi-Glass1"></i>
                 </div>
-                <div class="nav justify-content-end">
-                    <h4><a class="nav-link" href="./adminMainPage">Home</a></h4>
-                </div>
+	            <div class="d-flex col p-0">
+	                <div class="col-1 home"><a href="./adminMainPage" id="logo" class="fs-3 fw-bold">Home</a></div>
+	        	</div>
             </div>
             <div style="margin: auto"></div>
             <div class="header-part-right">
                 <!-- Full screen toggle -->
 							<c:if test="${empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item"><a class="nav-link"
-										href="./loginPage">로그인</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
-									</li>
+									<li class="nav-item login_box"><a class="nav-link" href="./loginPage">로그인</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item"><a class="nav-link" href="#">${shopAdmin.login_account }</a>
-									</li>
-									<li class="nav-item"><a class="nav-link"
-										href="./logoutProcess">로그아웃</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">고객센터</a>
-									</li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
 							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
@@ -142,7 +185,7 @@
                 <!-- User avatar dropdown -->
                 <div class="dropdown">
                     <div class="user col align-self-end">
-                        <img src="../resources/dist-assets/images/faces/1.jpg" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../../resources/img/admin1.jpg" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <div class="dropdown-header">
                                 <i class="i-Lock-User mr-1"></i> Timothy Carlson
@@ -158,6 +201,9 @@
         <div class="side-content-wrap">
             <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <ul class="navigation-left">
+                    <li class="nav-item" data-item="dashboard"><a class="nav-item-hold" href="#"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Dashboard</span></a>
+                        <div class="triangle"></div>
+                    </li>
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
@@ -171,20 +217,21 @@
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <!-- Product -->
+                <ul class="childNav" data-parent="dashboard">
+                    <li class="nav-item"><a href="./adminMainPage"><i class="nav-icon i-Clock-3"></i><span class="item-name">메인페이지</span></a></li>
+                </ul>
                 <ul class="childNav" data-parent="uikits">
-                   <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">InsertPage</span></a></li>
-                   <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">ListPage</span></a></li>
-                   <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">CategoryTypeInsertPage</span></a></li>
+                   <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
+                   <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
+                   <li class="nav-item"><a href="./productCategoryTypeInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">카테고리타입등록페이지</span></a></li>
                 </ul>
                 <!-- Order -->
                 <ul class="childNav" data-parent="extrakits">
-                    <li class="nav-item"><a href="./orderItemInsertPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemInsertPage</span></a></li>
-                    <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">orderItemListPage</span></a></li>
+                    <li class="nav-item"><a href="./orderItemListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">주문리스트페이지</span></a></li>
           		</ul>
           		<!-- Review-->
                 <ul class="childNav" data-parent="charts">
-                    <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">productReviewListPage</span></a></li>
-                    <li class="nav-item"><a href="charts.chartsjs.html"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">ChartJs</span></a></li>
+                    <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
                 </ul>
             <div class="sidebar-overlay"></div>
         	</div>
@@ -197,7 +244,7 @@
 					<div class="col-6 mx-auto">
 						<form action="./loginProcess">
 						<div class="row">
-							<div class="col text-center fw-bold fs-1">관리자 로그인</div>
+							<div class="col text-center fw-bold fs-1 login_title">관리자 로그인</div>
 						</div>
 						<div class="row my-1">
 							<div class="col">
@@ -215,7 +262,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col">회원가입 | 아이디 찾기 | 비밀번호 찾기</div>
+							<div class="col login_text">회원가입 | 아이디 찾기 | 비밀번호 찾기</div>
 						</div>
 						</form>
 					</div>

@@ -49,6 +49,18 @@
 	font-size: 12px;
 	margin-bottom: 10px;
 }
+
+/* 대시보드 */
+#content_style{
+	margin: 0 20px 0 65px;
+	max-width: 126px;
+	font-weight: 650;
+}
+
+.dash_title{
+	font-size: 16px;
+	font-weight: 800;
+}
 </style>
 
 <head>
@@ -253,9 +265,9 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
                             <div class="card-body text-center"><i class="i-Money-2"></i>
-                                <div class="content">
-                                    <p class="text-muted mt-2 mb-1">총 매출</p>
-                                    <p id="totalProductPrice" class="text-primary text-24 line-height-1 mb-2">${TotalPrice}&nbsp;원</p>
+                                <div id="content_style" class="content">
+                                    <p class="text-muted mt-2 mb-1 dash_title">총 매출</p>
+                                    <p id="totalProductPrice" class="text-primary text-18 line-height-1 mb-2">${TotalPrice}</p>
                                 </div>
                             </div>
                         </div>
@@ -263,9 +275,9 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
                             <div class="card-body text-center"><i class="i-Checkout-Basket"></i>
-                                <div class="content">
-                                    <p class="text-muted mt-2 mb-1">총 상품수</p>
-                                    <p class="text-primary text-24 line-height-1 mb-2">${TotalProductCount}&nbsp;개</p>
+                                <div id="content_style" class="content">
+                                    <p class="text-muted mt-2 mb-1 dash_title">총 상품수</p>
+                                    <p class="text-primary text-18 line-height-1 mb-2">${TotalProductCount}&nbsp;개</p>
                                 </div>
                             </div>
                         </div>
@@ -273,9 +285,9 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
                             <div class="card-body text-center"><i class="i-Data-Upload"></i>
-                                <div class="content">
-                                    <p class="text-muted mt-2 mb-0">총 리뷰수</p>
-                                    <p class="text-primary text-24 line-height-1 mb-2">${TotalProductReviewCount}&nbsp;개</p>
+                                <div id="content_style" class="content">
+                                    <p class="text-muted mt-2 mb-0 dash_title">총 리뷰수</p>
+                                    <p class="text-primary text-18 line-height-1 mb-2">${TotalProductReviewCount}&nbsp;개</p>
                                 </div>
                             </div>
                         </div>
@@ -283,9 +295,9 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
                             <div class="card-body text-center"><i class="i-Financial"></i>
-                                <div class="content">
-                                    <p class="text-muted mt-2 mb-1">총 평점</p>
-                                    <p class="text-primary text-24 line-height-1 mb-2">${productReviewAvgScore}&nbsp;점</p>
+                                <div id="content_style" class="content">
+                                    <p class="text-muted mt-2 mb-1 dash_title">총 평점</p>
+                                    <p class="text-primary text-18 line-height-1 mb-2">${productReviewAvgScore}&nbsp;점</p>
                                 </div>
                             </div>
                         </div>
@@ -317,7 +329,7 @@
                         <div class="card text-left">
                             <div class="card-body">
                                 <div class="d-flex row p-0">
-					                <div class="col title_box"><a href="./adminMainPage">상품리스트</a></div>
+					                <div class="col title_box"><a href="./adminMainPage">상품 리스트</a></div>
 					            </div>
 								<div class="table-responsive">
 								    <table class="table table-striped">
@@ -325,7 +337,7 @@
 								            <tr>
 								                <th class="List_th" scope="col">상품번호</th>
 								                <th class="List_th" scope="col">상품명</th>
-								                <th class="List_th" scope="col">가격</th>
+								                <th id="product_list_price" class="List_th" scope="col">가격</th>
 								                <th class="List_th" scope="col">등록일</th>
 								            </tr>
 								        </thead>
@@ -334,7 +346,7 @@
 								        		<tr>
 								        			<th scope="row" class="td_No List_td">No.&nbsp;${dashboardProductList.product_id}</th>
 								        			<td class="List_td">${dashboardProductList.name}</td>
-								        			<td class="List_td">${dashboardProductList.price}&nbsp;원</td>
+								        			<td class="List_td"><fmt:formatNumber value="${dashboardProductList.price}" type="number" pattern="#,##0"/> 원</td>
 								        			<td class="List_td"><fmt:formatDate value="${dashboardProductList.created_at}" pattern="yyyy-MM-dd" /></td>								                        				                         							                        									                										      										    								                										                
 								              	</tr>
 								           	</c:forEach>
@@ -352,7 +364,7 @@
                         <div class="card text-left">
                             <div class="card-body">
                                 <div class="d-flex row p-0">
-					                <div class="col title_box"><a href="./adminMainPage">주문리스트</a></div>
+					                <div class="col title_box"><a href="./adminMainPage">주문 리스트</a></div>
 					            </div>
 								<div class="table-responsive">
 								    <table class="table table-striped">
@@ -387,7 +399,7 @@
                         <div class="card text-left">
                             <div class="card-body">
                                 <div class="d-flex row p-0">
-					                <div class="col title_box"><a href="./adminMainPage">리뷰,평점리스트</a></div>
+					                <div class="col title_box"><a href="./adminMainPage">상품(리뷰,평점) 리스트</a></div>
 					            </div>
 								<div class="table-responsive">
 								    <table class="table table-striped">
@@ -591,17 +603,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+// 대시보드
   $(document).ready(function() {
     // ${TotalPrice} 변수의 값을 가져옴
     var totalProductPrice = "${TotalPrice}";
     // 3자리마다 콤마가 붙은 형식으로 변환하여 HTML 엘리먼트에 적용
-    $("#totalProductPrice").text(numberWithCommas(totalProductPrice));
+    $("#totalProductPrice").text(numberWithCommas(totalProductPrice)+" 원");
   });
 
   // 3자리마다 콤마가 붙은 형식으로 변환하는 함수
   function numberWithCommas(x) {
     return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
 </script>
 
 

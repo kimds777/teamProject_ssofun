@@ -52,6 +52,23 @@
 .table-btn-spacing {
 	margin-top: 30px;
 }
+
+/* 외곽선의 색상을 하얀색으로 설정한 클래스 */
+.img-with-border {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  overflow: hidden;
+}
+
+.img-with-border img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
     
 </style>
 <head>
@@ -287,14 +304,14 @@
 									  		<th class="text-black-50 detail_th" scope="row">상품명</th>
 									       	<th scope="col">${productDetail.product_name}</th>
 									  	</tr>
-									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">가격</th>
-									       	<th scope="col">${productDetail.price}&nbsp;원</th>
-									  	</tr>
-									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">할인가</th>
-									       	<th scope="col">${productDetail.price_sale}&nbsp;원</th>
-									  	</tr>
+										<tr>
+										    <th class="text-black-50 detail_th" scope="row">가격</th>
+										    <th scope="col"><fmt:formatNumber value="${productDetail.price}" type="number" pattern="#,##0"/> 원</th>
+										</tr>
+										<tr>
+										    <th class="text-black-50 detail_th" scope="row">할인가</th>
+										    <th scope="col"><fmt:formatNumber value="${productDetail.price_sale}" type="number" pattern="#,##0"/> 원</th>
+										</tr>
 									  	<tr>
 									  		<th class="text-black-50 detail_th" scope="row">등록일</th>
 									       	<th scope="col">
@@ -306,43 +323,48 @@
 								</div>					  		
 					  		</div>
 					  	</div>
-					  	<div class="row">
-					  		<div class="col">
-								<div class="table-responsive">
-									<table class="table table-striped">
-										<tbody>
-										<tr>
-									        <th scope="row">상품이미지</th>
-									        <c:forEach items="${productThumbnailDetail}" var="thumbnail">
-									            <td scope="col" class="thumbnail-cell">
-									                <img class="rounded-circle m-0 avatar-sm-table" style="width:75px; height:75px;" src="/ssofunUploadFiles/${thumbnail.name}">
-									            </td>
-									        </c:forEach>
-									    </tr>
-									    </tbody>
-									</table>
-								</div>					  		
-					  		</div>
-					  	</div>
 						<div class="row">
-						    <div class="col">
-						        <div class="table-responsive">
-						            <table class="table table-striped">
-						                <tbody>
-						                    <tr>
-						                        <th scope="row">상품상세이미지</th>
-						                        <c:forEach items="${productDetailImageList}" var="thumbnail">
-						                            <td scope="col" class="thumbnail-cell">
-						                                <img class="rounded-circle m-0 avatar-sm-table" style="width:75px; height:75px;" src="/ssofunUploadFiles/${thumbnail.name}">
-						                            </td>
-						                        </c:forEach>
-						                    </tr>
-						                </tbody>
-						            </table>
-						        </div>
+						  <div class="col">
+						    <div class="table-responsive">
+						      <table class="table table-striped">
+						        <tbody>
+						          <tr>
+						            <th scope="row">상품이미지</th>
+						            <c:forEach items="${productThumbnailDetail}" var="thumbnail">
+						              <td scope="col" class="thumbnail-cell">
+						                <!-- 수정된 클래스 img-with-border를 사용 -->
+						                <div class="img-with-border">
+						                  <img src="/ssofunUploadFiles/${thumbnail.name}" alt="상품이미지">
+						                </div>
+						              </td>
+						            </c:forEach>
+						          </tr>
+						        </tbody>
+						      </table>
 						    </div>
+						  </div>
 						</div>
-						
+						<div class="row">
+						  <div class="col">
+						    <div class="table-responsive">
+						      <table class="table table-striped">
+						        <tbody>
+						          <tr>
+						            <th scope="row">상품상세이미지</th>
+						            <c:forEach items="${productDetailImageList}" var="thumbnail">
+						              <td scope="col" class="thumbnail-cell">
+						                <!-- 수정된 클래스 img-with-border를 사용 -->
+						                <div class="img-with-border">
+						                  <img src="/ssofunUploadFiles/${thumbnail.name}" alt="상품상세이미지">
+						                </div>
+						              </td>
+						            </c:forEach>
+						          </tr>
+						        </tbody>
+						      </table>
+						    </div>
+						  </div>
+						</div>					
 						<!-- 버튼과 간격 조정 -->
 						<div class="row table-btn-spacing">
 						    <div class="col d-flex justify-content-end">
