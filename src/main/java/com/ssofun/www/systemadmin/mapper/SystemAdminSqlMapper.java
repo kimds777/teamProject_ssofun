@@ -74,4 +74,13 @@ public interface SystemAdminSqlMapper {
 	
 	public List<FaqDto> selectFaqCustomerService();
 	
+	
+	
+	//faq도움된다 안된다 insert
+	public void insertFaqHelpStatus(FaqHelpStatusDto faqHelpStatusDto);
+	
+	
+	//faq도움되는글 상위 10개 리스트 
+	public List<FaqHelpStatusDto> selectTop10HelpfulFaq();
+	
 }

@@ -72,15 +72,19 @@
 		SELECT * FROM tb_faq WHERE faq_id = #{faqId};
 	</select>
 	
+	<!-- faqid로 글수정 -->
 	<update id="updateFaqDataByFaqId">
 		UPDATE tb_faq SET faq_category = #{faq_category},title = #{title}, contents = #{contents} WHERE faq_id = #{faq_id};	
 	</update>
 
+	<!-- faqid로 글삭제 -->
 	<delete id="deleteFaqDataByFaqId">
 		DELETE FROM tb_faq WHERE faq_id = #{faqId};
 	</delete>
 
 
+
+<!-- 카테고리별 글정보가져옴 -->
 	<select id="selectFaqFunding" resultType="com.ssofun.dto.FaqDto">
 		SELECT * FROM tb_faq tf
 		WHERE tf.faq_category = 'categoryFunding'	
@@ -104,6 +108,27 @@
 	<select id="selectFaqCustomerService" resultType="com.ssofun.dto.FaqDto">
 		SELECT * FROM tb_faq tf
 		WHERE tf.faq_category = 'categoryCustomerService'	
+	</select>
+	
+	
+	
+	
+	
+	<!-- faq에 도움의견넣기 -->
+	<insert id="insertFaqHelpStatus">
+		INSERT INTO tb_faq_HelpStatus(faq_id ,helpStatus, created_at,used_fg)
+		VALUES(#{faq_id},#{helpStatus}, now(),1)
+	</insert>
+	
+	
+	<!-- faq 도움되는글 상위10개 -->
+	<select id="selectTop10HelpfulFaq" resultType="com.ssofun.dto.FaqHelpStatusDto">
+		  SELECT faq_id, COUNT(*) AS helpful_count
+		  FROM tb_faq_HelpStatus
+		  WHERE helpStatus = 'helpful'
+		  GROUP BY faq_id
+		  ORDER BY helpful_count DESC
+		  LIMIT 10
 	</select>
 	
 	

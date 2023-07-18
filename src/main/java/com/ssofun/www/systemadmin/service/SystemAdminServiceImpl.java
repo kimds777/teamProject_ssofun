@@ -170,4 +170,54 @@ public class SystemAdminServiceImpl {
 	public void deleteFaqData(int faqId) {
 		systemAdminSqlMapper.deleteFaqDataByFaqId(faqId);
 	}
+	
+
+	//faq도움 상위10개의 리스트 
+	public List<Map<String, Object>> selectTop10HelpfulFaqList() {
+		
+		List<Map<String, Object>> topFaqlist = new ArrayList<>();
+		List<FaqHelpStatusDto>  faqHelpStatusDtoList = systemAdminSqlMapper.selectTop10HelpfulFaq();
+		
+		
+		for(FaqHelpStatusDto faqHelpStatusDto:faqHelpStatusDtoList) {
+			
+			Map<String, Object> map = new HashMap<>();
+			int faqId = faqHelpStatusDto.getFaq_id();
+			
+			FaqDto faqDto = systemAdminSqlMapper.selectFaqDtoByfaqId(faqId);
+			
+			
+			map.put("faqDto",faqDto);
+			map.put("faqHelpStatusDto", faqHelpStatusDto);
+					
+			topFaqlist.add(map);
+			}
+			return topFaqlist;
+		}
+		
+		
+		
+
+//		List<Map<String ,Object>> unanswerList = new ArrayList<>();
+//		
+//		List<QnaDto> getUnansweredQnaList = systemAdminSqlMapper.selectQnaByNonAnswer();
+//		//리스트받아온걸 for문 돌려서 해체한 다음 
+//		
+//		
+//		for(QnaDto qnaDto :getUnansweredQnaList) {
+//			Map<String, Object> map = new HashMap<>();
+//			
+//			QnaDto qnaDto = systemAdminSqlMapper.
+//			int userId = qnaDto.getUser_id();
+//			
+//			UserDto userDto = systemAdminSqlMapper.selectUserDtoByUserId(userId);
+//			
+//			map.put("userDto", userDto);
+//			map.put("qnaDto",qnaDto);
+//		
+//			unanswerList.add(map);
+		
+	
+	
+	
 }

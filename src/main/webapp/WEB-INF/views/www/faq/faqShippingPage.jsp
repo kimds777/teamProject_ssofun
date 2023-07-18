@@ -117,7 +117,7 @@
 	        
     </div>
 
-<form>
+<!-- <form> -->
 
     <div class="backgroundcolor">
         <div class="container mb-3">
@@ -230,6 +230,8 @@
                                                             <div class="col">
                                                                 <div class="row mt-5" style="height: 110px; border-style: thin white; border-radius: 10px; background-color: white;">
                                                                     <div class="col">
+                                                                    
+                                                                    <form action="./shippingHelpStatusProcess" method="post">
                                                                         <div class="row mt-2">
                                                                             <div class="col-1">설문</div>
                                                                             <div class="col-5">문제 해결에 도움이 되셨나요?</div>
@@ -237,13 +239,13 @@
                                                                                 <div class="row">
                                                                                     <div class="col-3">
                                                                                         <div class="checks" style="padding: 0;">
-                                                                                            <input type="radio" id="ex_rd" name="ex_rds">
+                                                                                            <input type="radio" id="ex_rd" name="helpStatus" value="helpful">
                                                                                             <label for="ex_rd">예</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-6">
                                                                                         <div class="checks" style="padding: 0;">
-                                                                                            <input type="radio" id="ex_rd2" name="ex_rds">
+                                                                                            <input type="radio" id="ex_rd2" name="helpStatus" value="unhelpful">
                                                                                             <label for="ex_rd2">아니요</label>
                                                                                         </div>
                                                                                     </div>                                                                                    
@@ -256,7 +258,8 @@
                                                                         <div class="row mt-2">
                                                                             <div class="col"></div>
                                                                             <div class="col" style="text-align: center;">
-                                                                                <input type="button" value="의견 보내기">
+                                                                           		<input type="hidden" name="faq_id" value="${faq.faq_id}">
+                                                                                <input type="submit" value="의견 보내기">
                                                                             </div>
                                                                             <div class="col"></div>
                                                                         </div>
@@ -295,7 +298,7 @@
         </div>
     </div>
   
-</form>
+<!-- </form> -->
 
 
 

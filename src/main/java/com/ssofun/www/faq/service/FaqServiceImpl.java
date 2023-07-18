@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssofun.dto.FaqDto;
+import com.ssofun.dto.FaqHelpStatusDto;
 import com.ssofun.www.systemadmin.mapper.SystemAdminSqlMapper;
 
 @Service
@@ -36,5 +37,8 @@ public class FaqServiceImpl {
 	}
 	
 	
-	
+	public void insertFaqHelpStatus(FaqHelpStatusDto faqHelpStatusDto) {
+		
+		systemAdminSqlMapper.insertFaqHelpStatus(faqHelpStatusDto);
+	}
 }

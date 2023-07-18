@@ -96,13 +96,21 @@
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
-                                    <a class="navbar-brand text-black">자주찾는질문관리</a>
-                                    <form class="d-flex" role="search">
-                                        <input class="form-control me-2" type="search" placeholder="Search"
-                                            aria-label="Search">
-                                        <button class="btn btn-outline-secondary"
-                                            type="submit">Search</button>
-                                    </form>
+                                   
+                                        <div class="col-2">
+                                            <a class="navbar-brand text-black">자주찾는질문관리</a>
+                                        </div>
+                                        <div class="col">
+                                            <input type="button" class="writefaqbutton" value="FAQ글작성"  onclick="location.href='systemAdminWriteFaqPage'">
+                                        </div>
+                                        <div class="col-6 d-flex align-items-center justify-content-end">
+                                            
+                                            <form class="d-flex" role="search">
+                                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                                            </form>
+                                        </div>
+                                 
                                 </div>
                             </nav>
                         </div>
@@ -112,14 +120,41 @@
                     <div class="row" style="margin-left: 10px;">
                     
                         <div class="col">
+                            
+
+                            <div class="row" style="height: 500px;">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">Top10HelpfulFaq</p></div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col hr-col"><hr></div>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">Top10HelpfulFaq</p></div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col hr-col"><hr></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row mt-5">
+                                <div class="col hr-col"><hr></div>
+                            </div>
                            	<div class="row">
-                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">FAQ관리</p></div>
+                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">FAQ목록</p></div>
                                 <div class="col c-five-font"><p class="five-font mt-2">자주찾는질문 전체목록입니다.(글등록일순)</p></div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
                             		<input type="button" class="writefaqbutton" value="FAQ글작성"  onclick="location.href='systemAdminWriteFaqPage'">
                             	</div>
-                                
                             </div>
                             
                             <div class="row">
