@@ -179,6 +179,9 @@
         <div class="side-content-wrap">
             <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <ul class="navigation-left">
+                    <li class="nav-item" data-item="dashboard"><a class="nav-item-hold" href="#"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Dashboard</span></a>
+                        <div class="triangle"></div>
+                    </li>
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
@@ -192,6 +195,9 @@
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <!-- Product -->
+                <ul class="childNav" data-parent="dashboard">
+                    <li class="nav-item"><a href="./adminMainPage"><i class="nav-icon i-Clock-3"></i><span class="item-name">메인페이지</span></a></li>
+                </ul>
                 <ul class="childNav" data-parent="uikits">
                    <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
                    <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
@@ -208,130 +214,143 @@
             <div class="sidebar-overlay"></div>
         	</div>
         </div>
-        <!-- =============== Left side End ================-->
-        <div class="main-content-wrap sidenav-open d-flex flex-column">
-            <!-- ============ Body content start ============= -->
-<!--             <div class="main-content">
-                <div class="breadcrumb">
-                 <h1>상품등록페이지</h1>
-                 <ul>
-                     <li><a href="./adminMainPage">Home</a></li>
-                     <li>공란</li>
-                 </ul>
-             </div> -->
-             <form id="productForm" action="productInsertProcess" method="post" enctype="multipart/form-data">
-             <!-- <div class="separator-breadcrumb border-top"></div> -->
-             <div class="row">
-                 <div class="col-md-12">
-                     <div class="card mb-4">
-                         <div class="card-body">
-                                <div class="d-flex row p-0">
-					                <div class="col insert_box mb-3 pt-3"><a href="./adminMainPage">상품등록</a></div>
-					            </div>
-                             <div class="row">
-                                     <input class="form-control" id="admin_id" name="admin_id" type="hidden" value="${shopAdmin.admin_id}"/>
-                                 <div class="col-md-6 form-group mb-3">
-                                     <label for="name">상품이름</label>
-                                     <input class="form-control" id="name" name="name" type="text" placeholder="상품이름을 입력해주세요." />
-                                 </div>
-                                 <div class="col-md-6 form-group mb-3">
-                                     <label for="price">상품가격</label>
-                                     <input class="form-control" id="price" name="price" type="text" placeholder="상품의 가격을 입력해주세요." />
-                                 </div>
-                                 <div class="col-md-6 form-group mb-3">
-                                     <label for="price_sale">상품할인가</label>
-                                     <input class="form-control" id="price_sale" name="price_sale" type="text" placeholder="상품의 할인가를 입력해주세요." />
-                                 </div>
-                                 <div class="input-group col-md-6 form-group mb-3">
-                                     <div class="input-group-prepend"><span class="input-group-text">상세보기 내용</span></div>
-                                     <textarea id="contents" name="contents" class="form-control" aria-label="With textarea"></textarea>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-                <!-- 상품썸네일등록 -->
-                <div class="breadcrumb">
-                </div>
-                <div class="separator-breadcrumb border-top"></div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="d-flex row p-0">
-					                <div class="col insert_box mb-4 pt-3"><a href="./adminMainPage">상품썸네일등록</a></div>
-					            </div>
-                                <div class="row">
-									<div class="col-md-6 input-group mb-3">
-									    <div class="input-group-prepend">
-									        <span class="input-group-text" id="inputGroupFileAddon01">업로드 파일</span>
-									    </div>
-									    <div class="custom-file">
-									        <input id="thumbnail_files" name="thumbnail_files" type="file" multiple="multiple" />
-									    </div>
-									</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 상품카테고리타입등록 -->
-	                <div class="breadcrumb">
+	<!-- =============== Left side End ================-->
+	<div class="main-content-wrap sidenav-open d-flex flex-column">
+	    <!-- ============ Body content start ============= -->
+	    <form id="productForm" action="productInsertProcess" method="post" enctype="multipart/form-data">
+	        <div class="row">
+	            <div class="col-md-12">
+	                <div class="card mb-4">
+	                    <div class="card-body">
+	                        <div class="d-flex row p-0">
+	                            <div class="col insert_box mb-3 pt-3"><a href="./adminMainPage">상품등록</a></div>
+	                        </div>
+	                        <div class="row">
+	                            <input class="form-control" id="admin_id" name="admin_id" type="hidden" value="${shopAdmin.admin_id}" />
+	                            <div class="col-md-6 form-group mb-3">
+	                                <label for="name">상품이름</label>
+	                                <input class="form-control" id="name" name="name" type="text" placeholder="상품이름을 입력해주세요." />
+	                            </div>
+	                            <div class="col-md-6 form-group mb-3">
+	                                <label for="price">상품가격</label>
+	                                <input class="form-control" id="price" name="price" type="text" placeholder="상품의 가격을 입력해주세요." />
+	                            </div>
+	                            <div class="col-md-6 form-group mb-3">
+	                                <label for="price_sale">상품할인가</label>
+	                                <input class="form-control" id="price_sale" name="price_sale" type="text" placeholder="상품의 할인가를 입력해주세요." />
+	                            </div>
+	                            <div class="input-group col-md-6 form-group mb-3">
+	                                <div class="input-group-prepend">
+	                                    <span class="input-group-text">상세보기 내용</span>
+	                                </div>
+	                                <textarea id="contents" name="contents" class="form-control" aria-label="With textarea"></textarea>
+	                            </div>
+	                        </div>
+	                    </div>
 	                </div>
-	                <div class="separator-breadcrumb border-top"></div>
-	                <div class="row">
-	                    <div class="col-md-12">
-	                        <div class="card mb-4">
-	                            <div class="card-body">
-                                <div class="d-flex row p-0">
-					                <div class="col insert_box mb-4 pt-3"><a href="./adminMainPage">상품카테고리등록</a></div>
-					            </div>
-								<div class="row">
-								    <div class="col-md-6 form-group mb-3">
-								        <label for="picker1">카테고리타입아이디</label>
-								        <select name="product_category_type_id" class="form-control form-control-rounded">
-								            <option>카테고리타입아이디 선택</option>
-								            <c:forEach items="${categoryTypeList}" var="categoryType">
-								                <option value="${categoryType.product_category_type_id}">${categoryType.name}</option>
-								            </c:forEach>
-								        </select>
-								    </div>
-								</div>
-							</div>
-	                     </div>
-	                  </div>
-	               </div>
-	                <button id="submitAllBtn" class="btn btn-primary" onclick="submitForm()">상품등록</button>
-	                </form>
-                <!-- end of main-content -->
-                
-            </div><!-- Footer Start -->
-            <div class="flex-grow-1"></div>
-            <div class="app-footer">
-                <div class="row">
-                    <div class="col-md-9">
-                        <p><strong>Gull - Laravel + Bootstrap 4 admin template</strong></p>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero quis beatae officia saepe perferendis voluptatum minima eveniet voluptates dolorum, temporibus nisi maxime nesciunt totam repudiandae commodi sequi dolor quibusdam
-                            <sunt></sunt>
-                        </p>
-                    </div>
-                </div>
-                <div class="footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center">
-                    <a class="btn btn-primary text-white btn-rounded" href="https://themeforest.net/item/gull-bootstrap-laravel-admin-dashboard-template/23101970" target="_blank">Buy Gull HTML</a>
-                    <span class="flex-grow-1"></span>
-                    <div class="d-flex align-items-center">
-                        <img class="logo" src="../resources/dist-assets/images/logo.png" alt="">
-                        <div>
-                            <p class="m-0">&copy; 2018 Gull HTML</p>
-                            <p class="m-0">All rights reserved</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- fotter end -->
-        </div>
-    </div><!-- ============ Search UI Start ============= -->
+	            </div>
+	        </div>
+	    <!-- 상품썸네일등록 -->
+	    <div class="breadcrumb">
+	    </div>
+	    <div class="separator-breadcrumb border-top"></div>
+	    <div class="row">
+	        <div class="col-md-6">
+	            <div class="card mb-4">
+	                <div class="card-body">
+	                    <div class="d-flex row p-0">
+	                        <div class="col insert_box mb-4 pt-3"><a href="./adminMainPage">상품썸네일등록</a></div>
+	                    </div>
+	                    <div class="row">
+	                        <div class="col-md-6 input-group mb-3">
+	                            <div class="input-group-prepend">
+	                                <span class="input-group-text" id="inputGroupFileAddon01">업로드 파일</span>
+	                            </div>
+	                            <div class="custom-file">
+	                                <input id="thumbnail_files" name="thumbnail_files" type="file" multiple="multiple" />
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <!-- 상품상세이미지등록 -->
+	        <div class="col-md-6">
+	            <div class="card mb-4">
+	                <div class="card-body">
+	                    <div class="d-flex row p-0">
+	                        <div class="col insert_box mb-4 pt-3"><a href="./adminMainPage">상품상세이미지등록</a></div>
+	                    </div>
+	                    <div class="row">
+	                        <div class="col-md-6 input-group mb-3">
+	                            <div class="input-group-prepend">
+	                                <span class="input-group-text" id="inputGroupFileAddon01">업로드 파일</span>
+	                            </div>
+	                            <div class="custom-file">
+	                                <input id="detailImage_files" name="detailImage_files" type="file" multiple="multiple" />
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- 상품카테고리타입등록 -->
+	    <div class="breadcrumb">
+	    </div>
+	    <div class="separator-breadcrumb border-top"></div>
+	    <div class="row">
+	        <div class="col-md-12">
+	            <div class="card mb-4">
+	                <div class="card-body">
+	                    <div class="d-flex row p-0">
+	                        <div class="col insert_box mb-4 pt-3"><a href="./adminMainPage">상품카테고리등록</a></div>
+	                    </div>
+	                    <div class="row">
+	                        <div class="col-md-6 form-group mb-3">
+	                            <label for="picker1">카테고리타입아이디</label>
+	                            <select name="product_category_type_id" class="form-control form-control-rounded">
+	                                <option>카테고리타입아이디 선택</option>
+	                                <c:forEach items="${categoryTypeList}" var="categoryType">
+	                                    <option value="${categoryType.product_category_type_id}">${categoryType.name}</option>
+	                                </c:forEach>
+	                            </select>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+		<div class="d-flex justify-content-end">
+		    <button id="submitAllBtn" class="btn btn-primary" onclick="submitForm()">상품등록</button>
+		</div>
+	    </form>
+	    <!-- end of main-content -->
+	    <div class="flex-grow-1"></div>
+	    <div class="app-footer">
+	        <div class="row">
+	            <div class="col-md-9">
+	                <p><strong>Gull - Laravel + Bootstrap 4 admin template</strong></p>
+	                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero quis beatae officia saepe perferendis voluptatum minima eveniet voluptates dolorum, temporibus nisi maxime nesciunt totam repudiandae commodi sequi dolor quibusdam
+	                    <sunt></sunt>
+	                </p>
+	            </div>
+	        </div>
+	        <div class="footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center">
+	            <a class="btn btn-primary text-white btn-rounded" href="https://themeforest.net/item/gull-bootstrap-laravel-admin-dashboard-template/23101970" target="_blank">Buy Gull HTML</a>
+	            <span class="flex-grow-1"></span>
+	            <div class="d-flex align-items-center">
+	                <img class="logo" src="../resources/dist-assets/images/logo.png" alt="">
+	                <div>
+	                    <p class="m-0">&copy; 2018 Gull HTML</p>
+	                    <p class="m-0">All rights reserved</p>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<!-- fotter end -->
+	<!-- ============ Search UI Start ============= -->
     <div class="search-ui">
         <div class="search-header">
             <img src="../resources/dist-assets/images/logo.png" alt="" class="logo">

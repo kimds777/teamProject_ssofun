@@ -14,6 +14,7 @@ import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.HyunMinProductReviewListDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
+import com.ssofun.dto.ProductDetailImageDto;
 import com.ssofun.dto.ProductDto;
 import com.ssofun.dto.ProductOrderItemDto;
 import com.ssofun.dto.ProductOrderStatusDto;
@@ -26,7 +27,48 @@ public class StoreAdminService {
 	   @Autowired
 	   private StoreAdminSqlMapper storeAdminSqlMapper;
 	   
-	   // 모든 상품리스트
+	   // 대시보드
+	   // 총 매출
+	   public int selectTotalPrice(ProductDto productDto) {
+		   int TotalPrice = storeAdminSqlMapper.selectTotalPrice(productDto);
+		   return TotalPrice;
+	   }
+	   // 모든상품수
+	   public int selectTotalProductCount(ProductDto productDto) {
+		   int TotalProductCount = storeAdminSqlMapper.selectTotalProductCount(productDto);
+		   return TotalProductCount;
+	   }
+	   // 총 리뷰수
+	   public int selectTotalProductReviewCount(ProductDto productDto) {
+		   int TotalProductReviewCount = storeAdminSqlMapper.selectTotalProductReviewCount(productDto);
+		   return TotalProductReviewCount;
+	   }
+	   // 총 평점
+	   public double selectProductReviewAvgScore(ProductDto productDto) {
+		   double productReviewAvgScore = storeAdminSqlMapper.selectProductReviewAvgScore(productDto);
+		   return productReviewAvgScore;
+	   }
+	   
+	   // 리스트 시작
+	   // 상품리스트
+	   public List<ProductDto> dashboardProductList(ProductDto productDto){
+		   List<ProductDto> dashboardProductList = storeAdminSqlMapper.dashboardProductList(productDto);
+		   return dashboardProductList;
+	   }
+	   // 오더리스트
+	   public List<ProductDto> dashboardProductOrderList(ProductDto productDto){
+		   List<ProductDto> dashboardProductOrderList = storeAdminSqlMapper.dashboardProductOrderList(productDto);
+		   return dashboardProductOrderList;
+	   }
+	   // 리뷰,평점리스트
+	   public List<HyunMinProductReviewListDto> dashboardproductReviewList(HyunMinProductReviewListDto hyunMinProductReviewListDto){
+		   List<HyunMinProductReviewListDto> dashboardproductReviewList = storeAdminSqlMapper.dashboardproductReviewList(hyunMinProductReviewListDto);
+		   return dashboardproductReviewList;
+	   }
+	   
+	   // 대시보드 끝
+	   
+	   // 모든상품리스트
 	   public List<HyunMinProductJoinDto> selectAll(HyunMinProductJoinDto hyunMinProductJoinDto) {
 	      List<HyunMinProductJoinDto> list = storeAdminSqlMapper.selectAll(hyunMinProductJoinDto);
 	      return list;
@@ -63,15 +105,21 @@ public class StoreAdminService {
 	      }
 	   }
 	   
+	   // 상품썸네일이미지등록
+	   public void productDetailImageInsert(ProductDetailImageDto productDetailImageDto, List<ProductDetailImageDto> ProductDetailImageDtoList) {
+		   
+		   for(ProductDetailImageDto pdi : ProductDetailImageDtoList) {
+			   String name = pdi.getName();
+			   int list = pdi.getOrder_list();
+			   productDetailImageDto.setName(name);
+			   productDetailImageDto.setOrder_list(list);
+			   storeAdminSqlMapper.productDetailImageInsert(productDetailImageDto);
+		   }
+	   }
+	   
 	   // 상품카테고리타입등록
 	   public void productcategorytypeInsert(ProductCategoryTypeDto productCategoryTypeDto) {
 	      storeAdminSqlMapper.productcategorytypeInsert(productCategoryTypeDto);
-	   }
-	   
-	   // 하나의 상품에 대한 정보가져오기 
-	   public ProductDto getSelectById(int product_id) {
-	      ProductDto pId = storeAdminSqlMapper.selectById(product_id);
-	      return pId;
 	   }
 	   
 	   // 카테고리등록
@@ -84,11 +132,17 @@ public class StoreAdminService {
 		   HyunMinProductJoinDto productDto = storeAdminSqlMapper.productDetail(product_id);
 		   return productDto;
 	   }
-	   public List<ProductThumbnailDto> productThumbnailDetail(int product_id){
+	   // 썸네일리스트
+	   public List<ProductThumbnailDto> productThumbnailDetail(int product_id){ 
 		   
 		   List<ProductThumbnailDto> productThumbnailDetail = storeAdminSqlMapper.productThumbnailDetail(product_id);
 		   
 		   return productThumbnailDetail;
+	   }
+	   // 상품상세보기이미지리스트
+	   public List<ProductDetailImageDto> productDetailImageList(int product_id){
+		   List<ProductDetailImageDto> productDetailImageList = storeAdminSqlMapper.productDetailImageList(product_id);
+		   return productDetailImageList;
 	   }
 	   
 		// 상품수정

@@ -33,6 +33,35 @@
 .td_No{
 	font-weight: 700;
 }
+
+/* 테이블 UI */
+.c0{
+	width: 55px;
+}
+
+.c1{
+	width: 110px;
+}
+
+.c2{
+	width: 170px;
+}
+
+.c3{
+	width: 90px;
+}
+
+.c4{
+	width: 100px;
+}
+
+.c5{
+	width: 55px;
+}
+
+.c7{
+	width: 110px;
+}
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -185,6 +214,9 @@
         <div class="side-content-wrap">
             <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <ul class="navigation-left">
+                    <li class="nav-item" data-item="dashboard"><a class="nav-item-hold" href="#"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Dashboard</span></a>
+                        <div class="triangle"></div>
+                    </li>
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
@@ -198,6 +230,9 @@
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <!-- Product -->
+                <ul class="childNav" data-parent="dashboard">
+                    <li class="nav-item"><a href="./adminMainPage"><i class="nav-icon i-Clock-3"></i><span class="item-name">메인페이지</span></a></li>
+                </ul>
                 <ul class="childNav" data-parent="uikits">
                    <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
                    <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
@@ -228,14 +263,14 @@
 								    <table class="table table-striped">
 										<thead>
 										    <tr>
-										        <th scope="col">#</th>
-										        <th scope="col">리뷰이미지</th>
-										        <th scope="col">상품명</th>
-										        <th scope="col">리뷰번호</th>
-										        <th scope="col">닉네임</th>
-										        <th scope="col">별점</th>
-										        <th scope="col">리뷰내용</th>
-										        <th scope="col">리뷰등록일</th>
+										        <th scope="col" class="c0">#</th>
+										        <th scope="col" class="c1">리뷰이미지</th>
+										        <th scope="col" class="c2">상품명</th>
+										        <th scope="col" class="c3">리뷰번호</th>
+										        <th scope="col" class="c4">닉네임</th>
+										        <th scope="col" class="c5">별점</th>
+										        <th scope="col" class="c6">리뷰내용</th>
+										        <th scope="col" class="c7">리뷰등록일</th>
 										    </tr>
 										</thead>
 										<tbody>

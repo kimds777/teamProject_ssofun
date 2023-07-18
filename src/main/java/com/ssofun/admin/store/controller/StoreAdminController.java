@@ -33,10 +33,33 @@ public class StoreAdminController {
 	   
 	   // 관리자 메인페이지 
 	   @RequestMapping("adminMainPage")
-	   public String adminMainPage(HttpSession session,Model model) {
-		  	   
+	   public String adminMainPage(HttpSession session,Model model, ProductDto productDto, HyunMinProductReviewListDto hyunMinProductReviewListDto) {
+		  	
+		   // 대시보드
+		   // Total
+		   int TotalPrice = storeAdminService.selectTotalPrice(productDto); // 총 매출
+		   int TotalProductCount = storeAdminService.selectTotalProductCount(productDto); // 모든상품수
+		   int TotalProductReviewCount = storeAdminService.selectTotalProductReviewCount(productDto); // 총 리뷰수
+		   double productReviewAvgScore = storeAdminService.selectProductReviewAvgScore(productDto); // 총 평점
+		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   session.setAttribute("shopAdmin", shopAdmin);
+		   
+		   model.addAttribute("TotalPrice", TotalPrice); // 총 매출
+		   model.addAttribute("TotalProductCount", TotalProductCount); // 모든상품수
+		   model.addAttribute("TotalProductReviewCount", TotalProductReviewCount); // 총 리뷰수
+		   model.addAttribute("productReviewAvgScore", productReviewAvgScore); // 총 평점
+		   
+		   // 리스트
+		   int id = shopAdmin.getAdmin_id();
+		   hyunMinProductReviewListDto.setAdmin_id(id);
+		   List<HyunMinProductReviewListDto> dashboardproductReviewList = storeAdminService.dashboardproductReviewList(hyunMinProductReviewListDto); //리뷰,평점
+		   List<ProductDto> dashboardProductList = storeAdminService.dashboardProductList(productDto); // 상품리스트
+		   List<ProductDto> dashboardProductOrderList =  storeAdminService.dashboardProductOrderList(productDto); // 오더리스트
+
+		   model.addAttribute("dashboardProductList", dashboardProductList); // 상품리스트
+		   model.addAttribute("dashboardProductOrderList", dashboardProductOrderList); // 상품리스트
+		   model.addAttribute("dashboardproductReviewList", dashboardproductReviewList); // 리뷰리스트
 		   
 	      return "admin/adminMainPage";
 	   }
@@ -62,16 +85,16 @@ public class StoreAdminController {
 	      
 	   // 상품등록
 	   @RequestMapping("productInsertProcess")
-	   public String productThumbnaillInsertProcess(ProductDto productDto, ProductThumbnailDto params,ProductCategoryDto productCategoryDto
-			   											,MultipartFile [] thumbnail_files) {
-	      int totalFiles = thumbnail_files.length; // 등록된 이미지 파일의 총 개수
+	   public String productThumbnaillInsertProcess(ProductDto productDto, ProductThumbnailDto params,ProductCategoryDto productCategoryDto,
+			   ProductDetailImageDto params2,MultipartFile [] thumbnail_files, MultipartFile [] detailImage_files) {
+	      int thumbnailFiles = thumbnail_files.length; // 등록된 이미지 파일의 총 개수
 	      
 	      List<ProductThumbnailDto> productThumbnailList = new ArrayList<>();
-	      
-	      // 파일 저장 로직
-	      if(totalFiles > 0) { // 파일이 있을 때
+      
+	      // 상품썸네일
+	      if(thumbnailFiles > 0) { // 파일이 있을 때
 	         
-	         for(int i = 0; i < totalFiles; i++) {
+	         for(int i = 0; i < thumbnailFiles; i++) {
 	            MultipartFile multipartFile = thumbnail_files[i];
 	            
 	            if(multipartFile.isEmpty()) {
@@ -95,12 +118,53 @@ public class StoreAdminController {
 	            productThumbnailDto.setOrder_list(i);
 	            
 	            productThumbnailList.add(productThumbnailDto);
+	            
+	            
 	         }
 	         
 	      }
+	      
+	      int detailImageFiles = detailImage_files.length; // 등록된 이미지 파일의 총 개수
+	      
+	      List<ProductDetailImageDto> ProductDetailImageList = new ArrayList<>();
+	      
+	      // 상품상세이미지
+	      if(detailImageFiles > 0) { // 파일이 있을 때
+	         
+	         for(int i = 0; i < detailImageFiles; i++) {
+	            MultipartFile multipartFile = detailImage_files[i];
+	            
+	            if(multipartFile.isEmpty()) {
+	               continue;
+	            }
+	            
+	            System.out.println("파일명 " + multipartFile.getOriginalFilename());
+	            
+	            String rootFolder = "C:/ssofunDetailImageFiles/";
+	            
+	            String saveFileName = multipartFile.getOriginalFilename(); // 파일명 저장
+	                     
+	            try {
+	               multipartFile.transferTo(new File(rootFolder + saveFileName));
+	            }catch(Exception e) {
+	               e.printStackTrace();
+	            }
+	            
+	            ProductDetailImageDto productDetailImageDto = new ProductDetailImageDto();
+	            productDetailImageDto.setName(saveFileName);
+	            productDetailImageDto.setOrder_list(i);
+	            
+	            ProductDetailImageList.add(productDetailImageDto);
+	            
+	            
+	         }
+	         
+	      }
+	      
 	      storeAdminService.productInsert(productDto);
 	      storeAdminService.productcategoryInsert(productCategoryDto);
 	      storeAdminService.productThumbnaillInsert(params,productThumbnailList);
+	      storeAdminService.productDetailImageInsert(params2, ProductDetailImageList);
 	      
 
 	      
@@ -148,10 +212,12 @@ public class StoreAdminController {
 		   
 		   HyunMinProductJoinDto productDetail = storeAdminService.productDetail(product_id);
 		   List<ProductThumbnailDto> productThumbnailDetail = storeAdminService.productThumbnailDetail(product_id);
+		   List<ProductDetailImageDto> productDetailImageList = storeAdminService.productDetailImageList(product_id);
 		   
 		   session.setAttribute("shopAdmin", shopAdmin);
 		   model.addAttribute("productDetail", productDetail);
 		   model.addAttribute("productThumbnailDetail", productThumbnailDetail);
+		   model.addAttribute("productDetailImageList", productDetailImageList);
 		   
 	      return "admin/productDetailPage";
 	   }
@@ -161,16 +227,6 @@ public class StoreAdminController {
 	   public String productcategoryInsertPage() {
 	      return "admin/productCategoryInsertPage";
 	   }
-	   
-	   // 상품카테고리 등록
-	//   @ResponseBody
-	//   @RequestMapping("productcategoryInsertProcess")
-	//   public ProductCategoryTypeDto productcategoryInsertProcess(ProductCategoryDto productCategoryDto,ProductCategoryTypeDto productCategoryTypeDto) {
-//	      
-//	      storeAdminService.productcategoryInsert(productCategoryDto);
-//	      
-//	      return CategoryTypeDto;
-	//   }
 	   
 	   // 상품수정페이지
 	   @RequestMapping("productUpdatePage")

@@ -34,6 +34,25 @@
     font-weight: 600;
     text-align: left;
 }
+
+.update_btn{
+    margin: 0.25rem 0.5rem;
+    margin-top: -2rem; /* 버튼을 살짝 위로 올리는 값 조정 */
+}
+
+/* .detail_th{
+	height: 90px;
+} */
+
+.contents_th{
+	height: 90px;
+}
+
+/* 테이블과 버튼 사이 간격 조정 */
+.table-btn-spacing {
+	margin-top: 30px;
+}
+    
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -186,6 +205,9 @@
         <div class="side-content-wrap">
             <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <ul class="navigation-left">
+                    <li class="nav-item" data-item="dashboard"><a class="nav-item-hold" href="#"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Dashboard</span></a>
+                        <div class="triangle"></div>
+                    </li>
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
@@ -199,6 +221,9 @@
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <!-- Product -->
+                <ul class="childNav" data-parent="dashboard">
+                    <li class="nav-item"><a href="./adminMainPage"><i class="nav-icon i-Clock-3"></i><span class="item-name">메인페이지</span></a></li>
+                </ul>
                 <ul class="childNav" data-parent="uikits">
                    <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
                    <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
@@ -225,106 +250,105 @@
                   		<div class="d-flex row p-0">
 					  		<div class="col title_box mb-3 pt-3"><a href="./adminMainPage">상품상세보기</a></div>
 					  	</div>
+					  	<div class="row">
+					  		<div class="col">
 							<div class="table-responsive">
 								<table class="table table-striped">
 									<thead>
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">관리자아이디</th>
+									       	<th scope="col">${productDetail.admin_id}</th>
+									  	</tr>									
 										<tr>
-									  		<th scope="row">카테고리타입아이디</th>
-									       		<th scope="col">No.&nbsp;${productDetail.product_category_type_id}</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
+									  		<th class="text-black-50 detail_th" scope="row">카테고리타입아이디</th>
+									       	<th scope="col">No.&nbsp;${productDetail.product_category_type_id}</th>
 									  	</tr>
 									  	<tr>
-									  		<th scope="row">상품아이디</th>
-									       		<th scope="col">No.&nbsp;${productDetail.product_id}</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									  	</tr>
-<%-- 									  	<tr>
-									  		<th scope="row">관리자아이디</th>
-									       		<th scope="col">No&nbsp;${productDetail.admin_id}</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									  	</tr> --%>
+									  		<th class="text-black-50 detail_th" scope="row">상품아이디</th>
+									       	<th scope="col">No.&nbsp;${productDetail.product_id}</th>
+									  	</tr>									  	
 									  	<tr>
-									  		<th scope="row">회사명</th>
-									       		<th scope="col">${productDetail.biz_name}</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
+									  		<th class="text-black-50 detail_th" scope="row">회사명</th>
+									       	<th scope="col">${productDetail.biz_name}</th>
 									  	</tr>
 									  	<tr>
-									  		<th scope="row">카테고리명</th>
-									       		<th scope="col">${productDetail.category_type_name}</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									  	</tr>
-									  	<tr>
-									  		<th scope="row">상품명</th>
-									       		<th scope="col">${productDetail.product_name}</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									  	</tr>
-									  	<tr>
-									  		<th scope="row">가격</th>
-									       		<th scope="col">${productDetail.price}&nbsp;원</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									  	</tr>
-									  	<tr>
-									  		<th scope="row">할인가</th>
-									       		<th scope="col">${productDetail.price_sale}&nbsp;원</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									  	</tr>
-									  	<tr>
-									  		<th scope="row">상세설명</th>
-									       		<th scope="col">${productDetail.contents}</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									  	</tr>
-									  	<tr>
-									  		<th scope="row">등록일</th>
-									       		<th scope="col">
-									       			<fmt:formatDate value="${productDetail.created_at}" pattern="yyyy-MM-dd" />								       			
-									       		</th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
-									       		<th scope="col"></th>
+									  		<th class="text-black-50 detail_th" scope="row">카테고리명</th>
+									       	<th scope="col">${productDetail.category_type_name}</th>
 									  	</tr>
 									</thead>
 								</table>
-								<table class="thumbnailTable">
+							</div>					  		
+					  		</div>
+					  		<div class="col">
+								<div class="table-responsive">
+									<table class="table table-striped">
+									<thead>
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">상품명</th>
+									       	<th scope="col">${productDetail.product_name}</th>
+									  	</tr>
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">가격</th>
+									       	<th scope="col">${productDetail.price}&nbsp;원</th>
+									  	</tr>
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">할인가</th>
+									       	<th scope="col">${productDetail.price_sale}&nbsp;원</th>
+									  	</tr>
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">등록일</th>
+									       	<th scope="col">
+									       		<fmt:formatDate value="${productDetail.created_at}" pattern="yyyy-MM-dd" />								       			
+									       	</th>
+									  	</tr>									  	
+									  	</thead>
+									</table>
+								</div>					  		
+					  		</div>
+					  	</div>
+					  	<div class="row">
+					  		<div class="col">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<tbody>
 										<tr>
-									        <th scope="row">상품사진</th>
+									        <th scope="row">상품이미지</th>
 									        <c:forEach items="${productThumbnailDetail}" var="thumbnail">
 									            <td scope="col" class="thumbnail-cell">
 									                <img class="rounded-circle m-0 avatar-sm-table" style="width:75px; height:75px;" src="/ssofunUploadFiles/${thumbnail.name}">
 									            </td>
 									        </c:forEach>
 									    </tr>
-								</table>
-							</div>							
-                		</div>
-                		<button class="btn btn-outline-dark m-1" onclick="window.location.href='./productUpdatePage?product_id=${productDetail.product_id}'">상품수정페이지</button>
+									    </tbody>
+									</table>
+								</div>					  		
+					  		</div>
+					  	</div>
+						<div class="row">
+						    <div class="col">
+						        <div class="table-responsive">
+						            <table class="table table-striped">
+						                <tbody>
+						                    <tr>
+						                        <th scope="row">상품상세이미지</th>
+						                        <c:forEach items="${productDetailImageList}" var="thumbnail">
+						                            <td scope="col" class="thumbnail-cell">
+						                                <img class="rounded-circle m-0 avatar-sm-table" style="width:75px; height:75px;" src="/ssofunUploadFiles/${thumbnail.name}">
+						                            </td>
+						                        </c:forEach>
+						                    </tr>
+						                </tbody>
+						            </table>
+						        </div>
+						    </div>
+						</div>
+						
+						<!-- 버튼과 간격 조정 -->
+						<div class="row table-btn-spacing">
+						    <div class="col d-flex justify-content-end">
+						        <button class="btn btn-outline-dark update_btn" onclick="window.location.href='./productUpdatePage?product_id=${productDetail.product_id}'">상품수정</button>
+						    </div>
+						</div>
                 <!-- end of row-->
                 <!-- end of main-content -->
             </div><!-- Footer Start -->

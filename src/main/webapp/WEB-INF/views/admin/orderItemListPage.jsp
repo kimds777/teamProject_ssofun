@@ -209,6 +209,9 @@
         <div class="side-content-wrap">
             <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <ul class="navigation-left">
+                    <li class="nav-item" data-item="dashboard"><a class="nav-item-hold" href="#"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Dashboard</span></a>
+                        <div class="triangle"></div>
+                    </li>
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
@@ -222,6 +225,9 @@
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <!-- Product -->
+                <ul class="childNav" data-parent="dashboard">
+                    <li class="nav-item"><a href="./adminMainPage"><i class="nav-icon i-Clock-3"></i><span class="item-name">메인페이지</span></a></li>
+                </ul>
                 <ul class="childNav" data-parent="uikits">
                    <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
                    <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
@@ -306,7 +312,7 @@
 								        				<td><fmt:formatDate value="${orderItem.created_at}" pattern="yyyy-MM-dd" /></td>
 								                        <td class="text-success">${orderItem.recipient_name}&nbsp;님</td>
 								                        <%-- <td class="order-status ${getOrderStatusColor(orderItem.product_order_status_id)}">${orderItem.order_status_name}</td> --%>
-								                        <td>${orderItem.order_status_name}</td>
+								                        <td>${orderItem.order_status_name}</td>  							                        
 								                        <td>
 								                       		<a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
 								                        </td>										                										      										    
@@ -481,7 +487,7 @@
         });
     }); */
     
- /*    function getOrderStatusColor(orderStatusId) {
+    function getOrderStatusColor(orderStatusId) {
     	  switch (orderStatusId) {
     	    case 3:
     	      return "status-pending"; // 주문 상태 ID가 3일 때 CSS 클래스 이름 반환
@@ -494,7 +500,7 @@
     	    default:
     	      return ""; // 기본 클래스 이름 반환 (기본 글자색이 적용되도록)
     	  }
-    	} */
+    	}
 
 </script>
 </html>

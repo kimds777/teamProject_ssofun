@@ -3,25 +3,120 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssofun.admin.store.mapper.StoreAdminSqlMapper">
 
-<!-- 상품 하나의 대한 정보가져오기 -->
-<select id="selectById" resultType="com.ssofun.dto.ProductDto">
-   SELECT p.product_id, p.admin_id, p.name, p.price, p.price_sale, p.contents, p.created_at, t.name as tname,p.used_fg
-      FROM tb_product p
-      INNER JOIN tb_product_thumbnail t ON p.product_id = t.product_id
-   WHERE p.product_id = #{product_id} AND p.used_fg = 1
+<!-- 대시보드 -->
+<!-- 총 매출 계산 -->
+<select id="selectTotalPrice" resultType="int">
+	SELECT SUM(tp.price * poi.count) AS total_price
+	FROM tb_product tp
+	INNER JOIN tb_product_order_item poi ON tp.product_id = poi.product_id
+	WHERE tp.admin_id IN (
+	  SELECT ta2.admin_id 
+	  FROM tb_admin ta2 
+	  WHERE ta2.biz_id = (SELECT ta.biz_id FROM tb_admin ta WHERE ta.admin_id = 4)
+	) AND poi.product_order_status_id IN (3, 4, 5, 6, 7)
+</select>
+<!-- 모든 상품수 -->
+<select id="selectTotalProductCount" resultType="int">
+	select 
+		COUNT(tp.product_id) AS total_product_count
+	from tb_product tp
+	where tp.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+	)
+</select>
+<!-- 총 리뷰수 -->
+<select id="selectTotalProductReviewCount" resultType="int">
+	select  
+	    SUM((
+			select count(*) from tb_product_order_item poi 
+				inner join tb_product_review tpr on tpr.product_order_item_id = poi.product_order_item_id
+	        where poi.product_id = tp.product_id
+		)) as review_cnt  
+	from tb_product tp
+	where tp.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+	)
+</select>
+<!-- 총 평점 -->
+<select id="selectProductReviewAvgScore" resultType="java.lang.Double">
+	select 
+	     TRUNCATE(nvl(AVG((
+			select avg(tpr.rate) from tb_product_order_item poi inner join tb_product_review tpr on tpr.product_order_item_id = poi.product_order_item_id
+	        where poi.product_id = tp.product_id
+	    )),0),2) as review_avg_score    
+	from tb_product tp
+	where tp.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+	)
 </select>
 
-<!-- 모든 상품 리스트불러오기 -->
-<!-- <select id="selectAll" resultType="com.ssofun.admin.dto.ProductDto">
-		SELECT p.product_id, p.admin_id, p.name, p.price, p.price_sale, p.contents, p.created_at, t.name AS tname, p.used_fg
-		FROM tb_product p
-		INNER JOIN (
-		    SELECT product_id, MIN(name) AS name
-		    FROM tb_product_thumbnail
-		    GROUP BY product_id
-		) AS t ON p.product_id = t.product_id
-		ORDER BY tname ASC;
-</select> -->
+<!-- 리스트시작 -->
+<!-- 상품리스트 -->
+<select id="dashboardProductList" resultType="com.ssofun.dto.ProductDto">
+	select tp.*
+	from tb_product tp
+	where tp.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+	)
+	AND tp.used_fg = 1
+	ORDER BY tp.created_at DESC
+	LIMIT 5
+</select>
+<!-- 오더리스트 -->
+<select id="dashboardProductOrderList" resultType="com.ssofun.dto.ProductDto">
+	select 
+		poi.product_order_item_id,
+		poi.created_at AS order_created_at,
+	    dr.name AS delivery_recipient_name,
+	    tp.name AS product_name,
+	    poi.count,
+	    tp.price
+	from tb_product tp
+	INNER JOIN tb_product_order_item poi ON tp.product_id = poi.product_id
+	INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
+	INNER JOIN tb_product_order po ON poi.product_order_id = po.product_order_id
+	INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
+	where tp.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+	)
+	AND tp.used_fg = 1
+	ORDER BY poi.created_at DESC
+	LIMIT 5
+</select>
+<!-- 상품리스트(리뷰,평점) -->
+<select id="dashboardproductReviewList" resultType="com.ssofun.dto.HyunMinProductReviewListDto">
+	select 
+		tp.*, 
+	    (
+			select count(*) from tb_product_order_item poi 
+				inner join tb_product_review tpr on tpr.product_order_item_id = poi.product_order_item_id
+	        where poi.product_id = tp.product_id
+		) as review_cnt,
+	    nvl((
+			select FORMAT(avg(tpr.rate),2) from tb_product_order_item poi inner join tb_product_review tpr on tpr.product_order_item_id = poi.product_order_item_id
+	        where poi.product_id = tp.product_id
+	    ), 0) as review_avg_score    
+	from tb_product tp
+	where tp.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{admin_id} AND ta.used_fg = 1)
+	)
+	ORDER BY tp.product_id
+	LIMIT 5
+</select>
+<!-- 리스트끝 -->
+<!-- 대시보드 끝 -->
 
 <!-- 카테고리타입리스트 -->
 <select id="categoryTypeList" resultType="com.ssofun.dto.ProductCategoryTypeDto">
@@ -57,8 +152,13 @@
 	    FROM tb_product_thumbnail
 	    GROUP BY product_id
 	) AS t ON p.product_id = t.product_id
-	WHERE p.used_fg = 1 AND a.admin_id = #{admin_id} AND p.used_fg = 1
-	ORDER BY product_category_type_id,product_id,p.created_at
+	where p.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{admin_id} AND ta.used_fg = 1)
+	)
+	AND p.used_fg = 1
+	ORDER BY p.created_at DESC
 	LIMIT 0,1000	
 </select>
 
@@ -78,6 +178,16 @@
 <!-- 썸네일 등록 -->
 <insert id="productThumbnaillInsert">
    INSERT INTO tb_product_thumbnail(product_id,name,order_list) 
+      VALUES(
+         (SELECT MAX(product_id) FROM tb_product),
+         #{name},
+         #{order_list}
+         )
+</insert>
+
+<!-- 상세이미지 등록 -->
+<insert id="productDetailImageInsert">
+   INSERT INTO tb_product_detail_image(product_id,name,order_list) 
       VALUES(
          (SELECT MAX(product_id) FROM tb_product),
          #{name},
@@ -125,8 +235,15 @@
 	INNER JOIN tb_biz b ON a.biz_id = b.biz_id
 	WHERE p.product_id = #{product_id} AND p.used_fg = 1
 </select>	
+
+<!-- 썸네일리스트 -->
 <select id="productThumbnailDetail" resultType="com.ssofun.dto.ProductThumbnailDto">
 	SELECT * FROM tb_product_thumbnail WHERE product_id = #{product_id} AND used_fg = 1
+</select>
+
+<!-- 상품상세이미지 리스트 -->
+<select id="productDetailImageList" resultType="com.ssofun.dto.ProductDetailImageDto">
+	SELECT * FROM tb_product_detail_image WHERE product_id = #{product_id} AND used_fg = 1
 </select>
 
 <!-- 상품수정 -->
@@ -206,31 +323,36 @@
 
 <!-- N번 관리자가 판매하는 모든상품의 주문내역(오더리스트) -->
 <select id="productOrderItemList" resultType="com.ssofun.dto.ProductOrderItemDto">
-SELECT 
-	distinct(poi.product_order_item_id),
-    poi.created_at,
-    dr.name AS recipient_name,
-	pos.name AS order_status_name,
-    p.name AS product_name,
-    poi.count,
-    p.price,
-    dr.delivery_recipient_id
-FROM tb_product_order_item poi
-	INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
-	INNER JOIN tb_product p ON poi.product_id = p.product_id
-    INNER JOIN tb_product_category pc ON p.product_id = pc.product_id
-    INNER JOIN tb_product_category_type pct ON pc.product_category_type_id = pct.product_category_type_id
-    INNER JOIN tb_admin a ON p.admin_id = a.admin_id
-    INNER JOIN tb_biz b ON a.biz_id = b.biz_id
-    INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
-    INNER JOIN tb_product_order po ON poi.product_order_id = po.product_order_id
-    INNER JOIN(
-    SELECT product_id, MIN(name) AS name
-    FROM tb_product_thumbnail
-    GROUP BY product_id
-) AS t ON p.product_id = t.product_id
-WHERE a.admin_id = #{admin_id} AND poi.used_fg = 1
-ORDER BY poi.created_at DESC
+	SELECT 
+		distinct(poi.product_order_item_id),
+	    poi.created_at,
+	    dr.name AS recipient_name,
+		pos.name AS order_status_name,
+	    p.name AS product_name,
+	    poi.count,
+	    p.price,
+	    dr.delivery_recipient_id
+	FROM tb_product_order_item poi
+		INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
+		INNER JOIN tb_product p ON poi.product_id = p.product_id
+	    INNER JOIN tb_product_category pc ON p.product_id = pc.product_id
+	    INNER JOIN tb_product_category_type pct ON pc.product_category_type_id = pct.product_category_type_id
+	    INNER JOIN tb_admin a ON p.admin_id = a.admin_id
+	    INNER JOIN tb_biz b ON a.biz_id = b.biz_id
+	    INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
+	    INNER JOIN tb_product_order po ON poi.product_order_id = po.product_order_id
+	    INNER JOIN(
+	    SELECT product_id, MIN(name) AS name
+	    FROM tb_product_thumbnail
+	    GROUP BY product_id
+	) AS t ON p.product_id = t.product_id
+	where p.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{admin_id} AND ta.used_fg = 1)
+	) 
+	AND poi.used_fg = 1
+	ORDER BY poi.created_at DESC
 </select>
 <!-- N번 관리자가 판매하는 상품중 주문된 하나의 상품상세보기(오더리스트 상세보기) -->
 <select id="orderItemDetail" resultType="com.ssofun.dto.ProductOrderItemDto">
@@ -312,31 +434,31 @@ ORDER BY poi.created_at DESC
 </insert>
 <!--카테고리별 오더리스트 -->	
 <select id="orderItemCategoryList" resultType="com.ssofun.dto.ProductOrderItemDto">
-SELECT 
-	poi.product_order_item_id,
-    poi.created_at,
-    dr.name AS recipient_name,
-	pos.name AS order_status_name,
-    p.name AS product_name,
-    poi.count,
-    p.price,
-    dr.delivery_recipient_id
-FROM tb_product_order_item poi
-	INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
-	INNER JOIN tb_product p ON poi.product_id = p.product_id
-    INNER JOIN tb_product_category pc ON p.product_id = pc.product_id
-    INNER JOIN tb_product_category_type pct ON pc.product_category_type_id = pct.product_category_type_id
-    INNER JOIN tb_admin a ON p.admin_id = a.admin_id
-    INNER JOIN tb_biz b ON a.biz_id = b.biz_id
-    INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
-    INNER JOIN tb_product_order po ON poi.product_order_id = po.product_order_id
-    INNER JOIN(
-    SELECT product_id, MIN(name) AS name
-    FROM tb_product_thumbnail
-    GROUP BY product_id
-) AS t ON p.product_id = t.product_id
-WHERE a.admin_id = #{admin_id} AND pos.product_order_status_id = #{product_order_status_id} AND poi.used_fg = 1
-ORDER BY poi.created_at DESC
+	SELECT 
+		poi.product_order_item_id,
+	    poi.created_at,
+	    dr.name AS recipient_name,
+		pos.name AS order_status_name,
+	    p.name AS product_name,
+	    poi.count,
+	    p.price,
+	    dr.delivery_recipient_id
+	FROM tb_product_order_item poi
+		INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
+		INNER JOIN tb_product p ON poi.product_id = p.product_id
+	    INNER JOIN tb_product_category pc ON p.product_id = pc.product_id
+	    INNER JOIN tb_product_category_type pct ON pc.product_category_type_id = pct.product_category_type_id
+	    INNER JOIN tb_admin a ON p.admin_id = a.admin_id
+	    INNER JOIN tb_biz b ON a.biz_id = b.biz_id
+	    INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
+	    INNER JOIN tb_product_order po ON poi.product_order_id = po.product_order_id
+	    INNER JOIN(
+	    SELECT product_id, MIN(name) AS name
+	    FROM tb_product_thumbnail
+	    GROUP BY product_id
+	) AS t ON p.product_id = t.product_id
+	WHERE a.admin_id = #{admin_id} AND pos.product_order_status_id = #{product_order_status_id} AND poi.used_fg = 1
+	ORDER BY poi.created_at DESC
 </select>
 
 <!-- 배송중수정 -->
@@ -351,55 +473,56 @@ ORDER BY poi.created_at DESC
 </select>
 <!-- 발송상세보기 -->
 <select id="deliveryDetail" resultType="com.ssofun.dto.ProductOrderItemDto">
-SELECT 
-	d.delivery_id,
-	dr.delivery_recipient_id,
-	d.invoice_no,
-	d.created_at AS delivery_created_at,
-	dc.name AS delivery_company_name
-FROM tb_product_order_item poi
-	INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
-    INNER JOIN tb_delivery d ON dr.delivery_recipient_id = d.delivery_recipient_id
-    INNER JOIN tb_delivery_company dc ON d.delivery_company_id = dc.delivery_company_id
-WHERE product_order_item_id = #{product_order_item_id} AND poi.used_fg = 1
+	SELECT 
+		d.delivery_id,
+		dr.delivery_recipient_id,
+		d.invoice_no,
+		d.created_at AS delivery_created_at,
+		dc.name AS delivery_company_name
+	FROM tb_product_order_item poi
+		INNER JOIN tb_delivery_recipient dr ON poi.delivery_recipient_id = dr.delivery_recipient_id
+	    INNER JOIN tb_delivery d ON dr.delivery_recipient_id = d.delivery_recipient_id
+	    INNER JOIN tb_delivery_company dc ON d.delivery_company_id = dc.delivery_company_id
+	WHERE product_order_item_id = #{product_order_item_id} AND poi.used_fg = 1
 </select>
 
 <!-- 상품리스트(리뷰,평점) -->
 <select id="productReviewList" resultType="com.ssofun.dto.HyunMinProductReviewListDto">
-select 
-	tp.*, 
-    (
-		select count(*) from tb_product_order_item poi 
-			inner join tb_product_review tpr on tpr.product_order_item_id = poi.product_order_item_id
-        where poi.product_id = tp.product_id
-	) as review_cnt,
-    nvl((
-		select FORMAT(avg(tpr.rate),2) from tb_product_order_item poi inner join tb_product_review tpr on tpr.product_order_item_id = poi.product_order_item_id
-        where poi.product_id = tp.product_id
-    ), 0) as review_avg_score    
-from tb_product tp
-where tp.admin_id in (
-	select ta2.admin_id 
-	from tb_admin ta2 
-	where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{admin_id} AND ta.used_fg = 1)
-)
+	select 
+		tp.*, 
+	    (
+			select count(*) from tb_product_order_item poi 
+				inner join tb_product_review tpr on tpr.product_order_item_id = poi.product_order_item_id
+	        where poi.product_id = tp.product_id
+		) as review_cnt,
+	    nvl((
+			select FORMAT(avg(tpr.rate),2) from tb_product_order_item poi inner join tb_product_review tpr on tpr.product_order_item_id = poi.product_order_item_id
+	        where poi.product_id = tp.product_id
+	    ), 0) as review_avg_score    
+	from tb_product tp
+	where tp.admin_id in (
+		select ta2.admin_id 
+		from tb_admin ta2 
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{admin_id} AND ta.used_fg = 1)
+	)
+	ORDER BY tp.product_id
 </select>
 
 <!-- 상품하나에 대한 리뷰 리스트 -->
 <select id="productDetailReviewList" resultType="com.ssofun.dto.HyunMinProductReviewListDto">
-SELECT 
-    p.product_id,
-    p.name,
-    pr.product_review_id,
-	u.nickname,
-    pr.rate,
-    pr.contents,
-    pr.created_at
-FROM tb_product_review pr
-    INNER JOIN tb_product_order_item poi ON pr.product_order_item_id = poi.product_order_item_id
-    INNER JOIN tb_product p ON poi.product_id = p.product_id
-    INNER JOIN tb_user u ON pr.user_id = u.user_id
-WHERE p.product_id = #{product_id} AND pr.used_fg = 1
+	SELECT 
+	    p.product_id,
+	    p.name,
+	    pr.product_review_id,
+		u.nickname,
+	    pr.rate,
+	    pr.contents,
+	    pr.created_at
+	FROM tb_product_review pr
+	    INNER JOIN tb_product_order_item poi ON pr.product_order_item_id = poi.product_order_item_id
+	    INNER JOIN tb_product p ON poi.product_id = p.product_id
+	    INNER JOIN tb_user u ON pr.user_id = u.user_id
+	WHERE p.product_id = #{product_id} AND pr.used_fg = 1
 ORDER BY pr.created_at DESC
 </select>
 
@@ -412,4 +535,5 @@ ORDER BY pr.created_at DESC
 	    INNER JOIN tb_product p ON poi.product_id = p.product_id
 	WHERE p.product_id = #{product_id} AND pri.used_fg = 1
 </select>
+
 </mapper>

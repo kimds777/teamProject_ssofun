@@ -11,6 +11,7 @@ import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.HyunMinProductReviewListDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
+import com.ssofun.dto.ProductDetailImageDto;
 import com.ssofun.dto.ProductDto;
 import com.ssofun.dto.ProductOrderItemDto;
 import com.ssofun.dto.ProductOrderStatusDto;
@@ -19,12 +20,36 @@ import com.ssofun.dto.ProductReviewImageDto;
 import com.ssofun.dto.ProductThumbnailDto;
 
 public interface StoreAdminSqlMapper {
-
+			
+	   // 대시보드	
+	   // 맨위 
+	   // 총 매출
+	   public int selectTotalPrice(ProductDto productDto);
+	   // 모든상품수
+	   public int selectTotalProductCount(ProductDto productDto);
+	   // 총 리뷰수
+	   public int selectTotalProductReviewCount(ProductDto productDto);
+	   // 총 평점
+	   public double selectProductReviewAvgScore(ProductDto productDto);
+	   
+	   // 리스트시작
+	   // 상품리스트
+	   public List<ProductDto> dashboardProductList(ProductDto productDto);
+	   // 오더리스트
+	   public List<ProductDto> dashboardProductOrderList(ProductDto productDto);
+	   // 리뷰,평점리스트
+	   public List<HyunMinProductReviewListDto> dashboardproductReviewList(HyunMinProductReviewListDto hyunMinProductReviewListDto);
+	   
+	   // 대시보드 끝
+	   
 	   // 모든상품리스트
 	   public List<HyunMinProductJoinDto> selectAll(HyunMinProductJoinDto hyunMinProductJoinDto);
 	   
 	   // 카테고리타입리스트
 	   public List<ProductCategoryTypeDto> categoryTypeList(ProductCategoryTypeDto productCategoryTypeDto);
+	   
+	   // 상품상세이미지리스트
+	   public List<ProductDetailImageDto> productDetailImageList(int product_id);
 	   
 	   // 진행상태리스트
 	   public List<ProductOrderStatusDto> orderStatusList(ProductOrderStatusDto productOrderStatusDto);
@@ -35,12 +60,12 @@ public interface StoreAdminSqlMapper {
 	   // 상품썸네일등록
 	   public void productThumbnaillInsert(ProductThumbnailDto productThumbnailDto);
 	   
+	   // 상품상세이미지등록
+	   public void productDetailImageInsert(ProductDetailImageDto productDetailImageDto);
+	   
 	   // 상품 카테고리 타입등록 
 	   public void productcategorytypeInsert(ProductCategoryTypeDto productCategoryTypeDto);
-	   
-	   // 상품 하나의 대한 정보가져오기 
-	   public ProductDto selectById(int product_id);
-	   
+	   	   
 	   // 카테고리 등록
 	   public void productcategoryInsert(ProductCategoryDto productCategoryDto);
 	   

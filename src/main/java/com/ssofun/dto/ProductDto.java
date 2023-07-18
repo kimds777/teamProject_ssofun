@@ -15,10 +15,17 @@ public class ProductDto {
 	private Date created_at; // 등록일
 	private int used_fg; // 사용여부
 	private String tname; // 썸네일 테이블의 썸네일명
-	private String thumbnail_name;
-	private String category_type_name;
-	private String product_name;
-    private String biz_name;
+	private String thumbnail_name; // 썸네일 파일명
+	private String category_type_name; // 카테고리타입명
+	private String product_name; // 상품명
+    private String biz_name; // 브랜드명
+    // 귀찮아서 그냥 여기다가 추가함
+    // 대시보드꺼
+    private int product_order_item_id;
+    private Date order_created_at;
+    private String delivery_recipient_name;
+    private int count;
+       
 	public ProductDto() {
 		super();
 	}
@@ -118,6 +125,28 @@ public class ProductDto {
 	public void setBiz_name(String biz_name) {
 		this.biz_name = biz_name;
 	}
-    
-    
+	public int getProduct_order_item_id() {
+		return product_order_item_id;
+	}
+	public void setProduct_order_item_id(int product_order_item_id) {
+		this.product_order_item_id = product_order_item_id;
+	}
+	public Date getOrder_created_at() {
+		return order_created_at;
+	}
+	public void setOrder_created_at(Date order_created_at) {
+		this.order_created_at = order_created_at;
+	}
+	public String getDelivery_recipient_name() {
+		return delivery_recipient_name;
+	}
+	public void setDelivery_recipient_name(String delivery_recipient_name) {
+		this.delivery_recipient_name = delivery_recipient_name;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 }

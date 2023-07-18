@@ -37,6 +37,43 @@
 	font-weight: 700;
 }
 
+/* 테이블UI */
+.c0{
+	width: 55px;
+}
+
+.c1{
+	width: 80px;
+}
+
+.c2{
+	width: 100px;
+}
+
+.c3{
+	width: 100px;
+}
+
+.c4{
+	width: 170px;
+}
+
+.c5{
+	width: 110px;
+}
+
+.c6{
+	width: 100px;
+}
+
+.c7{
+	width: 100px;
+}
+
+.c9{
+	width: 110px;
+}
+
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -189,6 +226,9 @@
         <div class="side-content-wrap">
             <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <ul class="navigation-left">
+                    <li class="nav-item" data-item="dashboard"><a class="nav-item-hold" href="#"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Dashboard</span></a>
+                        <div class="triangle"></div>
+                    </li>
                     <li class="nav-item" data-item="uikits"><a class="nav-item-hold" href="#"><i class="nav-icon i-Library"></i><span class="nav-text">Product</span></a>
                         <div class="triangle"></div>
                     </li>
@@ -202,6 +242,9 @@
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
                 <!-- Product -->
+                <ul class="childNav" data-parent="dashboard">
+                    <li class="nav-item"><a href="./adminMainPage"><i class="nav-icon i-Clock-3"></i><span class="item-name">메인페이지</span></a></li>
+                </ul>
                 <ul class="childNav" data-parent="uikits">
                    <li class="nav-item"><a href="./productInsertPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품등록페이지</span></a></li>
                    <li class="nav-item"><a href="./productListPage"><i class="nav-icon i-Split-Horizontal-2-Window"></i><span class="item-name">상품리스트페이지</span></a></li>
@@ -232,21 +275,27 @@
 									    <table class="table table-striped">
 									        <thead>
 									            <tr>
-									                <th class="th_col1" scope="col">상품번호</th>
-									                <th class="th_col1" scope="col">회사명</th>
-									                <th class="th_col1" scope="col">카테고리명</th>
-									                <th scope="col">상품명</th>
-									                <th scope="col">상품이미지</th>
-									                <th scope="col">가격</th>
-									                <th scope="col">할인가</th>
-									                <th scope="col">상세설명</th>
-									                <th class="th_col1" scope="col">등록일</th>
+									            	<th class="c0" scope="col">#</th>
+									                <th class="c1" scope="col">상품번호</th>
+									                <th class="c2" scope="col">회사명</th>
+									                <th class="c3" scope="col">카테고리명</th>
+									                <th class="c4" scope="col">상품명</th>
+									                <th class="c5" scope="col">상품이미지</th>
+									                <th class="c6" scope="col">가격</th>
+									                <th class="c7" scope="col">할인가</th>
+									                <th class="c8" scope="col">상세설명</th>
+									                <th class="c9" scope="col">등록일</th>
 									            </tr>
 									        </thead>
 									        <tbody>
 									            <c:forEach items="${productList}" var="product">
 									                <tr>
-									                    <th class="td_No" scope="row">No.&nbsp;${product.product_id}</th>
+											            <th scope="row">
+											                <label class="checkbox checkbox-outline-info">
+											                    <input type="checkbox" checked="" /><span class="checkmark"></span>
+											                </label>
+											            </th>
+									                    <td>No.&nbsp;${product.product_id}</td>
 									                    <td>${product.biz_name}</td>
 									                    <td>${product.category_type_name}</td>
 									                    <td><a href="productDetailPage?product_id=${product.product_id }">${product.product_name}</a></td>
