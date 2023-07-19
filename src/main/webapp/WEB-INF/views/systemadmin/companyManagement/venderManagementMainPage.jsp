@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">    
     <!-- <script type="text/javascript"> </script>-->
 
 
@@ -19,14 +20,14 @@
 
 
 
-    <title>systemAdminFaqMainPage</title>
+    <title>venderManagementMainPage</title>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
             <div class="col"><!--상단 네비-->
-                <jsp:include page="../include/systemAdminNavi.jsp"></jsp:include>
+                <jsp:include page="../../include/systemAdminNavi.jsp"></jsp:include>
             </div>
         </div>
 
@@ -64,29 +65,17 @@
 
     
                             <div class="row mt-3">
-                                <div class="col"><i class="bi bi-clipboard text-light" style="margin-right: 5px;"></i><a
+                                <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="#">공지사항관리</a></div>
+                                        href="../../systemadmin/companyManagement/companyManagementMainPage">판매자관리</a></div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col"><i class="bi bi-patch-question text-light" style="margin-right: 5px;"></i><a
+                              <!--  <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="../systemadmin/systemAdminFaqMainPage">자주찾는질문관리</a></div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col"><i class="bi bi-book-half text-light" style="margin-right: 0px;">
-
-                                </i><a class="leftsidepontstyle1"
-                                        href="#">이용약관관리</a></div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col"><i class="bi bi-send-check text-light" style="margin-right: 5px;"></i><a
-                                        class="leftsidepontstyle1"
-                                        href="../systemadmin/systemAdminQnaMainPage">1:1문의관리</a></div>
-                            </div>
-                            
+                                        href="#">사업자관리</a></div>
+                                         --> 
+                            </div>                            
                         </div>
-
                     </div>
                 </div>
 
@@ -98,10 +87,10 @@
                                 <div class="container-fluid">
                                    
                                         <div class="col-2">
-                                            <a class="navbar-brand text-black">자주찾는질문관리</a>
+                                            <a class="navbar-brand text-black">판매자관리</a>
                                         </div>
                                         <div class="col">
-                                            <input type="button" class="writefaqbutton" value="FAQ글작성"  onclick="location.href='systemAdminWriteFaqPage'">
+                                            <input type="button" class="writefaqbutton" value="판매자등록"  onclick="location.href='venderRegistrationPage'">
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -117,43 +106,16 @@
                     </div>
 
                     <!--안에 페이지 내용만 바꾸기-->
-                    <div class="row" style="margin-left: 10px;">
+                    <div class="row" style="margin-left: 10px; height:1000px">
                     
                         <div class="col">
-                            
 
-                            <div class="row" style="height: 500px;">
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">Top10HelpfulFaq</p></div>
-                                    </div>
-                                    <div class="row mt-1">
-                                        <div class="col hr-col"><hr></div>
-                                    </div>
-                                </div>
-                                
-
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">Top10HelpfulFaq</p></div>
-                                    </div>
-                                    <div class="row mt-1">
-                                        <div class="col hr-col"><hr></div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                            <div class="row mt-5">
-                                <div class="col hr-col"><hr></div>
-                            </div>
                            	<div class="row">
-                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">FAQ목록</p></div>
-                                <div class="col c-five-font"><p class="five-font mt-2">자주찾는질문 전체목록입니다.(글등록일순)</p></div>
+                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">전체판매자목록</p></div>
+                                <div class="col c-five-font"><p class="five-font mt-2">SSOFUN에 등록된 판매자전체목록입니다.(등록일순)</p></div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
-                            		<input type="button" class="writefaqbutton" value="FAQ글작성"  onclick="location.href='systemAdminWriteFaqPage'">
+                            		
                             	</div>
                             </div>
                             
@@ -164,14 +126,25 @@
                             
                             <!-- faq글목록작성하기 -->
                             <div class="row">
-                                <div class="col-1"><p class="center1">번호</p></div>
-                                <div class="col"><p class="five-font">제목</p></div>
-                                <div class="col-2"><p class="center1">작성한관리자</p></div>
-                                <div class="col-2"><p class="center1">카테고리</p></div>
-                                <div class="col-2"><p class="center1">작성일</p></div>
+                                <div class="col-1"><p class="center1" style="text-align: center;">판매자번호</p></div>
+                                <div class="col-1"><p class="center1" style="text-align: center;">회사번호</p></div>
+                                <div class="col-2"><p class="center1" style="text-align: center;">소속회사명</p></div>
+                                <div class="col"><p class="five-font" style="text-align: center;">계정명</p></div>
+                                <div class="col-2"><p class="center1" style="text-align: center;">등록일</p></div>
+                                <div class="col-1"><p class="center1" style="text-align: center;">계정상태</p></div>                             
                             </div>
                             
-                            <c:forEach items="${list }" var="map">
+                            <!-- 반복문돌리기 -->
+                            <div class="row">
+                                <div class="col-1"><p class="center1" style="text-align: center;">1</p></div>
+                                <div class="col-1"><p class="center1" style="text-align: center;">1</p></div>
+                                <div class="col-2"><p class="center1" style="text-align: center;">Nike</p></div>
+                                <div class="col"><p class="companyfontTitle" style="text-align: center;">shopAdmin(계정명)</p></div>
+                                <div class="col-2"><p class="center1" style="text-align: center;">23.07.19 hh:mm:ss</p></div>
+                                <div class="col-1"><p class="center1" style="text-align: center;">활성화됨</p></div>                             
+                            </div>
+                            
+               <!-- 		<c:forEach items="${list }" var="map">
                             
 	                            <div class="row">
 	                                <div class="col-1"><p class="center1">${map.faqDto.faq_id }</p></div>
@@ -181,7 +154,7 @@
 	                                <div class="col-2"><p class="center1"><fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${map.faqDto.created_at }"/></p></div>
 	                            </div>
             
-                            </c:forEach>
+                            </c:forEach> -->             
 
                         
                         </div>
@@ -189,8 +162,44 @@
                     <div class="row mb-5">
                         <div class="col"> </div>
                     </div>
+                    
+                        <!-- 페이지네이션 -->
+			            <div class="row">
+			            	<div class="col"></div>
+			            	<div class="col">
+				            	<nav aria-label="Page navigation example">
+								  <ul class="pagination">
+								    <li class="page-item">
+								      <a class="page-link" href="#" aria-label="Previous">
+								        <span aria-hidden="true">&laquo;</span>
+								      </a>
+								    </li>
+								    <li class="page-item"><a class="page-link" href="#">1</a></li>
+								    <li class="page-item"><a class="page-link" href="#">2</a></li>
+								    <li class="page-item"><a class="page-link" href="#">3</a></li>
+								    <li class="page-item"><a class="page-link" href="#">4</a></li>
+								    <li class="page-item"><a class="page-link" href="#">5</a></li>
+								    <li class="page-item"><a class="page-link" href="#">6</a></li>
+								    <li class="page-item"><a class="page-link" href="#">7</a></li>
+								    <li class="page-item"><a class="page-link" href="#">8</a></li>
+								    <li class="page-item"><a class="page-link" href="#">9</a></li>
+								    <li class="page-item"><a class="page-link" href="#">10</a></li>
+								    <li class="page-item">
+								      <a class="page-link" href="#" aria-label="Next">
+								        <span aria-hidden="true">&raquo;</span>
+								      </a>
+								    </li>
+								  </ul>
+								</nav>
+							</div>
+							<div class="col"></div>
+			            </div>
+                    
+                    
+                    
                 </div>
             </div>
+
             <div class="row mt-5">
                 <div class="col"> </div>
             </div>

@@ -202,8 +202,8 @@
                         </div>
  -->                        
                         <div class="row mt-3">
-                            <div class="col"><p class="six-font">제목</p></div>
-                            <div class="col-10"><input type="text" name="title" id="title" class="form-control" placeholder="제목을 입력해주세요." aria-label="First name"></div>
+                            <div class="col title"><p class="six-font">제목</p></div>
+                            <div class="col-10"><input type="text" name="title" id="title" class="form-control" placeholder="제목을 입력해주세요." aria-label="title"></div>
                             
                         </div>
                         <div class="row mt-3">

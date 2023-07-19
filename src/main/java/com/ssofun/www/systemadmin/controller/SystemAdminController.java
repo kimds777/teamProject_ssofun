@@ -260,5 +260,77 @@ public class SystemAdminController {
 		return"redirect:./systemAdminFaqMainPage";
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//입점사관리메인페이지(리스트)
+	@RequestMapping("companyManagement/companyManagementMainPage")
+	public String companyManagementMainPage() {
+		
+		return "systemadmin/companyManagement/companyManagementMainPage";
+	}
+	
+	
+	
+	
+	//입점사등록페이지
+	@RequestMapping("companyManagement/companyRegistrationPage")
+	public String companyRegistrationPage() {
+		
+		return"systemadmin/companyManagement/companyRegistrationPage";
+	}
+	
+	
+	
+	
+	//입점사상세페이지
+	@RequestMapping("companyManagement/readCompanyPage")
+	public String readCompanyPage() {
+		return "systemadmin/companyManagement/readCompanyPage";
+		
+	}
+	
+	
+	//판매자메인페이지(리스트)
+	@RequestMapping("companyManagement/venderManagementMainPage")
+	public String venderManagementMainPage() {
+		return"systemadmin/companyManagement/venderManagementMainPage";
+	}
+	
+	
+	
+	//판매자등록페이지
+	@RequestMapping("companyManagement/venderRegistrationPage")
+	public String venderRegistrationPage() {
+		return"systemadmin/companyManagement/venderRegistrationPage";
+	}
+	
+	
+	//회사번호에 따른 소속판매자리스트페이지
+	@RequestMapping("companyManagement/venderListOfCompanyNumberPage")
+	public String venderListOfCompanyNumberPage() {
+		return"systemadmin/companyManagement/venderListOfCompanyNumberPage";
+	}
 
+	
+	//판매자상세페이지
+	@RequestMapping("companyManagement/readVenderPage")
+	public String readVenderPage() {
+		return"systemadmin/companyManagement/readVenderPage";
+	}
 }
