@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CommunityDto {
 	
 	private int community_id;
-	private int user_id;
+	private long user_id;
 	private String title;
 	private String contents;
 	private int read_count;
@@ -18,7 +18,7 @@ public class CommunityDto {
 	public CommunityDto() {
 		super();
 	}
-	public CommunityDto(int community_id, int user_id, String title, String contents, int read_count,
+	public CommunityDto(int community_id, long user_id, String title, String contents, int read_count,
 			Date community_created_at, Date created_at, int used_fg) {
 		super();
 		this.community_id = community_id;
@@ -36,10 +36,10 @@ public class CommunityDto {
 	public void setCommunity_id(int community_id) {
 		this.community_id = community_id;
 	}
-	public int getUser_id() {
+	public long getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
 	public String getTitle() {
@@ -78,6 +78,7 @@ public class CommunityDto {
 	public void setUsed_fg(int used_fg) {
 		this.used_fg = used_fg;
 	}
+	
 	
 	
 

@@ -10,8 +10,6 @@ public class CommunityService {
 	
 	@Autowired
 	private CommunitySqlMapper communitySqlMapper;
-	@Autowired
-	private 
 	
 	
 	
