@@ -14,7 +14,7 @@
 
 
     <footer>
-        <div class="section">
+        <div class="section3">
             <div id="leftSection">
                 <dl>
                     <dt><i class="bi bi-question-circle-fill"></i> 쏘펀 고객센터</dt>
