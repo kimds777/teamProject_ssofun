@@ -71,6 +71,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
     <link href="../resources/dist-assets/css/themes/lite-purple.css" rel="stylesheet" />
     <link href="../resources/dist-assets/css/plugins/perfect-scrollbar.css" rel="stylesheet" />
+    
+    
+    
+    
 </head>
 
 <body class="text-left">
@@ -309,7 +313,7 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="card-title">This Year Sales</div>
-                                <div id="echartBar" style="height: 300px;"></div>
+                                <div id="echartBar22" style="height: 300px;"></div>
                             </div>
                         </div>
                     </div>
@@ -618,6 +622,316 @@
   }
 
 </script>
+
+
+    <script>
+    
+    
+    
+    
+    
+    $(document).ready(function () {
+    	
+    	$.ajax({
+    		type : "get",
+    		url : "./getSalesYear?year=2023",
+    		success: function(res) {
+    
+    			const xData = [];
+    			for(x of res.currentYearSalesData){
+    				xData.push(x.month);
+    			}
+    			
+    			const yCurrent = [];
+    			for(x of res.currentYearSalesData){
+    				yCurrent.push(x.sales);
+    			}
+    			
+    			const yPrev = [];
+    			for(x of res.prevYearSalesData){
+    				yPrev.push(x.sales);
+    			}
+    			
+    			
+    			
+    	    	  // Chart in Dashboard version 1
+    	    	  let echartElemBar = document.getElementById("echartBar22");
+    	    	  if (echartElemBar) {
+    	    	    let echartBar = echarts.init(echartElemBar);
+    	    	    echartBar.setOption({
+    	    	      legend: {
+    	    	        borderRadius: 0,
+    	    	        orient: "horizontal",
+    	    	        x: "right",
+    	    	        data: ["Online", "Offline"],
+    	    	      },
+    	    	      grid: {
+    	    	        left: "8px",
+    	    	        right: "8px",
+    	    	        bottom: "0",
+    	    	        containLabel: true,
+    	    	      },
+    	    	      tooltip: {
+    	    	        show: true,
+    	    	        backgroundColor: "rgba(0, 0, 0, .8)",
+    	    	      },
+    	    	      xAxis: [
+    	    	        {
+    	    	          type: "category",
+    	    	          data: xData,
+    	    	          axisTick: {
+    	    	            alignWithLabel: true,
+    	    	          },
+    	    	          splitLine: {
+    	    	            show: false,
+    	    	          },
+    	    	          axisLine: {
+    	    	            show: true,
+    	    	          },
+    	    	        },
+    	    	      ],
+    	    	      yAxis: [
+    	    	        {
+    	    	          type: "value",
+    	    	          axisLabel: {
+    	    	            formatter: "${value}",
+    	    	          },
+    	    	          min: 0,
+    	    	          max: 100000,
+    	    	          interval: 25000,
+    	    	          axisLine: {
+    	    	            show: false,
+    	    	          },
+    	    	          splitLine: {
+    	    	            show: true,
+    	    	            interval: "auto",
+    	    	          },
+    	    	        },
+    	    	      ],
+
+    	    	      series: [
+    	    	        {
+    	    	          name: "2023",
+    	    	          data: yCurrent,
+    	    	          label: {show: false, color: "#0168c1"},
+    	    	          type: "bar",
+    	    	          barGap: 0,
+    	    	          color: "#DDD6FE",
+    	    	          smooth: true,
+    	    	          itemStyle: {
+    	    	            emphasis: {
+    	    	              shadowBlur: 10,
+    	    	              shadowOffsetX: 0,
+    	    	              shadowOffsetY: -2,
+    	    	              shadowColor: "rgba(0, 0, 0, 0.3)",
+    	    	            },
+    	    	          },
+    	    	        },
+    	    	        {
+    	    	          name: "2022",
+    	    	          data: yPrev,
+    	    	          label: {show: false, color: "#639"},
+    	    	          type: "bar",
+    	    	          color: "#A78BFA",
+    	    	          smooth: true,
+    	    	          itemStyle: {
+    	    	            emphasis: {
+    	    	              shadowBlur: 10,
+    	    	              shadowOffsetX: 0,
+    	    	              shadowOffsetY: -2,
+    	    	              shadowColor: "rgba(0, 0, 0, 0.3)",
+    	    	            },
+    	    	          },
+    	    	        },
+    	    	      ],
+    	    	    });
+    	    	    $(window).on("resize", function () {
+    	    	      setTimeout(() => {
+    	    	        echartBar.resize();
+    	    	      }, 500);
+    	    	    });
+    	    	  }
+
+    	    	  // Chart in Dashboard version 1
+    	    	  let echartElemPie = document.getElementById("echartPie");
+    	    	  if (echartElemPie) {
+    	    	    let echartPie = echarts.init(echartElemPie);
+    	    	    echartPie.setOption({
+    	    	      color: ["#62549c", "#7566b5", "#7d6cbb", "#8877bd", "#9181bd", "#6957af"],
+    	    	      tooltip: {
+    	    	        show: true,
+    	    	        backgroundColor: "rgba(0, 0, 0, .8)",
+    	    	      },
+
+    	    	      series: [
+    	    	        {
+    	    	          name: "Sales by Country",
+    	    	          type: "pie",
+    	    	          radius: "60%",
+    	    	          center: ["50%", "50%"],
+    	    	          data: [
+    	    	            {value: 535, name: "USA"},
+    	    	            {value: 310, name: "Brazil"},
+    	    	            {value: 234, name: "France"},
+    	    	            {value: 155, name: "BD"},
+    	    	            {value: 130, name: "UK"},
+    	    	            {value: 348, name: "India"},
+    	    	          ],
+    	    	          itemStyle: {
+    	    	            emphasis: {
+    	    	              shadowBlur: 10,
+    	    	              shadowOffsetX: 0,
+    	    	              shadowColor: "rgba(0, 0, 0, 0.5)",
+    	    	            },
+    	    	          },
+    	    	        },
+    	    	      ],
+    	    	    });
+    	    	    $(window).on("resize", function () {
+    	    	      setTimeout(() => {
+    	    	        echartPie.resize();
+    	    	      }, 500);
+    	    	    });
+    	    	  }
+
+    	    	  // Chart in Dashboard version 1
+    	    	  let echartElem1 = document.getElementById("echart1");
+    	    	  if (echartElem1) {
+    	    	    let echart1 = echarts.init(echartElem1);
+    	    	    echart1.setOption({
+    	    	      ...echartOptions.lineFullWidth,
+    	    	      ...{
+    	    	        series: [
+    	    	          {
+    	    	            data: [30, 40, 20, 50, 40, 80, 90],
+    	    	            ...echartOptions.smoothLine,
+    	    	            markArea: {
+    	    	              label: {
+    	    	                show: true,
+    	    	              },
+    	    	            },
+    	    	            areaStyle: {
+    	    	              color: "rgba(102, 51, 153, .2)",
+    	    	              origin: "start",
+    	    	            },
+    	    	            lineStyle: {
+    	    	              color: "#8B5CF6",
+    	    	            },
+    	    	            itemStyle: {
+    	    	              color: "#8B5CF6",
+    	    	            },
+    	    	          },
+    	    	        ],
+    	    	      },
+    	    	    });
+    	    	    $(window).on("resize", function () {
+    	    	      setTimeout(() => {
+    	    	        echart1.resize();
+    	    	      }, 500);
+    	    	    });
+    	    	  }
+    	    	  // Chart in Dashboard version 1
+    	    	  let echartElem2 = document.getElementById("echart2");
+    	    	  if (echartElem2) {
+    	    	    let echart2 = echarts.init(echartElem2);
+    	    	    echart2.setOption({
+    	    	      ...echartOptions.lineFullWidth,
+    	    	      ...{
+    	    	        series: [
+    	    	          {
+    	    	            data: [30, 10, 40, 10, 40, 20, 90],
+    	    	            ...echartOptions.smoothLine,
+    	    	            markArea: {
+    	    	              label: {
+    	    	                show: true,
+    	    	              },
+    	    	            },
+    	    	            areaStyle: {
+    	    	              color: "rgba(255, 193, 7, 0.2)",
+    	    	              origin: "start",
+    	    	            },
+    	    	            lineStyle: {
+    	    	              color: "#FFC107",
+    	    	            },
+    	    	            itemStyle: {
+    	    	              color: "#FFC107",
+    	    	            },
+    	    	          },
+    	    	        ],
+    	    	      },
+    	    	    });
+    	    	    $(window).on("resize", function () {
+    	    	      setTimeout(() => {
+    	    	        echart2.resize();
+    	    	      }, 500);
+    	    	    });
+    	    	  }
+    	    	  // Chart in Dashboard version 1
+    	    	  let echartElem3 = document.getElementById("echart3");
+    	    	  if (echartElem3) {
+    	    	    let echart3 = echarts.init(echartElem3);
+    	    	    echart3.setOption({
+    	    	      ...echartOptions.lineNoAxis,
+    	    	      ...{
+    	    	        series: [
+    	    	          {
+    	    	            data: [
+    	    	              40,
+    	    	              80,
+    	    	              20,
+    	    	              90,
+    	    	              30,
+    	    	              80,
+    	    	              40,
+    	    	              90,
+    	    	              20,
+    	    	              80,
+    	    	              30,
+    	    	              45,
+    	    	              50,
+    	    	              110,
+    	    	              90,
+    	    	              145,
+    	    	              120,
+    	    	              135,
+    	    	              120,
+    	    	              140,
+    	    	            ],
+    	    	            lineStyle: {
+    	    	              color: "rgba(102, 51, 153, 0.8)",
+    	    	              width: 3,
+    	    	              ...echartOptions.lineShadow,
+    	    	            },
+    	    	            label: {show: true, color: "#212121"},
+    	    	            type: "line",
+    	    	            smooth: true,
+    	    	            itemStyle: {
+    	    	              borderColor: "rgba(102, 51, 153, 1)",
+    	    	            },
+    	    	          },
+    	    	        ],
+    	    	      },
+    	    	    });
+    	    	    $(window).on("resize", function () {
+    	    	      setTimeout(() => {
+    	    	        echart3.resize();
+    	    	      }, 500);
+    	    	    });
+    	    	  }
+    			
+    			
+    			
+    		}		
+    	});
+    	
+    	
+    	
+    	
+    });
+    
+    
+    </script>
+
 
 
 </html>

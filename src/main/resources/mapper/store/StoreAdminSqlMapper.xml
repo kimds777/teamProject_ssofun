@@ -12,7 +12,7 @@
 	WHERE tp.admin_id IN (
 	  SELECT ta2.admin_id 
 	  FROM tb_admin ta2 
-	  WHERE ta2.biz_id = (SELECT ta.biz_id FROM tb_admin ta WHERE ta.admin_id = 4)
+	  WHERE ta2.biz_id = (SELECT ta.biz_id FROM tb_admin ta WHERE ta.admin_id = #{adminId})
 	) AND poi.product_order_status_id IN (3, 4, 5, 6, 7)
 </select>
 <!-- 모든 상품수 -->
@@ -23,7 +23,7 @@
 	where tp.admin_id in (
 		select ta2.admin_id 
 		from tb_admin ta2 
-		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId})
 	)
 </select>
 <!-- 총 리뷰수 -->
@@ -38,7 +38,7 @@
 	where tp.admin_id in (
 		select ta2.admin_id 
 		from tb_admin ta2 
-		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId})
 	)
 </select>
 <!-- 총 평점 -->
@@ -52,7 +52,7 @@
 	where tp.admin_id in (
 		select ta2.admin_id 
 		from tb_admin ta2 
-		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId})
 	)
 </select>
 
@@ -64,7 +64,7 @@
 	where tp.admin_id in (
 		select ta2.admin_id 
 		from tb_admin ta2 
-		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId})
 	)
 	AND tp.used_fg = 1
 	ORDER BY tp.created_at DESC
@@ -87,7 +87,7 @@
 	where tp.admin_id in (
 		select ta2.admin_id 
 		from tb_admin ta2 
-		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = 4)
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId})
 	)
 	AND tp.used_fg = 1
 	ORDER BY poi.created_at DESC
@@ -534,6 +534,20 @@ ORDER BY pr.created_at DESC
 	    INNER JOIN tb_product_order_item poi ON pr.product_order_item_id = poi.product_order_item_id
 	    INNER JOIN tb_product p ON poi.product_id = p.product_id
 	WHERE p.product_id = #{product_id} AND pri.used_fg = 1
+</select>
+
+
+<select id="getSalesYear" resultType="map">
+	select 
+		DATE_FORMAT(tpoi.created_at, '%Y-%m') as month,
+		sum(tpoi.count * tp.price_sale) as sales
+	from tb_product tp
+	inner join tb_product_order_item tpoi on tpoi.product_id = tp.product_id
+	where tp.admin_id in (
+		select ta2.admin_id from tb_admin ta2 where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId})
+	)
+	and CAST(DATE_FORMAT(tpoi.created_at, '%Y') AS UNSIGNED) = #{year}
+	group by DATE_FORMAT(tpoi.created_at, '%m')
 </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.ssofun.admin.store.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,35 +30,35 @@ public class StoreAdminService {
 	   
 	   // 대시보드
 	   // 총 매출
-	   public int selectTotalPrice(ProductDto productDto) {
-		   int TotalPrice = storeAdminSqlMapper.selectTotalPrice(productDto);
+	   public int selectTotalPrice(ProductDto productDto, int adminId) {
+		   int TotalPrice = storeAdminSqlMapper.selectTotalPrice(productDto, adminId);
 		   return TotalPrice;
 	   }
 	   // 모든상품수
-	   public int selectTotalProductCount(ProductDto productDto) {
-		   int TotalProductCount = storeAdminSqlMapper.selectTotalProductCount(productDto);
+	   public int selectTotalProductCount(ProductDto productDto, int adminId) {
+		   int TotalProductCount = storeAdminSqlMapper.selectTotalProductCount(productDto, adminId);
 		   return TotalProductCount;
 	   }
 	   // 총 리뷰수
-	   public int selectTotalProductReviewCount(ProductDto productDto) {
-		   int TotalProductReviewCount = storeAdminSqlMapper.selectTotalProductReviewCount(productDto);
+	   public int selectTotalProductReviewCount(ProductDto productDto, int adminId) {
+		   int TotalProductReviewCount = storeAdminSqlMapper.selectTotalProductReviewCount(productDto, adminId);
 		   return TotalProductReviewCount;
 	   }
 	   // 총 평점
-	   public double selectProductReviewAvgScore(ProductDto productDto) {
-		   double productReviewAvgScore = storeAdminSqlMapper.selectProductReviewAvgScore(productDto);
+	   public double selectProductReviewAvgScore(ProductDto productDto, int adminId) {
+		   double productReviewAvgScore = storeAdminSqlMapper.selectProductReviewAvgScore(productDto, adminId);
 		   return productReviewAvgScore;
 	   }
 	   
 	   // 리스트 시작
 	   // 상품리스트
-	   public List<ProductDto> dashboardProductList(ProductDto productDto){
-		   List<ProductDto> dashboardProductList = storeAdminSqlMapper.dashboardProductList(productDto);
+	   public List<ProductDto> dashboardProductList(ProductDto productDto, int adminId){
+		   List<ProductDto> dashboardProductList = storeAdminSqlMapper.dashboardProductList(productDto, adminId);
 		   return dashboardProductList;
 	   }
 	   // 오더리스트
-	   public List<ProductDto> dashboardProductOrderList(ProductDto productDto){
-		   List<ProductDto> dashboardProductOrderList = storeAdminSqlMapper.dashboardProductOrderList(productDto);
+	   public List<ProductDto> dashboardProductOrderList(ProductDto productDto, int adminId){
+		   List<ProductDto> dashboardProductOrderList = storeAdminSqlMapper.dashboardProductOrderList(productDto, adminId);
 		   return dashboardProductOrderList;
 	   }
 	   // 리뷰,평점리스트
@@ -256,5 +257,9 @@ public class StoreAdminService {
 			List<ProductReviewImageDto> productReviewImageList = storeAdminSqlMapper.productReviewImageList(product_id);
 			
 			return productReviewImageList;
+		}
+		
+		public List<Map<String,Object>> getSalesYear(int year, int adminId){
+			return storeAdminSqlMapper.getSalesYear(year, adminId);
 		}
 	}

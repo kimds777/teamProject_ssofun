@@ -1,6 +1,7 @@
 package com.ssofun.admin.store.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -24,19 +25,19 @@ public interface StoreAdminSqlMapper {
 	   // 대시보드	
 	   // 맨위 
 	   // 총 매출
-	   public int selectTotalPrice(ProductDto productDto);
+	   public int selectTotalPrice(ProductDto productDto,@Param("adminId") int adminId);
 	   // 모든상품수
-	   public int selectTotalProductCount(ProductDto productDto);
+	   public int selectTotalProductCount(ProductDto productDto, @Param("adminId") int adminId);
 	   // 총 리뷰수
-	   public int selectTotalProductReviewCount(ProductDto productDto);
+	   public int selectTotalProductReviewCount(ProductDto productDto, @Param("adminId") int adminId);
 	   // 총 평점
-	   public double selectProductReviewAvgScore(ProductDto productDto);
+	   public double selectProductReviewAvgScore(ProductDto productDto, @Param("adminId") int adminId);
 	   
 	   // 리스트시작
 	   // 상품리스트
-	   public List<ProductDto> dashboardProductList(ProductDto productDto);
+	   public List<ProductDto> dashboardProductList(ProductDto productDto, @Param("adminId") int adminId);
 	   // 오더리스트
-	   public List<ProductDto> dashboardProductOrderList(ProductDto productDto);
+	   public List<ProductDto> dashboardProductOrderList(ProductDto productDto, @Param("adminId") int adminId);
 	   // 리뷰,평점리스트
 	   public List<HyunMinProductReviewListDto> dashboardproductReviewList(HyunMinProductReviewListDto hyunMinProductReviewListDto);
 	   
@@ -117,7 +118,13 @@ public interface StoreAdminSqlMapper {
 	   public List<HyunMinProductReviewListDto> productReviewList(HyunMinProductReviewListDto hyunMinProductReviewListDto);
 	   
 	   // 상품하나에 대한 리뷰리스트
-	   public List<HyunMinProductReviewListDto> productDetailReviewList(int product_id);
+	   public List<HyunMinProductReviewListDto> productDetailReviewList(@Param("product_id") int product_id);
 	   // 상품하나에 대한 리뷰이미지리스트
 	   public List<ProductReviewImageDto> productReviewImageList(int product_id);
+	   
+	   
+	   public List<Map<String,Object>> getSalesYear(@Param("year") int year, @Param("adminId") int adminId);
+	   
+	   
+	   
 	}

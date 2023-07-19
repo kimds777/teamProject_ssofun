@@ -4,7 +4,9 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -35,16 +37,16 @@ public class StoreAdminController {
 	   @RequestMapping("adminMainPage")
 	   public String adminMainPage(HttpSession session,Model model, ProductDto productDto, HyunMinProductReviewListDto hyunMinProductReviewListDto) {
 		  	
-		   // 대시보드
-		   // Total
-		   int TotalPrice = storeAdminService.selectTotalPrice(productDto); // 총 매출
-		   int TotalProductCount = storeAdminService.selectTotalProductCount(productDto); // 모든상품수
-		   int TotalProductReviewCount = storeAdminService.selectTotalProductReviewCount(productDto); // 총 리뷰수
-		   double productReviewAvgScore = storeAdminService.selectProductReviewAvgScore(productDto); // 총 평점
-		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   session.setAttribute("shopAdmin", shopAdmin);
 		   
+		   // 대시보드
+		   // Total
+		   int TotalPrice = storeAdminService.selectTotalPrice(productDto, shopAdmin.getAdmin_id()); // 총 매출
+		   int TotalProductCount = storeAdminService.selectTotalProductCount(productDto, shopAdmin.getAdmin_id()); // 모든상품수
+		   int TotalProductReviewCount = storeAdminService.selectTotalProductReviewCount(productDto, shopAdmin.getAdmin_id()); // 총 리뷰수
+		   double productReviewAvgScore = storeAdminService.selectProductReviewAvgScore(productDto, shopAdmin.getAdmin_id()); // 총 평점
+	   
 		   model.addAttribute("TotalPrice", TotalPrice); // 총 매출
 		   model.addAttribute("TotalProductCount", TotalProductCount); // 모든상품수
 		   model.addAttribute("TotalProductReviewCount", TotalProductReviewCount); // 총 리뷰수
@@ -54,8 +56,8 @@ public class StoreAdminController {
 		   int id = shopAdmin.getAdmin_id();
 		   hyunMinProductReviewListDto.setAdmin_id(id);
 		   List<HyunMinProductReviewListDto> dashboardproductReviewList = storeAdminService.dashboardproductReviewList(hyunMinProductReviewListDto); //리뷰,평점
-		   List<ProductDto> dashboardProductList = storeAdminService.dashboardProductList(productDto); // 상품리스트
-		   List<ProductDto> dashboardProductOrderList =  storeAdminService.dashboardProductOrderList(productDto); // 오더리스트
+		   List<ProductDto> dashboardProductList = storeAdminService.dashboardProductList(productDto, shopAdmin.getAdmin_id()); // 상품리스트
+		   List<ProductDto> dashboardProductOrderList =  storeAdminService.dashboardProductOrderList(productDto, shopAdmin.getAdmin_id()); // 오더리스트
 
 		   model.addAttribute("dashboardProductList", dashboardProductList); // 상품리스트
 		   model.addAttribute("dashboardProductOrderList", dashboardProductOrderList); // 상품리스트
@@ -396,4 +398,22 @@ public class StoreAdminController {
 		   
 		   return "admin/productDetailReviewListPage";
 	   }
+	   
+	   @ResponseBody
+	   @RequestMapping("getSalesYear")
+	   public Map<String, Object> getSalesYear(int year, HttpSession session){
+		   Map<String, Object> map = new HashMap<String, Object>();
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   
+		   map.put("result", "success");
+		   map.put("currentYearSalesData", storeAdminService.getSalesYear(year, shopAdmin.getAdmin_id()));
+		   map.put("prevYearSalesData", storeAdminService.getSalesYear(year-1, shopAdmin.getAdmin_id()));
+		   
+		   
+		   return map;
+		   
+	   }
+	   
+	   
+	   
 }
