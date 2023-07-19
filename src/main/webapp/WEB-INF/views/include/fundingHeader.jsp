@@ -16,7 +16,7 @@
                 <div class="col-1 logobox"><a href="../funding/fundingMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
                 <div class="col-1"><a href="../funding/fundingListPage">펀딩</a></div>
                 <div class="col-1"><a href="../store/mainPage">스토어</a></div>
-                <div class="col-1 me-auto"><a href="./storePage">자유 게시판</a></div>
+                <div class="col-1 me-auto"><a href="./storePage">커뮤니티</a></div>
                 <div class="col-1"><a href="./loginPage">로그인</a></div>
                 <div class="col-1"><a href="../qna/customerServiceMainPage">고객센터</a></div>
             </div>
