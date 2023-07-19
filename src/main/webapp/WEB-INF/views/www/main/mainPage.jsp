@@ -29,20 +29,17 @@
 <body>
 
 	<jsp:include page="../../include/fundingHeader.jsp"/>
-     
-	
+	<div class="banner-a">
+     <img class="banner-img" src="../../resources/img/banner.jpg">
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col"></div>
 			<div class="col">
-				<div class="row">
-				<div class="col">
-					<img class="img- fluid banner" src="../../resources/img/banner.jpg">
-				</div>
-				</div>
+				
 				
 				<div class="row">
-				<div class="col ca">카테고리명</div>
+				<div class="col-ca">카테고리명</div>
 				</div>							
 				
 				<!-- 여기서 반복문 -->
@@ -50,7 +47,7 @@
 				<c:forEach items="${list }" var="product">
 				<div class="col-a Image "><a class="baby-product-link" href="./productPage?id=${product.product_id }">
 					<div class="row">
-					<div class="col text-center"><img src="/ssofunUploadFiles/${product.thumbnail_name}" style="width:380px; height:380px;" class="img-rounded">
+					<div class="col text-center"><img src="/ssofunUploadFiles/${product.thumbnail_name}" style="width:280px; height:280px;" class="img-rounded">
 					</div>
 					</div>
 					<div class="row r1">

@@ -53,6 +53,8 @@ public interface StoreSqlMapper {
 	// 장바구니 삭제
 	public void deleteByCart(ProductCart cartDto);	
 	
+	// 마이페이지 주문목록 출력
+	public List<ProductOrderItemDto> selectMypageProductList(int id);
 	// 주소 출력
 	public ProductRecipient selectRecipient(ProductRecipient reciDto);
 		

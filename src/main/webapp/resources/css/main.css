@@ -25,6 +25,15 @@ p{
 	width : 51px;
 	height : 20px;
 }
+.banner-a{
+	width: 100%;
+
+}
+.banner-img{
+	width: 100%;
+	height: 400px;
+
+}
 .c1 {
 	width : 1200px;
 	height : 100px;
@@ -70,8 +79,8 @@ p{
 	margin-top: 16px;
 }
 .col-a{
-	width:408px;
-	border-bottom: 1px solid; black;
+	width:306px;
+	border-bottom: 1px solid #ddd;
 }
 .banner {
 	width: 1200px;
@@ -79,8 +88,9 @@ p{
 	margin-bottom: 44px
 }
 
-.ca {
-	margin-bottom: 72px
+.col-ca {
+	width:1224px;
+	margin-bottom: 20px;
 }
 
 .Image {

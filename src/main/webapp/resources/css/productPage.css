@@ -59,17 +59,6 @@ p {
 	width: 1224px;
 }
 
-.baby-product-link:hover .col-ex {
-	color: #0073e9;
-	text-decoration: underline;
-}
-
-.baby-product-link {
-	display: block;
-	border: 1px solid transparent;
-	box-sizing: border-box;
-}
-
 .shopping-menu-list li a:hover {
 	text-decoration: none;
 }

@@ -216,12 +216,32 @@ public class StoreController {
 	    return "www/main/orderCompletePage";
 	}
 	
+	// 컨트롤러 메서드 수정
 	@RequestMapping("myPage")
-	public String myPage(ProductRecipient reciDto, Model model) {
-	    ProductRecipient recipient = storeService.getRecipient(reciDto);
-	    model.addAttribute("recipient", recipient);
-		return "www/main/myPage";
+	public String myPage(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session) {
+	    int itemsPerPage = 6; // 페이지당 아이템 개수
+
+	    ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
+	    int id = sessionUser.getUser_id();
+	    List<ProductOrderItemDto> fullList = storeService.getMypageList(id); // 전체 상품 목록 가져오기
+
+	    // 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+	    List<ProductOrderItemDto> paginatedList = new ArrayList<>();
+	    int startIdx = (page - 1) * itemsPerPage;
+	    int endIdx = Math.min(startIdx + itemsPerPage, fullList.size());
+	    for (int i = startIdx; i < endIdx; i++) {
+	        paginatedList.add(fullList.get(i));
+	    }
+
+	    int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+
+	    model.addAttribute("list", paginatedList);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("pageCount", pageCount);
+
+	    return "www/main/myPage";
 	}
+
 	
 	
 	//==등록 관련

@@ -107,6 +107,12 @@ public class StoreServiceImpl {
 		return CartList;
 	}
 	
+	//마이페이지 주문목록 출력
+	public List<ProductOrderItemDto> getMypageList(int id){
+		List<ProductOrderItemDto> MypageList = storeSqlMapper.selectMypageProductList(id);
+		
+		return MypageList;
+	}
 	
 	//장바구니 삭제
 	public void deleteCart(ProductCart cartDto) {

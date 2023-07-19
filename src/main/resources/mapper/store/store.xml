@@ -151,6 +151,30 @@
 		GROUP BY tb_cart.product_id
 	</select>
 	
+	<!-- 마이페이지 주문목록 출력 -->
+	<select id="selectMypageProductList" resultType="com.ssofun.dto.ProductOrderItemDto">
+		SELECT   po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
+    	poi.count, poi.created_at, tpos.name AS order_status_name
+		FROM
+	    tb_product_order_item AS poi
+	    INNER JOIN tb_product_order AS po ON poi.product_order_id = po.product_order_id
+	    INNER JOIN tb_product AS tp ON poi.product_id = tp.product_id
+	    INNER JOIN tb_product_thumbnail AS tpt ON tp.product_id = tpt.product_id
+	    INNER JOIN tb_user AS tu ON po.user_id = tu.user_id
+	    INNER JOIN tb_product_order_status AS tpos ON poi.product_order_status_id = tpos.product_order_status_id
+		WHERE
+		    tu.user_id = #{user_id} AND poi.used_fg=1
+		GROUP BY
+		    po.product_order_id,
+		    tu.user_id,
+		    tp.product_id,
+		    tp.name,
+		    tp.price_sale,
+		    poi.count,
+		    poi.created_at
+		ORDER BY
+		    poi.created_at DESC;
+	</select>
 	
 	<!-- 주소 출력 -->
 	<select id="selectRecipient" resultType="com.ssofun.dto.ProductRecipient">

@@ -10,6 +10,7 @@ public class ProductOrderItemDto {
 	private int product_id; // FK
 	private int product_order_status_id; // FK
 	private int delivery_recipient_id; // FK
+	private int user_id; // FK
 	private int count; // 개수
 	@JsonFormat(pattern = "yyyy-MM-dd:HH.mm.ss",  timezone = "Asia/Seoul") //데이터 포맷 변환
 	private Date created_at; // 등록일
@@ -37,15 +38,18 @@ public class ProductOrderItemDto {
 	}
 
 	public ProductOrderItemDto(int product_order_item_id, int product_order_id, int product_id,
-			int product_order_status_id, int delivery_recipient_id, int count, Date created_at, int used_fg,
-			String biz_name, String category_type_name, String product_name, String thumbnail_name, int price,
-			int price_sale, String order_status_name, String recipient_name) {
+			int product_order_status_id, int delivery_recipient_id, int user_id, int count, Date created_at,
+			int used_fg, String biz_name, String category_type_name, String product_name, String thumbnail_name,
+			int price, int price_sale, String order_status_name, String recipient_name, String address_post,
+			String address_default, String address_detail, String request_message, int admin_id, int delivery_id,
+			String invoice_no, Date delivery_created_at, String delivery_company_name) {
 		super();
 		this.product_order_item_id = product_order_item_id;
 		this.product_order_id = product_order_id;
 		this.product_id = product_id;
 		this.product_order_status_id = product_order_status_id;
 		this.delivery_recipient_id = delivery_recipient_id;
+		this.user_id = user_id;
 		this.count = count;
 		this.created_at = created_at;
 		this.used_fg = used_fg;
@@ -57,6 +61,15 @@ public class ProductOrderItemDto {
 		this.price_sale = price_sale;
 		this.order_status_name = order_status_name;
 		this.recipient_name = recipient_name;
+		this.address_post = address_post;
+		this.address_default = address_default;
+		this.address_detail = address_detail;
+		this.request_message = request_message;
+		this.admin_id = admin_id;
+		this.delivery_id = delivery_id;
+		this.invoice_no = invoice_no;
+		this.delivery_created_at = delivery_created_at;
+		this.delivery_company_name = delivery_company_name;
 	}
 
 	public int getProduct_order_item_id() {
@@ -97,6 +110,14 @@ public class ProductOrderItemDto {
 
 	public void setDelivery_recipient_id(int delivery_recipient_id) {
 		this.delivery_recipient_id = delivery_recipient_id;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public int getCount() {
@@ -257,6 +278,8 @@ public class ProductOrderItemDto {
 
 	public void setDelivery_company_name(String delivery_company_name) {
 		this.delivery_company_name = delivery_company_name;
-	}	
+	}
+
+	
 	
 }
