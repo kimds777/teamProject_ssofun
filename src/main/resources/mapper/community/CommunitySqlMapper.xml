@@ -5,4 +5,22 @@
 
 
 
+<insert id="insert">
+		INSERT INTO tb_community (
+		user_id, 
+		title, 
+		contents, 
+		read_count, 
+		community_created_at
+		)
+		VALUES(
+		    #{user_id},
+		    #{title},
+		    #{contents},
+		    0,
+		    CURRENT_TIMESTAMP()
+		)
+	</insert>
+
+
 </mapper>
