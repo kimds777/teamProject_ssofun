@@ -99,6 +99,7 @@
 	    )
 	</insert>
 	
+
 	<!-- 장바구니 주문후 물품 제거 등록 -->
 	<update id="cartUpdate">
 	UPDATE tb_cart SET used_fg=0 WHERE product_id=${product_id}
@@ -153,7 +154,7 @@
 	
 	<!-- 마이페이지 주문목록 출력 -->
 	<select id="selectMypageProductList" resultType="com.ssofun.dto.ProductOrderItemDto">
-		SELECT   po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
+		SELECT   poi.product_order_item_id, po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
     	poi.count, poi.created_at, tpos.name AS order_status_name
 		FROM
 	    tb_product_order_item AS poi
@@ -173,7 +174,49 @@
 		    poi.count,
 		    poi.created_at
 		ORDER BY
-		    poi.created_at DESC;
+		    po.product_order_id DESC;
+	</select>
+	
+	<!-- 주문상세 출력 -->
+	<select id="selectOrderDetailList" resultType="com.ssofun.dto.ProductOrderItemDto">
+		SELECT   po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
+    	poi.count, poi.created_at, tpos.name AS order_status_name, tdr.name AS recipient_name,tdr.phone AS recipient_phone,
+    	tdr.address_post, tdr.address_default, tdr.address_detail, tdr.request_message
+		FROM
+	    tb_product_order_item AS poi
+	    INNER JOIN tb_product_order AS po ON poi.product_order_id = po.product_order_id
+	    INNER JOIN tb_product AS tp ON poi.product_id = tp.product_id
+	    INNER JOIN tb_product_thumbnail AS tpt ON tp.product_id = tpt.product_id
+	    INNER JOIN tb_user AS tu ON po.user_id = tu.user_id
+	    INNER JOIN tb_product_order_status AS tpos ON poi.product_order_status_id = tpos.product_order_status_id
+	    INNER JOIN tb_delivery_recipient AS tdr ON poi.delivery_recipient_id = tdr.delivery_recipient_id
+		WHERE
+		    poi.used_fg=1 AND po.product_order_id = #{product_order_id}
+		GROUP BY
+		    po.product_order_id,
+		    tu.user_id,
+		    tp.product_id,
+		    tp.name,
+		    tp.price_sale,
+		    poi.count,
+		    poi.created_at
+	</select>
+	
+	<!-- 리뷰 -->
+	<select id="selectReview" resultType="com.ssofun.dto.ProductOrderItemDto">
+		SELECT   po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
+    	poi.count, poi.created_at, tpos.name AS order_status_name, tdr.name AS recipient_name,tdr.phone AS recipient_phone,
+    	tdr.address_post, tdr.address_default, tdr.address_detail, tdr.request_message
+		FROM
+	    tb_product_order_item AS poi
+	    INNER JOIN tb_product_order AS po ON poi.product_order_id = po.product_order_id
+	    INNER JOIN tb_product AS tp ON poi.product_id = tp.product_id
+	    INNER JOIN tb_product_thumbnail AS tpt ON tp.product_id = tpt.product_id
+	    INNER JOIN tb_user AS tu ON po.user_id = tu.user_id
+	    INNER JOIN tb_product_order_status AS tpos ON poi.product_order_status_id = tpos.product_order_status_id
+	    INNER JOIN tb_delivery_recipient AS tdr ON poi.delivery_recipient_id = tdr.delivery_recipient_id
+		WHERE
+		    poi.used_fg=1 AND poi.product_order_item_id = #{product_order_item_id}
 	</select>
 	
 	<!-- 주소 출력 -->

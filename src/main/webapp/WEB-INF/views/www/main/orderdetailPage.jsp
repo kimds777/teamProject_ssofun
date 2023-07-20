@@ -11,7 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
-<link href="../../resources/css/myPage.css" rel="stylesheet"
+<link href="../../resources/css/orderdetailPage.css" rel="stylesheet"
 	type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -77,75 +77,82 @@
 							<div class="middle-contents">
 								<div class="product-List">
 									<div class="pl-text">
-										<span>주문목록</span>
+										<span>주문상세</span>
 									</div>
 
 									<div class="row">
 										<div class="col">
-											<c:forEach items="${list}" var="item" varStatus="status">
-												<c:if
-													test="${status.index == 0 || item.created_at ne list[status.index - 1].created_at}">
-													<div class="bigbox">
-														<div class="create-date">
-															<fmt:formatDate value="${item.created_at}"
-																pattern="yyyy-MM-dd" />
-														</div>
-														<c:forEach items="${list}" var="innerItem">
-															<c:if test="${item.created_at eq innerItem.created_at}">
-																<div class="middlebox">
-																	<table>
-																		<tr>
-																			<td class="pa">${innerItem.order_status_name }
-																				<div class="img-title">
-																					<div class="img">
-																						<img
-																							src="/ssofunUploadFiles/${innerItem.thumbnail_name}"
-																							style="width: 64px; height: 64px;">
-																					</div>
-																					<div class="npc">
-																						<span>${innerItem.product_name }</span>
-																						<div class="price-count">
-																							<span><fmt:formatNumber
-																									value="${innerItem.price_sale }"
-																									pattern="#,###원" /></span> <span>${innerItem.count }개</span>
-																						</div>
-																					</div>
-																				</div>
-																			</td>
-																		</tr>
-																	</table>
+											<fmt:formatDate value="${list[0].created_at}"
+												pattern="yyyy-MM-dd" />
+											<span>주문번호 ${list[0].product_order_id }</span>
+											<c:forEach items="${list}" var="item">
+												<div class="middlebox">
+													<table>
+														<colgroup>
+															<col width="600">
+															<col width="">
+														</colgroup>
+														<tr>
+															<td class="pa">${item.order_status_name }
+																<div class="img-title">
+																	<div class="img">
+																		<img src="/ssofunUploadFiles/${item.thumbnail_name}"
+																			style="width: 64px; height: 64px;">
+																	</div>
+																	<div class="npc">
+																		<span>${item.product_name }</span>
+																		<div class="price-count">
+																			<span><fmt:formatNumber
+																					value="${item.price_sale }" pattern="#,###원" /></span> <span>${item.count }개</span>
+																		</div>
+																	</div>
 																</div>
-															</c:if>
-														</c:forEach>
-													</div>
-												</c:if>
+															</td>
+															<td class="td-btn">
+																<div class="btn-box">
+																	<button class="btn-review">리뷰 작성하기</button>
+																</div>
+															</td>
+														</tr>
+													</table>
+												</div>
 											</c:forEach>
 										</div>
 									</div>
-								</div>
 
-								<!-- 페이지네이션 부분 수정 -->
-								<div class="pagination jOhOoP">
-									<c:choose>
-										<c:when test="${currentPage > 1}">
-											<a href="?page=${currentPage - 1}" class="previous-button">이전</a>
-										</c:when>
-										<c:otherwise>
-											<span class="previous-button">이전</span>
-										</c:otherwise>
-									</c:choose>
+									<div class="row">
+										<div class="col">
+											<div class="rcpInf">
+											<span class="sp-text">받는사람 정보</span>
+											<table class="re-table">
+												<tr>
+													<td class="recipient-td1">받는사람</td>
+													<td class="pname-td2 td2">${list[0].recipient_name}</td>
+													<td></td>
+												</tr>
+												
+												<tr>
+													<td class="recipient-td1">연락처</td>
+													<td class="pname-td2 td2">${list[0].recipient_phone}</td>
+													<td></td>
+												</tr>
+			
+												<tr>
+													<td class="recipient-td1">받는주소</td>
+													<td class="pcount-td2 td2">(${list[0].address_post}) ${list[0].address_default} ${list[0].address_detail}</td>
+													<td></td>
+												</tr>
+			
+												<tr>
+													<td class="recipient-message">배송요청사항</td>
+													<td class="recipient-message">${list[0].request_message}</td>
+													<td></td>
+												</tr>
+											</table>
+											</div>
+										</div>
+									</div>
 
-									<!-- 페이지 번호를 표시하지 않고 이전과 다음 페이지로 이동할 수 있는 링크만을 제공 -->
-									<!-- 페이지 번호 표시가 필요하지 않으므로 해당 부분을 삭제 -->
-
-									<c:choose>
-										<c:when test="${currentPage < pageCount}">
-											<a href="?page=${currentPage + 1}" class="next-button">다음</a>
-										</c:when>
-										<c:otherwise>
-											<span class="next-button">다음</span>
-										</c:otherwise>
-									</c:choose>
 								</div>
 
 							</div>

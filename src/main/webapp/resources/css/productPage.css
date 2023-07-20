@@ -10,11 +10,7 @@ a {
 	color: inherit; /* 링크의 색상 제거 */
 }
 
-p {
-	color: gray;
-	width: 56px;
-	height: 20px;
-}
+
 
 .thumbnail-img:hover {
 	border: 2px solid #346aff;

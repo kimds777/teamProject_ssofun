@@ -114,6 +114,18 @@ public class StoreServiceImpl {
 		return MypageList;
 	}
 	
+	//마이페이지 주문목록 출력
+	public List<ProductOrderItemDto> getOrderDetailList(int id){
+		List<ProductOrderItemDto> OrderDetailList = storeSqlMapper.selectOrderDetailList(id);
+			
+		return OrderDetailList;
+	}
+	
+	// 리뷰
+	public ProductOrderItemDto getReview(int id) {
+		return storeSqlMapper.selectReview(id);
+	}
+	
 	//장바구니 삭제
 	public void deleteCart(ProductCart cartDto) {
 		storeSqlMapper.deleteByCart(cartDto);

@@ -23,6 +23,7 @@ public class ProductOrderItemDto {
 	private int price_sale; // 할인가
 	private String order_status_name; // 상태명
 	private String recipient_name; // 수령인
+	private String recipient_phone;
 	private String address_post; // 우편번호
 	private String address_default; // 기본주소
 	private String address_detail; // 상세주소
@@ -40,9 +41,9 @@ public class ProductOrderItemDto {
 	public ProductOrderItemDto(int product_order_item_id, int product_order_id, int product_id,
 			int product_order_status_id, int delivery_recipient_id, int user_id, int count, Date created_at,
 			int used_fg, String biz_name, String category_type_name, String product_name, String thumbnail_name,
-			int price, int price_sale, String order_status_name, String recipient_name, String address_post,
-			String address_default, String address_detail, String request_message, int admin_id, int delivery_id,
-			String invoice_no, Date delivery_created_at, String delivery_company_name) {
+			int price, int price_sale, String order_status_name, String recipient_name, String recipient_phone,
+			String address_post, String address_default, String address_detail, String request_message, int admin_id,
+			int delivery_id, String invoice_no, Date delivery_created_at, String delivery_company_name) {
 		super();
 		this.product_order_item_id = product_order_item_id;
 		this.product_order_id = product_order_id;
@@ -61,6 +62,7 @@ public class ProductOrderItemDto {
 		this.price_sale = price_sale;
 		this.order_status_name = order_status_name;
 		this.recipient_name = recipient_name;
+		this.recipient_phone = recipient_phone;
 		this.address_post = address_post;
 		this.address_default = address_default;
 		this.address_detail = address_detail;
@@ -208,6 +210,14 @@ public class ProductOrderItemDto {
 		this.recipient_name = recipient_name;
 	}
 
+	public String getRecipient_phone() {
+		return recipient_phone;
+	}
+
+	public void setRecipient_phone(String recipient_phone) {
+		this.recipient_phone = recipient_phone;
+	}
+
 	public String getAddress_post() {
 		return address_post;
 	}
@@ -280,6 +290,7 @@ public class ProductOrderItemDto {
 		this.delivery_company_name = delivery_company_name;
 	}
 
+	
 	
 	
 }

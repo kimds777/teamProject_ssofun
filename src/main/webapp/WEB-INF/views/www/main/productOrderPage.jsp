@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -7,20 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
-<link href="../../resources/css/productOrder.css" rel="stylesheet"	type="text/css">
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+    crossorigin="anonymous">
+<link href="../../resources/css/productOrder.css" rel="stylesheet"    type="text/css">
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>Document</title>
 </head>
 <body>
-	<jsp:include page="../../include/fundingHeader.jsp"/>
-	
-	 <div class="container">
+    <jsp:include page="../../include/fundingHeader.jsp"/>
+    
+     <div class="container">
        <div class="row">
         <div class="col"></div>
         <div class="col">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-				<form action="./productOrderProcess" method="post">
+                <form action="./productOrderProcess" method="post">
                 <div class="row">
                     <div class="col-customer">
                         <h2 class="delivery-address-h2">받는사람 정보</h2>
@@ -94,9 +94,9 @@
                 </div>
                 
                 <div class="row">
-                	<div class="col-customer">
-                		 <h2 class="customer-h2">배송상품</h2>
-                		<c:if test="${not empty detail}">                       
+                    <div class="col-customer">
+                         <h2 class="customer-h2">배송상품</h2>
+                        <c:if test="${not empty detail}">                       
                         <table class="customer-table">
                                 <tr>
                                     <td class="customer-td1">상품명</td>
@@ -104,17 +104,16 @@
                                      <td class="customer-td1">수량</td>
                                     <td class="customer-td2">${count }개</td>
                                 </tr>
-                		</table>
-                		</c:if>
-                		
-                	             		           
-                	</div>
+                        </table>
+                        </c:if>
+                                    
+                    </div>
                 </div>           
                 
                 
                 <div class="row">
                     <div class="col-customer">
-                    	<c:if test="${not empty detail}">
+                        <c:if test="${not empty detail}">
                         <h2 class="customer-h2">결제정보</h2>
                         <table class="customer-table">
                                
@@ -137,13 +136,12 @@
                     </div>
                 </div>
                 
-                
-                
                 <div class="row">
                     <div class="col-agreebtn">
-	                    <input type="hidden" name="amount" value="${amount}" readonly/>
-						<input type="hidden" name="count" value="${count}" readonly/>						
-						<input type="hidden" name="product_id" id="productId" readonly/>
+                        <input type="hidden" name="amount" value="${amount}" readonly/>
+                        <input type="hidden" name="count" value="${count}" readonly/>                      
+                        <input type="hidden" name="product_id" id="productId" readonly/>
+                         <input type="hidden" name="order_number" id="orderNumberInput" readonly/>
                         <button class="prod-buy-btn">구매하기</button>            
                     </div>
                 </div>
@@ -157,7 +155,7 @@
     </div>
     
 <script>
- 	// URL에서 id 값을 추출하여 productId input 요소의 value에 설정
+    // URL에서 id 값을 추출하여 productId input 요소의 value에 설정
     var url = new URL(window.location.href);
     var id = url.searchParams.get("id");
     document.getElementById("productId").value = id;
@@ -211,14 +209,35 @@
             }
         }).open();
     }
-    
+
+ // 주문번호 생성 함수
+    function generateOrderNumber() {
+        // 현재 날짜 및 시간을 기반으로 주문번호 생성
+        var now = new Date();
+        var year = now.getFullYear().toString().substr(-2); // 뒤의 두 자리만 사용 (예: 2023 -> 23)
+        var month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
+        var date = now.getDate().toString().padStart(2, '0');
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+
+        // 랜덤한 6자리 숫자 생성
+        var randomNumber = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+
+        // 주문번호 형식: 년월일시분초_랜덤숫자 (예: 230719161234_123456)
+        var orderNumber = year + month + date + hours + minutes + seconds + '_' + randomNumber;
+        return orderNumber;
+    }
+
+    // 주문번호를 생성하여 input 요소에 설정
+    document.getElementById("orderNumberInput").value = generateOrderNumber();
 
 </script>
-    
-    
+
+
 <script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-		crossorigin="anonymous"></script>
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
 </body>
 </html>

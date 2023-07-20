@@ -55,6 +55,13 @@ public interface StoreSqlMapper {
 	
 	// 마이페이지 주문목록 출력
 	public List<ProductOrderItemDto> selectMypageProductList(int id);
+	
+	// 주문상세 출력
+	public List<ProductOrderItemDto> selectOrderDetailList(int id);
+	
+	// 리뷰관리
+	public ProductOrderItemDto selectReview(int id);
+	
 	// 주소 출력
 	public ProductRecipient selectRecipient(ProductRecipient reciDto);
 		

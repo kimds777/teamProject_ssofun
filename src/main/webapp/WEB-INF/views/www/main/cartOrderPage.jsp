@@ -145,7 +145,8 @@
 						 <c:forEach items="${list}" var="item">
 					        <input type="hidden" name="product_id" value="${item.product_id}" />
 					        <input type="hidden" name="count" value="${item.total_count}" readonly/>
-					    </c:forEach>												
+					    </c:forEach>
+					    <input type="hidden" name="order_number" id="orderNumberInput" readonly/>												
                         <button class="prod-buy-btn">구매하기</button>            
                     </div>
                 </div>
@@ -158,13 +159,30 @@
        </div>
     </div>
     
-<script>
- 	// URL에서 id 값을 추출하여 productId input 요소의 value에 설정
-    var url = new URL(window.location.href);
-    var id = url.searchParams.get("id");
-    document.getElementById("productId").value = id;
+<script>    
     
-    
+//주문번호 생성 함수
+function generateOrderNumber() {
+    // 현재 날짜 및 시간을 기반으로 주문번호 생성
+    var now = new Date();
+    var year = now.getFullYear().toString().substr(-2); // 뒤의 두 자리만 사용 (예: 2023 -> 23)
+    var month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
+    var date = now.getDate().toString().padStart(2, '0');
+    var hours = now.getHours().toString().padStart(2, '0');
+    var minutes = now.getMinutes().toString().padStart(2, '0');
+    var seconds = now.getSeconds().toString().padStart(2, '0');
+
+    // 랜덤한 6자리 숫자 생성
+    var randomNumber = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+
+    // 주문번호 형식: 년월일시분초_랜덤숫자 (예: 230719161234_123456)
+    var orderNumber = year + month + date + hours + minutes + seconds + '_' + randomNumber;
+    return orderNumber;
+}
+
+// 주문번호를 생성하여 input 요소에 설정
+document.getElementById("orderNumberInput").value = generateOrderNumber();
+
     //주소 입력 api
     function address_input() {
         new daum.Postcode({

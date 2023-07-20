@@ -127,7 +127,11 @@ button {
 	margin-bottom: 20px;
 	padding: 24px 24px 16px;
 }
-
+.order-title{
+	height: 28px;
+    display: flex;
+    justify-content: space-between;
+}
 .create-date {
 	display: inline-block;
 	width: 50%;
@@ -140,7 +144,9 @@ button {
 	letter-spacing: -0.5px;
 	color: rgb(17, 17, 17);
 }
-
+.order-detail{
+    color: rgb(52, 106, 255);
+}
 .middlebox {
 	border-radius: 8px;
 	border: 1px solid rgb(238, 238, 238);
@@ -161,16 +167,10 @@ button {
 .img{
 	display: flex;
     width: 64px;
-    position: relative;
+   
     margin-right: 16px;
 }
-.npct{
-	
-}
 
-.price-count{
-	
-}
 
 .pagination{
 	display: flex;
@@ -207,5 +207,30 @@ button {
     color: #FFFFFF;
     background: #FF6462;
     border: 1px solid rgb(221, 221, 221);ㅇ
+    font-size: 0.875rem;
+}
+.td-btn {
+    width: 200px;
+    height: 100%;
+    text-align: center;
+    border-left: 1px solid rgb(238, 238, 238);
+}
+.btn-box{
+	display: flex;
+    flex-flow: column wrap;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+.btn-review{
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 2.25rem;
+    width: 100%;
+    border-radius: 4px;
+    color: rgb(17, 17, 17);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
     font-size: 0.875rem;
 }
