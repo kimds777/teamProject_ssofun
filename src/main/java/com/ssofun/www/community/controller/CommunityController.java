@@ -22,6 +22,8 @@ public class CommunityController {
 	@Autowired
 	private IntegratedAuthenticationService integratedAuthenticationService;
 	
+	
+	// 사용자 로그인 페이지
 	@RequestMapping("loginPage")
 	public String userLoginPage(HttpSession session) {
 		
@@ -48,6 +50,7 @@ public class CommunityController {
 	}
 	
 	
+	// 커뮤니티 메인페이지 
 	@RequestMapping("communityMainPage")
 	public String communityMainPage(HttpSession session) {
 		UserDto user = (UserDto)session.getAttribute("user");

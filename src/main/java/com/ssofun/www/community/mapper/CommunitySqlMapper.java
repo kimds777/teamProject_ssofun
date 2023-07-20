@@ -5,5 +5,5 @@ import com.ssofun.dto.CommunityDto;
 public interface CommunitySqlMapper {
 
 	
-	public void insert(CommunityDto communityDto);
+	public void communityWriteInsert(CommunityDto communityDto);
 }

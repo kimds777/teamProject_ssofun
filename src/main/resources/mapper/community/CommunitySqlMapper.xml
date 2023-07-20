@@ -5,7 +5,7 @@
 
 
 
-<insert id="insert">
+<insert id= "communityWriteInsert">
 		INSERT INTO tb_community (
 		user_id, 
 		title, 
