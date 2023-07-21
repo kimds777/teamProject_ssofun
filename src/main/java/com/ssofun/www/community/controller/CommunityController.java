@@ -1,9 +1,13 @@
 package com.ssofun.www.community.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssofun.dto.CommunityDto;
@@ -52,15 +56,19 @@ public class CommunityController {
 	
 	// 커뮤니티 메인페이지 
 	@RequestMapping("communityMainPage")
-	public String communityMainPage(HttpSession session) {
+	public String communityMainPage(HttpSession session, Model model) {
 		UserDto user = (UserDto)session.getAttribute("user");
 
+		
+		List<Map<String, Object>> list = communityService.communityList();
+		model.addAttribute("list", list); 
 		
 		
 		return "www/community/communityMainPage";
 	}
 
 	
+	//커뮤니티 글쓰기 페이지
 	@RequestMapping("communityWritePage")
 	public String communityWritePage() {
 		
@@ -81,5 +89,17 @@ public class CommunityController {
 		return "redirect:./communityMainPage";
 	}
 	
+	
+	//커뮤니티 글 내용 읽기 페이지 
+		@RequestMapping("communityReadPage")
+		public String communityReadPage(Model model, int community_id ) {
+			
+			Map<String,Object> map = communityService.getCommunity(community_id);
+			
+			model.addAttribute("data", map);
+			
+			return "www/community/communityReadPage";
+			
+		}
 	
 }
