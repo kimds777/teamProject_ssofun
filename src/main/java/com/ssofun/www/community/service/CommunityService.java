@@ -66,6 +66,20 @@ public class CommunityService {
 	  
 	  }
 	 
+	  // 조회수 증가
+	  public void increaseReadCount(int community_id) {
+		  communitySqlMapper.increaseReadCount(community_id);
+		}
+		
+	  // 글 삭제 
+		public void deleteContent(int community_id) {
+			communitySqlMapper.deleteById(community_id);
+		}
+		
+	  // 글 수정 
+		public void contentsUpdate(CommunityDto communityDto) {
+			communitySqlMapper.contentsUpdate(communityDto);
+		}
 	
 	
 

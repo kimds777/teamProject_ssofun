@@ -52,8 +52,24 @@
 	
 	</select>
 	
+	<!--조회수 증가 -->
+	<update id="increaseReadCount">
+		UPDATE tb_community 
+		SET read_count = read_count + 1
+		WHERE community_id = #{community_id}
+	</update>
 	
-
+	<!--글 삭제  -->
+	<delete id="deleteById">
+		DELETE FROM tb_community WHERE community_id = #{community_id}
+	</delete>
+	
+	<!--글 수정  -->
+	<update id="contentsUpdate">
+		UPDATE tb_community
+		SET title = #{title}, contents = #{contents}
+		WHERE community_id = #{community_id}
+	</update>
 
 
 </mapper>

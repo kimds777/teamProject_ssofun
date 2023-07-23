@@ -29,7 +29,7 @@
 	
 		<tr>
 			<td>${map.communityDto.community_id} </td>
-			<td><a href="./communityReadPage?community_id=${map.communityDto.community_id} }">${map.communityDto.title}</a> </td>
+			<td><a href="./communityReadPage?community_id=${map.communityDto.community_id}">${map.communityDto.title}</a></td>
 			<td>${map.communityDto.read_count} </td>
 			<td>${map.userDto.nickname} </td>
 			<td>${map.communityDto.community_created_at} </td>	
