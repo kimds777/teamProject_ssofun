@@ -14,6 +14,8 @@ a{text-decoration: none; color: black;}
 
 
 #topBg{box-shadow: inset 0 20px 30px rgba(0,0,0,0.02); width: 100%; height: 1000px; background-color: #f8f9fa; position: absolute; top: 100px; left: 0;} /*#FF6462, #f8f9fa, #f16866*/ /*background-image: linear-gradient(180deg,#e9ecef,#ffffff)*/
+div#height{height: auto;}
+
 div.myPage{width: 100%; height: 800px; z-index: 10; position: absolute; top: 0; left: 0;}
 .fakeSection{box-shadow: inset 0 20px 30px rgba(0,0,0,0.01); width: 100%; height: 80px; background-color: #f8f9fa; position: absolute; top: 0; left: 0; overflow: hidden;}
 #myPageTab{width: 180px; height: 70px; position: absolute; bottom: -15px; right: 0; margin-bottom: 0; padding: 0;}
