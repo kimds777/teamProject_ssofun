@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +62,15 @@ public class CommunityController {
 
 		
 		List<Map<String, Object>> list = communityService.communityList();
+		
+	    // list에 있는 각각의 CommunityDto에 대해 title을 HTML 이스케이프 처리
+	    for (Map<String, Object> item : list) {
+	        CommunityDto communityDto = (CommunityDto) item.get("communityDto");
+	        String title = communityDto.getTitle();
+	        title = StringEscapeUtils.escapeHtml4(title);
+	        communityDto.setTitle(title);
+	    }
+
 		model.addAttribute("list", list); 
 		
 		
@@ -90,13 +100,27 @@ public class CommunityController {
 	}
 	
 	
-	//커뮤니티 글 내용 읽기 페이지 
+	//커뮤니티 글 내용 상세 페이지 
 		@RequestMapping("communityReadPage")
 		public String communityReadPage(Model model, int community_id ) {
 			communityService.increaseReadCount(community_id);
 			
 			Map<String,Object> map = communityService.getCommunity(community_id);
 			
+
+			// html escape 글 내용 
+			CommunityDto communityDto = (CommunityDto)map.get("communityDto");
+			String contents = communityDto.getContents();
+			contents = StringEscapeUtils.escapeHtml4(contents);
+			contents = contents.replaceAll("\n", "<br>");
+			communityDto.setContents(contents);
+			
+			// html escape 제목
+			String title = communityDto.getTitle();
+			title = StringEscapeUtils.escapeHtml4(title);
+			communityDto.setTitle(title);
+
+	
 			model.addAttribute("data", map);
 			
 			return "www/community/communityReadPage";
