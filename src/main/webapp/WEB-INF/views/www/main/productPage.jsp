@@ -137,47 +137,35 @@
 					</div>
 				</div>
 			</div>
-
-
-
-			<div class="inner">
-				<div class="box">
+			
+			
+			<div class="box">
 					<div class="col-tab">
 						<ul class="nav tab-titles">
-							<li class="nav-item"><a class="nav-link" href="#se1"
-								onclick="changeTab(event, 0)">필수정보고시</a></li>
-							<li class="nav-item"><a class="nav-link" href="#se2"
-								onclick="changeTab(event, 1)">상세설명</a></li>
-							<li class="nav-item"><a class="nav-link" href="#se3"
-								onclick="changeTab(event, 2)">상품리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#se4"
-								onclick="changeTab(event, 3)">배송,교환,반품안내</a></li>
+							<li class="nav-item"><a class="nav-link" href="#scroll1">필수정보고시</a></li>
+							<li class="nav-item"><a class="nav-link" href="#scroll2">상세설명</a></li>
+							<li class="nav-item"><a class="nav-link" href="#scroll3">상품리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="#scroll4">배송,교환,반품안내</a></li>	
 						</ul>
 					</div>
 				</div>
-
-				<div id="se1" class="row">
-					<div class="col-rqrInf">필수정보고시</div>
-				</div>
-
-				<div id="se2" class="row">
-					<div class="col-dtl">
-						상세설명<br> (HTML,이미지)
-					</div>
-				</div>
-
-
-				<div id="se3" class="row">
-					<div class="col-review">상품리뷰</div>
-				</div>
-
-				<div class="row">
-					<div class="col-review-box"></div>
-				</div>
-
-
+					
+			<div>
+			  <ul class="list">
+			    <li><a href="#scroll1" class="scroll_move">scroll1</a><li>
+			    <li><a href="#scroll2" class="scroll_move">scroll2</a><li>
+			    <li><a href="#scroll3" class="scroll_move">scroll3</a><li>
+			    <li><a href="#scroll4" class="scroll_move">scroll4</a><li>
+			  </ul>
 			</div>
-
+			
+			<div class="listbox">
+			  <div class="scroll1" id="scroll1">scroll1</div>
+			  <div class="scroll2" id="scroll2">scroll2</div>
+			  <div class="scroll3" id="scroll3">scroll3</div>
+			  <div class="scroll4" id="scroll4">scroll4</div>
+			</div>
+			
 
 
 
@@ -202,6 +190,12 @@
 		 );
 	});
 	
+	 $(document).ready(function($) {
+         $(".scroll_move").click(function(event){
+             event.preventDefault();
+             window.location.hash = this.hash;
+         });
+     });
 	
 	
 	// 결제금액 표시

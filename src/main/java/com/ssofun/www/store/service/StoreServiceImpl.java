@@ -85,11 +85,33 @@ public class StoreServiceImpl {
 		storeSqlMapper.insertByOrderItem(poiDto);
 	}
 	
+	//리뷰 등록
+	public void regitstReview(ProductReviewDto reDto) {
+		storeSqlMapper.insertByReview(reDto);
+	}
+	
+	//리뷰 이미지등록
+	public void registReimg(ProductReviewImageDto reimgDto, List<ProductReviewImageDto> reimg_list) {
+		for(ProductReviewImageDto rid : reimg_list) {
+			String url = rid.getUrl();
+			int list = rid.getOrder_list();
+			reimgDto.setOrder_list(list);
+			reimgDto.setUrl(url);
+			storeSqlMapper.insertByReviewImg(reimgDto);
+		}
+	}
+	
 	//상품출력
 	public List<ProductDto> getItemList( ProductDto producDto){
 		List<ProductDto> productList = storeSqlMapper.selectProductList(producDto);
 		
 		return productList;
+	}
+	
+	//카테고리 출력
+	public List<ProductCategoryTypeDto> getProductCT(ProductCategoryTypeDto pctDto){
+		List<ProductCategoryTypeDto> productCTList = storeSqlMapper.selectProductCT(pctDto);
+		return productCTList;
 	}
 	
 	//상품상세보기

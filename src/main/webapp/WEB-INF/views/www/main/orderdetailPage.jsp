@@ -6,79 +6,87 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>주문상세</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
-<link href="../../resources/css/orderdetailPage.css" rel="stylesheet"
-	type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	
+<link href="../../resources/css/orderdetailPage.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/user_my.css" rel="stylesheet"
+	type="text/css">
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<title>Document</title>
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body>
 	<jsp:include page="../../include/fundingHeader.jsp" />
+	
+	<div id="topBg"></div>
+	<div class="section zIndex">
+		<div class="myPage">
+			<div class="fakeSection">
+				<ul id="myPageTab">
+					<li class="click"><a class="click" href="">서포터</a><i
+						class="bi bi-caret-down-fill click"></i></li>
+					<li><a href="">창작자</a><i class="bi bi-caret-down-fill"></i></li>
+				</ul>
+			</div>
 
-	<div class="container">
-		<div class="box-size">
-			<div class="row">
-				<div class="col-left">
-					<div class="my-title">
-						<span class="s-title">MY쏘펀</span>
-					</div>
+			<div id="myPageSection">
+				<div id="profile">
+					<ul id="first">
+						<li id="profileIcon"><span></span></li>
+						<li id="makerName">이지광님</li>
+						<li id="logout">로그아웃</li>
+					</ul>
+					<dl>
+						<dt>나의 쇼핑 내역</dt>
+						<!--중분류명 넣으면 됩니다-->
+						<dd class="click">
+							<a class="click" href="./orderListPage">주문목록</a><i
+								class="bi bi-caret-right-fill click"></i>
+						</dd>
+						<!--여기에 메뉴 넣으세요!-->
+						<dd class="click">
+							<a class="click" href="">주문 / 배송조회</a><i
+								class="bi bi-caret-right-fill click"></i>
+						</dd>
+						<!--여기에 메뉴 넣으세요!-->
+						<dd>
+							<a href="">주문 / 배송조회</a><i class="bi bi-caret-right-fill"></i>
+						</dd>
+						<!--여기에 메뉴 넣으세요!-->
+					</dl>
 
-					<div class="row">
-						<div class="col">
-							<div class="myMenu">
-								<div class="myMenu-first">
-									<div class="myMenu-title">My 쇼핑</div>
-									<div class="myMenu-content">
-										<ul>
-											<li>주문목록</li>
-										</ul>
-									</div>
-								</div>
-
-								<div class="myMenu-first">
-									<div class="myMenu-title">My 활동</div>
-									<div class="myMenu-content">
-										<ul>
-											<li>문의하기</li>
-											<li>문의내역 확인</li>
-											<li>리뷰관리</li>
-										</ul>
-									</div>
-								</div>
-
-								<div class="myMenu-last">
-									<div class="myMenu-title">My 정보</div>
-									<div class="myMenu-content">
-										<ul>
-											<li>개인정보확인/수정</li>
-											<li>문의내역 확인</li>
-											<li>리뷰관리</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<dl>
+						<dt>나의 펀딩 내역</dt>
+						<dd>
+							<a href="">후원한 프로젝트</a><i class="bi bi-caret-right-fill"></i>
+						</dd>
+						<dd>
+							<a href="">프로젝트 후기</a><i class="bi bi-caret-right-fill"></i>
+						</dd>
+					</dl>
 				</div>
-				<div class="col-middle">
-					<div class="middle-top">
-						<ul class="top-box"></ul>
-					</div>
+				<div id="contents">
+					<div id="leftBorder">
+						<div id="subTitle">
+							<h5>주문상세</h5>
+						</div>
+						<div id="list">
+							<!--리스트 영역-->
 
-					<div class="row">
-						<div class="col">
+							<div class="row">
+						<div class="col p-0">
 							<div class="middle-contents">
-								<div class="product-List">
-									<div class="pl-text">
-										<span>주문상세</span>
-									</div>
+								<div class="product-List">		
 
 									<div class="row">
 										<div class="col">
@@ -110,7 +118,7 @@
 															</td>
 															<td class="td-btn">
 																<div class="btn-box">
-																	<button class="btn-review">리뷰 작성하기</button>
+																	<button class="btn-review" type="button" onclick="location.href='./productReviewPage?id=${item.product_order_item_id }' ">리뷰 작성하기</button>
 																</div>
 															</td>
 														</tr>
@@ -158,11 +166,17 @@
 							</div>
 						</div>
 					</div>
+						</div>
+
+					</div>
 				</div>
-				<div class="col"></div>
+
 			</div>
 		</div>
+
 	</div>
+
+	<script src="../../resources/js/user_my.js"></script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

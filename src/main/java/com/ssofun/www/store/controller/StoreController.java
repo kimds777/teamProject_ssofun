@@ -33,19 +33,30 @@ public class StoreController {
 	}
 
 	@RequestMapping("test")
-	public String test(ProductDto producDto, Model model) {
-		List<ProductDto> list = storeService.getItemList(producDto);
-		model.addAttribute("list", list);
+	public String test(ProductDto producDto, Model model,ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);// tb_product_category_type 테이블 값가져오기
+
+		model.addAttribute("pctlist", pctlist); // tb_product_category_type 테이블
+		
 		return "www/main/test";
+	}
+	@RequestMapping("testtest")
+	public String testtest(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);// tb_product_category_type 테이블 값가져오기
+
+		model.addAttribute("pctlist", pctlist); // tb_product_category_type 테이블
+		
+		return "www/main/testtest";
 	}
 	// =================
 
 	// 스토어 리스트 메인페이지
 	@RequestMapping("mainPage")
-	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model) {
-		int itemsPerPage = 8; // 페이지당 아이템 개수
+	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
 		List<ProductDto> fullList = storeService.getItemList(producDto); // 전체 상품 목록 가져오기
-
+		
+		int itemsPerPage = 8; // 페이지당 아이템 개수
 		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
 		List<ProductDto> paginatedList = new ArrayList<>();
 		int startIdx = (page - 1) * itemsPerPage;
@@ -55,7 +66,7 @@ public class StoreController {
 		}
 
 		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
-
+		model.addAttribute("pctlist", pctlist);
 		model.addAttribute("list", paginatedList);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("pageCount", pageCount);
@@ -140,8 +151,7 @@ public class StoreController {
 
 	// 주문페이지
 	@RequestMapping("productOrderProcess")
-	public String productOrderProcess(ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto,
-			ProductDto pDto, HttpSession session) {
+	public String productOrderProcess(ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto,ProductDto pDto, HttpSession session) {
 		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		porDto.setUser_id(id);
@@ -235,7 +245,7 @@ public class StoreController {
 	// 마이페이지 주문목록출력
 	@RequestMapping("orderListPage")
 	public String orderListPage(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session) {
-		int itemsPerPage = 3; // 페이지당 아이템 개수
+		int itemsPerPage = 5; // 페이지당 아이템 개수
 		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		List<ProductOrderItemDto> fullList = storeService.getMypageList(id); // 전체 상품 목록 가져오기
@@ -270,6 +280,48 @@ public class StoreController {
 		ProductOrderItemDto rev = storeService.getReview(id);
 		model.addAttribute("rev", rev);
 		return "www/main/productReviewPage";
+	}
+	
+	//리뷰작성처리
+	@RequestMapping("productReviewProcess")
+	public String productReviewProcess(Model model,HttpSession session, ProductReviewDto reDto, ProductReviewImageDto param,MultipartFile[] imageFiles) {
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
+		int id = sessionUser.getUser_id();
+		reDto.setUser_id(id);
+		
+		int totalFiles = imageFiles.length; // 등록된 이미지 파일의 총 개수
+
+		List<ProductReviewImageDto> reimglist = new ArrayList<>();
+
+		if (totalFiles > 0) {
+			for (int i = 0; i < totalFiles; i++) {
+				MultipartFile multipartFile = imageFiles[i];
+
+				if (multipartFile.isEmpty()) {
+					continue;
+				}
+
+				System.out.println("파일명: " + multipartFile.getOriginalFilename());
+
+				String rootFolder = "C:/ssofunReImgFiles/";
+
+				String saveFileName = multipartFile.getOriginalFilename();
+
+				try {
+					multipartFile.transferTo(new File(rootFolder + saveFileName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				ProductReviewImageDto reimg = new ProductReviewImageDto();
+				reimg.setUrl(saveFileName);
+				reimg.setOrder_list(i);
+				reimglist.add(reimg);
+			}
+		}
+		storeService.regitstReview(reDto);
+		storeService.registReimg(param, reimglist);
+		return "redirect:./orderListPage";
 	}
 
 	@RequestMapping("userMyPage")

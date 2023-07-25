@@ -141,7 +141,6 @@
                         <input type="hidden" name="amount" value="${amount}" readonly/>
                         <input type="hidden" name="count" value="${count}" readonly/>                      
                         <input type="hidden" name="product_id" id="productId" readonly/>
-                         <input type="hidden" name="order_number" id="orderNumberInput" readonly/>
                         <button class="prod-buy-btn">구매하기</button>            
                     </div>
                 </div>
@@ -210,27 +209,7 @@
         }).open();
     }
 
- // 주문번호 생성 함수
-    function generateOrderNumber() {
-        // 현재 날짜 및 시간을 기반으로 주문번호 생성
-        var now = new Date();
-        var year = now.getFullYear().toString().substr(-2); // 뒤의 두 자리만 사용 (예: 2023 -> 23)
-        var month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
-        var date = now.getDate().toString().padStart(2, '0');
-        var hours = now.getHours().toString().padStart(2, '0');
-        var minutes = now.getMinutes().toString().padStart(2, '0');
-        var seconds = now.getSeconds().toString().padStart(2, '0');
 
-        // 랜덤한 6자리 숫자 생성
-        var randomNumber = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
-
-        // 주문번호 형식: 년월일시분초_랜덤숫자 (예: 230719161234_123456)
-        var orderNumber = year + month + date + hours + minutes + seconds + '_' + randomNumber;
-        return orderNumber;
-    }
-
-    // 주문번호를 생성하여 input 요소에 설정
-    document.getElementById("orderNumberInput").value = generateOrderNumber();
 
 </script>
 

@@ -130,3 +130,33 @@
   opacity: 0;
   cursor: pointer;
 }
+
+.review-register{
+	    padding-top: 30px;
+    text-align: center;
+}
+.cancel-button{
+	    width: 120px;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    color: #111;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #ccc;
+    margin-right: 4px;
+}
+.submit-button{
+	    width: 120px;
+    height: 38px;
+    box-sizing: border-box;
+    border: none;
+    background-color: #346aff;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}

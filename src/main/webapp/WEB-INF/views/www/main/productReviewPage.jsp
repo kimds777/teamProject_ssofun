@@ -85,7 +85,8 @@
 						<div id="list">
 							<!--리스트 영역-->
 
-							<form class="mb-3" name="myform" id="myform" method="post" enctype="multipart/form-data">
+							<form action="./productReviewProcess" class="mb-3" id="myform" method="post"
+								enctype="multipart/form-data">
 								<div class="my-review">
 									<div class="review-table">
 										<div class="re-img">
@@ -96,15 +97,12 @@
 										<div>
 
 											<fieldset>
-												<span class="text-bold">별점을 선택해주세요</span> <input
-													type="radio" name="reviewStar" value="5" id="rate1"><label
-													for="rate1">★</label> <input type="radio" name="reviewStar"
-													value="4" id="rate2"><label for="rate2">★</label> <input
-													type="radio" name="reviewStar" value="3" id="rate3"><label
-													for="rate3">★</label> <input type="radio" name="reviewStar"
-													value="2" id="rate4"><label for="rate4">★</label> <input
-													type="radio" name="reviewStar" value="1" id="rate5"><label
-													for="rate5">★</label>
+												<span class="text-bold">별점을 선택해주세요</span> 
+													<input type="radio" name="rate" value="5" id="rate1"><label for="rate1">★</label> 													
+													<input type="radio" name="rate" value="4" id="rate2"><label for="rate2">★</label> 
+													<input type="radio" name="rate" value="3" id="rate3"><label for="rate3">★</label> 
+													<input type="radio" name="rate"	value="2" id="rate4"><label for="rate4">★</label> 
+													<input type="radio" name="rate" value="1" id="rate5"><label for="rate5">★</label>
 											</fieldset>
 
 
@@ -115,26 +113,32 @@
 										<div class="review-table">
 											<div class="re-title">상세 리뷰</div>
 											<div class="re-content">
-												<textarea class="col-auto form-control" id="reviewContents"
+												<textarea class="col-auto form-control" id="reviewContents" name="contents"
 													placeholder="다른 고객님에게 도움이 되도록 상품에 대한 솔직한 평가를 남겨주세요.	
 (상품 품질과 관계 없는 배송, 포장, 질문 응대, 상품 가격 등은 판매자 서비스 평가에 남겨주세요.)"></textarea>
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="img-send">
 										<div class="review-table">
 											<div class="re-img">사진 첨부</div>
-											<div class="re-imgsend">									
-       										<!-- HTML -->
-											<div class="custom-file-upload">											  
-											  <input id="file-input" name="imageFiles" type="file" multiple accept="image/*">
-											  <span>파일 선택하기</span>
+											<div class="re-imgsend">
+												<!-- HTML -->
+												<div class="custom-file-upload">
+													<input id="file-input" name="imageFiles" type="file"
+														multiple accept="image/*"> <span>파일 선택하기</span>
+												</div>
+												<div id="file-name-display"></div>
 											</div>
-       										<div id="file-name-display"></div>
 										</div>
 									</div>
-
+									
+									<div class="review-register">
+										<input type="hidden" name="product_order_item_id" id="product_Order_Id" readonly/>
+										<a href="./orderListPage"><input type="button" class="cancel-button" value="취소하기"></a>
+										<button class="submit-button">등록하기</button>
+									</div>
 								</div>
 							</form>
 
@@ -147,8 +151,10 @@
 			</div>
 
 		</div>
+		</div>
 
 <script>
+
 // 파일 선택이 변경되었을 때 파일 이름들을 표시합니다.
 $(document).ready(function() {
   $('#file-input').change(function() {
@@ -162,6 +168,11 @@ $(document).ready(function() {
     $('#file-name-display').html(fileNames);
   });
 });
+
+//URL에서 id 값을 추출하여 productId input 요소의 value에 설정
+var url = new URL(window.location.href);
+var id = url.searchParams.get("id");
+document.getElementById("product_Order_Id").value = id;
 </script>
 		<script src="../../resources/js/user_my.js"></script>
 </body>

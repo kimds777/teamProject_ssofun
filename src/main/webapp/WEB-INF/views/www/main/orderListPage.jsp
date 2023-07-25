@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>주문목록</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -22,8 +22,6 @@
 	type="text/css">
 <link href="../../resources/css/orderListPage.css" rel="stylesheet"
 	type="text/css">
-
-
 
 </head>
 <body>
@@ -86,7 +84,7 @@
 							<!--리스트 영역-->
 
 							<div class="row">
-								<div class="col">
+								<div class="col p-0">
 									<div class="middle-contents">
 
 										<div class="row">

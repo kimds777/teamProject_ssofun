@@ -49,6 +49,25 @@
 		 )
 	</insert>
 	
+	<!-- 리뷰 등록 -->
+	<insert id="insertByReview">
+		insert into tb_product_review(product_order_item_id, user_id, rate, contents)values(
+			#{product_order_item_id},
+			#{user_id},
+			#{rate},
+			#{contents}
+			)
+	</insert>
+	
+	<!-- 리뷰 이미지 등록 -->
+	<insert id="insertByReviewImg">
+		insert into tb_product_review_image(product_review_id, url, order_list)values(
+		 (SELECT MAX(product_review_id) from tb_product_review),
+		 #{url},
+		 #{order_list}
+		 )
+	</insert>
+	
 	<!-- 썸네일 등록 -->
 	<insert id="insertByThumbnail">
 		insert into tb_product_thumbnail(product_id, name, order_list)values(
@@ -128,6 +147,10 @@
 		    ORDER BY tb_product_thumbnail.product_thumbnail_id DESC
 	</select>
 	
+	<!-- 카테고리 출력 -->
+	<select id="selectProductCT" resultType="com.ssofun.dto.ProductCategoryTypeDto">
+		select * from tb_product_category_type
+	</select>
 	<!-- 상품상세보기 출력 -->
 	<select id="selectProductListDetail" resultType="com.ssofun.dto.ProductDto">
 		SELECT tb_product.name AS product_name,
@@ -179,7 +202,7 @@
 	
 	<!-- 주문상세 출력 -->
 	<select id="selectOrderDetailList" resultType="com.ssofun.dto.ProductOrderItemDto">
-		SELECT   po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
+		SELECT   poi.product_order_item_id, po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
     	poi.count, poi.created_at, tpos.name AS order_status_name, tdr.name AS recipient_name,tdr.phone AS recipient_phone,
     	tdr.address_post, tdr.address_default, tdr.address_detail, tdr.request_message
 		FROM
