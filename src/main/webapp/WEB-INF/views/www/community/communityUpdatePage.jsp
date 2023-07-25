@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form action="./communityWriteProcess" method="post">
+	<form action="./communityupdateProcess" method="post">
 		작성자: ${user.nickname }<br>
 		제목: <input type="text" name="title" value="${data.communityDto.title}"><br>
 		내용: <br>

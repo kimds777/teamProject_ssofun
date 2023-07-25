@@ -20,8 +20,8 @@
 			<a href="./communityMainPage">목록으로</a>
 			
 			<c:if test="${!empty user && user.user_id== data.userDto.user_id }">
-				<a href="./communityUpdatePage?id=${data.communityDto.community_id }">수정</a>
-				<a href="./deleteProcess?id=${data.communityDto.community_id }">삭제</a>
+				<a href="./communityUpdatePage?community_id=${data.communityDto.community_id }">수정</a>
+				<a href="./deleteProcess?community_id=${data.communityDto.community_id }">삭제</a>
 			</c:if>
 
 
