@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">
     <!-- <script type="text/javascript"> </script>-->
 
 
@@ -90,7 +90,7 @@
                                             <a class="navbar-brand text-black">입점사관리</a>
                                         </div>
                                         <div class="col">
-                                            <input type="button" class="writefaqbutton" value="업체등록"  onclick="location.href='companyRegistrationPage'">
+                                            <input type="button" class="writefaqbutton" value="업체등록"  onclick="location.href='companyRegistrationPage'" style="border-radius: 5px;">
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -126,23 +126,31 @@
                             
                             <!-- faq글목록작성하기 -->
                             <div class="row">
-                                <div class="col-2"><p class="center1" style="text-align: center;">입점사번호</p></div>
-                                <div class="col"><p class="five-font" style="text-align: center;">회사명</p></div>
+                                <div class="col-1"><p class="center1" style="text-align: center;">업체번호</p></div>
+                                <div class="col"><p class="five-font" style="text-align: center;">업체명</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">대표자명</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">사업자번호</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">사업자수</p></div>
+                                <div class="col-1"><p class="center1" style="text-align: center;">판매자수</p></div>
+                                <div class="col-2"><p class="center1" style="text-align: center;">등록일</p></div>
                                                                
                             </div>
                             
                             <!-- faq글목록작성하기 -->
-                            <div class="row">
-                                <div class="col-2"><p class="center1" style="text-align: center;">1</p></div>
-                                <div class="col"><p class="companyfontTitle" style="text-align: center;">Nike</p></div>
-                                <div class="col-2"><p class="center1" style="text-align: center;">김김김</p></div>
-                                <div class="col-2"><p class="center1" style="text-align: center;">02-000-12345</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">3 명</p></div>
-                                                               
-                            </div>
+                            <c:forEach items="${bizList}" var="bizList" >
+	                            <div class="row"  style="border-bottom: thin ; border-color:black;">
+	                                <div class="col-1"><p class="center1" style="text-align: center;">${bizList.bizDto.biz_id }</p></div>
+	                                <div class="col"><p class="companyfontTitle" style="text-align: center;"><a class="readQnalink" href="./readCompanyPage?biz_id=${bizList.bizDto.biz_id }">${bizList.bizDto.biz_name }</a></p></div>
+	                                <div class="col-2"><p class="center1" style="text-align: center;">${bizList.bizDto.biz_ceo }</p></div>
+	                                <div class="col-2"><p class="center1" style="text-align: center;">${bizList.bizDto.biz_no }</p></div>
+	                                <div class="col-1"><p class="center1" style="text-align: center;">${bizList.adminCount } 명</p></div>
+	                                <div class="col-2">
+			                            <p class="center1">
+			                            	<fmt:formatDate pattern="yy. MM. dd. (E)" value="${bizList.bizDto.created_at }"/>
+			                            </p>
+			                        </div>
+	                                                               
+	                            </div>
+                            </c:forEach>
                             
                <!-- 		<c:forEach items="${list }" var="map">
                             

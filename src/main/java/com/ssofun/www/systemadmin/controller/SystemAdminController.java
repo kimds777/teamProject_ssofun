@@ -1,5 +1,6 @@
 package com.ssofun.www.systemadmin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -268,22 +269,18 @@ public class SystemAdminController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//입점사관리메인페이지(리스트)
 	@RequestMapping("companyManagement/companyManagementMainPage")
-	public String companyManagementMainPage() {
+	public String companyManagementMainPage(Model model) {
+		
+		List<Map<String, Object>> bizList = systemAdminService.getBizDtoListContainCount();
+		model.addAttribute("bizList",bizList);
 		
 		return "systemadmin/companyManagement/companyManagementMainPage";
 	}
+	
+
+	
 	
 	
 	
@@ -295,20 +292,72 @@ public class SystemAdminController {
 		return"systemadmin/companyManagement/companyRegistrationPage";
 	}
 	
+	//입점사 등록프로세서
+	@RequestMapping("writeCompanyAccountProcess")
+	public String writeCompanyAccount(@RequestParam("biz_name")String biz_name,
+									@RequestParam("biz_ceo")String biz_ceo,
+									@RequestParam("biz_no_1")String biz_no_1,
+									@RequestParam("biz_no_2")String biz_no_2,
+									@RequestParam("biz_no_3")String biz_no_3,
+									@RequestParam("biz_phone_1")String biz_phone_1,
+									@RequestParam("biz_phone_2")String biz_phone_2,
+									@RequestParam("biz_phone_3")String biz_phone_3) {
+		
+		String combinedBizNo = biz_no_1+"-"+biz_no_2+"-"+biz_no_3;
+		String combinedBizPhone = biz_phone_1+"-"+biz_phone_2+"-"+biz_phone_3;
+		
+		BizDto bizDto = new BizDto();
+		bizDto.setBiz_name(biz_name);
+		bizDto.setBiz_ceo(biz_ceo);
+		bizDto.setBiz_no(combinedBizNo);
+		bizDto.setBiz_phone(combinedBizPhone);
+		
+		
+		systemAdminService.insertcreateCompanyAccount(bizDto);
+		
+		System.out.println("controllerinsert"+bizDto.getBiz_ceo());
+		return"redirect:./companyManagement/companyManagementMainPage";
+	}
 	
 	
 	
-	//입점사상세페이지
+	
+	
+	//입점사 상세페이지
 	@RequestMapping("companyManagement/readCompanyPage")
-	public String readCompanyPage() {
+	public String readCompanyPage(Model model, int biz_id) {
+		
+		BizDto bizData = systemAdminService.getBizData(biz_id); 
+		model.addAttribute("bizData",bizData);
+		System.out.println(bizData.getBiz_id());
+		
 		return "systemadmin/companyManagement/readCompanyPage";
 		
 	}
 	
 	
+	
+	//입점사 수정페이지
+	@RequestMapping("companyManagement/updateCompanyPage")
+	public String updateCompanyPage() {
+		
+		
+		
+		return "systemadmin/companyManagement/updateCompanyPage";
+	}
+	
+	
+	
+	
+	
+	
 	//판매자메인페이지(리스트)
 	@RequestMapping("companyManagement/venderManagementMainPage")
-	public String venderManagementMainPage() {
+	public String venderManagementMainPage(Model model) {
+		
+		List<Map<String, Object>> allAdminList= systemAdminService.getAllAdminList();
+		model.addAttribute("allAdminList",allAdminList);
+		
 		return"systemadmin/companyManagement/venderManagementMainPage";
 	}
 	
@@ -316,21 +365,112 @@ public class SystemAdminController {
 	
 	//판매자등록페이지
 	@RequestMapping("companyManagement/venderRegistrationPage")
-	public String venderRegistrationPage() {
+	public String venderRegistrationPage(Model model,@RequestParam(value = "biz_id", defaultValue = "0")int biz_id ) {
+		
+		//입점사관리 => 상세페이지=> 해당되는 판매자관리메인=>판매자등록으로 들어오는 경우 미리 회사명 입력받아서 화면에 출력(adminId넘겨받아서 조회하기)
+		
+//		Map<String, Object> bizDtoByAdminId = systemAdminService.getAdminData(biz_id);
+
+		
+		int bizId = biz_id;
+		
+		
+		Map<String, Object>bizDto = systemAdminService.selectBizDataBybizId(bizId);
+			
+		List<BizDto> bizList = systemAdminService.getBizDtoList();
+		
+	
+		
+		
+		
+		
+		
+		
+		model.addAttribute("bizList",bizList);
+		model.addAttribute("bizDto",bizDto);
+		model.addAttribute("bizId",bizId);
+		
 		return"systemadmin/companyManagement/venderRegistrationPage";
 	}
 	
 	
+	//판매자등록프로세서
+	@RequestMapping("venderRegistrationProcess")
+	public String venderRegistrationProcess(
+													@RequestParam("biz_id")int biz_id,
+													@RequestParam("admin_nickname")String admin_nickname,
+													@RequestParam("login_account")String login_account,
+													@RequestParam("login_password")String login_password,
+													@RequestParam("admin_phone1")String admin_phone1,
+													@RequestParam("admin_phone2")String admin_phone2,
+													@RequestParam("admin_phone3")String admin_phone3,
+													@RequestParam("admin_received_report")String admin_received_report,
+													@RequestParam("admin_report_description")String admin_report_description)
+	
+	{
+
+		System.out.println(biz_id);
+		String combinedAdminPhone = admin_phone1+"-"+admin_phone2+"-"+admin_phone3;
+		
+		AdminDto adminDto = new AdminDto();
+		adminDto.setBiz_id(biz_id);
+		adminDto.setAdmin_nickname(admin_nickname);
+		adminDto.setLogin_account(login_account);
+		adminDto.setLogin_password(login_password);
+		adminDto.setAdmin_phone(combinedAdminPhone);
+		adminDto.setAdmin_received_report(admin_received_report);
+		adminDto.setAdmin_report_description(admin_report_description);
+		
+
+		 
+		systemAdminService.createAdminAccount(adminDto);
+
+
+		return "redirect:./companyManagement/venderListOfCompanyNumberPage?biz_id="+adminDto.getBiz_id();
+
+	}
+
+
+	
 	//회사번호에 따른 소속판매자리스트페이지
 	@RequestMapping("companyManagement/venderListOfCompanyNumberPage")
-	public String venderListOfCompanyNumberPage() {
+	public String venderListOfCompanyNumberPage(Model model, int biz_id) {
+
+		List<Map<String, Object>> adminDtoList = systemAdminService.getAdminDataByBizId(biz_id);
+		
+		
+		//이 코드로 작성하면 데이터 없으면 bizid가 안날라감 
+//		BizDto bizDto = null;
+//	    for (Map<String, Object> map : adminDtoList) {//첫번째 판매자정보를 가져오므로 항상 업체명 불러오려면 쿼리문부터 불러와야됨
+//	        bizDto = (BizDto) map.get("bizDto");
+//	        if (bizDto != null) {
+//	            break; // 첫 번째로 찾은 bizDto 정보만 가져옴 (모든 Map에 동일한 bizDto 정보가 들어있음)
+//	        }
+//	    }
+		
+		
+		BizDto bizDto = systemAdminService.getBizData(biz_id);
+			
+		model.addAttribute("adminDtoList",adminDtoList);
+		model.addAttribute("bizDto", bizDto); 
+		
+		System.out.println(bizDto.getBiz_id());
+		
 		return"systemadmin/companyManagement/venderListOfCompanyNumberPage";
 	}
 
 	
+	
 	//판매자상세페이지
 	@RequestMapping("companyManagement/readVenderPage")
-	public String readVenderPage() {
+	public String readVenderPage(Model model, int admin_id) {
+		
+		Map<String, Object> adminDtoByAdminId = systemAdminService.getAdminData(admin_id);
+		
+		
+		
+		
+		model.addAttribute("adminDtoByAdminId",adminDtoByAdminId);
 		return"systemadmin/companyManagement/readVenderPage";
 	}
 }

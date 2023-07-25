@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,16 @@
 			내용: <br>
 			${data.communityDto.contents}<br>
 			
+			<br><br>
 			<a href="./communityMainPage">목록으로</a>
 			
+			<c:if test="${!empty user && user.user_id== data.userDto.user_id }">
+				<a href="./communityUpdatePage?id=${data.communityDto.community_id }">수정</a>
+				<a href="./deleteProcess?id=${data.communityDto.community_id }">삭제</a>
+			</c:if>
+
+
+
 
 </body>
 </html>

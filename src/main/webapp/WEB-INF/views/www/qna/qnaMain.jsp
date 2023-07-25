@@ -119,7 +119,7 @@
                             <div class="col c-five-font"><p class="five-font mt-2">답변까지 약 2~3일 정도가 소요될 수 있습니다.</p></div>
                             <div class="col-2">
                             <c:if test="${!empty sessionUser }">
-                            	<input type="button" class="qnabutton" value="1:1문의"  onclick="location.href='writeQnaPage'">
+                            	<input type="button" class="qnabutton" value="1:1문의"  onclick="location.href='writeQnaPage'" style="border-radius: 5px;">
                             </c:if>
                             </div>
                          
@@ -135,7 +135,7 @@
                         </div>
                         
                         <c:forEach items="${qnaList}" var="qna" varStatus="status">
-                        <div class="row">
+                        <div class="row mb-2 line" style="border-top:solid 1px; border-color:#BFBFBF;">
                             <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${fn:length(qnaList)-status.count+1}</p></div>
                             <div class="col"><p class="five-font"><a class="readQnalink" href="./readQnaPage?qna_id=${qna.qna_id }">${qna.title }</a></p></div>
                             <div class="col-2">
@@ -177,6 +177,11 @@
 			<div class="col"></div>
 		</div>
 	</div>
+	
+   
+    	<jsp:include page="../../include/fundingFooter.jsp"/>
+  
+	
 
 
 

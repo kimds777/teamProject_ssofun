@@ -83,7 +83,7 @@
                             <div class="row mt-3">
                                 <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="#">판매자관리</a></div>
+                                        href="../../systemadmin/companyManagement/venderManagementMainPage">판매자관리</a></div>
                             </div>
                             <div class="row mt-3">
                                 <!-- <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
@@ -148,7 +148,7 @@
 											<div class="row mt-3">
 		                                        <div class="col"></div>
 		                            			<div class="col textcenter" >
-		                            				<p class="companyfont1" >계정ID 님</p>
+		                            				<p class="companyfont1" >${adminDtoByAdminId.adminDto.login_account } 님</p>
 		                            			</div>
 		                            			<div class="col"></div>
 		                            	
@@ -179,7 +179,7 @@
 		                            				<p class="companyfont">소속회사</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <p class="companyfont">NIKE</p>
+		                                            <p class="companyfont">${adminDtoByAdminId.bizDto.biz_name }</p>
 		                            			</div>
 		                            			<div class="col-2"></div>
 		                            		</div>
@@ -189,7 +189,7 @@
 		                            				<p class="companyfont">닉네임</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <p class="companyfont">룰루랄라</p>
+		                                            <p class="companyfont">${adminDtoByAdminId.adminDto.admin_nickname }</p>
 		                            			</div>
 		                            			<div class="col-2"></div>
 		                            		</div>
@@ -200,7 +200,7 @@
 		                            				<p class="companyfont">판매자전화번호</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <p class="companyfont">010-1234-1234</p>
+		                                            <p class="companyfont">${adminDtoByAdminId.adminDto.admin_phone }</p>
 		                            			</div>
 		                            			<div class="col-2"></div>
 		                            		</div>
@@ -221,7 +221,14 @@
 		                                            <p class="companyfont">통신판매업 신고여부</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <p class="companyfont">O</p>                                            
+		                                            <p class="companyfont">
+		                                            	<c:if test="${adminDtoByAdminId.adminDto.admin_received_report == 1}">
+		                                            		<i class="bi bi-envelope-check" style="color:green"></i>
+		                                            	</c:if>
+		                                            	<c:if test="${adminDtoByAdminId.adminDto.admin_received_report == 0}">
+		                                            		<i class="bi bi-x-circle" style="color:#B3B8C3"></i>
+		                                            	</c:if>
+		                                            </p>                                            
 		                            			</div>
 		                            			<div class="col-2"></div>
 		                            		</div>
@@ -244,7 +251,7 @@
 				                            	
                       	
 				                            	
-				                            	<div class="col textcenter"><input type="button"  class="companyButton" value="목록으로" onclick="location.href='venderListOfCompanyNumberPage'"></div>
+				                            	<div class="col textcenter"><input type="button"  class="companyButton" value="목록으로" onclick="location.href='venderListOfCompanyNumberPage?biz_id="></div>
 				                            	<div class="col textcenter"><input type="button" class="qnaUserSubmit" value="계정설정" onclick="location.href='#'"></div>
 				                            	<div class="col"></div>
 			                            	</div>

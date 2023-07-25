@@ -20,16 +20,6 @@
 <style>
 
 
-
-	
-	
-
-
-
-
-
-
-
 </style>
 
 
@@ -85,7 +75,7 @@
                             <div class="row mt-3">
                                 <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="#">판매자관리</a></div>
+                                        href="../../systemadmin/companyManagement/venderManagementMainPage">판매자관리</a></div>
                             </div>
                             <div class="row mt-3">
                                 <!-- <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
@@ -121,6 +111,12 @@
                     </div>
 
                     <!--안에 페이지 내용만 바꾸기-->
+                    
+                    
+                    
+                    
+                    
+                    
                     <div class="row" style="margin-left: 10px; height:500px">
                     
                         <div class="col">
@@ -141,7 +137,7 @@
                             
                             
                             
-                            <form >
+                            <form action="../venderRegistrationProcess"  method="post">
                                 
                             <div class="row">
                             	<div class="col">
@@ -177,7 +173,29 @@
 		                            			</div>
 
 		                            			<div class="col">
-		                                            <p class="companyfont"> NIKE</p>
+			                                           <c:choose>
+		                    								<c:when test="${bizId == 0}"> 	
+		                    									               
+			                 										<select class="form-select"  name="biz_id" aria-label="Default select example">
+																	  <option selected>입점업체를 선택해주세요.</option>
+																		<c:forEach items="${bizList}" var="bizList"> 
+																		  <option  value="${bizList.biz_id}">${bizList.biz_name}</option>
+																		</c:forEach>
+																	</select>
+																
+				                                            
+				                                            </c:when>
+				                                            <c:otherwise>
+				                                           	 	<p class="companyfont">${bizDto.bizDto.biz_name}</p>
+				                                           	 	<input type="hidden" name="biz_id" value="${bizDto.bizDto.biz_id}">
+				                                           	 	
+				                                            	<!-- biz_id받아서 bizDto에 네임받아오기 -->
+				                                            
+				                                            </c:otherwise>
+	                   									</c:choose>
+			                                            
+		                                            
+		                                            
 		                            			</div>
 		                            		</div>
 		     		
@@ -187,7 +205,7 @@
 		                            				<p class="companyfont"><span class="star">*</span> 닉네임</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <input type="text" name="nickName" class="form-control" placeholder="닉네임을 입력해주세요." aria-label="companyName">
+		                                            <input type="text" name="admin_nickname" class="form-control" placeholder="닉네임을 입력해주세요." aria-label="companyName">
 		                            			</div>
 		                            		</div>
 		                            		
@@ -215,7 +233,7 @@
 		                            				<p class="companyfont"><span class="star">*</span> 비밀번호확인</p>
 		                            			</div>
 		                            			<div class="col">
-													<input type="password" name="login_password" class="form-control" placeholder="비밀번호를 확인" aria-label="companyName">		                            				
+													<input type="password"  class="form-control" placeholder="비밀번호를 확인" aria-label="companyName">		                            				
 		                            			</div>
 		                            		</div>
 		                            		<div class="row">
@@ -236,7 +254,7 @@
 		                                            <div class="row">
 		                            					<div class="col-3">
 		                            						<!-- <input type="text" name="title" id="title" class="form-control" placeholder="010"> -->
-		                            						<select class="form-select" aria-label="Default select example">
+		                            						<select class="form-select" name="admin_phone1" aria-label="Default select example">
 															  <option selected>010</option>
 															  <option value="1">02</option>
 															  <option value="2">011</option>
@@ -245,11 +263,11 @@
 		                            					</div>
 		                            					<div class="col-1 textcenter"><p class="companyfont">-</p></div>
 		                            					<div class="col-3">
-		                            						<input type="text" name="title" id="title" class="form-control" placeholder="1234">
+		                            						<input type="text" name="admin_phone2" id="title" class="form-control" placeholder="1234">
 		                            					</div>
 		                            					<div class="col-1 textcenter"><p class="companyfont">-</p></div>
 		                            					<div class="col-4">
-		                            						<input type="text" name="title" id="title" class="form-control" placeholder="1234" aria-label="companyName">
+		                            						<input type="text" name="admin_phone3" id="title" class="form-control" placeholder="1234" aria-label="companyName">
 		                            					</div>
 		                            				</div>
 		                            			
@@ -263,10 +281,10 @@
 		                                            <p class="companyfont">출고지주소</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <input type="text" name="adress" id="adress" class="form-control" placeholder="서울 강남 테헤란로" aria-label="companyName">                                            
+		                                            <input type="text"  id="adress" class="form-control" placeholder="서울 강남 테헤란로" aria-label="companyName">                                            
 		                            			</div>
 		                            			<div class="col-2" style="padding:0px;">
-		                                            <input type="button" class="adressbutton"   value="우편번호찾기" aria-label="companyName">                                            
+		                                            <input type="button" class="adressbutton"  value="우편번호찾기" aria-label="companyName">                                            
 		                            			</div>
 		                            		</div>
 		                            				                            		
@@ -276,7 +294,7 @@
 		                                        
 		                            			</div>
 		                            			<div class="col">
-		                                            <input type="text" name="adress" id="adress" class="form-control" placeholder="나머지주소" aria-label="companyName">                                            
+		                                            <input type="text" id="adress" class="form-control" placeholder="나머지주소" aria-label="companyName">                                            
 		                            			</div>
 		                            		</div>
 		                            		
@@ -301,7 +319,7 @@
 		                            				<div class="row">
 		                            					<div class="col">
 		                            						<div class="form-check form-check-inline">
-															  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+															  <input class="form-check-input" type="radio" name="admin_received_report" id="flexRadioDefault1" value="1" checked>
 															  <label class="form-check-label" for="flexRadioDefault1">
 															    신고함
 															  </label>
@@ -309,7 +327,7 @@
 														</div>
 														<div class="col">
 															<div class="form-check form-check-inline">
-															  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+															  <input class="form-check-input" type="radio" name="admin_received_report" id="flexRadioDefault2" value="0">
 															  <label class="form-check-label" for="flexRadioDefault2">
 															    신고안함
 															  </label>
@@ -332,7 +350,7 @@
 		                            			<div class="col-3 textcenter">
 		                            			</div>
 		                            			<div class="col">
-		                                            <input type="text" name="nickName" class="form-control" placeholder="예시) 안양 제 12345호, 제 2009-충북-575858호" aria-label="companyName">
+		                                            <input type="text" name="admin_report_description" class="form-control" placeholder="예시) 안양 제 12345호, 제 2009-충북-575858호" aria-label="companyName">
 		                            			</div>
 		                            		</div>
 		                            		<div class="row mt-1">
@@ -366,6 +384,21 @@
                             
                         </div>
                     </div>
+    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     <div class="row mb-5">
                         <div class="col"> </div>
                     </div>

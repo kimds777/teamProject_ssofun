@@ -93,6 +93,7 @@ public class CommunityController {
 	//커뮤니티 글 내용 읽기 페이지 
 		@RequestMapping("communityReadPage")
 		public String communityReadPage(Model model, int community_id ) {
+			communityService.increaseReadCount(community_id);
 			
 			Map<String,Object> map = communityService.getCommunity(community_id);
 			
@@ -101,5 +102,33 @@ public class CommunityController {
 			return "www/community/communityReadPage";
 			
 		}
-	
+		
+		//글 삭제
+		@RequestMapping("deleteProcess")
+		public String deleteProcess(int community_id) {
+			
+			communityService.deleteContent(community_id);
+			
+			return "redirect:./communityMainPage";
+		}
+		
+		// 글 수정
+		@RequestMapping("communityUpdatePage")
+		public String communityUpdatePage(Model model, int community_id) {
+			
+			Map<String, Object> map = communityService.getCommunity(community_id);
+			model.addAttribute("data", map);
+			
+			return "www/community/communityUpdatePage";
+		}
+		
+		@RequestMapping("communityupdateProcess")
+		public String updateContentProcess(CommunityDto communityDto) {
+		
+			communityService.contentsUpdate(communityDto);
+			
+			return "redirect:./communityMainPage";
+		}
+		
+		
 }

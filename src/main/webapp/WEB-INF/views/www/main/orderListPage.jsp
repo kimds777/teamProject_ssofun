@@ -29,7 +29,7 @@
 
 	<jsp:include page="../../include/fundingHeader.jsp" />
 	<div id="topBg"></div>
-	<div class="section zIndex">
+	<div class="section" id="height">
 		<div class="myPage">
 			<div class="fakeSection">
 				<ul id="myPageTab">

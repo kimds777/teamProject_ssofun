@@ -67,7 +67,7 @@
                             <div class="row mt-3">
                                 <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="../../systemadmin/companyManagement/companyManagementMainPage">판매자관리</a></div>
+                                        href="../../systemadmin/companyManagement/venderManagementMainPage">판매자관리</a></div>
                             </div>
                             <div class="row mt-3">
                               <!--  <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
@@ -90,7 +90,7 @@
                                             <a class="navbar-brand text-black">판매자관리</a>
                                         </div>
                                         <div class="col">
-                                            <input type="button" class="writefaqbutton" value="판매자등록"  onclick="location.href='venderRegistrationPage'">
+                                            <input type="button" class="writefaqbutton" style="border-radius: 5px;" value="판매자등록"  onclick="location.href='venderRegistrationPage'">
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -135,26 +135,25 @@
                             </div>
                             
                             <!-- 반복문돌리기 -->
-                            <div class="row">
-                                <div class="col-1"><p class="center1" style="text-align: center;">1</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">1</p></div>
-                                <div class="col-2"><p class="center1" style="text-align: center;">Nike</p></div>
-                                <div class="col"><p class="companyfontTitle" style="text-align: center;">shopAdmin(계정명)</p></div>
-                                <div class="col-2"><p class="center1" style="text-align: center;">23.07.19 hh:mm:ss</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">활성화됨</p></div>                             
-                            </div>
-                            
-               <!-- 		<c:forEach items="${list }" var="map">
-                            
+                            <c:forEach items="${allAdminList}" var="allAdminList">
 	                            <div class="row">
-	                                <div class="col-1"><p class="center1">${map.faqDto.faq_id }</p></div>
-	                                <div class="col"><p class="five-font"><a class="readFaqlink" href="./systemAdminReadFaqPage?faqId=${map.faqDto.faq_id }">${map.faqDto.title }</a></p></div>
-	                                <div class="col-2"><p class="center1">${map.adminDto.login_account}</p></div>
-	                                <div class="col-2"><p class="center1">${map.faqDto.faq_category}</p></div>
-	                                <div class="col-2"><p class="center1"><fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${map.faqDto.created_at }"/></p></div>
+	                                <div class="col-1"><p class="center1" style="text-align: center;">${allAdminList.adminDto.admin_id }</p></div>
+	                                <div class="col-1"><p class="center1" style="text-align: center;">${allAdminList.bizDto.biz_id }</p></div>
+	                                <div class="col-2"><p class="center1" style="text-align: center;">${allAdminList.bizDto.biz_name }</p></div>
+	                                <div class="col"><p class="companyfontTitle" style="text-align: center;"><a class="readQnalink" href="./readVenderPage?admin_id=${allAdminList.adminDto.admin_id}">${allAdminList.adminDto.login_account}</a></p></div>
+	                                <div class="col-2"><p class="center1" style="text-align: center;"><fmt:formatDate pattern="yy. MM. dd. (E)" value="${allAdminList.adminDto.created_at }"/></p></div>
+	                               
+	                             
+	                                	<c:if test="${allAdminList.adminDto.used_fg == 1 }">
+		                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:green "></i></p></div>                             
+		                            	</c:if>
+		                            	<c:if test="${allAdminList.adminDto.used_fg == 0 }">
+		                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i></p></div>   <!-- 다른아이콘 <i class="bi bi-dash-circle"></i>-->                          
+		                            	</c:if>
+	                                                             
 	                            </div>
-            
-                            </c:forEach> -->             
+	                        </c:forEach>
+        
 
                         
                         </div>
