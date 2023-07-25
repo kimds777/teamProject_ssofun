@@ -83,4 +83,44 @@ public interface SystemAdminSqlMapper {
 	//faq도움되는글 상위 10개 리스트 
 	public List<FaqHelpStatusDto> selectTop10HelpfulFaq();
 	
+	
+	
+	
+	
+	
+	
+	
+	
+//companyManagement 관련
+	
+	//업체(입점사)정보등록
+	public void createCompanyAccount(BizDto bizDto );
+	
+	
+	//입점사 목록 가져오기 (등록일순)
+	public List<BizDto> bizDtoList();
+	
+	//bizid에 해당되는 bizdto가져오기
+	public BizDto selectBizDataBybizId(int biz_id);
+	
+	
+	
+	
+//vender관련
+	
+	//biz_id로 회사소속 판매자리스트불러옴
+	public List<AdminDto> selectAdminDtoListByBizId(int biz_id);
+	
+
+	//판매자등록
+	public void createVenderAccount(AdminDto adminDto);
+	
+	//전체판매자리스트
+	public List<AdminDto> selectAdminDtoList();
+	
+	
+	//입접업체에 해당항는 판매자 수 가져오기
+	public int countAdminByBizId(int biz_id);
+
+
 }

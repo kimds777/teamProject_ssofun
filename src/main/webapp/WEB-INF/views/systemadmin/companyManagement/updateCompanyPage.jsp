@@ -36,7 +36,7 @@
 
 
 
-<title>CompanyRegistrationPage</title>
+<title>UpdateCompanyPage</title>
 </head>
 
 <body>
@@ -83,7 +83,7 @@
                             <div class="row mt-3">
                                 <div class="col"><i class="bi bi-building text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="#">입점사관리</a></div>
+                                        href="../../systemadmin/companyManagement/venderManagementMainPage">입점사관리</a></div>
                             </div>
                             <div class="row mt-3">
                                 <!-- <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
@@ -102,7 +102,7 @@
                                 <div class="container-fluid">
                                    
                                         <div class="col-2">
-                                            <a class="navbar-brand text-black">입점사등록페이지</a>
+                                            <a class="navbar-brand text-black">입점사수정페이지</a>
                                         </div>
 
                                         <div class="col-6 d-flex align-items-center justify-content-end">
@@ -124,7 +124,7 @@
                         <div class="col">
 
                            	<div class="row">
-                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">입점사등록항목</p></div>
+                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">입점사수정항목</p></div>
                                 <div class="col c-five-font"><p class="five-font mt-2"><span class="star">*</span>표시는 필수입력사항입니다.</p></div>
                                 <div class="col-2"></div>
                                 <div class="col-2">

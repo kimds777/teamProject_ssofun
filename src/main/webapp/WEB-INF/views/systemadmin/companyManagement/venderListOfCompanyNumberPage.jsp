@@ -67,7 +67,7 @@
                             <div class="row mt-3">
                                 <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="../../systemadmin/companyManagement/companyManagementMainPage">판매자관리</a></div>
+                                        href="../../systemadmin/companyManagement/venderManagementMainPage">판매자관리</a></div>
                             </div>
                             <div class="row mt-3">
                               <!--  <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
@@ -86,11 +86,11 @@
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
                                    
-                                        <div class="col-2">
-                                            <a class="navbar-brand text-black">(상점번호)판매자관리</a>
+                                        <div class="col-3">
+                                            <a class="navbar-brand text-black">${bizDto.biz_name}판매자관리</a>
                                         </div>
                                         <div class="col">
-                                            <input type="button" class="writefaqbutton" value="판매자등록"  onclick="location.href='venderRegistrationPage'">
+                                            <input type="button" style="border-radius: 5px;" class="writefaqbutton" value="판매자등록"  onclick="location.href='venderRegistrationPage?biz_id=${bizDto.biz_id }'">
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -125,24 +125,34 @@
                             
                             
                             <!-- faq글목록작성하기 -->
-                            <div class="row">
+                            <div class="row"> 
                                 <div class="col-1"><p class="center1" style="text-align: center;">판매자번호</p></div>
                                 <div class="col-1"><p class="center1" style="text-align: center;">회사번호</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">소속회사명</p></div>
                                 <div class="col"><p class="five-font" style="text-align: center;">계정명</p></div>
+                                <div class="col"><p class="five-font" style="text-align: center;">닉네임</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">등록일</p></div>
                                 <div class="col-1"><p class="center1" style="text-align: center;">계정상태</p></div>                             
                             </div>
                             
                             <!-- 반복문돌리기 -->
-                            <div class="row">
-                                <div class="col-1"><p class="center1" style="text-align: center;">1</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">1</p></div>
-                                <div class="col-2"><p class="center1" style="text-align: center;">Nike</p></div>
-                                <div class="col"><p class="companyfontTitle" style="text-align: center;">shopAdmin(계정명)</p></div>
-                                <div class="col-2"><p class="center1" style="text-align: center;">23.07.19 hh:mm:ss</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">활성화됨</p></div>                             
-                            </div>
+                            <c:forEach items="${adminDtoList}" var="adminDataList">
+	                            <div class="row">
+	                                <div class="col-1"><p class="center1" style="text-align: center;">${adminDataList.adminDto.admin_id }</p></div>
+	                                <div class="col-1"><p class="center1" style="text-align: center;">${adminDataList.bizDto.biz_id }</p></div>
+	                                <div class="col-2"><p class="center1" style="text-align: center;">${adminDataList.bizDto.biz_name}</p></div>
+	                                <div class="col"><p class="companyfontTitle" style="text-align: center;"><a class="readQnalink" href="./readVenderPage?admin_id=${adminDataList.adminDto.admin_id}">${adminDataList.adminDto.login_account}</a></p></div>
+	                                <div class="col"><p class="companyfontTitle" style="text-align: center;">${adminDataList.adminDto.admin_nickname}</p></div>
+	                                <div class="col-2"><p class="center1" style="text-align: center;"><fmt:formatDate pattern="yy. MM. dd. (E)" value="${adminDataList.adminDto.created_at }"/></p></div>
+	                                
+	                                <c:if test="${adminDataList.adminDto.used_fg ==1 }">
+	                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:green "></i></p></div>                             
+	                            	</c:if>
+	                            	<c:if test="${adminDataList.adminDto.used_fg == 0 }">
+	                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i></p></div>   <!-- 다른아이콘 <i class="bi bi-dash-circle"></i>-->                          
+	                            	</c:if>
+	                            </div>
+                            </c:forEach>
                             
                <!-- 		<c:forEach items="${list }" var="map">
                             
@@ -200,7 +210,7 @@
                 </div>
             </div>
 
-            <div class="row mt-5">
+            <d iv class="row mt-5">
                 <div class="col"> </div>
             </div>
         </div>
