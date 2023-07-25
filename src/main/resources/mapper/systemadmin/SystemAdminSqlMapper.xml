@@ -14,23 +14,23 @@
 	
 	
 	<select id="selectQnaNotNullAnswer" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where answer_contents is not null order by qna_id DESC
+		select * from tb_qna where answer_contents is not null and biz_id is null order by qna_id DESC
 	</select>
 	
 	
 	<select id="selectQnaDataBYQnaId" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where qna_id = #{qna_id}
+		select * from tb_qna where qna_id = #{qna_id} and biz_id is null 
 	</select>
 	
 	<select id="selectQnaImageByQnaId" resultType="com.ssofun.dto.Qna_ImageDto">
-		select * from tb_qna_image where qna_id = #{qna_id}
+		select * from tb_qna_image where qna_id = #{qna_id} and biz_id is null 
 	</select>
 	
 	
 	
 <!--user_id로 유저정보가져오기 -->
 	<select id="selectUserDtoByUserId" resultType="com.ssofun.dto.UserDto">
-	 select * from tb_User where user_id = #{user_id}
+	 select * from tb_User where user_id = #{user_id} and biz_id is null 
 	</select>
 	
 
@@ -41,7 +41,7 @@
 	</update>
 	
 	<select id="selectById" resultType="com.ssofun.dto.QnaDto">
-		SELECT * FROM tb_qna where id = #{id}
+		SELECT * FROM tb_qna where id = #{id} and biz_id is null 
 	</select>
 
 
