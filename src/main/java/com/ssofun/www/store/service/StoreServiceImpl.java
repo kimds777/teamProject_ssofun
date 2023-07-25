@@ -108,6 +108,13 @@ public class StoreServiceImpl {
 		return productList;
 	}
 	
+	//카테고리 선택 상품 출력
+	public List<ProductDto> getProductCTList(int pct){
+		List<ProductDto> productCTList = storeSqlMapper.selectProductCTList(pct);
+		
+		return productCTList;
+	}
+	
 	//카테고리 출력
 	public List<ProductCategoryTypeDto> getProductCT(ProductCategoryTypeDto pctDto){
 		List<ProductCategoryTypeDto> productCTList = storeSqlMapper.selectProductCT(pctDto);

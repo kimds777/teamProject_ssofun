@@ -37,6 +37,7 @@
 .category-box-1{
 	width: 650px;
 }
+.hide{display: none;}
 </style>
 </head>
 <body>
@@ -46,19 +47,19 @@
 		<div class="search-header-content">
 			<div id="categoryMenu" class="category-box-1">
 				<div class="test">
-		<label for="categorySelect">대분류 선택:</label> <select
+		<label for="categorySelect"></label> <select
 			id="categorySelect" onchange="showSubCategories()">
-			<option value="0">선택하세요</option>
+			<option value="0">카테고리</option>
 			<c:forEach items="${pctlist}" var="category">
 				<c:if test="${category.this_parent_id eq 0}">
 					<option value="${category.product_category_type_id}">${category.name}</option>
 				</c:if>
 			</c:forEach>
-		</select> <label for="subCategorySelect">중분류 선택:</label> <select
+		</select> <label for="subCategorySelect"></label> <select class="hide"
 			id="subCategorySelect" onchange="showSubSubCategories()" disabled>
 			<option value="0">선택하세요</option>
 
-		</select> <label for="subSubCategorySelect">소분류 선택:</label> <select
+		</select> <label for="subSubCategorySelect"></label> <select class="hide"
 			id="subSubCategorySelect" disabled>
 			<option value="0">선택하세요</option>
 		</select>
@@ -91,6 +92,7 @@
       if (selectedCategoryId !== "0") {
        
           subCategorySelect.disabled = false; // 중분류를 보여주기 위해 드롭 메뉴 활성화
+          subCategorySelect.classList.remove('hide');
           var subCategories = <%= jsonPctList %>;
 
           // 중분류 드롭다운 메뉴에 옵션 추가
@@ -106,8 +108,10 @@
        // 소분류 드롭다운 메뉴 초기화
           subSubCategorySelect.innerHTML = '<option value="0">선택하세요</option>';
           subSubCategorySelect.disabled = true;
+        
       } else {
           subCategorySelect.disabled = true; // 대분류가 선택되지 않았을 때 중분류 드롭 메뉴 비활성화
+
           subSubCategorySelect.innerHTML = '<option value="0">선택하세요</option>';
           subSubCategorySelect.disabled = true; // 중분류가 선택되지 않았을 때 소분류 드롭다운 메뉴 비활성화
       }
@@ -120,7 +124,7 @@
 
       if (selectedSubCategoryId !== "0") {
           subSubCategorySelect.disabled = false; // 소분류를 보여주기 위해 드롭다운 메뉴 활성화
-          
+          subSubCategorySelect.classList.remove('hide');
           var subCategories = <%= jsonPctList %>;
           
           // 서버에서 가져온 JSON 형태의 소분류 목록을 사용하여 소분류 옵션 추가

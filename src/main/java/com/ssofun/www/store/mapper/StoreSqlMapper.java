@@ -50,6 +50,9 @@ public interface StoreSqlMapper {
 	// 상품출력
 	public List<ProductDto> selectProductList(ProductDto productDto);
 	
+	// 카테고리 선택 상품 출력
+	public List<ProductDto> selectProductCTList(int pct);
+	
 	// 상품상세보기
 	public List<ProductDto> selectProductListDetail(int id);
 	

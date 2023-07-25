@@ -140,24 +140,17 @@
 			
 			
 			<div class="box">
-					<div class="col-tab">
-						<ul class="nav tab-titles">
-							<li class="nav-item"><a class="nav-link" href="#scroll1">필수정보고시</a></li>
-							<li class="nav-item"><a class="nav-link" href="#scroll2">상세설명</a></li>
-							<li class="nav-item"><a class="nav-link" href="#scroll3">상품리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#scroll4">배송,교환,반품안내</a></li>	
-						</ul>
-					</div>
-				</div>
+    <div class="col-tab">
+        <ul class="nav tab-titles">
+            <li class="nav-item"><button class="nav-link-btn" onclick="changeTab(0)">필수정보고시</button></li>
+            <li class="nav-item"><button class="nav-link-btn" onclick="changeTab(1)">상세설명</button></li>
+            <li class="nav-item"><button class="nav-link-btn" onclick="changeTab(2)">상품리뷰</button></li>
+            <li class="nav-item"><button class="nav-link-btn" onclick="changeTab(3)">배송,교환,반품안내</button></li>
+        </ul>
+    </div>
+</div>
+
 					
-			<div>
-			  <ul class="list">
-			    <li><a href="#scroll1" class="scroll_move">scroll1</a><li>
-			    <li><a href="#scroll2" class="scroll_move">scroll2</a><li>
-			    <li><a href="#scroll3" class="scroll_move">scroll3</a><li>
-			    <li><a href="#scroll4" class="scroll_move">scroll4</a><li>
-			  </ul>
-			</div>
 			
 			<div class="listbox">
 			  <div class="scroll1" id="scroll1">scroll1</div>
@@ -190,13 +183,20 @@
 		 );
 	});
 	
-	 $(document).ready(function($) {
-         $(".scroll_move").click(function(event){
-             event.preventDefault();
-             window.location.hash = this.hash;
-         });
-     });
-	
+	// JavaScript 함수 변경: 탭 전환과 컨텐츠 보이기/숨기기
+	function changeTab(index) {
+	  // 모든 탭 컨텐츠를 숨깁니다.
+	  const tabContents = document.querySelectorAll('.listbox > div');
+	  tabContents.forEach((content) => {
+	    content.style.display = 'none';
+	  });
+
+	  // 선택한 탭 컨텐츠만 보여줍니다.
+	  const selectedTabContent = document.querySelector(`.listbox > div:nth-child(${index + 1})`);
+	  if (selectedTabContent) {
+	    selectedTabContent.style.display = 'block';
+	  }
+	}
 	
 	// 결제금액 표시
 	function changeQuantity(value) {

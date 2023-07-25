@@ -47,7 +47,8 @@ public class StoreController {
 		model.addAttribute("pctlist", pctlist); // tb_product_category_type 테이블
 		
 		return "www/main/testtest";
-	}
+	}	
+	
 	// =================
 
 	// 스토어 리스트 메인페이지
@@ -73,7 +74,31 @@ public class StoreController {
 
 		return "www/main/mainPage";
 	}
+	
+	//카테고리 선택 상품 출력
+	@RequestMapping("categories")
+	public String testa(@RequestParam(defaultValue = "1") int page, int pct, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto); // 카테고리 출력
+		List<ProductDto> pctypeList = storeService.getProductCTList(pct);
+		
+		int itemsPerPage = 8; // 페이지당 아이템 개수
+		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		List<ProductDto> paginatedList = new ArrayList<>();
+		int startIdx = (page - 1) * itemsPerPage;
+		int endIdx = Math.min(startIdx + itemsPerPage, pctypeList.size());
+		for (int i = startIdx; i < endIdx; i++) {
+			paginatedList.add(pctypeList.get(i));
+		}
 
+		int pageCount = (int) Math.ceil((double) pctypeList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("pctlist", pctlist);
+		model.addAttribute("list", paginatedList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageCount", pageCount);
+		
+		return "www/main/categories";
+	}
+	
 	@RequestMapping("loginPage")
 	public String loginPage() {
 		return "www/main/loginPage";
@@ -204,7 +229,7 @@ public class StoreController {
 	// 장바구니 주문페이지
 	@RequestMapping("cartOrderProcess")
 	public String cartOrderProcess(HttpServletRequest request, ProductRecipient recipiDto, ProductOrderItemDto poiDto,
-			ProductOrderDto porDto, ProductDto pDto, HttpSession session) {
+		ProductOrderDto porDto, ProductDto pDto, HttpSession session) {
 		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		porDto.setUser_id(id);

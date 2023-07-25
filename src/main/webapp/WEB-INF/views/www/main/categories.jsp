@@ -1,14 +1,18 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
-<%@ page import="java.util.List" %>
+<%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
+<%@ page import="java.util.List"%>
 <%
-  // Jackson ObjectMapper를 사용하여 Java 객체를 JSON 형태로 변환합니다.
-  ObjectMapper objectMapper = new ObjectMapper();
-  String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctlist"));
+// Jackson ObjectMapper를 사용하여 Java 객체를 JSON 형태로 변환합니다.
+ObjectMapper objectMapper = new ObjectMapper();
+String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctlist"));
 %>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,20 +49,22 @@
 						<ul class="shopping-menu-list">
 							<c:forEach items="${pctlist}" var="category">
 								<c:if test="${category.this_parent_id eq 0}">
-									<li class="li-list" value="${category.product_category_type_id}">
-										${category.name}
-										<!-- Subcategories -->
+									<li class="li-list"
+										value="${category.product_category_type_id}">
+										${category.name} <!-- Subcategories -->
 										<div class="subcategories">
 											<ul>
 												<c:forEach items="${pctlist}" var="subcategory">
-													<c:if test="${subcategory.this_parent_id eq category.product_category_type_id}">
-														<li>${subcategory.name}
-															<!-- Subsubcategories -->
+													<c:if
+														test="${subcategory.this_parent_id eq category.product_category_type_id}">
+														<li>${subcategory.name}<!-- Subsubcategories -->
 															<div class="subsubcategories">
 																<ul>
 																	<c:forEach items="${pctlist}" var="subsubcategory">
-																		<c:if test="${subsubcategory.this_parent_id eq subcategory.product_category_type_id}">
-																			<li><a href="./categories?pct=${subsubcategory.product_category_type_id }">${subsubcategory.name}</a></li>
+																		<c:if
+																			test="${subsubcategory.this_parent_id eq subcategory.product_category_type_id}">
+																			<li><a
+																				href="./categories?pct=${subsubcategory.product_category_type_id }">${subsubcategory.name}</a></li>
 																		</c:if>
 																	</c:forEach>
 																</ul>
@@ -81,7 +87,7 @@
 
 
 	<div class="banner-a">
-<!-- 				<img class="banner-img" src="../../resources/img/banner.jpg"> -->
+		<!-- 				<img class="banner-img" src="../../resources/img/banner.jpg"> -->
 	</div>
 
 	<div class="container">
@@ -89,9 +95,37 @@
 			<div class="col"></div>
 			<div class="col">
 
-
 				<div class="row">
-					<div class="col-ca"></div>
+					<div class="col-ca">
+						<%-- 대분류, 중분류, 소분류 이름 출력 --%>
+						<c:forEach items="${pctlist}" var="category">
+							<%-- 선택한 pct와 일치하는 카테고리를 찾음 --%>
+							<%-- 소분류 출력 --%>
+							<c:if test="${category.product_category_type_id eq param.pct}">								
+								<%-- 중분류 출력 --%>
+								<c:forEach items="${pctlist}" var="parentCategory">
+									<c:if test="${parentCategory.product_category_type_id eq category.this_parent_id}">
+										<%-- 대분류 출력 --%>
+										<c:forEach items="${pctlist}" var="grandParentCategory">
+											<c:if test="${grandParentCategory.product_category_type_id eq parentCategory.this_parent_id}">
+						                            ${grandParentCategory.name}  &gt; ${parentCategory.name} &gt;  ${category.name}
+						                        </c:if>
+										</c:forEach>
+									</c:if>
+								</c:forEach>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-ca">
+						<c:forEach items="${pctlist}" var="category">
+							<c:if test="${category.product_category_type_id eq param.pct}">
+								<h3>${category.name}</h3>
+							</c:if>
+						</c:forEach>
+					</div>
 				</div>
 
 				<!-- 여기서 반복문 -->
@@ -146,12 +180,14 @@
 						<div class="pagination jOhOoP">
 							<c:choose>
 								<c:when test="${currentPage > 1}">
-									<a href="?page=${currentPage - 1}" class="previous-button">이전</a>
+									<a onclick="updatePaginationLink(this, ${currentPage - 1})"
+										class="previous-button">이전</a>
 								</c:when>
 								<c:otherwise>
 									<span class="previous-button">이전</span>
 								</c:otherwise>
 							</c:choose>
+
 							<c:forEach begin="1" end="${pageCount}" var="pageNum">
 								<c:url value="mainPage" var="pageUrl">
 									<c:param name="page" value="${pageNum}" />
@@ -161,19 +197,24 @@
 										<span class="current-page">${pageNum}</span>
 									</c:when>
 									<c:otherwise>
-										<a href="${pageUrl}" class="page-link">${pageNum}</a>
+										<!-- 페이지 링크를 JavaScript 함수와 연결하여 페이지 번호가 바뀔 때 동적으로 변경되도록 합니다. -->
+										<a onclick="updatePaginationLink(this, ${pageNum})"
+											class="page-link">${pageNum}</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
+
 							<c:choose>
 								<c:when test="${currentPage < pageCount}">
-									<a href="?page=${currentPage + 1}" class="next-button">다음</a>
+									<a onclick="updatePaginationLink(this, ${currentPage + 1})"
+										class="next-button">다음</a>
 								</c:when>
 								<c:otherwise>
 									<span class="next-button">다음</span>
 								</c:otherwise>
 							</c:choose>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -185,30 +226,49 @@
 	<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp" />
 
-<script>
-//카테고리
-$(document).ready(function() {
-		// Show/hide the categories on hover for both the category button and menu items
-		$(".category-box").hover(function() {
-			$(".categories").css("display", "block");
-		}, function() {
-			$(".categories").css("display", "none");
+	<script>
+	//카테고리
+	$(document).ready(function() {
+			// Show/hide the categories on hover for both the category button and menu items
+			$(".category-box").hover(function() {
+				$(".categories").css("display", "block");
+			}, function() {
+				$(".categories").css("display", "none");
+			});
+	
+			$(".shopping-menu-list li").hover(function() {
+				$(this).find(".subcategories").css("display", "block");
+			}, function() {
+				$(this).find(".subcategories").css("display", "none");
+			});
+	
+			$(".subcategories li").hover(function() {
+				$(this).find(".subsubcategories").css("display", "block");
+			}, function() {
+				$(this).find(".subsubcategories").css("display", "none");
+			});
+			
+			
 		});
+	
+	function updatePaginationLink(linkElement, pageNumber) {
+		  const url = new URL(window.location.href);
+		  const params = new URLSearchParams(url.search.slice(1));
 
-		$(".shopping-menu-list li").hover(function() {
-			$(this).find(".subcategories").css("display", "block");
-		}, function() {
-			$(this).find(".subcategories").css("display", "none");
-		});
+		  // 'page' 매개변수를 원하는 페이지 번호로 업데이트합니다.
+		  params.set('page', pageNumber);
+		  
+		  // 'pct' 매개변수가 있다면 유지합니다.
+		  const pctParam = url.searchParams.get('pct');
+		  if (pctParam) {
+		    params.set('pct', pctParam);
+		  }
 
-		$(".subcategories li").hover(function() {
-			$(this).find(".subsubcategories").css("display", "block");
-		}, function() {
-			$(this).find(".subsubcategories").css("display", "none");
-		});
-	});
-
-</script>
+		  // 수정된 매개변수를 가진 URL로 페이지 이동합니다.
+		  url.search = '?' + params.toString();
+		  window.location.href = url.toString();
+		}
+	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

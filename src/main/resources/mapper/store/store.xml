@@ -151,6 +151,24 @@
 	<select id="selectProductCT" resultType="com.ssofun.dto.ProductCategoryTypeDto">
 		select * from tb_product_category_type
 	</select>
+	
+	<!-- 카테고리 상품 출력 -->
+	<select id="selectProductCTList" resultType="com.ssofun.dto.ProductDto">
+		SELECT tb_product.name AS product_name,
+       	tb_product_category_type.name AS category_type_name,
+       	tb_product_thumbnail.name AS thumbnail_name,
+       	tb_product.price, tb_product.price_sale, tb_product.product_id
+		FROM tb_product
+		INNER JOIN tb_product_category
+		    ON tb_product.product_id = tb_product_category.product_id
+		INNER JOIN tb_product_category_type
+		    ON tb_product_category.product_category_type_id = tb_product_category_type.product_category_type_id
+		INNER JOIN tb_product_thumbnail
+		    ON tb_product.product_id = tb_product_thumbnail.product_id
+		    WHERE tb_product_thumbnail.order_list = 0 and tb_product_category_type.product_category_type_id= #{product_category_type_id}
+		    ORDER BY tb_product_thumbnail.product_thumbnail_id DESC
+	</select>
+		    
 	<!-- 상품상세보기 출력 -->
 	<select id="selectProductListDetail" resultType="com.ssofun.dto.ProductDto">
 		SELECT tb_product.name AS product_name,
