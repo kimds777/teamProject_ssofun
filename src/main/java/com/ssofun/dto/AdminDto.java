@@ -10,21 +10,30 @@ public class AdminDto {
 	private String login_account;
 	private String login_password;
 	private String admin_nickname;
+<<<<<<< HEAD
+=======
+	private String admin_phone;
+	private String admin_received_report;
+	private String admin_report_description;
+>>>>>>> 6374cc34514f21ecefaf57a35d4c1a0ca7cf702a
 	@JsonFormat(pattern ="yyyy.MM.dd.HH.mm.ss", timezone = "Asia/Seoul")
 	private Date created_at;
 	private int used_fg;
-	
 	public AdminDto() {
 		super();
 	}
-	
-	public AdminDto(int admin_id, int biz_id, String login_account, String login_password, Date created_at,
+	public AdminDto(int admin_id, int biz_id, String login_account, String login_password, String admin_nickname,
+			String admin_phone, String admin_received_report, String admin_report_description, Date created_at,
 			int used_fg) {
 		super();
 		this.admin_id = admin_id;
 		this.biz_id = biz_id;
 		this.login_account = login_account;
 		this.login_password = login_password;
+		this.admin_nickname = admin_nickname;
+		this.admin_phone = admin_phone;
+		this.admin_received_report = admin_received_report;
+		this.admin_report_description = admin_report_description;
 		this.created_at = created_at;
 		this.used_fg = used_fg;
 	}
@@ -51,6 +60,30 @@ public class AdminDto {
 	}
 	public void setLogin_password(String login_password) {
 		this.login_password = login_password;
+	}
+	public String getAdmin_nickname() {
+		return admin_nickname;
+	}
+	public void setAdmin_nickname(String admin_nickname) {
+		this.admin_nickname = admin_nickname;
+	}
+	public String getAdmin_phone() {
+		return admin_phone;
+	}
+	public void setAdmin_phone(String admin_phone) {
+		this.admin_phone = admin_phone;
+	}
+	public String getAdmin_received_report() {
+		return admin_received_report;
+	}
+	public void setAdmin_received_report(String admin_received_report) {
+		this.admin_received_report = admin_received_report;
+	}
+	public String getAdmin_report_description() {
+		return admin_report_description;
+	}
+	public void setAdmin_report_description(String admin_report_description) {
+		this.admin_report_description = admin_report_description;
 	}
 	public Date getCreated_at() {
 		return created_at;
