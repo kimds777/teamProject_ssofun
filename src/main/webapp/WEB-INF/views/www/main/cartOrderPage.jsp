@@ -145,7 +145,7 @@
 						 <c:forEach items="${list}" var="item">
 					        <input type="hidden" name="product_id" value="${item.product_id}" />
 					        <input type="hidden" name="count" value="${item.total_count}" readonly/>
-					    </c:forEach>												
+					    </c:forEach>										
                         <button class="prod-buy-btn">구매하기</button>            
                     </div>
                 </div>
@@ -158,13 +158,8 @@
        </div>
     </div>
     
-<script>
- 	// URL에서 id 값을 추출하여 productId input 요소의 value에 설정
-    var url = new URL(window.location.href);
-    var id = url.searchParams.get("id");
-    document.getElementById("productId").value = id;
-    
-    
+<script> 
+
     //주소 입력 api
     function address_input() {
         new daum.Postcode({

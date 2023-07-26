@@ -18,7 +18,7 @@
 
 
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
+
     <title>systemAdminFaqMainPage</title>
 </head>
 

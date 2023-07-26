@@ -30,7 +30,13 @@ public interface StoreSqlMapper {
 	public void insertByOrder(ProductOrderDto porDto);
 		
 	// 주문 물품 등록
-	public void insertByOrderItem(ProductOrderItemDto poiDto);		
+	public void insertByOrderItem(ProductOrderItemDto poiDto);
+	
+	// 리뷰 등록
+	public void insertByReview(ProductReviewDto reDto);
+	
+	// 리뷰 이미지 등록
+	public void insertByReviewImg(ProductReviewImageDto reimgDto);
 
 	//테스트회원가입 ID 중복확인
 	public int countByUserId(String userid);
@@ -44,6 +50,9 @@ public interface StoreSqlMapper {
 	// 상품출력
 	public List<ProductDto> selectProductList(ProductDto productDto);
 	
+	// 카테고리 선택 상품 출력
+	public List<ProductDto> selectProductCTList(int pct);
+	
 	// 상품상세보기
 	public List<ProductDto> selectProductListDetail(int id);
 	
@@ -52,6 +61,18 @@ public interface StoreSqlMapper {
 	
 	// 장바구니 삭제
 	public void deleteByCart(ProductCart cartDto);	
+	
+	// 마이페이지 주문목록 출력
+	public List<ProductOrderItemDto> selectMypageProductList(int id);
+	
+	// 주문상세 출력
+	public List<ProductOrderItemDto> selectOrderDetailList(int id);
+	
+	// 리뷰관리
+	public ProductOrderItemDto selectReview(int id);
+	
+	// 카테고리 출력
+	public List<ProductCategoryTypeDto> selectProductCT(ProductCategoryTypeDto pctDto);
 	
 	// 주소 출력
 	public ProductRecipient selectRecipient(ProductRecipient reciDto);

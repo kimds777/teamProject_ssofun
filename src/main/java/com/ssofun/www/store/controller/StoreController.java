@@ -1,4 +1,4 @@
-	package com.ssofun.www.store.controller;
+package com.ssofun.www.store.controller;
 
 import java.io.File;
 
@@ -23,71 +23,122 @@ import com.ssofun.www.store.service.StoreServiceImpl;
 @Controller
 @RequestMapping("www/store/*")
 public class StoreController {
-	
+
 	@Autowired
 	private StoreServiceImpl storeService;
-	 
+
 	@RequestMapping("login")
 	public String login() {
 		return "www/main/loginPage1";
 	}
+
 	@RequestMapping("test")
-	public String test(ProductDto producDto, Model model) {
-		List<ProductDto> list = storeService.getItemList(producDto);
-		model.addAttribute("list", list);
+	public String test(ProductDto producDto, Model model,ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);// tb_product_category_type 테이블 값가져오기
+
+		model.addAttribute("pctlist", pctlist); // tb_product_category_type 테이블
+		
 		return "www/main/test";
 	}
-	//=================
+	@RequestMapping("testtest")
+	public String testtest(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);// tb_product_category_type 테이블 값가져오기
+
+		model.addAttribute("pctlist", pctlist); // tb_product_category_type 테이블
+		
+		return "www/main/testtest";
+	}	
 	
+	// =================
+
+	// 스토어 리스트 메인페이지
 	@RequestMapping("mainPage")
-	public String mainPage( ProductDto producDto, Model model) {
+	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
+		List<ProductDto> fullList = storeService.getItemList(producDto); // 전체 상품 목록 가져오기
 		
-		List<ProductDto> list = storeService.getItemList(producDto);
-		model.addAttribute("list", list);
+		int itemsPerPage = 8; // 페이지당 아이템 개수
+		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		List<ProductDto> paginatedList = new ArrayList<>();
+		int startIdx = (page - 1) * itemsPerPage;
+		int endIdx = Math.min(startIdx + itemsPerPage, fullList.size());
+		for (int i = startIdx; i < endIdx; i++) {
+			paginatedList.add(fullList.get(i));
+		}
+
+		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("pctlist", pctlist);
+		model.addAttribute("list", paginatedList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageCount", pageCount);
+
+		return "www/main/mainPage";
+	}
+	
+	//카테고리 선택 상품 출력
+	@RequestMapping("categories")
+	public String testa(@RequestParam(defaultValue = "1") int page, int pct, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto); // 카테고리 출력
+		List<ProductDto> pctypeList = storeService.getProductCTList(pct);
 		
-		return"www/main/mainPage";
+		int itemsPerPage = 8; // 페이지당 아이템 개수
+		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		List<ProductDto> paginatedList = new ArrayList<>();
+		int startIdx = (page - 1) * itemsPerPage;
+		int endIdx = Math.min(startIdx + itemsPerPage, pctypeList.size());
+		for (int i = startIdx; i < endIdx; i++) {
+			paginatedList.add(pctypeList.get(i));
+		}
+
+		int pageCount = (int) Math.ceil((double) pctypeList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("pctlist", pctlist);
+		model.addAttribute("list", paginatedList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageCount", pageCount);
+		
+		return "www/main/categories";
 	}
 	
 	@RequestMapping("loginPage")
 	public String loginPage() {
 		return "www/main/loginPage";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("loginProcess")
 	public String loginProcess(HttpSession session, ProductUserDto userDto) {
 		ProductUserDto sessionUser = storeService.login(userDto);
 		session.setAttribute("sessionUser", sessionUser);
-		if(sessionUser !=null) {
+		if (sessionUser != null) {
 			return "1";
-		}else {
+		} else {
 			return "0";
 		}
 	}
-	
+
 	@RequestMapping("logoutProcess")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:./mainPage";
 	}
-	
+
 	@RequestMapping("register")
 	public String register() {
 		return "www/main/register";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("registerProcess")
 	public String registerProcess(AdminDto testDto, String id) {
 		boolean exists = storeService.existsUserId(id);
-		if(exists == true) {
-			return "1"; 
-		}else {
+		if (exists == true) {
+			return "1";
+		} else {
 			storeService.register(testDto);
 			return "0";
 		}
 	}
-	
+
 	// 상품상세보기 페이지
 	@RequestMapping("productPage")
 	public String productPage(int id, Model model) {
@@ -95,38 +146,38 @@ public class StoreController {
 		model.addAttribute("detail", list);
 		return "www/main/productPage";
 	}
-	
+
 	@RequestMapping("productProcess")
-	public String productProcess(HttpSession session, ProductUserDto std,  ProductDto producDto ,int id, int amount, int count) {
-		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+	public String productProcess(HttpSession session, ProductUserDto std, ProductDto producDto, int id, int amount,
+			int count) {
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		System.out.println(id);
 		System.out.println(amount);
 		System.out.println(count);
 		System.out.println(sessionUser);
-		if(sessionUser != null) {
-			session.setAttribute("sessionUser", sessionUser);	
+		if (sessionUser != null) {
+			session.setAttribute("sessionUser", sessionUser);
 			session.setAttribute("amount", amount);
-	        session.setAttribute("count", count);
-			return "redirect:./productOrderPage?id="+id;
-		}else {
+			session.setAttribute("count", count);
+			return "redirect:./productOrderPage?id=" + id;
+		} else {
 			session.invalidate(); // 세션 무효화
 			return "redirect:./loginPage";
-		}	
+		}
 	}
-	
-	
-	// 주문페이지 
+
+	// 주문페이지
 	@RequestMapping("productOrderPage")
-	public String productOrderPage(int id,  Model model, HttpSession session) {
+	public String productOrderPage(int id, Model model, HttpSession session) {
 		List<ProductDto> list = storeService.getItemListDetail(id);
 		model.addAttribute("detail", list);
 		return "www/main/productOrderPage";
 	}
-	
-	// 주문페이지 
+
+	// 주문페이지
 	@RequestMapping("productOrderProcess")
-	public String productOrderProcess(ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto, ProductDto pDto, HttpSession session) {
-		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+	public String productOrderProcess(ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto,ProductDto pDto, HttpSession session) {
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		porDto.setUser_id(id);
 		storeService.registRecipient(recipiDto);
@@ -134,170 +185,250 @@ public class StoreController {
 		storeService.registOrderItem(poiDto);
 		return "redirect:./orderCompletePage";
 	}
-	
-	
+
 	// 장바구니 페이지
 	@RequestMapping("cartPage")
 	public String cartPage(Model model, HttpSession session) {
-		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		System.out.println(id);
 		List<ProductUserDto> list = storeService.getCartList(id);
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		return "www/main/cartPage";
 	}
-	
-	//장바구니 삭제
+
+	// 장바구니 삭제
 	@RequestMapping("deleteCartProcess")
 	public String deleteCartProcess(ProductCart cartDto, int user_id, int product_id) {
-		storeService.deleteCart(cartDto);	
-		return "redirect:./cartPage?id="+user_id;
+		storeService.deleteCart(cartDto);
+		return "redirect:./cartPage?id=" + user_id;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("cartProcess")
 	public String cartProcess(ProductCart cartDto, ProductUserDto Std, HttpSession session) {
-		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		cartDto.setUser_id(id);
 		storeService.registCart(cartDto);
 		return "1";
 	}
-	
-	//장바구니 구매페이지
+
+	// 장바구니 구매페이지
 	@RequestMapping("cartOrderPage")
 	public String cartOrderPage(ProductCart cartDto, ProductUserDto Std, HttpSession session, Model model, int amount) {
 		session.setAttribute("amount", amount);
-		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		System.out.println(id);
 		List<ProductUserDto> list = storeService.getCartList(id);
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		return "www/main/cartOrderPage";
 	}
-	
-	// 장바구니 주문페이지 
+
+	// 장바구니 주문페이지
 	@RequestMapping("cartOrderProcess")
-	public String cartOrderProcess(HttpServletRequest request,ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto, ProductDto pDto, HttpSession session) {
-		ProductUserDto sessionUser = (ProductUserDto)session.getAttribute("sessionUser");
+	public String cartOrderProcess(HttpServletRequest request, ProductRecipient recipiDto, ProductOrderItemDto poiDto,
+		ProductOrderDto porDto, ProductDto pDto, HttpSession session) {
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
 		int id = sessionUser.getUser_id();
 		porDto.setUser_id(id);
 		storeService.registRecipient(recipiDto);
 		storeService.registProductOrder(porDto);
-		
+
 		String[] productIds = request.getParameterValues("product_id");
-	    String[] counts = request.getParameterValues("count");
+		String[] counts = request.getParameterValues("count");
 
-	    if (productIds != null && counts != null && productIds.length == counts.length) {
-	        for (int i = 0; i < productIds.length; i++) {
-	            int productId = Integer.parseInt(productIds[i]);
-	            int count = Integer.parseInt(counts[i]);
+		if (productIds != null && counts != null && productIds.length == counts.length) {
+			for (int i = 0; i < productIds.length; i++) {
+				int productId = Integer.parseInt(productIds[i]);
+				int count = Integer.parseInt(counts[i]);
 
-	            // ProductOrderItemDto 객체 생성 및 설정
-	            ProductOrderItemDto orderItemDto = new ProductOrderItemDto();
-	            orderItemDto.setProduct_id(productId);
-	            orderItemDto.setCount(count);
+				// ProductOrderItemDto 객체 생성 및 설정
+				ProductOrderItemDto orderItemDto = new ProductOrderItemDto();
+				orderItemDto.setProduct_id(productId);
+				orderItemDto.setCount(count);
 
-	            // 주문 상품 등록
-	            storeService.registOrderItem(orderItemDto);
-	            ProductCart cartDto =  new ProductCart();
-	            cartDto.setProduct_id(productId);
-	            storeService.updateCart(cartDto);
-	        }
-	    }
-			return "redirect:./orderCompletePage";
+				// 주문 상품 등록
+				storeService.registOrderItem(orderItemDto);
+				ProductCart cartDto = new ProductCart();
+				cartDto.setProduct_id(productId);
+				storeService.updateCart(cartDto);
+			}
+		}
+		return "redirect:./orderCompletePage";
 	}
-	
+
 	// 주문 완료페이지
 	@RequestMapping("orderCompletePage")
 	public String orderCompletePage(ProductRecipient reciDto, Model model) {
-	    ProductRecipient recipient = storeService.getRecipient(reciDto);
-	    model.addAttribute("recipient", recipient);
-	    return "www/main/orderCompletePage";
+		ProductRecipient recipient = storeService.getRecipient(reciDto);
+		model.addAttribute("recipient", recipient);
+		return "www/main/orderCompletePage";
+	}
+
+	// 마이페이지 주문목록출력
+	@RequestMapping("orderListPage")
+	public String orderListPage(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session) {
+		int itemsPerPage = 5; // 페이지당 아이템 개수
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
+		int id = sessionUser.getUser_id();
+		List<ProductOrderItemDto> fullList = storeService.getMypageList(id); // 전체 상품 목록 가져오기
+		
+		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		List<ProductOrderItemDto> paginatedList = new ArrayList<>();
+		int startIdx = (page - 1) * itemsPerPage;
+		int endIdx = Math.min(startIdx + itemsPerPage, fullList.size());
+		
+		for (int i = startIdx; i < endIdx; i++) {
+			paginatedList.add(fullList.get(i));
+		}
+		
+		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("list", paginatedList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageCount", pageCount);
+		return "www/main/orderListPage";
+	}
+
+	// 주문상세페이지
+	@RequestMapping("orderdetailPage")
+	public String orderdetailPage(Model model, int id) {
+		List<ProductOrderItemDto> list = storeService.getOrderDetailList(id);
+		model.addAttribute("list", list);
+		return "www/main/orderdetailPage";
 	}
 	
-	@RequestMapping("myPage")
-	public String myPage(ProductRecipient reciDto, Model model) {
-	    ProductRecipient recipient = storeService.getRecipient(reciDto);
-	    model.addAttribute("recipient", recipient);
-		return "www/main/myPage";
+	//리뷰관리페이지
+	@RequestMapping("productReviewPage")
+	public String productReviewPage(Model model, int id) {
+		ProductOrderItemDto rev = storeService.getReview(id);
+		model.addAttribute("rev", rev);
+		return "www/main/productReviewPage";
 	}
 	
-	
-	//==등록 관련
+	//리뷰작성처리
+	@RequestMapping("productReviewProcess")
+	public String productReviewProcess(Model model,HttpSession session, ProductReviewDto reDto, ProductReviewImageDto param,MultipartFile[] imageFiles) {
+		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
+		int id = sessionUser.getUser_id();
+		reDto.setUser_id(id);
+		
+		int totalFiles = imageFiles.length; // 등록된 이미지 파일의 총 개수
+
+		List<ProductReviewImageDto> reimglist = new ArrayList<>();
+
+		if (totalFiles > 0) {
+			for (int i = 0; i < totalFiles; i++) {
+				MultipartFile multipartFile = imageFiles[i];
+
+				if (multipartFile.isEmpty()) {
+					continue;
+				}
+
+				System.out.println("파일명: " + multipartFile.getOriginalFilename());
+
+				String rootFolder = "C:/ssofunReImgFiles/";
+
+				String saveFileName = multipartFile.getOriginalFilename();
+
+				try {
+					multipartFile.transferTo(new File(rootFolder + saveFileName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				ProductReviewImageDto reimg = new ProductReviewImageDto();
+				reimg.setUrl(saveFileName);
+				reimg.setOrder_list(i);
+				reimglist.add(reimg);
+			}
+		}
+		storeService.regitstReview(reDto);
+		storeService.registReimg(param, reimglist);
+		return "redirect:./orderListPage";
+	}
+
+	@RequestMapping("userMyPage")
+	public String userMyPage() {
+
+		return "www/main/userMyPage";
+	}
+
+	// ==등록 관련
 	@RequestMapping("adminPage")
-	public String adminPage() {	
+	public String adminPage() {
 		return "www/main/adminPage";
 	}
-	
+
 	@RequestMapping("protuctRegist")
 	public String protuctRegist() {
 		return "www/main/protuctRegist";
 	}
-	
+
 	@RequestMapping("protuctProcess")
-	public String protuctProcess(ProductDto productDto, HttpSession session ) {
-		AdminDto sessionUser = (AdminDto)session.getAttribute("sessionUser");
-		
+	public String protuctProcess(ProductDto productDto, HttpSession session) {
+		AdminDto sessionUser = (AdminDto) session.getAttribute("sessionUser");
+
 		int adminId = sessionUser.getAdmin_id();
 		System.out.println(adminId);
 		productDto.setAdmin_id(adminId);
 		storeService.registerProduct(productDto);
 		return "redirect:./loginPage";
 	}
-	
+
 	@RequestMapping("thumbnail")
-	public String thumbnail() {	
+	public String thumbnail() {
 		return "www/main/thumbnail";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("thumbnailProcess")
 	public String thumbnailProcess(ProductThumbnailDto params, MultipartFile[] imageFiles) {
-	    int totalFiles = imageFiles.length; // 등록된 이미지 파일의 총 개수
+		int totalFiles = imageFiles.length; // 등록된 이미지 파일의 총 개수
 
-	    List<ProductThumbnailDto> thumbnailList = new ArrayList<>();
+		List<ProductThumbnailDto> thumbnailList = new ArrayList<>();
 
-	    if (totalFiles > 0) {
-	        for (int i = 0; i < totalFiles; i++) {
-	            MultipartFile multipartFile = imageFiles[i];
+		if (totalFiles > 0) {
+			for (int i = 0; i < totalFiles; i++) {
+				MultipartFile multipartFile = imageFiles[i];
 
-	            if (multipartFile.isEmpty()) {
-	                continue;
-	            }
+				if (multipartFile.isEmpty()) {
+					continue;
+				}
 
-	            System.out.println("파일명: " + multipartFile.getOriginalFilename());
+				System.out.println("파일명: " + multipartFile.getOriginalFilename());
 
-	            String rootFolder = "C:/uploadFiles/";
+				String rootFolder = "C:/uploadFiles/";
 
-	            String saveFileName = multipartFile.getOriginalFilename();
+				String saveFileName = multipartFile.getOriginalFilename();
 
-	            try {
-	                multipartFile.transferTo(new File(rootFolder + saveFileName));
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
+				try {
+					multipartFile.transferTo(new File(rootFolder + saveFileName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
-	            ProductThumbnailDto thumbnail = new ProductThumbnailDto();
-	            thumbnail.setName(saveFileName);
-	            thumbnail.setOrder_list(i);
-	            thumbnailList.add(thumbnail);
-	        }
-	    }
+				ProductThumbnailDto thumbnail = new ProductThumbnailDto();
+				thumbnail.setName(saveFileName);
+				thumbnail.setOrder_list(i);
+				thumbnailList.add(thumbnail);
+			}
+		}
 
-	    storeService.registThumbnail(params, thumbnailList);
-	    return "1";
+		storeService.registThumbnail(params, thumbnailList);
+		return "1";
 	}
-	
+
 	@RequestMapping("type")
 	public String type() {
 		return "www/main/type";
 	}
-	
+
 	@RequestMapping("typeProcess")
 	public String typeProcess(ProductCategoryTypeDto catyDto) {
 		storeService.registerType(catyDto);
-		return"www/main/mainPage";
+		return "www/main/mainPage";
 	}
-	
+
 }

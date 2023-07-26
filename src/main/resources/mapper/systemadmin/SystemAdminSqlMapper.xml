@@ -14,23 +14,23 @@
 	
 	
 	<select id="selectQnaNotNullAnswer" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where answer_contents is not null order by qna_id DESC
+		select * from tb_qna where answer_contents is not null and biz_id is null order by qna_id DESC
 	</select>
 	
 	
 	<select id="selectQnaDataBYQnaId" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where qna_id = #{qna_id}
+		select * from tb_qna where qna_id = #{qna_id} and biz_id is null 
 	</select>
 	
 	<select id="selectQnaImageByQnaId" resultType="com.ssofun.dto.Qna_ImageDto">
-		select * from tb_qna_image where qna_id = #{qna_id}
+		select * from tb_qna_image where qna_id = #{qna_id} and biz_id is null 
 	</select>
 	
 	
 	
 <!--user_id로 유저정보가져오기 -->
 	<select id="selectUserDtoByUserId" resultType="com.ssofun.dto.UserDto">
-	 select * from tb_User where user_id = #{user_id}
+	 select * from tb_User where user_id = #{user_id} and biz_id is null 
 	</select>
 	
 
@@ -41,7 +41,7 @@
 	</update>
 	
 	<select id="selectById" resultType="com.ssofun.dto.QnaDto">
-		SELECT * FROM tb_qna where id = #{id}
+		SELECT * FROM tb_qna where id = #{id} and biz_id is null 
 	</select>
 
 
@@ -107,15 +107,11 @@
 	
 	<select id="selectFaqCustomerService" resultType="com.ssofun.dto.FaqDto">
 		SELECT * FROM tb_faq tf
-		WHERE tf.faq_category = 'categoryCustomerService'	
 	</select>
 	
 	
-	
-	
-	
 	<!-- faq에 도움의견넣기 -->
-	<insert id="insertFaqHelpStatus">
+	<insert id="FaqHelpStatus">
 		INSERT INTO tb_faq_HelpStatus(faq_id ,helpStatus, created_at,used_fg)
 		VALUES(#{faq_id},#{helpStatus}, now(),1)
 	</insert>
@@ -132,6 +128,65 @@
 	</select>
 	
 	
+	
+	
+	
+	
+	
+	
+<!-- 입점사관리 -->
+	
+	<!-- 업체등록 -->
+	<insert id="createCompanyAccount">
+		INSERT INTO tb_biz(biz_name,biz_no,biz_phone,biz_ceo, created_at,used_fg)
+		VALUES(#{biz_name},#{biz_no},#{biz_phone},#{biz_ceo}, now(),1)
+	</insert>
+	
+	
+	<!-- 업체목록(등록일순) -->
+	<select id="bizDtoList" resultType="com.ssofun.dto.BizDto">
+		SELECT * FROM tb_biz ORDER BY biz_id ASC
+	</select>
+	
+	<!-- bizid로 해당업체정보가져오기 -->
+	<select id="selectBizDataBybizId" resultType="com.ssofun.dto.BizDto">
+		SELECT * FROM tb_biz WHERE biz_id=#{biz_id}
+	</select>
+	
+	
+	
+<!-- 판매자관리 -->
 
+	<!-- biz_id소속인 판매자 리스트 -->
+	<select id="selectAdminDtoListByBizId" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin WHERE biz_id = #{biz_id} ORDER BY admin_id DESC
+	</select>
+	
+	
+	
+	<!-- 판매자등록 -->	
+	<insert id="createVenderAccount">
+		INSERT INTO tb_admin(biz_id,login_account,login_password,admin_nickname,admin_phone,admin_received_report,admin_report_description, created_at,used_fg)
+		VALUES(#{biz_id},#{login_account},#{login_password},#{admin_nickname},#{admin_phone},#{admin_received_report},#{admin_report_description},now(),1)
+	</insert>
+	
+	
+	<!--전체판매자목록가져오기(최근등록순) -->
+	<select id="selectAdminDtoList" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin ORDER BY admin_id DESC
+	</select>
+	
+	
+	<!-- 입점업체에 해당하는 판매자수 -->
+	<select id="countAdminByBizId" resultType="int">
+		SELECT COUNT(*) as admin_count FROM tb_admin WHERE biz_id = #{biz_id}
+	</select>
+	
+	
+	<!-- 입점회사전체목록 -->
+	<!-- <select id="selectAllBizName" resultType="com.ssofun.dto.BizDto">
+		SELECT biz_name FROM tb_biz;
+	</select> -->
+		
 
 </mapper>

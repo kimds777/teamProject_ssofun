@@ -72,10 +72,7 @@ public class SystemAdminServiceImpl {
 			
 			answerCompleteList.add(map);
 			
-			
-		
 		}
-		
 		
 		return answerCompleteList;
 	}
@@ -217,6 +214,176 @@ public class SystemAdminServiceImpl {
 //		
 //			unanswerList.add(map);
 		
+	
+	
+	
+	
+//companyManagement관련, 입점사관리
+	
+	//업체등록
+	public void insertcreateCompanyAccount(BizDto bizDto) {
+		systemAdminSqlMapper.createCompanyAccount(bizDto);
+		
+		};
+	
+	
+	//입점사목록가져오기()
+	public List<Map<String, Object>> getBizDtoListContainCount(){
+		List<Map<String, Object>> bizList = new ArrayList<>();
+		List<BizDto> bizDtoList	= systemAdminSqlMapper.bizDtoList();
+		
+		for(BizDto bizDto : bizDtoList) {
+			Map<String, Object> map = new HashMap<>();
+			int biz_id = bizDto.getBiz_id();
+			int adminCount = systemAdminSqlMapper.countAdminByBizId(biz_id); 
+			
+			map.put("bizDto", bizDto);
+			map.put("adminCount",adminCount);//biz_id에 해당하는 판매자수
+			
+			
+			bizList.add(map);
+		}
+		
+		return bizList; 
+	}
+	
+	
+	public List<BizDto> getBizDtoList (){
+		List<BizDto> bizList = systemAdminSqlMapper.bizDtoList();
+		
+		return bizList;
+	}
+
+	
+	
+	//biz_id로 해당되는 글정보가져오기
+	public BizDto getBizData(int biz_id) {
+		
+		BizDto bizDto = systemAdminSqlMapper.selectBizDataBybizId(biz_id);
+		System.out.println("service"+bizDto.getBiz_name());
+		
+		return bizDto;
+		
+	};
+	
+	
+	
+	
+//판매자관리
+	
+	//bizid에 소속된 판매자리스트 
+	public List<Map<String, Object>> getAdminDataByBizId(int biz_id){
+		
+		List<Map<String, Object>> adminDtoList = new ArrayList<>();
+		
+		List<AdminDto> adminDtoListByBizId = systemAdminSqlMapper.selectAdminDtoListByBizId(biz_id);
+		
+		BizDto bizDto = systemAdminSqlMapper.selectBizDataBybizId(biz_id);
+		for(AdminDto adminDto:adminDtoListByBizId) {
+			
+			Map<String, Object> map = new HashMap<>();
+			
+			
+			
+			map.put("bizDto", bizDto);
+			map.put("adminDto", adminDto);
+			
+			adminDtoList.add(map);
+			}
+			return adminDtoList;
+		}
+	
+	//adminid로 판매자정보가져옴(bizid로 adminDto,bizDto엮음)
+	public Map<String, Object> getAdminData(int admin_id){
+		Map<String, Object> map = new HashMap<>();
+		
+		
+		AdminDto adminDto = systemAdminSqlMapper.selectAdminDtoByAdminId(admin_id);
+		
+		int bizId = adminDto.getBiz_id(); 
+		BizDto	bizDto = systemAdminSqlMapper.selectBizDataBybizId(bizId);
+
+		
+		map.put("bizDto", bizDto);
+		map.put("adminDto", adminDto);
+		
+		return map;
+	}
+	
+	//bizId로 해당되는 bizDto정보가져옴
+	public Map<String, Object> selectBizDataBybizId(int bizId){
+		
+		Map<String, Object> map = new HashMap<>();
+
+		
+		
+		BizDto bizDto = systemAdminSqlMapper.selectBizDataBybizId(bizId);
+		
+		map.put("bizDto", bizDto);
+		
+		return map;
+	}
+	
+
+	
+	//판매자등록
+	public void createAdminAccount(AdminDto adminDto) {
+		systemAdminSqlMapper.createVenderAccount(adminDto);
+	}
+	
+	
+	
+	//전체판매자리스트(venderManagementMainPage)
+	//bizid에 소속된 판매자리스트 
+	public List<Map<String, Object>> getAllAdminList(){
+		List<Map<String, Object>> adminList = new ArrayList<>();
+		
+		List<AdminDto> adminDtoList = systemAdminSqlMapper.selectAdminDtoList();
+
+		for(AdminDto adminDto:adminDtoList) {
+			Map<String, Object> map = new HashMap<>();
+			int bizId = adminDto.getBiz_id();
+			
+			BizDto bizDto = systemAdminSqlMapper.selectBizDataBybizId(bizId);
+			
+			map.put("adminDto", adminDto);
+			map.put("bizDto", bizDto);
+			adminList.add(map);
+		}
+		
+		return adminList ;
+	}
+	
+	
+
+	
+	
+	
+	
+	
+	
+//	public List<Map<String, Object>> getAdminDataByBizId(int biz_id){
+//		
+//		List<Map<String, Object>> adminDtoList = new ArrayList<>();
+//		
+//		List<AdminDto> adminDtoListByBizId = systemAdminSqlMapper.selectAdminDtoListByBizId(biz_id);
+//		
+//		BizDto bizDto = systemAdminSqlMapper.selectBizDataBybizId(biz_id);
+//		for(AdminDto adminDto:adminDtoListByBizId) {
+//			
+//			Map<String, Object> map = new HashMap<>();
+//			
+//			
+//			
+//			map.put("bizDto", bizDto);
+//			map.put("adminDto", adminDto);
+//			
+//			adminDtoList.add(map);
+//			}
+//			return adminDtoList;
+//		}
+	
+	
 	
 	
 	

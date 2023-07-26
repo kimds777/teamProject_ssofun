@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -7,20 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
-<link href="../../resources/css/productOrder.css" rel="stylesheet"	type="text/css">
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+    crossorigin="anonymous">
+<link href="../../resources/css/productOrder.css" rel="stylesheet"    type="text/css">
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>Document</title>
 </head>
 <body>
-	<jsp:include page="../../include/fundingHeader.jsp"/>
-	
-	 <div class="container">
+    <jsp:include page="../../include/fundingHeader.jsp"/>
+    
+     <div class="container">
        <div class="row">
         <div class="col"></div>
         <div class="col">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-				<form action="./productOrderProcess" method="post">
+                <form action="./productOrderProcess" method="post">
                 <div class="row">
                     <div class="col-customer">
                         <h2 class="delivery-address-h2">받는사람 정보</h2>
@@ -94,9 +94,9 @@
                 </div>
                 
                 <div class="row">
-                	<div class="col-customer">
-                		 <h2 class="customer-h2">배송상품</h2>
-                		<c:if test="${not empty detail}">                       
+                    <div class="col-customer">
+                         <h2 class="customer-h2">배송상품</h2>
+                        <c:if test="${not empty detail}">                       
                         <table class="customer-table">
                                 <tr>
                                     <td class="customer-td1">상품명</td>
@@ -104,17 +104,16 @@
                                      <td class="customer-td1">수량</td>
                                     <td class="customer-td2">${count }개</td>
                                 </tr>
-                		</table>
-                		</c:if>
-                		
-                	             		           
-                	</div>
+                        </table>
+                        </c:if>
+                                    
+                    </div>
                 </div>           
                 
                 
                 <div class="row">
                     <div class="col-customer">
-                    	<c:if test="${not empty detail}">
+                        <c:if test="${not empty detail}">
                         <h2 class="customer-h2">결제정보</h2>
                         <table class="customer-table">
                                
@@ -137,13 +136,11 @@
                     </div>
                 </div>
                 
-                
-                
                 <div class="row">
                     <div class="col-agreebtn">
-	                    <input type="hidden" name="amount" value="${amount}" readonly/>
-						<input type="hidden" name="count" value="${count}" readonly/>						
-						<input type="hidden" name="product_id" id="productId" readonly/>
+                        <input type="hidden" name="amount" value="${amount}" readonly/>
+                        <input type="hidden" name="count" value="${count}" readonly/>                      
+                        <input type="hidden" name="product_id" id="productId" readonly/>
                         <button class="prod-buy-btn">구매하기</button>            
                     </div>
                 </div>
@@ -157,7 +154,7 @@
     </div>
     
 <script>
- 	// URL에서 id 값을 추출하여 productId input 요소의 value에 설정
+    // URL에서 id 값을 추출하여 productId input 요소의 value에 설정
     var url = new URL(window.location.href);
     var id = url.searchParams.get("id");
     document.getElementById("productId").value = id;
@@ -211,14 +208,15 @@
             }
         }).open();
     }
-    
+
+
 
 </script>
-    
-    
+
+
 <script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-		crossorigin="anonymous"></script>
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
 </body>
 </html>

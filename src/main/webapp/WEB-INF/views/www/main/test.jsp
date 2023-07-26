@@ -1,81 +1,194 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
+<%@ page import="java.util.List"%>
+<%
+// Jackson ObjectMapper를 사용하여 Java 객체를 JSON 형태로 변환합니다.
+ObjectMapper objectMapper = new ObjectMapper();
+String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctlist"));
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="../../resources/css/main.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/productPage.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/productOrder.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/cartPage.css" rel="stylesheet"
+	type="text/css">
+<style>
+.test {
+	height: 30px;
+	margin: 5px 0px;
+}
 
-  
+/* Show/hide the categories on hover */
+.category-box:hover .categories {
+	display: block;
+}
+
+.categories {
+	width: 150px;
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.categories ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.categories li {
+	padding: 8px 16px;
+	position: relative;
+}
+
+/* Style for the subcategories */
+.subcategories {
+	width: 150px;
+	display: none;
+	position: absolute;
+	left: 100%;
+	top: 0;
+	background-color: #f9f9f9;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.subcategories ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.subcategories li {
+	padding: 8px 16px;
+	position: relative;
+}
+
+/* Style for the subsubcategories */
+.subsubcategories {
+	width: 150px;
+	display: none;
+	position: absolute;
+	left: 100%;
+	top: 0;
+	background-color: #f9f9f9;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.subsubcategories ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.subsubcategories li {
+	padding: 8px 16px;
+}
+
+.categories li:hover,
+.subcategories li:hover,
+.subsubcategories li:hover {
+	background-color: #f1f1f1;
+}
+</style>
 </head>
 <body>
- <div class="container">
-        <div class="row">
-        	<div class="col">
-        		<jsp:include page="../head/topNavi.jsp"></jsp:include>
-        	</div>
-        </div>
-    </div>
-    
-    <div class="container">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col">
-				<div class="row">
-				<div class="col">
-					<img class="img- fluid banner" src="../../resources/img/banner.jpg">
-				</div>
-				</div>
-				
-				<div class="row">
-				<div class="col ca">카테고리명</div>
-				</div>							
-				
-				<!-- 여기서 반복문 -->
-				<div class="row">
-				<c:forEach items="${list }" var="product">
-				<div class="col-a Image "><a class="baby-product-link" href="./productPage?id=${product.product_id }">
-					<div class="row">
-					<div class="col text-center"><img src="/uploadFiles/${product.thumbnail_name}" style="width:380px; height:380px;" class="img-rounded">
+	<jsp:include page="../../include/fundingHeader.jsp" />
+
+	<div class="category-head">
+		<div class="search-header-content">
+			<div class="category-box">
+				<div class="category-btn">
+					<i class="bi bi-list"></i> <a href="javascript:;">카테고리</a>
+					<div class="categories">
+						<ul class="shopping-menu-list">
+							<c:forEach items="${pctlist}" var="category">
+								<c:if test="${category.this_parent_id eq 0}">
+									<li class="li-list" value="${category.product_category_type_id}">
+										${category.name}
+										<!-- Subcategories -->
+										<div class="subcategories">
+											<ul>
+												<c:forEach items="${pctlist}" var="subcategory">
+													<c:if test="${subcategory.this_parent_id eq category.product_category_type_id}">
+														<li>${subcategory.name}
+															<!-- Subsubcategories -->
+															<div class="subsubcategories">
+																<ul>
+																	<c:forEach items="${pctlist}" var="subsubcategory">
+																		<c:if test="${subsubcategory.this_parent_id eq subcategory.product_category_type_id}">
+																			<li>${subsubcategory.name}</li>
+																		</c:if>
+																	</c:forEach>
+																</ul>
+															</div>
+														</li>
+													</c:if>
+												</c:forEach>
+											</ul>
+										</div>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
 					</div>
-					</div>
-					<div class="row r1">
-						<div class="row">
-						<div class="col-name"><p style="font-size:14px">${product.category_type_name }</p></div>
-						</div>
-						<div class="row r2">
-						<div class="col-ex">${product.product_name }</div>
-						</div>
-						<div class="row">
-						<div class="col">
-							<div class="row r3">
-							<div class="col-won1 text-end"><b><fmt:formatNumber value="${product.price_sale }" pattern="#,###원"/></b></div>						
-							<div class="col-won2"><del><fmt:formatNumber value="${product.price }" pattern="#,###원"/></del></div>
-						</div>				
-						</div>
-						<div class="col"></div>
-						</div>
-					</div>
-					<div class="col-review">리뷰</div><!-- <hr> --></a>					
-				</div>
-				</c:forEach>
-				</div>
-				
-				
-				<div class="row">
-				<div class="col">zz</div>
 				</div>
 			</div>
-			<div class="col"></div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-foot">FOOTER(미정)</div>
+
+	<div class="banner-a">
+		<!-- 배너 이미지 -->
 	</div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+	<!-- 푸터 영역 -->
+	<jsp:include page="../../include/fundingFooter.jsp" />
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+		crossorigin="anonymous"></script>
+
+	<script>
+	$(document).ready(function() {
+		// Show/hide the categories on hover for both the category button and menu items
+		$(".category-box").hover(function() {
+			$(".categories").css("display", "block");
+		}, function() {
+			$(".categories").css("display", "none");
+		});
+
+		$(".shopping-menu-list li").hover(function() {
+			$(this).find(".subcategories").css("display", "block");
+		}, function() {
+			$(this).find(".subcategories").css("display", "none");
+		});
+
+		$(".subcategories li").hover(function() {
+			$(this).find(".subsubcategories").css("display", "block");
+		}, function() {
+			$(this).find(".subsubcategories").css("display", "none");
+		});
+	});
+	</script>
 </body>
 </html>
