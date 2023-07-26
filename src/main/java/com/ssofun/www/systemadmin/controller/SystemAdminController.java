@@ -292,7 +292,7 @@ public class SystemAdminController {
 		return"systemadmin/companyManagement/companyRegistrationPage";
 	}
 	
-	//입점사 등록프로세서
+	//입점사 등록프로세스
 	@RequestMapping("writeCompanyAccountProcess")
 	public String writeCompanyAccount(@RequestParam("biz_name")String biz_name,
 									@RequestParam("biz_ceo")String biz_ceo,
@@ -420,7 +420,7 @@ public class SystemAdminController {
 	
 	
 	
-	//판매자메인페이지(리스트)
+	//판매자메인페이지(전체리스트)
 	@RequestMapping("companyManagement/venderManagementMainPage")
 	public String venderManagementMainPage(Model model) {
 		
@@ -457,7 +457,7 @@ public class SystemAdminController {
 	}
 	
 	
-	//판매자등록프로세서
+	//판매자등록프로세스
 	@RequestMapping("venderRegistrationProcess")
 	public String venderRegistrationProcess(
 													@RequestParam("biz_id")int biz_id,
@@ -551,9 +551,45 @@ public class SystemAdminController {
 		}else {
 			systemAdminService.adminAccountActivation(admin_id);
 		}
-//		
+	
 //		"redirect:./companyManagement/venderListOfCompanyNumberPage?biz_id="+adminDto.getBiz_id();
 		return"redirect:./companyManagement/readVenderPage?admin_id="+admin_id;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//사이트관리
+	
+	
+	//펀딩관리사이트
+	@RequestMapping("siteManagement/fundingManagementPage")
+	public String fundingManagementPage(Model model) {
+		
+		List<Map<String, Object>> unauthorizedFundingList = systemAdminService.getUnauthorizedFunding();
+				
+		model.addAttribute("fundingList",unauthorizedFundingList);
+		
+		
+		return "systemadmin/siteManagement/fundingManagementPage";
+	}
+	
+	
+	
+	//펀딩승인프로세스
+	@RequestMapping("fundingApprovalProcess")
+	public String fundingApprovalProcess(int funding_id) {
+		
+		System.out.println("펀딩프로세스"+funding_id);
+		
+		systemAdminService.fundingApproval(funding_id);
+		
+		return "redirect:./siteManagement/fundingManagementPage";
 	}
 	
 }

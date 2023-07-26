@@ -144,5 +144,32 @@ public interface SystemAdminSqlMapper {
 	
 	//판매자계정비활성화
 	public void adminAccountDeactivation(int admin_id);
+	
+	
+	
+	
+//사이트관리관련
+	
+	//미승인된 펀딩가져옴
+	public List<FundingDto> getUnauthorizedFunding();
+
+	//펀딩승인함
+	public void fundingApproval(int funding_id);
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

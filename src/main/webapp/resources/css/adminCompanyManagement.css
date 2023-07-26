@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Noto+Sans+KR&display=swap');
 	.site{display: block;}
 	.rightmenu{line-height: 68px;}
+	.section{margin: 0 auto; width: 1200px;}
 	.star{margin-top:7px; margin-bottom:0px; color:#FF6462; }
 	.companyfont{font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 19px; margin-bottom: 0; margin-top:6px; margin-bottom:0px;}	
 	.companyfont1{font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 28px; margin-bottom: 0; margin-top:6px; margin-bottom:0px; font-weight: bold;}	

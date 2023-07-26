@@ -34,6 +34,7 @@ public class FundingDto {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy년 MM월 dd일")
 	@DateTimeFormat(pattern = "yyyy.MM.dd")
 	private Date delivery_from; //배송 시작 예정일
+	private int confirm_fg;
 	
 	public FundingDto() {
 		super();
@@ -44,7 +45,8 @@ public class FundingDto {
 			String creator_email, long achievementPrice, int achievementRate, int countSupporter,
 			String title, String description, String contents, int favorit, List<FundingNewsDto> newsList,
 			List<FundingCommunityDto> reviewList, List<FundingThumbnailDto> thumbnailList,
-			List<FundingRewardDto> rewardList, int d_day, Date start_from, Date close_at, Date delivery_from) {
+			List<FundingRewardDto> rewardList, int d_day, Date start_from, Date close_at, Date delivery_from,
+			int confirm_fg) {
 		super();
 		this.funding_id = funding_id;
 		this.funding_category = funding_category;
@@ -66,6 +68,7 @@ public class FundingDto {
 		this.start_from = start_from;
 		this.close_at = close_at;
 		this.delivery_from = delivery_from;
+		this.confirm_fg = confirm_fg;
 	}
 
 	public List<FundingCommunityDto> getReviewList() {
@@ -228,6 +231,16 @@ public class FundingDto {
 
 	public void setDelivery_from(Date delivery_from) {
 		this.delivery_from = delivery_from;
+	}
+
+
+	public int getConfirm_fg() {
+		return confirm_fg;
+	}
+
+
+	public void setConfirm_fg(int confirm_fg) {
+		this.confirm_fg = confirm_fg;
 	}
 
 

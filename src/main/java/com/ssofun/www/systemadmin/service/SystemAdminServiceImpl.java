@@ -2,6 +2,7 @@ package com.ssofun.www.systemadmin.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -391,33 +392,51 @@ public class SystemAdminServiceImpl {
 		systemAdminSqlMapper.adminAccountDeactivation(admin_id);
 	}
 	
+	
+	
+	
+	
+//사이트관리
+	
+	
+	//펀딩사이트관리
+	public List<Map<String, Object>> getUnauthorizedFunding(){
+		
+		List<Map<String, Object>> unauthorizedFundingList = new ArrayList<>();
+		List<FundingDto> unauthorizedFundingDto = systemAdminSqlMapper.getUnauthorizedFunding();
+		
+		for(FundingDto fundingDto : unauthorizedFundingDto) {
+			Map<String, Object> map = new HashMap<>();
+			 
+			
+			map.put("fundingDto", fundingDto);
+			
+			unauthorizedFundingList.add(map);
+		}
+		
+		
+		return unauthorizedFundingList;
+	}
+
+	
+	//펀딩승인
+	
+	public void fundingApproval(int funding_id) {
+	
+		systemAdminSqlMapper.fundingApproval(funding_id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	
-	
-	
-	
-	
-//	public List<Map<String, Object>> getAdminDataByBizId(int biz_id){
-//		
-//		List<Map<String, Object>> adminDtoList = new ArrayList<>();
-//		
-//		List<AdminDto> adminDtoListByBizId = systemAdminSqlMapper.selectAdminDtoListByBizId(biz_id);
-//		
-//		BizDto bizDto = systemAdminSqlMapper.selectBizDataBybizId(biz_id);
-//		for(AdminDto adminDto:adminDtoListByBizId) {
-//			
-//			Map<String, Object> map = new HashMap<>();
-//			
-//			
-//			
-//			map.put("bizDto", bizDto);
-//			map.put("adminDto", adminDto);
-//			
-//			adminDtoList.add(map);
-//			}
-//			return adminDtoList;
-//		}
+
 	
 	
 	

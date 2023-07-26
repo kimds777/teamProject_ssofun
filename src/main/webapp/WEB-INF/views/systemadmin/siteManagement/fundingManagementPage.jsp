@@ -22,7 +22,7 @@
 
 
 
-    <title>systemAdminCompanyManagementMainPage</title>
+    <title>fundingManagementPage</title>
 </head>
 
 <body>
@@ -67,9 +67,16 @@
 
     
                             <div class="row mt-3">
-                                <div class="col"><i class="bi bi-building text-light" style="margin-right: 5px;"></i><a
+                                <div class="col"><i class="bi bi-arrow-through-heart-fill text-light" style="margin-right: 5px;"></i><a
                                         class="leftsidepontstyle1"
-                                        href="../../systemadmin/companyManagement/companyManagementMainPage">입점사관리</a></div>
+                                        href="../../systemadmin/companyManagement/companyManagementMainPage">펀딩사이트관리</a>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col"><i class="bi bi-cart4 text-light" style="margin-right: 5px;"></i><a
+                                        class="leftsidepontstyle1"
+                                        href="../../systemadmin/companyManagement/companyManagementMainPage">쇼핑몰사이트관리</a>
+                                </div>
                             </div>
                             <div class="row mt-3">
                               <!--  <div class="col"><i class="bi bi-person-vcard text-light" style="margin-right: 5px;"></i><a
@@ -89,10 +96,10 @@
                                 <div class="container-fluid">
                                    
                                         <div class="col-2">
-                                            <a class="navbar-brand text-black">입점사전체목록</a>
+                                            <a class="navbar-brand text-black">펀딩관리</a>
                                         </div>
                                         <div class="col">
-                                            <p class="five-font mt-2">ssoFun에 등록된 입점사전체목록입니다.</p>
+                                            <p class="five-font mt-2">펀딩관리페이지입니다.</p>
                                             
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
@@ -112,11 +119,13 @@
                     <div class="row" style="margin-left: 10px; height:1000px">
                     
                         <div class="col" style="padding-left: 0px;">
+		
+						<form  action="../fundingApprovalProcess" method="post">
 
                            	<div class="row" style="padding-left: 0px;">
-                                <div class="col-2" style="padding-left: 0px;"><p class="three-font mt-1" style="margin-left: 5px;">입점사목록</p></div>
+                                <div class="col-2" style="padding-left: 0px;"><p class="three-font mt-1" style="margin-left: 5px;">미승인된 펀딩목록</p></div>
                                 <div class="col c-five-font"></div>
-                                <div class="col-2" style="text-align: right;"><input type="button" class="writefaqbutton" value="업체등록"  onclick="location.href='companyRegistrationPage'" style="border-radius: 5px;"></div>
+                                <div class="col-2" style="text-align: right;"><input type="submit" class="writefaqbutton" value="펀딩승인"   style="border-radius: 5px;"></div>
                             
                             </div>
                       
@@ -126,26 +135,23 @@
 		              			<table class="table table-bordered table-sm">
 									  <thead>
 									    <tr  style="background-color: #f8f9fa;">
-									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">업체번호</p></th>
-									      <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">업체명</p></th>
-									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">대표자명</p></th>
-									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">사업자번호</p></th>
-		                                  <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">판매자수</p></th>
-									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">등록일</p></th>
+									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><input type="checkbox"></p></th>
+									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">펀딩번호</p></th>
+									      <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">펀딩제목</p></th>
+									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">창작자</p></th>
+									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">승인여부</p></th>
+								
 									    </tr>
 									  </thead>
-									  	<c:forEach items="${bizList}" var="bizList" >
+									  	<c:forEach items="${fundingList}" var="fundingList" >
 										  <tbody>
 										    <tr>
-										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_id }</p></th>
-										      <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./readCompanyPage?biz_id=${bizList.bizDto.biz_id }">${bizList.bizDto.biz_name }</a></p></td>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${bizList.bizDto.biz_ceo }</p></td>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_no }</p></td>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.adminCount } 명</p></td>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">
-					                            	<fmt:formatDate pattern="yy. MM. dd. (E)" value="${bizList.bizDto.created_at }"/>
-					                            </p>
-					                          </td>
+										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;"><input type="checkbox" name="funding_id" value="${fundingList.fundingDto.funding_id }"></p></th>
+										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.funding_id }</p></th>
+											  <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.title }</p></th>
+										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.creator_name }</p></td>
+										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.confirm_fg }</p></td>
+									
 										    </tr>
 										  </tbody>
 										</c:forEach>
@@ -191,7 +197,7 @@
 				            </div>
 	                    
                     
-		                    
+		                </form>
 		                </div>
 		            </div>
 				</div>

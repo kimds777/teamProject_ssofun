@@ -100,7 +100,7 @@
 
 
                 <div class="col">
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary" style="height:54.98px">
                                 <div class="container-fluid">
@@ -108,6 +108,10 @@
                                         <div class="col-2">
                                             <a class="navbar-brand text-black">입점사 상세정보</a>
                                         </div>
+                                        <div class="col">
+                                            <p class="five-font mt-2">입점사상세정보와 소속판매자정보입니다.</p>
+                                        </div>
+                    
 
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -125,27 +129,21 @@
                     <!--안에 페이지 내용만 바꾸기-->
                     <div class="row" style="margin-left: 10px; height:0px">
                     
-                        <div class="col">
+                        <div class="col" style="padding-left: 0px;">
 
-                           	<div class="row">
-                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">입점사상세정보</p></div>
-                                <div class="col c-five-font"><p class="five-font mt-2">입점사상세정보와 소속판매자정보입니다.</p></div>
-                                <div class="col-2"></div>
-                                <div class="col-2">
-                            	</div>
-                            </div>
+                
                             
-                            <div class="row" >
+                            <div class="row" style="padding-left: 0px;">
                                 <div class="col hr-col"><hr class="hr-1"></div>
                             </div>
                             
             
                             
                             <div  class="row">
-                                <div class="col"  style="background-color:#F8F9FA; height:320px; border-radius: 3%;">
+                                <div class="col"  style="background-color:#F8F9FA; height:320px; border-radius: 3%; ">
                                    
                                         <div class="row mt-2" style="height: 60px;">
-                                            <div class="col"style="text-align: left;">
+                                            <div class="col"style="text-align: left; padding-left: 0px;">
                                                 <a class="readQnalink" href="./companyManagementMainPage"><i class="bi bi-chevron-left fs-2"></i></a>
                                             	<span class="bizName">${bizData.biz_name }</span>
                                             </div>
