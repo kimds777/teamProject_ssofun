@@ -33,13 +33,30 @@ public class StoreController {
 	}
 
 	@RequestMapping("test")
-	public String test(ProductDto producDto, Model model,ProductCategoryTypeDto pctDto) {
-		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);// tb_product_category_type 테이블 값가져오기
+	public String test(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
+		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
+		List<ProductDto> fullList = storeService.getItemList(producDto); // 전체 상품 목록 가져오기
+		
+		int itemsPerPage = 8; // 페이지당 아이템 개수
+		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		List<ProductDto> paginatedList = new ArrayList<>();
+		int startIdx = (page - 1) * itemsPerPage;
+		int endIdx = Math.min(startIdx + itemsPerPage, fullList.size());
+		for (int i = startIdx; i < endIdx; i++) {
+			paginatedList.add(fullList.get(i));
+		}
 
-		model.addAttribute("pctlist", pctlist); // tb_product_category_type 테이블
+		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("Recount", Recount); // 상품별 리뷰 개수
+		model.addAttribute("pctlist", pctlist);
+		model.addAttribute("list", paginatedList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageCount", pageCount);
 		
 		return "www/main/test";
 	}
+	
 	@RequestMapping("testtest")
 	public String testtest(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
 		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);// tb_product_category_type 테이블 값가져오기
@@ -55,7 +72,9 @@ public class StoreController {
 	@RequestMapping("mainPage")
 	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
 		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
+		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
 		List<ProductDto> fullList = storeService.getItemList(producDto); // 전체 상품 목록 가져오기
+		
 		
 		int itemsPerPage = 8; // 페이지당 아이템 개수
 		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
@@ -67,6 +86,7 @@ public class StoreController {
 		}
 
 		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("Recount", Recount); // 상품별 리뷰 개수
 		model.addAttribute("pctlist", pctlist);
 		model.addAttribute("list", paginatedList);
 		model.addAttribute("currentPage", page);
@@ -79,6 +99,7 @@ public class StoreController {
 	@RequestMapping("categories")
 	public String testa(@RequestParam(defaultValue = "1") int page, int pct, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
 		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto); // 카테고리 출력
+		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
 		List<ProductDto> pctypeList = storeService.getProductCTList(pct);
 		
 		int itemsPerPage = 8; // 페이지당 아이템 개수
@@ -91,6 +112,7 @@ public class StoreController {
 		}
 
 		int pageCount = (int) Math.ceil((double) pctypeList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("Recount", Recount); // 상품별 리뷰 개수
 		model.addAttribute("pctlist", pctlist);
 		model.addAttribute("list", paginatedList);
 		model.addAttribute("currentPage", page);

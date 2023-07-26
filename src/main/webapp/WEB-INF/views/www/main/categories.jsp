@@ -26,14 +26,9 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <title>Insert title here</title>
 
-<link href="../../resources/css/main.css" rel="stylesheet"
+<link href="../../resources/css/categories.css" rel="stylesheet"
 	type="text/css">
-<link href="../../resources/css/productPage.css" rel="stylesheet"
-	type="text/css">
-<link href="../../resources/css/productOrder.css" rel="stylesheet"
-	type="text/css">
-<link href="../../resources/css/cartPage.css" rel="stylesheet"
-	type="text/css">
+
 
 </head>
 <body>
@@ -81,43 +76,41 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 					</div>
 				</div>
 			</div>
+			<div class="" id="categoryname">
+				<%-- 대분류, 중분류, 소분류 이름 출력 --%>
+				<c:forEach items="${pctlist}" var="category">
+					<%-- 선택한 pct와 일치하는 카테고리를 찾음 --%>
+					<%-- 소분류 출력 --%>
+					<c:if test="${category.product_category_type_id eq param.pct}">
+						<%-- 중분류 출력 --%>
+						<c:forEach items="${pctlist}" var="parentCategory">
+							<c:if
+								test="${parentCategory.product_category_type_id eq category.this_parent_id}">
+								<%-- 대분류 출력 --%>
+								<c:forEach items="${pctlist}" var="grandParentCategory">
+									<c:if
+										test="${grandParentCategory.product_category_type_id eq parentCategory.this_parent_id}">
+						                            ${grandParentCategory.name}  &gt; ${parentCategory.name} &gt;  ${category.name}
+						                        </c:if>
+								</c:forEach>
+							</c:if>
+						</c:forEach>
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 
 
 
-	<div class="banner-a">
-		<!-- 				<img class="banner-img" src="../../resources/img/banner.jpg"> -->
-	</div>
 
 	<div class="container">
 		<div class="row">
 			<div class="col"></div>
 			<div class="col">
 
-				<div class="row">
-					<div class="col-ca">
-						<%-- 대분류, 중분류, 소분류 이름 출력 --%>
-						<c:forEach items="${pctlist}" var="category">
-							<%-- 선택한 pct와 일치하는 카테고리를 찾음 --%>
-							<%-- 소분류 출력 --%>
-							<c:if test="${category.product_category_type_id eq param.pct}">								
-								<%-- 중분류 출력 --%>
-								<c:forEach items="${pctlist}" var="parentCategory">
-									<c:if test="${parentCategory.product_category_type_id eq category.this_parent_id}">
-										<%-- 대분류 출력 --%>
-										<c:forEach items="${pctlist}" var="grandParentCategory">
-											<c:if test="${grandParentCategory.product_category_type_id eq parentCategory.this_parent_id}">
-						                            ${grandParentCategory.name}  &gt; ${parentCategory.name} &gt;  ${category.name}
-						                        </c:if>
-										</c:forEach>
-									</c:if>
-								</c:forEach>
-							</c:if>
-						</c:forEach>
-					</div>
-				</div>
-				
+
+
 				<div class="row">
 					<div class="col-ca">
 						<c:forEach items="${pctlist}" var="category">
@@ -152,22 +145,28 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 									<div class="row">
 										<div class="col">
 											<div class="row r3">
-												<div class="col-mwon1 text-end">
+												<div class="col-mwon1">
+													<span class="discount">${Math.floor((product.price - product.price_sale) / product.price * 100).intValue()}%</span>
 													<b><fmt:formatNumber value="${product.price_sale }"
 															pattern="#,###원" /></b>
-												</div>
-												<div class="col-mwon2">
-													<del>
-														<fmt:formatNumber value="${product.price }"
+															
+													<del class="price"><fmt:formatNumber value="${product.price }"
 															pattern="#,###원" />
 													</del>
 												</div>
+												
 											</div>
 										</div>
-										<div class="col"></div>
 									</div>
 								</div>
-								<div class="col-review">리뷰</div> <!-- <hr> -->
+								<div class="col-review">
+									리뷰
+									<c:forEach items="${Recount }" var="Recount">
+										<c:if test="${product.product_id eq Recount.product_id }">
+											${Recount.count }
+										</c:if>
+									</c:forEach>
+								</div> <!-- <hr> -->
 							</a>
 						</div>
 					</c:forEach>

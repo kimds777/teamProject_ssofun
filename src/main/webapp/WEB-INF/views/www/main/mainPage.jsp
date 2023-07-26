@@ -7,7 +7,7 @@
 <%
   // Jackson ObjectMapper를 사용하여 Java 객체를 JSON 형태로 변환합니다.
   ObjectMapper objectMapper = new ObjectMapper();
-  String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctlist"));
+  String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"));
 %>
 <!DOCTYPE html>
 <html>
@@ -81,17 +81,17 @@
 
 
 	<div class="banner-a">
-<!-- 				<img class="banner-img" src="../../resources/img/banner.jpg"> -->
+			<img class="banner-img" src="../../resources/img/banner.jpg"> 
 	</div>
 
-	<div class="container">
+	<div class="container ">
 		<div class="row">
 			<div class="col"></div>
 			<div class="col">
 
 
 				<div class="row">
-					<div class="col-ca"></div>
+					<div class="col-ca"><h3>최신상품</h3></div>
 				</div>
 
 				<!-- 여기서 반복문 -->
@@ -118,23 +118,30 @@
 									<div class="row">
 										<div class="col">
 											<div class="row r3">
-												<div class="col-mwon1 text-end">
+												<div class="col-mwon1">
+													<span class="discount">${Math.floor((product.price - product.price_sale) / product.price * 100).intValue()}%</span>
 													<b><fmt:formatNumber value="${product.price_sale }"
 															pattern="#,###원" /></b>
-												</div>
-												<div class="col-mwon2">
-													<del>
-														<fmt:formatNumber value="${product.price }"
+															
+													<del class="price"><fmt:formatNumber value="${product.price }"
 															pattern="#,###원" />
 													</del>
 												</div>
+												
 											</div>
 										</div>
-										<div class="col"></div>
 									</div>
 								</div>
-								<div class="col-review">리뷰</div> <!-- <hr> -->
+								<div class="col-review">리뷰
+									<c:forEach items="${Recount }" var="Recount">
+										<c:if test="${product.product_id eq Recount.product_id }">
+											${Recount.count }
+										</c:if>
+									</c:forEach>									
+								</div> <!-- <hr> -->
 							</a>
+							<i id="heartBox" onclick="toggleLike()" class="fs-1 text-danger bi bi-heart-fill"></i>
+               						 <span id="totalLikeCount"></span>
 						</div>
 					</c:forEach>
 				</div>
@@ -207,6 +214,11 @@ $(document).ready(function() {
 			$(this).find(".subsubcategories").css("display", "none");
 		});
 	});
+
+
+
+var subCategories = <%= jsonPctList %>;
+console.log(subCategories)
 
 </script>
 	<script

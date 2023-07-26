@@ -94,6 +94,7 @@
           subCategorySelect.disabled = false; // 중분류를 보여주기 위해 드롭 메뉴 활성화
           subCategorySelect.classList.remove('hide');
           var subCategories = <%= jsonPctList %>;
+          console.log(subCategories)
 
           // 중분류 드롭다운 메뉴에 옵션 추가
           for (var i = 0; i < subCategories.length; i++) {
