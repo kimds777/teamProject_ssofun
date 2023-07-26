@@ -61,6 +61,7 @@
     </div>
 
     <div class="backgroundcolor">
+    
         <div class="container mb-3">
             <div class="row">
                 <div class="col">
@@ -79,7 +80,7 @@
                     <div class="row mb-5"><div class="col"></div></div>
                 </div>
             </div>
-        </div>
+       </div>
     </div>
     <div class="container mt-4 container2">
         <div class="row">
@@ -135,7 +136,7 @@
                         </div>
                         
                         <c:forEach items="${qnaList}" var="qna" varStatus="status">
-                        <div class="row mb-2 line" style="border-top:solid 1px; border-color:#BFBFBF;">
+                        <div class="row mb-2 line">
                             <div class="col-1"><p class="center1" name="qna_id" id="qna_id">${fn:length(qnaList)-status.count+1}</p></div>
                             <div class="col"><p class="five-font"><a class="readQnalink" href="./readQnaPage?qna_id=${qna.qna_id }">${qna.title }</a></p></div>
                             <div class="col-2">

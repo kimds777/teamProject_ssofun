@@ -114,8 +114,8 @@
                                 <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">전체판매자목록</p></div>
                                 <div class="col c-five-font"><p class="five-font mt-2">SSOFUN에 등록된 판매자전체목록입니다.(등록일순)</p></div>
                                 <div class="col-2"></div>
-                                <div class="col-2">
-                            		
+                                <div class="col-1" style="text-align: center">
+                            		<button class="btn btn-outline-secondary" style="height:29.98px; padding:6px; font-family: 'Noto Sans KR', sans-serif;font-weight: 400; font-size: 12px;" type="submit">삭제</button>
                             	</div>
                             </div>
                             
@@ -131,7 +131,8 @@
                                 <div class="col-2"><p class="center1" style="text-align: center;">소속회사명</p></div>
                                 <div class="col"><p class="five-font" style="text-align: center;">계정명</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">등록일</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">계정상태</p></div>                             
+                                <div class="col-1"><p class="center1" style="text-align: center;">계정상태</p></div> 
+                                <div class="col-1"><p class="center1" style="text-align: center;">삭제</p></div>                            
                             </div>
                             
                             <!-- 반복문돌리기 -->
@@ -150,7 +151,7 @@
 		                            	<c:if test="${allAdminList.adminDto.used_fg == 0 }">
 		                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i></p></div>   <!-- 다른아이콘 <i class="bi bi-dash-circle"></i>-->                          
 		                            	</c:if>
-	                                                             
+	                               	<div class="col-1" style="text-align: center"><input type="checkbox"  name="admin_id" value="${allAdminList.adminDto.admin_id }"></div>                              
 	                            </div>
 	                        </c:forEach>
         

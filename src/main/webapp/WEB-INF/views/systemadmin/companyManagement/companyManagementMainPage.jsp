@@ -14,7 +14,9 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">
     <!-- <script type="text/javascript"> </script>-->
+	<style>
 
+	</style>
 
 
 
@@ -81,7 +83,7 @@
 
 
                 <div class="col">
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
@@ -111,7 +113,7 @@
                         <div class="col">
 
                            	<div class="row">
-                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">입점사목록</p></div>
+                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 5px;">입점사목록</p></div>
                                 <div class="col c-five-font"><p class="five-font mt-2">ssoFun에 등록된 입점사전체목록입니다.(등록일순)</p></div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
@@ -119,13 +121,89 @@
                             	</div>
                             </div>
                             
+                            <!--
                             <div class="row">
                                 <div class="col hr-col"><hr class="hr-1"></div>
                             </div>
+-->
+
+                            <div class="row mt-3">
+                               
+                                <!--<table width: 1000px;>
+                                    <colgroup>
+                                      <col style="width: 10%; height: 20px;">
+                                      <col style="width: 30%;"> 
+                                      <col style="width: 20%;"> 
+                                      <col style="width: 20%;">
+                                      <col style="width: 10%;">
+                                      <col style="width: 10%;"> 
+                                    </colgroup>
+                                    <thead>
+                                      <tr >
+                                        <th height="20px" width="80px"><p style="text-align: center; padding: 0px;">업체번호</p></th>
+                                        <th height="50px" width="80px"><p style="text-align: center;">업체명</p></th>
+                                        <th height="50px" width="80px"><p style="text-align: center;">대표자명</p></th>
+                                        <th height="50px" width="80px"><p style="text-align: center;">사업자번호</p></th>
+                                        <th height="20px" width="80px"><p style="text-align: center;">판매자수</p></th>
+                                        <th height="50px" width="80px"><p style="text-align: center;">등록일</p></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <c:forEach items="${bizList}" var="bizList">
+                                        <tr>
+                                          <td><p style="text-align: center;">${bizList.bizDto.biz_id }</p></td>
+                                          <td><p style="text-align: left;"><a class="readQnalink" href="./readCompanyPage?biz_id=${bizList.bizDto.biz_id }">${bizList.bizDto.biz_name }</a></p></td>
+                                          <td><p style="text-align: left;">${bizList.bizDto.biz_ceo }</p></td>
+                                          <td><p style="text-align: center;">${bizList.bizDto.biz_no }</p></td>
+                                          <td><p style="text-align: center;">${bizList.adminCount } 명</p></td>
+                                          <td>
+                                            <p class="center1">
+                                              <fmt:formatDate pattern="yy. MM. dd. (E)" value="${bizList.bizDto.created_at }"/>
+                                            </p>
+                                          </td>
+                                        </tr>
+                                      </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>-->
+                              
+                            	
+                           
+                            
+                            <table class="table table-bordered table-sm">
+							  <thead>
+							    <tr  style="background-color: #f8f9fa;">
+							      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">업체번호</p></th>
+							      <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">업체명</p></th>
+							      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">대표자명</p></th>
+							      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">사업자번호</p></th>
+                                  <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">판매자수</p></th>
+							      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">등록일</p></th>
+							    </tr>
+							  </thead>
+							  	<c:forEach items="${bizList}" var="bizList" >
+								  <tbody>
+								    <tr>
+								      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_id }</p></th>
+								      <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./readCompanyPage?biz_id=${bizList.bizDto.biz_id }">${bizList.bizDto.biz_name }</a></p></td>
+								      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${bizList.bizDto.biz_ceo }</p></td>
+								      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_no }</p></td>
+								      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.adminCount } 명</p></td>
+								      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">
+			                            	<fmt:formatDate pattern="yy. MM. dd. (E)" value="${bizList.bizDto.created_at }"/>
+			                            </p>
+			                          </td>
+								    </tr>
+								  </tbody>
+								</c:forEach>
+							</table> 
                             
                             
-                            <!-- faq글목록작성하기 -->
-                            <div class="row">
+                            
+
+
+                           <!-- <div class="row">
                                 <div class="col-1"><p class="center1" style="text-align: center;">업체번호</p></div>
                                 <div class="col"><p class="five-font" style="text-align: center;">업체명</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">대표자명</p></div>
@@ -133,9 +211,9 @@
                                 <div class="col-1"><p class="center1" style="text-align: center;">판매자수</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">등록일</p></div>
                                                                
-                            </div>
+                            </div>  
                             
-                            <!-- faq글목록작성하기 -->
+                            
                             <c:forEach items="${bizList}" var="bizList" >
 	                            <div class="row"  style="border-bottom: thin ; border-color:black;">
 	                                <div class="col-1"><p class="center1" style="text-align: center;">${bizList.bizDto.biz_id }</p></div>
@@ -151,21 +229,12 @@
 	                                                               
 	                            </div>
                             </c:forEach>
+                            -->
                             
-               <!-- 		<c:forEach items="${list }" var="map">
-                            
-	                            <div class="row">
-	                                <div class="col-1"><p class="center1">${map.faqDto.faq_id }</p></div>
-	                                <div class="col"><p class="five-font"><a class="readFaqlink" href="./systemAdminReadFaqPage?faqId=${map.faqDto.faq_id }">${map.faqDto.title }</a></p></div>
-	                                <div class="col-2"><p class="center1">${map.adminDto.login_account}</p></div>
-	                                <div class="col-2"><p class="center1">${map.faqDto.faq_category}</p></div>
-	                                <div class="col-2"><p class="center1"><fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${map.faqDto.created_at }"/></p></div>
-	                            </div>
-            
-                            </c:forEach> -->             
+                  
 
                         
-                        </div>
+                        
                     </div>
                     <div class="row mb-5">
                         <div class="col"> </div>

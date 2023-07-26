@@ -154,6 +154,23 @@
 	</select>
 	
 	
+	<!-- 입점업체에 해당하는 판매자수 -->
+	<select id="countAdminByBizId" resultType="int">
+		SELECT COUNT(*) as admin_count FROM tb_admin WHERE biz_id = #{biz_id}
+	</select>
+	
+	
+	
+	<!-- 입점사정보수정 -->
+	<update id="updateCompanyData">
+		UPDATE tb_biz SET biz_name = #{biz_name}, biz_no = #{biz_no}, biz_phone=#{biz_phone}, biz_ceo=#{biz_ceo} WHERE biz_id = #{biz_id}
+	</update>
+	
+	
+	
+	
+	
+	
 	
 <!-- 판매자관리 -->
 
@@ -177,11 +194,21 @@
 	</select>
 	
 	
-	<!-- 입점업체에 해당하는 판매자수 -->
-	<select id="countAdminByBizId" resultType="int">
-		SELECT COUNT(*) as admin_count FROM tb_admin WHERE biz_id = #{biz_id}
+	
+	<!-- admin_id로 admin정보 가져오기 -->
+	<select id="getAdminDataByAdminId" resultType="com.ssofun.dto.AdminDto">
+		SELECT * fROM tb_admin where admin_id = #{admin_id}
 	</select>
 	
+	<!--계정활성화-->
+	<update id="adminAccountActivation">
+		UPDATE tb_admin SET used_fg = 1 WHERE admin_id = #{admin_id}
+	</update>
+
+	<!--계정비활성화-->	
+	<update id="adminAccountDeactivation">
+		UPDATE tb_admin SET used_fg = 0 WHERE admin_id = #{admin_id}
+	</update>
 	
 	<!-- 입점회사전체목록 -->
 	<!-- <select id="selectAllBizName" resultType="com.ssofun.dto.BizDto">

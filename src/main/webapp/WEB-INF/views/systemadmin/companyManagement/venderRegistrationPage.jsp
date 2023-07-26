@@ -256,9 +256,9 @@
 		                            						<!-- <input type="text" name="title" id="title" class="form-control" placeholder="010"> -->
 		                            						<select class="form-select" name="admin_phone1" aria-label="Default select example">
 															  <option selected>010</option>
-															  <option value="1">02</option>
-															  <option value="2">011</option>
-															  <option value="3">031</option>
+															  <option value="02">02</option>
+															  <option value="011">011</option>
+															  <option value="031">031</option>
 															</select>
 		                            					</div>
 		                            					<div class="col-1 textcenter"><p class="companyfont">-</p></div>
