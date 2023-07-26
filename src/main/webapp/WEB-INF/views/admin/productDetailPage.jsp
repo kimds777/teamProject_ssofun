@@ -116,7 +116,7 @@
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.admin_nickname }님</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
@@ -234,6 +234,9 @@
                     <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
+                    <li class="nav-item" data-item="sessions"><a class="nav-item-hold" href="#"><i class="nav-icon i-Administrator"></i><span class="nav-text">Q & A</span></a>
+                        <div class="triangle"></div>
+                    </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
@@ -254,6 +257,9 @@
                 <ul class="childNav" data-parent="charts">
                     <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
                 </ul>
+                <ul class="childNav" data-parent="sessions">
+                    <li class="nav-item"><a href="./qnaContentListPage"><i class="nav-icon i-Checked-User"></i><span class="item-name">문의리스트페이지</span></a></li>          
+                </ul>
             <div class="sidebar-overlay"></div>
         	</div>
         </div>
@@ -269,7 +275,7 @@
 					  	</div>
 					  	<div class="row">
 					  		<div class="col">
-							<div class="table-responsive">
+ 							<div class="table-responsive">
 								<table class="table table-striped">
 									<thead>
 									  	<tr>
@@ -294,7 +300,35 @@
 									  	</tr>
 									</thead>
 								</table>
-							</div>					  		
+							</div>	
+<!-- HTML 테이블을 표시할 위치 -->
+<!-- <div id="product_detail_table" class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-black-50 detail_th" scope="row">관리자아이디</th>
+                <th scope="col"></th>
+            </tr>
+            <tr>
+                <th class="text-black-50 detail_th" scope="row">카테고리타입아이디</th>
+                <th scope="col"></th>
+            </tr>
+            <tr>
+                <th class="text-black-50 detail_th" scope="row">상품아이디</th>
+                <th scope="col"></th>
+            </tr>
+            <tr>
+                <th class="text-black-50 detail_th" scope="row">회사명</th>
+                <th scope="col"></th>
+            </tr>
+            <tr>
+                <th class="text-black-50 detail_th" scope="row">카테고리명</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+    </table>
+</div> -->
+				  		
 					  		</div>
 					  		<div class="col">
 								<div class="table-responsive">
@@ -464,4 +498,34 @@
     <script src="../resources/dist-assets/js/scripts/script.min.js"></script>
     <script src="../resources/dist-assets/js/scripts/sidebar.large.script.min.js"></script>
 </body>
+
+<!-- jQuery를 사용하여 Ajax 요청을 보내는 스크립트 -->
+<!-- jQuery를 사용하여 Ajax 요청을 보내는 스크립트 -->
+<script>
+/*     $(document).ready(function() {
+        var currentURL = window.location.href;
+        var urlParams = new URLSearchParams(window.location.search);
+        var product_id = urlParams.get('product_id'); // URL에서 product_id 값을 추출
+        $.ajax({
+            type: "GET",
+            url: "productDetailProcess", // 실제 서버 엔드포인트 주소로 변경해야 합니다.
+            data: { productId: product_id }, // 상품 아이디를 서버로 보낼 데이터로 수정해야 합니다.
+            success: function(data) {
+                // Ajax 요청이 성공했을 때 실행될 콜백 함수
+                // 서버로부터 받은 데이터(data)를 이용하여 테이블에 동적으로 내용을 추가합니다.
+                $('#product_detail_table th:nth-child(2)').text(data.product_name);
+                $('#product_detail_table th:nth-child(4)').text(data.price);
+                $('#product_detail_table th:nth-child(6)').text(data.price_sale);
+                $('#product_detail_table th:nth-child(8)').text(data.created_at);
+                // 나머지 필요한 데이터도 동일한 방식으로 추가해주세요.
+            },
+            error: function() {
+            	console.log(product_id)
+                // Ajax 요청이 실패했을 때 실행될 콜백 함수
+                console.log("Ajax 요청이 실패했습니다.");
+            }
+        });
+    }); */
+</script>
+
 </html>

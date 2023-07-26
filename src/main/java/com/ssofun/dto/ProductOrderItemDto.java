@@ -11,7 +11,7 @@ public class ProductOrderItemDto {
 	private int product_order_status_id; // FK
 	private int delivery_recipient_id; // FK
 	private int count; // 개수
-	@JsonFormat(pattern = "yyyy-MM-dd:HH.mm.ss",  timezone = "Asia/Seoul") //데이터 포맷 변환
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",  timezone = "Asia/Seoul") //데이터 포맷 변환
 	private Date created_at; // 등록일
 	private int used_fg; // 사용여부
 	private String biz_name; // 브랜드명

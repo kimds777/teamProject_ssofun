@@ -57,6 +57,20 @@
   color: purple; /* 주문 상태가 "delivered" 일 때 글자색 (예시로 보라색) */
 }
 
+.current-page{
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #8b5cf6;
+    background-color: #dee2e6;
+    border: 1px solid #dee2e6;
+}
+
+.pagination{
+    justify-content: center;
+}
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -103,7 +117,7 @@
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.admin_nickname }님</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
@@ -221,6 +235,9 @@
                     <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
+                    <li class="nav-item" data-item="sessions"><a class="nav-item-hold" href="#"><i class="nav-icon i-Administrator"></i><span class="nav-text">Q & A</span></a>
+                        <div class="triangle"></div>
+                    </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
@@ -240,6 +257,9 @@
           		<!-- Review-->
                 <ul class="childNav" data-parent="charts">
                     <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
+                </ul>
+                <ul class="childNav" data-parent="sessions">
+                    <li class="nav-item"><a href="./qnaContentListPage"><i class="nav-icon i-Checked-User"></i><span class="item-name">문의리스트페이지</span></a></li>          
                 </ul>
             <div class="sidebar-overlay"></div>
         	</div>
@@ -300,8 +320,8 @@
 								                <th scope="col">할인가</th>
 								            </tr>
 								        </thead>
-								        <tbody>
-								        	<c:forEach items="${orderItemList}" var="orderItem">
+								        <tbody id="order_item_list">
+ 								        	<%-- <c:forEach items="${orderItemList}" var="orderItem">
 								        		<tr>
 								        			<th scope="row">
 								        				<label class="checkbox checkbox-outline-info">
@@ -311,7 +331,7 @@
 								        				<td class="td_No">No.&nbsp;${orderItem.product_order_item_id}</td>
 								        				<td><fmt:formatDate value="${orderItem.created_at}" pattern="yyyy-MM-dd" /></td>
 								                        <td class="text-success">${orderItem.recipient_name}&nbsp;님</td>
-								                        <%-- <td class="order-status ${getOrderStatusColor(orderItem.product_order_status_id)}">${orderItem.order_status_name}</td> --%>
+								                        <td class="order-status ${getOrderStatusColor(orderItem.product_order_status_id)}">${orderItem.order_status_name}</td>
 								                        <td>${orderItem.order_status_name}</td>  							                        
 								                        <td>
 								                       		<a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
@@ -320,62 +340,48 @@
 														<td><fmt:formatNumber value="${orderItem.price}" type="number" pattern="#,##0"/> 원</td>
 														<td><fmt:formatNumber value="${orderItem.price_sale}" type="number" pattern="#,##0"/> 원</td>								                        									                										                
 								              	</tr>
-								           	</c:forEach>
+								           	</c:forEach> --%>
 								     	</tbody>
 								     </table>									 
 								  </div>
 								</div> 
-								<!-- 페이징 버튼 -->
-									<div id="pagination">
-									    <nav aria-label="Page navigation">
-									        <ul class="pagination justify-content-center">
-									            <!-- 이전 페이지 버튼 -->
-									            <li class="page-item" id="prevPage">
-									                <a class="page-link" href="#" aria-label="Previous">
-									                    <span aria-hidden="true">&laquo;</span>
-									                </a>
-									            </li>
-									            <!-- 장식 -->
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(1)">1</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(2)">2</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(3)">3</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(4)">4</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(5)">5</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(6)">6</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(7)">7</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(8)">8</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(9)">9</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(10)">10</a>
-									            </li>
-									            <!-- 장식 끝 -->
-									            <!-- 페이지 번호 버튼 -->
-									            <li class="page-item" id="nextPage">
-									                <a class="page-link" href="#" aria-label="Next">
-									                    <span aria-hidden="true">&raquo;</span>
-									                </a>
-									            </li>
-									        </ul>
-									    </nav>
-									</div>           
+								<!-- 페이지네이션 부분 추가 -->
+								<div class="pagination">
+								    <c:choose>
+								        <c:when test="${currentPage > 1}">
+								            <a href="?page=1" class="page-link">처음</a>
+								            <a href="?page=${currentPage - 1}" class="page-link">이전</a>
+								        </c:when>
+								        <c:otherwise>
+								            <span class="page-link">처음</span>
+								            <span class="page-link">이전</span>
+								        </c:otherwise>
+								    </c:choose>
+								    <c:forEach begin="1" end="${pageCount}" var="pageNum">
+								        <c:url value="orderItemListPage" var="pageUrl">
+								            <c:param name="page" value="${pageNum}" />
+								        </c:url>
+								        <c:choose>
+								            <c:when test="${pageNum eq currentPage}">
+								                <span class="current-page">${pageNum}</span>
+								            </c:when>
+								            <c:otherwise>
+								                <a href="${pageUrl}" class="page-link">${pageNum}</a>
+								            </c:otherwise>
+								        </c:choose>
+								    </c:forEach>
+								    <c:choose>
+								        <c:when test="${currentPage < pageCount}">
+								            <a href="?page=${currentPage + 1}" class="page-link">다음</a>
+								            <a href="?page=${pageCount}" class="page-link">마지막</a>
+								        </c:when>
+								        <c:otherwise>
+								            <span class="page-link">다음</span>
+								            <span class="page-link">마지막</span>
+								        </c:otherwise>
+								    </c:choose>
+								</div>
+           
                 <!-- end of row-->
                 <!-- end of main-content -->
             </div><!-- Footer Start -->
@@ -470,6 +476,55 @@
     <script src="../resources/dist-assets/js/scripts/sidebar.large.script.min.js"></script>
 </body>
 <script>
+//숫자 형식화 함수
+function formatNumber(number) {
+    return new Intl.NumberFormat().format(number);
+}
+
+// 오더리스트
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "orderItemListProcess",
+        success: function(orderItemList) {
+            let res = "";
+            for (let i = 0; i < orderItemList.length; i++) {
+            	  let orderStatusClass = "";
+            	  if (orderItemList[i].product_order_status_id === "3" || 
+            	      orderItemList[i].product_order_status_id === "4" ||
+            	      orderItemList[i].product_order_status_id === "5" ||
+            	      orderItemList[i].product_order_status_id === "6" ||
+            	      orderItemList[i].product_order_status_id === "7") {
+            	    orderStatusClass = "text-danger"; // 상태가 3, 4, 5, 6, 7인 경우 텍스트 색상을 빨간색으로 설정
+            	  } else {
+            	    orderStatusClass = "text-success"; // 기타 상태인 경우 텍스트 색상을 초록색으로 설정
+            	  }             	
+                res += "<tr>" +
+                    "<th scope='row'>" +
+                    "<label class='checkbox checkbox-outline-info'>" +
+                    "<input type='checkbox' checked=''><span class='checkmark'></span>" +
+                    "</label>" +
+                    "</th>" +
+                    "<td class='td_No'>No. " + orderItemList[i].product_order_item_id + "</td>" +
+                    "<td>" + orderItemList[i].created_at + "</td>" +
+                    "<td class='text-success'>" + orderItemList[i].recipient_name + " 님</td>" +
+                    "<td>" + orderItemList[i].order_status_name + "</td>" +
+                    "<td><a href='orderItemDetailPage?product_order_item_id=" + orderItemList[i].product_order_item_id + "'>" + orderItemList[i].product_name + "</a></td>" +
+                    "<td>" + orderItemList[i].count + " 개</td>" +
+                    "<td>" + formatNumber(orderItemList[i].price) + " 원</td>" +
+                    "<td>" + formatNumber(orderItemList[i].price_sale) + " 원</td>" +
+                    "</tr>";
+            }
+            $('#order_item_list').append(res);
+        },
+        error: function() {
+            // 에러 처리
+            $('#order_item_list').append("<tr><td colspan='9'>주문 상품을 불러오는데 오류가 발생했습니다.</td></tr>");
+        }
+    });
+});
+
+
 /*     function submitForm() {
         var form = document.getElementById("myForm");
         form.submit();
@@ -487,7 +542,7 @@
         });
     }); */
     
-    function getOrderStatusColor(orderStatusId) {
+/*     function getOrderStatusColor(orderStatusId) {
     	  switch (orderStatusId) {
     	    case 3:
     	      return "status-pending"; // 주문 상태 ID가 3일 때 CSS 클래스 이름 반환
@@ -500,7 +555,7 @@
     	    default:
     	      return ""; // 기본 클래스 이름 반환 (기본 글자색이 적용되도록)
     	  }
-    	}
+    	} */
 
 </script>
 </html>

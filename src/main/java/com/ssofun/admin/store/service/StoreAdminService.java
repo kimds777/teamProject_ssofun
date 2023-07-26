@@ -13,6 +13,7 @@ import com.ssofun.dto.DeliveryDto;
 import com.ssofun.dto.HyunMinDeliveryJoinDto;
 import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.HyunMinProductReviewListDto;
+import com.ssofun.dto.HyunMinQnaJoinDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
 import com.ssofun.dto.ProductDetailImageDto;
@@ -177,9 +178,9 @@ public class StoreAdminService {
 		}
 		
 		// N번 관리자가 판매하는 모든상품의 주문 내역
-		public List<ProductOrderItemDto> productOrderItemList(ProductOrderItemDto productOrderItemDto){
+		public List<ProductOrderItemDto> productOrderItemList(ProductOrderItemDto productOrderItemDto, int adminId){
 			
-			List<ProductOrderItemDto> productOrderItemList = storeAdminSqlMapper.productOrderItemList(productOrderItemDto);
+			List<ProductOrderItemDto> productOrderItemList = storeAdminSqlMapper.productOrderItemList(productOrderItemDto, adminId);
 			
 			return productOrderItemList;
 		}
@@ -259,6 +260,22 @@ public class StoreAdminService {
 			return productReviewImageList;
 		}
 		
+		// 문의내용리스트
+		public List<HyunMinQnaJoinDto> qnaContentsList(HyunMinQnaJoinDto hyunMinQnaJoinDto,  int adminId){
+			List<HyunMinQnaJoinDto> qnaContentsList = storeAdminSqlMapper.qnaContentsList(hyunMinQnaJoinDto, adminId);
+			return qnaContentsList;
+		}
+		// 문의내용상세보기
+		public HyunMinQnaJoinDto qnaContentDetail(int qna_id) {
+			HyunMinQnaJoinDto qnaContentDetail = storeAdminSqlMapper.qnaContentDetail(qna_id);
+			return qnaContentDetail;
+		}
+		// 답글등록
+		public void answerContentsInsert(HyunMinQnaJoinDto hyunMinQnaJoinDto) {
+			storeAdminSqlMapper.answerContentsInsert(hyunMinQnaJoinDto);
+		}
+		
+		// 통계그래프
 		public List<Map<String,Object>> getSalesYear(int year, int adminId){
 			return storeAdminSqlMapper.getSalesYear(year, adminId);
 		}

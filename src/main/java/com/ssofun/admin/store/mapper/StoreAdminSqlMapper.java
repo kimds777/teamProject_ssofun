@@ -10,6 +10,7 @@ import com.ssofun.dto.DeliveryDto;
 import com.ssofun.dto.HyunMinDeliveryJoinDto;
 import com.ssofun.dto.HyunMinProductJoinDto;
 import com.ssofun.dto.HyunMinProductReviewListDto;
+import com.ssofun.dto.HyunMinQnaJoinDto;
 import com.ssofun.dto.ProductCategoryDto;
 import com.ssofun.dto.ProductCategoryTypeDto;
 import com.ssofun.dto.ProductDetailImageDto;
@@ -92,7 +93,7 @@ public interface StoreAdminSqlMapper {
 	   public void productOrderItemInsert(ProductOrderItemDto productOrderItemDto);
 	   
 	   // N번 관리자가 판매하는 모든상품의 주문 내역
-	   public List<ProductOrderItemDto> productOrderItemList(ProductOrderItemDto productOrderItemDto);
+	   public List<ProductOrderItemDto> productOrderItemList(ProductOrderItemDto productOrderItemDto, @Param("adminId") int adminId);
 	   
 	   // N번 관리가 판매하는 하나의 상품의 주문내역
 	   public ProductOrderItemDto orderItemDetail(int product_order_item_id);
@@ -122,7 +123,14 @@ public interface StoreAdminSqlMapper {
 	   // 상품하나에 대한 리뷰이미지리스트
 	   public List<ProductReviewImageDto> productReviewImageList(int product_id);
 	   
+	   // 문의내용리스트
+	   public List<HyunMinQnaJoinDto> qnaContentsList(HyunMinQnaJoinDto hyunMinQnaJoinDto, @Param("adminId") int adminId);
+	   // 문의내용상세보기	
+	   public HyunMinQnaJoinDto qnaContentDetail(int qna_id);
+	   // 답글등록
+	   public void answerContentsInsert(HyunMinQnaJoinDto hyunMinQnaJoinDto);
 	   
+	   // 통게그래프
 	   public List<Map<String,Object>> getSalesYear(@Param("year") int year, @Param("adminId") int adminId);
 	   
 	   

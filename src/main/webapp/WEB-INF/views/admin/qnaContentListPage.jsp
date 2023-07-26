@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="">
 <style>
+.th_col1{
+	width: 110px;
+}
 
 .logo_box{
     margin-left: 20px;
@@ -23,6 +26,60 @@
     font-weight: 600;
 }
 
+.title_box{
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.td_No{
+	font-weight: 700;
+}
+
+/* 테이블UI */
+.c0{
+	width: 55px;
+}
+
+.c1{
+	width: 206.7px;
+}
+
+.c2{
+	width: 206.7px;
+}
+
+.c3{
+	width: 206.7px;
+}
+
+.c4{
+	width: 206.7px;
+}
+
+.c5{
+	width: 206.7px;
+}
+
+.c6{
+	width: 206.7px;
+}
+
+.current-page{
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #8b5cf6;
+    background-color: #dee2e6;
+    border: 1px solid #dee2e6;
+}
+
+.pagination{
+    justify-content: center;
+}
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -223,127 +280,90 @@
                     <div class="col mb-3">
                         <div class="card text-left">
                             <div class="card-body">
-                                <h4 class="card-title mb-3 pt-3">주문리스트</h4>
-								<div class="row">
-								    <div class="col-md-6 form-group mb-3">
-								    	<%-- <form action="orderItemCategoryListPage" method="post">
-								        <select name="product_order_status_id" class="form-control form-control-rounded">
-								            <option>카테고리선택</option>
-								            <c:forEach items="${orderStatusList}" var="orderStatusList">
-								                <option value="${orderStatusList.product_order_status_id}">${orderStatusList.name}</option>
-								            </c:forEach>
-								        </select>
-								        </form> --%>
-								    </div>
-								</div>
-                                <ul class="nav justify-content-end">
-									<li class="nav-item">
-									    <a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=3">결제완료</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=4">판매자확인완료</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=5">배송중</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=6">배송완료</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=7">구매확정</a>
-									</li>
-								</ul>
-								<div class="table-responsive">
-								    <table class="table table-striped">
-								        <thead>
-								            <tr>
-								                <th scope="col">#</th>
-								                <th scope="col">NO</th>
-								                <th scope="col">주문일</th>
-								                <th scope="col">고객명</th>
-								                <th scope="col">진행상태</th>
-								                <th scope="col">상품명</th>
-								                <th scope="col">수량</th>
-								                <th scope="col">가격</th>
-								                <th scope="col">할인가</th>
-								            </tr>
-								        </thead>
-								        	<tbody>
-								            	<c:forEach items="${orderItemCategoryList}" var="orderItemCategoryList">
-								               		<tr>
-								                  		<th scope="row">
-								                       		<label class="checkbox checkbox-outline-info">
-								                                    <input type="checkbox" checked="" /><span class="checkmark"></span>
-								                           	</label>
-								                       	</th>
-								                        	<td>${orderItemCategoryList.product_order_item_id}</td>
-								                            <td><fmt:formatDate value="${orderItemCategoryList.created_at}" pattern="yyyy-MM-dd" /></td>
-								                            <td>${orderItemCategoryList.recipient_name}</td>
-								                            <td>${orderItemCategoryList.order_status_name}</td>
-								                            <td>
-								                                <a href="orderItemDetailPage?product_order_item_id=${orderItemCategoryList.product_order_item_id}">${orderItemCategoryList.product_name}</a>
-								                            </td>										                										      										    
-								                            <td>${orderItemCategoryList.count}</td>
-								                            <td>${orderItemCategoryList.price}</td>
-								                            <td>${orderItemCategoryList.price_sale}</td>										                										                
-								                        </tr>
-								              	</c:forEach>
-								       		</tbody>
-								   		</table>									 
+                                <div class="d-flex row p-0">
+					                <div class="col title_box mb-4 pt-3"><a href="./adminMainPage">문의리스트</a></div>
+					            </div>
+									<div class="table-responsive">
+									    <table class="table table-striped">
+									        <thead>
+									            <tr>
+									            	<th class="c0" scope="col">#</th>
+									                <th class="c1" scope="col">문의번호</th>
+									                <th class="c2" scope="col">등록일</th>
+									                <th class="c3" scope="col">회사명</th>
+									                <th class="c4" scope="col">닉네임</th>
+									                <th class="c5" scope="col">제목</th>
+									                <th class="c6" scope="col">답변여부</th>
+									                <!-- <th class="c5" scope="col">문의내용</th> -->									               
+									            </tr>
+									        </thead>
+									        <tbody id="product_list">
+ 									            <c:forEach items="${qnaContentsList}" var="qnaContentsList">
+									                <tr>
+											            <th scope="row">
+											                <label class="checkbox checkbox-outline-info">
+											                    <input type="checkbox" checked="" /><span class="checkmark"></span>
+											                </label>
+											            </th>
+											            <td><a href="qnaContentDetailPage?qna_id=${qnaContentsList.qna_id}">No.&nbsp;${qnaContentsList.qna_id}</a></td>
+											            <td><fmt:formatDate value="${qnaContentsList.created_at}" pattern="yyyy-MM-dd" /></td>
+									                    <td>${qnaContentsList.biz_name}</td>
+									                    <td>${qnaContentsList.nickname}</td>
+									                    <td>${qnaContentsList.title}</td>
+									                    <c:choose>
+									                    	<c:when test="${empty qnaContentsList.answer_contents}">
+									                    		<td>답변대기</td>
+									                    	</c:when>
+									                    	<c:when test="${!empty qnaContentsList.answer_contents}">
+									                    		<td>답변완료</td>
+									                    	</c:when>
+									                    </c:choose>
+									                    
+									                    
+									                   <%--  <td><a href="productDetailPage?product_id=${qnaContentsList.product_id }">${qnaContentsList.product_name}</a></td>--%>    
+														<%-- <td><fmt:formatNumber value="${qnaContentsList.price}" type="number" pattern="#,##0"/> 원</td>
+														<td><fmt:formatNumber value="${qnaContentsList.price_sale}" type="number" pattern="#,##0"/> 원</td>
+									                    <td>${product.contents}</td> --%>								                    
+									                </tr>
+									            </c:forEach>
+									        </tbody>
+									    </table>
 									</div>
-                				</div>
-                				<!-- 페이징 버튼 -->
-									<div id="pagination">
-									    <nav aria-label="Page navigation">
-									        <ul class="pagination justify-content-center">
-									            <!-- 이전 페이지 버튼 -->
-									            <li class="page-item" id="prevPage">
-									                <a class="page-link" href="#" aria-label="Previous">
-									                    <span aria-hidden="true">&laquo;</span>
-									                </a>
-									            </li>
-									            <!-- 장식 -->
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(1)">1</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(2)">2</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(3)">3</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(4)">4</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(5)">5</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(6)">6</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(7)">7</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(8)">8</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(9)">9</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(10)">10</a>
-									            </li>
-									            <!-- 장식 끝 -->
-									            <!-- 페이지 번호 버튼 -->
-									            <li class="page-item" id="nextPage">
-									                <a class="page-link" href="#" aria-label="Next">
-									                    <span aria-hidden="true">&raquo;</span>
-									                </a>
-									            </li>
-									        </ul>
-									    </nav>
-									</div> 
-           
+                        <!-- 페이지네이션 부분 추가 -->
+<%--                         <div class="pagination">
+                           <c:choose>
+                              <c:when test="${currentPage > 1}">
+                                 <a href="?page=${currentPage - 1}" class="page-link">이전</a>
+                              </c:when>
+                              <c:otherwise>
+                                 <span class="page-link">이전</span>
+                              </c:otherwise>
+                           </c:choose>
+                           <c:forEach begin="1" end="${pageCount}" var="pageNum">
+                              <c:url value="productListPage" var="pageUrl">
+                                 <c:param name="page" value="${pageNum}" />
+                              </c:url>
+                              <c:choose>
+                                 <c:when test="${pageNum eq currentPage}">
+                                    <span class="current-page">${pageNum}</span>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <a href="${pageUrl}" class="page-link">${pageNum}</a>
+                                 </c:otherwise>
+                              </c:choose>
+                           </c:forEach>
+                           <c:choose>
+                              <c:when test="${currentPage < pageCount}">
+                                 <a href="?page=${currentPage + 1}" class="page-link">다음</a>
+                              </c:when>
+                              <c:otherwise>
+                                 <span class="page-link">다음</span>
+                              </c:otherwise>
+                           </c:choose>
+                        </div> --%>
+									
+                    <!-- end of col-->
+                </div>
                 <!-- end of row-->
                 <!-- end of main-content -->
             </div><!-- Footer Start -->
@@ -437,5 +457,13 @@
     <script src="../resources/dist-assets/js/scripts/script.min.js"></script>
     <script src="../resources/dist-assets/js/scripts/sidebar.large.script.min.js"></script>
 </body>
+
+<script>
+//숫자 형식화 함수
+function formatNumber(number) {
+    return new Intl.NumberFormat().format(number);
+}
+
+</script>
 
 </html>

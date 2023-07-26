@@ -6,6 +6,11 @@
 <html lang="en" dir="">
 <style>
 
+.thumbnailTable {
+    width: 100%;
+    background-color: transparent;
+}
+
 .logo_box{
     margin-left: 20px;
     font-size: 20px;
@@ -23,6 +28,58 @@
     font-weight: 600;
 }
 
+.title_box{
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.update_btn{
+    margin: 0.25rem 0.5rem;
+    margin-top: -2rem; /* 버튼을 살짝 위로 올리는 값 조정 */
+}
+
+/* .detail_th{
+	height: 90px;
+} */
+
+.contents_th{
+	height: 90px;
+}
+
+/* 테이블과 버튼 사이 간격 조정 */
+.table-btn-spacing {
+	margin-top: 30px;
+}
+
+/* 외곽선의 색상을 하얀색으로 설정한 클래스 */
+.img-with-border {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  overflow: hidden;
+}
+
+.img-with-border img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contents_box {
+    vertical-align: top; /* 텍스트를 위로 정렬합니다. */
+  }
+
+.detail_th{
+	width: 80px;
+}
+
+.detail_bottom{
+	vertical-align: top;
+}
+    
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -32,6 +89,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
     <link href="../resources/dist-assets/css/themes/lite-purple.css" rel="stylesheet" />
     <link href="../resources/dist-assets/css/plugins/perfect-scrollbar.css" rel="stylesheet" />
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>	    
 </head>
 
 <body class="text-left">
@@ -219,131 +280,87 @@
         <!-- =============== Left side End ================-->
         <div class="main-content-wrap sidenav-open d-flex flex-column">
             <!-- ============ Body content start ============= -->
-                <div class="row mb-4">
-                    <div class="col mb-3">
-                        <div class="card text-left">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3 pt-3">주문리스트</h4>
-								<div class="row">
-								    <div class="col-md-6 form-group mb-3">
-								    	<%-- <form action="orderItemCategoryListPage" method="post">
-								        <select name="product_order_status_id" class="form-control form-control-rounded">
-								            <option>카테고리선택</option>
-								            <c:forEach items="${orderStatusList}" var="orderStatusList">
-								                <option value="${orderStatusList.product_order_status_id}">${orderStatusList.name}</option>
-								            </c:forEach>
-								        </select>
-								        </form> --%>
-								    </div>
-								</div>
-                                <ul class="nav justify-content-end">
-									<li class="nav-item">
-									    <a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=3">결제완료</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=4">판매자확인완료</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=5">배송중</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=6">배송완료</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=7">구매확정</a>
-									</li>
-								</ul>
-								<div class="table-responsive">
-								    <table class="table table-striped">
-								        <thead>
-								            <tr>
-								                <th scope="col">#</th>
-								                <th scope="col">NO</th>
-								                <th scope="col">주문일</th>
-								                <th scope="col">고객명</th>
-								                <th scope="col">진행상태</th>
-								                <th scope="col">상품명</th>
-								                <th scope="col">수량</th>
-								                <th scope="col">가격</th>
-								                <th scope="col">할인가</th>
-								            </tr>
-								        </thead>
-								        	<tbody>
-								            	<c:forEach items="${orderItemCategoryList}" var="orderItemCategoryList">
-								               		<tr>
-								                  		<th scope="row">
-								                       		<label class="checkbox checkbox-outline-info">
-								                                    <input type="checkbox" checked="" /><span class="checkmark"></span>
-								                           	</label>
-								                       	</th>
-								                        	<td>${orderItemCategoryList.product_order_item_id}</td>
-								                            <td><fmt:formatDate value="${orderItemCategoryList.created_at}" pattern="yyyy-MM-dd" /></td>
-								                            <td>${orderItemCategoryList.recipient_name}</td>
-								                            <td>${orderItemCategoryList.order_status_name}</td>
-								                            <td>
-								                                <a href="orderItemDetailPage?product_order_item_id=${orderItemCategoryList.product_order_item_id}">${orderItemCategoryList.product_name}</a>
-								                            </td>										                										      										    
-								                            <td>${orderItemCategoryList.count}</td>
-								                            <td>${orderItemCategoryList.price}</td>
-								                            <td>${orderItemCategoryList.price_sale}</td>										                										                
-								                        </tr>
-								              	</c:forEach>
-								       		</tbody>
-								   		</table>									 
-									</div>
-                				</div>
-                				<!-- 페이징 버튼 -->
-									<div id="pagination">
-									    <nav aria-label="Page navigation">
-									        <ul class="pagination justify-content-center">
-									            <!-- 이전 페이지 버튼 -->
-									            <li class="page-item" id="prevPage">
-									                <a class="page-link" href="#" aria-label="Previous">
-									                    <span aria-hidden="true">&laquo;</span>
-									                </a>
-									            </li>
-									            <!-- 장식 -->
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(1)">1</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(2)">2</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(3)">3</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(4)">4</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(5)">5</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(6)">6</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(7)">7</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(8)">8</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(9)">9</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(10)">10</a>
-									            </li>
-									            <!-- 장식 끝 -->
-									            <!-- 페이지 번호 버튼 -->
-									            <li class="page-item" id="nextPage">
-									                <a class="page-link" href="#" aria-label="Next">
-									                    <span aria-hidden="true">&raquo;</span>
-									                </a>
-									            </li>
-									        </ul>
-									    </nav>
-									</div> 
-           
+		<div class="row mb-4">
+        	<div class="col mb-3">
+            	<div class="card text-left">
+                	<div class="card-body">
+                  		<div class="d-flex row p-0">
+					  		<div class="col title_box mb-3 pt-3"><a href="./adminMainPage">문의내용 상세보기</a></div>
+					  	</div>
+					  	<div class="row">
+					  		<div class="col">
+ 							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+									  	<tr>
+									  		<th class="text-black-50 detail_top" scope="row">문의번호</th>
+									       	<th class="detail_bottom" scope="col">No.&nbsp;${qnaContentDetail.qna_id}</th>
+									  	</tr>
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">등록일</th>
+									       	<th class="detail_bottom" scope="col"><fmt:formatDate value="${qnaContentDetail.created_at}" pattern="yyyy-MM-dd" /></th>
+									  	</tr>
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">회사명</th>
+									       	<th class="detail_bottom" scope="col">${qnaContentDetail.biz_name}</th>
+									  	</tr>																			
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">아이디</th>
+									       	<th class="detail_bottom" scope="col">${qnaContentDetail.email}</th>
+									  	</tr>									  	
+									  	<tr>
+									  		<th class="text-black-50 detail_th" scope="row">제목</th>
+									       	<th class="detail_bottom" scope="col">${qnaContentDetail.title}</th>
+									  	</tr>
+									  	<tr>
+									  		<th class="text-black-50 detail_th contents_box" scope="row">문의내용</th>
+									       	<th class="detail_bottom" class="contents_box" scope="col">${qnaContentDetail.contents}</th>
+									  	</tr>
+									  	<c:if test="${!empty qnaContentDetail.answer_contents}">
+									  	<tr>
+									  		<th class="text-black-50 detail_th contents_box" scope="row">답변내용</th>
+									       	<th class="detail_bottom" class="contents_box" scope="col">${qnaContentDetail.answer_contents}</th>
+									  	</tr>
+									  	</c:if>
+									</thead>
+								</table>
+									<c:if test="${empty qnaContentDetail.answer_contents}">								
+										<div class="d-flex justify-content-between align-items-center">
+										    <div class="card-title"></div>
+										    <button class="btn btn-primary ml-auto" type="button" data-toggle="modal" data-target="#exampleModalCenter">
+										        답변등록하기
+										    </button>
+										</div>
+									</c:if>
+		                <!--  Modal -->
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle-2" aria-hidden="true">
+						    <div class="modal-dialog modal-dialog-centered" role="document">
+						        <div class="modal-content">
+						            <div class="modal-header">
+						                <h5 class="modal-title" id="exampleModalCenterTitle-2">답변작성</h5>
+						                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						            </div>
+						            <div class="modal-body">
+						                <!-- 폼 태그를 모달 외부로 이동 -->
+						                <form action="answerContentsInsertProcess" method="POST">
+						                    <div class="input-group">
+						                    	<input type="hidden" value="${qnaContentDetail.qna_id}" name="qna_id">
+						                        <div class="input-group-prepend"><span class="input-group-text">답변작성하기</span></div>
+						                        <textarea class="form-control" name="answer_contents" aria-label="With textarea"></textarea>
+						                    </div>
+						            </div>
+						            <div class="modal-footer">
+						                <button class="btn btn-primary ml-2" type="submit">답변등록</button>
+						                <button class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
+						            </div>
+						             	</form> <!-- 폼 태그 닫기 -->
+						        </div>
+						    </div>
+						</div>
+		                <!-- Modal End -->
+						</div>					  		
+					 </div>
+				 </div>				
                 <!-- end of row-->
                 <!-- end of main-content -->
             </div><!-- Footer Start -->
@@ -437,5 +454,34 @@
     <script src="../resources/dist-assets/js/scripts/script.min.js"></script>
     <script src="../resources/dist-assets/js/scripts/sidebar.large.script.min.js"></script>
 </body>
+
+<!-- jQuery를 사용하여 Ajax 요청을 보내는 스크립트 -->
+<!-- jQuery를 사용하여 Ajax 요청을 보내는 스크립트 -->
+<script>
+/*     $(document).ready(function() {
+        var currentURL = window.location.href;
+        var urlParams = new URLSearchParams(window.location.search);
+        var product_id = urlParams.get('product_id'); // URL에서 product_id 값을 추출
+        $.ajax({
+            type: "GET",
+            url: "productDetailProcess", // 실제 서버 엔드포인트 주소로 변경해야 합니다.
+            data: { productId: product_id }, // 상품 아이디를 서버로 보낼 데이터로 수정해야 합니다.
+            success: function(data) {
+                // Ajax 요청이 성공했을 때 실행될 콜백 함수
+                // 서버로부터 받은 데이터(data)를 이용하여 테이블에 동적으로 내용을 추가합니다.
+                $('#product_detail_table th:nth-child(2)').text(data.product_name);
+                $('#product_detail_table th:nth-child(4)').text(data.price);
+                $('#product_detail_table th:nth-child(6)').text(data.price_sale);
+                $('#product_detail_table th:nth-child(8)').text(data.created_at);
+                // 나머지 필요한 데이터도 동일한 방식으로 추가해주세요.
+            },
+            error: function() {
+            	console.log(product_id)
+                // Ajax 요청이 실패했을 때 실행될 콜백 함수
+                console.log("Ajax 요청이 실패했습니다.");
+            }
+        });
+    }); */
+</script>
 
 </html>

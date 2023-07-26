@@ -74,6 +74,20 @@
 	width: 110px;
 }
 
+.current-page{
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #8b5cf6;
+    background-color: #dee2e6;
+    border: 1px solid #dee2e6;
+}
+
+.pagination{
+    justify-content: center;
+}
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -120,7 +134,7 @@
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.admin_nickname }님</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
@@ -238,6 +252,9 @@
                     <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
+                    <li class="nav-item" data-item="sessions"><a class="nav-item-hold" href="#"><i class="nav-icon i-Administrator"></i><span class="nav-text">Q & A</span></a>
+                        <div class="triangle"></div>
+                    </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
@@ -257,6 +274,9 @@
           		<!-- Review-->
                 <ul class="childNav" data-parent="charts">
                     <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
+                </ul>
+                <ul class="childNav" data-parent="sessions">
+                    <li class="nav-item"><a href="./qnaContentListPage"><i class="nav-icon i-Checked-User"></i><span class="item-name">문의리스트페이지</span></a></li>          
                 </ul>
             <div class="sidebar-overlay"></div>
         	</div>
@@ -287,8 +307,8 @@
 									                <th class="c9" scope="col">등록일</th>
 									            </tr>
 									        </thead>
-									        <tbody>
-									            <c:forEach items="${productList}" var="product">
+									        <tbody id="product_list">
+<%-- 									            <c:forEach items="${productList}" var="product">
 									                <tr>
 											            <th scope="row">
 											                <label class="checkbox checkbox-outline-info">
@@ -305,61 +325,43 @@
 									                    <td>${product.contents}</td>
 									                    <td><fmt:formatDate value="${product.created_at}" pattern="yyyy-MM-dd" /></td>
 									                </tr>
-									            </c:forEach>
+									            </c:forEach> --%>
 									        </tbody>
 									    </table>
 									</div>
-									<!-- 페이징 버튼 -->
-									<div id="pagination">
-									    <nav aria-label="Page navigation">
-									        <ul class="pagination justify-content-center">
-									            <!-- 이전 페이지 버튼 -->
-									            <li class="page-item" id="prevPage">
-									                <a class="page-link" href="#" aria-label="Previous">
-									                    <span aria-hidden="true">&laquo;</span>
-									                </a>
-									            </li>
-									            <!-- 장식 -->
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(1)">1</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(2)">2</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(3)">3</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(4)">4</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(5)">5</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(6)">6</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(7)">7</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(8)">8</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(9)">9</a>
-									            </li>
-									            <li class="page-item">
-									                <a class="page-link" href="#" onclick="loadPage(10)">10</a>
-									            </li>
-									            <!-- 장식 끝 -->
-									            <!-- 페이지 번호 버튼 -->
-									            <li class="page-item" id="nextPage">
-									                <a class="page-link" href="#" aria-label="Next">
-									                    <span aria-hidden="true">&raquo;</span>
-									                </a>
-									            </li>
-									        </ul>
-									    </nav>
-									</div>									
+                        <!-- 페이지네이션 부분 추가 -->
+                        <div class="pagination">
+                           <c:choose>
+                              <c:when test="${currentPage > 1}">
+                                 <a href="?page=${currentPage - 1}" class="page-link">이전</a>
+                              </c:when>
+                              <c:otherwise>
+                                 <span class="page-link">이전</span>
+                              </c:otherwise>
+                           </c:choose>
+                           <c:forEach begin="1" end="${pageCount}" var="pageNum">
+                              <c:url value="productListPage" var="pageUrl">
+                                 <c:param name="page" value="${pageNum}" />
+                              </c:url>
+                              <c:choose>
+                                 <c:when test="${pageNum eq currentPage}">
+                                    <span class="current-page">${pageNum}</span>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <a href="${pageUrl}" class="page-link">${pageNum}</a>
+                                 </c:otherwise>
+                              </c:choose>
+                           </c:forEach>
+                           <c:choose>
+                              <c:when test="${currentPage < pageCount}">
+                                 <a href="?page=${currentPage + 1}" class="page-link">다음</a>
+                              </c:when>
+                              <c:otherwise>
+                                 <span class="page-link">다음</span>
+                              </c:otherwise>
+                           </c:choose>
+                        </div>
+									
                     <!-- end of col-->
                 </div>
                 <!-- end of row-->
@@ -457,7 +459,51 @@
 </body>
 
 <script>
-    // 페이지가 로드되면 초기 페이지 설정을 위해 첫 페이지 데이터를 로드
+//숫자 형식화 함수
+function formatNumber(number) {
+    return new Intl.NumberFormat().format(number);
+}
+
+//상품리스트
+$(document).ready(function() {
+    $.ajax({
+        type: "POST", // 또는 "GET" 요청 방식 (서버의 처리 방식에 따라 설정)
+        url: "productListProcess", // 서버 URL (서버의 컨트롤러에서 요청을 처리할 URL)
+        success: function(productList) {
+            // Ajax 요청 성공 시 실행되는 함수
+            // 서버로부터 받은 데이터인 'productList'를 사용하여 테이블의 내용을 추가합니다.
+            let res = "";
+            for (let i = 0; i < productList.length; i++) {
+                res += "<tr>" +
+                    "<th scope='row'>" +
+                    "<label class='checkbox checkbox-outline-info'>" +
+                    "<input type='checkbox' checked=''/><span class='checkmark'></span>" +
+                    "</label>" +
+                    "</th>" +
+                    "<td>No. " + productList[i].product_id + "</td>" +
+                    "<td>" + productList[i].biz_name + "</td>" +
+                    "<td>" + productList[i].category_type_name + "</td>" +
+                    "<td><a href='productDetailPage?product_id=" + productList[i].product_id + "'>" + productList[i].product_name + "</a></td>" +
+                    "<td><img class='img-fluid img-thumbnail' style='width:75px; height:75px;' src='/ssofunUploadFiles/" + productList[i].thumbnail_name + "'></td>" +
+                    "<td>" + formatNumber(productList[i].price) + " 원</td>" +
+                    "<td>" + formatNumber(productList[i].price_sale) + " 원</td>" +
+                    "<td>" + productList[i].contents + "</td>" +
+                    "<td>" + productList[i].created_at + "</td>" +
+                    "</tr>";
+            }
+            $('#product_list').append(res); // 'product_list' 요소의 내용을 변경하여 테이블을 갱신합니다.
+        },
+        error: function(xhr, status, error) {
+            // Ajax 요청 실패 시 실행되는 함수
+            // 오류 처리 등을 수행합니다.
+            $('#product_list').append("<tr><td colspan='9'>상품을 불러오는데 오류가 발생했습니다.</td></tr>");
+            console.error(error);
+        }
+    });
+});
+
+
+/*     // 페이지가 로드되면 초기 페이지 설정을 위해 첫 페이지 데이터를 로드
     document.addEventListener("DOMContentLoaded", function() {
         loadPage(1);
     });
@@ -543,7 +589,7 @@
                 item.classList.add("active");
             }
         });
-    }
+    } */
 
 </script>
 

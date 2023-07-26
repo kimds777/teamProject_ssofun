@@ -79,7 +79,7 @@
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.admin_nickname }님</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
@@ -197,6 +197,9 @@
                     <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
+                    <li class="nav-item" data-item="sessions"><a class="nav-item-hold" href="#"><i class="nav-icon i-Administrator"></i><span class="nav-text">Q & A</span></a>
+                        <div class="triangle"></div>
+                    </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
@@ -216,6 +219,9 @@
           		<!-- Review-->
                 <ul class="childNav" data-parent="charts">
                     <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
+                </ul>
+                <ul class="childNav" data-parent="sessions">
+                    <li class="nav-item"><a href="./qnaContentListPage"><i class="nav-icon i-Checked-User"></i><span class="item-name">문의리스트페이지</span></a></li>          
                 </ul>
             <div class="sidebar-overlay"></div>
         	</div>
@@ -241,8 +247,8 @@
 								                <th scope="col">상품평점</th>
 								            </tr>
 								        </thead>
-								        	<tbody>
-								            	<c:forEach items="${productReviewList}" var="productReviewList">
+								        	<tbody id="product_review_list">
+<%-- 								            	<c:forEach items="${productReviewList}" var="productReviewList">
 								                	<tr>
 								                    	<th scope="row">
 								                       		<label class="checkbox checkbox-outline-info">
@@ -254,7 +260,7 @@
 								                            <td>${productReviewList.review_cnt}&nbsp;개</td>
 								                            <td>${productReviewList.review_avg_score}&nbsp;점</td>										                										                
 								                        </tr>
-								              	</c:forEach>
+								              	</c:forEach> --%>
 								       		</tbody>
 								  	</table>									 
 								</div>
@@ -404,4 +410,35 @@
     <script src="../resources/dist-assets/js/scripts/sidebar.large.script.min.js"></script>
 </body>
 
+<script>
+// 리뷰리스트
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "productReviewListProcess",
+        success: function(productReviewList) {
+            let res = "";
+            for (let i = 0; i < productReviewList.length; i++) {
+                res += "<tr>" +
+                    "<th scope='row'>" +
+                    "<label class='checkbox checkbox-outline-info'>" +
+                    "<input type='checkbox' checked=''><span class='checkmark'></span>" +
+                    "</label>" +
+                    "</th>" +
+                    "<td class='td_No'>No. " + productReviewList[i].product_id + "</td>" +
+                    "<td><a href='productDetailReviewListPage?product_id=" + productReviewList[i].product_id + "'>" + productReviewList[i].name + "</a></td>" +
+                    "<td>" + productReviewList[i].review_cnt + " 개</td>" +
+                    "<td>" + productReviewList[i].review_avg_score + " 점</td>" +
+                    "</tr>";
+            }
+            $('#product_review_list').append(res);
+        },
+        error: function() {
+            // 에러 처리
+            $('#product_review_list').append("<tr><td colspan='5'>상품 리뷰를 불러오는데 오류가 발생했습니다.</td></tr>");
+        }
+    });
+});
+
+</script>
 </html>

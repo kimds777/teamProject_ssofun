@@ -112,7 +112,7 @@
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.login_account }님</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.admin_nickname }님</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
 								</ul>
@@ -230,6 +230,9 @@
                     <li class="nav-item" data-item="charts"><a class="nav-item-hold" href="#"><i class="nav-icon i-File-Clipboard-File--Text"></i><span class="nav-text">Review</span></a>
                         <div class="triangle"></div>
                     </li>
+                    <li class="nav-item" data-item="sessions"><a class="nav-item-hold" href="#"><i class="nav-icon i-Administrator"></i><span class="nav-text">Q & A</span></a>
+                        <div class="triangle"></div>
+                    </li>
                 </ul>
             </div>
             <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
@@ -250,6 +253,9 @@
                 <ul class="childNav" data-parent="charts">
                     <li class="nav-item"><a href="./productReviewListPage"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">상품(리뷰,평점)리스트페이지</span></a></li>
                 </ul>
+                <ul class="childNav" data-parent="sessions">
+                    <li class="nav-item"><a href="./qnaContentListPage"><i class="nav-icon i-Checked-User"></i><span class="item-name">문의리스트페이지</span></a></li>          
+                </ul>
             <div class="sidebar-overlay"></div>
         	</div>
         </div>
@@ -269,10 +275,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-icon-bg card-icon-bg-primary o-hidden mb-4">
                             <div class="card-body text-center"><i class="i-Money-2"></i>
-                                <div id="content_style" class="content">
-                                    <p class="text-muted mt-2 mb-1 dash_title">총 매출</p>
-                                    <p id="totalProductPrice" class="text-primary text-18 line-height-1 mb-2">${TotalPrice}</p>
-                                </div>
+								<div id="content_style" class="content">
+								    <p class="text-muted mt-2 mb-1 dash_title">총 매출</p>
+								    <p id="totalProductPrice" class="text-primary text-16 line-height-1 mb-2">로그인을 하세요...</p>
+								</div>
                             </div>
                         </div>
                     </div>
@@ -281,7 +287,7 @@
                             <div class="card-body text-center"><i class="i-Checkout-Basket"></i>
                                 <div id="content_style" class="content">
                                     <p class="text-muted mt-2 mb-1 dash_title">총 상품수</p>
-                                    <p class="text-primary text-18 line-height-1 mb-2">${TotalProductCount}&nbsp;개</p>
+                                    <p id="totalProductCount" class="text-primary text-16 line-height-1 mb-2">로그인을 하세요...</p>
                                 </div>
                             </div>
                         </div>
@@ -291,7 +297,7 @@
                             <div class="card-body text-center"><i class="i-Data-Upload"></i>
                                 <div id="content_style" class="content">
                                     <p class="text-muted mt-2 mb-0 dash_title">총 리뷰수</p>
-                                    <p class="text-primary text-18 line-height-1 mb-2">${TotalProductReviewCount}&nbsp;개</p>
+                                    <p id="totalProductReviewCount" class="text-primary text-16 line-height-1 mb-2">로그인을 하세요...</p>
                                 </div>
                             </div>
                         </div>
@@ -301,7 +307,7 @@
                             <div class="card-body text-center"><i class="i-Financial"></i>
                                 <div id="content_style" class="content">
                                     <p class="text-muted mt-2 mb-1 dash_title">총 평점</p>
-                                    <p class="text-primary text-18 line-height-1 mb-2">${productReviewAvgScore}&nbsp;점</p>
+                                    <p id="productReviewAvgScore" class="text-primary text-16 line-height-1 mb-2">로그인을 하세요...</p>
                                 </div>
                             </div>
                         </div>
@@ -312,7 +318,7 @@
                     <div class="col-lg-8 col-md-12">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <div class="card-title">This Year Sales</div>
+                                <div class="card-title">월별 매출</div>
                                 <div id="echartBar22" style="height: 300px;"></div>
                             </div>
                         </div>
@@ -345,15 +351,15 @@
 								                <th class="List_th" scope="col">등록일</th>
 								            </tr>
 								        </thead>
-								        <tbody>
-								        	<c:forEach items="${dashboardProductList}" var="dashboardProductList">
+								        <tbody id="dashboard_product_list">
+								        	<%-- <c:forEach items="${dashboardProductList}" var="dashboardProductList">
 								        		<tr>
 								        			<th scope="row" class="td_No List_td">No.&nbsp;${dashboardProductList.product_id}</th>
 								        			<td class="List_td">${dashboardProductList.name}</td>
 								        			<td class="List_td"><fmt:formatNumber value="${dashboardProductList.price}" type="number" pattern="#,##0"/> 원</td>
 								        			<td class="List_td"><fmt:formatDate value="${dashboardProductList.created_at}" pattern="yyyy-MM-dd" /></td>								                        				                         							                        									                										      										    								                										                
 								              	</tr>
-								           	</c:forEach>
+								           	</c:forEach> --%>
 								     	</tbody>
 								     </table>
 	                                <div class="d-flex row">
@@ -380,15 +386,15 @@
 								                <th class="List_th" scope="col">상품명</th>
 								            </tr>
 								        </thead>
-								        <tbody>
-								        	<c:forEach items="${dashboardProductOrderList}" var="dashboardProductOrderList">
+								        <tbody id="dashboard_product_orderlist">
+								        	<%-- <c:forEach items="${dashboardProductOrderList}" var="dashboardProductOrderList">
 								        		<tr>
 								        			<th scope="row" class="td_No List_td">No.&nbsp;${dashboardProductOrderList.product_order_item_id}</th>
 								        			<td class="List_td"><fmt:formatDate value="${dashboardProductOrderList.order_created_at}" pattern="yyyy-MM-dd" /></td>
 								        			<td class="List_td">${dashboardProductOrderList.delivery_recipient_name}&nbsp;님</td>
 								        			<td class="List_td">${dashboardProductOrderList.product_name}</td>					                        				                         							                        									                										      										    								                										                
 								              	</tr>
-								           	</c:forEach>
+								           	</c:forEach> --%>
 								     	</tbody>
 								     </table>
 	                                <div class="d-flex row">
@@ -415,15 +421,15 @@
 								                <th class="List_th" scope="col">상품평점</th>
 								            </tr>
 								        </thead>
-								        <tbody>
-								        	<c:forEach items="${dashboardproductReviewList}" var="dashboardproductReviewList">
+								        <tbody id="dashboard_product_reviewList">
+								        	<%-- <c:forEach items="${dashboardproductReviewList}" var="dashboardproductReviewList">
 								        		<tr>
 								        			<th scope="row" class="td_No List_td">No.&nbsp;${dashboardproductReviewList.product_id}</th>
 								        			<td class="List_td">${dashboardproductReviewList.name}</td>
 								        			<td class="List_td">${dashboardproductReviewList.review_cnt}&nbsp;개</td>
 								        			<td class="List_td">${dashboardproductReviewList.review_avg_score}&nbsp;점</td>					                        				                         							                        									                										      										    								                										                
 								              	</tr>
-								           	</c:forEach>
+								           	</c:forEach> --%>
 								     	</tbody>
 								     </table>
 	                                <div class="d-flex row">
@@ -609,6 +615,7 @@
 <script>
 
 // 대시보드
+// 총 매출
   $(document).ready(function() {
     // ${TotalPrice} 변수의 값을 가져옴
     var totalProductPrice = "${TotalPrice}";
@@ -622,37 +629,38 @@
   }
 
 </script>
-
-
-    <script>
-    
-    
-    
-    
-    
-    $(document).ready(function () {
+<script>
+// 대시보드그래프
+// * 절대 건들지 마시오 *
+$(document).ready(function () {
     	
     	$.ajax({
     		type : "get",
     		url : "./getSalesYear?year=2023",
     		success: function(res) {
     
+    			let maxValue = 0;
+    			
     			const xData = [];
-    			for(x of res.currentYearSalesData){
+    			for(x of res.prevYearSalesData){
     				xData.push(x.month);
     			}
     			
     			const yCurrent = [];
     			for(x of res.currentYearSalesData){
     				yCurrent.push(x.sales);
+    				
+    				if(maxValue < x.sales) maxValue = x.sales;
     			}
     			
     			const yPrev = [];
     			for(x of res.prevYearSalesData){
     				yPrev.push(x.sales);
+    				if(maxValue < x.sales) maxValue = x.sales;
     			}
-    			
-    			
+				
+    			maxValue = maxValue * 1.1;
+    			const valueInterval = maxValue/4
     			
     	    	  // Chart in Dashboard version 1
     	    	  let echartElemBar = document.getElementById("echartBar22");
@@ -697,8 +705,8 @@
     	    	            formatter: "${value}",
     	    	          },
     	    	          min: 0,
-    	    	          max: 100000,
-    	    	          interval: 25000,
+    	    	          max: maxValue,
+    	    	          interval: valueInterval,
     	    	          axisLine: {
     	    	            show: false,
     	    	          },
@@ -930,8 +938,127 @@
     });
     
     
-    </script>
+</script>
+<script>
+//숫자 형식화 함수
+function formatNumber(number) {
+    return new Intl.NumberFormat().format(number);
+}
 
+// 대시보드
+// 총 매출
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "totalPriceProcess", // 서버에서 값을 반환하는 요청을 보냅니다.
+        success: function(TotalPrice) {
+            // 서버에서 반환된 값을 받아와서 해당 HTML 요소에 삽입합니다.
+            $("#totalProductPrice").text(formatNumber(TotalPrice) + " 원");
+        },
+        error: function() {
+            $("#totalProductPrice").text("에러발생...");
+        }
+    });
+});
+// 총 상품수
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "totalProductCountProcess", // 서버에서 값을 반환하는 요청을 보냅니다.
+        success: function(TotalProductCount) {
+            // 서버에서 반환된 값을 받아와서 해당 HTML 요소에 삽입합니다.
+        	$("#totalProductCount").text(TotalProductCount + " 개");
+        },
+        error: function() {
+            $("#totalProductCount").text("에러발생...");
+        }
+    });
+});
 
+// 총 리뷰수
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "totalProductReviewCountProcess", // 서버에서 값을 반환하는 요청을 보냅니다.
+        success: function(TotalProductReviewCount) {
+            // 서버에서 반환된 값을 받아와서 해당 HTML 요소에 삽입합니다.
+        	$("#totalProductReviewCount").text(TotalProductReviewCount + " 개");
+        },
+        error: function() {
+            $("#totalProductReviewCount").text("에러발생...");
+        }
+    });
+});
+// 평점
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "productReviewAvgScoreProcess", // 서버에서 값을 반환하는 요청을 보냅니다.
+        success: function(productReviewAvgScore) {
+            // 서버에서 반환된 값을 받아와서 해당 HTML 요소에 삽입합니다.
+        	$("#productReviewAvgScore").text(productReviewAvgScore + " 점");
+        },
+        error: function() {
+            $("#productReviewAvgScore").text("에러발생...");
+        }
+    });
+});
 
+// 상품리스트
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "dashboardProductListProcess",
+        success: function(dashboardProductList) {
+            let res = "";
+            for (let i = 0; i < dashboardProductList.length; i++) {
+                res += "<tr>" +
+                    "<th scope='row' class='td_No List_td'>No. " + dashboardProductList[i].product_id + "</th>" +
+                    "<td class='List_td'>" + dashboardProductList[i].name + "</td>" +
+                    "<td class='List_td'>" + formatNumber(dashboardProductList[i].price) + " 원</td>" +
+                    "<td class='List_td'>" + dashboardProductList[i].created_at + "</td></tr>";
+            }
+            $('#dashboard_product_list').append(res);
+        }
+    });
+});
+
+// 오더리스트
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "dashboardProductOrderListProcess",
+        success: function(dashboardProductOrderList) {
+            let res = "";
+            for (let i = 0; i < dashboardProductOrderList.length; i++) {
+                res += "<tr>" +
+                	"<th scope='row' class='td_No List_td'>No. " + dashboardProductOrderList[i].product_order_item_id + "</th>" +
+                    "<td class='List_td'>" + dashboardProductOrderList[i].order_created_at + "</td>" +
+                    "<td class='List_td'>" + dashboardProductOrderList[i].delivery_recipient_name + " 님</td>" +
+                    "<td class='List_td'>" + dashboardProductOrderList[i].product_name + "</td></tr>";
+            }
+            $('#dashboard_product_orderlist').append(res);
+        }
+    });
+});
+//상품(리뷰,평점)리스트
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "HyunMinProductReviewListProcess",
+        success: function(dashboardproductReviewList) {
+            let res = "";
+            for (let i = 0; i < dashboardproductReviewList.length; i++) {
+                console.log(dashboardproductReviewList);
+                res += "<tr>" +
+                	"<th scope='row' class='td_No List_td'>No. " + dashboardproductReviewList[i].product_id + "</th>" +
+                    "<td class='List_td'>" + dashboardproductReviewList[i].name + "</td>" +
+                    "<td class='List_td'>" + dashboardproductReviewList[i].review_cnt + " 개</td>" +
+                    "<td class='List_td'>" + dashboardproductReviewList[i].review_avg_score + " 점</td></tr>";
+            }
+            $('#dashboard_product_reviewList').append(res);
+        }
+    });
+});
+</script>
 </html>

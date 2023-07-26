@@ -2,6 +2,8 @@ package com.ssofun.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class HyunMinProductJoinDto {
 	private int product_category_type_id; // FK
 	private int product_id; // FK
@@ -12,6 +14,7 @@ public class HyunMinProductJoinDto {
 	private int price; // 가격
 	private int price_sale; // 할인가
 	private String contents; // 상세보기내용
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",  timezone = "Asia/Seoul") //데이터 포맷 변환
 	private Date created_at; // 등록일
 	private String thumbnail_name; // 파일명
 	public HyunMinProductJoinDto() {

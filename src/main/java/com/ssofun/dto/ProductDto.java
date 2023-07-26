@@ -11,7 +11,7 @@ public class ProductDto {
 	private int price; // 가격
 	private int price_sale; // 할인가
 	private String contents; // 상세보기 내용
-	@JsonFormat(pattern = "yyyy-MM-dd:HH.mm.ss",  timezone = "Asia/Seoul") //데이터 포맷 변환
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",  timezone = "Asia/Seoul") //데이터 포맷 변환
 	private Date created_at; // 등록일
 	private int used_fg; // 사용여부
 	private String tname; // 썸네일 테이블의 썸네일명
@@ -22,6 +22,7 @@ public class ProductDto {
     // 귀찮아서 그냥 여기다가 추가함
     // 대시보드꺼
     private int product_order_item_id;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",  timezone = "Asia/Seoul") //데이터 포맷 변환
     private Date order_created_at;
     private String delivery_recipient_name;
     private int count;

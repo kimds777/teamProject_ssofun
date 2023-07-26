@@ -325,6 +325,7 @@
 <select id="productOrderItemList" resultType="com.ssofun.dto.ProductOrderItemDto">
 	SELECT 
 		distinct(poi.product_order_item_id),
+		p.admin_id,
 	    poi.created_at,
 	    dr.name AS recipient_name,
 		pos.name AS order_status_name,
@@ -349,10 +350,11 @@
 	where p.admin_id in (
 		select ta2.admin_id 
 		from tb_admin ta2 
-		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{admin_id} AND ta.used_fg = 1)
+		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId} AND ta.used_fg = 1)
 	) 
 	AND poi.used_fg = 1
 	ORDER BY poi.created_at DESC
+	LIMIT 0,1000
 </select>
 <!-- N번 관리자가 판매하는 상품중 주문된 하나의 상품상세보기(오더리스트 상세보기) -->
 <select id="orderItemDetail" resultType="com.ssofun.dto.ProductOrderItemDto">
@@ -536,10 +538,70 @@ ORDER BY pr.created_at DESC
 	WHERE p.product_id = #{product_id} AND pri.used_fg = 1
 </select>
 
+<!-- 문의리스트 -->
+<select id="qnaContentsList" resultType="com.ssofun.dto.HyunMinQnaJoinDto">
+	SELECT 
+		q.admin_id,
+		q.qna_id,
+	    b.biz_name,
+	    u.nickname,
+	    q.title,
+	    q.contents,
+	    q.answer_contents,
+	    q.answer_created_at,
+	    q.created_at
+	FROM tb_qna q
+		INNER JOIN tb_admin a ON q.admin_id = a.admin_id
+	    INNER JOIN tb_biz b ON a.biz_id = b.biz_id
+	    INNER JOIN tb_user u ON q.user_id = u.user_id
+	    INNER JOIN (
+	        SELECT DISTINCT ta2.admin_id 
+	        FROM tb_admin ta2 
+	        WHERE ta2.biz_id IN (SELECT tb.biz_id FROM tb_admin tb WHERE tb.admin_id = #{adminId} AND tb.used_fg = 1)
+	    ) sub ON a.admin_id = sub.admin_id
+	WHERE q.used_fg = 1
+	ORDER BY created_at DESC
+	LIMIT 0, 300
+</select>
 
+<!-- 문의내용상세보기 -->
+<select id="qnaContentDetail" resultType="com.ssofun.dto.HyunMinQnaJoinDto">
+	SELECT 
+		q.admin_id,
+		q.qna_id,
+	    b.biz_name,
+	    u.email,
+	    u.nickname,
+	    q.title,
+	    q.contents,
+	    q.answer_contents,
+	    q.answer_created_at,
+	    q.created_at
+	FROM tb_qna q
+		INNER JOIN tb_admin a ON q.admin_id = a.admin_id
+	    INNER JOIN tb_biz b ON a.biz_id = b.biz_id
+	    INNER JOIN tb_user u ON q.user_id = u.user_id
+	    INNER JOIN (
+	        SELECT DISTINCT ta2.admin_id 
+	        FROM tb_admin ta2 
+	        WHERE ta2.biz_id IN (SELECT tb.biz_id FROM tb_admin tb WHERE tb.used_fg = 1)
+	    ) sub ON a.admin_id = sub.admin_id
+	WHERE q.qna_id = #{qna_id} AND q.used_fg = 1
+	ORDER BY created_at DESC
+	LIMIT 0, 300
+</select>
+<!-- 답글등록 -->
+<update id="answerContentsInsert">
+	UPDATE tb_qna SET 
+	answer_contents = #{answer_contents}, 
+	answer_created_at = CURRENT_TIMESTAMP()  
+	WHERE qna_id =#{qna_id}
+</update>
+
+<!-- 통계그래프 접근금지 -->
 <select id="getSalesYear" resultType="map">
 	select 
-		DATE_FORMAT(tpoi.created_at, '%Y-%m') as month,
+		DATE_FORMAT(tpoi.created_at, '%m') as month,
 		sum(tpoi.count * tp.price_sale) as sales
 	from tb_product tp
 	inner join tb_product_order_item tpoi on tpoi.product_id = tp.product_id

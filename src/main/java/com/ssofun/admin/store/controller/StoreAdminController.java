@@ -30,42 +30,91 @@ public class StoreAdminController {
    
 	   @Autowired
 	   private StoreAdminService storeAdminService;
-	   @Autowired
-	   private IntegratedAuthenticationService integratedAuthenticationService;
 	   
 	   // 관리자 메인페이지 
 	   @RequestMapping("adminMainPage")
-	   public String adminMainPage(HttpSession session,Model model, ProductDto productDto, HyunMinProductReviewListDto hyunMinProductReviewListDto) {
+	   public String adminMainPage(HttpSession session,Model model, ProductDto productDto) {
 		  	
-		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
-		   session.setAttribute("shopAdmin", shopAdmin);
-		   
-		   // 대시보드
-		   // Total
-		   int TotalPrice = storeAdminService.selectTotalPrice(productDto, shopAdmin.getAdmin_id()); // 총 매출
-		   int TotalProductCount = storeAdminService.selectTotalProductCount(productDto, shopAdmin.getAdmin_id()); // 모든상품수
-		   int TotalProductReviewCount = storeAdminService.selectTotalProductReviewCount(productDto, shopAdmin.getAdmin_id()); // 총 리뷰수
-		   double productReviewAvgScore = storeAdminService.selectProductReviewAvgScore(productDto, shopAdmin.getAdmin_id()); // 총 평점
-	   
-		   model.addAttribute("TotalPrice", TotalPrice); // 총 매출
-		   model.addAttribute("TotalProductCount", TotalProductCount); // 모든상품수
-		   model.addAttribute("TotalProductReviewCount", TotalProductReviewCount); // 총 리뷰수
-		   model.addAttribute("productReviewAvgScore", productReviewAvgScore); // 총 평점
-		   
-		   // 리스트
-		   int id = shopAdmin.getAdmin_id();
-		   hyunMinProductReviewListDto.setAdmin_id(id);
-		   List<HyunMinProductReviewListDto> dashboardproductReviewList = storeAdminService.dashboardproductReviewList(hyunMinProductReviewListDto); //리뷰,평점
-		   List<ProductDto> dashboardProductList = storeAdminService.dashboardProductList(productDto, shopAdmin.getAdmin_id()); // 상품리스트
-		   List<ProductDto> dashboardProductOrderList =  storeAdminService.dashboardProductOrderList(productDto, shopAdmin.getAdmin_id()); // 오더리스트
-
-		   model.addAttribute("dashboardProductList", dashboardProductList); // 상품리스트
-		   model.addAttribute("dashboardProductOrderList", dashboardProductOrderList); // 상품리스트
-		   model.addAttribute("dashboardproductReviewList", dashboardproductReviewList); // 리뷰리스트
-		   
+		  AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		  session.setAttribute("shopAdmin", shopAdmin);
+		     		   
 	      return "admin/adminMainPage";
 	   }
 	   
+	   // 대시보드
+	   // 총 매출
+	   @ResponseBody
+	   @RequestMapping("totalPriceProcess")
+	   public int selectTotalPrice(HttpSession session, ProductDto productDto) {
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   int TotalPrice = storeAdminService.selectTotalPrice(productDto, shopAdmin.getAdmin_id()); // 총 매출
+		   return TotalPrice;
+	   }
+	   // 총 판매수
+	   @ResponseBody
+	   @RequestMapping("totalProductCountProcess")
+	   public int selectTotalProductCount(HttpSession session, ProductDto productDto) {
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   int TotalProductCount = storeAdminService.selectTotalProductCount(productDto, shopAdmin.getAdmin_id()); // 모든상품수
+		   return TotalProductCount;
+	   }
+	   // 총 리뷰수
+	   @ResponseBody
+	   @RequestMapping("totalProductReviewCountProcess")
+	   public int selectTotalProductReviewCount(HttpSession session, ProductDto productDto) {
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   int TotalProductReviewCount = storeAdminService.selectTotalProductReviewCount(productDto, shopAdmin.getAdmin_id()); // 총 리뷰수
+		   return TotalProductReviewCount;
+	   }
+	   // 총 평점
+	   @ResponseBody
+	   @RequestMapping("productReviewAvgScoreProcess")
+	   public double selectProductReviewAvgScore(HttpSession session, ProductDto productDto) {
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   double productReviewAvgScore = storeAdminService.selectProductReviewAvgScore(productDto, shopAdmin.getAdmin_id()); // 총 평점
+		   return productReviewAvgScore;
+	   }
+	   
+	   // 대시보드
+	   // 상품리스트
+	   @ResponseBody
+	   @RequestMapping("dashboardProductListProcess")
+	   public List<ProductDto> dashboardProductList(HttpSession session, ProductDto productDto){
+		   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+
+		   List<ProductDto> dashboardProductList = storeAdminService.dashboardProductList(productDto, shopAdmin.getAdmin_id());
+		   
+		   return dashboardProductList;
+	   }
+	   // 대시보드
+	   // 오더리스트
+	   @ResponseBody
+	   @RequestMapping("dashboardProductOrderListProcess")
+	   public List<ProductDto> dashboardProductOrderList(HttpSession session, ProductDto productDto){
+		   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   
+		   List<ProductDto> dashboardProductOrderList =  storeAdminService.dashboardProductOrderList(productDto, shopAdmin.getAdmin_id());
+		   
+		   return dashboardProductOrderList;
+	   }
+	   // 대시보드
+	   // 상품(리뷰,평점)리스트
+	   @ResponseBody
+	   @RequestMapping("HyunMinProductReviewListProcess")
+	   public List<HyunMinProductReviewListDto> dashboardproductReviewList(HttpSession session, HyunMinProductReviewListDto hyunMinProductReviewListDto){
+		   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   int id = shopAdmin.getAdmin_id();
+		   hyunMinProductReviewListDto.setAdmin_id(id);
+		   List<HyunMinProductReviewListDto> dashboardproductReviewList = storeAdminService.dashboardproductReviewList(hyunMinProductReviewListDto); //리뷰,평점
+		   return dashboardproductReviewList;
+	   }
+	   
+//	   --------------------------------      대 시 보 드 끝     --------------------------------------------------------------
+	   
+	   	// 로그아웃
 		@RequestMapping("logoutProcess")
 		public String logout(HttpSession session) {
 			
@@ -175,20 +224,46 @@ public class StoreAdminController {
 	   
 	   // 상품 리스트페이지
 	   @RequestMapping("productListPage")
-	   public String productListPage(HyunMinProductJoinDto hyunMinProductJoinDto,Model model,HttpSession session) {
-		   
+	   public String productListPage(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session
+			   , HyunMinProductJoinDto hyunMinProductJoinDto) {
+		   		   
+		   int itemsPerPage = 10; // 페이지당 아이템 개수
+
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
-		   	   
-		   
+		   session.setAttribute("shopAdmin", shopAdmin);
 		   int id = shopAdmin.getAdmin_id();
 		   hyunMinProductJoinDto.setAdmin_id(id);
+		   List<HyunMinProductJoinDto> productList = storeAdminService.selectAll(hyunMinProductJoinDto); // 전체 상품목록 가져오기
 		   
-		   List<HyunMinProductJoinDto> productList = storeAdminService.selectAll(hyunMinProductJoinDto);
-		  	   
-		   session.setAttribute("shopAdmin", shopAdmin);
-		   model.addAttribute("productList", productList);
-		   
+		    // 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		   List<HyunMinProductJoinDto> paginatedList = new ArrayList<>();
+		   int startIdx = (page - 1) * itemsPerPage;
+		   int endIdx = Math.min(startIdx + itemsPerPage, productList.size());
+		   for (int i = startIdx; i < endIdx; i++) {
+		        paginatedList.add(productList.get(i));
+		    }
+
+		   int pageCount = (int) Math.ceil((double) productList.size() / itemsPerPage); // 총 페이지 수 계산
+
+		   model.addAttribute("list", paginatedList);
+		   model.addAttribute("currentPage", page);
+		   model.addAttribute("pageCount", pageCount);		   
+		   	 
 		   return "admin/productListPage";
+	   }
+	   
+	   // 상품리스트
+	   @ResponseBody
+	   @RequestMapping("productListProcess")
+	   public List<HyunMinProductJoinDto> productList(HyunMinProductJoinDto hyunMinProductJoinDto, HttpSession session){
+		   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   
+		   int id = shopAdmin.getAdmin_id();
+		   hyunMinProductJoinDto.setAdmin_id(id);		   
+		   List<HyunMinProductJoinDto> productList = storeAdminService.selectAll(hyunMinProductJoinDto);
+		   
+		   return productList;
 	   }
 	   
 	   // 상품카테고리타입페이지 
@@ -206,9 +281,9 @@ public class StoreAdminController {
 	      return "redirect:./adminMainPage";
 	   }
 	   
-	   // 상품상세보기
+	   // 상품상세보기페이지
 	   @RequestMapping("productDetailPage")
-	   public String productDetailProcess(int product_id, Model model,HttpSession session) {
+	   public String productDetailPage(int product_id, Model model,HttpSession session) {
 	      
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   
@@ -223,6 +298,23 @@ public class StoreAdminController {
 		   
 	      return "admin/productDetailPage";
 	   }
+	   
+//	   // 상품상세보기
+//	   @ResponseBody
+//	   @RequestMapping("productDetailProcess")
+//	   public HyunMinProductJoinDto productDetail(@RequestParam("product_id") int product_id, HttpSession session) {
+//		   
+//		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+//		   session.setAttribute("shopAdmin", shopAdmin);
+//		   
+//		   HyunMinProductJoinDto productDetail = storeAdminService.productDetail(product_id);
+//		   
+//		   System.out.println(productDetail.getProduct_id());
+//		   
+//		   return productDetail;
+//	   }
+	   
+	   // 상품상세보기
 	   
 	   // 상품카테고리 등록페이지
 	   @RequestMapping("productCategoryInsertPage")
@@ -282,21 +374,50 @@ public class StoreAdminController {
 	   
 	   // 오더리스트페이지
 	   @RequestMapping("orderItemListPage")
-	   public String orderItemListPage(Model model, ProductOrderItemDto productOrderItemDto, 
-			   ProductOrderStatusDto productOrderStatusDto,HttpSession session) {
+	   public String orderItemListPage(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session
+			   , ProductOrderItemDto productOrderItemDto) {
 		   
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
-		   	   
 		   session.setAttribute("shopAdmin", shopAdmin);
+
+		   // 페이지당 아이템 개수
+		   int itemsPerPage = 10; 
 		   
-		   int id = shopAdmin.getAdmin_id();
-		   productOrderItemDto.setAdmin_id(id);		   
-		   List<ProductOrderItemDto> orderItemList = storeAdminService.productOrderItemList(productOrderItemDto);
+		   // 전체 상품목록 가져오기
+		   List<ProductOrderItemDto> orderItemList = storeAdminService.productOrderItemList(productOrderItemDto, shopAdmin.getAdmin_id());
+   
+		   int totalItems  = orderItemList.size();
 		   
-		 
-		   model.addAttribute("orderItemList", orderItemList);
-		  		  		    
-		   return "admin/orderItemListPage";
+		   // 총 페이지 수 계산
+		   int pageCount = (int) Math.ceil((double) totalItems / itemsPerPage);
+		   
+		   // 현재 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		   List<ProductOrderItemDto> paginatedList = new ArrayList<>();
+		   int startIdx = (page - 1) * itemsPerPage;
+		   int endIdx = Math.min(startIdx + itemsPerPage, orderItemList.size());
+		   for (int i = startIdx; i < endIdx; i++) {
+		       paginatedList.add(orderItemList.get(i));
+		   }
+		   
+		   // JSP로 전달할 데이터를 Model에 추가합니다.
+		   model.addAttribute("orderItemList", paginatedList);
+		   model.addAttribute("currentPage", page);
+		   model.addAttribute("pageCount", pageCount);
+
+		    
+	       return "admin/orderItemListPage";
+	   }
+
+	   
+	   // 오더리스트
+	   @ResponseBody
+	   @RequestMapping("orderItemListProcess")
+	   public List<ProductOrderItemDto> orderItemList(ProductOrderItemDto productOrderItemDto, HttpSession session){
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+	   	   	   
+		   List<ProductOrderItemDto> orderItemList = storeAdminService.productOrderItemList(productOrderItemDto, shopAdmin.getAdmin_id());
+		   
+		   return orderItemList;
 	   }
 	   
 	   // 관리자 판매상품 상세보기페이지
@@ -370,8 +491,18 @@ public class StoreAdminController {
 	   
 	   // 상품리뷰리스트페이지(리뷰개수,평점)
 	   @RequestMapping("productReviewListPage")
-	   public String productReviewListPage(HyunMinProductReviewListDto hyunMinProductReviewListDto, Model model, HttpSession session) {
+	   public String productReviewListPage(HttpSession session) {
 		   
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");		   
+		   session.setAttribute("shopAdmin", shopAdmin);		   
+		   
+		   return "admin/productReviewListPage";
+	   }
+	   
+	   // 상품리뷰리스트
+	   @ResponseBody
+	   @RequestMapping("productReviewListProcess")
+	   public List<HyunMinProductReviewListDto> productReviewList(HyunMinProductReviewListDto hyunMinProductReviewListDto, HttpSession session){
 		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		   
 		   session.setAttribute("shopAdmin", shopAdmin);
@@ -380,9 +511,7 @@ public class StoreAdminController {
 		   hyunMinProductReviewListDto.setAdmin_id(id);
 		   List<HyunMinProductReviewListDto> productReviewList = storeAdminService.productReviewList(hyunMinProductReviewListDto);
 		   
-		   model.addAttribute("productReviewList", productReviewList);
-		   
-		   return "admin/productReviewListPage";
+		   return productReviewList;
 	   }
 	   
 	   // 상품하나에 대한 리뷰리스트페이지
@@ -399,6 +528,44 @@ public class StoreAdminController {
 		   return "admin/productDetailReviewListPage";
 	   }
 	   
+	   // 문의리스트
+	   @RequestMapping("qnaContentListPage")
+	   public String adminQnaListPage(HyunMinQnaJoinDto hyunMinQnaJoinDto, Model model, HttpSession session) {
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");		   
+		   session.setAttribute("shopAdmin", shopAdmin);
+		   
+		   List<HyunMinQnaJoinDto> qnaContentsList = storeAdminService.qnaContentsList(hyunMinQnaJoinDto, shopAdmin.getAdmin_id());
+		   
+		   if(shopAdmin != null) {
+			   model.addAttribute("qnaContentsList", qnaContentsList);
+		   }else {
+			   return "redirect:./loginPage";
+		   }
+		      
+		   return "admin/qnaContentListPage";
+	   }
+	   // 문의상세보기
+	   @RequestMapping("qnaContentDetailPage")
+	   public String qnaContentDetailPage(int qna_id, Model model, HttpSession session) {
+		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		   session.setAttribute("shopAdmin", shopAdmin);
+		   
+		   HyunMinQnaJoinDto qnaContentDetail = storeAdminService.qnaContentDetail(qna_id);
+		   
+		   model.addAttribute("qnaContentDetail", qnaContentDetail);
+		   
+		   return "admin/qnaContentDetailPage";
+	   }
+	   // 답글등록하기
+	   @RequestMapping("answerContentsInsertProcess")
+	   public String answerContentsInsertProcess(HyunMinQnaJoinDto hyunMinQnaJoinDto, int qna_id) {
+		   
+		   storeAdminService.answerContentsInsert(hyunMinQnaJoinDto);
+		   
+		   return "redirect:./qnaContentDetailPage?qna_id=" + qna_id;
+	   }
+	   
+	   // 통계그래프
 	   @ResponseBody
 	   @RequestMapping("getSalesYear")
 	   public Map<String, Object> getSalesYear(int year, HttpSession session){

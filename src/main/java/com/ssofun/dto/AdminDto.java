@@ -9,6 +9,7 @@ public class AdminDto {
 	private int biz_id;
 	private String login_account;
 	private String login_password;
+	private String admin_nickname;
 	@JsonFormat(pattern ="yyyy.MM.dd.HH.mm.ss", timezone = "Asia/Seoul")
 	private Date created_at;
 	private int used_fg;
@@ -63,6 +64,13 @@ public class AdminDto {
 	public void setUsed_fg(int used_fg) {
 		this.used_fg = used_fg;
 	}
-	
+
+	public String getAdmin_nickname() {
+		return admin_nickname;
+	}
+
+	public void setAdmin_nickname(String admin_nickname) {
+		this.admin_nickname = admin_nickname;
+	}
 	
 }
