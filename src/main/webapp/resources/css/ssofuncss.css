@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Noto+Sans+KR&display=swap');
+    .section{margin: 0 auto; width: 1200px;}
     .backgroundcolor{background-image:url('/resources/customerserviceimg/customerServiceMainShakeHand.jpg'); background-repeat:no-repeat; background-size:100% 100%;}
     .one{font-family: 'Inter', sans-serif; font-size: 24px; text-align: center; font-weight: 400;}
     .one-1{ height: 100px; line-height: 36px;}
@@ -22,7 +23,7 @@
     #four-font-active{color: #333333; font-weight: bold;}
     .four-font-1{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0; color:#666666;}
     .hr-1{ border: none; border-top: 1px solid black;}/*잘안보여서 임시로 black함*/
-    /*.hr-col{padding: 0; line-height: 3px; }*/
+    .hr-col{ padding-left: 0px; padding-right: 0px; line-height: 3px; }
     .five-font{font-family: 'Noto Sans KR', sans-serif; font-weight:400; margin-bottom: 0; font-size: 12px; }
     .c-five-font{padding: 0;}
     .center1{text-align: center; font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 12px; }

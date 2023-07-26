@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">    
+ 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
+<!-- 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">  -->   
+	<link rel="stylesheet" href="../../resources/css/adminCompanyManagement.css">    
     <!-- <script type="text/javascript"> </script>-->
 
 
@@ -24,7 +25,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="section">
         <div class="row">
             <div class="col"><!--상단 네비-->
                 <jsp:include page="../../include/systemAdminNavi.jsp"></jsp:include>
@@ -81,16 +82,17 @@
 
 
                 <div class="col">
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
                                    
                                         <div class="col-2">
-                                            <a class="navbar-brand text-black">판매자관리</a>
+                                            <a class="navbar-brand text-black">판매자전체목록</a>
                                         </div>
                                         <div class="col">
-                                            <input type="button" class="writefaqbutton" style="border-radius: 5px;" value="판매자등록"  onclick="location.href='venderRegistrationPage'">
+                                            <p class="five-font mt-2">SSOFUN에 등록된 판매자전체목록입니다.</p>
+                                            
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -106,35 +108,75 @@
                     </div>
 
                     <!--안에 페이지 내용만 바꾸기-->
-                    <div class="row" style="margin-left: 10px; height:1000px">
+                    <div class="row" style="margin-left: 12px; height:1000px">
                     
-                        <div class="col">
+                        <div class="col" style="padding-left: 0px; padding-right: 12px;">
 
-                           	<div class="row">
-                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">전체판매자목록</p></div>
-                                <div class="col c-five-font"><p class="five-font mt-2">SSOFUN에 등록된 판매자전체목록입니다.(등록일순)</p></div>
-                                <div class="col-2"></div>
-                                <div class="col-2">
-                            		
+                           	<div class="row" style="padding-left: 0px;">
+                                <div class="col-3" style="padding-left: 0px;"><p class="three-font mt-1" style="margin-left: 5px;">전체판매자목록</p></div>
+                                
+                                <div class="col-7"></div>
+                                <div class="col-2" style="text-align: right;">
+                            		<button class="btn btn-outline-secondary" style="height:29.98px; padding:6px; font-family: 'Noto Sans KR', sans-serif;font-weight: 400; font-size: 12px;" type="submit">삭제</button>
+                                    <input type="button" class="writefaqbutton" style="border-radius: 5px;" value="판매자등록"  onclick="location.href='venderRegistrationPage'">
                             	</div>
                             </div>
+
+                   
                             
-                            <div class="row">
-                                <div class="col hr-col"><hr class="hr-1"></div>
+                          
+                            <div class="row mt-3">
+                                <table class="table table-bordered table-sm" style="padding: 12px;">
+                                    <thead>
+                                      <tr  style="background-color: #f8f9fa;">
+                                        <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><input type="checkbox"  name="admin_id" ></p></th>
+                                        <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">판매자번호</p></th>
+                                        <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">회사번호</p></th>
+                                        <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">소속회사명</p></th>
+                                        <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">계정명</p></th>
+                                        <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">등록일</p></th>
+                                        <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">계정상태</p></th>
+                                        
+                                        
+                                      </tr>
+                                    </thead>
+                                    <c:forEach items="${allAdminList}" var="allAdminList">
+                                        <tbody>
+                                          <tr>
+                                            <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;"><input type="checkbox"  name="admin_id"></p></th>
+                                            <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${allAdminList.adminDto.admin_id }</p></th>
+                                            <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${allAdminList.bizDto.biz_id }</p></th>
+                                            <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${allAdminList.bizDto.biz_name}</p></th>
+                                            <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./readVenderPage?admin_id=${allAdminList.adminDto.admin_id}">${allAdminList.adminDto.login_account}</a></p></td>
+                                            <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;"><fmt:formatDate pattern="yy. MM. dd. (E)" value="${allAdminList.adminDto.created_at }"/></p></td>
+                                            
+                                            <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">
+                                                <c:if test="${allAdminList.adminDto.used_fg == 1}">
+                                                    <i class="bi bi-check-circle-fill" style="color:green "></i>
+                                                </c:if>
+                                                <c:if test="${allAdminList.adminDto.used_fg == 0 }">
+                                                    <i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i>
+                                                </c:if>
+                                            </p></td>
+                                          </tr>
+                                        </tbody>
+                                      </c:forEach>
+                                </table> 
                             </div>
                             
                             
-                            <!-- faq글목록작성하기 -->
+                            
                             <div class="row">
                                 <div class="col-1"><p class="center1" style="text-align: center;">판매자번호</p></div>
                                 <div class="col-1"><p class="center1" style="text-align: center;">회사번호</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">소속회사명</p></div>
                                 <div class="col"><p class="five-font" style="text-align: center;">계정명</p></div>
                                 <div class="col-2"><p class="center1" style="text-align: center;">등록일</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">계정상태</p></div>                             
+                                <div class="col-1"><p class="center1" style="text-align: center;">계정상태</p></div> 
+                                <div class="col-1"><p class="center1" style="text-align: center;">삭제</p></div>                            
                             </div>
                             
-                            <!-- 반복문돌리기 -->
+                            
                             <c:forEach items="${allAdminList}" var="allAdminList">
 	                            <div class="row">
 	                                <div class="col-1"><p class="center1" style="text-align: center;">${allAdminList.adminDto.admin_id }</p></div>
@@ -148,13 +190,13 @@
 		                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:green "></i></p></div>                             
 		                            	</c:if>
 		                            	<c:if test="${allAdminList.adminDto.used_fg == 0 }">
-		                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i></p></div>   <!-- 다른아이콘 <i class="bi bi-dash-circle"></i>-->                          
+		                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i></p></div>                            
 		                            	</c:if>
-	                                                             
+	                               	<div class="col-1" style="text-align: center"><input type="checkbox"  name="admin_id" value="${allAdminList.adminDto.admin_id }"></div>                              
 	                            </div>
 	                        </c:forEach>
         
-
+                            
                         
                         </div>
                     </div>

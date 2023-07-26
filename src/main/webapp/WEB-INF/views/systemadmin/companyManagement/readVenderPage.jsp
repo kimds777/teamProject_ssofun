@@ -20,8 +20,13 @@
 	.star{margin-top:5px; margin-bottom:0px; color:#FF6462}
 	.companyfont{font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 19px; margin-bottom: 0; margin-top:7px; margin-bottom:0px;}	
 	.companyfont1{font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 25px; margin-bottom: 0; margin-top:7px; margin-bottom:0px;}	
-    .qnaUserSubmit{background-color: #FF6462; height: 50px; width: 150px; border: none; border-radius: 5px; color: #ffffff;  font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px;  }
+    .qnaUserSubmit{background-color: #FF6462; height: 20px; width: 80px; border: none; border-radius: 5px; color: #ffffff;  font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px;  }
 	.companyButton{background-color: #212529; height: 50px; width: 150px; border: none; border-radius: 5px; color: #ffffff;  font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px;  }
+    .readCompanyButton1{height: 40px; width: 110px;  border-color: #FF6462; background-color: #F8F9FA; border-radius: 5px; color:#FF6462;   font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px; box-shadow: none; }
+    .readCompanyButton2{height: 40px; width: 110px; border-color: #212529; background-color:#F8F9FA ; border-radius: 5px; color: #212529;  font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px; box-shadow: none; outline:none;}
+    #infoWrap>div>div>p{width: 300px;}
+    #infoWrap>div>div>p>span:first-of-type{margin-right: 10px;}
+	.bizName{width:400px; margin-right: 5px; font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 28px; margin-bottom: 0; margin-top:4px; margin-bottom:0px; font-weight: bold;}
 
 
 
@@ -137,130 +142,124 @@
                             </div>
                             
                             
-                            
-                                
-                            <div class="row">
-                            	<div class="col">
-                            		<div class="row" style="background-color:#F8F9FA; height:650px; border-radius: 3%;">
-		                            	<div class="col-2"></div>
-		                            	<div class="col">
-		
-											<div class="row mt-3">
-		                                        <div class="col"></div>
-		                            			<div class="col textcenter" >
-		                            				<p class="companyfont1" >${adminDtoByAdminId.adminDto.login_account } 님</p>
-		                            			</div>
-		                            			<div class="col"></div>
-		                            	
-		                            		</div>
-		
-				                            <div class="row">
-		                               			<div class="col hr-col"><hr class="hr-1"></div>
-		                           			 </div>
-		
-		
-		                                    <div class="row mt-2">
-		                                        <div class="col"></div>
-		                                        <div class="col mt-2 textcenter" >
-		                                            <img src="/resources/companyManagement/exDog.jpg" alt="대표자" width="130px" height="130px"  style=" border-radius: 30%;">
-		                                        </div>
-		                                        <div class="col">
-
-		                                        </div>
-		                                    </div>
-		                                                                		
-		
-		
-
-		     		
-		                            		<div class="row mt-2">
-		                                        <div class="col-2"></div>
-		                            			<div class="col textcenter">
-		                            				<p class="companyfont">소속회사</p>
-		                            			</div>
-		                            			<div class="col">
-		                                            <p class="companyfont">${adminDtoByAdminId.bizDto.biz_name }</p>
-		                            			</div>
-		                            			<div class="col-2"></div>
-		                            		</div>
-		                            		<div class="row mt-2">
-		                                        <div class="col-2"></div>
-		                            			<div class="col textcenter">
-		                            				<p class="companyfont">닉네임</p>
-		                            			</div>
-		                            			<div class="col">
-		                                            <p class="companyfont">${adminDtoByAdminId.adminDto.admin_nickname }</p>
-		                            			</div>
-		                            			<div class="col-2"></div>
-		                            		</div>
-		                            		
-		                            		<div class="row mt-2">
-		                                        <div class="col-2"></div>
-		                            			<div class="col textcenter">
-		                            				<p class="companyfont">판매자전화번호</p>
-		                            			</div>
-		                            			<div class="col">
-		                                            <p class="companyfont">${adminDtoByAdminId.adminDto.admin_phone }</p>
-		                            			</div>
-		                            			<div class="col-2"></div>
-		                            		</div>
-		                            		<div class="row mt-2">
-		                                        <div class="col-2"></div>
-		                            			<div class="col textcenter">
-		                            				<p class="companyfont">출고지주소</p>
-		                            			</div>
-		                            			<div class="col">
-		                            				<p class="companyfont">경기도안산시</p>
-		                            			</div>
-		                            			<div class="col-2"></div>
-		                            		</div>
-		                            		
-		                            		<div class="row mt-2">
-		                                        <div class="col-2"></div>
-		                            			<div class="col textcenter">
-		                                            <p class="companyfont">통신판매업 신고여부</p>
-		                            			</div>
-		                            			<div class="col">
-		                                            <p class="companyfont">
-		                                            	<c:if test="${adminDtoByAdminId.adminDto.admin_received_report == 1}">
+                            <div  class="row"style="background-color:#F8F9FA; height:450px; border-radius: 3%;" >
+                                <div class="col" >
+                                   
+                                        <div class="row mt-2" style="height: 60px;">
+                                            <div class="col"style="text-align: left;">
+												<a class="readQnalink" href="./venderListOfCompanyNumberPage?biz_id=${adminDtoByAdminId.adminDto.biz_id }"><i class="bi bi-chevron-left fs-2"></i></a>
+                                            	<span class="bizName">${adminDtoByAdminId.adminDto.login_account } 님</span>
+                                            </div>
+                                            
+                                            <div class="col" >
+                                                
+                                            </div>
+                                            <div class="col mt-3">
+                                           		<form action="../venderAccountSetProcess" method="post">
+	                                            	<input type="button"  class="readCompanyButton2" value="수정" onclick="location.href='updateCompanyPage?biz_id=${bizData.biz_id }'">
+	                               					
+	                                                
+	                                                
+	                                                
+	                                                
+	                                                <c:choose>
+		                                                <c:when test="${adminDtoByAdminId.adminDto.used_fg == 0 }">
+		                                                	<input type="submit" class="readCompanyButton1" value="계정활성화"> 
+		                                                </c:when>
+		                                                <c:when test="${adminDtoByAdminId.adminDto.used_fg ==1  }">
+		                                                	<input type="submit" class="readCompanyButton2" value="계정비활성화">
+		                                             	</c:when>
+		                                             </c:choose>   
+	                                                
+	                                                
+	                                                <input type="hidden" name="admin_id" value="${adminDtoByAdminId.adminDto.admin_id }">
+                                            	</form>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <!--<div class="col-1"></div>-->
+                                            <div class="col-1"></div>
+                                            <div class="col mt-3">
+                                                <div class="row"></div>
+                                                <div class="row mt-4">
+                                                    <div class="col textcenter">
+                                                        <img src="/resources/companyManagement/exDog.jpg"  alt="대표자" width="230px" height="230px"  style=" border-radius: 30%;">
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col mt-2" id="infoWrap">
+                                                <div class="row"></div>
+                                                <!-- <div class="row">
+                                                    <div class="col mt-2 ">
+                                                        <p><span class="companyfont" style="font-weight: bold;">회사명</span><span class="companyfont"> ${bizData.biz_name }</span></p>
+                                                    </div>
+                                                </div> -->
+                                                <div class="row">
+                                                    <div class="col mt-3">
+                                                        <p><span class="companyfont" style="font-weight: bold;">소속회사</span> <span class="companyfont">${adminDtoByAdminId.bizDto.biz_name }</span></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mt-2 ">
+                                                        <p><span class="companyfont" style="font-weight: bold;">닉네임</span> <span class="companyfont"> ${adminDtoByAdminId.adminDto.admin_nickname }</span></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mt-2">
+                                                        <p><span class="companyfont" style="font-weight: bold;">판매자전화번호</span> <span class="companyfont"> ${adminDtoByAdminId.adminDto.admin_phone }</span></p>
+                                                    </div>
+                                                </div>
+												<div class="row">
+                                                    <div class="col mt-2">
+                                                        <p><span class="companyfont" style="font-weight: bold;">출고지주소</span> <span class="companyfont">  경기도 안산~</span></p>
+                                                    </div>
+                                                </div>
+												<div class="row">
+                                                    <div class="col mt-2">
+                                                        <p><span class="companyfont" style="font-weight: bold;">통신판매업 신고여부</span> <span class="companyfont"> 
+															<c:if test="${adminDtoByAdminId.adminDto.admin_received_report == 1}">
 		                                            		<i class="bi bi-envelope-check" style="color:green"></i>
-		                                            	</c:if>
-		                                            	<c:if test="${adminDtoByAdminId.adminDto.admin_received_report == 0}">
-		                                            		<i class="bi bi-x-circle" style="color:#B3B8C3"></i>
-		                                            	</c:if>
-		                                            </p>                                            
-		                            			</div>
-		                            			<div class="col-2"></div>
-		                            		</div>
-		                            		
-		                            		<div class="row mt-2">
-		                                        <div class="col-2"></div>
-		                            			<div class="col textcenter">
-		                                            <p class="companyfont">계정상태</p>
-		                            			</div>
-		                            			<div class="col">
-		                                            <p class="companyfont">활성화됨 </p>                                            
-		                            			</div>
-		                            			<div class="col-2"></div>
-		                            		</div>
+															</c:if>
+															<c:if test="${adminDtoByAdminId.adminDto.admin_received_report == 0}">
+																<i class="bi bi-x-circle" style="color:#B3B8C3"></i>
+															</c:if>
+														</span></p>
+                                                    </div>
+                                                </div>
+												<div class="row">
+                                                    <div class="col mt-2">
+                                                        <p><span class="companyfont" style="font-weight: bold;">계정상태</span> <span class="companyfont"> 
+                                                        	          	<c:choose>
+							                                                <c:when test="${adminDtoByAdminId.adminDto.used_fg == 0 }">
+							                                                	비활성화
+							                                                </c:when>
+							                                                <c:when test="${adminDtoByAdminId.adminDto.used_fg ==1  }">
+							                                                	활성화
+							                                             	</c:when>
+							                                             </c:choose>
+		                                             
+                                                        
+                                                        </span></p>
+                                                    </div>
+                                                </div>
+											
 
-		                           			
-		                           			<div class="row mt-5">
-				                            	<div class="col"></div>
-				                            	
-				                            	
-                      	
-				                            	
-				                            	<div class="col textcenter"><input type="button"  class="companyButton" value="목록으로" onclick="location.href='venderListOfCompanyNumberPage?biz_id="></div>
-				                            	<div class="col textcenter"><input type="button" class="qnaUserSubmit" value="계정설정" onclick="location.href='#'"></div>
-				                            	<div class="col"></div>
-			                            	</div>
-		                            		
-		                          		
-
-		                            	</div>
-		                            	<div class="col-2"></div>
-	                            	</div>
+                                            </div>
+                                    
+                                            <div class="col-1"></div>
+                                        </div>
+                                  
+                                </div>
+                            </div>
+                            	
+                            	
+                            	
+                            	
+                           
+                            	
+ 
 	                            	<div class="row">
 	                            	
 	                            	</div>

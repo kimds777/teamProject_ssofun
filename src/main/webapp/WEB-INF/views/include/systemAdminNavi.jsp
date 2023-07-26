@@ -31,7 +31,7 @@
 	<div class="col-2">
 		<div class="row ">
 			
-			<div class="col text-center fw-bold fs-5">SSOFUN <span class="site">사이트 관리 </span></div>
+			<div class="col text-center fw-bold fs-5">SSOFUN <span class="site">시스템관리 </span></div>
 		</div>
 	</div>
 	<div class="col">
@@ -40,7 +40,7 @@
 			<div class="col-2 text-center fw-bold">홈</div>
 			<div class="col-2 text-center fw-bold"><a href="../../systemadmin/companyManagement/companyManagementMainPage">입점사관리</a></div>
 			<div class="col-2 text-center fw-bold"><a href="../../systemadmin/companyManagement/venderManagementMainPage">판매자관리</a></div>
-			<div class="col-2 text-center fw-bold">사이트 관리</div>
+			<div class="col-2 text-center fw-bold"><a href="../../systemadmin/siteManagement/fundingManagementPage">사이트관리</a></div>
 			<div class="col-2 text-center fw-bold"><a href="../../systemadmin/systemAdminMainPage">고객센터관리</a></div>
 		 </div>
 		<div class="row"> </div>

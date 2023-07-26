@@ -139,11 +139,11 @@
                             
                             
                             
-                            <form action="../writeCompanyAccountProcess" method="post">
+                            <form action="../companyUpdateProcess" method="post">
                                 
                             <div class="row">
                             	<div class="col">
-                            		<div class="row" style="background-color:#F8F9FA; height:550px; border-radius: 3%; ">
+                            		<div class="row" style="background-color:#F8F9FA; height:580px; border-radius: 3%; ">
 		                            	<div class="col-2"></div>
 		                            	<div class="col">
 		
@@ -174,7 +174,7 @@
 		                            				<p class="companyfont" ><span class="star">*</span> 회사명</p>
 		                            			</div>
 		                            			<div class="col">
-		                            				<input type="text" name="biz_name" class="form-control" placeholder="회사명 입력해주세요." aria-label="companyName">
+		                            				<input type="text" name="biz_name" class="form-control" value="${bizDto.biz_name }" aria-label="companyName">
 		                            			</div>
 		                            		</div>
 		     		
@@ -184,7 +184,7 @@
 		                            				<p class="companyfont"><span class="star" style="color: ;">*</span> 대표자명</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <input type="text" name="biz_ceo"  class="form-control" placeholder="대표자명 입력해주세요." aria-label="companyName">
+		                                            <input type="text" name="biz_ceo" class="form-control" value="${bizDto.biz_ceo }" aria-label="companyName">
 		                            			</div>
 		                            		</div>
 		                            		
@@ -196,15 +196,15 @@
 		                            			<div class="col">
 		                            				<div class="row">
 		                            					<div class="col-3">
-		                            						<input type="text" name="biz_no_1" class="form-control" placeholder="012">
+		                            						<input type="text" name="biz_no_1"  value="${bizNoPart1 }" class="form-control" placeholder="012">
 		                            					</div>
 		                            					<div class="col-1 textcenter"><p class="companyfont">-</p></div>
 		                            					<div class="col-2">
-		                            						<input type="text" name="biz_no_2" class="form-control" placeholder="34">
+		                            						<input type="text" name="biz_no_2" value="${bizNoPart2}" class="form-control" placeholder="34">
 		                            					</div>
 		                            					<div class="col-1 textcenter"><p class="companyfont">-</p></div>
 		                            					<div class="col-5">
-		                            						<input type="text" name="biz_no_3" class="form-control" placeholder="67890" aria-label="companyName">
+		                            						<input type="text" name="biz_no_3" value="${bizNoPart3 }" class="form-control" placeholder="67890" aria-label="companyName">
 		                            					</div>
 		                            				</div>
 		                            				
@@ -230,18 +230,18 @@
 		                            						<!-- <input type="text" name="title" id="title" class="form-control" placeholder="010"> -->
 		                            						<select class="form-select" name="biz_phone_1" aria-label="Default select example">
 															  <option selected>010</option>
-															  <option value="1">02</option>
-															  <option value="2">011</option>
-															  <option value="3">031</option>
+															  <option value="02">02</option>
+															  <option value="011">011</option>
+															  <option value="031">031</option>
 															</select>
 		                            					</div>
 		                            					<div class="col-1 textcenter"><p class="companyfont">-</p></div>
 		                            					<div class="col-3">
-		                            						<input type="text" name="biz_phone_2" class="form-control" placeholder="1234">
+		                            						<input type="text" name="biz_phone_2" class="form-control" value="${bizPhone2 }">
 		                            					</div>
 		                            					<div class="col-1 textcenter"><p class="companyfont">-</p></div>
 		                            					<div class="col-4">
-		                            						<input type="text" name="biz_phone_3" class="form-control" placeholder="1234" aria-label="companyName">
+		                            						<input type="text" name="biz_phone_3" class="form-control" value="${bizPhone3 }" aria-label="companyName">
 		                            					</div>
 		                            				</div>
 		                            			
@@ -262,7 +262,8 @@
 		                          		
 			                            	<div class="row mt-4">
 				                            	<div class="col"></div>
-				                            	<div class="col textcenter"><input type="submit" id ="qnaUserSubmit" class="qnaUserSubmit" value="등록하기"></div>
+				                            	<input type="hidden" name="biz_id" value="${bizDto.biz_id }">
+				                            	<div class="col textcenter"><input type="submit" id ="qnaUserSubmit" class="qnaUserSubmit" value="수정하기"></div>
 				                            	<div class="col"></div>
 			                            	</div>
 		                            	</div>

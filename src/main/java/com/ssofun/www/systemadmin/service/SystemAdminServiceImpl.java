@@ -2,6 +2,7 @@ package com.ssofun.www.systemadmin.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -247,7 +248,7 @@ public class SystemAdminServiceImpl {
 		return bizList; 
 	}
 	
-	
+	//입점회사목록가져오기
 	public List<BizDto> getBizDtoList (){
 		List<BizDto> bizList = systemAdminSqlMapper.bizDtoList();
 		
@@ -265,6 +266,21 @@ public class SystemAdminServiceImpl {
 		return bizDto;
 		
 	};
+	
+	//biz_id에 해당하는 판매자수 가져오기
+	public int getAdminCount(int biz_id) {
+		int adminCount = systemAdminSqlMapper.countAdminByBizId(biz_id);
+		
+		return adminCount;
+	}
+	
+	
+	//biz_id로 bizDto가져와서 입점업체정보수정
+	public void updateCompanyData(BizDto bizDto) {
+		systemAdminSqlMapper.updateCompanyData(bizDto);
+
+	}
+	
 	
 	
 	
@@ -355,33 +371,72 @@ public class SystemAdminServiceImpl {
 	}
 	
 	
+	//admin_id로 adminDto정보 가져옴
+	public AdminDto getAdminDataByAdminId(int admin_id) {
+		
+		AdminDto adminDto = systemAdminSqlMapper.getAdminDataByAdminId(admin_id);
+		
+		return adminDto;
+	}
+	
+	
+	//판매자계정활성화
+	public void adminAccountActivation(int admin_id) {
+		systemAdminSqlMapper.adminAccountActivation(admin_id);
+	}
+	
+	
+	
+	//판매자계정비활성화
+	public void adminAccountDeactivation(int admin_id) {
+		systemAdminSqlMapper.adminAccountDeactivation(admin_id);
+	}
+	
+	
+	
+	
+	
+//사이트관리
+	
+	
+	//펀딩사이트관리
+	public List<Map<String, Object>> getUnauthorizedFunding(){
+		
+		List<Map<String, Object>> unauthorizedFundingList = new ArrayList<>();
+		List<FundingDto> unauthorizedFundingDto = systemAdminSqlMapper.getUnauthorizedFunding();
+		
+		for(FundingDto fundingDto : unauthorizedFundingDto) {
+			Map<String, Object> map = new HashMap<>();
+			 
+			
+			map.put("fundingDto", fundingDto);
+			
+			unauthorizedFundingList.add(map);
+		}
+		
+		
+		return unauthorizedFundingList;
+	}
+
+	
+	//펀딩승인
+	
+	public void fundingApproval(int funding_id) {
+	
+		systemAdminSqlMapper.fundingApproval(funding_id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	
-	
-	
-	
-	
-//	public List<Map<String, Object>> getAdminDataByBizId(int biz_id){
-//		
-//		List<Map<String, Object>> adminDtoList = new ArrayList<>();
-//		
-//		List<AdminDto> adminDtoListByBizId = systemAdminSqlMapper.selectAdminDtoListByBizId(biz_id);
-//		
-//		BizDto bizDto = systemAdminSqlMapper.selectBizDataBybizId(biz_id);
-//		for(AdminDto adminDto:adminDtoListByBizId) {
-//			
-//			Map<String, Object> map = new HashMap<>();
-//			
-//			
-//			
-//			map.put("bizDto", bizDto);
-//			map.put("adminDto", adminDto);
-//			
-//			adminDtoList.add(map);
-//			}
-//			return adminDtoList;
-//		}
+
 	
 	
 	

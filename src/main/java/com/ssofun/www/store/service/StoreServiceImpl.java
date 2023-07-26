@@ -155,6 +155,12 @@ public class StoreServiceImpl {
 		return storeSqlMapper.selectReview(id);
 	}
 	
+	// 상품별 리뷰개수 출력
+	public List<ProductDto> getRecount(ProductDto pDto){
+		List<ProductDto> Recount = storeSqlMapper.selectByRecount(pDto);
+		return Recount;
+	}
+	
 	//장바구니 삭제
 	public void deleteCart(ProductCart cartDto) {
 		storeSqlMapper.deleteByCart(cartDto);
@@ -163,6 +169,27 @@ public class StoreServiceImpl {
 	//주소 출력
 	public ProductRecipient getRecipient(ProductRecipient reciDto) {
 	    return storeSqlMapper.selectRecipient(reciDto);
+	}
+	
+	//좋아요 관련
+	//좋아요 아이콘 클릭
+	public void toggleLike(ProductFavoritDto pfDto) {
+			
+			if(storeSqlMapper.countMyLike(pfDto) > 0) {
+				storeSqlMapper.deleteLike(pfDto); //좋아요 클릭 되어있으면 취소하기		
+			}else {
+				storeSqlMapper.insertLike(pfDto); //좋아 클릭 안되어 있으면 좋아요 누르고 색 변경 
+			}
+		}
+
+	// 고객이 하나의 상품에 대하여 좋아요 하였는지 체크
+	public boolean isLiked(ProductFavoritDto pfDto) {
+		return storeSqlMapper.countMyLike(pfDto)>0;
+	}
+	
+	// 상품 당 좋아요 개수
+	public int getTotalLike(int ProductId) {
+		return storeSqlMapper.countLikeByProductId(ProductId);
 	}
 	
 	// ProductUser 로그인

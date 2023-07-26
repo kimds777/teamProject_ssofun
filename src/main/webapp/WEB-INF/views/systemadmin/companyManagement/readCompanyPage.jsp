@@ -22,11 +22,11 @@
 	.companyfont1{font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 25px; margin-bottom: 0; margin-top:7px; margin-bottom:0px;}	
     .qnaUserSubmit{background-color: #FF6462; height: 20px; width: 80px; border: none; border-radius: 5px; color: #ffffff;  font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px;  }
 	.companyButton{background-color: #212529; height: 50px; width: 150px; border: none; border-radius: 5px; color: #ffffff;  font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px;  }
-    .readCompanyButton1{ height: 35px; width: 90px;  border-color: #FF6462; color: #FF6462; border-radius: 5px;   font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px; }
-    .readCompanyButton2{ height: 35px; width: 90px; border-color: #212529; background-color:#F8F9FA ; border-radius: 5px; color: #212529;  font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px; }
+    .readCompanyButton1{height: 40px; width: 110px;  border-color: #FF6462; background-color: #F8F9FA; border-radius: 5px; color:#FF6462;   font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px; box-shadow: none; }
+    .readCompanyButton2{height: 40px; width: 110px; border-color: #212529; background-color:#F8F9FA ; border-radius: 5px; color: #212529;  font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 16px; box-shadow: none; outline:none;}
     #infoWrap>div>div>p{width: 350px;}
     #infoWrap>div>div>p>span:first-of-type{margin-right: 15px;}
-
+	.bizName{width:400px; margin-right: 5px; font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 28px; margin-bottom: 0; margin-top:4px; margin-bottom:0px; font-weight: bold;}
 
 
 
@@ -96,48 +96,11 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="accordion accordion-flush" id="accordionFlushExample">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                      Accordion Item #1
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                                  </div>
-                                </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                      Accordion Item #2
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                                  </div>
-                                </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                      Accordion Item #3
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
 
                 <div class="col">
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary" style="height:54.98px">
                                 <div class="container-fluid">
@@ -145,6 +108,10 @@
                                         <div class="col-2">
                                             <a class="navbar-brand text-black">입점사 상세정보</a>
                                         </div>
+                                        <div class="col">
+                                            <p class="five-font mt-2">입점사상세정보와 소속판매자정보입니다.</p>
+                                        </div>
+                    
 
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -162,54 +129,55 @@
                     <!--안에 페이지 내용만 바꾸기-->
                     <div class="row" style="margin-left: 10px; height:0px">
                     
-                        <div class="col">
+                        <div class="col" style="padding-left: 0px;">
 
-                           	<div class="row">
-                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">입점사상세정보</p></div>
-                                <div class="col c-five-font"><p class="five-font mt-2">입점사상세정보와 소속판매자정보입니다.</p></div>
-                                <div class="col-2"></div>
-                                <div class="col-2">
-                            	</div>
-                            </div>
+                
                             
-                            <div class="row" >
+                            <div class="row" style="padding-left: 0px;">
                                 <div class="col hr-col"><hr class="hr-1"></div>
                             </div>
                             
             
                             
                             <div  class="row">
-                                <div class="col"  style="background-color:#F8F9FA; height:320px; border-radius: 3%;">
+                                <div class="col"  style="background-color:#F8F9FA; height:320px; border-radius: 3%; ">
                                    
                                         <div class="row mt-2" style="height: 60px;">
-                                            <div class="col"style="text-align: left;">
+                                            <div class="col"style="text-align: left; padding-left: 0px;">
                                                 <a class="readQnalink" href="./companyManagementMainPage"><i class="bi bi-chevron-left fs-2"></i></a>
+                                            	<span class="bizName">${bizData.biz_name }</span>
                                             </div>
-                                            <div class="col-9"></div>
-                                            <div class="col mt-1" style="text-align: right;">
+                                            
+                                            <div class="col" >
+                                                
+                                            </div>
+                                            <div class="col mt-3">
+                                            	<input type="button"  class="readCompanyButton2" value="수정" onclick="location.href='updateCompanyPage?biz_id=${bizData.biz_id }'">
                                                 <input type="button" class="readCompanyButton1" value="판매자목록" onclick="location.href='./venderListOfCompanyNumberPage?biz_id=${bizData.biz_id }'">
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row mt-2">
                                             <!--<div class="col-1"></div>-->
-                                            <div class="col">
+                                            <div class="col-1"></div>
+                                            <div class="col mt-3">
                                                 <div class="row"></div>
                                                 <div class="row">
                                                     <div class="col textcenter">
-                                                        <img src="/resources/companyManagement/companyperson.jpg" alt="대표자" width="200px" height="200px"  style=" border-radius: 30%;">
+                                                        <img src="/resources/companyManagement/companyperson.jpg" alt="대표자" width="160px" height="160px"  style=" border-radius: 30%;">
                                                     </div>
+                                                    
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col" id="infoWrap">
+                                            <div class="col mt-2" id="infoWrap">
                                                 <div class="row"></div>
-                                                <div class="row">
+                                                <!-- <div class="row">
                                                     <div class="col mt-2 ">
                                                         <p><span class="companyfont" style="font-weight: bold;">회사명</span><span class="companyfont"> ${bizData.biz_name }</span></p>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="row">
-                                                    <div class="col mt-2">
+                                                    <div class="col mt-3">
                                                         <p><span class="companyfont" style="font-weight: bold;">대표자명</span> <span class="companyfont"> ${bizData.biz_ceo }</span></p>
                                                     </div>
                                                 </div>
@@ -224,11 +192,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col" id="infoWrap">
+                                            <div class="col mt-2" id="infoWrap">
                                                 <div class="row"></div>
                                                 <div class="row">
-                                                    <div class="col mt-2 ">
-                                                        <p><span class="companyfont" style="font-weight: bold;">판매자수</span> <span class="companyfont"> ~명</span></p>
+                                                    <div class="col mt-3" >
+                                                        <p><span class="companyfont" style="font-weight: bold;">판매자수</span> <span class="companyfont"> ${adminCount}명</span></p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -242,23 +210,23 @@
                                                     </div>
                                                 </div>
                                                 <div class="row" >
-                                                    <div class="col mt-2"style="height: 44x;" >
+                                                    <div class="col mt-2" style="height: 23px;" >
                                                         
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col mt-2 ">
-                                                       <div class="row">
-                                                        <div class="col textcenter"><input type="button"  class="readCompanyButton2" value="수정" onclick="location.href='updateCompanyPage?biz_id=${bizData.biz_id }'"></div>
-                                                        <div class="col textcenter"><input type="button"  class="readCompanyButton2" value="삭제" onclick="location.href='updateCompanyPage?biz_id=${bizData.biz_id }'"></div>
-                                                        <div class="col textcenter"></div>
-                                                       </div>
-        
-                                                    </div>
-                                                </div>
+                                
                                             </div>
                                             <div class="col-1"></div>
                                         </div>
+                                        <div class="row">
+                                        	
+                                            <div class="col">
+                                                <div class="row" style="padding:0px; text-align:left">
+                                                <div class="col-5"></div>
+                                                 <div class="col"></div>
+                                                </div>
+                                            </div>
+                                         </div>
                                    
                                 </div>
                             </div>

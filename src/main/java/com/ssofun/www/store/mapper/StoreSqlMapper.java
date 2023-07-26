@@ -71,12 +71,21 @@ public interface StoreSqlMapper {
 	// 리뷰관리
 	public ProductOrderItemDto selectReview(int id);
 	
+	// 상품별 리뷰개수 출력
+	public List<ProductDto> selectByRecount(ProductDto pDto);
+	
 	// 카테고리 출력
 	public List<ProductCategoryTypeDto> selectProductCT(ProductCategoryTypeDto pctDto);
 	
 	// 주소 출력
 	public ProductRecipient selectRecipient(ProductRecipient reciDto);
-		
+	
+	// 좋아요 관련
+	public void insertLike(ProductFavoritDto pfDto);
+	public void deleteLike(ProductFavoritDto pfDto);
+	public int countMyLike(ProductFavoritDto pfDto);
+	public int countLikeByProductId(int ProductId);
+	
 	//테스트상품등록
 	public void insertByItem(ProductDto productDto);
 	

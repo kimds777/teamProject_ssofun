@@ -81,16 +81,16 @@
 
 
                 <div class="col">
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
                                    
-                                        <div class="col-3">
-                                            <a class="navbar-brand text-black">${bizDto.biz_name}판매자관리</a>
+                                        <div class="col-2">
+                                            <a class="navbar-brand text-black">판매자목록</a>
                                         </div>
                                         <div class="col">
-                                            <input type="button" style="border-radius: 5px;" class="writefaqbutton" value="판매자등록"  onclick="location.href='venderRegistrationPage?biz_id=${bizDto.biz_id }'">
+                                            <p class="five-font mt-2">소속회사에 등록된 판매자전체목록입니다.</p>
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -105,68 +105,63 @@
                         </div>
                     </div>
 
+       
+
                     <!--안에 페이지 내용만 바꾸기-->
-                    <div class="row" style="margin-left: 10px; height:1000px">
+                    <div class="row" style="margin-left: 12px; height:1000px">
                     
-                        <div class="col">
+                        <div class="col" style="padding-left: 0px; padding-right: 12px;">
 
-                           	<div class="row">
-                                <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">판매자목록</p></div>
-                                <div class="col c-five-font"><p class="five-font mt-2">소속회사에 등록된 판매자전체목록입니다.(등록일순)</p></div>
-                                <div class="col-2"></div>
-                                <div class="col-2">
-                            		
-                            	</div>
+                           	<div class="row" style="padding-left: 0px;">
+                                <div class="col-3" style="padding-left: 0px;"><p class="three-font mt-1" style="margin-left: 5px;">${bizDto.biz_name}판매자목록</p></div>
+                                
+                                <div class="col-7"></div>
+                                <div class="col-2" style="text-align:right;">
+                            		<button class="btn btn-outline-secondary" style="height:29.98px; padding:6px; font-family: 'Noto Sans KR', sans-serif;font-weight: 400; font-size: 12px;" type="submit">삭제</button>
+                                    <input type="button" style="border-radius: 5px;" class="writefaqbutton" value="판매자등록"  onclick="location.href='venderRegistrationPage?biz_id=${bizDto.biz_id }'">
+                                </div>
+                                
                             </div>
                             
-                            <div class="row">
-                                <div class="col hr-col"><hr class="hr-1"></div>
-                            </div>
-                            
-                            
-                            <!-- faq글목록작성하기 -->
-                            <div class="row"> 
-                                <div class="col-1"><p class="center1" style="text-align: center;">판매자번호</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">회사번호</p></div>
-                                <div class="col-2"><p class="center1" style="text-align: center;">소속회사명</p></div>
-                                <div class="col"><p class="five-font" style="text-align: center;">계정명</p></div>
-                                <div class="col"><p class="five-font" style="text-align: center;">닉네임</p></div>
-                                <div class="col-2"><p class="center1" style="text-align: center;">등록일</p></div>
-                                <div class="col-1"><p class="center1" style="text-align: center;">계정상태</p></div>                             
-                            </div>
-                            
-                            <!-- 반복문돌리기 -->
-                            <c:forEach items="${adminDtoList}" var="adminDataList">
-	                            <div class="row">
-	                                <div class="col-1"><p class="center1" style="text-align: center;">${adminDataList.adminDto.admin_id }</p></div>
-	                                <div class="col-1"><p class="center1" style="text-align: center;">${adminDataList.bizDto.biz_id }</p></div>
-	                                <div class="col-2"><p class="center1" style="text-align: center;">${adminDataList.bizDto.biz_name}</p></div>
-	                                <div class="col"><p class="companyfontTitle" style="text-align: center;"><a class="readQnalink" href="./readVenderPage?admin_id=${adminDataList.adminDto.admin_id}">${adminDataList.adminDto.login_account}</a></p></div>
-	                                <div class="col"><p class="companyfontTitle" style="text-align: center;">${adminDataList.adminDto.admin_nickname}</p></div>
-	                                <div class="col-2"><p class="center1" style="text-align: center;"><fmt:formatDate pattern="yy. MM. dd. (E)" value="${adminDataList.adminDto.created_at }"/></p></div>
-	                                
-	                                <c:if test="${adminDataList.adminDto.used_fg ==1 }">
-	                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:green "></i></p></div>                             
-	                            	</c:if>
-	                            	<c:if test="${adminDataList.adminDto.used_fg == 0 }">
-	                                	<div class="col-1"><p class="center1" style="text-align: center;"><i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i></p></div>   <!-- 다른아이콘 <i class="bi bi-dash-circle"></i>-->                          
-	                            	</c:if>
-	                            </div>
-                            </c:forEach>
-                            
-               <!-- 		<c:forEach items="${list }" var="map">
-                            
-	                            <div class="row">
-	                                <div class="col-1"><p class="center1">${map.faqDto.faq_id }</p></div>
-	                                <div class="col"><p class="five-font"><a class="readFaqlink" href="./systemAdminReadFaqPage?faqId=${map.faqDto.faq_id }">${map.faqDto.title }</a></p></div>
-	                                <div class="col-2"><p class="center1">${map.adminDto.login_account}</p></div>
-	                                <div class="col-2"><p class="center1">${map.faqDto.faq_category}</p></div>
-	                                <div class="col-2"><p class="center1"><fmt:formatDate pattern="yy. MM. dd. (E) HH:mm:ss" value="${map.faqDto.created_at }"/></p></div>
-	                            </div>
-            
-                            </c:forEach> -->             
-
-                        
+                          <div class="row mt-3">
+                            <table class="table table-bordered table-sm" style="padding: 12px;">
+                                <thead>
+                                  <tr  style="background-color: #f8f9fa;">
+                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><input type="checkbox"  name="admin_id" value="${allAdminList.adminDto.admin_id }"></p></th>
+                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">판매자번호</p></th>
+                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">회사번호</p></th>
+                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">소속회사명</p></th>
+                                    <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">계정명</p></th>
+                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">등록일</p></th>
+                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">계정상태</p></th>
+                                    
+                                    
+                                  </tr>
+                                </thead>
+                                <c:forEach items="${adminDtoList}" var="adminDataList">
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;"><input type="checkbox"  name="admin_id" value="${allAdminList.adminDto.admin_id }"></p></th>
+                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${adminDataList.adminDto.admin_id }</p></th>
+                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${adminDataList.bizDto.biz_id }</p></th>
+                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${adminDataList.bizDto.biz_name}</p></th>
+                                        <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./readVenderPage?admin_id=${adminDataList.adminDto.admin_id}">${adminDataList.adminDto.login_account}</a></p></td>
+                                        <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;"><fmt:formatDate pattern="yy. MM. dd. (E)" value="${adminDataList.adminDto.created_at }"/></p></td>
+                                        
+                                        <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">
+                                            <c:if test="${adminDataList.adminDto.used_fg ==1 }">
+                                                <i class="bi bi-check-circle-fill" style="color:green "></i>
+                                            </c:if>
+                                            <c:if test="${adminDataList.adminDto.used_fg == 0 }">
+                                                <i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i>
+                                            </c:if>
+                                        </p></td>
+                                      </tr>
+                                    </tbody>
+                                  </c:forEach>
+                              </table> 
+                          </div>
+                          
                         </div>
                     </div>
                     <div class="row mb-5">
@@ -205,12 +200,10 @@
 							<div class="col"></div>
 			            </div>
                     
-                    
-                    
                 </div>
             </div>
 
-            <d iv class="row mt-5">
+            <div class="row mt-5">
                 <div class="col"> </div>
             </div>
         </div>

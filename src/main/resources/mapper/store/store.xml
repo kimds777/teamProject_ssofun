@@ -129,6 +129,14 @@
 		DELETE FROM tb_cart WHERE user_id = #{user_id} and product_id = #{product_id}
 	</delete>
 	
+	<!-- 상품 리뷰 개수 출력 -->
+	<select id="selectByRecount" resultType="com.ssofun.dto.ProductDto">
+		select  tp.product_id, count(*) as count from tb_product tp
+		inner join tb_product_order_item tpoi on tp.product_id = tpoi.product_id
+		inner join tb_product_review tpv on tpoi.product_order_item_id = tpv.product_order_item_id
+		where tpoi.used_fg=1
+		group by tp.product_id DESC    
+	</select>
 	
 	<!-- 상품목록 출력 -->
 	<select id="selectProductList" resultType="com.ssofun.dto.ProductDto">
@@ -264,7 +272,33 @@
 	<select id="selectRecipient" resultType="com.ssofun.dto.ProductRecipient">
 		select * from tb_delivery_recipient order by delivery_recipient_id DESC LIMIT 1
 	</select>
-		
+	
+	<!-- 상품 좋아요 클릭 -->
+	<insert id="insertLike">
+		insert into tb_product_favorit(product_id,user_id)values(
+			#{product_id},
+			#{user_id}
+			)
+	</insert>
+	<!-- 상품 좋아요 취소 -->
+	<delete id="deleteLike">
+		DELETE FROM tb_product_favorit
+		WHERE product_id = #{product_id}
+		AND user_id = #{user_id}
+	</delete>
+	
+	<!-- 고객마다 상품 좋아요 개수 -->
+	<select id="countMyLike" resultType="int">
+		SELECT COUNT(*) FROM tb_product_favorit
+		WHERE product_id = #{product_id}
+		AND user_id = #{user_id}
+	</select>
+	
+	<!-- 상품마다 좋아요 개수 -->
+	<select id="countLikeByProductId" resultType="int">
+		SELECT COUNT(*) FROM tb_product_favorit
+		WHERE product_id = #{product_id}
+	</select>	
 	
 	<!-- 아래는 테스트 코드 -->
 	

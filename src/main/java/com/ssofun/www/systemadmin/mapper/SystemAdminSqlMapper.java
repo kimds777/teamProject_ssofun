@@ -105,6 +105,18 @@ public interface SystemAdminSqlMapper {
 	
 	
 	
+	//입접업체에 해당항는 판매자 수 가져오기
+	public int countAdminByBizId(int biz_id);
+
+	
+	
+	//입점회사정보수정
+	public void updateCompanyData(BizDto bizDto);
+	
+	
+	
+	
+	
 	
 //vender관련
 	
@@ -115,12 +127,49 @@ public interface SystemAdminSqlMapper {
 	//판매자등록
 	public void createVenderAccount(AdminDto adminDto);
 	
+	
 	//전체판매자리스트
 	public List<AdminDto> selectAdminDtoList();
 	
-	
-	//입접업체에 해당항는 판매자 수 가져오기
-	public int countAdminByBizId(int biz_id);
 
+	
+	//admin_id로 adminDto가져오기
+	public AdminDto getAdminDataByAdminId(int admin_id);
+	
+	
+	
+	//판매자계정활성화
+	public void adminAccountActivation(int admin_id);
+
+	
+	//판매자계정비활성화
+	public void adminAccountDeactivation(int admin_id);
+	
+	
+	
+	
+//사이트관리관련
+	
+	//미승인된 펀딩가져옴
+	public List<FundingDto> getUnauthorizedFunding();
+
+	//펀딩승인함
+	public void fundingApproval(int funding_id);
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -23,14 +23,14 @@
 	</select>
 	
 	<select id="selectQnaImageByQnaId" resultType="com.ssofun.dto.Qna_ImageDto">
-		select * from tb_qna_image where qna_id = #{qna_id} and biz_id is null 
+		select * from tb_qna_image where qna_id = #{qna_id}  
 	</select>
 	
 	
 	
 <!--user_id로 유저정보가져오기 -->
 	<select id="selectUserDtoByUserId" resultType="com.ssofun.dto.UserDto">
-	 select * from tb_User where user_id = #{user_id} and biz_id is null 
+	 select * from tb_User where user_id = #{user_id}  
 	</select>
 	
 
@@ -41,7 +41,7 @@
 	</update>
 	
 	<select id="selectById" resultType="com.ssofun.dto.QnaDto">
-		SELECT * FROM tb_qna where id = #{id} and biz_id is null 
+		SELECT * FROM tb_qna where id = #{id}  
 	</select>
 
 
@@ -57,29 +57,29 @@
 	
 	<!-- faq글목록가져오기 -->
 	<select id="selectAllFaq" resultType="com.ssofun.dto.FaqDto">
-		SELECT * FROM tb_faq ORDER BY faq_id DESC;		
+		SELECT * FROM tb_faq ORDER BY faq_id DESC		
 	</select>
 	
 	
 	<!-- adminid에 해당되는 admin정보 가져옴 -->
 	<select id="selectAdminDtoByAdminId" resultType="com.ssofun.dto.AdminDto">
-		SELECT * FROM tb_admin where admin_id = #{adminId};
+		SELECT * FROM tb_admin where admin_id = #{adminId}
 	</select>
 	
 	
 	<!-- faqId로 해당되는 faq글 가져옴 -->
 	<select id="selectFaqDtoByfaqId" resultType="com.ssofun.dto.FaqDto">
-		SELECT * FROM tb_faq WHERE faq_id = #{faqId};
+		SELECT * FROM tb_faq WHERE faq_id = #{faqId}
 	</select>
 	
 	<!-- faqid로 글수정 -->
 	<update id="updateFaqDataByFaqId">
-		UPDATE tb_faq SET faq_category = #{faq_category},title = #{title}, contents = #{contents} WHERE faq_id = #{faq_id};	
+		UPDATE tb_faq SET faq_category = #{faq_category},title = #{title}, contents = #{contents} WHERE faq_id = #{faq_id}	
 	</update>
 
 	<!-- faqid로 글삭제 -->
 	<delete id="deleteFaqDataByFaqId">
-		DELETE FROM tb_faq WHERE faq_id = #{faqId};
+		DELETE FROM tb_faq WHERE faq_id = #{faqId}
 	</delete>
 
 
@@ -154,6 +154,23 @@
 	</select>
 	
 	
+	<!-- 입점업체에 해당하는 판매자수 -->
+	<select id="countAdminByBizId" resultType="int">
+		SELECT COUNT(*) as admin_count FROM tb_admin WHERE biz_id = #{biz_id}
+	</select>
+	
+	
+	
+	<!-- 입점사정보수정 -->
+	<update id="updateCompanyData">
+		UPDATE tb_biz SET biz_name = #{biz_name}, biz_no = #{biz_no}, biz_phone=#{biz_phone}, biz_ceo=#{biz_ceo} WHERE biz_id = #{biz_id}
+	</update>
+	
+	
+	
+	
+	
+	
 	
 <!-- 판매자관리 -->
 
@@ -177,16 +194,45 @@
 	</select>
 	
 	
-	<!-- 입점업체에 해당하는 판매자수 -->
-	<select id="countAdminByBizId" resultType="int">
-		SELECT COUNT(*) as admin_count FROM tb_admin WHERE biz_id = #{biz_id}
+	
+	<!-- admin_id로 admin정보 가져오기 -->
+	<select id="getAdminDataByAdminId" resultType="com.ssofun.dto.AdminDto">
+		SELECT * fROM tb_admin where admin_id = #{admin_id}
 	</select>
 	
+	<!--계정활성화-->
+	<update id="adminAccountActivation">
+		UPDATE tb_admin SET used_fg = 1 WHERE admin_id = #{admin_id}
+	</update>
+
+	<!--계정비활성화-->	
+	<update id="adminAccountDeactivation">
+		UPDATE tb_admin SET used_fg = 0 WHERE admin_id = #{admin_id}
+	</update>
 	
 	<!-- 입점회사전체목록 -->
 	<!-- <select id="selectAllBizName" resultType="com.ssofun.dto.BizDto">
 		SELECT biz_name FROM tb_biz;
 	</select> -->
+	
+	
+	
+	
+	
+<!-- 사이트관리 -->	
+	
+	<!-- 미승인된 펀딩정보가져옴 -->
+	<select id="getUnauthorizedFunding" resultType="com.ssofun.dto.FundingDto">
+		SELECT * FROM tb_funding WHERE confirm_fg = 0
+	</select>
+	
+	
+	<!-- 펀딩승인함 -->
+	<update id="fundingApproval">
+		UPDATE tb_funding SET confirm_fg = 1 WHERE funding_id = #{funding_id}
+	</update>
+	
+	
 		
 
 </mapper>

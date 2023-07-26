@@ -16,6 +16,127 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<script >
+const ProductId = new URLSearchParams(location.search).get("id");
+//좋아요 관련
+function ajaxTemplete(){
+		
+		const xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4 && xhr.status == 200){
+				const response = JSON.parse(xhr.responseText);
+				// js 작업..
+			}
+		}
+		
+		//get
+		xhr.open("get", "요청 url?파라메터=값");
+		xhr.send();
+		
+		//post
+		xhr.open("post", "요청 url");
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded"); 
+		xhr.send("파라메터=값");
+	}
+
+let mySessionId = null;
+
+  function getSessionId() {
+	    const xhr = new XMLHttpRequest();
+	    
+	    xhr.onreadystatechange = function() {
+	      if (xhr.readyState == 4 && xhr.status == 200) {
+	        const response = JSON.parse(xhr.responseText);
+	        // 응답으로부터 받은 세션 ID를 설정합니다.
+	        if (response.result == "success") {
+	          mySessionId = response.id;
+	        }
+	      }
+	    }
+
+	    // 서버에 세션 ID를 요청하는 Ajax 요청을 보냅니다.
+	    xhr.open("GET", "/store/getCustomerId", false); // 동기식 호출을 위해 false 설정
+	    xhr.send();
+	  }
+function refreshTotalLikeCount(){
+	const xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			const response = JSON.parse(xhr.responseText);
+			// js 작업..
+			const totalLikeCountBox = document.getElementById("totalLikeCount");
+			totalLikeCountBox.innerText = response.count;
+		}
+	}
+	
+	//get
+	xhr.open("get", "./getTotalLikeCount?ProductId=" + ProductId);
+	xhr.send();		
+}
+
+function toggleLike(){
+	if(mySessionId == null){
+		if(confirm("로그인을 하셔야 이용하실 수 있습니다. 로그인 하시겠습니까?")){
+			location.href = "./loginPage";
+		}
+		return;
+	}
+	
+	const xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			const response = JSON.parse(xhr.responseText);
+			// js 작업..
+			refreshTotalLikeCount();
+			refreshMyHeart();
+		}
+	}
+	
+	//get
+	xhr.open("get", "./toggleLike?product_id=" + ProductId);
+	xhr.send();
+	
+}
+
+function refreshMyHeart(){
+	
+	if(mySessionId == null) return;
+	
+	
+	const xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			const response = JSON.parse(xhr.responseText);
+			// js 렌더링... 작업..
+			const heartBox = document.getElementById("heartBox");
+			
+			if(response.isLiked){
+				heartBox.classList.remove("bi-heart");
+				heartBox.classList.add("bi-heart-fill");
+			}else{
+				heartBox.classList.remove("bi-heart-fill");
+				heartBox.classList.add("bi-heart");
+			}
+		}
+	}
+	
+	//get
+	xhr.open("get", "./isLiked?product_id=" + ProductId);
+	xhr.send();
+	
+}
+window.onload = function() {
+    getSessionId();
+    // 좋아요와 관련된 작업을 수행합니다.
+    refreshTotalLikeCount();
+    refreshMyHeart();
+  };
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -65,6 +186,9 @@
 							<div class="col-won1">
 								<fmt:formatNumber value="${detail[0].price_sale}"
 									pattern="#,###원" />
+							</div>
+							<div class=""col>
+								<i id="heartBox" onclick="toggleLike()" class="fs-1 text-danger bi bi-heart"></i><span id="totalLikeCount">3</span>
 							</div>
 						</div>
 
@@ -307,6 +431,7 @@
 		  	});
 		}
 
+		
 </script>
 
 	<script

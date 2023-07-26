@@ -292,7 +292,7 @@ public class SystemAdminController {
 		return"systemadmin/companyManagement/companyRegistrationPage";
 	}
 	
-	//입점사 등록프로세서
+	//입점사 등록프로세스
 	@RequestMapping("writeCompanyAccountProcess")
 	public String writeCompanyAccount(@RequestParam("biz_name")String biz_name,
 									@RequestParam("biz_ceo")String biz_ceo,
@@ -328,9 +328,13 @@ public class SystemAdminController {
 	public String readCompanyPage(Model model, int biz_id) {
 		
 		BizDto bizData = systemAdminService.getBizData(biz_id); 
+		int adminCount = systemAdminService.getAdminCount(biz_id);
+		
+		
+		model.addAttribute("adminCount",adminCount);
 		model.addAttribute("bizData",bizData);
 		System.out.println(bizData.getBiz_id());
-		
+		System.out.println(adminCount);
 		return "systemadmin/companyManagement/readCompanyPage";
 		
 	}
@@ -339,11 +343,76 @@ public class SystemAdminController {
 	
 	//입점사 수정페이지
 	@RequestMapping("companyManagement/updateCompanyPage")
-	public String updateCompanyPage() {
+	public String updateCompanyPage(Model model,int biz_id) {
 		
+		BizDto bizDto = systemAdminService.getBizData(biz_id);
 		
+		String biz_no=systemAdminService.getBizData(biz_id).getBiz_no();
+		
+		String[] parts = biz_no.split("-");
+		
+		  String bizNoPart1 = parts[0];
+		  String bizNoPart2 = parts[1];
+		  String bizNoPart3 = parts[2];
+		
+		String biz_phone=systemAdminService.getBizData(biz_id).getBiz_phone();
+		
+		String[] phoneParts = biz_phone.split("-");
+			
+			String bizPhone1 =phoneParts[0];
+			String bizPhone2 =phoneParts[1];
+			String bizPhone3 =phoneParts[2];
+		  
+		  
+		  
+		  
+
+	    model.addAttribute("bizNoPart1", bizNoPart1);
+	    model.addAttribute("bizNoPart2", bizNoPart2);
+	    model.addAttribute("bizNoPart3", bizNoPart3);
+	    
+	    model.addAttribute("bizPhone1",bizPhone1);
+	    model.addAttribute("bizPhone2",bizPhone2);
+	    model.addAttribute("bizPhone3",bizPhone3);
+	    
+
+		model.addAttribute("bizDto",bizDto);
 		
 		return "systemadmin/companyManagement/updateCompanyPage";
+		
+	}
+	
+	@RequestMapping("companyUpdateProcess")
+	public String companyUpdateProcess(@RequestParam("biz_id")int biz_id,
+											@RequestParam("biz_name")String biz_name,
+											@RequestParam("biz_ceo")String biz_ceo,
+											@RequestParam("biz_no_1")String biz_no_1,
+											@RequestParam("biz_no_2")String biz_no_2,
+											@RequestParam("biz_no_3")String biz_no_3,
+											@RequestParam("biz_phone_1")String biz_phone_1,
+											@RequestParam("biz_phone_2")String biz_phone_2,
+											@RequestParam("biz_phone_3")String biz_phone_3) {
+		
+		
+		String combinedBizNo = biz_no_1+"-"+biz_no_2+"-"+biz_no_3;
+		String combinedBizPhone = biz_phone_1+"-"+biz_phone_2+"-"+biz_phone_3;
+
+		BizDto bizDto = new BizDto();
+		
+		bizDto.setBiz_id(biz_id);
+		bizDto.setBiz_name(biz_name);
+		bizDto.setBiz_ceo(biz_ceo);
+		bizDto.setBiz_no(combinedBizNo);
+		bizDto.setBiz_phone(combinedBizPhone);
+		
+		System.out.println(biz_name);
+		
+		systemAdminService.updateCompanyData(bizDto);
+		
+		
+		
+		
+		return "redirect:./companyManagement/companyManagementMainPage";
 	}
 	
 	
@@ -351,7 +420,7 @@ public class SystemAdminController {
 	
 	
 	
-	//판매자메인페이지(리스트)
+	//판매자메인페이지(전체리스트)
 	@RequestMapping("companyManagement/venderManagementMainPage")
 	public String venderManagementMainPage(Model model) {
 		
@@ -379,12 +448,6 @@ public class SystemAdminController {
 			
 		List<BizDto> bizList = systemAdminService.getBizDtoList();
 		
-	
-		
-		
-		
-		
-		
 		
 		model.addAttribute("bizList",bizList);
 		model.addAttribute("bizDto",bizDto);
@@ -394,7 +457,7 @@ public class SystemAdminController {
 	}
 	
 	
-	//판매자등록프로세서
+	//판매자등록프로세스
 	@RequestMapping("venderRegistrationProcess")
 	public String venderRegistrationProcess(
 													@RequestParam("biz_id")int biz_id,
@@ -473,4 +536,60 @@ public class SystemAdminController {
 		model.addAttribute("adminDtoByAdminId",adminDtoByAdminId);
 		return"systemadmin/companyManagement/readVenderPage";
 	}
+	
+	
+	//판매자계정설정
+	@RequestMapping("venderAccountSetProcess")
+	public String venderAccountSetProcess(int admin_id) {
+		System.out.println("adminid"+admin_id);
+		int bizId = systemAdminService.getAdminDataByAdminId(admin_id).getBiz_id();
+		int uesdFg = systemAdminService.getAdminDataByAdminId(admin_id).getUsed_fg();
+		System.out.println("계정admin"+admin_id);
+		
+		if(uesdFg == 1) {
+			systemAdminService.adminAccountDeactivation(admin_id);
+		}else {
+			systemAdminService.adminAccountActivation(admin_id);
+		}
+	
+//		"redirect:./companyManagement/venderListOfCompanyNumberPage?biz_id="+adminDto.getBiz_id();
+		return"redirect:./companyManagement/readVenderPage?admin_id="+admin_id;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//사이트관리
+	
+	
+	//펀딩관리사이트
+	@RequestMapping("siteManagement/fundingManagementPage")
+	public String fundingManagementPage(Model model) {
+		
+		List<Map<String, Object>> unauthorizedFundingList = systemAdminService.getUnauthorizedFunding();
+				
+		model.addAttribute("fundingList",unauthorizedFundingList);
+		
+		
+		return "systemadmin/siteManagement/fundingManagementPage";
+	}
+	
+	
+	
+	//펀딩승인프로세스
+	@RequestMapping("fundingApprovalProcess")
+	public String fundingApprovalProcess(int funding_id) {
+		
+		System.out.println("펀딩프로세스"+funding_id);
+		
+		systemAdminService.fundingApproval(funding_id);
+		
+		return "redirect:./siteManagement/fundingManagementPage";
+	}
+	
 }
