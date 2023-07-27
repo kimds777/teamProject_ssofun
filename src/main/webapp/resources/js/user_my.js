@@ -32,13 +32,11 @@ function setEventListener(){
 
     $(document).on("click","#first>li#logoutUser",function(e){
         e.stopPropagation();
-        alert("클릭");
         logout();
     });
 
     $(document).on("click","#header>div>div>a#logout",function(e){
         e.stopPropagation();
-        alert("클릭");
         logout();
     });
 
