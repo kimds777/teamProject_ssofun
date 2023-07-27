@@ -9,17 +9,19 @@ $(document).ready(function(){
 
 function setEventListener($funding_id,user_id){
 
-        $(document).on("click","#reviewSubmit",function(){ 
-        event.stopPropagation();   
 
-        var $contents = $("#reviewInput").val();
 
-        if($contents == ""){
-            alert("댓글 내용을 입력해주세요");
-            $("#commentInput").focus();
-            return ;
-        }
-        insertReview($funding_id,user_id,$contents);
+    $(document).on("click","#reviewSubmit",function(e){ 
+    e.stopPropagation();   
+
+    var $contents = $("#reviewInput").val();
+
+    if($contents == ""){
+        alert("댓글 내용을 입력해주세요");
+        $("#commentInput").focus();
+        return ;
+    }
+    insertReview($funding_id,user_id,$contents);
     });
     
 

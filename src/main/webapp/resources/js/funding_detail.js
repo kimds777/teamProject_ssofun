@@ -3,16 +3,15 @@ $(document).ready(function(){
 
     var urlParams = new URLSearchParams(window.location.search);
     var $funding_id = urlParams.get("funding_id");
-    var user_id = getUserSession(); 
 
     getFundingDto($funding_id);
-    setEventListener($funding_id,user_id);
+    setEventListener($funding_id);
     getSameCategoryFunding($funding_id);
     getOrderUserPickFunding($funding_id);
 
 });
 
-function setEventListener($funding_id,user_id){
+function setEventListener($funding_id){
 
     $(document).on("click","#tab>ul>li#reward",function(e){
         e.stopPropagation();
@@ -21,12 +20,25 @@ function setEventListener($funding_id,user_id){
 
     $(document).on("click","#likeBtn",function(e){
         e.stopPropagation();
-        insertFavorit($funding_id,user_id);
+        var user_id = getUserSession();
+        if(user_id != 0){
+            insertFavorit($funding_id,user_id);
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
     });
 
     $(document).on("click","#supportBtn",function(e){
         e.stopPropagation();
-        location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+        var user_id = getUserSession();
+
+        if(user_id != 0){
+            location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
     });
 
 
@@ -101,8 +113,7 @@ function getUserSession(){
     if(user_id != 0){
         return user_id;
     }else{
-        alert("세션이 만료되어 로그아웃되었습니다.");
-        // window.location.href = "../user/userLoginPage";
+       return 0;
     }
 }
 

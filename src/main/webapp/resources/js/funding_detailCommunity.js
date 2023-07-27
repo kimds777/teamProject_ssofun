@@ -1,7 +1,6 @@
 $(document).ready(function(){
     var $funding_id = $("#funding_id").val();
     var $funding_review_id = $("#funding_review_id").val();
-    var user_id = 1; //수정해야함!
 
     getFundingDto($funding_id);
     getFundingCommunity($funding_review_id,$funding_review_id);
@@ -14,20 +13,44 @@ $(document).ready(function(){
 function setEventListener($funding_id,user_id,$funding_review_id){
 
 
-    $("#tab>ul>li#reward").click(function(){
+    $("#tab>ul>li#reward").click(function(e){
+        e.stopPropagation();
         $("#tab>div#rewardModal").toggleClass("hide");
     });
 
-    $("#likeBtn").click(function(){
-        insertFavorit($funding_id,user_id);
+    $(document).on("click","#likeBtn",function(e){
+        e.stopPropagation();
+        var user_id = getUserSession();
+        if(user_id != 0){
+            insertFavorit($funding_id,user_id);
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
     });
 
-    $("#supportBtn").click(function(){
-        location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+    $(document).on("click","#supportBtn",function(e){
+        e.stopPropagation();
+        var user_id = getUserSession();
+
+        if(user_id != 0){
+            location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
     });
 
-    $(document).on("click","input#commentSubmit",function(){ 
-        event.stopPropagation();       
+    $(document).on("click","#goToLoginBtn",function(e){
+        window.location.href = "../user/userLoginPage";
+    });
+    
+    $(document).on("click",".goToLogin",function(e){
+        window.location.href = "../user/userLoginPage";
+    });
+    
+    $(document).on("click","input#commentSubmit",function(e){ 
+        e.stopPropagation();       
         var $contents = $("#commentInput").val();
 
         if($contents == ""){
@@ -41,6 +64,7 @@ function setEventListener($funding_id,user_id,$funding_review_id){
 
     $(document).on("click","input.commentReplySubmit",function(e){ 
         e.stopPropagation();       
+
         var $contents = $(this).prev().val();
         var $this_answer_id = $(this).next().val();
         alert($contents+" "+$this_answer_id);
@@ -54,7 +78,8 @@ function setEventListener($funding_id,user_id,$funding_review_id){
         insertCommunityCommentReply($funding_id,$this_answer_id,user_id,$contents,$funding_review_id);
     });
 
-    $(document).on("click",".commentReplyShowBtn",function(){
+    $(document).on("click",".commentReplyShowBtn",function(e){
+        e.stopPropagation();
         $(this).addClass("hide");
         var $hideBtn = $(this).next();
         var $replyList = $hideBtn.next();
@@ -62,7 +87,8 @@ function setEventListener($funding_id,user_id,$funding_review_id){
         $replyList.removeClass("hide");
     });
 
-    $(document).on("click",".commentReplyHideBtn",function(){
+    $(document).on("click",".commentReplyHideBtn",function(e){
+        e.stopPropagation();
         $(this).addClass("hide");
         var $showBtn = $(this).prev();
         var $replyList = $(this).next();
@@ -72,7 +98,8 @@ function setEventListener($funding_id,user_id,$funding_review_id){
 
 
     var n=0;
-    $('ul#moveLeft').click(function(){
+    $('ul#moveLeft').click(function(e){
+        e.stopPropagation();
         n--;
         getDetailThumbnailCount(function(res){
             var $thumbLength = res-1;
@@ -91,7 +118,8 @@ function setEventListener($funding_id,user_id,$funding_review_id){
 
     });
 
-    $('ul#moveRight').click(function(){
+    $('ul#moveRight').click(function(e){
+        e.stopPropagation();
         n++;
         getDetailThumbnailCount(function(res){
             var $thumbLength = res-1;
@@ -109,6 +137,49 @@ function setEventListener($funding_id,user_id,$funding_review_id){
 
     });
 
+    $(document).on("click","#header>div>div>a#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+
+}
+
+function logout(){
+    $.ajax({
+        url: "../user/AJAXlogout",
+        method: "GET",
+        success: function(res){
+            if(res == 1){
+                alert("로그아웃 성공!");
+                window.location.href = "http://localhost:8181/www/www/funding/fundingMainPage";
+            }else{
+                alert("이미 로그아웃 되어있습니다.");
+            }
+        }
+    });
+}
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        metho: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+       return 0;
+    }
 }
 
 function getDetailThumbnailCount(callback,$funding_id){
@@ -350,7 +421,12 @@ function getFundingCommunity($funding_review_id){
                     }
                     if(key == "totalComment"){
                         $div.append("<p class='totalComment'>"+value+"개의 댓글</p>");
-                        return $div.append("<div class='input'><input type='text' name='commentInput' id='commentInput' placeholder='댓글을 달아보세요!'><input type='button' value='작성하기' id='commentSubmit'></div>");
+                        var user_id = getUserSession();
+                        if(user_id != 0){
+                            $div.append("<div class='input'><input type='text' name='commentInput' id='commentInput' placeholder='댓글을 달아보세요!'><input type='button' value='작성하기' id='commentSubmit'></div>");
+                        }else{
+                            $div.append("<div class='input'><input type='text' value='로그인이 필요한 서비스입니다.' disabled ><input type='button' value='로그인' id='goToLoginBtn'></div>");
+                        }
                     }
 
                     if(key == "reviewList"){
@@ -424,7 +500,12 @@ function getFundingCommunity($funding_review_id){
                                     });                                    
                                     $comment.append($replyList);                              
 
-                                    $inputDiv.append("<input type='text' name='commentReply' class='commentReply' placeholder='댓글을 달아보세요!'><input type='button' value='작성하기' class='commentReplySubmit'>");
+                                    var user_id = getUserSession();
+                                    if(user_id != 0){
+                                        $inputDiv.append("<input type='text' name='commentReply' class='commentReply' placeholder='댓글을 달아보세요!'><input type='button' value='작성하기' class='commentReplySubmit'>");
+                                    }else{
+                                        $inputDiv.append("<input type='text' class='commentReply' value='로그인이 필요한 서비스입니다.'><input type='button' value='로그인하기' class='goToLogin'>");
+                                    }
                                     $inputDiv.append($this_answer_id);
                                     $replyList.append($inputDiv);
                                 }
