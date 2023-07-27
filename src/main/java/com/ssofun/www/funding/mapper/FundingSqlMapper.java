@@ -5,23 +5,23 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ssofun.www.funding.dto.DeliveryRecipientDto;
-import com.ssofun.www.funding.dto.FundingCategoryDto;
-import com.ssofun.www.funding.dto.FundingCommunityDto;
-import com.ssofun.www.funding.dto.FundingCommunityReviewAnswerDto;
-import com.ssofun.www.funding.dto.FundingCommunityReviewDto;
-import com.ssofun.www.funding.dto.FundingDto;
-import com.ssofun.www.funding.dto.FundingFavoritDto;
-import com.ssofun.www.funding.dto.FundingItemDto;
-import com.ssofun.www.funding.dto.FundingNewsDto;
-import com.ssofun.www.funding.dto.FundingNewsReviewAnswerDto;
-import com.ssofun.www.funding.dto.FundingNewsReviewDto;
-import com.ssofun.www.funding.dto.FundingOrderDto;
-import com.ssofun.www.funding.dto.FundingRewardDto;
-import com.ssofun.www.funding.dto.FundingRewardOrderDto;
-import com.ssofun.www.funding.dto.FundingTagDto;
-import com.ssofun.www.funding.dto.FundingThumbnailDto;
-import com.ssofun.www.funding.dto.PaymentDto;
+import com.ssofun.dto.DeliveryRecipientDto;
+import com.ssofun.dto.FundingCategoryDto;
+import com.ssofun.dto.FundingCommunityDto;
+import com.ssofun.dto.FundingCommunityReviewAnswerDto;
+import com.ssofun.dto.FundingCommunityReviewDto;
+import com.ssofun.dto.FundingDto;
+import com.ssofun.dto.FundingFavoritDto;
+import com.ssofun.dto.FundingItemDto;
+import com.ssofun.dto.FundingNewsDto;
+import com.ssofun.dto.FundingNewsReviewAnswerDto;
+import com.ssofun.dto.FundingNewsReviewDto;
+import com.ssofun.dto.FundingOrderDto;
+import com.ssofun.dto.FundingRewardDto;
+import com.ssofun.dto.FundingRewardOrderDto;
+import com.ssofun.dto.FundingTagDto;
+import com.ssofun.dto.FundingThumbnailDto;
+import com.ssofun.dto.PaymentDto;
 
 public interface FundingSqlMapper {
 

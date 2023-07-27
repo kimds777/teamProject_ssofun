@@ -16,12 +16,12 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.ssofun.www.funding.dto.FundingDto;
-import com.ssofun.www.funding.dto.FundingOrderDto;
-import com.ssofun.www.funding.dto.FundingRewardDto;
-import com.ssofun.www.funding.dto.FundingRewardOrderDto;
-import com.ssofun.www.funding.dto.FundingThumbnailDto;
-import com.ssofun.www.funding.dto.UserDto;
+import com.ssofun.dto.FundingDto;
+import com.ssofun.dto.FundingOrderDto;
+import com.ssofun.dto.FundingRewardDto;
+import com.ssofun.dto.FundingRewardOrderDto;
+import com.ssofun.dto.FundingThumbnailDto;
+import com.ssofun.dto.UserDto;
 import com.ssofun.www.user.mapper.UserSqlMapper;
 
 @Service

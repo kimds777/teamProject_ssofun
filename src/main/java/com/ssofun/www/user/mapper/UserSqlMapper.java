@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ssofun.www.funding.dto.FundingDto;
-import com.ssofun.www.funding.dto.FundingOrderDto;
-import com.ssofun.www.funding.dto.FundingRewardDto;
-import com.ssofun.www.funding.dto.FundingRewardOrderDto;
-import com.ssofun.www.funding.dto.FundingThumbnailDto;
-import com.ssofun.www.funding.dto.UserDto;
+import com.ssofun.dto.FundingDto;
+import com.ssofun.dto.FundingOrderDto;
+import com.ssofun.dto.FundingRewardDto;
+import com.ssofun.dto.FundingRewardOrderDto;
+import com.ssofun.dto.FundingThumbnailDto;
+import com.ssofun.dto.UserDto;
 
 public interface UserSqlMapper {
 
