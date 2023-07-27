@@ -60,7 +60,7 @@
 }
 
 .col_3{
-	width: 50px;
+	width: 55px;
 }
 
 .col_4{

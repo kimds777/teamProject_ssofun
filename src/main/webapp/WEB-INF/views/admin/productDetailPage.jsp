@@ -301,34 +301,6 @@
 									</thead>
 								</table>
 							</div>	
-<!-- HTML 테이블을 표시할 위치 -->
-<!-- <div id="product_detail_table" class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th class="text-black-50 detail_th" scope="row">관리자아이디</th>
-                <th scope="col"></th>
-            </tr>
-            <tr>
-                <th class="text-black-50 detail_th" scope="row">카테고리타입아이디</th>
-                <th scope="col"></th>
-            </tr>
-            <tr>
-                <th class="text-black-50 detail_th" scope="row">상품아이디</th>
-                <th scope="col"></th>
-            </tr>
-            <tr>
-                <th class="text-black-50 detail_th" scope="row">회사명</th>
-                <th scope="col"></th>
-            </tr>
-            <tr>
-                <th class="text-black-50 detail_th" scope="row">카테고리명</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-    </table>
-</div> -->
-				  		
 					  		</div>
 					  		<div class="col">
 								<div class="table-responsive">
@@ -430,9 +402,10 @@
                     </div>
                 </div>
             </div>
-            <!-- fotter end -->
-        </div>
-    </div><!-- ============ Search UI Start ============= -->
+         </div>
+      </div>
+   	</div>
+            <!-- fotter end --><!-- ============ Search UI Start ============= -->
     <div class="search-ui">
         <div class="search-header">
             <img src="../resources/dist-assets/images/logo.png" alt="" class="logo">
