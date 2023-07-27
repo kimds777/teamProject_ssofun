@@ -361,7 +361,7 @@
 						                <form action="answerContentsInsertProcess" method="POST">
 						                    <div class="input-group">
 						                    	<input type="hidden" value="${qnaContentDetail.qna_id}" name="qna_id">
-						                        <div class="input-group-prepend modal_text"><span class="input-group-text textarea_style">답변작성하기</span></div>
+						                        <div class="input-group-prepend modal_text"></div>
 						                        <textarea class="textarea_style" name="answer_contents" aria-label="With textarea"></textarea>
 						                    </div>
 						            </div>
