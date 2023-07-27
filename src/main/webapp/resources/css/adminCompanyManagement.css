@@ -16,6 +16,7 @@
 	.form-check-label{font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 15px; margin-bottom: 0; margin-top:0px; margin-bottom:0px;}
 	.explanationfont{font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 11px; margin-bottom: 0; margin-top:6px; margin-bottom:0px;color:#6F737E;}
 	.writefaqbutton{ -webkit-appearance: none;  -moz-appearance: none;  appearance: none; border: none; border-radius: 3px; padding: 6px 11px 6px 11px; font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 12px; color:white; background-color: #FF6462; }
+	.categoryaddbutton{ -webkit-appearance: none;  -moz-appearance: none;  appearance: none; border: none; border-radius: 3px; padding: 6px 11px 6px 11px; font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 12px; color:white; background-color: #FF6462;}
 	.page-link{color: #000000;text-decoration: none;}
 	
 	

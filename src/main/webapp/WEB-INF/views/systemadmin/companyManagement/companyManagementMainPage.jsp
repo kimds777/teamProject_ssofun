@@ -26,20 +26,14 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col"><!--상단 네비-->
-                <jsp:include page="../../include/systemAdminNavi.jsp"></jsp:include>
-            </div>
-        </div>
-
-
 
 
 
         <!--고객센터 기본 틀 -->
-        <div class="container mt-4 container2">
-
+        <div class="container container2" style="margin-top: 0px;">
+			<div class="row">
+				<jsp:include page="../../include/systemAdminNavi.jsp"></jsp:include>
+			</div>
             <div class="row">
                 <div class="col-2">
                     <div class="row leftside1">

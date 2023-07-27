@@ -428,6 +428,7 @@ public class SystemAdminServiceImpl {
 	//펀딩카테고리추가
 	public void fundingCategoryAdd(FundingCategoryDto fundingCategoryDto) {
 		systemAdminSqlMapper.fundingCategoryAdd(fundingCategoryDto);
+		
 	}
 	
 	//펀딩카테고리 목록가져옴
