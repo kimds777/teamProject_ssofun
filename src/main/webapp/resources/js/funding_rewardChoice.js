@@ -1,16 +1,17 @@
 $(document).ready(function(){
     var urlParams = new URLSearchParams(window.location.search);
     var $funding_id =  urlParams.get("funding_id");
-    var user_id = 1;
-
-    getFundingDto($funding_id);
-    setEventListener($funding_id,user_id);
+    var funding_reward_id =  urlParams.get("funding_reward_id");
+    
+    getFundingDto($funding_id,funding_reward_id);
+    setEventListener($funding_id);
 });
 
-function setEventListener($funding_id,user_id){
+function setEventListener($funding_id){
+    var user_id = getUserSession();
 
-    $(document).on("click","#rewardGroup>.reward>ul:first-of-type",function(){
-        event.stopPropagation(); 
+    $(document).on("click","#rewardGroup>.reward>ul:first-of-type",function(e){
+        e.stopPropagation(); 
         $(this).children("li").eq(1).toggleClass("activeColor");
         $(this).children("li:eq(1)").children("i").toggleClass("activeColor");
         $(this).parent("div").toggleClass("checked");
@@ -20,14 +21,14 @@ function setEventListener($funding_id,user_id){
         $(this).next().toggleClass("hide");
     });
     
-    $(document).on("focus","#rewardGroup>.reward>ul:last-of-type>li:first-child>input",function(){
-        event.stopPropagation(); 
+    $(document).on("focus","#rewardGroup>.reward>ul:last-of-type>li:first-child>input",function(e){
+        e.stopPropagation(); 
         $(this).addClass("activeInput");
         $(this).parent("li").next().addClass("activeColor");
     });
 
-    $(document).on("blur","#rewardGroup>.reward>ul:last-of-type>li:first-child>input",function(){
-        event.stopPropagation();         
+    $(document).on("blur","#rewardGroup>.reward>ul:last-of-type>li:first-child>input",function(e){
+        e.stopPropagation();         
         var $thisVal = $(this).val();
         var valParseInt = parseInt($thisVal);
         var buyCountVal = $(this).parent("li").next("li").next("li").text().replace(/[^0-9]/g,"");
@@ -50,8 +51,8 @@ function setEventListener($funding_id,user_id){
         }    
     });
 
-    $(document).on("click","#nextSubmit",function(){
-        event.stopPropagation(); 
+    $(document).on("click","#nextSubmit",function(e){
+        e.stopPropagation(); 
         if($("div.checked").length){
             var inputValue = $("div.checked>ul:last-of-type>li>input").val();
             
@@ -66,8 +67,8 @@ function setEventListener($funding_id,user_id){
         
     });
     
-    $(document).on("input","#price_support",function(){
-        event.stopPropagation(); 
+    $(document).on("input","#price_support",function(e){
+        e.stopPropagation(); 
         // 현재 입력된 값 가져오기
         var value = $(this).val();
         
@@ -85,21 +86,65 @@ function setEventListener($funding_id,user_id){
     });
 
 
-    $(document).on("click","#open>dd:nth-child(4)",function(){
-        event.stopPropagation(); 
+    $(document).on("click","#open>dd:nth-child(4)",function(e){
+        e.stopPropagation(); 
         $(this).toggleClass("checked");
         $(this).children("i").toggleClass("activeColor");
     });
     
     
-    $(document).on("click","#open>dd:last-child",function(){
-        event.stopPropagation(); 
+    $(document).on("click","#open>dd:last-child",function(e){
+        e.stopPropagation(); 
         $(this).toggleClass("checked");
         $(this).children("i").toggleClass("activeColor");
     });
 
+    $(document).on("click","#header>div>div>a#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+
 
     
+}
+
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        metho: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+       return 0;
+    }
+}
+
+function logout(){
+    $.ajax({
+        url: "../user/AJAXlogout",
+        method: "GET",
+        success: function(res){
+            if(res == 1){
+                alert("로그아웃 성공!");
+                window.location.href = "http://localhost:8181/www/www/funding/fundingMainPage";
+            }else{
+                alert("이미 로그아웃 되어있습니다.");
+            }
+        }
+    });
 }
 
 function insertFundingOrder(user_id){
@@ -185,7 +230,7 @@ function insertFundingOrder(user_id){
 
 
 
-function getFundingDto($funding_id){
+function getFundingDto($funding_id,$funding_reward_id){
     $.ajax({
         url: "./getFundingDtoAjax",
         method: "GET",
@@ -278,14 +323,22 @@ function getFundingDto($funding_id){
                                         $ul.prepend("<li>"+description+"</li>");
                                         $ul.prepend("<li>"+title+"</li>");
                                         $ul.prepend("<li>"+paymentCountCommas+"명이 선택</li>");
-                                        $ul.prepend("<li class='first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span>남은수량 999개</span></li>");
+                                        if($funding_reward_id != "" && $funding_reward_id == funding_reward_id){
+                                            $ul.prepend("<li class='first activeColor'><i class='bi bi-check-square activeColor'></i><b>"+price+"원</b><span>남은수량 "+value+"개</span></li>");
+                                        }else{
+                                            $ul.prepend("<li class='first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span>남은수량 "+value+"개</span></li>");
+                                        }
                                         $ul.prepend("<li><input type='hidden' class='rewardId' value='"+funding_reward_id+"'></li>");
                                     }else{
                                         if(res < value){
                                             $ul.prepend("<li>"+description+"</li>");
                                             $ul.prepend("<li>"+title+"</li>");
                                             $ul.prepend("<li>"+paymentCountCommas+"명이 선택</li>");
-                                            $ul.prepend("<li class='first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span>남은수량 "+(value - res)+"개</span></li>");
+                                            if($funding_reward_id != "" && $funding_reward_id == funding_reward_id){
+                                                $ul.prepend("<li class='first activeColor'><i class='bi bi-check-square activeColor'></i><b>"+price+"원</b><span>남은수량 "+(value - res)+"개</span></li>");
+                                            }else{
+                                                $ul.prepend("<li class='first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span>남은수량 "+(value - res)+"개</span></li>");
+                                            }
                                             $ul.prepend("<li><input type='hidden' class='rewardId' value='"+funding_reward_id+"'></li>");
                                         }else if(res >= value){
                                             $ul.prepend("<li class='soldOut'>"+description+"</li>");
@@ -307,9 +360,17 @@ function getFundingDto($funding_id){
                                     if(res < stock_max || stock_max == 0){                                    
                                         $ul.append("<li><span>발송예정일</span> "+value+" 예정</li>");
                                         if(buy_count == 0){
-                                            $ulInput.addClass("hide").append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li>갯수 제한 없음</li>");
+                                            if($funding_reward_id != "" && $funding_reward_id == funding_reward_id){
+                                                $ulInput.append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li>갯수 제한 없음</li>");
+                                            }else{
+                                                $ulInput.addClass("hide").append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li>갯수 제한 없음</li>");
+                                            }
                                         }else{
-                                            $ulInput.addClass("hide").append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li class='buy_count'>최대 "+buy_count+"개</li>");
+                                            if($funding_reward_id != "" && $funding_reward_id == funding_reward_id){
+                                                $ulInput.append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li class='buy_count'>최대 "+buy_count+"개</li>");
+                                            }else{
+                                                $ulInput.addClass("hide").append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li class='buy_count'>최대 "+buy_count+"개</li>");
+                                            }
                                         }
                                     }else if(res >= stock_max){
                                         $ul.append("<li class='soldOut'><span>발송예정일</span> "+value+" 예정</li>");
@@ -318,7 +379,11 @@ function getFundingDto($funding_id){
                             }
                             
                         });
-                        $rewardDiv.append($ul).append($ulInput).appendTo($rewardGroup);
+                        if($funding_reward_id != "" && $funding_reward_id == funding_reward_id){
+                            $rewardDiv.addClass("checked").append($ul).append($ulInput).appendTo($rewardGroup);
+                        }else{
+                            $rewardDiv.append($ul).append($ulInput).appendTo($rewardGroup);
+                        }
                     });
                 }
 

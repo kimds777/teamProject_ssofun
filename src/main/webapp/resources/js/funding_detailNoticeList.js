@@ -265,46 +265,53 @@ function getFundingDto($funding_id){
                     if(key == "rewardList"){
                         $.each(value,function(index,item){
                             var $stock;
-                            var $addCommaRward;
+                            var $addCommaReward;
                             var $dl = $("<dl></dl>");
-                            var $sellCount;
+                            var $funding_reward_id;
+                            var $dt = $("<dt></dt>");
                             $.each(item, function(key,value){
+
                                 if(key == "funding_reward_id"){
-                                    return $("<input type='hidden' id='funding_reward_id' value='"+value+"'>").appendTo($dl);
+                                     $("<input type='hidden' id='funding_reward_id' value='"+value+"'>").appendTo($dl);
+                                     $funding_reward_id = value;
                                 }
 
                                 if(key == "price"){
                                     $addCommaRward = addCommas(value);
-                                    return $("<dt>"+$addCommaRward+"<b>원</b></dt>").appendTo($dl);
+                                     $dt.append($addCommaRward+"<b>원</b>").appendTo($dl);
+
+                                     getRewardPaymentCount(function(res){
+                                        $dt.after("<dd class='ddFirst'>"+res+"명이 선택</dd>");
+                                     },$funding_reward_id);
                                 }
     
                                 if(key == "delivery_price"){
                                     $addCommaRward = addCommas(value);
-                                    return $("<dd><span>배송비</span> "+$addCommaRward+"원</dd>").appendTo($dl);
-                                }
-    
-                                if(key == "target_sell_count"){
-                                    $sellCount = value;
-                                    $addCommaRward = addCommas(value);
-                                    return $("<dd class='ddFirst'>"+value+"명이 선택</dd>").appendTo($dl);
+                                     $("<dd><span>배송비</span>"+$addCommaRward+"원</dd>").appendTo($dl);
                                 }
                                 
                                 if(key == "title"){
-                                    return $(" <dd class='ddNthTwo'>"+value+"</dd>").appendTo($dl);
+                                     $(" <dd class='ddNthTwo'>"+value+"</dd>").appendTo($dl);
                                 }
                                 
                                 if(key == "description"){
-                                    return $("<dd class='ddNthThree'>"+value+"</dd>").appendTo($dl);
+                                     $("<dd class='ddNthThree'>"+value+"</dd>").appendTo($dl);
                                 }
                                 
                                 if(key == "stock_max"){
-                                    $stock = value-$sellCount;
-                                    $addCommaRward = addCommas($stock);
-                                    return $("<dd class='stock'><span>남은 수량</span> "+$addCommaRward+"개</dd>").appendTo($dl);
+                                    getRewardPaymentCount(function(res){
+                                        $stock = value-res;
+                                        $addCommaReward = addCommas($stock);
+                                        $("<dd class='stock'><span>남은 수량</span> "+$addCommaReward+"개</dd>").appendTo($dl);
+                                     },$funding_reward_id);                                    
+                                }
+
+                                if(key == "buy_count"){
+                                    $("<dd class='buyCount'><span>1인당 구매수량</span> "+value+"개</dd>").appendTo($dl);
                                 }
                                 
                                 if(key == "delivery_from"){
-                                    return $("<dd class='ddLast'><span>발송 예정일</span> "+value+" 예정</dd>").appendTo($dl);
+                                     $("<dd class='ddLast'><span>발송 예정일</span> "+value+" 예정</dd>").appendTo($dl);
                                 }
 
                                 if(key == "itemList"){
@@ -312,10 +319,10 @@ function getFundingDto($funding_id){
                                         var $name;
                                         $.each(item, function(key,value){
                                             if(key=="name"){
-                                                return $name = value;
+                                                 $name = value;
                                             }
                                             if(key == "count"){
-                                                return $("<dd class='item'>&#8226; "+$name+" "+value+"개</dd>").appendTo($dl);
+                                                 $("<dd class='item'>&#8226; "+$name+" "+value+"개</dd>").appendTo($dl);
                                             }
                                         });
                                     });
@@ -362,6 +369,17 @@ function getFundingDto($funding_id){
         }
     });
 }
+
+function getRewardPaymentCount(callback,funding_reward_id){
+    $.ajax({
+        url: "./AJAXgetRewardPaymentCount",
+        method: "GET",
+        data: {funding_reward_id:funding_reward_id},
+        success: function(res){
+            callback(res);
+        }
+    });
+};
 
 function addCommas(num){
     var str = num.toString();

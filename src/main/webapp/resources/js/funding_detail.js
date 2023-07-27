@@ -40,7 +40,19 @@ function setEventListener($funding_id){
             return window.location.href = "../user/userLoginPage";
         }
     });
-
+    
+    $(document).on("click","#rewardModal>dl",function(e){
+        e.stopPropagation();
+        var funding_reward_id = $(this).children("input#funding_reward_id").val();
+        location.href = "./fundingRewardChoicePage?funding_id="+$funding_id+"&funding_reward_id="+funding_reward_id;
+        // var user_id = getUserSession();
+        // if(user_id != 0){
+        //     location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+        // }else{
+        //     alert("로그인이 필요한 서비스입니다.");
+        //     return window.location.href = "../user/userLoginPage";
+        // }
+    });
 
     var n=0;
     $(document).on("click","ul#moveLeft",function(e){
