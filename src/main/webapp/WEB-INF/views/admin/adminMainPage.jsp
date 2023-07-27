@@ -78,6 +78,16 @@
 	font-size: 16px;
 	font-weight: 800;
 }
+
+.card-title{
+	font-size: 16px;
+	font-weight: 800;
+}
+.a_test{
+	color: black;
+}
+
+a{color:#333333;}
 </style>
 
 <head>
@@ -124,14 +134,14 @@
 							<c:if test="${empty shopAdmin }">
 								<ul class="nav justify-content-end">
 									<li class="nav-item login_box"><a class="nav-link" href="./loginPage">로그인</a></li>
-									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">문의하기</a></li>
 								</ul>
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
 									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.admin_nickname }님</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
-									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">문의하기</a></li>
 								</ul>
 							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
@@ -343,8 +353,8 @@
                     <div class="col-lg-4 col-sm-12">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <div class="card-title">Sales by Countries</div>
-                                <div id="echartPie" style="height: 300px;"></div>
+                                <div class="card-title">연령별 구매자수</div>
+                                <div id="echartPie1" style="height: 300px;"></div>
                             </div>
                         </div>
                     </div>
@@ -450,7 +460,7 @@
 								     	</tbody>
 								     </table>
 	                                <div class="d-flex row">
-						                <div class="col list_bottom"><a href="./productReviewListPage">더보기</a></div>
+						                <div class="col list_bottom"><a class="a_test" href="./productReviewListPage">더보기</a></div>
 						            </div>								     									 
 								  </div>
 								</div>
@@ -955,6 +965,67 @@ $(document).ready(function () {
     });
     
     
+</script>
+<script>
+/* 차트 */
+var echartElemPie = document.getElementById("echartPie1");
+
+if (echartElemPie) {
+  var echartPie = echarts.init(echartElemPie);
+  echartPie.setOption({
+    color: ["#62549c", "#7566b5", "#7d6cbb", "#8877bd", "#9181bd", "#6957af"],
+    tooltip: {
+      show: true,
+      backgroundColor: "rgba(0, 0, 0, .8)",
+    },
+    series: [
+      {
+        name: "연령별 구매자수",
+        type: "pie",
+        radius: "60%",
+        center: ["50%", "50%"],
+        data: [
+          {
+            value: 348,
+            name: "10대",
+          },
+          {
+            value: 535,
+            name: "20대",
+          },
+          {
+            value: 310,
+            name: "30대",
+          },
+          {
+            value: 234,
+            name: "40대",
+          },
+          {
+            value: 155,
+            name: "50대",
+          },
+          {
+            value: 130,
+            name: "60대",
+          },
+        ],
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      },
+    ],
+  });
+  $(window).on("resize", function () {
+    setTimeout(function () {
+      echartPie.resize();
+    }, 500);
+  });
+}
 </script>
 <script>
 //숫자 형식화 함수

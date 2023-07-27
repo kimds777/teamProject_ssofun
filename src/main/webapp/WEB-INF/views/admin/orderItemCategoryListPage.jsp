@@ -64,14 +64,14 @@
 							<c:if test="${empty shopAdmin }">
 								<ul class="nav justify-content-end">
 									<li class="nav-item login_box"><a class="nav-link" href="./loginPage">로그인</a></li>
-									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">문의하기</a></li>
 								</ul>
 							</c:if>
 							<c:if test="${!empty shopAdmin }">
 								<ul class="nav justify-content-end">
 									<li class="nav-item login_box"><a class="nav-link" href="#">안녕하세요.&nbsp;${shopAdmin.admin_nickname }님</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="./logoutProcess">로그아웃</a></li>
-									<li class="nav-item login_box"><a class="nav-link" href="#">고객센터</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="#">문의하기</a></li>
 								</ul>
 							</c:if>
                 <i class="i-Full-Screen header-icon d-none d-sm-inline-block" data-fullscreen></i>
