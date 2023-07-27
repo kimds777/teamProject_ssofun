@@ -1,9 +1,14 @@
 package com.ssofun.www.systemadmin.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.text.StringEscapeUtils;
@@ -13,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssofun.dto.*;
 import com.ssofun.www.faq.service.FaqServiceImpl;
@@ -52,6 +58,21 @@ public class SystemAdminController {
 					//"redirect:../qna/qnaMain?user_id="+user_id;
 		}
 	}
+	
+	
+	
+	
+	
+//admin로그인처리
+	@RequestMapping("login/adminLoginPage")
+	public String adminLoginPage() {
+		
+		return "systemadmin/login/adminLoginPage";
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -602,6 +623,7 @@ public class SystemAdminController {
 		
 		List<FundingCategoryDto>fundingCategoryList = systemAdminService.getFundingCategpryData();
 		
+
 		model.addAttribute("fundingCategoryList",fundingCategoryList);
 		
 		return"systemadmin/siteManagement/fundingCategoryAddPage";
@@ -609,12 +631,124 @@ public class SystemAdminController {
 	
 	//펀딩카테고리추가프로세스
 	@RequestMapping("fundingCategoryAddProcess")
-	public String fundingCategoryAddProcess(FundingCategoryDto fundingCategoryDto) {
+	public String fundingCategoryAddProcess(@RequestParam("name") String name,
+            								@RequestParam("fundingCategoryFiles") MultipartFile fundingCategoryFiles,
+            								HttpServletRequest request) {
+		System.out.println("사진"+fundingCategoryFiles);
+		System.out.println("사진"+name);
+
 		
 		
-		systemAdminService.fundingCategoryAdd(fundingCategoryDto);
+		//펀딩카테고리저장로직
+	
+		FundingCategoryDto fundingCategory = new FundingCategoryDto();
+		
+	    if (!fundingCategoryFiles.isEmpty()) {
+            String originalFileName = fundingCategoryFiles.getOriginalFilename();
+            String rootFolder = "C:/ssofunUploadFiles/";
+
+            // 경로 설정 (예: /uploadFiles/2023/07/20/)
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String today = sdf.format(new Date());
+            String targetFolderPath = rootFolder + today + "/";
+            File targetFolder = new File(targetFolderPath);
+
+            // 폴더 생성
+            if (!targetFolder.exists()) {
+                targetFolder.mkdirs();
+            }
+
+            // 파일명 설정 (랜덤 + 현재 시간)
+            String fileName = UUID.randomUUID().toString() + "_" + System.currentTimeMillis();
+            String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
+            String saveFileName = today + "/" + fileName + ext;
+            String fullPath = targetFolderPath + fileName + ext;
+
+            try {
+                // 파일 저장
+            	fundingCategoryFiles.transferTo(new File(fullPath));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            System.out.println("사진"+saveFileName);
+            fundingCategory.setImage_url(saveFileName);
+            fundingCategory.setName(name);
+            
+            // 파일 정보를 이용하여 추가 작업 수행
+            // ...
+        }
+		
+		
+		
+		systemAdminService.fundingCategoryAdd(fundingCategory);
 		return"redirect:./siteManagement/fundingCategoryAddPage";
 	}
+	
+	
+	
+	
+	
+	
+	//파일저장로직
+//	if(boardFiles != null) {
+//		
+//		for(MultipartFile multipartFile : boardFiles) {
+//			api다루는법임
+//			if(multipartFile.isEmpty()) {//비어있는 것, 무조건 한바퀴 돌기 때문에 예외처리 해줌
+//				continue;					
+//			}
+//			
+//			System.out.println("파일명: "+multipartFile.getOriginalFilename());
+//			
+//			
+//			String rootFolder ="C:/uploadFiles/";
+//			//충돌피하기 위해 날짜별 폴더 아래에 저장파일명 만들기.
+//			//날짜별 폴더 생성 로직.
+//			
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//			String today = sdf.format( new Date());
+//			
+//			
+//			
+//			
+//			File targetFolder = new File(rootFolder +today);
+//			
+//			if(!targetFolder.exists()) {//존재하지않으면 파일을 만들어라
+//				targetFolder.mkdirs();//여러개의 폴더 만들어줌
+//		
+//				
+//			}
+//			
+//			
+//			//저장파일명 만들기. 핵심은 파일명 충돌방지 = 랜덤+시간
+//			String fileName = UUID.randomUUID().toString();
+//			fileName+="_" + System.currentTimeMillis();
+//			
+//			//확장자 추출
+//			String originalFileName = multipartFile.getOriginalFilename();//사용가가 컴퓨터에 있는 파일 올릴때 확장자임
+//			
+//			String ext = originalFileName.substring(originalFileName.lastIndexOf("."));//글자의 마지막 뒤에서부터 . 위치를 잡아서 .의 위치를 숫자로 리턴해줌
+//			
+//			String saveFileName = today + "/" + fileName + ext;
+//			
+//			
+//			try {//try catch쓰는 이유는 문법적오류 피하기 위해     \\는 폴더구분자임 : uploadFiles폴더 밑에 이 파일명으로 저장해라 
+//				multipartFile.transferTo(new File(rootFolder + saveFileName));//try catch잡아주기, 서버폴더(uploadFiles)에 파일이 올라간다 
+//			}catch(Exception e) {
+//				e.printStackTrace();//에러찾기위해?
+//			}
+//			
+//			
+//			//파라미터로 받기 애매해서 (파일)  내부에서 dto만들어서 세팅해서 arraylist로 만들어서 서비스로
+//			BoardImageDto boardImageDto = new BoardImageDto();
+//			boardImageDto.setOriginal_filename(originalFileName);
+//			boardImageDto.setLink(saveFileName);
+//			
+//			boardImageDtoList.add(boardImageDto);//한바퀴돌때마다 파일을 저장하고 Dto를 두개씩 생성해서 서비스쪽으로 넘김 
+//		}
+//		
+//	}
 	
 	
 	

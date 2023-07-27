@@ -5,7 +5,7 @@
 a{text-decoration: none; color: black;}
 .section{width: 1200px; margin: 0 auto;}
 
-#header{height: 100px;}
+#header{height: 100px; text-align: center;}
 .logobox{width: 111px; margin-right: 30px;}
 #header>div>div>a{line-height: 100px;}
 

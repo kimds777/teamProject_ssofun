@@ -163,27 +163,27 @@ $(document).ready(function () {
           data: [
             {
               value: 535,
-              name: "USA",
+              name: "10대",
             },
             {
               value: 310,
-              name: "Brazil",
+              name: "20대",
             },
             {
               value: 234,
-              name: "France",
+              name: "30대",
             },
             {
               value: 155,
-              name: "BD",
+              name: "40대",
             },
             {
               value: 130,
-              name: "UK",
+              name: "50대",
             },
             {
               value: 348,
-              name: "India",
+              name: "60대",
             },
           ],
           itemStyle: {

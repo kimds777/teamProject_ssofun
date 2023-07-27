@@ -236,7 +236,7 @@
 	<!-- 펀딩사이트카테고리추가 -->
 	<insert id="fundingCategoryAdd">
 		INSERT INTO tb_funding_category(name,image_url,created_at,used_fg)
-		VALUES(#{name},"test",now(),1)
+		VALUES(#{name},#{image_url},now(),1)
 	</insert>
 	
 	<!-- 펀딩카테고리목록가져옴 -->

@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="../../resources/css/funding_header.css">
 </head>
 <body>
@@ -45,6 +44,7 @@
 </c:choose>
 
 
-<script defer src="../../resources/js/header.js"></script>   
+
+
 </body>
 </html>
