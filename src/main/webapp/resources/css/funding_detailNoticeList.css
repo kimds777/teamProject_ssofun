@@ -88,6 +88,10 @@ a{text-decoration: none; color: black;}
 
 #content{margin-bottom: 70px; text-align: left;}
 #content>div{padding: 0; position: relative; margin-bottom: 105px;}
+#content>div#newsEmpty{margin-bottom: 0; text-align: center; font-size: 15px; height: 185px; line-height: 45px; color: #999999;}
+#content>div#newsEmpty>i{margin-top: 65px; display: block; text-align: center; font-size: 50px; color: #d9d9d9; line-height: 50px;}
+
+
 #content>div>div.noticeList{padding: 0; height: 320px; position: relative; overflow: hidden;}
 #content>div>div>.noticeWriter{width: 100%; padding: 0; margin: 0; height: 50px; border: 1px solid transparent; position: relative; margin-bottom: 30px;}
 #content>div>div>.noticeWriter>li{padding: 0;}

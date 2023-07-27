@@ -327,7 +327,7 @@ function getFundingDto($funding_id){
                     }
 
                     if(key == "newsList"){  
-                        if(value != null){
+                        if(value != ""){
                             $.each(value,function(index,item){
                                 var $div = $("<div></div>");
                                 var $noticeList = $("<div class='noticeList'></div>");
@@ -355,7 +355,7 @@ function getFundingDto($funding_id){
                                 $("#content").append($div);
                             });
                         }else{
-                            alert("공지사항 없다!");
+                            $("<div id='newsEmpty'><i class='bi bi-exclamation-circle'></i>등록된 공지사항이 없어요 :(</div>").appendTo("#content");
                         }                
                     }
             });

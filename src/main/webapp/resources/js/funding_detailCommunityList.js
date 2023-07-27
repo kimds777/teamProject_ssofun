@@ -361,38 +361,42 @@ function getFundingDto($funding_id){
                         });
                     }
 
-                    if(key == "reviewList"){                        
-                        $.each(value,function(index,item){
-                            var $div = $("<div></div>");
-                            var $noticeList = $("<div class='noticeList'></div>");
-                            var $ul = $("<ul class='noticeWriter'></ul>");
-                            var $nickname;
-                            $.each(item,function(key,value){
-
-                                if(key == "nickname"){
-                                    return $nickname = value;
-                                }
-
-                                if(key == "created_after"){
-                                    if(value == 0){
-                                        return $ul.append("<li class='profile'></li><li class='name'>"+$nickname+"</li><li class='date'> 오늘</li>").appendTo($noticeList);
-                                    }else{
-                                        return $ul.append("<li class='profile'></li><li class='name'>"+$nickname+"</li><li class='date'>"+value+"일전</li>").appendTo($noticeList);
+                    if(key == "reviewList"){      
+                        if(value != ""){
+                            $.each(value,function(index,item){
+                                var $div = $("<div></div>");
+                                var $noticeList = $("<div class='noticeList'></div>");
+                                var $ul = $("<ul class='noticeWriter'></ul>");
+                                var $nickname;
+                                $.each(item,function(key,value){
+    
+                                    if(key == "nickname"){
+                                        return $nickname = value;
                                     }
-                                }
-                                if(key == "title"){
-                                    return true;
-                                }                                      
-                                if(key == "contents"){                       
-                                    return $noticeList.append("<div class='noticeContent'>"+value+"</div>");
-                                }
-                                if(key == "funding_review_id"){
-                                    $div.append($noticeList);
-                                    return $div.append("<a href='./fundingDetailCommunityPage?funding_id="+$funding_id+"&funding_review_id="+value+"' class='moreBtn'></a>");
-                                }
+    
+                                    if(key == "created_after"){
+                                        if(value == 0){
+                                            return $ul.append("<li class='profile'></li><li class='name'>"+$nickname+"</li><li class='date'> 오늘</li>").appendTo($noticeList);
+                                        }else{
+                                            return $ul.append("<li class='profile'></li><li class='name'>"+$nickname+"</li><li class='date'>"+value+"일전</li>").appendTo($noticeList);
+                                        }
+                                    }
+                                    if(key == "title"){
+                                        return true;
+                                    }                                      
+                                    if(key == "contents"){                       
+                                        return $noticeList.append("<div class='noticeContent'>"+value+"</div>");
+                                    }
+                                    if(key == "funding_review_id"){
+                                        $div.append($noticeList);
+                                        return $div.append("<a href='./fundingDetailCommunityPage?funding_id="+$funding_id+"&funding_review_id="+value+"' class='moreBtn'></a>");
+                                    }
+                                });
+                                $("#content").append($div);
                             });
-                            $("#content").append($div);
-                        });
+                        }else{
+                            $("<div id='communityEmpty'><i class='bi bi-exclamation-circle'></i>등록된 응원・의견・체험리뷰가 없어요 :(</div>").appendTo("#content");
+                        }           
                     }
 
             });
