@@ -9,6 +9,6 @@
 </head>
 <body>
 
-    <script src="../../resources/JS/kakao_accessToken.js"></script>
+    <script src="../../resources/js/kakao_accessToken.js"></script>
 </body>
 </html>

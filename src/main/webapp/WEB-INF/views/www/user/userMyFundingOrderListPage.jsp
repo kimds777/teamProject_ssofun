@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../resources/CSS/user_myFundingOrderList.css"> 
+<link rel="stylesheet" href="../../resources/css/user_myFundingOrderList.css"> 
 </head>
 <body>
 
@@ -90,6 +90,6 @@
     <!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
 
-    <script src="../../resources/JS/user_myFundingOrderList.js"></script>
+    <script src="../../resources/js/user_myFundingOrderList.js"></script>
 </body>
 </html>

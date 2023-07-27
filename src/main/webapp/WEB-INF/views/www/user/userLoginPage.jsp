@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../resources/CSS/login.css">
+<link rel="stylesheet" href="../../resources/css/login.css">
 </head>
 <body>
 
@@ -49,6 +49,6 @@
 
 	<!-- 푸터 영역 필요없음-->
 	
-    <script src="../../resources/JS/login.js"></script>
+    <script src="../../resources/js/login.js"></script>
 </body>
 </html>
