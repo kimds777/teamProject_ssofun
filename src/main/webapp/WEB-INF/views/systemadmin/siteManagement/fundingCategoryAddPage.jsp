@@ -195,43 +195,7 @@
                                             <div class="col-1"></div>
                                         </div>
                                     </div>
-                                    <div class="col"  style="background-color:#F8F9FA; height:100px; border-radius: 3%; margin-right: 5px;">
-                                        <div class="row" >
-                                            <div class="col-1">
-                                                
-                                             <!--  <div class="row mt-2">
-                                                    <div class="col">
-                                                        <input type="checkbox">
-                                                    </div>
-                                                </div>--> 
-                                            </div>
-                                            <div class="col">
-                                             
-            
-                                                <div class="row mt-2">
-                                                   
-                                                    <div class="col textcenter">
-                                                        <p class="companyfont">아이콘등록</p>
-                                                    </div>
-                                                    <div class="col mt-2">
-                                                        <input type="file" name="qnaFiles" id="name" multiple accept="image/*">
-                                                    </div>
-                                                </div>
-                                                      
-                                                <div class="row mt-2">
-                                                    
-                                                    <div class="col-3 textcenter">
-                                                        <p class="companyfont">아이콘명</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <input type="text" name="name" class="form-control"  aria-label="companyName">
-                                                    </div>
-                                                </div>
-            
-                                            </div>
-                                            <div class="col-1"></div>
-                                        </div>
-                                    </div>
+                      
                                 </div>
     
                                 </form>
