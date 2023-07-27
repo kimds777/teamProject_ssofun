@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../resources/CSS/funding_RewardChoice.css">  
-<script src="../../resources/JS/funding_rewardChoice.js"></script>    
+<link rel="stylesheet" href="../../resources/css/funding_RewardChoice.css">  
+<script src="../../resources/js/funding_rewardChoice.js"></script>    
 
 </head>
 <body>
