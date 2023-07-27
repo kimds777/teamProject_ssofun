@@ -22,7 +22,7 @@
 
 
 
-    <title>fundingManagementPage</title>
+    <title>fundingCategoryAddPage</title>
 </head>
 
 <body>
@@ -66,6 +66,7 @@
                         <div class="col">
 
     
+               
                             <div class="row mt-3">
                                 <div class="col">
                                     <div class="row">
@@ -120,14 +121,14 @@
                 </div>
 
 
-                <div class="col content">
+                <div class="col">
                     <div class="row mb-2">
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
                                    
                                         <div class="col-2">
-                                            <a class="navbar-brand text-black">미승인펀딩</a>
+                                            <a class="navbar-brand text-black">카테고리관리</a>
                                         </div>
                                         <div class="col">
                                             <!--<p class="five-font mt-2">펀딩관리페이지입니다.</p>-->
@@ -147,48 +148,153 @@
                     </div>
 
                     <!--안에 페이지 내용만 바꾸기-->
-                    <div class="row content" style="margin-left: 10px; height:1000px">
+                    <div class="row" style="margin-left: 10px; height:1000px">
                     
                         <div class="col" style="padding-left: 0px;">
 		
-						<form  action="../fundingApprovalProcess" method="post">
+                            <form action="../fundingCategoryAddProcess"  method="post">
 
                            	<div class="row" style="padding-left: 0px;">
-                                <div class="col-2" style="padding-left: 0px;"><p class="three-font mt-1" style="margin-left: 5px;">미승인된 펀딩목록</p></div>
+                                <div class="col-7" style="padding-left: 0px;"><!--<p class="three-font mt-1" style="margin-left: 5px;">미승인된 펀딩목록</p>--></div>
                                 <div class="col c-five-font"></div>
-                                <div class="col-2" style="text-align: right;"><input type="submit" class="writefaqbutton" value="펀딩승인"   style="border-radius: 5px;"></div>
+                                <div class="col-2" style="text-align: right;"><input type="submit" class="writefaqbutton" value="카테고리추가"   style="border-radius: 5px;"></div>
                             
                             </div>
                       
-                            <div class="row mt-3">       
-                               
-                                <div class="col">
-		              			<table class="table table-bordered table-sm">
-									  <thead>
-									    <tr  style="background-color: #f8f9fa;">
-									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><input type="checkbox"></p></th>
-									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">펀딩번호</p></th>
-									      <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">펀딩제목</p></th>
-									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">창작자</p></th>
-									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">승인여부</p></th>
-								
-									    </tr>
-									  </thead>
-									  	<c:forEach items="${fundingList}" var="fundingList" >
-										  <tbody>
-										    <tr>
-										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;"><input type="checkbox" name="funding_id" value="${fundingList.fundingDto.funding_id }"></p></th>
-										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.funding_id }</p></th>
-											  <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.title }</p></th>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.creator_name }</p></td>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.confirm_fg }</p></td>
-									
-										    </tr>
-										  </tbody>
-										</c:forEach>
-								</table> 
+                                <div class="row mt-2">
+                                    <div class="col"  style="background-color:#F8F9FA; height:100px; border-radius: 3%; margin-right: 5px;">
+                                        <div class="row" >
+                                            <div class="col-1">
+                                                
+                                                <div class="row mt-2">
+                                                    <div class="col">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                             
+            
+                                                <div class="row mt-2">
+                                                   
+                                                    <div class="col textcenter">
+                                                        <p class="companyfont">아이콘등록</p>
+                                                    </div>
+                                                    <div class="col mt-2">
+                                                        <input type="file" name="qnaFiles" id="name" multiple accept="image/*">
+                                                    </div>
+                                                </div>
+                                                      
+                                                <div class="row mt-2">
+                                                    
+                                                    <div class="col-3 textcenter">
+                                                        <p class="companyfont">아이콘명</p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" name="name" class="form-control"  aria-label="companyName">
+                                                    </div>
+                                                </div>
+            
+                                            </div>
+                                            <div class="col-1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col"  style="background-color:#F8F9FA; height:100px; border-radius: 3%; margin-right: 5px;">
+                                        <div class="row" >
+                                            <div class="col-1">
+                                                
+                                                <div class="row mt-2">
+                                                    <div class="col">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                             
+            
+                                                <div class="row mt-2">
+                                                   
+                                                    <div class="col textcenter">
+                                                        <p class="companyfont">아이콘등록</p>
+                                                    </div>
+                                                    <div class="col mt-2">
+                                                        <input type="file" name="qnaFiles" id="name" multiple accept="image/*">
+                                                    </div>
+                                                </div>
+                                                      
+                                                <div class="row mt-2">
+                                                    
+                                                    <div class="col-3 textcenter">
+                                                        <p class="companyfont">아이콘명</p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" name="name" class="form-control"  aria-label="companyName">
+                                                    </div>
+                                                </div>
+            
+                                            </div>
+                                            <div class="col-1"></div>
+                                        </div>
+                                    </div>
                                 </div>
+    
+                                </form>
+
+                                <div class="row">
+                                    <div class="col hr-col"><hr class="hr-1"></div>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <div class="row" style="padding-left: 0px;">
+                                        <div class="col-2" style="padding-left: 0px; margin-left: 10px;"><p class="three-font mt-1" style="margin-left: 5px;">카테고리목록</p></div>
+                                        <div class="col-7" style="padding-left: 0px;"><!--<p class="three-font mt-1" style="margin-left: 5px;">미승인된 펀딩목록</p>--></div>
+                                        <div class="col c-five-font"></div>
+                                       
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1" style="margin-left: 10px;">
+                                    <!--이미지반복문돌리기-->
+
+                                    <div class="col-2 mt-2 qnaImage">
+                                        <div class="row" style="text-align: center;">
+                                            <div class="col mt-2"><img src="/ssofunUploadFiles/${d.link}" width="80px" height="80px"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <hr class="hr hr-1">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mb-3" style="text-align: center;"><p class="companyfont" style="margin-top: 0px;">아이콘이름</p></div>
+                                        </div>    
+                                    </div>
+
+                                </div>
+
+                            
                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      
+
+
+
+
+
+
 
                     
 		                    <div class="row mb-5">
@@ -196,7 +302,7 @@
 		                    </div>
 	                    
 	                        <!-- 페이지네이션 -->
-				            <div class="row">
+				            <!--<div class="row">
 				            	<div class="col"></div>
 				            	<div class="col">
 					            	<nav aria-label="Page navigation example">
@@ -225,10 +331,10 @@
 									</nav>
 								</div>
 								<div class="col"></div>
-				            </div>
+				            </div>-->
 	                    
                     
-		                </form>
+		            
 		                </div>
 		            </div>
 				</div>

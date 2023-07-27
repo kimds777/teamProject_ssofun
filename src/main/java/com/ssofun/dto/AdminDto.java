@@ -10,12 +10,10 @@ public class AdminDto {
 	private String login_account;
 	private String login_password;
 	private String admin_nickname;
-<<<<<<< HEAD
-=======
 	private String admin_phone;
 	private String admin_received_report;
 	private String admin_report_description;
->>>>>>> 6374cc34514f21ecefaf57a35d4c1a0ca7cf702a
+
 	@JsonFormat(pattern ="yyyy.MM.dd.HH.mm.ss", timezone = "Asia/Seoul")
 	private Date created_at;
 	private int used_fg;
@@ -61,12 +59,7 @@ public class AdminDto {
 	public void setLogin_password(String login_password) {
 		this.login_password = login_password;
 	}
-	public String getAdmin_nickname() {
-		return admin_nickname;
-	}
-	public void setAdmin_nickname(String admin_nickname) {
-		this.admin_nickname = admin_nickname;
-	}
+
 	public String getAdmin_phone() {
 		return admin_phone;
 	}

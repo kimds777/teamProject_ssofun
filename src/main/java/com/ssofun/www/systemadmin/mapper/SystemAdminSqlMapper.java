@@ -157,10 +157,12 @@ public interface SystemAdminSqlMapper {
 	public void fundingApproval(int funding_id);
 
 	
+	//펀딩카테고리 추가
+	public void fundingCategoryAdd(FundingCategoryDto FundingCategoryDto);
 	
 	
-	
-	
+	//펀딩카테고리목록가져옴
+	public List<FundingCategoryDto> getFundingCategpryDto();
 	
 	
 	

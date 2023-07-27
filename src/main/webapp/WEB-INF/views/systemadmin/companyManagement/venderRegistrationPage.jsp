@@ -141,7 +141,7 @@
                                 
                             <div class="row">
                             	<div class="col">
-                            		<div class="row" style="background-color:#F8F9FA; height:1000px; border-radius: 3%; ">
+                            		<div class="row" style="background-color:#F8F9FA; height:1000px; border-radius: 3%;">
 		                            	<div class="col-2"></div>
 		                            	<div class="col">
 		

@@ -564,10 +564,12 @@ public class SystemAdminController {
 	
 	
 	
+	
+	
 //사이트관리
 	
 	
-	//펀딩관리사이트
+	//펀딩관리사이트 승인관련
 	@RequestMapping("siteManagement/fundingManagementPage")
 	public String fundingManagementPage(Model model) {
 		
@@ -580,7 +582,6 @@ public class SystemAdminController {
 	}
 	
 	
-	
 	//펀딩승인프로세스
 	@RequestMapping("fundingApprovalProcess")
 	public String fundingApprovalProcess(int funding_id) {
@@ -591,5 +592,33 @@ public class SystemAdminController {
 		
 		return "redirect:./siteManagement/fundingManagementPage";
 	}
+	
+	
+	
+	
+	//펀딩사이트 카테고리추가페이지
+	@RequestMapping("siteManagement/fundingCategoryAddPage")
+	public String fundingCategoryAddPage(Model model) {
+		
+		List<FundingCategoryDto>fundingCategoryList = systemAdminService.getFundingCategpryData();
+		
+		model.addAttribute("fundingCategoryList",fundingCategoryList);
+		
+		return"systemadmin/siteManagement/fundingCategoryAddPage";
+	}
+	
+	//펀딩카테고리추가프로세스
+	@RequestMapping("fundingCategoryAddProcess")
+	public String fundingCategoryAddProcess(FundingCategoryDto fundingCategoryDto) {
+		
+		
+		systemAdminService.fundingCategoryAdd(fundingCategoryDto);
+		return"redirect:./siteManagement/fundingCategoryAddPage";
+	}
+	
+	
+	
+
+	
 	
 }

@@ -420,14 +420,21 @@ public class SystemAdminServiceImpl {
 
 	
 	//펀딩승인
-	
 	public void fundingApproval(int funding_id) {
 	
 		systemAdminSqlMapper.fundingApproval(funding_id);
 	}
 	
+	//펀딩카테고리추가
+	public void fundingCategoryAdd(FundingCategoryDto fundingCategoryDto) {
+		systemAdminSqlMapper.fundingCategoryAdd(fundingCategoryDto);
+	}
 	
-	
+	//펀딩카테고리 목록가져옴
+	public List<FundingCategoryDto> getFundingCategpryData(){
+		List<FundingCategoryDto> fundingCategory = systemAdminSqlMapper.getFundingCategpryDto();
+		return fundingCategory;
+	}
 	
 	
 	
