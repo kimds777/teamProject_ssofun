@@ -16,15 +16,15 @@
             <div class="d-flex col p-0">
                 <div class="col-1 logobox"><a href="../funding/fundingMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
                 <div class="col-1"><a href="../funding/fundingListPage">펀딩</a></div>
-                <div class="col-1"><a href="./storePage">스토어</a></div>
-                <div class="col-1 me-auto"><a href="../../www/qna/customerServiceMainPage">커뮤니티</a></div>
+                <div class="col-1"><a href="../store/storePage">스토어</a></div>
+                <div class="col-1 me-auto"><a href="#">커뮤니티</a></div>
                 <div class="col-1">
                 	<a id="logout">로그아웃</a>
                	</div>
                 <div class="col-1">
-                	<a href="../../www/user/userMyPage?user_id=${user.user_id}">마이페이지</a>
+                	<a href="../store/userMyPage?user_id=${user.user_id}">마이페이지</a>
                	</div>
-                <div class="col-1"><a href="./csPage">고객센터</a></div>
+                <div class="col-1"><a href="../qna/customerServiceMainPage">고객센터</a></div>
             </div>
         </div>
 	</c:when>
@@ -35,9 +35,9 @@
                 <div class="col-1 logobox"><a href="../funding/fundingMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
                 <div class="col-1"><a href="../funding/fundingListPage">펀딩</a></div>
                 <div class="col-1"><a href="../store/storePage">스토어</a></div>
-                <div class="col-1 me-auto"><a href="./storePage">커뮤니티</a></div>
-                <div class="col-1"><a href="../../www/user/userLoginPage">로그인</a></div>
-                <div class="col-1"><a href="../../www/qna/customerServiceMainPage">고객센터</a></div>
+                <div class="col-1 me-auto"><a href="#">커뮤니티</a></div>
+                <div class="col-1"><a href="../user/userLoginPage">로그인</a></div>
+                <div class="col-1"><a href="../qna/customerServiceMainPage">고객센터</a></div>
             </div>
         </div>
 	</c:otherwise>
