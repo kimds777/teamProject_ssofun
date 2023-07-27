@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <link rel="stylesheet" href="../../resources/css/funding_Main.css">
-<script src="../../resources/js/funding_list.js"></script>
+
 </head>
 <body>
     <div class="container text-center">
@@ -23,15 +23,78 @@
             <div class="gradient"></div>
             <div class="gradient right"></div>
             <ul id="bannerList">
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>
-                <li><a href=""><img src="" alt="">배너 300*450</a></li>            
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="icon">NEW</li>
+                        <li class="firstText">덕질가방,</li>
+                        <li class="lastText">이젠 크로스백으로!</li>
+                    </ul>
+                    <img src="../../resources/IMG/bag.webp" alt="">
+                </a></li>
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="icon">NEW</li>
+                        <li class="firstText">덕질가방,</li>
+                        <li class="lastText">이젠 크로스백으로!</li>
+                    </ul>
+                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="iconWhite">NEW</li>
+                        <li class="firstTextWhite">원석 마법 도감</li>
+                        <li class="lastTextWhite">누구나 마법이 필요한 순간이 있다</li>
+                    </ul>
+                    <img src="../../resources/IMG/원석마법도감_main.webp" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="icon">NEW</li>
+                        <li class="firstText">덕질가방,</li>
+                        <li class="lastText">이젠 크로스백으로!</li>
+                    </ul>
+                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="icon">NEW</li>
+                        <li class="firstText">덕질가방,</li>
+                        <li class="lastText">이젠 크로스백으로!</li>
+                    </ul>
+                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="icon">NEW</li>
+                        <li class="firstText">덕질가방,</li>
+                        <li class="lastText">이젠 크로스백으로!</li>
+                    </ul>
+                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="icon">NEW</li>
+                        <li class="firstText">덕질가방,</li>
+                        <li class="lastText">이젠 크로스백으로!</li>
+                    </ul>
+                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="icon">NEW</li>
+                        <li class="firstText">덕질가방,</li>
+                        <li class="lastText">이젠 크로스백으로!</li>
+                    </ul>
+                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="icon">NEW</li>
+                        <li class="firstText">덕질가방,</li>
+                        <li class="lastText">이젠 크로스백으로!</li>
+                    </ul>
+                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                </a></li>             
             </ul>
         </div>
 
@@ -41,71 +104,14 @@
                     <h5 class="row p-0">지금 제일 핫한 펀딩 모음집</h5>
     
                     <div class="row p-0 d-flex" id="sList">
-                        <a href="">
+                        <!-- <a href="">
                             <ul class="p-0">
-                                <li>image 280 x 280</li>
+                                <li><img src="" alt=""></li>
                                 <li class="text-start">카테고리</li>
                                 <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
                                 <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
                             </ul>
-                        </a>
-                        <a href="">
-                            <ul class="p-0">
-                                <li>image 280 x 280</li>
-                                <li class="text-start">카테고리</li>
-                                <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                                <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                            </ul>
-                        </a>
-                        <a href="">
-                            <ul class="p-0">
-                                <li>image 280 x 280</li>
-                                <li class="text-start">카테고리</li>
-                                <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                                <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                            </ul>
-                        </a>
-                        <a href="">
-                            <ul class="p-0">
-                                <li>image 280 x 280</li>
-                                <li class="text-start">카테고리</li>
-                                <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                                <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                            </ul>
-                        </a>
-
-                        <a href="">
-                            <ul class="p-0">
-                                <li>image 280 x 280</li>
-                                <li class="text-start">카테고리</li>
-                                <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                                <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                            </ul>
-                        </a>
-                        <a href="">
-                            <ul class="p-0">
-                                <li>image 280 x 280</li>
-                                <li class="text-start">카테고리</li>
-                                <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                                <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                            </ul>
-                        </a>
-                        <a href="">
-                            <ul class="p-0">
-                                <li>image 280 x 280</li>
-                                <li class="text-start">카테고리</li>
-                                <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                                <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                            </ul>
-                        </a>
-                        <a href="">
-                            <ul class="p-0">
-                                <li>image 280 x 280</li>
-                                <li class="text-start">카테고리</li>
-                                <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                                <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                            </ul>
-                        </a>
+                        </a> -->
                     </div>
     
                 </div>
@@ -113,46 +119,28 @@
         </div>
 	</div>
 
-    <div id="subBanner"><a href=""><img src="" alt="">banner Full x 250</a></div>
+    <div id="subBanner"><a>
+        <ul id="subBannerText">
+            <li>검증된 상품만 모았어요!</li>
+            <li>이번주 신상 반짝 혜택</li>
+        </ul>
+        <img src="../../resources/IMG/메인서브배너2.jpg" alt="">
+    </a></div>
 
     <div class="section">
-        <div class="row section" id="recoZip">
+        <div class="row section" id="newZip">
             <div class="col">
-                <h5 class="row p-0">이런건 어떠세요?</h5>
+                <h5 class="row p-0">주목하세요! 새로 오픈한 프로젝트</h5>
 
-                <div class="row p-0 d-flex" id="sList">
-                    <a href="">
+                <div class="row p-0 d-flex" id="nList">
+                    <!-- <a href="">
                         <ul class="p-0">
                             <li>image 280 x 280</li>
                             <li class="text-start">카테고리</li>
                             <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
                             <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
                         </ul>
-                    </a>
-                    <a href="">
-                        <ul class="p-0">
-                            <li>image 280 x 280</li>
-                            <li class="text-start">카테고리</li>
-                            <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                            <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                        </ul>
-                    </a>
-                    <a href="">
-                        <ul class="p-0">
-                            <li>image 280 x 280</li>
-                            <li class="text-start">카테고리</li>
-                            <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                            <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                        </ul>
-                    </a>
-                    <a href="">
-                        <ul class="p-0">
-                            <li>image 280 x 280</li>
-                            <li class="text-start">카테고리</li>
-                            <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                            <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                        </ul>
-                    </a>
+                    </a> -->
                 </div>
 
             </div>
@@ -161,6 +149,7 @@
 
 	<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
+	<script src="../../resources/js/funding_main.js"></script>
     
 </body>
 </html>

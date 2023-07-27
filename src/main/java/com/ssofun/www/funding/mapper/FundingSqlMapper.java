@@ -5,25 +5,36 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ssofun.dto.DeliveryRecipientDto;
-import com.ssofun.dto.FundingCategoryDto;
-import com.ssofun.dto.FundingCommunityDto;
-import com.ssofun.dto.FundingCommunityReviewAnswerDto;
-import com.ssofun.dto.FundingCommunityReviewDto;
-import com.ssofun.dto.FundingDto;
-import com.ssofun.dto.FundingFavoritDto;
-import com.ssofun.dto.FundingItemDto;
-import com.ssofun.dto.FundingNewsDto;
-import com.ssofun.dto.FundingNewsReviewAnswerDto;
-import com.ssofun.dto.FundingNewsReviewDto;
-import com.ssofun.dto.FundingOrderDto;
-import com.ssofun.dto.FundingRewardDto;
-import com.ssofun.dto.FundingRewardOrderDto;
-import com.ssofun.dto.FundingTagDto;
-import com.ssofun.dto.PaymentDto;
+import com.ssofun.www.funding.dto.DeliveryRecipientDto;
+import com.ssofun.www.funding.dto.FundingCategoryDto;
+import com.ssofun.www.funding.dto.FundingCommunityDto;
+import com.ssofun.www.funding.dto.FundingCommunityReviewAnswerDto;
+import com.ssofun.www.funding.dto.FundingCommunityReviewDto;
+import com.ssofun.www.funding.dto.FundingDto;
+import com.ssofun.www.funding.dto.FundingFavoritDto;
+import com.ssofun.www.funding.dto.FundingItemDto;
+import com.ssofun.www.funding.dto.FundingNewsDto;
+import com.ssofun.www.funding.dto.FundingNewsReviewAnswerDto;
+import com.ssofun.www.funding.dto.FundingNewsReviewDto;
+import com.ssofun.www.funding.dto.FundingOrderDto;
+import com.ssofun.www.funding.dto.FundingRewardDto;
+import com.ssofun.www.funding.dto.FundingRewardOrderDto;
+import com.ssofun.www.funding.dto.FundingTagDto;
+import com.ssofun.www.funding.dto.FundingThumbnailDto;
+import com.ssofun.www.funding.dto.PaymentDto;
 
 public interface FundingSqlMapper {
 
+	
+	//---달성률 높은 순서대로 펀딩리스트 출력
+	public List<FundingDto> selectFundingOrderByAchievementRate();
+	//---새로 등록한 펀딩 순서대로 리스트 출력
+	public List<FundingDto> selectFundingOrderByCreatedAt();
+	//--- 펀딩 달성률 출력
+	public int selectFundingAchievementRate(long funding_id);
+	
+	
+	
 	
 	//---가장 최근에 insert 된 auto_increment값 가져오기
 	public long selectLastInsertId();
@@ -63,6 +74,14 @@ public interface FundingSqlMapper {
 	public List<FundingRewardDto> selectRewardList(long funding_id);
 	//---펀딩 리워드 아이템 리스트 출력
 	public List<FundingItemDto> selectItemList(@Param("funding_id") long funding_id,@Param("funding_reward_id") long funding_reward_id);
+	//---펀딩 섬네일 리스트 출력
+	public List<FundingThumbnailDto> selectThumbnailAll(long funding_id);
+	//--펀딩 상세 섬네일 갯수 출력
+	public int selectDetailThumbnailCount(long funding_id);
+	//---펀딩 후원자 수 출력
+	public int selectSupportCount(long funding_id);
+	
+	
 	
 	
 	//---펀딩 공지사항 리스트 출력
@@ -83,6 +102,7 @@ public interface FundingSqlMapper {
 	public void insertNewsReply(@Param("fundingNewsReviewAnswerDto") FundingNewsReviewAnswerDto fundingNewsReviewAnswerDto, @Param("user_id") long user_id, @Param("funding_notice_id") long funding_notice_id);
 	
 
+	
 
 	//---펀딩 커뮤니티 리스트 출력
 	public List<FundingCommunityDto> selectCommunityList(long funding_id);
@@ -113,6 +133,8 @@ public interface FundingSqlMapper {
 	public long insertOrder(FundingOrderDto fundingOrderDto);
 	//---펀딩 결제전 리워드별 주문 정보 입력
 	public void insertRewardOrder(FundingRewardOrderDto fundingRewardOrderDto);
+	//---결제완료된 리워드 갯수 출력
+	public int selectRewardPaymentCount(long funding_reward_id);
 	//---펀딩 결제전 주문 정보 조회
 	public FundingOrderDto selectPaymentBeforeFundingOrder(long funding_order_id);
 	//---펀딩 결제전 리워드별 주문 정보 조회
@@ -134,20 +156,29 @@ public interface FundingSqlMapper {
 	public void insertOrderPayment(@Param("payment_id") long payment_id, @Param("funding_order_id") long funding_order_id);
 	//---주문 결제건 택배 수령인 정보 입력
 	public long insertDeliveryRecipient(DeliveryRecipientDto deliveryRecipientDto);
+
+
+
+
+
+
+
+
+
 	
 	
+
+
+
+
+
+
+
+
+
+
+
 	
-	//---펀딩 등록전 태그 입력
-	public long insertTag(FundingTagDto fundingTagDto);
-	//---펀딩 등록전 태그 조회
-	public FundingTagDto getTemporarilyTag(long funding_tag_id);
-	
-	
-	
-	
-	//---펀딩 등록
-	public void insertFunding(@Param("fundingDto") FundingDto fundingDto, @Param("funding_category_id") int funding_category_id, 
-			@Param("user_creator_id") int user_creator_id, @Param("fuding_tag_id") int fuding_tag_id);
 
 
 

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,20 +22,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import com.ssofun.dto.DeliveryRecipientDto;
-import com.ssofun.dto.FundingCategoryDto;
-import com.ssofun.dto.FundingCommunityDto;
-import com.ssofun.dto.FundingCommunityReviewAnswerDto;
-import com.ssofun.dto.FundingCommunityReviewDto;
-import com.ssofun.dto.FundingDto;
-import com.ssofun.dto.FundingFavoritDto;
-import com.ssofun.dto.FundingNewsDto;
-import com.ssofun.dto.FundingNewsReviewAnswerDto;
-import com.ssofun.dto.FundingNewsReviewDto;
-import com.ssofun.dto.FundingOrderDto;
-import com.ssofun.dto.FundingRewardOrderDto;
-import com.ssofun.dto.PaymentDto;
+import com.ssofun.www.funding.dto.DeliveryRecipientDto;
+import com.ssofun.www.funding.dto.FundingCategoryDto;
+import com.ssofun.www.funding.dto.FundingCommunityDto;
+import com.ssofun.www.funding.dto.FundingCommunityReviewAnswerDto;
+import com.ssofun.www.funding.dto.FundingCommunityReviewDto;
+import com.ssofun.www.funding.dto.FundingDto;
+import com.ssofun.www.funding.dto.FundingFavoritDto;
+import com.ssofun.www.funding.dto.FundingNewsDto;
+import com.ssofun.www.funding.dto.FundingNewsReviewAnswerDto;
+import com.ssofun.www.funding.dto.FundingNewsReviewDto;
+import com.ssofun.www.funding.dto.FundingOrderDto;
+import com.ssofun.www.funding.dto.FundingRewardOrderDto;
+import com.ssofun.www.funding.dto.PaymentDto;
 import com.ssofun.www.funding.service.FundingServiceImpl;
+import com.ssofun.www.user.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("www/funding/*")
@@ -42,13 +45,45 @@ public class FundingController {
 	@Autowired
 	private FundingServiceImpl fundingService;
 	
+//	@Autowired 
+//	private UserServiceImpl userService;
+//
+//	@RequestMapping("fundingMainPage")
+//	public String fundingMainPage(HttpSession session, @RequestParam(value = "user_id", required = false, defaultValue = "0") long user_id) {
+//		if(user_id != 0) {		
+//			System.out.println("user_id: "+user_id);
+//			session.setAttribute("user", userService.getUserByUserId(user_id));
+//		}
+//		return "www/funding/fundingMainPage";
+//	}
 	
 	@RequestMapping("fundingMainPage")
 	public String fundingMainPage() {
 		return "www/funding/fundingMainPage";
 	}
+	
+	//펀딩 메인페이지 달성률 높은순으로 8개 출력
+	@ResponseBody
+	@RequestMapping("AJAXgetFundingOrderByAchievementRate")
+	public List<FundingDto> AJAXgetFundingOrderByAchievementRate(){
+		return fundingService.getFundingOrderByAchievementRate();
+	}
 
 
+	@ResponseBody
+	@RequestMapping("AJAXgetFundingAchievementRate")
+	public int AJAXgetFundingAchievementRate(long funding_id) {
+		return fundingService.getFundingAchievementRate(funding_id);
+	}
+	
+	@ResponseBody
+	@RequestMapping("AJAXgetFundingOrderByCreatedAt")
+	public List<FundingDto> AJAXgetFundingOrderByCreatedAt() {
+		return fundingService.getFundingOrderByCreatedAt();
+	}
+	
+	
+	
 
 //	펀딩 리스트 페이지 ----------------------------------------------------------------------------------------
 
@@ -107,14 +142,31 @@ public class FundingController {
 		return "www/funding/fundingDetailPage";
 	}
 
+	//펀딩 상세 정보 조회
 	@ResponseBody
 	@RequestMapping("getFundingDtoAjax")
 	public FundingDto getFundingDtoAjax(long funding_id) {
 		FundingDto fundingDto = fundingService.selectFunding(funding_id);
+		
 		return fundingDto;
 	}
+	
+	//섬네일 갯수 조회
+	@ResponseBody
+	@RequestMapping("AJAXgetDetailThumbnailCount")
+	public int AJAXgetDetailThumbnailCount(@RequestParam("funding_id") long funding_id) {
+		return fundingService.getDetailThumbnailCount(funding_id);
+	}
+	
+	//후원자 수 조회
+	@ResponseBody
+	@RequestMapping("AJAXgetSupportCount")
+	public int AJAXgetSupportCount(long funding_id) {
 
-//	상세 공지 페이지
+		return fundingService.getSupportCount(funding_id);
+	}
+
+//	상세 상세 공지 페이지 -----------------------------------------------------------------------------------------------------
 
 	@RequestMapping("fundingDetailNoticeListPage")
 	public String fundingDetailNoticeListPage(Model model, long funding_id) {
@@ -220,6 +272,12 @@ public class FundingController {
 	@RequestMapping("fundingRewardPaymentPage")
 	public String fundingRewardPaymentPage() {
 		return "www/funding/fundingRewardPaymentPage";
+	}
+	
+	@ResponseBody
+	@RequestMapping("AJAXgetRewardPaymentCount")
+	public int AJAXgetRewardPaymentCount(long funding_reward_id) {
+		return fundingService.getRewardPaymentCount(funding_reward_id);
 	}
 
 	@ResponseBody

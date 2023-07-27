@@ -35,17 +35,19 @@
 							<li></li>
 							<li></li>
 						</ul>
-                        <ul id="thumb">
-                            <li>image 500 x 450</li>
-                        </ul>
+                        <div id="thumbBox">
+                            <ul id="thumb">
+                                <!-- <li>image 500 x 450</li> -->
+                            </ul>
+                        </div>
 						<ul id="moveRight">
 							<li></li>
 							<li></li>
 						</ul>
                         <ul class="p-0 m-0" id="swiper"> 
-                            <li class="activeBtn"></li>
+                            <!-- <li class="activeBtn"></li>
                             <li></li>
-                            <li></li>
+                            <li></li> -->
                         </ul>
 					</div>
 					

@@ -20,7 +20,7 @@
 		
 		<div class="section" id="participation">
             <ul id="pageName">
-                <li><img src="../../resources/img/celebration.PNG" alt=""></li>
+                <li><img src="../../resources/IMG/celebration.PNG" alt=""></li>
                 <li>프로젝트 참여가 완료되었습니다.</li>
             </ul>
             <div id="history">

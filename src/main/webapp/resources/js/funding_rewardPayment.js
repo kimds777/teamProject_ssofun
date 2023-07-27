@@ -46,7 +46,13 @@ function setEventListener($funding_order_id,user_id){
 
     $(document).on("click","input#paymentSubmit",function(event){
         event.stopPropagation();
-        payment($funding_order_id);
+        var totalAgreeChecked = $("#totalAgree.checked").length;
+
+        if(totalAgreeChecked == 0){
+            alert("전체 동의후 결제가 진행됩니다.");
+        }else{
+            payment($funding_order_id);
+        }
     });
     
     // 동의사항 수정해야함..!
@@ -204,7 +210,7 @@ function payment($funding_order_id){
                                                     $.ajax({
                                                         url: "./AJAXupdateFundingRewardOrder?funding_order_id="+$funding_order_id,
                                                         method: "PATCH",
-                                                        data: JSON.stringify({delivery_recipient_id:$delivery_recipient_id, used_fg: 1, status: 2 }), // JSON 문자열로 데이터 직렬화 //funding_order_status_id:2 -> 2는 결제완료 의미
+                                                        data: JSON.stringify({delivery_recipient_id:$delivery_recipient_id, used_fg: 1, status: 3 }), // JSON 문자열로 데이터 직렬화 //status:3 -> 3는 결제완료 의미
                                                         contentType: "application/json", // Content-Type 헤더 설정 
                                                         success: function(res){
                                                             if(res == 1){
@@ -213,7 +219,7 @@ function payment($funding_order_id){
                                                                 $.ajax({
                                                                     url: "./AJAXupdateFundingOrder?funding_order_id="+$funding_order_id,
                                                                     method: "PATCH",
-                                                                    data: JSON.stringify({ used_fg: 1, funding_order_status_id: 2 }), // JSON 문자열로 데이터 직렬화 //funding_order_status_id:2 -> 2는 결제완료 의미
+                                                                    data: JSON.stringify({ used_fg: 1, funding_order_status_id: 3 }), // JSON 문자열로 데이터 직렬화 //funding_order_status_id:3 -> 3는 결제완료 의미
                                                                     contentType: "application/json", // Content-Type 헤더 설정 
                                                                     success: function(res){
                                                                         if(res == 1){
@@ -265,6 +271,10 @@ function getPaymentBeforeFundingOrder($funding_order_id){
                     var price_support = addCommas(value);
                     $("#choiceReward>ul:first-of-type>li:nth-child(2)>b").text(price_support+"원");
                 }
+                // if(key == ""){
+                //     var delivery_price = addCommas(value);
+                //     $("#choiceReward>ul:first-of-type>li:nth-child(3)>b").text(delivery_price+"원");
+                // }
                 if(key == "total_price"){
                     var total_price = addCommas(value);
                     $("#choiceReward>ul:first-of-type>li:last-child>b").text(total_price+"원");
@@ -296,6 +306,10 @@ function getPaymentBeforeFundingOrder($funding_order_id){
                                         $detail.append($itemList);
                                         $ul.append($detail);
                                     }
+
+                                    // if(key == "delivery_from"){
+                                        
+                                    // }
                                 });
                             }
 

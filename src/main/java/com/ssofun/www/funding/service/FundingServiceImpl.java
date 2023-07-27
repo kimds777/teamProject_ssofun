@@ -5,22 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssofun.dto.DeliveryRecipientDto;
-import com.ssofun.dto.FundingCategoryDto;
-import com.ssofun.dto.FundingCommunityDto;
-import com.ssofun.dto.FundingCommunityReviewAnswerDto;
-import com.ssofun.dto.FundingCommunityReviewDto;
-import com.ssofun.dto.FundingDto;
-import com.ssofun.dto.FundingFavoritDto;
-import com.ssofun.dto.FundingItemDto;
-import com.ssofun.dto.FundingNewsDto;
-import com.ssofun.dto.FundingNewsReviewAnswerDto;
-import com.ssofun.dto.FundingNewsReviewDto;
-import com.ssofun.dto.FundingOrderDto;
-import com.ssofun.dto.FundingRewardDto;
-import com.ssofun.dto.FundingRewardOrderDto;
-import com.ssofun.dto.FundingTagDto;
-import com.ssofun.dto.PaymentDto;
+import com.ssofun.www.funding.dto.DeliveryRecipientDto;
+import com.ssofun.www.funding.dto.FundingCategoryDto;
+import com.ssofun.www.funding.dto.FundingCommunityDto;
+import com.ssofun.www.funding.dto.FundingCommunityReviewAnswerDto;
+import com.ssofun.www.funding.dto.FundingCommunityReviewDto;
+import com.ssofun.www.funding.dto.FundingDto;
+import com.ssofun.www.funding.dto.FundingFavoritDto;
+import com.ssofun.www.funding.dto.FundingItemDto;
+import com.ssofun.www.funding.dto.FundingNewsDto;
+import com.ssofun.www.funding.dto.FundingNewsReviewAnswerDto;
+import com.ssofun.www.funding.dto.FundingNewsReviewDto;
+import com.ssofun.www.funding.dto.FundingOrderDto;
+import com.ssofun.www.funding.dto.FundingRewardDto;
+import com.ssofun.www.funding.dto.FundingRewardOrderDto;
+import com.ssofun.www.funding.dto.FundingTagDto;
+import com.ssofun.www.funding.dto.FundingThumbnailDto;
+import com.ssofun.www.funding.dto.PaymentDto;
 import com.ssofun.www.funding.mapper.FundingSqlMapper;
 
 @Service
@@ -28,6 +29,39 @@ public class FundingServiceImpl {
 	
 	@Autowired
 	private FundingSqlMapper fundingSqlMapper;
+	
+//	펀딩 메인페이지 ------------------------------------------------------------------------------------------
+	public List<FundingDto> getFundingOrderByAchievementRate() {
+		List<FundingDto> fundingList = fundingSqlMapper.selectFundingOrderByAchievementRate();
+		for(FundingDto fundingDto : fundingList) {
+			fundingDto.setThumbnailList(fundingSqlMapper.selectThumbnailAll(fundingDto.getFunding_id()));
+		}
+		return fundingList;
+	}
+	
+	
+//	펀딩 최신 등록순
+	public List<FundingDto> getFundingOrderByCreatedAt() {
+		List<FundingDto> fundingList = fundingSqlMapper.selectFundingOrderByCreatedAt();
+		for(FundingDto fundingDto : fundingList) {
+			fundingDto.setThumbnailList(fundingSqlMapper.selectThumbnailAll(fundingDto.getFunding_id()));
+		}
+		return fundingList;
+	}
+	
+	
+//	펀딩 달성률 가져오기
+	public int getFundingAchievementRate(long funding_id) {
+		// TODO Auto-generated method stub
+		return fundingSqlMapper.selectFundingAchievementRate(funding_id);
+	}
+	
+	
+	
+	
+	
+	
+//	펀딩 리스트 페이지 ----------------------------------------------------------------------------------------
 
 //	카테고리 목록
 	public List<FundingCategoryDto> selectAllFundingCategory() {
@@ -46,7 +80,10 @@ public class FundingServiceImpl {
 		List<FundingDto> fundingList = fundingSqlMapper.selectAllFunding(startNum,funding_category_id);
 		
 		for(FundingDto fundingDto : fundingList) {	
-
+			
+			List<FundingThumbnailDto> thumbnailList = fundingSqlMapper.selectThumbnailAll(fundingDto.getFunding_id());
+			fundingDto.setThumbnailList(thumbnailList);
+			
 			fundingDto.setClose_at(fundingSqlMapper.selectFundingCloseAt(fundingDto.getFunding_id()));
 			
 			int Dday = fundingSqlMapper.selectDateDiff(fundingDto.getClose_at());
@@ -68,6 +105,8 @@ public class FundingServiceImpl {
 //	펀딩 정보
 	public FundingDto selectFunding(long funding_id) {
 		FundingDto fundingDto = fundingSqlMapper.selectFunding(funding_id);
+		
+		fundingDto.setThumbnailList(fundingSqlMapper.selectThumbnailAll(funding_id));
 		
 		fundingDto.setFavorit(fundingSqlMapper.selectCountFavorit(funding_id));
 		
@@ -97,6 +136,8 @@ public class FundingServiceImpl {
 		
 		return fundingDto;		
 	}
+	
+
 
 //	페이지 갯수
 	public int selectCountPage(long funding_category_id) {
@@ -130,6 +171,20 @@ public class FundingServiceImpl {
 		
 		return pageNumList;
 	}
+	
+//	펀딩 상세 페이지 -----------------------------------------------------------------------------------------------
+	
+//	펀딩 상세 섬네일 이미지 갯수	
+	public int getDetailThumbnailCount(long funding_id) {
+		return fundingSqlMapper.selectDetailThumbnailCount(funding_id);
+	}
+	
+//	펀딩 후원자 수 출력
+	public int getSupportCount(long funding_id) {
+		return fundingSqlMapper.selectSupportCount(funding_id);
+	}
+
+//	펀딩 공지사항 ------------------------------------------------------------------------------------------------------------------------
 	
 //	공지사항 상세 정보
 	public FundingNewsDto selectFundingNews(long funding_notice_id) {
@@ -286,6 +341,11 @@ public class FundingServiceImpl {
 		return fundingOrderDto;
 	}
 	
+//	리워드 결제완료 갯수 출력
+	public int getRewardPaymentCount(long funding_reward_id) {
+		return fundingSqlMapper.selectRewardPaymentCount(funding_reward_id);
+	}
+	
 //	펀딩 리워드별 주문 정보 업데이트
 	public int updateFundingRewardOrder(long funding_order_id, FundingRewardOrderDto params) {
 
@@ -355,17 +415,28 @@ public class FundingServiceImpl {
 		return fundingOrderDto;
 	}
 
-	
-//	펀딩 등록전 태그 입력 
-	public long insertTag(FundingTagDto fundingTagDto) {
-		fundingSqlMapper.insertTag(fundingTagDto);
-		return fundingTagDto.getFunding_tag_id();
-	}
 
-//	펀딩 등록전 태그 조회
-	public FundingTagDto getTemporarilyTag(long funding_tag_id) {
-		return fundingSqlMapper.getTemporarilyTag(funding_tag_id);
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
 
 
 	
