@@ -3,13 +3,44 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssofun.www.funding.mapper.FundingSqlMapper">
 
+	<!-- 달성률 높은 순서대로 펀딩 리스트 8개 가져오기 -->
+	<select id="selectFundingOrderByAchievementRate" resultType="com.ssofun.www.funding.dto.FundingDto">
+		SELECT fd.* FROM tb_funding fd, 
+		(SELECT f.funding_id, f.target_price, IFNULL(SUM(fo.total_price),0) AS total_price, 
+		TRUNCATE((IFNULL(SUM(fo.total_price),0) / f.target_price)*100,0) AS achievement_rate
+		FROM tb_funding f
+		LEFT JOIN tb_funding_reward fr ON f.funding_id = fr.funding_id
+		LEFT JOIN tb_funding_reward_order fro ON fr.funding_reward_id = fro.funding_reward_id
+		LEFT JOIN tb_funding_order fo ON fro.funding_order_id = fo.funding_order_id
+		GROUP BY f.funding_id) t1
+		WHERE fd.funding_id = t1.funding_id 
+		ORDER BY t1.achievement_rate DESC, total_price DESC LIMIT 8
+	</select>
+	
+	
+	<!-- 새로 등록된 펀딩 리스트 4개 가져오기 -->
+	<select id="selectFundingOrderByCreatedAt" resultType="com.ssofun.www.funding.dto.FundingDto">
+		SELECT * FROM tb_funding ORDER BY created_at DESC LIMIT 4
+	</select>
+	
+	
+	<!-- 펀딩별 달성률 출력 -->
+	<select id="selectFundingAchievementRate" resultType="int">
+		SELECT TRUNCATE((IFNULL(SUM(fo.total_price),0) / f.target_price)*100,0) AS achievement_rate
+		FROM tb_funding f
+		LEFT JOIN tb_funding_reward fr ON f.funding_id = fr.funding_id
+		LEFT JOIN tb_funding_reward_order fro ON fr.funding_reward_id = fro.funding_reward_id
+		LEFT JOIN tb_funding_order fo ON fro.funding_order_id = fo.funding_order_id
+		WHERE f.funding_id = #{funding_id}
+	</select>
+
 	<!-- 가장 최근에 등록된 PK 가져오기 -->
 	<select id="selectLastInsertId" resultType="long">
 		SELECT LAST_INSERT_ID() FROM dual
 	</select>
 
 	<!-- 카테고리 리스트 출력 -->
-	<select id="selectAllFundingCategory" resultType="com.ssofun.dto.FundingCategoryDto">
+	<select id="selectAllFundingCategory" resultType="com.ssofun.www.funding.dto.FundingCategoryDto">
 		SELECT funding_category_id, name, image_url FROM tb_funding_category WHERE used_fg = 1 ORDER BY created_at
 	</select>
 	
@@ -20,7 +51,7 @@
 	
 	
 	<!-- 펀딩 리스트 출력 -->
-	<select id="selectAllFunding" resultType="com.ssofun.dto.FundingDto">
+	<select id="selectAllFunding" resultType="com.ssofun.www.funding.dto.FundingDto">
 		SELECT f.funding_id, fc.name funding_category, ft.name funding_tag, uc.name, f.title, f.description, f.contents, f.delivery_from
 		FROM tb_funding f, tb_funding_category fc, tb_funding_tag ft, tb_user_creator uc
 		WHERE f.funding_category_id = fc.funding_category_id AND f.funding_tag_id = ft.funding_tag_id 
@@ -67,8 +98,13 @@
 		WHERE funding_id = #{funding_id}
 	</select>
 	
+	
+	
+	
+	
+	
 	<!-- 펀딩 상세 정보 출력 -->
-	<select id="selectFunding" resultType="com.ssofun.dto.FundingDto">
+	<select id="selectFunding" resultType="com.ssofun.www.funding.dto.FundingDto">
 		SELECT f.funding_id, fc.name funding_category, ft.name funding_tag, uc.name creator_name, 
 		uc.email creator_email, f.title, f.description, f.contents, f.delivery_from
 		FROM tb_funding f, tb_funding_category fc, tb_funding_tag ft, tb_user_creator uc
@@ -84,7 +120,7 @@
 	
 	
 	<!-- 펀딩 좋아요 조회 -->
-	<select id="selectFavorit" resultType="com.ssofun.dto.FundingFavoritDto">
+	<select id="selectFavorit" resultType="com.ssofun.www.funding.dto.FundingFavoritDto">
 		SELECT * FROM tb_funding_favorit 
 		WHERE user_id = #{user_id} AND funding_id = #{funding_id} 
 		AND used_fg = 1
@@ -103,15 +139,16 @@
 	</update>
 	
 	<!-- 펀딩 리워드 리스트 출력 -->
-	<select id="selectRewardList" resultType="com.ssofun.dto.FundingRewardDto">
-		SELECT fr.funding_reward_id, fr.price, IFNULL(fr.target_sell_count,0) target_sell_count ,fr.title, fr.description,
-		 fr.delivery_price, fr.stock_max, fr.buy_count, fr.start_from, fr.close_at, fr.delivery_from FROM tb_funding_reward fr, tb_funding f
+	<select id="selectRewardList" resultType="com.ssofun.www.funding.dto.FundingRewardDto">
+		SELECT fr.funding_reward_id, fr.price ,fr.title, fr.description,
+		 fr.delivery_price, IFNULL(fr.stock_max,0) stock_max, IFNULL(fr.buy_count,0) buy_count, fr.start_from, fr.close_at, fr.delivery_from FROM tb_funding_reward fr, tb_funding f
 		WHERE fr.funding_id = f.funding_id 
 		AND f.funding_id = #{funding_id}
 	</select>
+
 	
 	<!-- 펀딩 리워드 아이템 리스트 출력 -->
-	<select id="selectItemList" resultType="com.ssofun.dto.FundingItemDto">
+	<select id="selectItemList" resultType="com.ssofun.www.funding.dto.FundingItemDto">
 		SELECT fri.funding_reward_item_id, fri.name, fri.count FROM tb_funding_reward fr, tb_funding f, tb_funding_reward_item fri
 		WHERE fr.funding_id = f.funding_id AND fr.funding_reward_id = fri.funding_reward_id
 		AND fr.funding_reward_id = #{funding_reward_id}
@@ -120,20 +157,51 @@
 		</if>
 	</select>
 	
+	<!-- 펀딩 섬네일 리스트 출력 -->
+	<select id="selectThumbnailAll" resultType="com.ssofun.www.funding.dto.FundingThumbnailDto">
+		SELECT funding_thumbnail_id,funding_id,url,image_order FROM tb_funding_thumbnail
+		WHERE funding_id = #{funding_id}
+	</select>
+	
+		
+	<!-- 펀딩 상세 섬네일 갯수 출력 -->
+	<select id="selectDetailThumbnailCount" resultType="int">
+		SELECT COUNT(*)-1 FROM tb_funding_thumbnail
+		WHERE funding_id = #{funding_id}
+	</select>
+	
+	<!-- 펀딩 상세 후원자 수 출력 -->
+	<select id="selectSupportCount" resultType="int">
+		SELECT IFNULL(COUNT(fo.user_id),0)
+		FROM tb_funding_order fo, tb_funding_reward_order fro, tb_funding_reward fr 
+		WHERE fo.funding_order_id = fro.funding_order_id 
+		AND fro.funding_reward_id = fr.funding_reward_id
+		AND fr.funding_id = #{funding_id}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 펀딩 공지사항 리스트 출력 -->
-	<select id="selectNewsList" resultType="com.ssofun.dto.FundingNewsDto">
-		SELECT funding_notice_id, title, contents, IFNULL(DATEDIFF(SYSDATE(),created_at),0) created_at FROM tb_funding_news
+	<select id="selectNewsList" resultType="com.ssofun.www.funding.dto.FundingNewsDto">
+		SELECT funding_notice_id, title, contents, IFNULL(DATEDIFF(SYSDATE(),created_at),0) created_after, created_at FROM tb_funding_news
 		WHERE funding_id = #{funding_id}
 	</select>
 	
 	<!-- 펀딩 공지사항 상세 출력 -->
-	<select id="selectFundingNews" resultType="com.ssofun.dto.FundingNewsDto">
-		SELECT funding_notice_id, title, contents, IFNULL(DATEDIFF(SYSDATE(),created_at),0) created_at FROM tb_funding_news
+	<select id="selectFundingNews" resultType="com.ssofun.www.funding.dto.FundingNewsDto">
+		SELECT funding_notice_id, title, contents, IFNULL(DATEDIFF(SYSDATE(),created_at),0) created_after FROM tb_funding_news
 		WHERE funding_notice_id = #{funding_notice_id}
 	</select>
 	
 	<!-- 펀딩 공지사항 댓글 리스트 출력 -->
-	<select id="selectNewsReviewList" resultType="com.ssofun.dto.FundingNewsReviewDto">
+	<select id="selectNewsReviewList" resultType="com.ssofun.www.funding.dto.FundingNewsReviewDto">
 		SELECT fnr.funding_news_review_id, u. nickname, fnr.contents, IFNULL(DATEDIFF(SYSDATE(),fnr.created_at),0) created_at
 		FROM tb_funding_news_review fnr, tb_user u
 		WHERE fnr.user_id = u.user_id AND funding_notice_id = #{funding_notice_id} AND this_answer_id IS NULL
@@ -145,7 +213,7 @@
 	 </select>
 	 
 	 <!-- 펀딩 공지사항 대댓글 리스트 출력 -->
-	 <select id="selectNewsAnswerList" resultType="com.ssofun.dto.FundingNewsReviewAnswerDto">
+	 <select id="selectNewsAnswerList" resultType="com.ssofun.www.funding.dto.FundingNewsReviewAnswerDto">
 	 	SELECT fnr.this_answer_id, u. nickname, fnr.contents, IFNULL(DATEDIFF(SYSDATE(),fnr.created_at),0) created_at
 		FROM tb_funding_news_review fnr, tb_user u
 		WHERE fnr.user_id = u.user_id AND funding_notice_id = #{funding_notice_id} AND this_answer_id = #{funding_news_review_id}
@@ -171,11 +239,17 @@
 	 
 	 
 	 
+	 
+	 
+	 
+	 
+	 
+	 
 	<!-- 테이블명 변경 예정 -->
 	 
 	 <!-- 펀딩 커뮤니티 리스트 출력 -->
-	 <select id="selectCommunityList" resultType="com.ssofun.dto.FundingCommunityDto">
-	 	SELECT fr.funding_review_id, u.nickname, fr.contents, IFNULL(DATEDIFF(SYSDATE(),fr.created_at),0) created_at 
+	 <select id="selectCommunityList" resultType="com.ssofun.www.funding.dto.FundingCommunityDto">
+	 	SELECT fr.funding_review_id, u.nickname, fr.contents, IFNULL(DATEDIFF(SYSDATE(),fr.created_at),0) created_after, fr.created_at 
 		FROM tb_funding_review fr, tb_user u 
 		WHERE fr.user_id = u.user_id AND fr.funding_id = #{funding_id} AND fr.this_answer_id IS NULL AND fr.used_fg = 1
 	 </select> 
@@ -188,22 +262,22 @@
 	 </insert>
 	 
 	 <!-- 펀딩 커뮤니티 상세 출력 -->
-	 <select id="selectCommunity" resultType="com.ssofun.dto.FundingCommunityDto">
-	 	SELECT fr.funding_review_id, u.nickname, fr.contents, IFNULL(DATEDIFF(SYSDATE(),fr.created_at),0) created_at 
+	 <select id="selectCommunity" resultType="com.ssofun.www.funding.dto.FundingCommunityDto">
+	 	SELECT fr.funding_review_id, u.nickname, fr.contents, IFNULL(DATEDIFF(SYSDATE(),fr.created_at),0) created_after, fr.created_at
 		FROM tb_funding_review fr, tb_user u WHERE fr.user_id = u.user_id AND fr.funding_review_id = #{funding_review_id} 
 		AND fr.this_answer_id IS NULL AND fr.used_fg = 1
 	 </select>
 	 
 	 <!-- 펀딩 커뮤니티 댓글 리스트 출력 -->
-	<select id="selectCommunityReviewList" resultType="com.ssofun.dto.FundingCommunityReviewDto">
-		SELECT funding_review_id, this_answer_id, nickname, contents, IFNULL(DATEDIFF(SYSDATE(),fr.created_at),0) created_at 
+	<select id="selectCommunityReviewList" resultType="com.ssofun.www.funding.dto.FundingCommunityReviewDto">
+		SELECT funding_review_id, this_answer_id, nickname, contents, IFNULL(DATEDIFF(SYSDATE(),fr.created_at),0) created_after 
 		FROM tb_funding_review fr, tb_user u WHERE fr.user_id = u.user_id AND fr.this_answer_id = #{funding_review_id} 
 		AND fr.used_fg = 1
 	</select>
 	
 	<!-- 펀딩 커뮤니티 대댓글 리스트 출력 -->
-	<select id="selectCommunityReviewAnswerList" resultType="com.ssofun.dto.FundingCommunityReviewAnswerDto">
-		SELECT this_answer_id, nickname, contents, IFNULL(DATEDIFF(SYSDATE(),fr.created_at),0) created_at 
+	<select id="selectCommunityReviewAnswerList" resultType="com.ssofun.www.funding.dto.FundingCommunityReviewAnswerDto">
+		SELECT this_answer_id, nickname, contents, IFNULL(DATEDIFF(SYSDATE(),fr.created_at),0) created_after 
 		FROM tb_funding_review fr, tb_user u WHERE fr.user_id = u.user_id AND fr.this_answer_id = #{review_id} 
 		AND fr.used_fg = 1
 	</select>
@@ -233,9 +307,14 @@
 	</insert>
 	
 	
+	<!-- 결제완료된 리워드 갯수 출력 -->
+	 <select id="selectRewardPaymentCount" resultType="int">
+	 	SELECT IFNULL(SUM(count),0) FROM tb_funding_reward_order 
+	 	WHERE funding_reward_id = #{funding_reward_id} AND status = 3
+	 </select>
 	 
 	 <!-- 펀딩 결제전 주문 정보 입력 -->
-	 <insert id="insertOrder" parameterType="com.ssofun.dto.FundingOrderDto" keyProperty="funding_order_id">
+	 <insert id="insertOrder" parameterType="com.ssofun.www.funding.dto.FundingOrderDto" keyProperty="funding_order_id">
 	 	INSERT INTO tb_funding_order(user_id,funding_order_status_id,price_support,open_name_fg,open_amount_fg,total_price,used_fg)
 		VALUE(#{user_id},#{funding_order_status_id},#{price_support},#{open_name_fg},#{open_amount_fg},#{total_price},0)
 	 	
@@ -253,22 +332,22 @@
 	</insert>
 	
 	<!-- 펀딩 결제전 주문 정보 출력 -->
-	 <select id="selectPaymentBeforeFundingOrder" resultType="com.ssofun.dto.FundingOrderDto">
+	 <select id="selectPaymentBeforeFundingOrder" resultType="com.ssofun.www.funding.dto.FundingOrderDto">
 	 	SELECT funding_order_id,user_id,funding_order_status_id,price_support,open_name_fg,open_amount_fg,
 	 	total_price,created_at  FROM tb_funding_order 
 	 	WHERE funding_order_id = #{funding_order_id}
 	 </select>
 	 
 	 <!-- 펀딩 결제전 리워드별 주문 정보 출력 -->
-	<select id="selectPaymentBeforeFundingRewardOrder" resultType="com.ssofun.dto.FundingRewardOrderDto">
+	<select id="selectPaymentBeforeFundingRewardOrder" resultType="com.ssofun.www.funding.dto.FundingRewardOrderDto">
 		SELECT funding_reward_order_id,funding_reward_id,funding_order_id,delivery_recipient_id,count,amount,status 
 		FROM tb_funding_reward_order 
 		WHERE funding_order_id = #{funding_order_id}
 	</select>
 	
 	<!-- 리워드 정보 리스트 출력 -->
-	 <select id="selectReward" resultType="com.ssofun.dto.FundingRewardDto">
-	 	SELECT funding_reward_id,funding_id,price,target_sell_count,title,description,delivery_price,stock_max,buy_count
+	 <select id="selectReward" resultType="com.ssofun.www.funding.dto.FundingRewardDto">
+	 	SELECT funding_reward_id,funding_id,price,title,description,delivery_price,stock_max,buy_count
 	 	FROM tb_funding_reward 
 	 	WHERE funding_reward_id = #{funding_reward_id}
 	 </select>
@@ -290,21 +369,21 @@
 	</update>
 	
 	<!-- 펀딩 결제 완료된 주문 정보 출력 -->
-	 <select id="selectOrder" resultType="com.ssofun.dto.FundingOrderDto">
+	 <select id="selectOrder" resultType="com.ssofun.www.funding.dto.FundingOrderDto">
 	 	SELECT funding_order_id,user_id,funding_order_status_id,price_support,open_name_fg,open_amount_fg,
 	 	total_price,created_at  FROM tb_funding_order 
 	 	WHERE funding_order_id = #{funding_order_id} AND used_fg = 1
 	 </select>
 	 
 	 <!-- 펀딩 결제 완료된 리워드별 주문 정보 출력 -->
-	<select id="selectRewardOrder" resultType="com.ssofun.dto.FundingRewardOrderDto">
+	<select id="selectRewardOrder" resultType="com.ssofun.www.funding.dto.FundingRewardOrderDto">
 		SELECT funding_reward_order_id,funding_reward_id,funding_order_id,delivery_recipient_id,count,amount,status 
 		FROM tb_funding_reward_order 
 		WHERE funding_order_id = #{funding_order_id} AND used_fg = 1
 	</select>
 	
 	<!-- 결제 완료후 결제 정보 입력 -->
-	<insert id="insertPayment" parameterType="com.ssofun.dto.PaymentDto" keyProperty="payment_id">
+	<insert id="insertPayment" parameterType="com.ssofun.www.funding.dto.PaymentDto" keyProperty="payment_id">
 		INSERT INTO tb_payment(amount,token) VALUE(#{amount},#{token})
 		
 		<!-- PK 조회를 위한 selectKey -->
@@ -320,7 +399,7 @@
 	</insert>
 	
 	<!-- 주문 결제건 택배 수령인 정보 입력 -->
-	<insert id="insertDeliveryRecipient" parameterType="com.ssofun.dto.DeliveryRecipientDto" keyProperty="delivery_recipient_id">
+	<insert id="insertDeliveryRecipient" parameterType="com.ssofun.www.funding.dto.DeliveryRecipientDto" keyProperty="delivery_recipient_id">
 		INSERT INTO tb_delivery_recipient(name,phone,address_post,address_default,address_detail,request_message)
 		VALUE(#{name},#{phone},#{address_post},#{address_default},#{address_detail},#{request_message})
 		
@@ -330,31 +409,7 @@
 		</selectKey>
 	</insert>
 	
-	
-	<!-- 펀딩 등록전 태그 입력 -->
-	<insert id="insertTag" parameterType="com.ssofun.dto.FundingTagDto" keyProperty="funding_tag_id">
-		INSERT INTO tb_funding_tag(name,used_fg) VALUES(#{name},#{used_fg})
-		
-		<!-- PK 조회를 위한 selectKey -->
-		<selectKey keyProperty="funding_tag_id" resultType="java.lang.Long" order="AFTER">
-		  SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert>
-	
-	<!-- 펀딩 등록전 태그 조회 -->
-	<select id="getTemporarilyTag" resultType="com.ssofun.dto.FundingTagDto">
-		SELECT funding_tag_id, name FROM tb_funding_tag WHERE funding_tag_id = #{funding_tag_id}
-	</select>
-	
-	
-	
-	
-	<insert id="insertFunding">
-		INSERT INTO tb_funding(funding_category_id,funding_tag_id,user_creator_id,funding_code,title,
-								description,contents,confirm_fg,delivery_from)
-		VALUES(#{funding_category_id},#{fuding_tag_id},#{user_creator_id},'t123',#{fundingDto.title},
-				#{fundingDto.description},#{fundingDto.contents},1,#{fundingDto.delivery_from})
-	</insert>
+
 	
 
 </mapper>

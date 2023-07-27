@@ -72,12 +72,24 @@
     vertical-align: top; /* 텍스트를 위로 정렬합니다. */
   }
 
-.detail_th{
+.detail_top{
+	vertical-align: top;
 	width: 80px;
+	font-weight: 800;
 }
 
 .detail_bottom{
 	vertical-align: top;
+	font-weight: 700;	
+}
+
+.modal_text{
+	font-weight: 700;
+}
+
+.textarea_style{
+	width: 100%;
+	height: 150px;
 }
     
 </style>
@@ -293,33 +305,37 @@
 								<table class="table table-striped">
 									<thead>
 									  	<tr>
-									  		<th class="text-black-50 detail_top" scope="row">문의번호</th>
-									       	<th class="detail_bottom" scope="col">No.&nbsp;${qnaContentDetail.qna_id}</th>
+									  		<td class="text-black-50 detail_top" scope="row">문의번호</td>
+									       	<td class="detail_bottom" scope="col">No.&nbsp;${qnaContentDetail.qna_id}</td>
 									  	</tr>
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">등록일</th>
-									       	<th class="detail_bottom" scope="col"><fmt:formatDate value="${qnaContentDetail.created_at}" pattern="yyyy-MM-dd" /></th>
+									  		<td class="text-black-50 detail_top" scope="row">등록일</td>
+									       	<td class="detail_bottom" scope="col"><fmt:formatDate value="${qnaContentDetail.created_at}" pattern="yyyy-MM-dd" /></td>
 									  	</tr>
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">회사명</th>
-									       	<th class="detail_bottom" scope="col">${qnaContentDetail.biz_name}</th>
+									  		<td class="text-black-50 detail_top" scope="row">회사명</td>
+									       	<td class="detail_bottom" scope="col">${qnaContentDetail.biz_name}</td>
 									  	</tr>																			
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">아이디</th>
-									       	<th class="detail_bottom" scope="col">${qnaContentDetail.email}</th>
+									  		<td class="text-black-50 detail_top" scope="row">아이디</td>
+									       	<td class="detail_bottom" scope="col">${qnaContentDetail.email}</td>
 									  	</tr>									  	
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">제목</th>
-									       	<th class="detail_bottom" scope="col">${qnaContentDetail.title}</th>
+									  		<td class="text-black-50 detail_top" scope="row">제목</td>
+									       	<td class="detail_bottom" scope="col">${qnaContentDetail.title}</td>
 									  	</tr>
 									  	<tr>
-									  		<th class="text-black-50 detail_th contents_box" scope="row">문의내용</th>
-									       	<th class="detail_bottom" class="contents_box" scope="col">${qnaContentDetail.contents}</th>
+									  		<td class="text-black-50 detail_top contents_box" scope="row">문의내용</td>
+									       	<td class="detail_bottom" class="contents_box" scope="col">${qnaContentDetail.contents}</td>
 									  	</tr>
 									  	<c:if test="${!empty qnaContentDetail.answer_contents}">
 									  	<tr>
-									  		<th class="text-black-50 detail_th contents_box" scope="row">답변내용</th>
-									       	<th class="detail_bottom" class="contents_box" scope="col">${qnaContentDetail.answer_contents}</th>
+									  		<td class="text-black-50 detail_top contents_box" scope="row">답변내용</td>
+									       	<td class="detail_bottom" class="contents_box" scope="col">${qnaContentDetail.answer_contents}</td>
+									  	</tr>
+									  	<tr>
+									  		<td></td>
+									  		<td></td>
 									  	</tr>
 									  	</c:if>
 									</thead>
@@ -337,7 +353,7 @@
 						    <div class="modal-dialog modal-dialog-centered" role="document">
 						        <div class="modal-content">
 						            <div class="modal-header">
-						                <h5 class="modal-title" id="exampleModalCenterTitle-2">답변작성</h5>
+						                <h5 class="modal-title modal_text" id="exampleModalCenterTitle-2">답변작성</h5>
 						                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 						            </div>
 						            <div class="modal-body">
@@ -345,8 +361,8 @@
 						                <form action="answerContentsInsertProcess" method="POST">
 						                    <div class="input-group">
 						                    	<input type="hidden" value="${qnaContentDetail.qna_id}" name="qna_id">
-						                        <div class="input-group-prepend"><span class="input-group-text">답변작성하기</span></div>
-						                        <textarea class="form-control" name="answer_contents" aria-label="With textarea"></textarea>
+						                        <div class="input-group-prepend modal_text"><span class="input-group-text textarea_style">답변작성하기</span></div>
+						                        <textarea class="textarea_style" name="answer_contents" aria-label="With textarea"></textarea>
 						                    </div>
 						            </div>
 						            <div class="modal-footer">

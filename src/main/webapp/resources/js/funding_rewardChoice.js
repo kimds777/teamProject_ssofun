@@ -30,9 +30,12 @@ function setEventListener($funding_id,user_id){
         event.stopPropagation();         
         var $thisVal = $(this).val();
         var valParseInt = parseInt($thisVal);
+        var buyCountVal = $(this).parent("li").next("li").next("li").text().replace(/[^0-9]/g,"");
+        var buyCount = parseInt(buyCountVal);
+        // var buyCount = 5;
         if($thisVal != ""){
-            if(valParseInt>10){
-                alert("최대 10개까지 구매 가능합니다.");
+            if(valParseInt>buyCount){
+                alert("최대 "+buyCount+"개까지 구매 가능합니다.");
                 $(this).val("");
                 $(this).removeClass("activeInput");
                 $(this).parent("li").next().removeClass("activeColor");
@@ -190,6 +193,24 @@ function getFundingDto($funding_id){
         success: function(res){
             var achievementRate;
             $.each(res,function(key,value){
+
+                if(key == "thumbnailList"){
+                    $.each(value,function(index,item){
+                        var $url;
+                        $.each(item,function(key,value){
+                            if(key == "url"){
+                                $url = value;
+                            }
+
+                            if(key == "image_order"){
+                                if(value == 1){
+                                    $("#fundingInfo>li:first-child").html("<img src='/ssofunUploadFiles/"+$url+"' alt='리스트 섬네일'>");
+                                }
+                            }
+                        });
+                    });
+                }
+
                 if(key == "funding_category"){
                     $("#fundingInfo>li:nth-child(2)").text(value);
                 }
@@ -214,13 +235,12 @@ function getFundingDto($funding_id){
                         var $ul = $("<ul></ul>");
                         var $ulInput = $("<ul></ul>");
                         var price;
-                        var target_sell_count;
-                        var commasTargetSellCount;
                         var title;
                         var description;
                         var $itemList = $("<ul class='itemList'></ul>");
                         var stock_max;
                         var funding_reward_id;
+                        var buy_count;
                         $.each(item,function(key,value){
                             if(key == "funding_reward_id"){
                                 funding_reward_id = value;
@@ -228,10 +248,6 @@ function getFundingDto($funding_id){
                             if(key == "price"){
                                 var commasPrice = addCommas(value);
                                 price = commasPrice;
-                            }
-                            if(key == "target_sell_count"){
-                                commasTargetSellCount = addCommas(value);
-                                target_sell_count = value;
                             }
                             if(key == "title"){
                                 title = value;
@@ -255,27 +271,50 @@ function getFundingDto($funding_id){
                             }
                             if(key == "stock_max"){
                                 stock_max = value;
-                                if(target_sell_count < value){
-                                    $ul.prepend("<li>"+description+"</li>");
-                                    $ul.prepend("<li>"+title+"</li>");
-                                    $ul.prepend("<li>"+commasTargetSellCount+"명이 선택</li>");
-                                    $ul.prepend("<li class='first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span>남은수량 "+(value - target_sell_count)+"개</span></li>");
-                                    $ul.prepend("<li><input type='hidden' class='rewardId' value='"+funding_reward_id+"'></li>");
-                                }else if(target_sell_count >= value){
-                                    $ul.prepend("<li class='soldOut'>"+description+"</li>");
-                                    $ul.prepend("<li class='soldOut'>"+title+"</li>");
-                                    $ul.prepend("<li class='soldOut'>"+commasTargetSellCount+"명이 선택</li>");
-                                    $ul.prepend("<li class='soldOut first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span class='activeColor'>남은수량 0개 (매진)</span></li>");
-                                    $ul.prepend("<li><input type='hidden' class='funding_reward_id' value='"+funding_reward_id+"'></li>");
-                                }
+                                
+                                getRewardPaymentCount(function(res){
+                                    var paymentCountCommas = addCommas(res);
+                                    if(value == 0){
+                                        $ul.prepend("<li>"+description+"</li>");
+                                        $ul.prepend("<li>"+title+"</li>");
+                                        $ul.prepend("<li>"+paymentCountCommas+"명이 선택</li>");
+                                        $ul.prepend("<li class='first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span>남은수량 999개</span></li>");
+                                        $ul.prepend("<li><input type='hidden' class='rewardId' value='"+funding_reward_id+"'></li>");
+                                    }else{
+                                        if(res < value){
+                                            $ul.prepend("<li>"+description+"</li>");
+                                            $ul.prepend("<li>"+title+"</li>");
+                                            $ul.prepend("<li>"+paymentCountCommas+"명이 선택</li>");
+                                            $ul.prepend("<li class='first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span>남은수량 "+(value - res)+"개</span></li>");
+                                            $ul.prepend("<li><input type='hidden' class='rewardId' value='"+funding_reward_id+"'></li>");
+                                        }else if(res >= value){
+                                            $ul.prepend("<li class='soldOut'>"+description+"</li>");
+                                            $ul.prepend("<li class='soldOut'>"+title+"</li>");
+                                            $ul.prepend("<li class='soldOut'>"+paymentCountCommas+"명이 선택</li>");
+                                            $ul.prepend("<li class='soldOut first'><i class='bi bi-check-square'></i><b>"+price+"원</b><span class='activeColor'>남은수량 0개 (매진)</span></li>");
+                                            $ul.prepend("<li><input type='hidden' class='funding_reward_id' value='"+funding_reward_id+"'></li>");
+                                        }
+                                    }
+                                    
+                                },funding_reward_id);
+                            }
+
+                            if(key == "buy_count"){
+                                buy_count = value
                             }
                             if(key == "delivery_from"){
-                                if(target_sell_count < stock_max){                                    
-                                    $ul.append("<li><span>발송예정일</span> "+value+" 예정</li>");
-                                    $ulInput.addClass("hide").append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li>최대 10개</li>");
-                                }else if(target_sell_count >= stock_max){
-                                    $ul.append("<li class='soldOut'><span>발송예정일</span> "+value+" 예정</li>");
-                                }
+                                getRewardPaymentCount(function(res){
+                                    if(res < stock_max || stock_max == 0){                                    
+                                        $ul.append("<li><span>발송예정일</span> "+value+" 예정</li>");
+                                        if(buy_count == 0){
+                                            $ulInput.addClass("hide").append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li>갯수 제한 없음</li>");
+                                        }else{
+                                            $ulInput.addClass("hide").append("<li><input type='text' name='amount' class='amount'></li><li>수량</li><li class='buy_count'>최대 "+buy_count+"개</li>");
+                                        }
+                                    }else if(res >= stock_max){
+                                        $ul.append("<li class='soldOut'><span>발송예정일</span> "+value+" 예정</li>");
+                                    }
+                                },funding_reward_id);
                             }
                             
                         });
@@ -284,6 +323,18 @@ function getFundingDto($funding_id){
                 }
 
             });
+        }
+    });
+    
+};
+
+function getRewardPaymentCount(callback,funding_reward_id){
+    $.ajax({
+        url: "./AJAXgetRewardPaymentCount",
+        method: "GET",
+        data: {funding_reward_id:funding_reward_id},
+        success: function(res){
+            callback(res);
         }
     });
 };

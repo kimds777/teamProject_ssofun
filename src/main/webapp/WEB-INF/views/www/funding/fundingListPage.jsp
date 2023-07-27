@@ -53,14 +53,14 @@
                 <div class="row d-flex m-0" id="list">
                     <!-- <a href="#">
                         <ul class="p-0">
-                            <li>image 280 x 280</li>
+                            <li><img src="" alt=""></li>
                             <li class="text-start">카테고리</li>
                             <li class="text-start">상품 제목이 3줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
                             <li class="text-start">상품의 설명입니다. 이것도 최대 2줄까지만 지원을 하는것으로 하겠습니다</li>
                             <li class="text-start"><b class="text-danger">152% 달성</b> 20,000,000원 <span class="float-end">12일 남음</span></li>
                             <li><span></span></li>
                         </ul>
-                    </a>  -->                 
+                    </a>                   -->
                 </div>
             </div>
         </div>

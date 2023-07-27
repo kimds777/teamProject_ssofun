@@ -74,6 +74,10 @@
 	width: 110px;
 }
 
+.td_1{
+	font-weight: 700;	
+}
+
 .current-page{
     position: relative;
     display: block;
@@ -480,7 +484,7 @@ $(document).ready(function() {
                     "<input type='checkbox' checked=''/><span class='checkmark'></span>" +
                     "</label>" +
                     "</th>" +
-                    "<td>No. " + productList[i].product_id + "</td>" +
+                    "<td class='td_1'>No. " + productList[i].product_id + "</td>" +
                     "<td>" + productList[i].biz_name + "</td>" +
                     "<td>" + productList[i].category_type_name + "</td>" +
                     "<td><a href='productDetailPage?product_id=" + productList[i].product_id + "'>" + productList[i].product_name + "</a></td>" +

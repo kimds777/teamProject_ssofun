@@ -43,27 +43,27 @@
 }
 
 .c1{
-	width: 206.7px;
+	width: 100px;
 }
 
 .c2{
-	width: 206.7px;
+	width: 130px;
 }
 
 .c3{
-	width: 206.7px;
+	width: 180px;
 }
 
 .c4{
-	width: 206.7px;
-}
-
-.c5{
-	width: 206.7px;
+	width: 80px;
 }
 
 .c6{
-	width: 206.7px;
+	width: 120px;
+}
+
+.td_1{
+	font-weight: 700;
 }
 
 .current-page{
@@ -290,7 +290,7 @@
 									            	<th class="c0" scope="col">#</th>
 									                <th class="c1" scope="col">문의번호</th>
 									                <th class="c2" scope="col">등록일</th>
-									                <th class="c3" scope="col">회사명</th>
+									                <th class="c3" scope="col">유저아이디</th>
 									                <th class="c4" scope="col">닉네임</th>
 									                <th class="c5" scope="col">제목</th>
 									                <th class="c6" scope="col">답변여부</th>
@@ -305,11 +305,11 @@
 											                    <input type="checkbox" checked="" /><span class="checkmark"></span>
 											                </label>
 											            </th>
-											            <td><a href="qnaContentDetailPage?qna_id=${qnaContentsList.qna_id}">No.&nbsp;${qnaContentsList.qna_id}</a></td>
+											            <td class="td_1">No.&nbsp;${qnaContentsList.qna_id}</td>
 											            <td><fmt:formatDate value="${qnaContentsList.created_at}" pattern="yyyy-MM-dd" /></td>
-									                    <td>${qnaContentsList.biz_name}</td>
+									                    <td>${qnaContentsList.email}</td>
 									                    <td>${qnaContentsList.nickname}</td>
-									                    <td>${qnaContentsList.title}</td>
+									                    <td><a href="qnaContentDetailPage?qna_id=${qnaContentsList.qna_id}">${qnaContentsList.title}</a></td>
 									                    <c:choose>
 									                    	<c:when test="${empty qnaContentsList.answer_contents}">
 									                    		<td>답변대기</td>
@@ -330,7 +330,7 @@
 									    </table>
 									</div>
                         <!-- 페이지네이션 부분 추가 -->
-<%--                         <div class="pagination">
+                         <div class="pagination">
                            <c:choose>
                               <c:when test="${currentPage > 1}">
                                  <a href="?page=${currentPage - 1}" class="page-link">이전</a>
@@ -360,7 +360,7 @@
                                  <span class="page-link">다음</span>
                               </c:otherwise>
                            </c:choose>
-                        </div> --%>
+                        </div>
 									
                     <!-- end of col-->
                 </div>

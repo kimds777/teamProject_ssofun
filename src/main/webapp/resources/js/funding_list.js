@@ -1,3 +1,55 @@
+$(document).ready(function(){
+
+	var $funding_category_id = $("#funding_category_id").val();
+
+    getCategoryList($funding_category_id);
+    getPageName($funding_category_id);
+    getFundingList(null,$funding_category_id);
+    getPageList(null,$funding_category_id);
+
+    $("#sort").css({
+        "height":"25px",
+        "font-size":"5px"
+    });
+
+    $(document).on("click","#move-right",function(){
+        var $currentPageNum = $(".active").text();
+        var $maxPageNum;
+        getMaxPageNum(function(res){
+            $maxPageNum = res;
+            if($currentPageNum == $maxPageNum){
+                return alert("더이상 이동할 페이지가 없습니다.");
+            }
+            $("#pageNum"+$currentPageNum).removeClass('active');
+            var $nextPageNum =  parseInt($currentPageNum) + 1 ;
+            getPageList($nextPageNum,$funding_category_id);
+            getFundingList($nextPageNum,$funding_category_id);
+        },$funding_category_id);
+    });
+
+    $(document).on("click","#move-left",function(){
+        var $currentPageNum = $(".active").text();
+        if($currentPageNum == 1){
+            return alert("더이상 이동할 페이지가 없습니다.");
+        }
+    	$("#pageNum"+$currentPageNum).removeClass('active');
+        var $prePageNum = $currentPageNum - 1 ;
+        getPageList($prePageNum,$funding_category_id);
+        getFundingList($prePageNum,$funding_category_id);
+    });
+
+    $(document).on("click","#paging ul li",function(){
+        $("#paging ul li").removeClass('active');
+        var $clickNum = $(this).text();
+        getPageList($clickNum,$funding_category_id);
+        getFundingList($clickNum,$funding_category_id);
+    });
+
+    $("#category>li").first().addClass('active-cate');
+
+
+});
+
 function getPageName($funding_category_id){
     $.ajax({
         url: "./getPageNameAjax",
@@ -67,10 +119,27 @@ function getFundingList(pageNum,$funding_category_id){
                 var $achievementPrice;
                 var $achievementRate;
                 var $addComma;
-                var $ul = $("<ul class='p-0'></ul>").append("<li>image 280 x 280</li>");
+                var $ul = $("<ul class='p-0'></ul>")
                 $.each(item,function(key,value){
+                    
                     if(key == "funding_id"){
                         return $a = $("<a href='./fundingDetailPage?funding_id="+value+"'></a>");
+                    }
+                    if(key == "thumbnailList"){
+                        $.each(value,function(index,item){
+                            var $url;
+                            $.each(item,function(key,value){
+                                if(key == "url"){
+                                    $url = value;
+                                }
+
+                                if(key == "image_order"){
+                                    if(value == 1){
+                                        $ul.append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='리스트 섬네일'></li>");
+                                    }
+                                }
+                            });
+                        });
                     }
                     if(key == "funding_category" || key == "title" || key == "description"){
                         return $("<li class='text-start'>"+value+"</li>").appendTo($ul);
@@ -86,7 +155,11 @@ function getFundingList(pageNum,$funding_category_id){
 
                     if(key == "d_day"){
                         $addComma = addCommas($achievementPrice);
-                        return $("<li class='text-start'><b class='text-danger'>"+$achievementRate+"% 달성</b> "+$addComma+"원 <span class='float-end'>"+value+"일 남음</span></li>").appendTo($ul);
+                        if(value<0){
+                            return $("<li class='text-start'><b class='text-danger'>"+$achievementRate+"% 달성</b> "+$addComma+"원 <span class='float-end'>종료</span></li>").appendTo($ul);
+                        }else{
+                           return $("<li class='text-start'><b class='text-danger'>"+$achievementRate+"% 달성</b> "+$addComma+"원 <span class='float-end'>"+value+"일 남음</span></li>").appendTo($ul);
+                       }
                     }
 
                     if(key == "delivery_from"){
@@ -98,7 +171,7 @@ function getFundingList(pageNum,$funding_category_id){
                         return $($li).appendTo($ul);
                     }
 
-                    if(key == "funding_tag" || key == "name" || key == "contents" || key == "thumbnailList"){
+                    if(key == "funding_tag" || key == "name" || key == "contents"){
                         return true;
                     }
                 });
@@ -156,54 +229,3 @@ function getCategoryList(clickCategory){
     });
 };
 
-$(document).ready(function(){
-
-	var $funding_category_id = $("#funding_category_id").val();
-
-    getCategoryList($funding_category_id);
-    getPageName($funding_category_id);
-    getFundingList(null,$funding_category_id);
-    getPageList(null,$funding_category_id);
-
-    $("#sort").css({
-        "height":"25px",
-        "font-size":"5px"
-    });
-
-    $(document).on("click","#move-right",function(){
-        var $currentPageNum = $(".active").text();
-        var $maxPageNum;
-        getMaxPageNum(function(res){
-            $maxPageNum = res;
-            if($currentPageNum == $maxPageNum){
-                return alert("더이상 이동할 페이지가 없습니다.");
-            }
-            $("#pageNum"+$currentPageNum).removeClass('active');
-            var $nextPageNum =  parseInt($currentPageNum) + 1 ;
-            getPageList($nextPageNum,$funding_category_id);
-            getFundingList($nextPageNum,$funding_category_id);
-        },$funding_category_id);
-    });
-
-    $(document).on("click","#move-left",function(){
-        var $currentPageNum = $(".active").text();
-        if($currentPageNum == 1){
-            return alert("더이상 이동할 페이지가 없습니다.");
-        }
-    	$("#pageNum"+$currentPageNum).removeClass('active');
-        var $prePageNum = $currentPageNum - 1 ;
-        getPageList($prePageNum,$funding_category_id);
-        getFundingList($prePageNum,$funding_category_id);
-    });
-
-    $(document).on("click","#paging ul li",function(){
-        $("#paging ul li").removeClass('active');
-        var $clickNum = $(this).text();
-        getPageList($clickNum,$funding_category_id);
-        getFundingList($clickNum,$funding_category_id);
-    });
-
-    $("#category>li").first().addClass('active-cate');
-
-
-});

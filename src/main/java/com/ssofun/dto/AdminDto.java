@@ -13,7 +13,6 @@ public class AdminDto {
 	private String admin_phone;
 	private String admin_received_report;
 	private String admin_report_description;
-
 	@JsonFormat(pattern ="yyyy.MM.dd.HH.mm.ss", timezone = "Asia/Seoul")
 	private Date created_at;
 	private int used_fg;
@@ -59,7 +58,6 @@ public class AdminDto {
 	public void setLogin_password(String login_password) {
 		this.login_password = login_password;
 	}
-
 	public String getAdmin_phone() {
 		return admin_phone;
 	}
