@@ -29,7 +29,7 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/IMG/bag.webp" alt="">
+                    <img src="../../resources/img/bag.webp" alt="">
                 </a></li>
                 <li><a href="">
                     <ul class="bannerText">
@@ -37,7 +37,7 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/덕질가방3.webp" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
@@ -45,7 +45,7 @@
                         <li class="firstTextWhite">원석 마법 도감</li>
                         <li class="lastTextWhite">누구나 마법이 필요한 순간이 있다</li>
                     </ul>
-                    <img src="../../resources/IMG/원석마법도감_main.webp" alt="">
+                    <img src="../../resources/img/원석마법도감_main.webp" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
@@ -53,7 +53,7 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/덕질가방3.webp" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
@@ -61,7 +61,7 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/덕질가방3.webp" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
@@ -69,7 +69,7 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/덕질가방3.webp" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
@@ -77,7 +77,7 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/덕질가방3.webp" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
@@ -85,7 +85,7 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/덕질가방3.webp" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
@@ -93,7 +93,7 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/IMG/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/덕질가방3.webp" alt="">
                 </a></li>             
             </ul>
         </div>
@@ -124,7 +124,7 @@
             <li>검증된 상품만 모았어요!</li>
             <li>이번주 신상 반짝 혜택</li>
         </ul>
-        <img src="../../resources/IMG/메인서브배너2.jpg" alt="">
+        <img src="../../resources/img/메인서브배너2.jpg" alt="">
     </a></div>
 
     <div class="section">
