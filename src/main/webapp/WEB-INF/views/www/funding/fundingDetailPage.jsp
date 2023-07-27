@@ -145,30 +145,15 @@
                 <h5 class="row p-0">이 펀딩 서포터들의 PICK</h5>
 
                 <div class="row p-0 d-flex" id="pList">
-                    <a href="">
+                    <!-- <a href="">
                         <ul class="p-0">
                             <li>image 280 x 280</li>
                             <li class="text-start">카테고리</li>
                             <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
                             <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
                         </ul>
-                    </a>
-                    <a href="">
-                        <ul class="p-0">
-                            <li>image 280 x 280</li>
-                            <li class="text-start">카테고리</li>
-                            <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                            <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                        </ul>
-                    </a>
-                    <a href="">
-                        <ul class="p-0">
-                            <li>image 280 x 280</li>
-                            <li class="text-start">카테고리</li>
-                            <li class="text-start">상품 제목이 1줄이상 넘어가면 이렇게 표시를 하면 되겠습니다. 가나라마바사 아자차카다파하</li>
-                            <li class="text-start"><b class="text-danger">152% 달성</b> 12일 남음</li>
-                        </ul>
-                    </a>
+                    </a> -->
+                    
                 </div>
 
             </div>
