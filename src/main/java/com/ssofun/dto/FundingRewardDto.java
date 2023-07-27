@@ -11,9 +11,9 @@ public class FundingRewardDto {
 	private long funding_reward_id;
 	private long funding_id;
 	private int price; //리워드 가격
-	private int target_sell_count; //최대 팔린 개수
 	private String title; //리워드 제목
 	private String description; // 리워드 설명
+	private FundingDto fundingDto;
 	private List<FundingItemDto> itemList; //리워드별 상품 리스트
 	private int stock_max; //최대재고
 	private int buy_count; //1인당 최대 구매 개수
@@ -24,7 +24,7 @@ public class FundingRewardDto {
 	@JsonFormat(pattern="yyyy.MM.dd")
 	@DateTimeFormat(pattern = "yy.MM.dd")
 	private Date close_at; //리워드 종료일
-	@JsonFormat(pattern="yyyy. MM. dd EEEE")
+	@JsonFormat(pattern="yyyy. MM. dd. EEEE")
 	@DateTimeFormat(pattern = "yy.MM.dd")
 	private Date delivery_from; //배송 시작일
 	
@@ -33,17 +33,16 @@ public class FundingRewardDto {
 	}
 
 
-	
-	public FundingRewardDto(long funding_reward_id, long funding_id, int price, int target_sell_count, String title,
-			String description, List<FundingItemDto> itemList, int stock_max, int buy_count, int delivery_price,
+	public FundingRewardDto(long funding_reward_id, long funding_id, int price, String title, String description,
+			FundingDto fundingDto, List<FundingItemDto> itemList, int stock_max, int buy_count, int delivery_price,
 			Date start_from, Date close_at, Date delivery_from) {
 		super();
 		this.funding_reward_id = funding_reward_id;
 		this.funding_id = funding_id;
 		this.price = price;
-		this.target_sell_count = target_sell_count;
 		this.title = title;
 		this.description = description;
+		this.fundingDto = fundingDto;
 		this.itemList = itemList;
 		this.stock_max = stock_max;
 		this.buy_count = buy_count;
@@ -53,6 +52,16 @@ public class FundingRewardDto {
 		this.delivery_from = delivery_from;
 	}
 
+
+
+	public FundingDto getFundingDto() {
+		return fundingDto;
+	}
+
+
+	public void setFundingDto(FundingDto fundingDto) {
+		this.fundingDto = fundingDto;
+	}
 
 
 	public int getBuy_count() {
@@ -65,15 +74,6 @@ public class FundingRewardDto {
 		this.buy_count = buy_count;
 	}
 
-
-
-	public int getTarget_sell_count() {
-		return target_sell_count;
-	}
-
-	public void setTarget_sell_count(int target_sell_count) {
-		this.target_sell_count = target_sell_count;
-	}
 
 	public long getFunding_reward_id() {
 		return funding_reward_id;

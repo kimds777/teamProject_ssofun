@@ -8,13 +8,16 @@ public class UserCreatorDto {
 	private String phone;
 	private int creator_type;
 	private String biz_no;
+	private UserCreatorBankDto userCreatorBankDto;
 	
 	public UserCreatorDto() {
 		super();
 	}
 
+
+
 	public UserCreatorDto(long user_creator_id, long user_id, String name, String email, String phone, int creator_type,
-			String biz_no) {
+			String biz_no, UserCreatorBankDto userCreatorBankDto) {
 		super();
 		this.user_creator_id = user_creator_id;
 		this.user_id = user_id;
@@ -23,7 +26,22 @@ public class UserCreatorDto {
 		this.phone = phone;
 		this.creator_type = creator_type;
 		this.biz_no = biz_no;
+		this.userCreatorBankDto = userCreatorBankDto;
 	}
+
+
+
+	public UserCreatorBankDto getUserCreatorBankDto() {
+		return userCreatorBankDto;
+	}
+
+
+
+	public void setUserCreatorBankDto(UserCreatorBankDto userCreatorBankDto) {
+		this.userCreatorBankDto = userCreatorBankDto;
+	}
+
+
 
 	public long getUser_creator_id() {
 		return user_creator_id;

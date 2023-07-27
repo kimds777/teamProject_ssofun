@@ -19,7 +19,6 @@ public class FundingItemDto {
 		this.name = name;
 		this.count = count;
 	}
-	
 
 
 

@@ -8,33 +8,38 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class FundingOrderDto {
+	private int used_fg;
 	private long funding_order_id;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy.MM.dd")
+	private Date created_at;
 	private long user_id;
+	private UserDto userDto;
+	private FundingDto fundingDto;
 	private long funding_order_status_id;
-	private String funding_category;
-	private String title;
-	private String creator_name; // 나의 펀딩현황에서 사용
+	private String funding_category; //추후 삭제해야함 -> fundingDto로 가져와야함
+	private String title; //추후 삭제해야함 -> fundingDto로 가져와야함
+	private String creator_name; // 나의 펀딩현황에서 사용 //추후 삭제해야함 -> fundingDto로 가져와야함
 	private int price_support;
 	private int open_name_fg;
 	private int open_amount_fg;
 	private int total_price;
 	private List<FundingRewardOrderDto> rewardList;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy년 MM월 dd일")
-	@DateTimeFormat(pattern = "yyyy.MM.dd")
-	private Date created_at;
-	private int used_fg;
 	
 	public FundingOrderDto() {
 		super();
 	}
 
-	public FundingOrderDto(long funding_order_id, long user_id, long funding_order_status_id, String funding_category,
-			String title, String creator_name, int price_support, int open_name_fg, int open_amount_fg, int total_price,
-			List<FundingRewardOrderDto> rewardList, Date created_at, int used_fg) {
+	public FundingOrderDto(long funding_order_id, long user_id, long funding_order_status_id, UserDto userDto,
+			FundingDto fundingDto, String funding_category, String title, String creator_name, int price_support,
+			int open_name_fg, int open_amount_fg, int total_price, List<FundingRewardOrderDto> rewardList,
+			Date created_at, int used_fg) {
 		super();
 		this.funding_order_id = funding_order_id;
 		this.user_id = user_id;
 		this.funding_order_status_id = funding_order_status_id;
+		this.userDto = userDto;
+		this.fundingDto = fundingDto;
 		this.funding_category = funding_category;
 		this.title = title;
 		this.creator_name = creator_name;
@@ -45,6 +50,23 @@ public class FundingOrderDto {
 		this.rewardList = rewardList;
 		this.created_at = created_at;
 		this.used_fg = used_fg;
+	}
+
+
+	public UserDto getUserDto() {
+		return userDto;
+	}
+
+	public void setUserDto(UserDto userDto) {
+		this.userDto = userDto;
+	}
+
+	public FundingDto getFundingDto() {
+		return fundingDto;
+	}
+
+	public void setFundingDto(FundingDto fundingDto) {
+		this.fundingDto = fundingDto;
 	}
 
 	public String getFunding_category() {
