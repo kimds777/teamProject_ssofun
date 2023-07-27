@@ -1,3 +1,172 @@
+$(document).ready(function(){
+    var $funding_id = $("#funding_id").val();
+    var $funding_review_id = $("#funding_review_id").val();
+    var user_id = 1; //수정해야함!
+
+    getFundingDto($funding_id);
+    getFundingCommunity($funding_review_id,$funding_review_id);
+    setEventListener($funding_id,user_id,$funding_review_id);
+
+    
+
+});
+
+function setEventListener($funding_id,user_id,$funding_review_id){
+
+
+    $("#tab>ul>li#reward").click(function(){
+        $("#tab>div#rewardModal").toggleClass("hide");
+    });
+
+    $("#likeBtn").click(function(){
+        insertFavorit($funding_id,user_id);
+    });
+
+    $("#supportBtn").click(function(){
+        location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+    });
+
+    $(document).on("click","input#commentSubmit",function(){ 
+        event.stopPropagation();       
+        var $contents = $("#commentInput").val();
+
+        if($contents == ""){
+            alert("댓글 내용을 입력해주세요");
+            $("#commentInput").focus();
+            return ;
+        }
+
+        insertCommunityComment($funding_id,$funding_review_id,user_id,$contents);
+    });
+
+    $(document).on("click","input.commentReplySubmit",function(e){ 
+        e.stopPropagation();       
+        var $contents = $(this).prev().val();
+        var $this_answer_id = $(this).next().val();
+        alert($contents+" "+$this_answer_id);
+
+        if($contents == ""){
+            alert("댓글 내용을 입력해주세요");
+            $contents.focus();
+            return ;
+        }
+
+        insertCommunityCommentReply($funding_id,$this_answer_id,user_id,$contents,$funding_review_id);
+    });
+
+    $(document).on("click",".commentReplyShowBtn",function(){
+        $(this).addClass("hide");
+        var $hideBtn = $(this).next();
+        var $replyList = $hideBtn.next();
+        $hideBtn.removeClass("hide");
+        $replyList.removeClass("hide");
+    });
+
+    $(document).on("click",".commentReplyHideBtn",function(){
+        $(this).addClass("hide");
+        var $showBtn = $(this).prev();
+        var $replyList = $(this).next();
+        $replyList.addClass("hide");
+        $showBtn.removeClass("hide");
+    });
+
+
+    var n=0;
+    $('ul#moveLeft').click(function(){
+        n--;
+        getDetailThumbnailCount(function(res){
+            var $thumbLength = res-1;
+
+            if(n<0){
+                n=$thumbLength;
+            };
+
+            $("ul#swiper>li").removeClass("activeBtn");
+            $("ul#swiper>li").eq(n).addClass("activeBtn");
+
+            var nm= n*(-100)+'%';
+            $('ul#thumb').animate({left:nm});
+        }, $funding_id);
+        
+
+    });
+
+    $('ul#moveRight').click(function(){
+        n++;
+        getDetailThumbnailCount(function(res){
+            var $thumbLength = res-1;
+
+            if(n>$thumbLength){
+                n=0;
+            };
+            $("ul#swiper>li").removeClass("activeBtn");
+            $("ul#swiper>li").eq(n).addClass("activeBtn");
+
+            var nm= n*(-100)+'%';
+            $('ul#thumb').animate({left:nm});
+        }, $funding_id);
+
+
+    });
+
+}
+
+function getDetailThumbnailCount(callback,$funding_id){
+    $.ajax({
+        url: "./AJAXgetDetailThumbnailCount",
+        method: "GET",
+        data: {funding_id:$funding_id},
+        success: function(res){
+            if(res != 0){
+                callback(res);
+            }
+        }
+    });
+}
+
+function insertFavorit($funding_id,user_id){
+    $.ajax({
+        url: "./AJAXinsertFavorit",
+        method: "POST",
+        data: {funding_id:$funding_id,user_id:user_id},
+        success: function(res){
+            if(res==1){
+                // uesd_fg 1인 좋아요 갯수 조회하기
+                getCountFavorit($funding_id);
+            }else{
+                // 만들어야함 uesd_fg 0으로 처리하기
+                deleteFavorit($funding_id,user_id);
+            }
+        }
+    });
+}
+
+function getCountFavorit($funding_id){
+    $.ajax({
+        url: "./AJAXgetCountFavorit",
+        method: "GET",
+        data: {funding_id:$funding_id},
+        success: function(res){
+            if(res != null){
+                $("#likeBtn").html("<i class='bi bi-heart'></i>"+res);
+            }
+        }
+    });
+}
+
+function deleteFavorit($funding_id,user_id){
+    $.ajax({
+        url: "./AJAXdeleteFavorit?funding_id="+$funding_id+"&user_id="+user_id,
+        method: "PATCH",
+        data: {used_fg:0},
+        success: function(res){
+            if(res == 1){
+                getCountFavorit($funding_id);
+            }
+        }
+    });
+}
+
 
 function getFundingDto($funding_id){
     $.ajax({
@@ -16,6 +185,29 @@ function getFundingDto($funding_id){
                         $tabNotice.html("<a href='./fundingDetailNoticeListPage?funding_id="+value+"'>공지사항</a>");
                         $tabCommunity.html("<a class='activeTab' href='./fundingDetailCommunityListPage?funding_id="+value+"'>커뮤니티</a>");
                         return true;
+                    }
+
+                    if(key == "thumbnailList"){
+                        $.each(value,function(index,item){
+                            var $url;
+                            $.each(item,function(key,value){
+                                if(key == "url"){
+                                    $url = value;
+                                }
+
+                                if(key == "image_order"){
+                                    if(value != 1){
+                                        if(value == 2){
+                                            $("ul#swiper").append("<li class='activeBtn'></li>");
+                                            $("ul#thumb").append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='상세 섬네일'></li>");
+                                        }else{
+                                            $("ul#swiper").append("<li></li>");
+                                            $("ul#thumb").append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='상세 섬네일'></li>");
+                                        }
+                                    }
+                                }
+                            });
+                        });
                     }
 
                     if(key == "funding_category"){return $("#category-name>h6").text(value);}
@@ -127,6 +319,7 @@ function getFundingDto($funding_id){
 
 function getFundingCommunity($funding_review_id){
     $("#content").empty();
+    
     $.ajax({
         url: "./getFundingCommunityAjax",
         method: "GET",
@@ -141,7 +334,7 @@ function getFundingCommunity($funding_review_id){
                         return $creatorName = value;
                     }
 
-                    if(key == "created_at"){
+                    if(key == "created_after"){
                         if(value == 0){
                             return $ul.append("<li class='profile'></li><li class='name'>"+$creatorName+"</li><li class='date'> 오늘</li>").appendTo($div);
                         }else{
@@ -176,7 +369,7 @@ function getFundingCommunity($funding_review_id){
                                 if(key == "nickname"){
                                     return $("<li class='profile'></li><li class='name'>"+value+"</li>").appendTo($ulComment);
                                 }
-                                if(key == "created_at"){
+                                if(key == "created_after"){
                                     if(value == 0){
                                         return $("<li class='date'> 오늘</li>").appendTo($ulComment);
                                     }else{
@@ -295,60 +488,3 @@ function insertCommunityCommentReply($funding_id,$this_answer_id,user_id,$conten
 }
 
 
-$(document).ready(function(){
-    var $funding_id = $("#funding_id").val();
-    var $funding_review_id = $("#funding_review_id").val();
-    var user_id = 1; //수정해야함!
-
-    getFundingDto($funding_id);
-    getFundingCommunity($funding_review_id);
-
-    $(document).on("click","input#commentSubmit",function(){ 
-        event.stopPropagation();       
-        var $contents = $("#commentInput").val();
-
-        if($contents == ""){
-            alert("댓글 내용을 입력해주세요");
-            $("#commentInput").focus();
-            return ;
-        }
-
-        insertCommunityComment($funding_id,$funding_review_id,user_id,$contents);
-    });
-
-    $(document).on("click","input.commentReplySubmit",function(){ 
-        event.stopPropagation();       
-        var $contents = $(this).prev().val();
-        var $this_answer_id = $(this).next().val();
-        alert($contents+" "+$this_answer_id);
-
-        if($contents == ""){
-            alert("댓글 내용을 입력해주세요");
-            $contents.focus();
-            return ;
-        }
-
-        insertCommunityCommentReply($funding_id,$this_answer_id,user_id,$contents,$funding_review_id);
-    });
-
-    $(document).on("click",".commentReplyShowBtn",function(){
-        $(this).addClass("hide");
-        var $hideBtn = $(this).next();
-        var $replyList = $hideBtn.next();
-        $hideBtn.removeClass("hide");
-        $replyList.removeClass("hide");
-    });
-
-    $(document).on("click",".commentReplyHideBtn",function(){
-        $(this).addClass("hide");
-        var $showBtn = $(this).prev();
-        var $replyList = $(this).next();
-        $replyList.addClass("hide");
-        $showBtn.removeClass("hide");
-    });
-
-    $("#tab>ul>li#reward").click(function(){
-        $("#tab>div#rewardModal").toggleClass("hide");
-    });
-
-});
