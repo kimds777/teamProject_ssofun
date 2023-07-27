@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssofun.www.funding.dto.FundingDto;
-import com.ssofun.www.funding.dto.FundingOrderDto;
-import com.ssofun.www.funding.dto.UserDto;
+import com.ssofun.dto.FundingDto;
+import com.ssofun.dto.FundingOrderDto;
+import com.ssofun.dto.UserDto;
 import com.ssofun.www.user.service.UserServiceImpl;
 
 @Controller
