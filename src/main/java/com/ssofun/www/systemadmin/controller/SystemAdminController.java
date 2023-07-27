@@ -61,6 +61,21 @@ public class SystemAdminController {
 	
 	
 	
+	
+	
+//admin로그인처리
+	@RequestMapping("login/adminLoginPage")
+	public String adminLoginPage() {
+		
+		return "systemadmin/login/adminLoginPage";
+	}
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("systemAdminMainPage")
 	public String systemAdminMainPage() {
 		return"systemadmin/systemAdminMainPage";
