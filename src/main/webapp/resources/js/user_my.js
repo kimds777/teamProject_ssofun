@@ -1,5 +1,5 @@
-
-$(document).ready(function(){
+var $j = jQuery.noConflict();
+$j(document).ready(function(){
 
     divHeightSense();
     setEventListener();
@@ -9,27 +9,27 @@ $(document).ready(function(){
 function setEventListener(){
 
     
-    $(document).on("click","#myPageTab>li:first-child",function(e){
+    $j(document).on("click","#myPageTab>li:first-child",function(e){
         e.stopPropagation();
         window.location.href = "../store/userMyPage";
     });
 
-    $(document).on("click","#myPageTab>li:first-child>a",function(e){
+    $j(document).on("click","#myPageTab>li:first-child>a",function(e){
         e.stopPropagation();
         window.location.href = "../store/userMyPage";
     });
     
-    $(document).on("click","#myPageTab>li:last-child",function(e){
+    $j(document).on("click","#myPageTab>li:last-child",function(e){
         e.stopPropagation();
         window.location.href = "../maker/makerMyPage";
     });
 
-    $(document).on("click","#myPageTab>li:last-child>a",function(e){
+    $j(document).on("click","#myPageTab>li:last-child>a",function(e){
         e.stopPropagation();
         window.location.href = "../maker/makerMyPage";
     });
 
-    $(document).on("click","#first>li#logout",function(e){
+    $j(document).on("click","#first>li#logoutUser",function(e){
         e.stopPropagation();
         alert("클릭");
         logout();
@@ -39,7 +39,7 @@ function setEventListener(){
 
 
 function logout(){
-    $.ajax({
+    $j.ajax({
         url: "../user/AJAXlogout",
         method: "GET",
         success: function(res){
@@ -54,6 +54,6 @@ function logout(){
 }
 
 function divHeightSense(){
-    var divHight =  $('div#myPageSection').height();
-    $('#topBg').height(divHight+160);
+    var divHight =  $j('div#myPageSection').height();
+    $j('#topBg').height(divHight+160);
 }
