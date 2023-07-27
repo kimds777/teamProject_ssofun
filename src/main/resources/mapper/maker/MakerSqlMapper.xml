@@ -9,22 +9,22 @@
 	</select>
 	
 	<!-- 창작자 펀딩 리스트 조회 -->
-	<select id="selectMakerFundingList" resultType="com.ssofun.www.funding.dto.FundingDto">
+	<select id="selectMakerFundingList" resultType="com.ssofun.dto.FundingDto">
 		SELECT * FROM tb_funding WHERE user_creator_id = #{user_creator_id} 
 	</select>
 	
 	<!-- 창작자 펀딩 섬네일 리스트 조회 -->
-	<select id="selectFundingThumbnailList" resultType="com.ssofun.www.funding.dto.FundingThumbnailDto">
+	<select id="selectFundingThumbnailList" resultType="com.ssofun.dto.FundingThumbnailDto">
 		SELECT * FROM tb_funding_thumbnail WHERE funding_id = #{funding_id} AND used_fg = 1
 	</select>
 	
 	<!-- 창작자 정보 조회 -->
-	<select id="selectMakerByUserCreatorId" resultType="com.ssofun.www.funding.dto.UserCreatorDto">
+	<select id="selectMakerByUserCreatorId" resultType="com.ssofun.dto.UserCreatorDto">
 		SELECT * FROM tb_user_creator WHERE user_creator_id = #{user_creator_id} AND used_fg = 1
 	</select>
 	
 	<!-- 창작자 은행 정보 조회 -->
-	<select id="selectCreatorBank" resultType="com.ssofun.www.funding.dto.UserCreatorBankDto">
+	<select id="selectCreatorBank" resultType="com.ssofun.dto.UserCreatorBankDto">
 		SELECT * FROM tb_user_creator_bank WHERE user_creator_id = #{user_creator_id} AND used_fg = 1
 	</select>
 	
@@ -34,7 +34,7 @@
 	</select>
 	
 	<!-- 리워드 아이템 리스트 조회 -->
-	<select id="selectItemList" resultType="com.ssofun.www.funding.dto.FundingItemDto">
+	<select id="selectItemList" resultType="com.ssofun.dto.FundingItemDto">
 		SELECT * FROM tb_funding_reward_item WHERE funding_reward_id = #{funding_reward_id}
 	</select>
 	
@@ -50,7 +50,7 @@
 
 
 	<!-- 창작자 정보 입력 -->
-	<insert id="insertUserCreator" parameterType="com.ssofun.www.funding.dto.UserCreatorDto" keyProperty="user_creator_id">
+	<insert id="insertUserCreator" parameterType="com.ssofun.dto.UserCreatorDto" keyProperty="user_creator_id">
 		INSERT INTO tb_user_creator(user_id,name,email,phone,creator_type,biz_no) 
 		VALUES(#{user_id},#{name},#{email},#{phone},#{creator_type},#{biz_no})
 		
@@ -68,7 +68,7 @@
 	
 	<!-- 태그 정보 입력 -->
 	
-	<insert id="insertTag" parameterType="com.ssofun.www.funding.dto.FundingTagDto" keyProperty="funding_tag_id">
+	<insert id="insertTag" parameterType="com.ssofun.dto.FundingTagDto" keyProperty="funding_tag_id">
 		INSERT INTO tb_funding_tag(name) VALUES(#{name})
 	
 		<!-- PK 조회를 위한 selectKey -->
@@ -91,7 +91,7 @@
 	</select>
 	
 	<!-- 리워드 정보 입력 -->
-	<insert id="insertFundingReward" parameterType="com.ssofun.www.funding.dto.FundingRewardDto" keyProperty="funding_reward_id">
+	<insert id="insertFundingReward" parameterType="com.ssofun.dto.FundingRewardDto" keyProperty="funding_reward_id">
 		INSERT INTO tb_funding_reward(funding_id,title,description,price,delivery_price,stock_max,buy_count,start_from,close_at,delivery_from) 
 		VALUES(#{funding_id},#{title},#{description},#{price},#{delivery_price},#{stock_max},#{buy_count},#{start_from},#{close_at},#{delivery_from})
 		
@@ -115,17 +115,17 @@
 	</insert>
 	
 	<!-- 리워드 리스트 출력 -->
-	<select id="selectRewardList" resultType="com.ssofun.www.funding.dto.FundingRewardDto">
+	<select id="selectRewardList" resultType="com.ssofun.dto.FundingRewardDto">
 		SELECT * FROM tb_funding_reward WHERE funding_id = #{funding_id}
 	</select>
 	
 	<!-- 리워드 주문 리스트 출력 -->
-	<select id="selectFundingRewardOrderList" resultType="com.ssofun.www.funding.dto.FundingRewardOrderDto">
+	<select id="selectFundingRewardOrderList" resultType="com.ssofun.dto.FundingRewardOrderDto">
 		SELECT * FROM tb_funding_reward_order WHERE funding_order_id = #{funding_order_id}
 	</select>
 	
 	<!-- 펀딩 주문 리스트 출력 수정필요 -->
-	<select id="selectFundingOrderList" resultType="com.ssofun.www.funding.dto.FundingOrderDto">
+	<select id="selectFundingOrderList" resultType="com.ssofun.dto.FundingOrderDto">
 		SELECT fo.*
 		FROM tb_funding_order fo, tb_funding_reward_order fro, tb_funding_reward fr 
 		WHERE fo.funding_order_id = fro.funding_order_id 
@@ -135,22 +135,22 @@
 	</select>
 	
 	<!-- 리워드 출력 -->
-	<select id="selectReward" resultType="com.ssofun.www.funding.dto.FundingRewardDto">
+	<select id="selectReward" resultType="com.ssofun.dto.FundingRewardDto">
 		SELECT * FROM tb_funding_reward WHERE funding_id = #{funding_id}
 	</select>
 	
 	<!-- 펀딩 출력 -->
-	<select id="selectFunding" resultType="com.ssofun.www.funding.dto.FundingDto">
+	<select id="selectFunding" resultType="com.ssofun.dto.FundingDto">
 		SELECT * FROM tb_funding WHERE funding_id = #{funding_id}
 	</select>
 	
 	<!-- 주문 회원 조회 -->
-	<select id="selectUser" resultType="com.ssofun.www.funding.dto.UserDto">
+	<select id="selectUser" resultType="com.ssofun.dto.UserDto">
 		SELECT user_id,name,email,nickname FROM tb_user WHERE user_id = #{user_id}
 	</select>
 	
 	<!-- 주문 상태 조회 -->
-	<select id="selectFundingOrderStatus" resultType="com.ssofun.www.funding.dto.FundingOrderStatusDto">
+	<select id="selectFundingOrderStatus" resultType="com.ssofun.dto.FundingOrderStatusDto">
 		SELECT * FROM tb_funding_order_status WHERE funding_order_status_id = #{funding_order_status_id}
 	</select>
 	
@@ -167,12 +167,12 @@
 	</select>
 	
 	<!-- 배송사 리스트 조회 -->
-	<select id="selectDeliveryCompanyList" resultType="com.ssofun.www.funding.dto.DeliveryCompanyDto">
+	<select id="selectDeliveryCompanyList" resultType="com.ssofun.dto.DeliveryCompanyDto">
 		SELECT * FROM tb_delivery_company WHERE used_fg = 1
 	</select>
 	
 	<!-- 배송 정보 입력(배송사+배송주소+배송상태) -->
-	<insert id="insertDelivery" parameterType="com.ssofun.www.funding.dto.DeliveryDto" keyProperty="delivery_id">
+	<insert id="insertDelivery" parameterType="com.ssofun.dto.DeliveryDto" keyProperty="delivery_id">
 		INSERT INTO tb_delivery(delivery_company_id,delivery_status_id,delivery_recipient_id) 
 		VALUES(#{delivery_company_id},#{delivery_status_id},#{delivery_recipient_id})
 		
@@ -184,7 +184,7 @@
 	
 	
 	<!-- 배송 상태 이름 출력 -->
-	<select id="selectDeliveryStatus" resultType="com.ssofun.www.funding.dto.DeliveryStatusDto">
+	<select id="selectDeliveryStatus" resultType="com.ssofun.dto.DeliveryStatusDto">
 		SELECT ds.* FROM tb_delivery_status ds, tb_delivery d
 		WHERE ds.delivery_status_id = d.delivery_status_id AND d.delivery_recipient_id = #{delivery_recipient_id}
 	</select>
@@ -225,7 +225,7 @@
 	
 	
 	<!-- 공지사항 리스트 출력 -->
-	<select id="selectFundingNoticeList" resultType="com.ssofun.www.funding.dto.FundingNewsDto">
+	<select id="selectFundingNoticeList" resultType="com.ssofun.dto.FundingNewsDto">
 		SELECT funding_notice_id,funding_id,title,contents,created_at FROM tb_funding_news 
 		WHERE funding_id = #{funding_id} AND used_fg = 1 ORDER BY funding_notice_id DESC
 	</select>
@@ -242,7 +242,7 @@
 	</insert>
 	
 	<!-- 공지사항 조회 -->
-	<select id="selectFundingNotice" resultType="com.ssofun.www.funding.dto.FundingNewsDto">
+	<select id="selectFundingNotice" resultType="com.ssofun.dto.FundingNewsDto">
 		SELECT funding_notice_id,funding_id,title,contents,created_at FROM tb_funding_news 
 		WHERE funding_notice_id = #{funding_notice_id}
 	</select>
@@ -262,13 +262,13 @@
 	
 	
 	<!-- 커뮤니티 리스트 출력 -->
-	<select id="selectCommunityList" resultType="com.ssofun.www.funding.dto.FundingCommunityDto">
+	<select id="selectCommunityList" resultType="com.ssofun.dto.FundingCommunityDto">
 		SELECT user_id,funding_id,created_at,contents,funding_review_id  FROM tb_funding_review
 		WHERE funding_id = #{funding_id} AND used_fg = 1 AND this_answer_id IS NULL ORDER BY funding_review_id DESC
 	</select>
 	
 	<!-- 커뮤니티 댓글 리스트 출력 -->
-	<select id="selectCommunityReviewList" resultType="com.ssofun.www.funding.dto.FundingCommunityReviewDto">
+	<select id="selectCommunityReviewList" resultType="com.ssofun.dto.FundingCommunityReviewDto">
 		SELECT user_id,IFNULL(DATEDIFF(SYSDATE(),created_at),0) created_after, created_at ,contents,funding_review_id,this_answer_id  FROM tb_funding_review
 		WHERE this_answer_id = #{funding_review_id} AND used_fg = 1
 	</select>
@@ -316,7 +316,7 @@
 	</select>
 	
 	<!-- 대시보드 일별 주문금액 출력 -->
-	<select id="selectDayChartData" resultType="com.ssofun.www.funding.dto.FundingOrderDto">
+	<select id="selectDayChartData" resultType="com.ssofun.dto.FundingOrderDto">
 		WITH RECURSIVE date_range AS (
 			SELECT (SELECT DATE(start_from) FROM tb_funding_reward WHERE funding_id = #{funding_id}) AS date_value
 		    UNION ALL
@@ -337,7 +337,7 @@
 	</select>
 	
 	<!-- 대시보드 일별 주문금액 누적 출력 -->
-	<select id="selectTotalChartData" resultType="com.ssofun.www.funding.dto.FundingOrderDto">
+	<select id="selectTotalChartData" resultType="com.ssofun.dto.FundingOrderDto">
 		WITH RECURSIVE date_range AS (
 			SELECT (SELECT DATE(start_from) FROM tb_funding_reward WHERE funding_id = #{funding_id}) AS date_value
 		    UNION ALL
