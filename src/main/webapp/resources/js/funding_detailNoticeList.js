@@ -1,33 +1,45 @@
 
 $(document).ready(function(){
-    var $funding_id = $("#funding_id").val();
-    var user_id = 1;
+    var urlParams = new URLSearchParams(window.location.search);
+    var $funding_id = urlParams.get("funding_id");
 
     getFundingDto($funding_id);
-    setEventListener($funding_id,user_id);
+    setEventListener($funding_id);
 
 });
 
-function setEventListener($funding_id,user_id){
+function setEventListener($funding_id){
+    var user_id = getUserSession();
 
     $("#tab>ul>li#reward").click(function(e){
         e.stopPropagation();
         $("#tab>div#rewardModal").toggleClass("hide");
     });
 
-    $("#likeBtn").click(function(e){
+    $(document).on("click","#likeBtn",function(e){
         e.stopPropagation();
-        insertFavorit($funding_id,user_id);
+        if(user_id != 0){
+            insertFavorit($funding_id,user_id);
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
     });
 
-    $("#supportBtn").click(function(e){
+    $(document).on("click","#supportBtn",function(e){
         e.stopPropagation();
-        location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
-    });
 
+        if(user_id != 0){
+            location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
+    });
 
     var n=0;
-    $('ul#moveLeft').click(function(){
+    $('ul#moveLeft').click(function(e){
+        e.stopPropagation();
         n--;
         getDetailThumbnailCount(function(res){
             var $thumbLength = res-1;
@@ -46,7 +58,8 @@ function setEventListener($funding_id,user_id){
 
     });
 
-    $('ul#moveRight').click(function(){
+    $('ul#moveRight').click(function(e){
+        e.stopPropagation();
         n++;
         getDetailThumbnailCount(function(res){
             var $thumbLength = res-1;
@@ -64,6 +77,49 @@ function setEventListener($funding_id,user_id){
 
     });
 
+    $(document).on("click","#header>div>div>a#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+
+}
+
+function logout(){
+    $.ajax({
+        url: "../user/AJAXlogout",
+        method: "GET",
+        success: function(res){
+            if(res == 1){
+                alert("로그아웃 성공!");
+                window.location.href = "http://localhost:8181/www/www/funding/fundingMainPage";
+            }else{
+                alert("이미 로그아웃 되어있습니다.");
+            }
+        }
+    });
+}
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        metho: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+       return 0;
+    }
 }
 
 function getDetailThumbnailCount(callback,$funding_id){
@@ -270,33 +326,37 @@ function getFundingDto($funding_id){
                         });
                     }
 
-                    if(key == "newsList"){                        
-                        $.each(value,function(index,item){
-                            var $div = $("<div></div>");
-                            var $noticeList = $("<div class='noticeList'></div>");
-                            var $ul = $("<ul class='noticeWriter'></ul>");
-                            $.each(item,function(key,value){
-
-                                if(key == "created_after"){
-                                    if(value == 0){
-                                        return $ul.append("<li class='profile'></li><li class='name'>"+$creator_name+"<span>메이커</span></li><li class='date'> 오늘</li>").appendTo($noticeList);
-                                    }else{
-                                        return $ul.append("<li class='profile'></li><li class='name'>"+$creator_name+"<span>메이커</span></li><li class='date'>"+value+"일전</li>").appendTo($noticeList);
+                    if(key == "newsList"){  
+                        if(value != null){
+                            $.each(value,function(index,item){
+                                var $div = $("<div></div>");
+                                var $noticeList = $("<div class='noticeList'></div>");
+                                var $ul = $("<ul class='noticeWriter'></ul>");
+                                $.each(item,function(key,value){
+    
+                                    if(key == "created_after"){
+                                        if(value == 0){
+                                            return $ul.append("<li class='profile'></li><li class='name'>"+$creator_name+"<span>메이커</span></li><li class='date'> 오늘</li>").appendTo($noticeList);
+                                        }else{
+                                            return $ul.append("<li class='profile'></li><li class='name'>"+$creator_name+"<span>메이커</span></li><li class='date'>"+value+"일전</li>").appendTo($noticeList);
+                                        }
                                     }
-                                }
-                                if(key == "title"){
-                                    return true;
-                                }                                      
-                                if(key == "contents"){                       
-                                    return $noticeList.append("<div class='noticeContent'>"+value+"</div><div class='gradient'></div>");
-                                }
-                                if(key == "funding_notice_id"){
-                                    $div.append($noticeList);
-                                    return $div.append("<a href='./fundingDetailNoticePage?funding_id="+$funding_id+"&funding_notice_id="+value+"' class='moreBtn'>더보기</a>");
-                                }
+                                    if(key == "title"){
+                                        return true;
+                                    }                                      
+                                    if(key == "contents"){                       
+                                        return $noticeList.append("<div class='noticeContent'>"+value+"</div><div class='gradient'></div>");
+                                    }
+                                    if(key == "funding_notice_id"){
+                                        $div.append($noticeList);
+                                        return $div.append("<a href='./fundingDetailNoticePage?funding_id="+$funding_id+"&funding_notice_id="+value+"' class='moreBtn'>더보기</a>");
+                                    }
+                                });
+                                $("#content").append($div);
                             });
-                            $("#content").append($div);
-                        });
+                        }else{
+                            alert("공지사항 없다!");
+                        }                
                     }
             });
         }
