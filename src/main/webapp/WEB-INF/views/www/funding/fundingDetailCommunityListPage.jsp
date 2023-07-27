@@ -120,8 +120,8 @@
 
         <div class="row section2" id="content">
             <div class="input">
-                <input type="text" id="reviewInput" placeholder="리뷰를 남겨보세요!">
-                <input type="button" value="작성하기" id="reviewSubmit">
+                <!-- <input type="text" id="reviewInput" placeholder="리뷰를 남겨보세요!">
+                <input type="button" value="작성하기" id="reviewSubmit"> -->
             </div>
             
             </div>
