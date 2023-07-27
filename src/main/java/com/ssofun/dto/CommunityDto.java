@@ -12,7 +12,6 @@ public class CommunityDto {
 	private String contents;
 	private int read_count;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date community_created_at;
 	private Date created_at;
 	private int used_fg;
 	public CommunityDto() {
@@ -26,7 +25,6 @@ public class CommunityDto {
 		this.title = title;
 		this.contents = contents;
 		this.read_count = read_count;
-		this.community_created_at = community_created_at;
 		this.created_at = created_at;
 		this.used_fg = used_fg;
 	}
@@ -60,12 +58,6 @@ public class CommunityDto {
 	public void setRead_count(int read_count) {
 		this.read_count = read_count;
 	}
-	public Date getCommunity_created_at() {
-		return community_created_at;
-	}
-	public void setCommunity_created_at(Date community_created_at) {
-		this.community_created_at = community_created_at;
-	}
 	public Date getCreated_at() {
 		return created_at;
 	}
@@ -78,8 +70,5 @@ public class CommunityDto {
 	public void setUsed_fg(int used_fg) {
 		this.used_fg = used_fg;
 	}
-	
-	
-	
 
 }
