@@ -27,6 +27,7 @@
             </ul>
             <p id="cover"></p>
             <ul id="userLogin" class="hide">
+            <form>
                 <li><input type="text" id="email" placeholder="아이디"></li>
                 <li><input type="password" id="password" placeholder="비밀번호"></li>
                 <li><a href="">로그인 정보를 잊으셨나요?</a></li>
