@@ -122,7 +122,7 @@ function insertEmailJoin(email,name,password,gender,birth,nickname,agree_sms){
         data: JSON.stringify({email:email,name:name,password:password,gender:gender,birth:birth,nickname:nickname,agree_sms:agree_sms}),
         success: function(res){
             if(res != 0){
-                window.location.href = "http://localhost:8181/www/www/user/userJoinSuccessPage?user_id="+res;
+                window.location.href = "http://localhost:8181/www/user/userJoinSuccessPage?user_id="+res;
             }
         }
     });
