@@ -155,12 +155,20 @@ public class StoreServiceImpl {
 		return storeSqlMapper.selectReview(id);
 	}
 	
+	//상품마다 리뷰 출력
+	
+	
 	// 상품별 리뷰개수 출력
 	public List<ProductDto> getRecount(ProductDto pDto){
 		List<ProductDto> Recount = storeSqlMapper.selectByRecount(pDto);
 		return Recount;
 	}
 	
+	//상품별 좋아요 개수 출력
+	public List<ProductFavoritCountDto> getLikecount(ProductFavoritCountDto pfDto){
+		List<ProductFavoritCountDto> count = storeSqlMapper.likeCountByProductId(pfDto);
+		return count;
+	}
 	//장바구니 삭제
 	public void deleteCart(ProductCart cartDto) {
 		storeSqlMapper.deleteByCart(cartDto);

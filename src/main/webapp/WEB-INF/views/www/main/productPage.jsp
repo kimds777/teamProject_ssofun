@@ -11,13 +11,20 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
-<link href="../../resources/css/productPage.css" rel="stylesheet" type="text/css">
+<link href="../../resources/css/productPage.css" rel="stylesheet"
+	type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
-<script >
+<style>
+/* 버튼이 클릭된 상태의 CSS 스타일 */
+.nav li .scroll_move.clicked {
+	background-color: yellow;
+	color: white;
+}
+</style>
+<script>
 const ProductId = new URLSearchParams(location.search).get("id");
 //좋아요 관련
 function ajaxTemplete(){
@@ -116,11 +123,11 @@ function refreshMyHeart(){
 			const heartBox = document.getElementById("heartBox");
 			
 			if(response.isLiked){
-				heartBox.classList.remove("bi-heart");
-				heartBox.classList.add("bi-heart-fill");
+				heartBox.classList.remove("bi-suit-heart");
+				heartBox.classList.add("bi-suit-heart-fill");
 			}else{
-				heartBox.classList.remove("bi-heart-fill");
-				heartBox.classList.add("bi-heart");
+				heartBox.classList.remove("bi-suit-heart-fill");
+				heartBox.classList.add("bi-suit-heart");
 			}
 		}
 	}
@@ -140,7 +147,7 @@ window.onload = function() {
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../../include/fundingHeader.jsp"/>
+	<jsp:include page="../../include/fundingHeader.jsp" />
 
 	<div class="con">
 		<div class="container">
@@ -173,7 +180,7 @@ window.onload = function() {
 						<div class="row">
 							<div class="col">${detail[0].product_name}</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-won2">
 								<del>
@@ -187,8 +194,10 @@ window.onload = function() {
 								<fmt:formatNumber value="${detail[0].price_sale}"
 									pattern="#,###원" />
 							</div>
-							<div class=""col>
-								<i id="heartBox" onclick="toggleLike()" class="fs-1 text-danger bi bi-heart"></i><span id="totalLikeCount">3</span>
+							<div class="col-heart">
+								<i id="heartBox" onclick="toggleLike()"
+									class="text-danger bi bi-suit-heart"></i><span
+									id="totalLikeCount"></span>
 							</div>
 						</div>
 
@@ -227,8 +236,7 @@ window.onload = function() {
 											<div class="button_quantity">
 												<span class="custom-element">
 													<button class="prod-quantity__plus"
-														onclick="changeQuantity('+')">+</button> 
-													<input
+														onclick="changeQuantity('+')">+</button> <input
 													type="text" id="prod-quantity" value="1"
 													class="prod-quantity__input" min="1" maxlength="6"
 													autocomplete="off" oninput="changeQuantity(this.value)">
@@ -249,46 +257,127 @@ window.onload = function() {
 								<i class="bi bi-cart3"></i> 장바구니
 							</button>
 						</div>
+
 						<div class="col">
-							 <form action="./productProcess" method="post">
-					            <input type="hidden" name="id" id="productId" value="" />
-					            <input type="hidden" name="amount" id="productAmount" value="" />
-					            <input type="hidden" name="count" id="productCount" value="" />
-					            <input type="hidden" name="user_id" id="userId" value="${sessionUser.user_id }" readonly/>
-					            <button class="prod-buy-btn" onclick="setProductValues()">바로구매</button>
-					        </form>	
+							<form action="./productProcess" method="post">
+								<input type="hidden" name="id" id="productId" value="" /> <input
+									type="hidden" name="amount" id="productAmount" value="" /> <input
+									type="hidden" name="count" id="productCount" value="" /> <input
+									type="hidden" name="user_id" id="userId"
+									value="${sessionUser.user_id }" readonly />
+								<button class="prod-buy-btn" onclick="setProductValues()">바로구매</button>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
-			<div class="box">
-    <div class="col-tab">
-        <ul class="nav tab-titles">
-            <li class="nav-item"><button class="nav-link-btn" onclick="changeTab(0)">필수정보고시</button></li>
-            <li class="nav-item"><button class="nav-link-btn" onclick="changeTab(1)">상세설명</button></li>
-            <li class="nav-item"><button class="nav-link-btn" onclick="changeTab(2)">상품리뷰</button></li>
-            <li class="nav-item"><button class="nav-link-btn" onclick="changeTab(3)">배송,교환,반품안내</button></li>
-        </ul>
-    </div>
-</div>
 
-					
-			
-			<div class="listbox">
-			  <div class="scroll1" id="scroll1">scroll1</div>
-			  <div class="scroll2" id="scroll2">scroll2</div>
-			  <div class="scroll3" id="scroll3">scroll3</div>
-			  <div class="scroll4" id="scroll4">scroll4</div>
+			<div class="row">
+				<div class="col">zz</div>
 			</div>
-			
+
+
+			<!-- HTML 코드 -->
+			<div class="box">
+				<div class="col-tab">
+					<ul class="nav">
+						<li><button id="scroll1Btn" class="scroll_move"
+								onclick="scrollToSection('scroll1')">상품정보</button></li>
+						<li><button id="scroll2Btn" class="scroll_move"
+								onclick="scrollToSection('scroll2')">상세설명</button></li>
+						<li><button id="scroll3Btn" class="scroll_move"
+								onclick="scrollToSection('scroll3')">리뷰</button></li>
+						<li><button id="scroll4Btn" class="scroll_move"
+								onclick="scrollToSection('scroll4')">배송,교환,반품 안내</button></li>
+					</ul>
+				</div>
+			</div>
+
+
+
+
+			<div class="listbox">
+				<div class="scroll1" id="scroll1">
+					<p class="table-title">필수 표기정보</p>
+					<table class="prdc_detail_table">
+						<tbody>
+
+							<!-- general info table// -->
+							<tr>
+								<th scope="row">상품상태</th>
+								<td>상품 상세페이지 참조</td>
+								<th scope="row">상품번호</th>
+								<td>상품 상세페이지 참조</td>
+							</tr>
+							<tr>
+								<th scope="row">배송방법</th>
+								<td>택배</td>
+								<th scope="row">배송가능지역</th>
+								<td>전국</td>
+							</tr>
+							<tr>
+								<th scope="row">영수증발행</th>
+								<td>상품 상세페이지 참조</td>
+								
+							</tr>
+							<tr>
+								<th scope="row">제조일자/유효기간</th>
+								<td colspan="3">상품 상세페이지 참조</td>
+							</tr>
+							<tr>
+								<th scope="row">A/S안내</th>
+								<td colspan="3">상품 상세페이지 참조</td>
+							</tr>
+							<tr>
+								<th scope="row">상품무게</th>
+								<td colspan="3">상품 상세페이지 참조
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">브랜드</th>
+								<td colspan="3">상품 상세페이지 참조</td>
+							</tr>
+							<!-- //general info table -->
+
+						</tbody>
+
+					</table>
+				</div>
+				<div class="scroll2" id="scroll2">scroll2</div>
+				<div class="scroll2" id="scroll2">scroll2</div>
+				<div class="scroll2" id="scroll2">scroll2</div>
+				<div class="scroll2" id="scroll2">scroll2</div>
+				<div class="scroll2" id="scroll2">scroll2</div>
+				
+				<div class="scroll3" id="scroll3">
+					<h3>상품리뷰</h3>
+					<div class="product_review_rate">
+						<dl>
+							<dt>
+								<div class="product_review_rate1">
+									<strong class="guide">구매 만족도</strong>
+								</div>
+								
+							</dt>
+						</dl>						
+					</div>
+					
+					<div class="product_review_title">
+									<h3>전체리뷰</h3>
+					</div>
+				</div>
+				<div class="scroll4" id="scroll4">scroll4</div>
+			</div>
+
 
 
 
 
 		</div>
 	</div>
+
+	<!-- 푸터 영역 -->
+	<jsp:include page="../../include/fundingFooter.jsp" />
 
 	<script>
 	$(document).ready(function() {
@@ -307,21 +396,9 @@ window.onload = function() {
 		 );
 	});
 	
-	// JavaScript 함수 변경: 탭 전환과 컨텐츠 보이기/숨기기
-	function changeTab(index) {
-	  // 모든 탭 컨텐츠를 숨깁니다.
-	  const tabContents = document.querySelectorAll('.listbox > div');
-	  tabContents.forEach((content) => {
-	    content.style.display = 'none';
-	  });
 
-	  // 선택한 탭 컨텐츠만 보여줍니다.
-	  const selectedTabContent = document.querySelector(`.listbox > div:nth-child(${index + 1})`);
-	  if (selectedTabContent) {
-	    selectedTabContent.style.display = 'block';
-	  }
-	}
 	
+
 	// 결제금액 표시
 	function changeQuantity(value) {
 	    var inputElement = document.getElementById("prod-quantity");
@@ -352,23 +429,6 @@ window.onload = function() {
 	  
 	  // 초기화
 	  updateAmount(1);
-	  
-	  //배경 테두리 변경
-	  function changeTab(event, index) {
-	  //event.preventDefault(); -- 	  
-	
-	  const clickedTab = event.target.parentElement;
-	  const tabs = document.querySelectorAll('.col-tab .tab-titles>li');
-	
-	  // 현재 'active' 클래스를 가진 탭을 찾아 제거
-	  const activeTabs = document.querySelectorAll('.col-tab .tab-titles>li.active');
-	  activeTabs.forEach((tab) => {
-	    tab.classList.remove('active');
-	  });
-	
-	  // 클릭된 탭에 'active' 클래스 추가
-	  clickedTab.classList.add('active');
-	}
 
 
 	// URL에서 id 값을 추출하여 productId input 요소의 value에 설정
@@ -430,8 +490,31 @@ window.onload = function() {
 		        }
 		  	});
 		}
+		
 
 		
+		
+		function scrollToSection(sectionId) {
+			  const targetSection = document.getElementById(sectionId);
+			  const targetOffsetTop = targetSection.offsetTop - 70; // 70px 위로 이동
+			  window.scrollTo({
+			    top: targetOffsetTop,
+			    behavior: "smooth"
+			  });
+
+			  const buttonIds = ['scroll1Btn', 'scroll2Btn', 'scroll3Btn', 'scroll4Btn'];
+		        for (const buttonId of buttonIds) {
+		            const button = document.getElementById(buttonId);
+		            if (buttonId === sectionId + 'Btn') {
+		                button.classList.add('active');
+		            } else {
+		                button.classList.remove('active');
+		            }
+		        }
+			}
+
+
+
 </script>
 
 	<script

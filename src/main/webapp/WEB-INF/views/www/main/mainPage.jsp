@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
-<%@ page import="java.util.List" %>
+<%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
+<%@ page import="java.util.List"%>
 <%
-  // Jackson ObjectMapper를 사용하여 Java 객체를 JSON 형태로 변환합니다.
-  ObjectMapper objectMapper = new ObjectMapper();
-  String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"));
+// Jackson ObjectMapper를 사용하여 Java 객체를 JSON 형태로 변환합니다.
+ObjectMapper objectMapper = new ObjectMapper();
+String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"));
 %>
 <!DOCTYPE html>
 <html>
@@ -23,8 +23,6 @@
 <title>Insert title here</title>
 
 <link href="../../resources/css/main.css" rel="stylesheet"
-	type="text/css">
-<link href="../../resources/css/productPage.css" rel="stylesheet"
 	type="text/css">
 <link href="../../resources/css/productOrder.css" rel="stylesheet"
 	type="text/css">
@@ -45,20 +43,22 @@
 						<ul class="shopping-menu-list">
 							<c:forEach items="${pctlist}" var="category">
 								<c:if test="${category.this_parent_id eq 0}">
-									<li class="li-list" value="${category.product_category_type_id}">
-										${category.name}
-										<!-- Subcategories -->
+									<li class="li-list"
+										value="${category.product_category_type_id}">
+										${category.name} <!-- Subcategories -->
 										<div class="subcategories">
 											<ul>
 												<c:forEach items="${pctlist}" var="subcategory">
-													<c:if test="${subcategory.this_parent_id eq category.product_category_type_id}">
-														<li>${subcategory.name}
-															<!-- Subsubcategories -->
+													<c:if
+														test="${subcategory.this_parent_id eq category.product_category_type_id}">
+														<li>${subcategory.name}<!-- Subsubcategories -->
 															<div class="subsubcategories">
 																<ul>
 																	<c:forEach items="${pctlist}" var="subsubcategory">
-																		<c:if test="${subsubcategory.this_parent_id eq subcategory.product_category_type_id}">
-																			<li><a href="./categories?pct=${subsubcategory.product_category_type_id }">${subsubcategory.name}</a></li>
+																		<c:if
+																			test="${subsubcategory.this_parent_id eq subcategory.product_category_type_id}">
+																			<li><a
+																				href="./categories?pct=${subsubcategory.product_category_type_id }">${subsubcategory.name}</a></li>
 																		</c:if>
 																	</c:forEach>
 																</ul>
@@ -81,7 +81,7 @@
 
 
 	<div class="banner-a">
-			<img class="banner-img" src="../../resources/img/banner.jpg"> 
+		<img class="banner-img" src="../../resources/img/banner.jpg">
 	</div>
 
 	<div class="container ">
@@ -91,7 +91,9 @@
 
 
 				<div class="row">
-					<div class="col-ca"><h3>최신상품</h3></div>
+					<div class="col-ca">
+						<h3>최신상품</h3>
+					</div>
 				</div>
 
 				<!-- 여기서 반복문 -->
@@ -122,26 +124,37 @@
 													<span class="discount">${Math.floor((product.price - product.price_sale) / product.price * 100).intValue()}%</span>
 													<b><fmt:formatNumber value="${product.price_sale }"
 															pattern="#,###원" /></b>
-															
-													<del class="price"><fmt:formatNumber value="${product.price }"
+
+													<del class="price">
+														<fmt:formatNumber value="${product.price }"
 															pattern="#,###원" />
 													</del>
 												</div>
-												
+
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-review">리뷰
-									<c:forEach items="${Recount }" var="Recount">
-										<c:if test="${product.product_id eq Recount.product_id }">
+
+							</a>
+							<div class="col-heart-review">
+								<i class="bi bi-suit-heart"></i>
+								<c:forEach items="${Likecount }" var="count">
+									<c:if test="${product.product_id eq count.product_id }">
+											 ${count.count }
+										</c:if>
+								</c:forEach>
+								
+								<i class="bi bi-chat-right"></i>
+								<c:forEach items="${Recount }" var="Recount">
+									<c:if test="${product.product_id eq Recount.product_id }">
 											${Recount.count }
 										</c:if>
-									</c:forEach>									
-								</div> <!-- <hr> -->
-							</a>
-							<i id="heartBox" onclick="toggleLike()" class="fs-1 text-danger bi bi-heart-fill"></i>
-               						 <span id="totalLikeCount"></span>
+								</c:forEach>
+
+							</div>
+							<!-- <hr> -->
+
 						</div>
 					</c:forEach>
 				</div>
@@ -192,35 +205,34 @@
 	<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp" />
 
-<script>
-//카테고리
-$(document).ready(function() {
-		// Show/hide the categories on hover for both the category button and menu items
-		$(".category-box").hover(function() {
-			$(".categories").css("display", "block");
-		}, function() {
-			$(".categories").css("display", "none");
+	<script>
+		//카테고리
+		$(document).ready(function() {
+			// Show/hide the categories on hover for both the category button and menu items
+			$(".category-box").hover(function() {
+				$(".categories").css("display", "block");
+			}, function() {
+				$(".categories").css("display", "none");
+			});
+
+			$(".shopping-menu-list li").hover(function() {
+				$(this).find(".subcategories").css("display", "block");
+			}, function() {
+				$(this).find(".subcategories").css("display", "none");
+			});
+
+			$(".subcategories li").hover(function() {
+				$(this).find(".subsubcategories").css("display", "block");
+			}, function() {
+				$(this).find(".subsubcategories").css("display", "none");
+			});
 		});
 
-		$(".shopping-menu-list li").hover(function() {
-			$(this).find(".subcategories").css("display", "block");
-		}, function() {
-			$(this).find(".subcategories").css("display", "none");
-		});
-
-		$(".subcategories li").hover(function() {
-			$(this).find(".subsubcategories").css("display", "block");
-		}, function() {
-			$(this).find(".subsubcategories").css("display", "none");
-		});
-	});
-
-
-
-var subCategories = <%= jsonPctList %>;
-console.log(subCategories)
-
-</script>
+		var subCategories =
+	<%=jsonPctList%>
+		;
+		console.log(subCategories)
+	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

@@ -26,7 +26,7 @@
 	
 	<!-- 로그인 -->
 	<select id="selectByEmailAndPassword" resultType="com.ssofun.dto.ProductUserDto">
-		SELECT * FROM tb_user WHERE email=#{email} AND password =#{password} AND used_fg=1;
+		SELECT * FROM tb_user WHERE user_phone_auth_id=#{user_phone_auth_id} AND password =#{password} AND used_fg=1;
 	</select>
 	
 	<!-- 상품등록 -->
@@ -298,8 +298,22 @@
 	<select id="countLikeByProductId" resultType="int">
 		SELECT COUNT(*) FROM tb_product_favorit
 		WHERE product_id = #{product_id}
+	</select>
+	
+	<!-- 상품마다 좋아요 출력 -->
+	<select id="likeCountByProductId" resultType="com.ssofun.dto.ProductFavoritCountDto">
+		SELECT COUNT(*) AS count, product_id FROM tb_product_favorit
 	</select>	
 	
+	<!-- 상품마다 리뷰 출력 -->
+	<select id="selectProductReview" resultType="int">
+		select tpr.rate, tpr.contents, tpri.url,tu.name		
+		from tb_product_review tpr
+		inner join tb_product_review_image tpri on tpr.product_review_id = tpri.product_review_id
+		inner join tb_user tu on tpr.user_id = tu.user_id
+		inner join tb_product_order_item tpoi on tpr.product_order_item_id = tpoi.product_order_item_id
+		where tpoi.product_id= #{product_id};
+	</select>
 	<!-- 아래는 테스트 코드 -->
 	
 	<!-- <insert id="insert">
