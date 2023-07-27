@@ -16,11 +16,12 @@ $(document).ready(function(){
 
 function login(){
 	const userId = $("#userId").val();
+	console.log(userId);
     $.ajax({
         url: "loginProcess",
         method: "POST",
         data: {
-        	email : userId,
+        	user_phone_auth_id : userId,
         	password : $("#userPw").val()
         },
         success: function(res){
@@ -45,7 +46,7 @@ function login(){
 <body>
 <h1>로그인</h1>
 
-	ID : <input id="userId" type="text" name="email"><br> 	
+	ID : <input id="userId" type="text" name="user_phone_auth_id"><br> 	
 	PW : <input id="userPw" type="password" name="password"><br>
 	<input type="button" value="로그인" id="login_btn">
 	<br>

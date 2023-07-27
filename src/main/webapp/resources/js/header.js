@@ -1,4 +1,6 @@
 
+
+
 $(document).ready(function(){
 
     setEventListener();
@@ -24,7 +26,7 @@ function logout(){
         success: function(res){
             if(res == 1){
                 alert("로그아웃 성공!");
-                window.location.href = "http://localhost:8181/www/www/funding/fundingMainPage";
+                window.location.href = "http://localhost:8181/www/funding/fundingMainPage";
             }else{
                 alert("이미 로그아웃 되어있습니다.");
             }

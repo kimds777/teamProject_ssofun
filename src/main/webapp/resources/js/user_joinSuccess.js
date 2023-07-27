@@ -11,7 +11,7 @@ function setEventListener(user_id){
 
     $(document).on("click","input#moveMainPageBtn",function(e){
         e.stopPropagation();
-        window.location.href = "http://localhost:8181/www/www/funding/fundingMainPage";
+        window.location.href = "http://localhost:8181/www/funding/fundingMainPage";
     });
 
 }

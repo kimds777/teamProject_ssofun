@@ -135,6 +135,7 @@
 																				</td>
 																				<td class="td-btn">
 																					<div class="btn-box">
+																						<c:if test="${innerItem }"></c:if>
 																						<button class="btn-review" type="button" onclick="location.href='./productReviewPage?id=${innerItem.product_order_item_id }' ">리뷰 작성하기</button>
 																					</div>
 																				</td>

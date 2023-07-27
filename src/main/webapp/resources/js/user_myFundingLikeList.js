@@ -1,9 +1,9 @@
 
 $(document).ready(function(){
-    var user_id = 1;
+    var user_id = 1; // getsession function 가져오
 
 
-    setEventListener(user_id);
+    setEventListener();
     getLikeFundingList(user_id);
 
 });

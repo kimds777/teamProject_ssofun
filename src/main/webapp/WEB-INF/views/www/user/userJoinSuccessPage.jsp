@@ -22,8 +22,8 @@
         <div id="welcomeSection">
 
             <div id="welcome">
-                <img src="../../resources/IMG/celebration.PNG" alt="" id="leftImg">
-                <img src="../../resources/IMG/celebration.PNG" alt="" id="rightImg">
+                <img src="../../resources/img/celebration.PNG" alt="" id="leftImg">
+                <img src="../../resources/img/celebration.PNG" alt="" id="rightImg">
                 <ul class="notosanskr">
                     <li>000 서포터님</li>
                     <li>쏘펀 가입을 축하드려요</li>

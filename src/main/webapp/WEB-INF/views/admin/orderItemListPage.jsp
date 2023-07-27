@@ -386,7 +386,7 @@
                 <!-- end of main-content -->
             </div><!-- Footer Start -->
             <div class="flex-grow-1"></div>
-            <div class="app-footer">
+<!--             <div class="app-footer">
                 <div class="row">
                     <div class="col-md-9">
                         <p><strong>Gull - Laravel + Bootstrap 4 admin template</strong></p>
@@ -406,7 +406,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- fotter end -->
         </div>
     </div><!-- ============ Search UI Start ============= -->
