@@ -3,10 +3,11 @@ $(document).ready(function(){
 
     var urlParams = new URLSearchParams(window.location.search);
     var $funding_id = urlParams.get("funding_id");
-    var user_id = 1;
+    var user_id = getUserSession(); 
 
     getFundingDto($funding_id);
     setEventListener($funding_id,user_id);
+    getSameCategoryFunding($funding_id);
 
 });
 
@@ -79,6 +80,43 @@ function setEventListener($funding_id,user_id){
 
 
 }
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        metho: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+        alert("세션이 만료되어 로그아웃되었습니다.");
+        // window.location.href = "../user/userLoginPage";
+    }
+}
+
+
+function getSameCategoryFunding(funding_id){
+    $.ajax({
+        url: "./AJAXgetSameCategoryFunding",
+        method: "GET",
+        data: {funding_id:funding_id},
+        success: function(res){
+            
+        }
+    });
+}
+
 
 
 function logout(){
