@@ -162,6 +162,56 @@ function getSameCategoryFunding(funding_id){
 }
 
 
+function getDday(funding_id){
+    var dday;
+
+    $.ajax({
+        url: "../user/AJAXgetDday",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                dday = res;
+            }
+        }
+    });
+
+    return dday;
+}
+
+function getFundingAchievementRate(funding_id){
+    var respone;
+    $.ajax({
+        url: "../funding/AJAXgetFundingAchievementRate",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                respone = res;
+            }
+        }
+    });
+    return respone;
+}
+
+function getFundingCategoryName(funding_category_id){
+    var fundingCategoryName;
+    $.ajax({
+        url: "../user/AJAXgetFundingCategoryName",
+        method: "GET",
+        async : false,
+        data: {funding_category_id:funding_category_id},
+        success: function(res){
+            if(res !=  null){
+                fundingCategoryName = res;
+            }
+        }
+    });
+
+    return fundingCategoryName;
+}
 
 function logout(){
     $.ajax({
