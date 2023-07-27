@@ -197,13 +197,15 @@ sup {
 }
 
 a {
-  color: #8b5cf6;
+  /* color: #8b5cf6;  기존 태그*/
+  color: #333333; /*수정된 태그*/
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
 a:hover {
-  color: #402060;
+  /* color: #402060; 기존 태그 */
+  color: #333333; /*수정된 태그*/
   text-decoration: underline;
 }
 
