@@ -192,6 +192,15 @@ public class FundingServiceImpl {
 		}
 		return fundingList;
 	}
+	
+//	가장 최근에 구매한 유저가 후원한 펀딩 리스트 3개 출력
+	public List<FundingDto> getOrderUserPickFunding(long funding_id) {
+		List<FundingDto> fundingList = fundingSqlMapper.selectOrderUserPickFunding(funding_id);
+		for(FundingDto fundingDto : fundingList) {
+			fundingDto.setThumbnailList(fundingSqlMapper.selectThumbnailAll(fundingDto.getFunding_id()));
+		}
+		return fundingList;
+	}
 
 //	펀딩 공지사항 ------------------------------------------------------------------------------------------------------------------------
 	
@@ -423,6 +432,8 @@ public class FundingServiceImpl {
 		
 		return fundingOrderDto;
 	}
+
+
 
 
 

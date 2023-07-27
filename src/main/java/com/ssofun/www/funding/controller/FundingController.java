@@ -166,11 +166,18 @@ public class FundingController {
 		return fundingService.getSupportCount(funding_id);
 	}
 
-	//같은 카테고리 펀딩 추천 리스트 4개 출력
+	//같은 카테고리 펀딩 추천 리스트 3개 출력
 	@ResponseBody
 	@RequestMapping("AJAXgetSameCategoryFunding")
 	public List<FundingDto> AJAXgetSameCategoryFunding(long funding_id) {
 		return fundingService.getSameCategoryFunding(funding_id);
+	}
+	
+	//가장 최근 펀딩을 후원한 유저가 후원한 펀딩 리스트 3개 출력
+	@ResponseBody
+	@RequestMapping("AJAXgetOrderUserPickFunding")
+	public List<FundingDto> AJAXgetOrderUserPickFunding(long funding_id) {
+		return fundingService.getOrderUserPickFunding(funding_id);
 	}
 	
 	
