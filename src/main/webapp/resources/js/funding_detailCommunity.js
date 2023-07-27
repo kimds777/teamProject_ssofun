@@ -1,17 +1,18 @@
 $(document).ready(function(){
-    var $funding_id = $("#funding_id").val();
+    var urlParams = new URLSearchParams(window.location.search);
+    var $funding_id = urlParams.get("funding_id");
     var $funding_review_id = $("#funding_review_id").val();
 
     getFundingDto($funding_id);
     getFundingCommunity($funding_review_id,$funding_review_id);
-    setEventListener($funding_id,user_id,$funding_review_id);
+    setEventListener($funding_id,$funding_review_id);
 
     
 
 });
 
-function setEventListener($funding_id,user_id,$funding_review_id){
-
+function setEventListener($funding_id,$funding_review_id){
+    var user_id = getUserSession();
 
     $("#tab>ul>li#reward").click(function(e){
         e.stopPropagation();
@@ -20,7 +21,6 @@ function setEventListener($funding_id,user_id,$funding_review_id){
 
     $(document).on("click","#likeBtn",function(e){
         e.stopPropagation();
-        var user_id = getUserSession();
         if(user_id != 0){
             insertFavorit($funding_id,user_id);
         }else{
@@ -31,7 +31,6 @@ function setEventListener($funding_id,user_id,$funding_review_id){
 
     $(document).on("click","#supportBtn",function(e){
         e.stopPropagation();
-        var user_id = getUserSession();
 
         if(user_id != 0){
             location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
@@ -48,34 +47,37 @@ function setEventListener($funding_id,user_id,$funding_review_id){
     $(document).on("click",".goToLogin",function(e){
         window.location.href = "../user/userLoginPage";
     });
-    
+
     $(document).on("click","input#commentSubmit",function(e){ 
-        e.stopPropagation();       
-        var $contents = $("#commentInput").val();
+        e.stopPropagation();      
+        if(user_id != 0){ 
+            var $contents = $("#commentInput").val();
 
-        if($contents == ""){
-            alert("댓글 내용을 입력해주세요");
-            $("#commentInput").focus();
-            return ;
+            if($contents == ""){
+                alert("댓글 내용을 입력해주세요");
+                $("#commentInput").focus();
+                return ;
+            }
+
+            insertCommunityComment($funding_id,$funding_review_id,user_id,$contents);
         }
-
-        insertCommunityComment($funding_id,$funding_review_id,user_id,$contents);
     });
 
     $(document).on("click","input.commentReplySubmit",function(e){ 
         e.stopPropagation();       
-
-        var $contents = $(this).prev().val();
-        var $this_answer_id = $(this).next().val();
-        alert($contents+" "+$this_answer_id);
-
-        if($contents == ""){
-            alert("댓글 내용을 입력해주세요");
-            $contents.focus();
-            return ;
+        if(user_id != 0){
+            var $contents = $(this).prev().val();
+            var $this_answer_id = $(this).next().val();
+            alert($contents+" "+$this_answer_id);
+    
+            if($contents == ""){
+                alert("댓글 내용을 입력해주세요");
+                $contents.focus();
+                return ;
+            }
+    
+            insertCommunityCommentReply($funding_id,$this_answer_id,user_id,$contents,$funding_review_id);
         }
-
-        insertCommunityCommentReply($funding_id,$this_answer_id,user_id,$contents,$funding_review_id);
     });
 
     $(document).on("click",".commentReplyShowBtn",function(e){
@@ -422,7 +424,9 @@ function getFundingCommunity($funding_review_id){
                     if(key == "totalComment"){
                         $div.append("<p class='totalComment'>"+value+"개의 댓글</p>");
                         var user_id = getUserSession();
+
                         if(user_id != 0){
+                            alert("유저 아이디가 있다고? 유저아이디: "+user_id);
                             $div.append("<div class='input'><input type='text' name='commentInput' id='commentInput' placeholder='댓글을 달아보세요!'><input type='button' value='작성하기' id='commentSubmit'></div>");
                         }else{
                             $div.append("<div class='input'><input type='text' value='로그인이 필요한 서비스입니다.' disabled ><input type='button' value='로그인' id='goToLoginBtn'></div>");
