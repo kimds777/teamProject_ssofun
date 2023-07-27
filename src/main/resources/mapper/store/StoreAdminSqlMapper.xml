@@ -544,6 +544,7 @@ ORDER BY pr.created_at DESC
 		q.admin_id,
 		q.qna_id,
 	    b.biz_name,
+	    u.email,
 	    u.nickname,
 	    q.title,
 	    q.contents,

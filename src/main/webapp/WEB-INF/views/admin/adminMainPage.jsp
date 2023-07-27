@@ -31,11 +31,11 @@
 }
 
 .List_td{
-	font-size: 12px;
+	font-size: 8px;
 }
 
-.List_th{
-	font-size: 13px;
+.List_th{	
+	font-size: 8px;
 	font-weight: 750;
 }
 
@@ -48,6 +48,23 @@
 	font-weight: 600;
 	font-size: 12px;
 	margin-bottom: 10px;
+}
+
+.list_body_size{
+	width: 425.06px;
+	height: 458.41px;
+}
+
+.col_1{
+	width: 70px;
+}
+
+.col_3{
+	width: 50px;
+}
+
+.col_4{
+	width: 70px;
 }
 
 /* 대시보드 */
@@ -337,7 +354,7 @@
                 <div class="row">
               		<div class="col-4 mb-3 list_box">
                         <div class="card text-left">
-                            <div class="card-body">
+                            <div class="card-body list_body_size">
                                 <div class="d-flex row p-0">
 					                <div class="col title_box"><a href="./adminMainPage">상품 리스트</a></div>
 					            </div>
@@ -372,7 +389,7 @@
             		<!-- 주문리스트 -->
               		<div class="col-4 mb-3 list_box">
                         <div class="card text-left">
-                            <div class="card-body">
+                            <div class="card-body list_body_size">
                                 <div class="d-flex row p-0">
 					                <div class="col title_box"><a href="./adminMainPage">주문 리스트</a></div>
 					            </div>
@@ -407,7 +424,7 @@
             		<!-- 리뷰,평점리스트 -->
               		<div class="col-4 mb-3 list_box">
                         <div class="card text-left">
-                            <div class="card-body">
+                            <div class="card-body list_body_size">
                                 <div class="d-flex row p-0">
 					                <div class="col title_box"><a href="./adminMainPage">상품(리뷰,평점) 리스트</a></div>
 					            </div>
@@ -415,10 +432,10 @@
 								    <table class="table table-striped">
 								        <thead>
 								            <tr>
-								                <th class="List_th" scope="col">상품번호</th>
-								                <th class="List_th" scope="col">상품명</th>
-								                <th class="List_th" scope="col">리뷰수</th>
-								                <th class="List_th" scope="col">상품평점</th>
+								                <th class="List_th col_1" scope="col">상품번호</th>
+								                <th class="List_th col_2" scope="col">상품명</th>
+								                <th class="List_th col_3" scope="col">리뷰수</th>
+								                <th class="List_th col_4" scope="col">상품평점</th>
 								            </tr>
 								        </thead>
 								        <tbody id="dashboard_product_reviewList">
