@@ -8,3 +8,8 @@ body{position: relative;}
       background-color: transparent;
       border: none;
 }
+
+.pagination {
+  background-color: transparent; /* 배경색 */
+  color: black; /* 텍스트 색상 */
+}
