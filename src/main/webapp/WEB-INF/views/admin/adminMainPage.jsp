@@ -464,7 +464,7 @@
             
             <!-- Footer Start -->
             
-            <div class="app-footer">
+<!--             <div class="app-footer">
                 <div class="row">
                     <div class="col-md-9">
                         <p><strong>Gull - Laravel + Bootstrap 4 admin template</strong></p>
@@ -484,7 +484,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- fotter end -->
         </div>
     </div><!-- ============ Search UI Start ============= -->
