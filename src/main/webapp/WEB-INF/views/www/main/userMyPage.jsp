@@ -66,12 +66,8 @@
 
 					<dl>
 						<dt>나의 펀딩 내역</dt>
-						<dd>
-							<a href="">후원한 프로젝트</a><i class="bi bi-caret-right-fill"></i>
-						</dd>
-						<dd>
-							<a href="">프로젝트 후기</a><i class="bi bi-caret-right-fill"></i>
-						</dd>
+						<dd class="click"><a class="click" href="../user/userMyFundingOrderListPage">후원한 프로젝트</a><i class="bi bi-caret-right-fill click"></i></dd>
+                        <dd><a href="../user/userMyFundingLikeListPage">찜한 프로젝트</a><i class="bi bi-caret-right-fill"></i></dd>
 					</dl>
 				</div>
 				<div id="contents">
