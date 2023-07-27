@@ -23,7 +23,6 @@
 	<jsp:include page="../../include/fundingHeader.jsp"/>
 		
 	
-	
 	  <div class="container" >
 		
 			<div class ="row">
@@ -46,7 +45,7 @@
 						<td>${map.communityDto.community_id} </td>
 						<td><a href="./communityReadPage?community_id=${map.communityDto.community_id}">${map.communityDto.title}</a></td>
 						<td>${map.userDto.nickname} </td>
-						<td><fmt:formatDate value="${map.communityDto.community_created_at}" pattern="yy.MM.dd"/> </td>
+						<td><fmt:formatDate value="${map.communityDto.created_at}" pattern="yy.MM.dd"/> </td>
 						<td>${map.communityDto.read_count} </td>
 					</tr>
 					</c:forEach>

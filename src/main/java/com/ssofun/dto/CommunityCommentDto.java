@@ -6,7 +6,6 @@ public class CommunityCommentDto {
 	private int community_comment_id;
 	private int community_id;
 	private int user_id;
-	private int parent_id;
 	private String comment;
 	private Date created_at;
 	private int used_fg;
@@ -27,12 +26,6 @@ public class CommunityCommentDto {
 	}
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
-	}
-	public int getParent_id() {
-		return parent_id;
-	}
-	public void setParent_id(int parent_id) {
-		this.parent_id = parent_id;
 	}
 	public String getComment() {
 		return comment;

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssofun.dto.CommunityCommentDto;
 import com.ssofun.dto.CommunityDto;
 import com.ssofun.dto.UserDto;
 import com.ssofun.www.community.mapper.CommunitySqlMapper;
@@ -40,7 +41,7 @@ public class CommunityService {
 			long user_id = communityDto.getUser_id();
 			
 			UserDto userDto = communitySqlMapper.selectByUserId(user_id);
-			  
+	  
 			map.put("userDto", userDto);
 			map.put("communityDto", communityDto);
 		  
@@ -76,11 +77,47 @@ public class CommunityService {
 			communitySqlMapper.deleteById(community_id);
 		}
 		
-	  // 글 수정 
+	 // 글 수정 
 		public void contentsUpdate(CommunityDto communityDto) {
 			communitySqlMapper.contentsUpdate(communityDto);
 		}
 	
+		
+	 // 댓글 등록
+		public void commentInsert(CommunityCommentDto communityCommentDto) {
+			communitySqlMapper.commentInsert(communityCommentDto);
+		}
+	
+		
+		// 댓글 리스트 셀렉트
+		public List<Map<String, Object>> community_commentList() {
+			
+			List<Map<String, Object>> Commentlist = new ArrayList<>();
+			
+			List<CommunityCommentDto> communityCommentDtoList = communitySqlMapper.communitySelectComment();
+			
+			for(CommunityCommentDto communityCommentDto : communityCommentDtoList) {
+				
+				Map<String, Object> map = new HashMap<>();
+				
+				long user_id = communityCommentDto.getUser_id();
+				
+				int community_id = communityCommentDto.getCommunity_id();
+				
+				UserDto userDto = communitySqlMapper.selectByUserId(user_id);
+				
+				CommunityDto communityDto = communitySqlMapper.selectByCommunityId(community_id);
+				  
+				map.put("userDto", userDto);
+				map.put("communityDto", communityDto);
+				map.put("communityCommentDto", communityCommentDto);
+			  
+				Commentlist.add(map);
+			}
+			
+			return Commentlist;
+		}
+		
 	
 
 }

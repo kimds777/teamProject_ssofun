@@ -11,7 +11,7 @@
 		title, 
 		contents, 
 		read_count, 
-		community_created_at
+		created_at
 		)
 		VALUES(
 		    #{user_id},
@@ -52,6 +52,7 @@
 	
 	</select>
 	
+	
 	<!--조회수 증가 -->
 	<update id="increaseReadCount">
 		UPDATE tb_community 
@@ -64,12 +65,45 @@
 		DELETE FROM tb_community WHERE community_id = #{community_id}
 	</delete>
 	
+	
 	<!--글 수정  -->
 	<update id="contentsUpdate">
 		UPDATE tb_community
 		SET title = #{title}, contents = #{contents}
 		WHERE community_id = #{community_id}
 	</update>
+	
+	
+	<!-- 댓글 등록 -->
+	<insert id="commentInsert">
+		insert into tb_community_comment
+		(community_id, user_id, comment, created_at, used_fg) 
+	   	 values (
+			   #{community_id},
+			   #{user_id},
+			   #{comment}, 
+			   current_timestamp(),
+			   1
+			   )
+	</insert>
+	
+	
+	
+	<!--댓글 리스트 출력 -->
+	<select id="communitySelectComment" resultType="com.ssofun.dto.CommunityCommentDto">
+	
+		select*
+		from tb_community_comment
+		order by created_at asc
+	
+	</select>
+	
+	<!--게시글에 달린 댓글 수 -->
+	<select id="getCommentCount" resultType="int">
+	    SELECT COUNT(*) FROM tb_community_comment WHERE community_id = #{community_id}
+	</select>
+	
+	
 
 
 </mapper>

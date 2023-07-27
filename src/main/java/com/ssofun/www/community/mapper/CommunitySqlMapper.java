@@ -2,6 +2,7 @@ package com.ssofun.www.community.mapper;
 
 import java.util.List;
 
+import com.ssofun.dto.CommunityCommentDto;
 import com.ssofun.dto.CommunityDto;
 import com.ssofun.dto.UserDto;
 
@@ -22,6 +23,15 @@ public interface CommunitySqlMapper {
 	public void deleteById(int community_id);
 	// 글 수정
 	public void contentsUpdate(CommunityDto communityDto);
+	
+	//댓글 등록 
+	public void commentInsert(CommunityCommentDto communityCommentDto);
+	
+	//댓글 리스트 출력
+	public List<CommunityCommentDto> communitySelectComment ();
+	
+	//게시글에 대한 댓글 개수
+	public int getCommentCount(int community_id);
 
 	
 }
