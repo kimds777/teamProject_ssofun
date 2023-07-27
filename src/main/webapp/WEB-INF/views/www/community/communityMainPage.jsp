@@ -26,7 +26,10 @@
 	
 	  <div class="container" >
 		
-			<table class= "table table-hover">
+			<div class ="row">
+				<div class="col"></div>
+				<div class="col-11">
+					<table class= "table table-hover">
 			   <thead>
 				 <tr>
 					<td>번호</td>
@@ -49,7 +52,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			
+				</div>
+				<div class="col"></div>
+			</div>
 			
 			
 				<!--글쓰기 버튼  -->
