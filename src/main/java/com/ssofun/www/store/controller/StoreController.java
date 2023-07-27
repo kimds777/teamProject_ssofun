@@ -69,11 +69,17 @@ public class StoreController {
 	// =================
 
 	// 스토어 리스트 메인페이지
-	@RequestMapping("mainPage")
-	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+	@RequestMapping("storePage")
+	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto, ProductFavoritCountDto pfDto) {
 		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
 		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
 		List<ProductDto> fullList = storeService.getItemList(producDto); // 전체 상품 목록 가져오기
+		List<ProductFavoritCountDto>Likecount = storeService.getLikecount(pfDto); //상품별 좋아요 개수
+		for(ProductFavoritCountDto a : Likecount) {
+			int av =a.getProduct_id();
+			int b = a.getCount();
+			System.out.println(av);
+		}
 		
 		
 		int itemsPerPage = 8; // 페이지당 아이템 개수
@@ -87,6 +93,7 @@ public class StoreController {
 
 		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
 		model.addAttribute("Recount", Recount); // 상품별 리뷰 개수
+		model.addAttribute("Likecount", Likecount); // 상품별 좋아요 개수
 		model.addAttribute("pctlist", pctlist);
 		model.addAttribute("list", paginatedList);
 		model.addAttribute("currentPage", page);
@@ -97,10 +104,11 @@ public class StoreController {
 	
 	//카테고리 선택 상품 출력
 	@RequestMapping("categories")
-	public String testa(@RequestParam(defaultValue = "1") int page, int pct, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto) {
+	public String testa(@RequestParam(defaultValue = "1") int page, int pct, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto, ProductFavoritCountDto pfDto) {
 		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto); // 카테고리 출력
 		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
 		List<ProductDto> pctypeList = storeService.getProductCTList(pct);
+		List<ProductFavoritCountDto>Likecount = storeService.getLikecount(pfDto); //상품별 좋아요 개수
 		
 		int itemsPerPage = 8; // 페이지당 아이템 개수
 		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
@@ -113,6 +121,7 @@ public class StoreController {
 
 		int pageCount = (int) Math.ceil((double) pctypeList.size() / itemsPerPage); // 총 페이지 수 계산
 		model.addAttribute("Recount", Recount); // 상품별 리뷰 개수
+		model.addAttribute("Likecount", Likecount); // 상품별 좋아요 개수
 		model.addAttribute("pctlist", pctlist);
 		model.addAttribute("list", paginatedList);
 		model.addAttribute("currentPage", page);

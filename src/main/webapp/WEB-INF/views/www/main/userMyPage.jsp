@@ -32,9 +32,9 @@
 		<div class="myPage">
 			<div class="fakeSection">
 				<ul id="myPageTab">
-					<li class="click"><a class="click" href="">서포터</a><i
+					<li class="click"><a class="click">서포터</a><i
 						class="bi bi-caret-down-fill click"></i></li>
-					<li><a href="">창작자</a><i class="bi bi-caret-down-fill"></i></li>
+					<li><a>창작자</a><i class="bi bi-caret-down-fill"></i></li>
 				</ul>
 			</div>
 
@@ -43,7 +43,7 @@
 					<ul id="first">
 						<li id="profileIcon"><span></span></li>
 						<li id="makerName">이지광님</li>
-						<li id="logout">로그아웃</li>
+						<li id="logoutUser">로그아웃</li>
 					</ul>
 					<dl>
 						<dt>나의 쇼핑 내역</dt>
@@ -66,12 +66,8 @@
 
 					<dl>
 						<dt>나의 펀딩 내역</dt>
-						<dd>
-							<a href="">후원한 프로젝트</a><i class="bi bi-caret-right-fill"></i>
-						</dd>
-						<dd>
-							<a href="">프로젝트 후기</a><i class="bi bi-caret-right-fill"></i>
-						</dd>
+						<dd class="click"><a class="click" href="../user/userMyFundingOrderListPage">후원한 프로젝트</a><i class="bi bi-caret-right-fill click"></i></dd>
+                        <dd><a href="../user/userMyFundingLikeListPage">찜한 프로젝트</a><i class="bi bi-caret-right-fill"></i></dd>
 					</dl>
 				</div>
 				<div id="contents">
