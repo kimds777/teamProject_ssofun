@@ -29,7 +29,9 @@ a{text-decoration: none; color: black;}
 #list>a:nth-child(4n){margin-right: 0;}
 #list>a>ul{width: 100%;}
 
-#list>a>ul>li:first-child{display: block; width: 280px; height: 280px; background-color: black; color: white; line-height: 280px;border-radius: 5px;}
+#list>a>ul>li:first-child{overflow: hidden; position: relative; width: 280px; height: 280px; color: white; line-height: 280px;border-radius: 5px;}
+#list>a>ul>li:first-child>img{width: 100%; position: absolute; top: 0; left: 0;}
+
 #list>a>ul>li:nth-child(2){font-size: 10px; margin-top: 12px; margin-bottom: 5px;}
 #list>a>ul>li:nth-child(3){font-size: 14px; line-height: 18px; width: 100%; height: 35px; overflow:hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
 #list>a>ul>li:nth-child(4){color: #666666; margin-top: 5px; margin-bottom: 15px; font-size: 12px; line-height: 16px; width: 100%; height: 30px; overflow:hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}

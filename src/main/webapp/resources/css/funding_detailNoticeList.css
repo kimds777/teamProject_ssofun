@@ -19,14 +19,18 @@ a{text-decoration: none; color: black;}
 
 #thumbnail{width: 575px; height: 480px; border: 1px solid transparent; position: relative;}
 #thumbnail>ul{position: absolute;}
-#thumbnail>#moveLeft{ width: 24px; height: 24px; padding: 0; left: 0; top: 213px;}
+#thumbnail>#moveLeft{cursor:pointer; width: 24px; height: 24px; padding: 0; left: 0; top: 213px;}
 #thumbnail>#moveLeft>li{width:13px; height:13px; border-left: 1px solid black;transform-origin: bottom left; transform: rotate(45deg); margin: 0;}
 #thumbnail>#moveLeft>li:last-child{transform-origin: top left;transform: rotate(-45deg);}
 
-#thumbnail>#thumb{left: 36px; top: 0;width: 500px; height: 450px; padding: 0;}
-#thumbnail>#thumb>li{float: left; width: 500px; height: 450px; background-color: #D9D9D9; font-size: 25px; line-height: 450px;}
+/* #thumbnail>#thumb{left: 36px; top: 0;width: 500px; height: 450px; padding: 0;}
+#thumbnail>#thumb>li{float: left; width: 500px; height: 450px; background-color: #D9D9D9; font-size: 25px; line-height: 450px;} */
+#thumbnail>#thumbBox{position: absolute; left: 36px; top: 0;width: 500px; height: 450px; padding: 0; overflow: hidden;}
+#thumbnail>#thumbBox>#thumb{position: absolute; top: 0; left: 0; width: 1000px; height: 450px; padding: 0;}
+#thumbnail>#thumbBox>#thumb>li{float: left; width: 500px; height: 450px; font-size: 25px; line-height: 450px;}
+#thumbnail>#thumbBox>#thumb>li>img{width: 100%; height: 100%;}
 
-#thumbnail>#moveRight{width: 24px; height: 24px; top: 213px; right: 13px; margin: 0;}
+#thumbnail>#moveRight{cursor:pointer; width: 24px; height: 24px; top: 213px; right: 13px; margin: 0;}
 #thumbnail>#moveRight>li{width:13px; height:13px; border-right: 1px solid black;transform-origin: bottom right; transform: rotate(-45deg); margin: 0;}
 #thumbnail>#moveRight>li:last-child{transform-origin: top right; transform: rotate(45deg);}
 
