@@ -330,7 +330,7 @@
                         </div>
                     </div>                    
                 </div>
-               	<div cla>
+               	<div>
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
                         <div class="card mb-4">
