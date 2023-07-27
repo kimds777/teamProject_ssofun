@@ -32,9 +32,9 @@
 		<div class="myPage">
 			<div class="fakeSection">
 				<ul id="myPageTab">
-					<li class="click"><a class="click" href="">서포터</a><i
+					<li class="click"><a class="click">서포터</a><i
 						class="bi bi-caret-down-fill click"></i></li>
-					<li><a href="">창작자</a><i class="bi bi-caret-down-fill"></i></li>
+					<li><a>창작자</a><i class="bi bi-caret-down-fill"></i></li>
 				</ul>
 			</div>
 
