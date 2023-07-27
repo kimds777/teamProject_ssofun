@@ -1,49 +1,71 @@
 $(document).ready(function(){
-    var $funding_id = $("#funding_id").val();
-    var user_id = 1; // 나중에 수정해야함
+    var urlParams = new URLSearchParams(window.location.search);
+    var $funding_id = urlParams.get("funding_id");
 
     getFundingDto($funding_id);
-    setEventListener($funding_id,user_id);
+    setEventListener($funding_id);
 
 });
 
-function setEventListener($funding_id,user_id){
-
+function setEventListener($funding_id){
+    var user_id = getUserSession();
 
 
     $(document).on("click","#reviewSubmit",function(e){ 
     e.stopPropagation();   
-
-    var $contents = $("#reviewInput").val();
-
-    if($contents == ""){
-        alert("댓글 내용을 입력해주세요");
-        $("#commentInput").focus();
-        return ;
-    }
-    insertReview($funding_id,user_id,$contents);
+        if(user_id != 0){
+            var $contents = $("#reviewInput").val();
+        
+            if($contents == ""){
+                alert("댓글 내용을 입력해주세요");
+                $("#commentInput").focus();
+                return ;
+            }
+            insertReview($funding_id,user_id,$contents);
+        }
     });
     
 
-    $("#tab>ul>li#reward").click(function(){
+    $("#tab>ul>li#reward").click(function(e){
+        e.stopPropagation();  
         $("#tab>div#rewardModal").toggleClass("hide");
     });
 
-    $("#tab>ul>li#reward").click(function(){
+    $("#tab>ul>li#reward").click(function(e){
+        e.stopPropagation();  
         $("#tab>div#rewardModal").toggleClass("hide");
     });
 
-    $("#likeBtn").click(function(){
-        insertFavorit($funding_id,user_id);
+    $(document).on("click","#likeBtn",function(e){
+        e.stopPropagation();
+        if(user_id != 0){
+            insertFavorit($funding_id,user_id);
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
     });
 
-    $("#supportBtn").click(function(){
-        location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+    $(document).on("click","#supportBtn",function(e){
+        e.stopPropagation();
+
+        if(user_id != 0){
+            location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
+    });
+
+    $(document).on("click","#goToLoginBtn",function(e){
+        e.stopPropagation();
+        window.location.href = "../user/userLoginPage";
     });
 
 
     var n=0;
-    $('ul#moveLeft').click(function(){
+    $('ul#moveLeft').click(function(e){
+        e.stopPropagation();
         n--;
         getDetailThumbnailCount(function(res){
             var $thumbLength = res-1;
@@ -62,7 +84,8 @@ function setEventListener($funding_id,user_id){
 
     });
 
-    $('ul#moveRight').click(function(){
+    $('ul#moveRight').click(function(e){
+        e.stopPropagation();
         n++;
         getDetailThumbnailCount(function(res){
             var $thumbLength = res-1;
@@ -80,6 +103,49 @@ function setEventListener($funding_id,user_id){
 
     });
 
+    $(document).on("click","#header>div>div>a#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+
+}
+
+function logout(){
+    $.ajax({
+        url: "../user/AJAXlogout",
+        method: "GET",
+        success: function(res){
+            if(res == 1){
+                alert("로그아웃 성공!");
+                window.location.href = "http://localhost:8181/www/www/funding/fundingMainPage";
+            }else{
+                alert("이미 로그아웃 되어있습니다.");
+            }
+        }
+    });
+}
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        metho: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+       return 0;
+    }
 }
 
 function getDetailThumbnailCount(callback,$funding_id){
@@ -158,6 +224,15 @@ function getFundingDto($funding_id){
                         return true;
                     }
                     if(key == "funding_id"){
+                        var div = $("#content>div.input");
+                        var user_id = getUserSession();
+                        if(user_id != 0){
+                            $("<input type='text' id='reviewInput' placeholder='리뷰를 남겨보세요!'>").appendTo(div);
+                            $("<input type='button' value='작성하기' id='reviewSubmit'>").appendTo(div);
+                        }else{
+                            $("<input type='text' value='로그인이 필요한 서비스입니다.' disabled>").appendTo(div);
+                            $("<input type='button' value='로그인하기' id='goToLoginBtn'>").appendTo(div);
+                        }
                         $tabInfo.html("<a href='./fundingDetailPage?funding_id="+value+"'>소개</a>");
                         $tabNotice.html("<a href='./fundingDetailNoticeListPage?funding_id="+value+"'>공지사항</a>");
                         $tabCommunity.html("<a class='activeTab' href='./fundingDetailCommunityListPage?funding_id="+value+"'>커뮤니티</a>");

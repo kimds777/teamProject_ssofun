@@ -41,10 +41,12 @@ function setEventListener($funding_id,$funding_review_id){
     });
 
     $(document).on("click","#goToLoginBtn",function(e){
+        e.stopPropagation();
         window.location.href = "../user/userLoginPage";
     });
     
     $(document).on("click",".goToLogin",function(e){
+        e.stopPropagation();
         window.location.href = "../user/userLoginPage";
     });
 
