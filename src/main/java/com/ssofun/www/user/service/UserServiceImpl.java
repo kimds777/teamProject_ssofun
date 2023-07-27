@@ -32,7 +32,7 @@ public class UserServiceImpl {
 	public String getKakaoApiUrl() {
 		
 		String client_id = "11bfe947a01b42a63dcfb6d3cbf9f8b2";
-		String redirect_uri = "http://localhost:8181/www/www/user/kakaoOauthPage";
+		String redirect_uri = "http://localhost:8181/www/user/kakaoOauthPage";
 		String kakaoApiUrl 
 		= "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id="
 		+client_id+"&redirect_uri="+redirect_uri+"&scope=age_range,gender";
@@ -46,7 +46,7 @@ public class UserServiceImpl {
         String reqURL = "https://kauth.kakao.com/oauth/token";
         
         String client_id = "11bfe947a01b42a63dcfb6d3cbf9f8b2";
-		String redirect_uri = "http://localhost:8181/www/www/user/kakaoOauthPage";
+		String redirect_uri = "http://localhost:8181/www/user/kakaoOauthPage";
 
         try {
             URL url = new URL(reqURL);
@@ -194,13 +194,13 @@ public class UserServiceImpl {
 	    	   long user_id = userDto.getUser_id();
 	    	   
 	    	   userDto = userSqlMapper.selectUserByUserId(user_id);
-	    	   reloadUrl = "http://localhost:8181/www/www/user/userSimpleJoinPage?user_id="+user_id;
+	    	   reloadUrl = "http://localhost:8181/www/user/userSimpleJoinPage?user_id="+user_id;
 	    	   
 	    	   map.put("user", userDto);
 	    	   map.put("url", reloadUrl);
 	    	   
 	       }else {
-	    	   reloadUrl = "http://localhost:8181/www/www/funding/fundingMainPage";
+	    	   reloadUrl = "http://localhost:8181/www/funding/fundingMainPage";
 	    	   map.put("user", userDto);
 	    	   map.put("url", reloadUrl);
     	   
