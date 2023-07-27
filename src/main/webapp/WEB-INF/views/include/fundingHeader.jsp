@@ -22,7 +22,7 @@
                 	<a id="logout">로그아웃</a>
                	</div>
                 <div class="col-1">
-                	<a href="../store/userMyPage?user_id=${user.user_id}">마이페이지</a>
+                	<a href="../store/userMyPage">마이페이지</a>
                	</div>
                 <div class="col-1"><a href="../qna/customerServiceMainPage">고객센터</a></div>
             </div>
