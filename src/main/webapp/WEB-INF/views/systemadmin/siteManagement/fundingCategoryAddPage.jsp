@@ -166,11 +166,7 @@
                                         <div class="row" >
                                             <div class="col-1">
                                                 
-                                                <div class="row mt-2">
-                                                    <div class="col">
-                                                        <input type="checkbox">
-                                                    </div>
-                                                </div>
+                                             
                                             </div>
                                             <div class="col">
                                              
@@ -203,11 +199,11 @@
                                         <div class="row" >
                                             <div class="col-1">
                                                 
-                                                <div class="row mt-2">
+                                             <!--  <div class="row mt-2">
                                                     <div class="col">
                                                         <input type="checkbox">
                                                     </div>
-                                                </div>
+                                                </div>--> 
                                             </div>
                                             <div class="col">
                                              
@@ -256,10 +252,10 @@
                                 <div class="row mt-1" style="margin-left: 10px;">
                                     <!--이미지반복문돌리기-->
 									
-									<c:forEach items="${fundingCategoryList.fundingCategory }" var="list">
-                                    <div class="col-2 mt-2 qnaImage">
+									<c:forEach items="${fundingCategoryList }" var="list">
+                                    <div class="col-1 mt-2 qnaImage">
                                         <div class="row" style="text-align: center;">
-                                            <div class="col mt-2"><img src="/ssofunUploadFiles/${d.link}" width="80px" height="80px"></div>
+                                            <div class="col mt-2"><img src="/ssofunUploadFiles/${d.link}" width="60px" height="60px"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
