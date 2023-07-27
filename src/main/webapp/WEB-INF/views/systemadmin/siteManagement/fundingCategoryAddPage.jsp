@@ -255,7 +255,8 @@
 
                                 <div class="row mt-1" style="margin-left: 10px;">
                                     <!--이미지반복문돌리기-->
-
+									
+									<c:forEach items="${fundingCategoryList.fundingCategory }" var="list">
                                     <div class="col-2 mt-2 qnaImage">
                                         <div class="row" style="text-align: center;">
                                             <div class="col mt-2"><img src="/ssofunUploadFiles/${d.link}" width="80px" height="80px"></div>
@@ -266,9 +267,10 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col mb-3" style="text-align: center;"><p class="companyfont" style="margin-top: 0px;">아이콘이름</p></div>
+                                            <div class="col mb-3" style="text-align: center;"><p class="companyfont" style="margin-top: 0px;">${list.name }</p></div>
                                         </div>    
                                     </div>
+                                    </c:forEach>
 
                                 </div>
 
