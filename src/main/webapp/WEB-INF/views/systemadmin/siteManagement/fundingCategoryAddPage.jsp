@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">
     <!-- <script type="text/javascript"> </script>-->
 	<style>
-
+        .categoryaddbutton{ -webkit-appearance: none;  -moz-appearance: none;  appearance: none; border: none; border-radius: 3px; padding: 20px 20px 20px 20px; font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 13px; color:white; background-color: #FF6462;}
 	</style>
 
 
@@ -152,47 +152,53 @@
                     
                         <div class="col" style="padding-left: 0px;">
 		
-                            <form action="../fundingCategoryAddProcess"  method="post">
+                            <form action="../fundingCategoryAddProcess"  method="post" enctype="multipart/form-data">
 
                            	<div class="row" style="padding-left: 0px;">
                                 <div class="col-7" style="padding-left: 0px;"><!--<p class="three-font mt-1" style="margin-left: 5px;">미승인된 펀딩목록</p>--></div>
                                 <div class="col c-five-font"></div>
-                                <div class="col-2" style="text-align: right;"><input type="submit" class="writefaqbutton" value="카테고리추가"   style="border-radius: 5px;"></div>
+                                <div class="col-2" style="text-align: right;"></div>
                             
                             </div>
                       
                                 <div class="row mt-2">
-                                    <div class="col"  style="background-color:#F8F9FA; height:100px; border-radius: 3%; margin-right: 5px;">
+                                    <div class="col"  style="background-color:#F8F9FA; height:110px; border-radius: 3%; margin-right: 5px;">
                                         <div class="row" >
                                             <div class="col-1">
                                                 
-                                             
                                             </div>
                                             <div class="col">
                                              
             
                                                 <div class="row mt-2">
                                                    
-                                                    <div class="col textcenter">
+                                                    <div class="col-2 textcenter">
                                                         <p class="companyfont">아이콘등록</p>
                                                     </div>
                                                     <div class="col mt-2">
-                                                        <input type="file" name="qnaFiles" id="name" multiple accept="image/*">
+                                                        <input type="file" name="fundingCategoryFiles"  accept="image/*">
                                                     </div>
+                                                    
                                                 </div>
                                                       
                                                 <div class="row mt-2">
                                                     
-                                                    <div class="col-3 textcenter">
+                                                    <div class="col-2 textcenter">
                                                         <p class="companyfont">아이콘명</p>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" name="name" class="form-control"  aria-label="companyName">
                                                     </div>
+                                                    
                                                 </div>
             
                                             </div>
-                                            <div class="col-1"></div>
+                                            <div class="col-2 mt-4" style="text-align: right;">
+                                                <div class="row">
+                                                    
+                                                </div>
+                                                <input type="submit" class="categoryaddbutton" value="카테고리추가"   style="border-radius: 5px; size: 90px; ">
+                                            </div>
                                         </div>
                                     </div>
                       
@@ -209,7 +215,6 @@
                                         <div class="col-2" style="padding-left: 0px; margin-left: 10px;"><p class="three-font mt-1" style="margin-left: 5px;">카테고리목록</p></div>
                                         <div class="col-7" style="padding-left: 0px;"><!--<p class="three-font mt-1" style="margin-left: 5px;">미승인된 펀딩목록</p>--></div>
                                         <div class="col c-five-font"></div>
-                                       
                                     </div>
                                 </div>
 
@@ -217,9 +222,9 @@
                                     <!--이미지반복문돌리기-->
 									
 									<c:forEach items="${fundingCategoryList }" var="list">
-                                    <div class="col-1 mt-2 qnaImage">
+                                    <div class="col-2 mt-3 qnaImage">
                                         <div class="row" style="text-align: center;">
-                                            <div class="col mt-2"><img src="/ssofunUploadFiles/${d.link}" width="60px" height="60px"></div>
+                                            <div class="col mt-3"><img src="/ssofunUploadFiles/${list.image_url}" width="65px" height="65px"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
@@ -227,35 +232,14 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col mb-3" style="text-align: center;"><p class="companyfont" style="margin-top: 0px;">${list.name }</p></div>
+                                            <div class="col mb-3" style="text-align: center;"><p class="companyfont" style="margin-top: 0px; font-size: 14px;">${list.name }</p></div>
                                         </div>    
                                     </div>
                                     </c:forEach>
 
                                 </div>
 
-                            
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                      
-
-
-
-
-
 
 
                     
