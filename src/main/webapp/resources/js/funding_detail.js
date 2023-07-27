@@ -8,6 +8,7 @@ $(document).ready(function(){
     getFundingDto($funding_id);
     setEventListener($funding_id,user_id);
     getSameCategoryFunding($funding_id);
+    getOrderUserPickFunding($funding_id);
 
 });
 
