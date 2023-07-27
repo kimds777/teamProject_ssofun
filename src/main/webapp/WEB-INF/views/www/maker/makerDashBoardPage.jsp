@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="../../resources/CSS/maker_dashBoard.css">
+    <link rel="stylesheet" href="../../resources/css/maker_dashBoard.css">
 
 </head>
 
@@ -86,6 +86,6 @@
 	</div>
    	<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
-	    <script src="../../resources/JS/maker_dashboard.js"></script>
+	    <script src="../../resources/js/maker_dashboard.js"></script>
 </body>
 </html>

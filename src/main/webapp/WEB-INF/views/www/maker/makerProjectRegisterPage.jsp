@@ -13,7 +13,7 @@
     <script src="https://cdn.tiny.cloud/1/dl4ms718ugksfxpr7sg5p1y8r28i9x5o7pedc1whuvu4xarq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 
-    <link rel="stylesheet" href="../../resources/CSS/maker_projectRegister.css">
+    <link rel="stylesheet" href="../../resources/css/maker_projectRegister.css">
 
 </head>
 
@@ -322,6 +322,6 @@
     </div>
    	<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
-	    <script src="../../resources/JS/maker_projectRegister.js"></script>
+	    <script src="../../resources/js/maker_projectRegister.js"></script>
 </body>
 </html>

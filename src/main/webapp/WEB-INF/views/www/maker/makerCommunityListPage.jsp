@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../resources/CSS/maker_communityList.css">
+    <link rel="stylesheet" href="../../resources/css/maker_communityList.css">
 
 </head>
 
@@ -131,6 +131,6 @@
 	</div>
    	<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
-	    <script src="../../resources/JS/maker_communityList.js"></script>
+	    <script src="../../resources/js/maker_communityList.js"></script>
 </body>
 </html>
