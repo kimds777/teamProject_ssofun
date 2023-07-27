@@ -80,6 +80,8 @@ public interface FundingSqlMapper {
 	public int selectDetailThumbnailCount(long funding_id);
 	//---펀딩 후원자 수 출력
 	public int selectSupportCount(long funding_id);
+	//---같은 카테고리 펀딩 추천 리스트 출력
+	public List<FundingDto> selectSameCategoryFunding(long funding_id);
 	
 	
 	
@@ -156,6 +158,7 @@ public interface FundingSqlMapper {
 	public void insertOrderPayment(@Param("payment_id") long payment_id, @Param("funding_order_id") long funding_order_id);
 	//---주문 결제건 택배 수령인 정보 입력
 	public long insertDeliveryRecipient(DeliveryRecipientDto deliveryRecipientDto);
+
 
 
 

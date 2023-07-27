@@ -166,6 +166,14 @@ public class FundingController {
 		return fundingService.getSupportCount(funding_id);
 	}
 
+	//같은 카테고리 펀딩 추천 리스트 4개 출력
+	@ResponseBody
+	@RequestMapping("AJAXgetSameCategoryFunding")
+	public List<FundingDto> AJAXgetSameCategoryFunding(long funding_id) {
+		return fundingService.getSameCategoryFunding(funding_id);
+	}
+	
+	
 //	상세 상세 공지 페이지 -----------------------------------------------------------------------------------------------------
 
 	@RequestMapping("fundingDetailNoticeListPage")

@@ -183,6 +183,15 @@ public class FundingServiceImpl {
 	public int getSupportCount(long funding_id) {
 		return fundingSqlMapper.selectSupportCount(funding_id);
 	}
+	
+//	같은 카테고리 펀딩 추천 리스트 4개 출력
+	public List<FundingDto> getSameCategoryFunding(long funding_id) {
+		List<FundingDto> fundingList = fundingSqlMapper.selectSameCategoryFunding(funding_id);
+		for(FundingDto fundingDto : fundingList) {
+			fundingDto.setThumbnailList(fundingSqlMapper.selectThumbnailAll(fundingDto.getFunding_id()));
+		}
+		return fundingList;
+	}
 
 //	펀딩 공지사항 ------------------------------------------------------------------------------------------------------------------------
 	
@@ -414,6 +423,8 @@ public class FundingServiceImpl {
 		
 		return fundingOrderDto;
 	}
+
+
 
 
 

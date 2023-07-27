@@ -112,7 +112,51 @@ function getSameCategoryFunding(funding_id){
         method: "GET",
         data: {funding_id:funding_id},
         success: function(res){
-            
+            if(res != null){
+                $.each(res,function(index,item){
+                    var a;
+                    var funding_id;
+                    var ul = $("<ul class='p-0'></ul>");
+                    $.each(item,function(key,value){
+                        if(key == "funding_id"){
+                            funding_id = value;
+                            a = $("<a href='../funding/fundingDetailPage?funding_id="+value+"'></a>");
+                        }
+
+                        if(key == "thumbnailList"){
+                            $.each(value,function(index,item){
+                                var url;
+                                $.each(item,function(key,value){
+                                    if(key == "url"){
+                                        url = value;
+                                    }
+                                    if(key == "image_order"){
+                                        if(value == 1){
+                                            $("<li><img src='/ssofunUploadFiles/"+url+"' alt=''></li>").appendTo(ul);
+                                        }
+                                    }
+                                });
+                            });
+                        }
+
+                        if(key == "funding_category_id"){
+                            $("<li class='text-start'>"+getFundingCategoryName(value)+"</li>").appendTo(ul);
+                        }
+
+                        if(key == "title"){
+                            $("<li class='text-start'>"+value+"</li>").appendTo(ul);
+                        }
+
+                        if(key == "target_price"){
+                            $("<li class='text-start'><b class='text-danger'>"+getFundingAchievementRate(funding_id)+"% 달성</b> "+getDday(funding_id)+"일 남음</li>").appendTo(ul);
+                            ul.appendTo(a);
+                            a.appendTo("#sList");
+                        }
+                    });
+                });
+
+            }
+
         }
     });
 }
