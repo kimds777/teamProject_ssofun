@@ -1,7 +1,5 @@
 
-
-
-$(document).ready(function(){
+$j(document).ready(function(){
 
     setEventListener();
 
@@ -9,7 +7,7 @@ $(document).ready(function(){
 
 function setEventListener(){
 
-    $(document).on("click","#header>div>div>a#logout",function(e){
+    $j(document).on("click","#header>div>div>a#logout",function(e){
         e.stopPropagation();
         logout();
     });
@@ -20,7 +18,7 @@ function setEventListener(){
 
 
 function logout(){
-    $.ajax({
+    $j.ajax({
         url: "../user/AJAXlogout",
         method: "GET",
         success: function(res){
