@@ -29,7 +29,7 @@ function setEventListener(){
         window.location.href = "../maker/makerMyPage";
     });
 
-    $(document).on("click","#header>div>div>a#logout",function(e){
+    $(document).on("click","#first>li#logout",function(e){
         e.stopPropagation();
         logout();
     });
