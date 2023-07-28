@@ -132,7 +132,7 @@
                 <!-- Full screen toggle -->
 							<c:if test="${empty shopAdmin }">
 								<ul class="nav justify-content-end">
-									<li class="nav-item login_box"><a class="nav-link" href="./loginPage">로그인</a></li>
+									<li class="nav-item login_box"><a class="nav-link" href="/systemadmin/login/adminLoginPage">로그인</a></li>
 									<li class="nav-item login_box"><a class="nav-link" href="#">문의하기</a></li>
 								</ul>
 							</c:if>
