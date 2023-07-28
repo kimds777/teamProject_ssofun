@@ -28,7 +28,7 @@ public class CommunityService {
 	
 	// 커뮤니티 리스트 셀렉트
 	
-	public List<Map<String, Object>> communityList() {
+	public List<Map<String, Object>> communityList() { 
 		
 		List<Map<String, Object>> list = new ArrayList<>();
 		
