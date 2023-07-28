@@ -80,6 +80,15 @@
 .pagination{
     justify-content: center;
 }
+
+.qna_wait{
+	color:#FF6462;
+	font-weight: 800;
+}
+
+.qna_finish{
+	font-weight: 800;
+}
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -312,10 +321,10 @@
 									                    <td><a href="qnaContentDetailPage?qna_id=${qnaContentsList.qna_id}">${qnaContentsList.title}</a></td>
 									                    <c:choose>
 									                    	<c:when test="${empty qnaContentsList.answer_contents}">
-									                    		<td>답변대기</td>
+									                    		<td class="qna_wait">답변대기</td>
 									                    	</c:when>
 									                    	<c:when test="${!empty qnaContentsList.answer_contents}">
-									                    		<td>답변완료</td>
+									                    		<td class="qna_finish">답변완료</td>
 									                    	</c:when>
 									                    </c:choose>
 									                    

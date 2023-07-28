@@ -31,12 +31,20 @@
 }
 
 .List_td{
-	font-size: 8px;
+	font-size: 10px;
 }
 
 .List_th{	
-	font-size: 8px;
+	font-size: 10px;
 	font-weight: 750;
+}
+
+.List_productname{
+	font-size: 8px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
 }
 
 .td_No{
@@ -50,10 +58,10 @@
 	margin-bottom: 10px;
 }
 
-.list_body_size{
+/* .list_body_size{
 	width: 425.06px;
 	height: 458.41px;
-}
+} */
 
 .col_1{
 	width: 70px;
@@ -83,11 +91,7 @@
 	font-size: 16px;
 	font-weight: 800;
 }
-.a_test{
-	color: black;
-}
 
-a{color:#333333;}
 </style>
 
 <head>
@@ -973,7 +977,7 @@ var echartElemPie = document.getElementById("echartPie1");
 if (echartElemPie) {
   var echartPie = echarts.init(echartElemPie);
   echartPie.setOption({
-    color: ["#62549c", "#7566b5", "#7d6cbb", "#8877bd", "#9181bd", "#6957af"],
+    color: ["#FF6462", "#ff7573", "#ff9896", "#ffa9a8", "#ffbebd", "#ffcac9"],
     tooltip: {
       show: true,
       backgroundColor: "rgba(0, 0, 0, .8)",
@@ -1102,7 +1106,7 @@ $(document).ready(function() {
             for (let i = 0; i < dashboardProductList.length; i++) {
                 res += "<tr>" +
                     "<th scope='row' class='td_No List_td'>No. " + dashboardProductList[i].product_id + "</th>" +
-                    "<td class='List_td'>" + dashboardProductList[i].name + "</td>" +
+                    "<td class='List_productname'>" + dashboardProductList[i].name + "</td>" +
                     "<td class='List_td'>" + formatNumber(dashboardProductList[i].price) + " 원</td>" +
                     "<td class='List_td'>" + dashboardProductList[i].created_at + "</td></tr>";
             }
@@ -1123,7 +1127,7 @@ $(document).ready(function() {
                 	"<th scope='row' class='td_No List_td'>No. " + dashboardProductOrderList[i].product_order_item_id + "</th>" +
                     "<td class='List_td'>" + dashboardProductOrderList[i].order_created_at + "</td>" +
                     "<td class='List_td'>" + dashboardProductOrderList[i].delivery_recipient_name + " 님</td>" +
-                    "<td class='List_td'>" + dashboardProductOrderList[i].product_name + "</td></tr>";
+                    "<td class='List_productname'>" + dashboardProductOrderList[i].product_name + "</td></tr>";
             }
             $('#dashboard_product_orderlist').append(res);
         }
@@ -1140,7 +1144,7 @@ $(document).ready(function() {
                 console.log(dashboardproductReviewList);
                 res += "<tr>" +
                 	"<th scope='row' class='td_No List_td'>No. " + dashboardproductReviewList[i].product_id + "</th>" +
-                    "<td class='List_td'>" + dashboardproductReviewList[i].name + "</td>" +
+                    "<td class='List_productname'>" + dashboardproductReviewList[i].name + "</td>" +
                     "<td class='List_td'>" + dashboardproductReviewList[i].review_cnt + " 개</td>" +
                     "<td class='List_td'>" + dashboardproductReviewList[i].review_avg_score + " 점</td></tr>";
             }

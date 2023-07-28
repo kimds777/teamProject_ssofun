@@ -350,7 +350,7 @@
 		                            </tr>
 		                        </table>
 		                    </div>
-		                    <button class="btn btn-outline-dark m-1 float-right">수정하기</button>
+		                    <button class="btn btn-primary m-1 float-right">수정하기</button>
 
 		                </form>
 		            </div>

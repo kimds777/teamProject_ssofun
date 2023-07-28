@@ -374,7 +374,7 @@
 						<!-- 버튼과 간격 조정 -->
 						<div class="row table-btn-spacing">
 						    <div class="col d-flex justify-content-end">
-						        <button class="btn btn-outline-dark update_btn" onclick="window.location.href='./productUpdatePage?product_id=${productDetail.product_id}'">상품수정</button>
+						        <button class="btn btn-primary update_btn" onclick="window.location.href='./productUpdatePage?product_id=${productDetail.product_id}'">상품수정</button>
 						    </div>
 						</div>
                 <!-- end of row-->

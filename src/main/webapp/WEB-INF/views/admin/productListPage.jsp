@@ -84,7 +84,7 @@
     padding: 0.5rem 0.75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #8b5cf6;
+    color: #333333;
     background-color: #dee2e6;
     border: 1px solid #dee2e6;
 }

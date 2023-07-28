@@ -52,7 +52,7 @@
 }
 
 .c4{
-	width: 100px;
+	width: 130px;
 }
 
 .c5{
@@ -290,7 +290,7 @@
 										            <td><img class="img-fluid img-thumbnail" style="width:75px; height:75px;" src="/ssofunUploadFiles/${productReviewImage.url}"></td>
 										            <td>${productDetailReviewList[imageStatus.index].name}</td>
 										            <td class="td_No">No.&nbsp;${productDetailReviewList[imageStatus.index].product_review_id}</td>
-										            <td class="text-success">${productDetailReviewList[imageStatus.index].nickname}&nbsp;님</td>
+										            <td>${productDetailReviewList[imageStatus.index].nickname}&nbsp;님</td>
 										            <td>${productDetailReviewList[imageStatus.index].rate}&nbsp;점</td>
 										            <td>${productDetailReviewList[imageStatus.index].contents}</td>
 										            <td><fmt:formatDate value="${productDetailReviewList[imageStatus.index].created_at}" pattern="yyyy-MM-dd" /></td>

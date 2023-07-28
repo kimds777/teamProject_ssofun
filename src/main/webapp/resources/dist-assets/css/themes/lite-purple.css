@@ -2372,7 +2372,7 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #8b5cf6;
+  background-color: #FF6462;
   border-color: #8b5cf6;
 }
 .btn-primary:hover {
@@ -5144,7 +5144,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #8b5cf6;
+  color: #333333;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
@@ -5250,7 +5250,7 @@ input[type="button"].btn-block {
 
 .badge-primary {
   color: #fff;
-  background-color: #8b5cf6;
+  background-color: #FF6462;
 }
 .badge-primary[href]:hover,
 .badge-primary[href]:focus {
@@ -9558,7 +9558,7 @@ button.bg-gray-900:focus {
 }
 
 .text-primary {
-  color: #8b5cf6 !important;
+  color: #FF6462 !important;
 }
 
 a.text-primary:hover,
@@ -9715,7 +9715,7 @@ a.text-gray-900:focus {
 }
 
 .text-muted {
-  color: #70657b !important;
+  color: #333333 !important;
 }
 
 .text-black-50 {
@@ -21844,14 +21844,14 @@ a.typo_link.text-gray-900:after {
   text-align: center;
 }
 .layout-sidebar-large .sidebar-left .navigation-left .nav-item.active {
-  color: #8b5cf6;
+   color: #8b5cf6;
 }
 .layout-sidebar-large
   .sidebar-left
   .navigation-left
   .nav-item.active
   .nav-item-hold {
-  color: #8b5cf6;
+/*   color: #8b5cf6; */
 }
 .layout-sidebar-large .sidebar-left .navigation-left .nav-item .nav-item-hold {
   display: block;
@@ -21919,7 +21919,7 @@ a.typo_link.text-gray-900:after {
   bottom: 0;
   border-style: solid;
   border-width: 0 0 30px 30px;
-  border-color: transparent transparent #8b5cf6 transparent;
+  border-color: transparent transparent #FF6462 transparent;
 }
 
 .layout-sidebar-large .sidebar-left-secondary {
@@ -25067,7 +25067,7 @@ select.form-control {
   /*border: 1px solid #003473; 원본 코드*/
 }
 .checkbox-outline-info .checkmark:after {
-  border-color: #003473;
+  border-color: #333333;
 }
 
 .checkbox-outline-warning:hover input ~ .checkmark {
