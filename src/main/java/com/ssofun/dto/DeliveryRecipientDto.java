@@ -1,6 +1,7 @@
 package com.ssofun.dto;
 
 public class DeliveryRecipientDto {
+	private int default_fg;
 	private long delivery_recipient_id;
 	private String name;
 	private String phone;
@@ -13,9 +14,10 @@ public class DeliveryRecipientDto {
 		super();
 	}
 
-	public DeliveryRecipientDto(long delivery_recipient_id, String name, String phone, String address_post,
-			String address_default, String address_detail, String request_message) {
+	public DeliveryRecipientDto(int default_fg, long delivery_recipient_id, String name, String phone,
+			String address_post, String address_default, String address_detail, String request_message) {
 		super();
+		this.default_fg = default_fg;
 		this.delivery_recipient_id = delivery_recipient_id;
 		this.name = name;
 		this.phone = phone;
@@ -23,6 +25,15 @@ public class DeliveryRecipientDto {
 		this.address_default = address_default;
 		this.address_detail = address_detail;
 		this.request_message = request_message;
+	}
+
+
+	public int getDefault_fg() {
+		return default_fg;
+	}
+
+	public void setDefault_fg(int default_fg) {
+		this.default_fg = default_fg;
 	}
 
 	public long getDelivery_recipient_id() {
