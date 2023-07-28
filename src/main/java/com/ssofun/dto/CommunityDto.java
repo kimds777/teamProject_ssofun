@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CommunityDto {
 	
 	private int community_id;
+	private int community_category_id;
 	private long user_id;
 	private String title;
 	private String contents;
@@ -33,6 +34,12 @@ public class CommunityDto {
 	}
 	public void setCommunity_id(int community_id) {
 		this.community_id = community_id;
+	}
+	public int getCommunity_category_id() {
+		return community_category_id;
+	}
+	public void setCommunity_category_id(int community_category_id) {
+		this.community_category_id = community_category_id;
 	}
 	public long getUser_id() {
 		return user_id;
@@ -70,5 +77,6 @@ public class CommunityDto {
 	public void setUsed_fg(int used_fg) {
 		this.used_fg = used_fg;
 	}
+
 
 }

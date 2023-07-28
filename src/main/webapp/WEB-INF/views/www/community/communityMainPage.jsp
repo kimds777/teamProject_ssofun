@@ -35,10 +35,12 @@
 					<c:set var="now" value="<%=new java.util.Date()%>" />
 					<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="today" />
 
+
 					<table class="table table-hover">
 					    <thead>
 					        <tr>
 					            <td>번호</td>
+					            <td>카테고리명</td>
 					            <td>제목</td>
 					            <td>작성자</td>
 					            <td>작성일</td>
@@ -50,6 +52,7 @@
 					        <c:forEach items="${list}" var="map">
 					            <tr>
 					                <td>${map.communityDto.community_id}</td>
+					                <td>${map.communityCategoryDto.name}</td>
 					                <td>
 					                    <a href="./communityReadPage?community_id=${map.communityDto.community_id}">
 					                        ${map.communityDto.title}
@@ -73,6 +76,10 @@
 					        </c:forEach>
 					    </tbody>
 					</table>
+
+
+
+
 		
 				</div>
 				<div class="col"></div>
@@ -80,11 +87,12 @@
 			
 			
 				<!--글쓰기 버튼  -->
+				
 				<div class="col-2 ms-auto d-grid">
-			     <c:if test="${!empty user}">
+			
 						<a href="./communityWritePage" class="btn btn-light">글쓰기</a>
-				</c:if>
-			 </div>
+
+			 	</div>
 			
 				<!--페이지네이션 -->
 				

@@ -12,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ssofun.dto.AdminDto;
 import com.ssofun.dto.CommunityCommentDto;
 import com.ssofun.dto.CommunityDto;
+import com.ssofun.dto.CommunityNoticeDto;
+import com.ssofun.dto.CommunityCategoryDto;
 import com.ssofun.dto.UserDto;
 import com.ssofun.www.community.service.CommunityService;
 import com.ssofun.www.integration.service.IntegratedAuthenticationService;
@@ -25,37 +28,6 @@ public class CommunityController {
 
 	@Autowired
 	private CommunityService communityService;
-	
-	@Autowired
-	private IntegratedAuthenticationService integratedAuthenticationService;
-	
-	
-	// 사용자 로그인 페이지
-	@RequestMapping("loginPage")
-	public String userLoginPage(HttpSession session) {
-		
-		if(session.getAttribute("user") != null) {
-			return "redirect:./communityMainPage";
-		}
-		
-		return "integratedAuthentication/userLoginPage";
-	}
-
-	@RequestMapping("loginProcess")
-	public String userLoginProcess(HttpSession session, UserDto params) {
-
-		UserDto user = integratedAuthenticationService.findUserByIdAndPw(params);
-		
-		if(user == null) {
-			return "integratedAuthentication/loginFailed";
-		}
-		
-		
-		session.setAttribute("user", user);
-		
-		return "redirect:./communityMainPage";
-	}
-	
 	
 	// 커뮤니티 메인페이지 
 	@RequestMapping("communityMainPage")
@@ -90,25 +62,48 @@ public class CommunityController {
 		
 		return "www/community/communityMainPage";
 	}
-
 	
 	//커뮤니티 글쓰기 페이지
 	@RequestMapping("communityWritePage")
-	public String communityWritePage() {
+	public String communityWritePage(Model model, HttpSession session) {
 		
-		return "www/community/communityWritePage";
+		UserDto user = (UserDto)session.getAttribute("user");
+		
+		AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		
+		List<CommunityCategoryDto> communityCategoryList = communityService.communityCategoryList();
+		
+		model.addAttribute("communityCategoryList", communityCategoryList);
+		
+		if(user != null || shopAdmin != null) {
+			return "www/community/communityWritePage";
+		}
+		
+		return "redirect:../user/userLoginPage";
 		
 	}
 	
 	@RequestMapping("communityWriteProcess")
-	public String communityWriteProcess(HttpSession session, CommunityDto communityDto ) {
+	public String communityWriteProcess(HttpSession session, CommunityDto communityDto
+			, CommunityNoticeDto communityNoticeDto) {
 		
 		UserDto user = (UserDto)session.getAttribute("user");
 		
-		long user_id = user.getUser_id();
-		communityDto.setUser_id(user_id);
+		AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 		
-		communityService.communityWrite(communityDto);
+		if(user != null) {
+			long user_id = user.getUser_id();
+			communityDto.setUser_id(user_id);
+			
+			communityService.communityWrite(communityDto);
+		}else {
+			int admin_id = shopAdmin.getAdmin_id();
+			communityNoticeDto.setAdmin_id(admin_id);
+			
+			communityService.insertCommunityNotice(communityNoticeDto);
+		}
+		
+
 		
 		return "redirect:./communityMainPage";
 	}
@@ -192,10 +187,6 @@ public class CommunityController {
 			return "redirect:./communityReadPage?community_id=" + communityCommentDto.getCommunity_id();
 			// 리다이렉트 시 보이는 리드페이지를 구별하기 위해 커뮤니티 아이디를 넘기는 것. 
 		}
-		
-		
-		
-
 		
 		
 }

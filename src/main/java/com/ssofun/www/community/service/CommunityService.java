@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.ssofun.dto.CommunityCommentDto;
 import com.ssofun.dto.CommunityDto;
+import com.ssofun.dto.CommunityNoticeDto;
+import com.ssofun.dto.AdminDto;
+import com.ssofun.dto.CommunityCategoryDto;
 import com.ssofun.dto.UserDto;
 import com.ssofun.www.community.mapper.CommunitySqlMapper;
 import com.ssofun.www.integration.mapper.IntegratedAuthenticationSqlMapper;
@@ -26,6 +29,35 @@ public class CommunityService {
 		
 	}
 	
+	// 커뮤니티 공지사항 등록
+	public void insertCommunityNotice(CommunityNoticeDto communityNoticeDto) {
+		communitySqlMapper.insertCommunityNotice(communityNoticeDto);
+	}
+	
+	// 커뮤니트 공지사항 리스트
+	public List<Map<String, Object>> communityNoticeList(){
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		
+		List<CommunityNoticeDto> communityNoticeList = communitySqlMapper.communityNoticeList();
+		
+		for(CommunityNoticeDto communityNoticeDto : communityNoticeList) {
+			
+			Map<String, Object> map = new HashMap<>();
+			
+			int admin_id = communityNoticeDto.getAdmin_id();
+			
+			AdminDto adminDto = communitySqlMapper.selectByAdminId(admin_id);
+			
+			map.put("communityNoticeDto", communityNoticeDto);
+			map.put("adminDto", adminDto);
+			
+			communityNoticeList.add(communityNoticeDto);
+		}
+		
+		return list;
+	}
+	
 	// 커뮤니티 리스트 셀렉트
 	
 	public List<Map<String, Object>> communityList() { 
@@ -40,13 +72,18 @@ public class CommunityService {
 			
 			long user_id = communityDto.getUser_id();
 			
+			int community_category_id = communityDto.getCommunity_category_id();
+			
 			UserDto userDto = communitySqlMapper.selectByUserId(user_id);
+			
+			CommunityCategoryDto communityCategoryDto = communitySqlMapper.selectByCommunityCategoryId(community_category_id);
 			
 			// 댓글 개수 조회
 			int commentCount = communitySqlMapper.getCommentCount(communityDto.getCommunity_id());
 	  
 			map.put("userDto", userDto);
 			map.put("communityDto", communityDto);
+			map.put("communityCategoryDto", communityCategoryDto);
 			map.put("commentCount", commentCount);
 		  
 		  list.add(map);
@@ -144,4 +181,10 @@ public class CommunityService {
 
 		    return Commentlist;
 		}
+
+		// 공지사항 카테고리 리스트
+		public List<CommunityCategoryDto> communityCategoryList(){
+			List<CommunityCategoryDto> communityCategoryList = communitySqlMapper.communityCategoryList();
+			return communityCategoryList;
+		}		
 }
