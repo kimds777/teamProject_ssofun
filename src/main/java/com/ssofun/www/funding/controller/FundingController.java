@@ -307,6 +307,12 @@ public class FundingController {
 
 		return fundingService.getPaymentBeforeFundingOrder(funding_order_id);
 	}
+	
+	@ResponseBody
+	@RequestMapping("AJAXgetUseraddressList") //여기부터 작업해야함!!
+	public List<DeliveryRecipientDto> AJAXgetUseraddressList(long user_id) {
+		
+	}
 
 	// 콜백 수신 처리
 	@RequestMapping("AJAXcallback_receive")

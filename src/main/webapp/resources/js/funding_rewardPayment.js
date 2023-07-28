@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var urlParams = new URLSearchParams(window.location.search);
     var $funding_order_id =  urlParams.get("funding_order_id");
-    var user_id = 1;
+    var user_id = 1;  // 유저아이디 수정 필요 세션으로 받아야함
 
     getPaymentBeforeFundingOrder($funding_order_id);
     setEventListener($funding_order_id,user_id);
@@ -29,6 +29,7 @@ function setEventListener($funding_order_id,user_id){
 
     $(document).on("click","#showAddressAddModalBtn",function(event){
         event.stopPropagation(); 
+        getUseraddressList(user_id)
         $("#addressAddModal").removeClass("hide");
     })
     
@@ -341,3 +342,17 @@ function addCommas(num){
 
     return str;
 };
+
+
+function getUseraddressList(user_id){
+    $.ajax({
+        url: "./AJAXgetUseraddressList",
+        method: "GET",
+        data: {user_id:user_id},
+        success: function(res){
+            if(res != null){
+
+            }
+        }
+    });
+}
