@@ -33,13 +33,13 @@
 .List_td{
 	font-size: 12px;
 	font-weight: 700;
-	height: 44.19px;
+	height: 35px;
 }
 
 .List_th{	
 	font-size: 10px;
 	font-weight: 750;
-	height: 44.19px;
+	height: 35px;
 }
 
 /* 폰트 크기와 줄 간격을 조절하여 한 줄로 나오도록 합니다. */
@@ -52,7 +52,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     /* 부모 요소의 높이를 설정해주세요. 예시로 16px로 설정하겠습니다. */
-    height: 44.19px;
+    height: 35px;
 }
 
 
