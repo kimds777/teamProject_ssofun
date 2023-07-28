@@ -28,7 +28,9 @@
 		
 			<div class ="row">
 				<div class="col"></div>
+				
 				<div class="col-11">
+				
 					<!-- 시간 계산 -->
 					<c:set var="now" value="<%=new java.util.Date()%>" />
 					<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="today" />
@@ -51,11 +53,15 @@
 					                <td>
 					                    <a href="./communityReadPage?community_id=${map.communityDto.community_id}">
 					                        ${map.communityDto.title}
-					                        <!-- 등록된지 3일이내일때 new 나옴 -->
-					                        <c:if test="${map.daysDiff lt 3}">
-					                            <img src="resources/images/new.png" width="12px" alt="new" />
-					                        </c:if>
+					                        
+					                        <!--댓글 개수 -->
 					                        (${map.commentCount})
+					                        
+					                        <!-- 등록된지 1일이내일때 new 나옴 -->
+					                        <c:if test="${map.daysDiff lt 1}">
+					                            <img src="../../resources/img/new.png" width="23px"/>
+					                        </c:if>
+					                        
 					                    </a>
 					                </td>
 					                <td>${map.userDto.nickname}</td>
