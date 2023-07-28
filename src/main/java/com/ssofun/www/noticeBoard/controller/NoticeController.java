@@ -15,10 +15,10 @@ public class NoticeController {
 	@Autowired 
 	private NoticeService noticeService;
 	
-	@RequestMapping("noticeMainPage")
+	@RequestMapping("notice")
 	public String notice() {
 		
-		return "www/notice/noticeMainPage";
+		return "www/notice/notice";
 	}
 	
 	
@@ -26,7 +26,7 @@ public class NoticeController {
 	public String noticeinsertprocess(NoticeDto noticeDto, NoticeCategoryDto noticeCategoryDto ) {
 		noticeService.insertNoticeBoard(noticeDto);
 		noticeService.insertNoticeCategory(noticeCategoryDto);		
-		return "redirect:./noticeMainPage";
+		return "redirect:./notice";
 		
 	}
 
