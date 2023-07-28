@@ -25063,7 +25063,8 @@ select.form-control {
 
 .checkbox-outline-info .checkmark {
   background: #fff;
-  border: 1px solid #003473;
+  border: 1px solid #333333;
+  /*border: 1px solid #003473; 원본 코드*/
 }
 .checkbox-outline-info .checkmark:after {
   border-color: #003473;
