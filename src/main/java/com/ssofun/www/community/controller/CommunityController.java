@@ -1,5 +1,6 @@
 package com.ssofun.www.community.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -71,7 +72,19 @@ public class CommunityController {
 	        title = StringEscapeUtils.escapeHtml4(title);
 	        communityDto.setTitle(title);
 	    }
-
+	    
+	    // 커뮤니티 글 작성일과 현재 시간 사이의 차이를 계산하여 "daysDiff"로 모델에 추가
+	    for (Map<String, Object> item : list) {
+	        CommunityDto communityDto = (CommunityDto) item.get("communityDto");
+	        Date now = new Date();
+	        long currentTime = now.getTime();
+	        long createdTime = communityDto.getCreated_at().getTime();
+	        long diffInMillies = currentTime - createdTime;
+	        long daysDiff = diffInMillies / (1000 * 60 * 60 * 24);
+	        item.put("daysDiff", daysDiff);
+	    }
+        
+        
 		model.addAttribute("list", list); 
 		
 		
@@ -124,7 +137,7 @@ public class CommunityController {
 			communityDto.setTitle(title);
 
 			// 댓글 리스트
-			List<Map<String, Object>> Commentlist = communityService.community_commentList();
+			List<Map<String, Object>> Commentlist = communityService.communitySelectCommentList(community_id);
 			
 		    // Commentlist에 있는 각각의 CommunityCommentDto에 대해 comment을 HTML 이스케이프 처리
 		    for (Map<String, Object> item : Commentlist) {
@@ -142,9 +155,7 @@ public class CommunityController {
 				
 	
 			}
-			
-
-		
+	
 		//글 삭제
 		@RequestMapping("deleteProcess")
 		public String deleteProcess(int community_id) {

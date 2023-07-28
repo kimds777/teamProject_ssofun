@@ -41,9 +41,13 @@ public class CommunityService {
 			long user_id = communityDto.getUser_id();
 			
 			UserDto userDto = communitySqlMapper.selectByUserId(user_id);
+			
+			// 댓글 개수 조회
+			int commentCount = communitySqlMapper.getCommentCount(communityDto.getCommunity_id());
 	  
 			map.put("userDto", userDto);
 			map.put("communityDto", communityDto);
+			map.put("commentCount", commentCount);
 		  
 		  list.add(map);
 		}
@@ -90,34 +94,54 @@ public class CommunityService {
 	
 		
 		// 댓글 리스트 셀렉트
-		public List<Map<String, Object>> community_commentList() {
-			
-			List<Map<String, Object>> Commentlist = new ArrayList<>();
-			
-			List<CommunityCommentDto> communityCommentDtoList = communitySqlMapper.communitySelectComment();
-			
-			for(CommunityCommentDto communityCommentDto : communityCommentDtoList) {
-				
-				Map<String, Object> map = new HashMap<>();
-				
-				long user_id = communityCommentDto.getUser_id();
-				
-				int community_id = communityCommentDto.getCommunity_id();
-				
-				UserDto userDto = communitySqlMapper.selectByUserId(user_id);
-				
-				CommunityDto communityDto = communitySqlMapper.selectByCommunityId(community_id);
-				  
-				map.put("userDto", userDto);
-				map.put("communityDto", communityDto);
-				map.put("communityCommentDto", communityCommentDto);
-			  
-				Commentlist.add(map);
-			}
-			
-			return Commentlist;
-		}
+//		public List<Map<String, Object>> community_commentList() {
+//			
+//			List<Map<String, Object>> Commentlist = new ArrayList<>();
+//			
+//			List<CommunityCommentDto> communityCommentDtoList = communitySqlMapper.communitySelectComment();
+//			
+//			for(CommunityCommentDto communityCommentDto : communityCommentDtoList) {
+//				
+//				Map<String, Object> map = new HashMap<>();
+//				
+//				long user_id = communityCommentDto.getUser_id();
+//				
+//				int community_id = communityCommentDto.getCommunity_id();
+//				
+//				UserDto userDto = communitySqlMapper.selectByUserId(user_id);
+//				
+//				CommunityDto communityDto = communitySqlMapper.selectByCommunityId(community_id);
+//				  
+//				map.put("userDto", userDto);
+//				map.put("communityDto", communityDto);
+//				map.put("communityCommentDto", communityCommentDto);
+//			  
+//				Commentlist.add(map);
+//			}
+//			
+//			return Commentlist;
+//		}
 		
-	
+		// 하나의 게시글에 대한 댓글 리스트
+		public List<Map<String, Object>> communitySelectCommentList(int community_id) {
 
+		    List<Map<String, Object>> Commentlist = new ArrayList<>();
+		    List<CommunityCommentDto> communityCommentDtoList = communitySqlMapper.communitySelectCommentList(community_id);
+
+		    for (CommunityCommentDto communityCommentDto : communityCommentDtoList) {
+
+		        Map<String, Object> map = new HashMap<>();
+		        long user_id = communityCommentDto.getUser_id();
+		        UserDto userDto = communitySqlMapper.selectByUserId(user_id);
+		        CommunityDto communityDto = communitySqlMapper.selectByCommunityId(community_id);
+
+		        map.put("userDto", userDto);
+		        map.put("communityDto", communityDto);
+		        map.put("communityCommentDto", communityCommentDto);
+
+		        Commentlist.add(map);
+		    }
+
+		    return Commentlist;
+		}
 }

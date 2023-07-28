@@ -31,24 +31,30 @@
 }
 
 .List_td{
-	font-size: 10px;
+	font-size: 12px;
 	font-weight: 700;
+	height: 44.19px;
 }
 
 .List_th{	
 	font-size: 10px;
 	font-weight: 750;
+	height: 44.19px;
 }
 
+/* 폰트 크기와 줄 간격을 조절하여 한 줄로 나오도록 합니다. */
 .List_productname {
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 700;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    text-overflow: ellipsis; /* 텍스트 공간이 넘칠 경우 "..."으로 표시 */
+    text-overflow: ellipsis;
+    /* 부모 요소의 높이를 설정해주세요. 예시로 16px로 설정하겠습니다. */
+    height: 44.19px;
 }
+
 
 
 .td_No{
@@ -96,6 +102,56 @@
 	font-weight: 800;
 }
 
+/* 상품리스트 UI */
+.product_list0{
+	width: 75px;
+}
+
+.product_list1{
+
+}
+
+.product_list2{
+	width: 110px;
+}
+
+.product_list3{
+	width: 100px;
+}
+
+/* 주문리스트 UI */
+.review_list0{
+	width: 75px;
+}
+
+.review_list1{
+	width: 100px;
+}
+
+.review_list2{
+	width: 90px;
+}
+
+.review_list3{
+
+}
+
+/* 리뷰,평점리스트 UI */
+.order_list0{
+	width: 75px;
+}
+
+.order_list1{
+
+}
+
+.order_list2{
+	width: 75px;
+}
+
+.order_list3{
+	width: 70px;
+}
 </style>
 
 <head>
@@ -1109,10 +1165,10 @@ $(document).ready(function() {
             let res = "";
             for (let i = 0; i < dashboardProductList.length; i++) {
                 res += "<tr>" +
-                    "<th scope='row' class='td_No List_td'>No. " + dashboardProductList[i].product_id + "</th>" +
-                    "<td class='List_productname'>" + dashboardProductList[i].name + "</td>" +
-                    "<td class='List_td'>" + formatNumber(dashboardProductList[i].price) + " 원</td>" +
-                    "<td class='List_td'>" + dashboardProductList[i].created_at + "</td></tr>";
+                    "<th scope='row' class='td_No List_td product_list0'>No. " + dashboardProductList[i].product_id + "</th>" +
+                    "<td class='List_productname product_list1'>" + dashboardProductList[i].name + "</td>" +
+                    "<td class='List_td product_list2'>" + formatNumber(dashboardProductList[i].price) + " 원</td>" +
+                    "<td class='List_td product_list3'>" + dashboardProductList[i].created_at + "</td></tr>";
             }
             $('#dashboard_product_list').append(res);
         }
@@ -1128,10 +1184,10 @@ $(document).ready(function() {
             let res = "";
             for (let i = 0; i < dashboardProductOrderList.length; i++) {
                 res += "<tr>" +
-                	"<th scope='row' class='td_No List_td'>No. " + dashboardProductOrderList[i].product_order_item_id + "</th>" +
-                    "<td class='List_td'>" + dashboardProductOrderList[i].order_created_at + "</td>" +
-                    "<td class='List_td'>" + dashboardProductOrderList[i].delivery_recipient_name + " 님</td>" +
-                    "<td class='List_productname'>" + dashboardProductOrderList[i].product_name + "</td></tr>";
+                	"<th scope='row' class='td_No List_td review_list0'>No. " + dashboardProductOrderList[i].product_order_item_id + "</th>" +
+                    "<td class='List_td review_list1'>" + dashboardProductOrderList[i].order_created_at + "</td>" +
+                    "<td class='List_td review_list2'>" + dashboardProductOrderList[i].delivery_recipient_name + " 님</td>" +
+                    "<td class='List_productname review_list3'>" + dashboardProductOrderList[i].product_name + "</td></tr>";
             }
             $('#dashboard_product_orderlist').append(res);
         }
@@ -1147,10 +1203,10 @@ $(document).ready(function() {
             for (let i = 0; i < dashboardproductReviewList.length; i++) {
                 console.log(dashboardproductReviewList);
                 res += "<tr>" +
-                	"<th scope='row' class='td_No List_td'>No. " + dashboardproductReviewList[i].product_id + "</th>" +
-                    "<td class='List_productname'>" + dashboardproductReviewList[i].name + "</td>" +
-                    "<td class='List_td'>" + dashboardproductReviewList[i].review_cnt + " 개</td>" +
-                    "<td class='List_td'>" + dashboardproductReviewList[i].review_avg_score + " 점</td></tr>";
+                	"<th scope='row' class='td_No List_td order_list0'>No. " + dashboardproductReviewList[i].product_id + "</th>" +
+                    "<td class='List_productname order_list1'>" + dashboardproductReviewList[i].name + "</td>" +
+                    "<td class='List_td order_list2'>" + dashboardproductReviewList[i].review_cnt + " 개</td>" +
+                    "<td class='List_td order_list3'>" + dashboardproductReviewList[i].review_avg_score + " 점</td></tr>";
             }
             $('#dashboard_product_reviewList').append(res);
         }

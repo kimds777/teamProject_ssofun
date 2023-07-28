@@ -52,6 +52,12 @@
 	
 	</select>
 	
+	<!-- 커뮤니티 댓글 테이블 프라이머리키로 검색 -->
+	<select id="selectByCommunityCommentId" resultType="com.ssofun.dto.CommunityCommentDto">
+		select *
+		from tb_community_comment
+		 where community_comment_id = #{community_comment_id}
+	</select>
 	
 	<!--조회수 증가 -->
 	<update id="increaseReadCount">
@@ -90,20 +96,25 @@
 	
 	
 	<!--댓글 리스트 출력 -->
-	<select id="communitySelectComment" resultType="com.ssofun.dto.CommunityCommentDto">
+<!-- 	<select id="communitySelectComment" resultType="com.ssofun.dto.CommunityCommentDto">
 	
 		select*
 		from tb_community_comment
 		order by created_at asc
 	
+	</select> -->
+	
+	<!-- 하나에 게시글에 대한 댓글 리스트 출력 -->
+	<select id="communitySelectCommentList" resultType="com.ssofun.dto.CommunityCommentDto">
+		select *
+		 from tb_community_comment 
+		 where community_id = #{community_id}
+		 order by created_at asc
 	</select>
 	
 	<!--게시글에 달린 댓글 수 -->
 	<select id="getCommentCount" resultType="int">
-	    SELECT COUNT(*) FROM tb_community_comment WHERE community_id = #{community_id}
+	SELECT COUNT(*) FROM tb_community_comment WHERE community_id = #{community_id}
 	</select>
 	
-	
-
-
 </mapper>

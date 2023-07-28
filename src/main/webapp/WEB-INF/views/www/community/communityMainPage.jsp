@@ -14,6 +14,7 @@
  	  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="../../resources/css/community_main.css">
+	<script src="../../resources/js/logout.js"></script>
 
 
 <title>커뮤니티</title>
@@ -28,29 +29,45 @@
 			<div class ="row">
 				<div class="col"></div>
 				<div class="col-11">
-					<table class= "table table-hover">
-			   <thead>
-				 <tr>
-					<td>번호</td>
-					<td>제목</td>
-					<td>작성자</td>
-					<td>작성일</td>
-					<td>조회수</td>
-				  </tr>
-				</thead> 
-				
-				<tbody>
-					<c:forEach items= "${list }" var="map">
-					<tr>
-						<td>${map.communityDto.community_id} </td>
-						<td><a href="./communityReadPage?community_id=${map.communityDto.community_id}">${map.communityDto.title}</a></td>
-						<td>${map.userDto.nickname} </td>
-						<td><fmt:formatDate value="${map.communityDto.created_at}" pattern="yy.MM.dd"/> </td>
-						<td>${map.communityDto.read_count} </td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					<!-- 시간 계산 -->
+					<c:set var="now" value="<%=new java.util.Date()%>" />
+					<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="today" />
+
+					<table class="table table-hover">
+					    <thead>
+					        <tr>
+					            <td>번호</td>
+					            <td>제목</td>
+					            <td>작성자</td>
+					            <td>작성일</td>
+					            <td>조회수</td>
+					        </tr>
+					    </thead>
+					
+					    <tbody>
+					        <c:forEach items="${list}" var="map">
+					            <tr>
+					                <td>${map.communityDto.community_id}</td>
+					                <td>
+					                    <a href="./communityReadPage?community_id=${map.communityDto.community_id}">
+					                        ${map.communityDto.title}
+					                        <!-- 등록된지 3일이내일때 new 나옴 -->
+					                        <c:if test="${map.daysDiff lt 3}">
+					                            <img src="resources/images/new.png" width="12px" alt="new" />
+					                        </c:if>
+					                        (${map.commentCount})
+					                    </a>
+					                </td>
+					                <td>${map.userDto.nickname}</td>
+					                <td>
+					                    <fmt:formatDate value="${map.communityDto.created_at}" pattern="yy.MM.dd" />
+					                </td>
+					                <td>${map.communityDto.read_count}</td>
+					            </tr>
+					        </c:forEach>
+					    </tbody>
+					</table>
+		
 				</div>
 				<div class="col"></div>
 			</div>
