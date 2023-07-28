@@ -265,7 +265,7 @@ function getPaymentBeforeFundingOrder($funding_order_id){
         method: "GET",
         data:{funding_order_id:$funding_order_id},
         success: function(res){
-            var $rewardGroup = $("div#rewardGroup");
+            var $rewardGroup = $("div#rewardGroups");
             $.each(res,function(key,value){
                 if(key == "price_support"){
                     var price_support = addCommas(value);
