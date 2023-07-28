@@ -1,4 +1,4 @@
-spackage com.ssofun.www.systemadmin.controller;
+package com.ssofun.www.systemadmin.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -35,29 +35,27 @@ public class SystemAdminController {
 
 	
 	
-	@ResponseBody
-	@RequestMapping("systemAdminLoginProcess")
-	public int systemAdminLoginProcess(HttpSession session, AdminDto adminDto) {
-		
-		
-		AdminDto sessionSystemAdmin= systemAdminService.getAdminByIdAndPw(adminDto);
-	
+//	@ResponseBody
+//	@RequestMapping("systemAdminLoginProcess")
+//	public int systemAdminLoginProcess(HttpSession session, AdminDto adminDto) {
+//		
+//		
+//		AdminDto sessionSystemAdmin= systemAdminService.getAdminByIdAndPw(adminDto);
+//	
 //		int user_id = sessionUser.getUser_id();
-	
-		if (sessionSystemAdmin == null) {		
-			return 0;
-		}else {
-			session.setAttribute("sessionSystemAdmin", sessionSystemAdmin);
-			
-			return 1;
-					//"redirect:../qna/qnaMain?user_id="+user_id;
-		}
-	}
-	
-	
+//	
+//		if (sessionSystemAdmin == null) {		
+//			return 0;
+//		}else {
+//			session.setAttribute("sessionSystemAdmin", sessionSystemAdmin);
+//			
+//			return 1;
+//					//"redirect:../qna/qnaMain?user_id="+user_id;
+//		}
+//	}
 	
 	
-	
+
 	
 	
 	
@@ -72,48 +70,22 @@ public class SystemAdminController {
 	
 	
 	
-	
-
-	
 	@RequestMapping("adminLoginProcess")
 	public String loginProcess(HttpSession session, AdminDto adminDto) {
-		
-//	    if (adminDto.getLogin_account() == null || adminDto.getLogin_password() == null) {
-//	        // "login_account"와 "login_password"가 없는 경우, 로그인 실패 페이지로 이동
-//	        return "redirect:./login/adminLoginFail";
-//	    }
-		
+
 		
 		AdminDto adminData = systemAdminService.findAdminByIdAndPw(adminDto);
 		
-//		System.out.println(adminData.getLogin_account());
-//		System.out.println(adminData.getLogin_password());
-//		int bizid = adminData.getBiz_id();
-//		
-//		if (bizid == 0) {
-//			
-//			AdminDto systemAdmin = adminData;
-//			
-//			session.setAttribute("systemAdmin", systemAdmin);
-//			System.out.println("시스템관리자"+systemAdmin.getLogin_account());
-//			
-//			return "redirect:./companyManagement/companyManagementMainPage";
-//			
-//			
-//		}else if(bizid != 0){
-//			
-//			 AdminDto shopAdmin = adminData;
-//			 
-//			 session.setAttribute("shopAdmin", shopAdmin);
-//			System.out.println("샵관리자"+shopAdmin.getLogin_account()); 
-//			 return "redirect:../admin/adminMainPage";
-//		}
 		
 		if(adminData != null) {
+			
 			int bizId = adminData.getBiz_id();
 			
 			if(bizId == 0) {
-//				session.setAttribute("systemAdmin", systemAdmin);
+				
+				AdminDto systemAdmin = adminData;
+				
+				session.setAttribute("systemAdmin", systemAdmin);
 				return "redirect:./companyManagement/companyManagementMainPage";
 			} else if (bizId != 0) {
 				 AdminDto shopAdmin = adminData;
@@ -129,6 +101,13 @@ public class SystemAdminController {
 		
 	}
 	
+
+	@RequestMapping("login/adminLoginFail")
+	public String adminLoginFail() {
+		
+		return "systemadmin/login/adminLoginFail";
+	}
+	
 	
 	
 	
@@ -137,44 +116,9 @@ public class SystemAdminController {
 		return"systemadmin/systemAdminMainPage";
 	}
 		
-		
-		
-//		AdminDto shopAdmin = systemAdminService.findShopAdminByIdAndPw(adminDto);
-//		AdminDto systemAdmin = systemAdminService.findSystemAdminByIdAndPw(adminDto);
-//		
-//		if (shopAdmin != null) {
-//				
-//			session.setAttribute("shopAdmin", shopAdmin);
-//			
-//			return "redirect:../admin/adminMainPage";
-//			
-//		}else if(systemAdmin != null) {
-//			
-//			session.setAttribute("systemAdmin", systemAdmin);
-//			return "redirect:./companyManagement/companyManageMent";
-//		}
-//	
-//		return"redirect:./login/loginFail";
-	
-	
-	
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

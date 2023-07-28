@@ -42,7 +42,7 @@
                             <div class="row" style="height: 100px;">
                                 <div class="col"></div>
                                 <div class="col">
-                                    <div class="box adminimagecol"><img class="adminimage"></div>
+                                    <div class="box adminimagecol"><img class="admi nimage"></div>
                                 </div>
                                 <div class="col"></div>
                             </div>
