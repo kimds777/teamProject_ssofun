@@ -31,10 +31,6 @@ function setEventListener($funding_id){
         $("#tab>div#rewardModal").toggleClass("hide");
     });
 
-    // $("#tab>ul>li#reward").click(function(e){
-    //     e.stopPropagation();  
-    //     $("#tab>div#rewardModal").toggleClass("hide");
-    // });
 
     $(document).on("click","#likeBtn",function(e){
         e.stopPropagation();
@@ -51,6 +47,18 @@ function setEventListener($funding_id){
 
         if(user_id != 0){
             location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
+    });
+
+    $(document).on("click","#rewardModal>dl",function(e){
+        e.stopPropagation();
+        
+        if(user_id != 0){
+            var funding_reward_id = $(this).children("input#funding_reward_id").val();
+            location.href = "./fundingRewardChoicePage?funding_id="+$funding_id+"&funding_reward_id="+funding_reward_id;
         }else{
             alert("로그인이 필요한 서비스입니다.");
             return window.location.href = "../user/userLoginPage";
@@ -206,8 +214,10 @@ function deleteFavorit($funding_id,user_id){
 
 
 function getFundingDto($funding_id){
+    $("#content>div.input").empty();
     $("#content>div.input").siblings().remove();
     $("#swiper").empty();
+
     $.ajax({
         url: "./getFundingDtoAjax",
         method: "GET",

@@ -508,7 +508,7 @@ $(document).ready(function() {
                     "<td class='td_No'>No. " + orderItemList[i].product_order_item_id + "</td>" +
                     "<td>" + orderItemList[i].created_at + "</td>" +
                     "<td>" + orderItemList[i].recipient_name + " 님</td>" +
-                    "<td>" + orderItemList[i].order_status_name + "</td>" +
+                    "<td class='"+orderStatusClass+"'>" + orderItemList[i].order_status_name + "</td>" +
                     "<td><a href='orderItemDetailPage?product_order_item_id=" + orderItemList[i].product_order_item_id + "'>" + orderItemList[i].product_name + "</a></td>" +
                     "<td>" + orderItemList[i].count + " 개</td>" +
                     "<td>" + formatNumber(orderItemList[i].price) + " 원</td>" +

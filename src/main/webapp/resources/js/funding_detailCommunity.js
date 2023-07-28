@@ -40,6 +40,18 @@ function setEventListener($funding_id,$funding_review_id){
         }
     });
 
+    $(document).on("click","#rewardModal>dl",function(e){
+        e.stopPropagation();
+        
+        if(user_id != 0){
+            var funding_reward_id = $(this).children("input#funding_reward_id").val();
+            location.href = "./fundingRewardChoicePage?funding_id="+$funding_id+"&funding_reward_id="+funding_reward_id;
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
+    });
+
     $(document).on("click","#goToLoginBtn",function(e){
         e.stopPropagation();
         window.location.href = "../user/userLoginPage";
