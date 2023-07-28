@@ -271,7 +271,10 @@ function getFundingDto($funding_id){
                         $tabInfo.html("<a href='./fundingDetailPage?funding_id="+value+"'>소개</a>");
                         $tabNotice.html("<a href='./fundingDetailNoticeListPage?funding_id="+value+"'>공지사항</a>");
                         $tabCommunity.html("<a class='activeTab' href='./fundingDetailCommunityListPage?funding_id="+value+"'>커뮤니티</a>");
-                        return true;
+
+                        getSupportCount(value,function(res){
+                            $("#sponsor").html("<span class='first'>후원자</span>"+res+"<b>명 참여</b>");
+                        });
                     }
 
                     if(key == "thumbnailList"){
@@ -314,10 +317,6 @@ function getFundingDto($funding_id){
                     if(key == "d_day"){return $d_day = value;}
                     if(key == "close_at"){
                         return $("#endtime").html("<span class='first'>남은 시간</span>"+$d_day+"<b>일</b><span id='end'>"+value+" 종료</span>");
-                    }
-
-                    if(key =="countSupporter"){
-                        return $("#sponsor").html("<span class='first'>후원자</span>"+value+"<b>명 참여</b>");
                     }
 
                     if(key == "delivery_from"){
@@ -411,6 +410,19 @@ function getFundingDto($funding_id){
     });
 };
 
+function getSupportCount(funding_id,callback){
+    $.ajax({
+        url: "./AJAXgetSupportCount",
+        method: "GET",
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                callback(res);
+            }
+        }
+    });
+}
+
 function getRewardPaymentCount(callback,funding_reward_id){
     $.ajax({
         url: "./AJAXgetRewardPaymentCount",
@@ -461,7 +473,7 @@ function getFundingCommunity($funding_review_id){
                             alert("유저 아이디가 있다고? 유저아이디: "+user_id);
                             $div.append("<div class='input'><input type='text' name='commentInput' id='commentInput' placeholder='댓글을 달아보세요!'><input type='button' value='작성하기' id='commentSubmit'></div>");
                         }else{
-                            $div.append("<div class='input'><input type='text' value='로그인이 필요한 서비스입니다.' disabled ><input type='button' value='로그인' id='goToLoginBtn'></div>");
+                            $div.append("<div class='input'><input type='text' value='로그인이 필요한 서비스입니다.' disabled ><input type='button' value='로그인하기' id='goToLoginBtn'></div>");
                         }
                     }
 

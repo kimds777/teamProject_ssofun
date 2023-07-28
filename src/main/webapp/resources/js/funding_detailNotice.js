@@ -266,7 +266,10 @@ function getFundingDto($funding_id,$funding_notice_id){
                         $tabInfo.html("<a href='./fundingDetailPage?funding_id="+value+"'>소개</a>");
                         $tabNotice.html("<a class='activeTab' href='./fundingDetailNoticeListPage?funding_id="+value+"'>공지사항</a>");
                         $tabCommunity.html("<a href='./fundingDetailCommunityListPage?funding_id="+value+"'>커뮤니티</a>");
-                        return true;
+
+                        getSupportCount(value,function(res){
+                            $("#sponsor").html("<span class='first'>후원자</span>"+res+"<b>명 참여</b>");
+                        });
                     }
 
                     if(key == "thumbnailList"){
@@ -311,9 +314,6 @@ function getFundingDto($funding_id,$funding_notice_id){
                         return $("#endtime").html("<span class='first'>남은 시간</span>"+$d_day+"<b>일</b><span id='end'>"+value+" 종료</span>");
                     }
 
-                    if(key =="countSupporter"){
-                        return $("#sponsor").html("<span class='first'>후원자</span>"+value+"<b>명 참여</b>");
-                    }
 
                     if(key == "delivery_from"){
                         return $("#aside>ul>li>ul>li:first-child").html("<i class='bi bi-truck'></i> "+value+"에 발송됩니다.");
@@ -396,6 +396,19 @@ function getFundingDto($funding_id,$funding_notice_id){
                     }
                 });
                 getFundingNewsDto($funding_notice_id);
+        }
+    });
+}
+
+function getSupportCount(funding_id,callback){
+    $.ajax({
+        url: "./AJAXgetSupportCount",
+        method: "GET",
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                callback(res);
+            }
         }
     });
 }

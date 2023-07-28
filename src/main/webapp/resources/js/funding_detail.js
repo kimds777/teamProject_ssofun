@@ -42,7 +42,7 @@ function setEventListener($funding_id){
     
     $(document).on("click","#rewardModal>dl",function(e){
         e.stopPropagation();
-        
+
         if(user_id != 0){
             var funding_reward_id = $(this).children("input#funding_reward_id").val();
             location.href = "./fundingRewardChoicePage?funding_id="+$funding_id+"&funding_reward_id="+funding_reward_id;
@@ -376,7 +376,6 @@ function getFundingDto($funding_id){
                         $tabInfo.html("<a class='activeTab' href='./fundingDetailPage?funding_id="+value+"'>소개</a>");
                         $tabNotice.html("<a href='./fundingDetailNoticeListPage?funding_id="+value+"'>공지사항</a>");
                         $tabCommunity.html("<a href='./fundingDetailCommunityListPage?funding_id="+value+"'>커뮤니티</a>");
-                        $("body").append("<input type='hidden' name='funding_id' id='funding_id' value='"+value+"'>");
 
                         getSupportCount(value,function(res){
                             $("#sponsor").html("<span class='first'>후원자</span>"+res+"<b>명 참여</b>");
@@ -431,10 +430,10 @@ function getFundingDto($funding_id){
                         }
                     }
 
-                    if(key =="countSupporter"){
-                        alert(key+": "+value);
+                    // if(key =="countSupporter"){
+                    //     alert(key+": "+value);
                          
-                    }
+                    // }
 
                     if(key == "delivery_from"){
                          $("#aside>ul>li>ul>li:first-child").html("<i class='bi bi-truck'></i> "+value+"에 발송됩니다.");
