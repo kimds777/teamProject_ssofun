@@ -324,6 +324,13 @@ public class FundingServiceImpl {
 	
 //	펀딩 결제하기--------------------------------------------------------
 	
+//	배송지 정보 리스트 출력
+	public List<DeliveryRecipientDto> getUserAddressList(long user_id) {
+		List<DeliveryRecipientDto> recipientList = fundingSqlMapper.selectUserAddressList(user_id);
+		
+		return null;
+	}
+	
 //	펀딩 결제 진행전 주문 정보 입력 -> 리워드별 주문 정보도 같이 입력
 	public long insertOrder(FundingOrderDto fundingOrderDto) {
 		fundingSqlMapper.insertOrder(fundingOrderDto);
@@ -432,6 +439,8 @@ public class FundingServiceImpl {
 		
 		return fundingOrderDto;
 	}
+
+
 
 
 

@@ -109,6 +109,8 @@ public interface FundingSqlMapper {
 	
 
 	
+	
+	
 
 	//---펀딩 커뮤니티 리스트 출력
 	public List<FundingCommunityDto> selectCommunityList(long funding_id);
@@ -133,6 +135,8 @@ public interface FundingSqlMapper {
 			@Param("fundingCommunityReviewAnswerDto") FundingCommunityReviewAnswerDto fundingCommunityReviewAnswerDto, 
 			@Param("user_id") long user_id);
 
+	
+	
 	
 	
 	//---펀딩 결제전 주문 정보 입력
@@ -162,6 +166,8 @@ public interface FundingSqlMapper {
 	public void insertOrderPayment(@Param("payment_id") long payment_id, @Param("funding_order_id") long funding_order_id);
 	//---주문 결제건 택배 수령인 정보 입력
 	public long insertDeliveryRecipient(DeliveryRecipientDto deliveryRecipientDto);
+	//---배송지 리스트 출력
+	public List<DeliveryRecipientDto> selectUserAddressList(long user_id);
 
 
 

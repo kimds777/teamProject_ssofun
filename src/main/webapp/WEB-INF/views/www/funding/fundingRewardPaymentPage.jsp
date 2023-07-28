@@ -11,6 +11,7 @@
 
 <link rel="stylesheet" href="../../resources/css/funding_RewardPayment.css">
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 <body>
@@ -20,12 +21,12 @@
         <h6>배송지 추가</h6>
         <ul>
             <li><i class="bi bi-check-square"></i>이 주소를 기본 주소로 정합니다.</li>
-            <li><span>이름</span><input type="text" name="recipient_name" id="recipient_name"></li>
-            <li><span>연락처</span><input type="text" name="address_phone" id="address_phone"></li>
-            <li><span>주소</span><input type="text" name="address_post" id="address_post"><input type="button" id="searchAddressBtn" value="주소찾기"></li>
-            <li><span>기본주소</span><input type="text" name="address_default" id="address_default"></li>
-            <li><span>상세주소</span><input type="text" name="address_detail" id="address_detail"></li>
-            <li><span>요청사항</span><input type="text" name="request_message" id="request_message"></li>
+            <li><span>이름</span><input type="text" id="recipient_name"></li>
+            <li><span>연락처</span><input type="text" id="address_phone"></li>
+            <li><span>우편번호</span><input type="text" id="address_post"><input type="button" id="searchAddressBtn" value="주소찾기"></li>
+            <li><span>기본주소</span><input type="text" id="address_default"></li>
+            <li><span>상세주소</span><input type="text" id="address_detail"></li>
+            <li><span>요청사항</span><input type="text" id="request_message" placeholder="선택사항"></li>
         </ul>
         <div class="button">
             <input type="button" value="돌아가기" id="returnBtn">

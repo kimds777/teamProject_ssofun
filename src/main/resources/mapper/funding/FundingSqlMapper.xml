@@ -332,6 +332,13 @@
 	</insert>
 	
 	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 결제완료된 리워드 갯수 출력 -->
 	 <select id="selectRewardPaymentCount" resultType="int">
 	 	SELECT IFNULL(SUM(count),0) FROM tb_funding_reward_order 
@@ -425,8 +432,8 @@
 	
 	<!-- 주문 결제건 택배 수령인 정보 입력 -->
 	<insert id="insertDeliveryRecipient" parameterType="com.ssofun.dto.DeliveryRecipientDto" keyProperty="delivery_recipient_id">
-		INSERT INTO tb_delivery_recipient(name,phone,address_post,address_default,address_detail,request_message)
-		VALUE(#{name},#{phone},#{address_post},#{address_default},#{address_detail},#{request_message})
+		INSERT INTO tb_delivery_recipient(default_fg,name,phone,address_post,address_default,address_detail,request_message)
+		VALUE(#{default_fg},#{name},#{phone},#{address_post},#{address_default},#{address_detail},#{request_message})
 		
 		<!-- PK 조회를 위한 selectKey -->
 		<selectKey keyProperty="delivery_recipient_id" resultType="java.lang.Long" order="AFTER">
@@ -434,7 +441,11 @@
 		</selectKey>
 	</insert>
 	
-
-	
+	<!-- 배송지 리스트 출력 -->
+	<select id="selectUserAddressList" resultType="com.ssofun.dto.DeliveryRecipientDto">
+		SELECT dr.* FROM tb_delivery_recipient dr, tb_funding_reward_order fro, tb_funding_order fo, tb_user u
+		WHERE dr.delivery_recipient_id = fro.delivery_recipient_id AND fro.funding_order_id = fo.funding_order_id
+		AND fo.user_id = u.user_id AND dr.used_fg = 1 AND u.user_id = #{user_id}
+	</select>
 
 </mapper>

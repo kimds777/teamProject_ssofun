@@ -309,9 +309,9 @@ public class FundingController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("AJAXgetUseraddressList") //여기부터 작업해야함!!
-	public List<DeliveryRecipientDto> AJAXgetUseraddressList(long user_id) {
-		
+	@RequestMapping("AJAXgetUserAddressList") 
+	public List<DeliveryRecipientDto> AJAXgetUserAddressList(long user_id) {
+		return fundingService.getUserAddressList(user_id);
 	}
 
 	// 콜백 수신 처리
