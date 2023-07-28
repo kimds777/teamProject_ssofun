@@ -751,7 +751,7 @@ $(document).ready(function () {
     	    	          label: {show: false, color: "#0168c1"},
     	    	          type: "bar",
     	    	          barGap: 0,
-    	    	          color: "#DDD6FE",
+    	    	          color: "#FF6462",
     	    	          smooth: true,
     	    	          itemStyle: {
     	    	            emphasis: {
@@ -767,7 +767,7 @@ $(document).ready(function () {
     	    	          data: yPrev,
     	    	          label: {show: false, color: "#639"},
     	    	          type: "bar",
-    	    	          color: "#A78BFA",
+    	    	          color: "#ffcac9",
     	    	          smooth: true,
     	    	          itemStyle: {
     	    	            emphasis: {
