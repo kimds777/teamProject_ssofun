@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssofun.dto.ProductUserDto;
+import com.ssofun.dto.UserDto;
 
 @RestController
 @RequestMapping("/store/*")
@@ -19,7 +19,7 @@ public class RestCustomerController {
 			
 			Map<String, Object> map = new HashMap<>();
 			
-			ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
+			UserDto sessionUser = (UserDto) session.getAttribute("user");
 			
 			if (sessionUser == null) {
 				map.put("result", "fail");	

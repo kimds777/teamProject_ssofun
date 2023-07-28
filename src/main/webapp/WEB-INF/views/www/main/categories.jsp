@@ -29,7 +29,8 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 <link href="../../resources/css/categories.css" rel="stylesheet"
 	type="text/css">
 
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -198,7 +199,7 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 							</c:choose>
 
 							<c:forEach begin="1" end="${pageCount}" var="pageNum">
-								<c:url value="mainPage" var="pageUrl">
+								<c:url value="storePage" var="pageUrl">
 									<c:param name="page" value="${pageNum}" />
 								</c:url>
 								<c:choose>

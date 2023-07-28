@@ -135,9 +135,33 @@
 																				</td>
 																				<td class="td-btn">
 																					<div class="btn-box">
-																						<c:if test="${innerItem }"></c:if>
-																						<button class="btn-review" type="button" onclick="location.href='./productReviewPage?id=${innerItem.product_order_item_id }' ">리뷰 작성하기</button>
+																						<c:set var="hasReview" value="false" />
+																						<c:forEach items="${review}" var="reviewItem">
+																							<c:if
+																								test="${reviewItem.product_order_item_id eq innerItem.product_order_item_id}">
+																								<c:set var="hasReview" value="true" />
+																							</c:if>
+																						</c:forEach>
+																						<c:choose>
+																							<c:when test="${hasReview}">
+																								<!-- Show "리뷰 수정하기" button if a review exists -->
+																								<button class="btn-review" type="button"
+																									onclick="location.href='./productReviewPage?id=${innerItem.product_order_item_id }' ">리뷰
+																									수정하기</button>
+																							</c:when>
+																							<c:otherwise>
+																								<!-- Show "리뷰 작성하기" button if no review exists -->
+																								<button class="btn-review" type="button"
+																									onclick="location.href='./productReviewPage?id=${innerItem.product_order_item_id }' ">리뷰
+																									작성하기</button>
+																							</c:otherwise>
+																						</c:choose>
+																						<button class="btn-qna" type="button"
+																									onclick="location.href='./productReviewPage?id=${innerItem.product_order_item_id }' ">
+																									문의하기</button>
+
 																					</div>
+
 																				</td>
 																			</tr>
 																		</table>

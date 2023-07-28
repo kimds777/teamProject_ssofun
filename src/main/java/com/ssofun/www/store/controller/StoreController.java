@@ -70,7 +70,7 @@ public class StoreController {
 
 	// 스토어 리스트 메인페이지
 	@RequestMapping("storePage")
-	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto, ProductFavoritCountDto pfDto) {
+	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto, ProductFavoritCountDto pfDto, HttpSession session) {
 		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
 		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
 		List<ProductDto> fullList = storeService.getItemList(producDto); // 전체 상품 목록 가져오기
@@ -78,7 +78,6 @@ public class StoreController {
 		for(ProductFavoritCountDto a : Likecount) {
 			int av =a.getProduct_id();
 			int b = a.getCount();
-			System.out.println(av);
 		}
 		
 		
@@ -153,27 +152,19 @@ public class StoreController {
 		return "redirect:./mainPage";
 	}
 
-	@RequestMapping("register")
-	public String register() {
-		return "www/main/register";
-	}
-
-	@ResponseBody
-	@RequestMapping("registerProcess")
-	public String registerProcess(AdminDto testDto, String id) {
-		boolean exists = storeService.existsUserId(id);
-		if (exists == true) {
-			return "1";
-		} else {
-			storeService.register(testDto);
-			return "0";
-		}
-	}
-
 	// 상품상세보기 페이지
 	@RequestMapping("productPage")
-	public String productPage(int id, Model model) {
+	public String productPage(int id, Model model, ProductReviewJiDto prjDto, ProductReviewImageDto priDto, ProductDetailImageDto pdiDto) {
 		List<ProductDto> list = storeService.getItemListDetail(id);
+		prjDto.setProduct_id(id);
+		pdiDto.setProduct_id(id);
+		List<ProductReviewJiDto> relist = storeService.getProductReview(prjDto); //상품마다 리뷰 출력
+		List<ProductDetailImageDto>deimglist = storeService.getDetailImg(pdiDto); // 상품마다 상세이미지 출력
+		List<ProductReviewImageDto>reimgList = storeService.getReviewImg(priDto); // 상품마다 리뷰이미지 출력
+		
+		model.addAttribute("deimglist", deimglist);
+		model.addAttribute("reimgList", reimgList);
+		model.addAttribute("relist", relist);
 		model.addAttribute("detail", list);
 		return "www/main/productPage";
 	}
@@ -181,7 +172,7 @@ public class StoreController {
 	@RequestMapping("productProcess")
 	public String productProcess(HttpSession session, ProductUserDto std, ProductDto producDto, int id, int amount,
 			int count) {
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		System.out.println(id);
 		System.out.println(amount);
 		System.out.println(count);
@@ -208,8 +199,9 @@ public class StoreController {
 	// 주문페이지
 	@RequestMapping("productOrderProcess")
 	public String productOrderProcess(ProductRecipient recipiDto, ProductOrderItemDto poiDto, ProductOrderDto porDto,ProductDto pDto, HttpSession session) {
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
-		int id = sessionUser.getUser_id();
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
+		System.out.println(id);
 		porDto.setUser_id(id);
 		storeService.registRecipient(recipiDto);
 		storeService.registProductOrder(porDto);
@@ -220,8 +212,8 @@ public class StoreController {
 	// 장바구니 페이지
 	@RequestMapping("cartPage")
 	public String cartPage(Model model, HttpSession session) {
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
-		int id = sessionUser.getUser_id();
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
 		System.out.println(id);
 		List<ProductUserDto> list = storeService.getCartList(id);
 		model.addAttribute("list", list);
@@ -238,8 +230,9 @@ public class StoreController {
 	@ResponseBody
 	@RequestMapping("cartProcess")
 	public String cartProcess(ProductCart cartDto, ProductUserDto Std, HttpSession session) {
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
-		int id = sessionUser.getUser_id();
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
+		System.out.println(id);
 		cartDto.setUser_id(id);
 		storeService.registCart(cartDto);
 		return "1";
@@ -249,8 +242,8 @@ public class StoreController {
 	@RequestMapping("cartOrderPage")
 	public String cartOrderPage(ProductCart cartDto, ProductUserDto Std, HttpSession session, Model model, int amount) {
 		session.setAttribute("amount", amount);
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
-		int id = sessionUser.getUser_id();
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
 		System.out.println(id);
 		List<ProductUserDto> list = storeService.getCartList(id);
 		model.addAttribute("list", list);
@@ -261,8 +254,8 @@ public class StoreController {
 	@RequestMapping("cartOrderProcess")
 	public String cartOrderProcess(HttpServletRequest request, ProductRecipient recipiDto, ProductOrderItemDto poiDto,
 		ProductOrderDto porDto, ProductDto pDto, HttpSession session) {
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
-		int id = sessionUser.getUser_id();
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
 		porDto.setUser_id(id);
 		storeService.registRecipient(recipiDto);
 		storeService.registProductOrder(porDto);
@@ -300,10 +293,12 @@ public class StoreController {
 
 	// 마이페이지 주문목록출력
 	@RequestMapping("orderListPage")
-	public String orderListPage(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session) {
+	public String orderListPage(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session, ProductReviewDto prDto) {
 		int itemsPerPage = 5; // 페이지당 아이템 개수
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
-		int id = sessionUser.getUser_id();
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
+		prDto.setUser_id(id);
+		List<ProductReviewDto> review = storeService.getreview(prDto); // 상품마다 리뷰 비교
 		List<ProductOrderItemDto> fullList = storeService.getMypageList(id); // 전체 상품 목록 가져오기
 		
 		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
@@ -316,6 +311,7 @@ public class StoreController {
 		}
 		
 		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("review", review);// 상품마다 리뷰 비교 
 		model.addAttribute("list", paginatedList);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("pageCount", pageCount);
@@ -341,8 +337,9 @@ public class StoreController {
 	//리뷰작성처리
 	@RequestMapping("productReviewProcess")
 	public String productReviewProcess(Model model,HttpSession session, ProductReviewDto reDto, ProductReviewImageDto param,MultipartFile[] imageFiles) {
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
-		int id = sessionUser.getUser_id();
+		storeService.reupdate(reDto);
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
 		reDto.setUser_id(id);
 		
 		int totalFiles = imageFiles.length; // 등록된 이미지 파일의 총 개수
@@ -378,6 +375,14 @@ public class StoreController {
 		storeService.regitstReview(reDto);
 		storeService.registReimg(param, reimglist);
 		return "redirect:./orderListPage";
+	}
+	
+	//리뷰관리페이지
+	@RequestMapping("productQnaPage")
+	public String productQnaPage(Model model, int id) {
+		ProductOrderItemDto rev = storeService.getReview(id);
+		model.addAttribute("rev", rev);
+		return "www/main/productQnaPage";
 	}
 
 	@RequestMapping("userMyPage")

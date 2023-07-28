@@ -11,6 +11,10 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+ <!-- Google Fonts를 통해 Material Icons 라이브러리를 불러옵니다. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+ 
 <link href="../../resources/css/productPage.css" rel="stylesheet"
 	type="text/css">
 <link rel="stylesheet"
@@ -87,7 +91,7 @@ function refreshTotalLikeCount(){
 function toggleLike(){
 	if(mySessionId == null){
 		if(confirm("로그인을 하셔야 이용하실 수 있습니다. 로그인 하시겠습니까?")){
-			location.href = "./loginPage";
+			location.href = "../user/userLoginPage";
 		}
 		return;
 	}
@@ -144,13 +148,30 @@ window.onload = function() {
     refreshMyHeart();
   };
 </script>
+
+<%-- 전체 리뷰 개수와 총 별점 합계를 초기화합니다. --%>
+<c:set var="totalReviewCount" value="0" />
+<c:set var="totalRatingSum" value="0" />
+
+<c:forEach items="${relist}" var="review">
+	<%-- 리뷰 개수와 총 별점 합계를 업데이트합니다. --%>
+	<c:set var="totalReviewCount" value="${totalReviewCount + 1}" />
+	<c:set var="totalRatingSum" value="${totalRatingSum + review.rate}" />
+</c:forEach>
+
+<%-- 평균 별점을 계산합니다. 만약 전체 리뷰 개수가 0인 경우, 평균 별점은 0으로 처리합니다. --%>
+<c:set var="averageRating"
+	value="${totalReviewCount > 0 ? totalRatingSum / totalReviewCount : 0}" />
+
+<c:set var="averageRatingFormatted"
+	value="${String.format('%.1f', averageRating)}" />
 <title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="../../include/fundingHeader.jsp" />
 
 	<div class="con">
-		<div class="container">
+		<div class="container " id="section">
 			<div class="row">
 				<div class="col">
 					<div class="prod-image">
@@ -264,7 +285,7 @@ window.onload = function() {
 									type="hidden" name="amount" id="productAmount" value="" /> <input
 									type="hidden" name="count" id="productCount" value="" /> <input
 									type="hidden" name="user_id" id="userId"
-									value="${sessionUser.user_id }" readonly />
+									value="${user.user_id }" readonly />
 								<button class="prod-buy-btn" onclick="setProductValues()">바로구매</button>
 							</form>
 						</div>
@@ -318,7 +339,7 @@ window.onload = function() {
 							<tr>
 								<th scope="row">영수증발행</th>
 								<td>상품 상세페이지 참조</td>
-								
+
 							</tr>
 							<tr>
 								<th scope="row">제조일자/유효기간</th>
@@ -330,8 +351,7 @@ window.onload = function() {
 							</tr>
 							<tr>
 								<th scope="row">상품무게</th>
-								<td colspan="3">상품 상세페이지 참조
-								</td>
+								<td colspan="3">상품 상세페이지 참조</td>
 							</tr>
 							<tr>
 								<th scope="row">브랜드</th>
@@ -343,27 +363,120 @@ window.onload = function() {
 
 					</table>
 				</div>
-				<div class="scroll2" id="scroll2">scroll2</div>
-				<div class="scroll2" id="scroll2">scroll2</div>
-				<div class="scroll2" id="scroll2">scroll2</div>
-				<div class="scroll2" id="scroll2">scroll2</div>
-				<div class="scroll2" id="scroll2">scroll2</div>
-				
+				<div class="scroll2" id="scroll2">
+					<c:forEach items="${deimglist }" var="deimglist">
+						<div class="detail-img">
+							<img src="/ssofunUploadFiles/${deimglist.name}"style="width: 870px; height: 1300px;">
+						</div>
+					</c:forEach>
+				</div>
+
 				<div class="scroll3" id="scroll3">
 					<h3>상품리뷰</h3>
 					<div class="product_review_rate">
-						<dl>
-							<dt>
-								<div class="product_review_rate1">
-									<strong class="guide">구매 만족도</strong>
-								</div>
-								
-							</dt>
-						</dl>						
+						<div class="preview1">
+							<div class="product_review_rate1">
+								<strong class="guide">구매 만족도</strong>
+							</div>
+							
+							<div class="average_rating">
+						        <p class="average_Rate">${averageRatingFormatted}</p>
+						        <div class="star_rating">
+						            <script>
+						                // JavaScript로 평균 별점을 받아옴 (여기에서는 3.7을 직접 지정함)
+						                const averageRating = ${averageRatingFormatted};
+						
+						                // 전체 별과 반 별의 개수를 계산
+						                const fullStars = Math.floor(averageRating);
+						                const hasHalfStar = averageRating - fullStars >= 0.5;
+						                const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+						
+						                // Font Awesome 아이콘을 사용하여 별점을 출력
+						                let starsHtml = '';
+						                for (let i = 0; i < fullStars; i++) {
+						                    starsHtml += '<i class="star_icon material-icons">star</i>';
+						                }
+						                if (hasHalfStar) {
+						                    starsHtml += '<i class="star_icon material-icons">star_half</i>';
+						                }
+						                for (let i = 0; i < emptyStars; i++) {
+						                    starsHtml += '<i class="star_icon material-icons">star_border</i>';
+						                }
+						
+						                // 별점을 표시할 요소에 HTML 추가
+						                document.write(starsHtml);
+						            </script>
+						        </div>
+						    </div>
+						</div>				
 					</div>
-					
+
 					<div class="product_review_title">
-									<h3>전체리뷰</h3>
+						<div class="review-head">
+						<h3>전체리뷰</h3>
+						</div>
+						<div class="product_review_list">
+
+							<c:forEach items="${relist }" var="review">
+								<div class="review_list_element">
+									<div class="review_name">${review.uname }</div>
+									<div class="rate">
+
+										<c:choose>
+											<c:when test="${review.rate == 1}">
+												<div class="star-rating">
+													<span class="star">★</span><span class="star-empty">★★★★</span>
+													<span class="start-num">${review.rate}</span>
+												</div>
+											</c:when>
+											<c:when test="${review.rate == 2}">
+												<div class="star-rating">
+													<span class="star">★★</span><span class="star-empty">★★★</span>
+													<span class="start-num">${review.rate}</span>
+												</div>
+											</c:when>
+											<c:when test="${review.rate == 3}">
+												<div class="star-rating">
+													<span class="star">★★★</span><span class="star-empty">★★</span>
+													<span class="start-num">${review.rate}</span>
+												</div>
+											</c:when>
+											<c:when test="${review.rate == 4}">
+												<div class="star-rating">
+													<span class="star">★★★★</span><span class="star-empty">★</span>
+													<span class="start-num">${review.rate}</span>
+												</div>
+											</c:when>
+											<c:when test="${review.rate == 5}">
+												<div class="star-rating">
+													<span class="star">★★★★★</span><span class="star-empty"></span>
+													<span>${review.rate}</span>
+												</div>
+											</c:when>
+											<c:otherwise>
+								                    (별점 없음)
+								             </c:otherwise>
+										</c:choose>
+									</div>
+									<div class="col-product-name">${detail[0].product_name}</div>
+
+									<div class="img-list">
+										<c:forEach items="${reimgList }" var="reimg">
+											<c:if
+												test="${review.product_review_id eq reimg.product_review_id }">
+												<div class="p-img">
+													<img src="/ssofunUploadFiles/${reimg.url}"
+														style="width: 65px; height: 65px;">
+												</div>
+											</c:if>
+										</c:forEach>
+									</div>
+
+									<div class="review_contents">${review.contents }</div>
+								</div>							
+							</c:forEach>
+
+						</div>
 					</div>
 				</div>
 				<div class="scroll4" id="scroll4">scroll4</div>
@@ -375,6 +488,7 @@ window.onload = function() {
 
 		</div>
 	</div>
+
 
 	<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp" />
@@ -480,7 +594,7 @@ window.onload = function() {
 		        error: function(){
 		        	 if (confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?") == true){ 
 		        		   //true는 확인버튼을 눌렀을 때 코드 작성
-		        		    location.href = 'loginPage'
+		        		    location.href = '../user/userLoginPage'
 		        		   console.log("완료되었습니다.");
 		        		 }else{
 		        		   // false는 취소버튼을 눌렀을 때, 취소됨

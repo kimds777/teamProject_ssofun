@@ -154,9 +154,7 @@ public class StoreServiceImpl {
 	public ProductOrderItemDto getReview(int id) {
 		return storeSqlMapper.selectReview(id);
 	}
-	
-	//상품마다 리뷰 출력
-	
+		
 	
 	// 상품별 리뷰개수 출력
 	public List<ProductDto> getRecount(ProductDto pDto){
@@ -200,6 +198,34 @@ public class StoreServiceImpl {
 		return storeSqlMapper.countLikeByProductId(ProductId);
 	}
 	
+	// 상품마다 리뷰 출력
+	public List<ProductReviewJiDto> getProductReview(ProductReviewJiDto prjDto){
+		List<ProductReviewJiDto>review = storeSqlMapper.selectProductReview(prjDto);
+		return  review;
+	}
+	
+	// 상품마다 리뷰 이미지 출력
+	public List<ProductReviewImageDto> getReviewImg(ProductReviewImageDto priDto){
+		List<ProductReviewImageDto>reImg = storeSqlMapper.selectReviewImg(priDto);
+		return reImg;
+	}
+	
+	// 상품마다 상세 이미지 출력
+	public List<ProductDetailImageDto> getDetailImg(ProductDetailImageDto pdiDto){
+		List<ProductDetailImageDto>deImg = storeSqlMapper.selectByDetailImg(pdiDto);
+		return deImg;
+	}
+	
+	// 리뷰 작성하기 주문아이디 비교
+	public List<ProductReviewDto> getreview(ProductReviewDto prDto){
+		List<ProductReviewDto>review = storeSqlMapper.selectByReview(prDto);
+		return review;
+	}
+	
+	// 장바구니 구매후 물품제거
+	public void reupdate(ProductReviewDto prDto) {
+		storeSqlMapper.reUpdate(prDto);
+	}	
 	// ProductUser 로그인
 	public ProductUserDto login(ProductUserDto userDto) {
 		ProductUserDto sessionUser = storeSqlMapper.selectByEmailAndPassword(userDto);

@@ -26,7 +26,7 @@
 	
 	<!-- 로그인 -->
 	<select id="selectByEmailAndPassword" resultType="com.ssofun.dto.ProductUserDto">
-		SELECT * FROM tb_user WHERE user_phone_auth_id=#{user_phone_auth_id} AND password =#{password} AND used_fg=1;
+		SELECT * FROM tb_user WHERE email=#{email} AND password =#{password} AND used_fg=1;
 	</select>
 	
 	<!-- 상품등록 -->
@@ -121,7 +121,7 @@
 
 	<!-- 장바구니 주문후 물품 제거 등록 -->
 	<update id="cartUpdate">
-	UPDATE tb_cart SET used_fg=0 WHERE product_id=${product_id}
+	UPDATE tb_cart SET used_fg=0 WHERE product_id=#{product_id}
 	</update>
 	
 	<!-- 장바구니 삭제 -->
@@ -306,14 +306,33 @@
 	</select>	
 	
 	<!-- 상품마다 리뷰 출력 -->
-	<select id="selectProductReview" resultType="int">
-		select tpr.rate, tpr.contents, tpri.url,tu.name		
+	<select id="selectProductReview" resultType="com.ssofun.dto.ProductReviewJiDto">
+		select tpr.rate, tpr.contents, tu.name as uname, tpoi.product_id as product_id	
+		,tpr.created_at	as 	created_at, tpr.product_review_id	
 		from tb_product_review tpr
-		inner join tb_product_review_image tpri on tpr.product_review_id = tpri.product_review_id
 		inner join tb_user tu on tpr.user_id = tu.user_id
 		inner join tb_product_order_item tpoi on tpr.product_order_item_id = tpoi.product_order_item_id
-		where tpoi.product_id= #{product_id};
+		where tpoi.product_id= #{product_id} AND tpr.used_fg=1 order by created_at
 	</select>
+	
+	<!-- 상품마다 리뷰 이미지 출력 -->
+	<select id="selectReviewImg" resultType="com.ssofun.dto.ProductReviewImageDto">
+		select * from tb_product_review_image;
+	</select>
+	
+	<!-- 상품마다 상세이미지 출력 -->
+	<select id="selectByDetailImg" resultType="com.ssofun.dto.ProductDetailImageDto">
+		select * from tb_product_detail_image where product_id=#{product_id}
+	</select>
+	<!-- 리뷰 작성하기 비교하는용 -->
+	<select id="selectByReview" resultType="com.ssofun.dto.ProductReviewDto">
+		select * from tb_product_review where user_id  =#{user_id}
+	</select>
+	
+	<!-- 리뷰 수정후 이전 리뷰제거 -->
+	<update id="reUpdate">
+		UPDATE tb_product_review SET used_fg=0 WHERE product_order_item_id=#{product_order_item_id}
+	</update>
 	<!-- 아래는 테스트 코드 -->
 	
 	<!-- <insert id="insert">

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssofun.dto.ProductFavoritDto;
 import com.ssofun.dto.ProductUserDto;
+import com.ssofun.dto.UserDto;
 import com.ssofun.www.store.service.StoreServiceImpl;
 
 @RestController
@@ -24,8 +25,8 @@ public class RestStoreController {
 	public Map<String , Object> toggleLike(HttpSession session, ProductFavoritDto  params){
 		Map<String , Object> map = new HashMap<>();
 
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
-		params.setUser_id(sessionUser.getUser_id());
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		params.setUser_id((int) sessionUser.getUser_id());
 		System.out.println(params.getUser_id());
 		System.out.println(params.getProduct_id());
 		storeService.toggleLike(params);
@@ -39,7 +40,7 @@ public class RestStoreController {
 	public Map<String, Object> isLiked(HttpSession session, ProductFavoritDto  params){
 		Map<String , Object> map = new HashMap<>();
 		
-		ProductUserDto sessionUser = (ProductUserDto) session.getAttribute("sessionUser");
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		
 		if(sessionUser == null) {
 			map.put("result", "fail");
@@ -47,7 +48,7 @@ public class RestStoreController {
 			return map;
 		}
 		
-		params.setUser_id(sessionUser.getUser_id());
+		params.setUser_id((int) sessionUser.getUser_id());
 		
 		map.put("result", "success");
 		map.put("isLiked", storeService.isLiked(params));

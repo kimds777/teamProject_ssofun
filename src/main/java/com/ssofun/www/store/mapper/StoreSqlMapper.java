@@ -72,7 +72,13 @@ public interface StoreSqlMapper {
 	public ProductOrderItemDto selectReview(int id);
 	
 	// 상품마다 리뷰 출력
-	public List<ProductReviewDto> selectProductReview(int id);
+	public List<ProductReviewJiDto> selectProductReview(ProductReviewJiDto prjDto);
+	
+	// 상품마다 리뷰 이미지 출력
+	public List<ProductReviewImageDto> selectReviewImg(ProductReviewImageDto priDto);
+	
+	// 상품마다 상세 이미지 출력
+	public List<ProductDetailImageDto> selectByDetailImg(ProductDetailImageDto pdiDto);
 	
 	// 상품별 리뷰개수 출력
 	public List<ProductDto> selectByRecount(ProductDto pDto);
@@ -91,6 +97,13 @@ public interface StoreSqlMapper {
 	
 	// 상품마다 좋아요 개수 출력
 	public List<ProductFavoritCountDto> likeCountByProductId(ProductFavoritCountDto pfDto);
+	
+	// 리뷰 작성하기 주문아이디 비교
+	public List<ProductReviewDto> selectByReview(ProductReviewDto prDto);
+	
+	// 리뷰 수정후 이전 리뷰 제거
+	public void reUpdate(ProductReviewDto prDto);
+	
 	//테스트상품등록
 	public void insertByItem(ProductDto productDto);
 	

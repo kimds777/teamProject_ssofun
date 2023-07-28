@@ -28,7 +28,8 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"
 	type="text/css">
 <link href="../../resources/css/cartPage.css" rel="stylesheet"
 	type="text/css">
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -173,7 +174,7 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"
 								</c:otherwise>
 							</c:choose>
 							<c:forEach begin="1" end="${pageCount}" var="pageNum">
-								<c:url value="mainPage" var="pageUrl">
+								<c:url value="storePage" var="pageUrl">
 									<c:param name="page" value="${pageNum}" />
 								</c:url>
 								<c:choose>
