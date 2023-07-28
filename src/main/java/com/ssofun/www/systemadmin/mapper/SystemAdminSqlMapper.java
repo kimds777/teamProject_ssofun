@@ -5,6 +5,16 @@ import java.util.List;
 import com.ssofun.dto.*;
 
 public interface SystemAdminSqlMapper {
+	
+	
+//로그인관련
+	public AdminDto selectShopAdminByAndPw(AdminDto adminDto);
+	public AdminDto selectSystemAdminByAndPw(AdminDto adminDto);
+	
+	public AdminDto selectAdminByAndPw(AdminDto adminDto);
+	
+	
+	
 
 	
 //Qna관련

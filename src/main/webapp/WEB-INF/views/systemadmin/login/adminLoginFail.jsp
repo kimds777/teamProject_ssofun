@@ -12,6 +12,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <link rel="stylesheet" href="../../resources/css/login.css">
+<script>
+	
+	
+	
+	
+</script>
 </head>
 <body>
 
@@ -27,7 +33,7 @@
             </ul>
             <p id="cover"></p>
             <ul id="userLogin" class="hide">
-            
+            <form>
                 <li><input type="text" id="email" placeholder="아이디"></li>
                 <li><input type="password" id="password" placeholder="비밀번호"></li>
                 <li><a href="">로그인 정보를 잊으셨나요?</a></li>
@@ -39,14 +45,12 @@
                 <li id="google"></li>
             </ul>
             <p class="hide" id="userJoin">아직 쏘펀 계정이 없나요? <a href="./userJoinPage">회원가입</a></p>
-            <form action="../adminLoginProcess" method="post" >
             <ul id="adminLogin">
                 <li><input type="text" name="login_account" id="login_account" placeholder="아이디"></li>
                 <li><input type="password" name="login_password" id="login_password" placeholder="비밀번호"></li>
                 <li><a href="">로그인 정보를 잊으셨나요?</a></li>
-                <li><input type="submit" id="adminLoginBtn" value="로그인"></li>
+                <li><input type="button" id="adminLoginBtn" value="로그인"></li>
             </ul>
-            </form>  
         </div>
     </div>
 

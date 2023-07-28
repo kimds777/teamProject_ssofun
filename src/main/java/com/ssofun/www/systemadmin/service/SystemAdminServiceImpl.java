@@ -26,6 +26,30 @@ public class SystemAdminServiceImpl {
 	}
 	
 	
+//로그인관련
+	
+	//판매자로그인
+	public AdminDto findShopAdminByIdAndPw(AdminDto adminDto) {
+		return systemAdminSqlMapper.selectShopAdminByAndPw(adminDto);
+	}
+	
+	//시스템관리자로그인
+	public AdminDto findSystemAdminByIdAndPw(AdminDto adminDto) {
+		return systemAdminSqlMapper.selectSystemAdminByAndPw(adminDto);
+	}
+	
+	
+	//adminlogin
+	public AdminDto findAdminByIdAndPw(AdminDto adminDto) {
+		
+		AdminDto adminData = systemAdminSqlMapper.selectAdminByAndPw(adminDto);
+		
+		return adminData;
+	}
+	
+	
+	
+	
 	//미답변 qna리스트
 	public List<Map<String, Object>> getUnansweredQnaList() {
 		

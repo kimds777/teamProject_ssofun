@@ -7,6 +7,51 @@
 	<select id="getAdminByIdAndPw" resultType="com.ssofun.dto.AdminDto">
 		SELECT * FROM tb_admin WHERE login_account = #{login_account} AND login_password = #{login_password}
 	</select>
+	
+	<!-- 상품판매자 로그인확인 : 사용 X -->
+	<select id="selectShopAdminByAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin 
+		WHERE 
+			login_account = #{login_account} 
+		AND 
+			login_password = #{login_password}
+		AND
+		biz_id IS NOT NULL
+	</select>
+	
+	
+	<!-- 사이트관리자 로그인확인 : 사용X -->
+	<select id="selectSystemAdminByAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin 
+		WHERE 
+			login_account = #{login_account} 
+		AND 
+			login_password = #{login_password}
+		AND
+			biz_id IS NULL
+	</select>
+	
+	
+	
+	<select id ="selectAdminByAndPw" resultType="com.ssofun.dto.AdminDto">
+		SELECT * FROM tb_admin 
+		WHERE 
+			login_account = #{login_account} 
+		AND 
+			login_password = #{login_password}
+	
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	<select id="selectQnaByNonAnswer" resultType="com.ssofun.dto.QnaDto">
 		select * from tb_qna where answer_contents is null order by qna_id
@@ -25,6 +70,11 @@
 	<select id="selectQnaImageByQnaId" resultType="com.ssofun.dto.Qna_ImageDto">
 		select * from tb_qna_image where qna_id = #{qna_id}  
 	</select>
+	
+	
+	
+	
+	
 	
 	
 	

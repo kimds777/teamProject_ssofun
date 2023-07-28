@@ -32,12 +32,7 @@ public class SystemAdminController {
 	private SystemAdminServiceImpl systemAdminService;
 	
 	
-	
-	@RequestMapping("systemAdminLoginPage")
-	public String systemAdminLoginPage() {
-		
-		return"systemadmin/systemAdminLoginPage";
-	}
+
 	
 	
 	@ResponseBody
@@ -63,9 +58,28 @@ public class SystemAdminController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //admin로그인처리
+	
+	//관리자 로그인
 	@RequestMapping("login/adminLoginPage")
-	public String adminLoginPage() {
+	public String adminLoginPage(HttpSession session) {
+		
+
+		 
 		
 		return "systemadmin/login/adminLoginPage";
 	}
@@ -73,13 +87,87 @@ public class SystemAdminController {
 	
 	
 	
+
 	
-	
+	@RequestMapping("adminLoginProcess")
+	public String loginProcess(HttpSession session, AdminDto adminDto) {
+		
+		AdminDto adminData = systemAdminService.findAdminByIdAndPw(adminDto);
+		
+		
+		int bizid = adminData.getBiz_id();
+		if (bizid == 0) {
+			
+			AdminDto systemAdmin = adminData;
+			
+			session.setAttribute("systemAdmin", systemAdmin);
+			System.out.println("시스템관리자"+systemAdmin.getLogin_account());
+			
+			return "redirect:./companyManagement/companyManagementMainPage";
+			
+			
+		}else if(bizid != 0){
+			
+			 AdminDto shopAdmin = adminData;
+			 
+			 session.setAttribute("shopAdmin", shopAdmin);
+			System.out.println("샵관리자"+shopAdmin.getLogin_account()); 
+			 return "redirect:../admin/adminMainPage";
+		}
+		
+		
+		return "redirect:./login/adminLoginFail";
+		
+		
+	}
 	
 	@RequestMapping("systemAdminMainPage")
 	public String systemAdminMainPage() {
 		return"systemadmin/systemAdminMainPage";
 	}
+		
+		
+		
+//		AdminDto shopAdmin = systemAdminService.findShopAdminByIdAndPw(adminDto);
+//		AdminDto systemAdmin = systemAdminService.findSystemAdminByIdAndPw(adminDto);
+//		
+//		if (shopAdmin != null) {
+//				
+//			session.setAttribute("shopAdmin", shopAdmin);
+//			
+//			return "redirect:../admin/adminMainPage";
+//			
+//		}else if(systemAdmin != null) {
+//			
+//			session.setAttribute("systemAdmin", systemAdmin);
+//			return "redirect:./companyManagement/companyManageMent";
+//		}
+//	
+//		return"redirect:./login/loginFail";
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 //	미답변 qna글의 리스트프로세스
