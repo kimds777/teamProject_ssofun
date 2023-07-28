@@ -78,10 +78,7 @@ public class SystemAdminController {
 	@RequestMapping("adminLoginProcess")
 	public String loginProcess(HttpSession session, AdminDto adminDto) {
 		
-	    if (adminDto.getLogin_account() == null || adminDto.getLogin_password() == null) {
-	        // "login_account"와 "login_password"가 없는 경우, 로그인 실패 페이지로 이동
-	        return "redirect:./login/adminLoginFail";
-	    }
+	 
 		
 		
 		AdminDto adminData = systemAdminService.findAdminByIdAndPw(adminDto);
@@ -89,7 +86,7 @@ public class SystemAdminController {
 		
 		int bizid = adminData.getBiz_id();
 		
-		if (bizid == 0) {
+		 if (bizid == 0) {
 			
 			AdminDto systemAdmin = adminData;
 			
@@ -106,6 +103,8 @@ public class SystemAdminController {
 			 session.setAttribute("shopAdmin", shopAdmin);
 			System.out.println("샵관리자"+shopAdmin.getLogin_account()); 
 			 return "redirect:../admin/adminMainPage";
+		}else if(adminData ==null ) {
+			  return "redirect:./login/adminLoginFail";
 		}
 		
 		return "redirect:./login/adminLoginFail";
