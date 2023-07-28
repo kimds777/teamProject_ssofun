@@ -12,7 +12,7 @@ $(document).ready(function(){
 });
 
 function setEventListener($funding_id){
-
+    var user_id = getUserSession();
     $(document).on("click","#tab>ul>li#reward",function(e){
         e.stopPropagation();
         $("#tab>div#rewardModal").toggleClass("hide");
@@ -20,7 +20,7 @@ function setEventListener($funding_id){
 
     $(document).on("click","#likeBtn",function(e){
         e.stopPropagation();
-        var user_id = getUserSession();
+
         if(user_id != 0){
             insertFavorit($funding_id,user_id);
         }else{
@@ -31,7 +31,6 @@ function setEventListener($funding_id){
 
     $(document).on("click","#supportBtn",function(e){
         e.stopPropagation();
-        var user_id = getUserSession();
 
         if(user_id != 0){
             location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
@@ -43,15 +42,14 @@ function setEventListener($funding_id){
     
     $(document).on("click","#rewardModal>dl",function(e){
         e.stopPropagation();
-        var funding_reward_id = $(this).children("input#funding_reward_id").val();
-        location.href = "./fundingRewardChoicePage?funding_id="+$funding_id+"&funding_reward_id="+funding_reward_id;
-        // var user_id = getUserSession();
-        // if(user_id != 0){
-        //     location.href = "./fundingRewardChoicePage?funding_id="+$funding_id;
-        // }else{
-        //     alert("로그인이 필요한 서비스입니다.");
-        //     return window.location.href = "../user/userLoginPage";
-        // }
+        
+        if(user_id != 0){
+            var funding_reward_id = $(this).children("input#funding_reward_id").val();
+            location.href = "./fundingRewardChoicePage?funding_id="+$funding_id+"&funding_reward_id="+funding_reward_id;
+        }else{
+            alert("로그인이 필요한 서비스입니다.");
+            return window.location.href = "../user/userLoginPage";
+        }
     });
 
     var n=0;
