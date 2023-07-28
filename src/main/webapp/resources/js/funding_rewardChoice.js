@@ -288,7 +288,6 @@ function getFundingDto($funding_id,$funding_reward_id){
                         var buy_count;
                         $.each(item,function(key,value){
                             if(key == "funding_reward_id"){
-                                alert("리워드 리스트 리워드별 아이디: "+value);
                                 funding_reward_id = value;
                             }
                             if(key == "price"){
