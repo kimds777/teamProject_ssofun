@@ -69,7 +69,7 @@ public class SystemAdminController {
 	}
 	
 	
-	
+	//로그인프로세스
 	@RequestMapping("adminLoginProcess")
 	public String loginProcess(HttpSession session, AdminDto adminDto) {
 
@@ -86,12 +86,15 @@ public class SystemAdminController {
 				AdminDto systemAdmin = adminData;
 				
 				session.setAttribute("systemAdmin", systemAdmin);
-				return "redirect:./companyManagement/companyManagementMainPage";
+				return "redirect:./systemAdminMainPage";
+				
+				
+			
 			} else if (bizId != 0) {
 				 AdminDto shopAdmin = adminData;
 				 
 				 session.setAttribute("shopAdmin", shopAdmin);
-				System.out.println("샵관리자"+shopAdmin.getLogin_account()); 
+				
 				 return "redirect:../admin/adminMainPage";
 			}
 		}
@@ -105,23 +108,44 @@ public class SystemAdminController {
 	@RequestMapping("login/adminLoginFail")
 	public String adminLoginFail() {
 		
+		
+		
 		return "systemadmin/login/adminLoginFail";
 	}
 	
 	
 	
 	
+	//로그아웃
+	@RequestMapping("/systemAdminLogoutProcess")
+	public String systemAdminLogout(HttpSession session) {
+
+		
+		session.invalidate();
+		
+		return "redirect:../systemadmin/login/adminLoginPage";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("systemAdminMainPage")
-	public String systemAdminMainPage() {
+	public String systemAdminMainPage(HttpSession session) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
+		
 		return"systemadmin/systemAdminMainPage";
 	}
 		
 
 	
 
-	
-	
-	
 
 	
 	
@@ -160,7 +184,7 @@ public class SystemAdminController {
 
 	@RequestMapping("systemAdminQnaMainPage")
 	public String systemAdminQnaMain(Model model, HttpSession session ) {
-
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 
 		getUnansweredQnaListProcess(model, session);//미답변qna리스트 
 		answerCompletedQnaListProcess(model, session);//답변완료qna리스트
@@ -172,8 +196,8 @@ public class SystemAdminController {
 	
 	
 	@RequestMapping("systemAdminReadQnaPage")
-	public String systemAdminReadQnaPage(Model model, int qna_id) {
-		
+	public String systemAdminReadQnaPage(HttpSession session,Model model, int qna_id) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 //		String name = UserDto.
 		Map<String, Object> map = systemAdminService.getQnaData(qna_id);
 		QnaDto QnaDto = (QnaDto)map.get("QnaDto");
@@ -231,8 +255,8 @@ public class SystemAdminController {
 	
 	//FAQ메인페이지(목록)
 	@RequestMapping("systemAdminFaqMainPage")
-	public String systemAdminFaqMainPage(Model model) {
-		
+	public String systemAdminFaqMainPage(HttpSession session,Model model) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		List<Map<String, Object>> list = systemAdminService.getfaqList();
 		model.addAttribute("list",list);//request에 담아서 jsp에서 꺼내쓸 수 있음 
 		
@@ -245,8 +269,8 @@ public class SystemAdminController {
 	
 	//FAQ글작성
 	@RequestMapping("systemAdminWriteFaqPage")
-	public String systemAdminWriteFaqPage() {
-		
+	public String systemAdminWriteFaqPage(HttpSession session) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		return"systemadmin/systemAdminWriteFaqPage";
 	}
 	
@@ -267,10 +291,10 @@ public class SystemAdminController {
 	}
 	
 	
-	//faq상세글보기
+//	faq상세글보기
 	@RequestMapping("systemAdminReadFaqPage")
-	public String systemAdminReadFaqPage(Model model,int faqId) {
-		 
+	public String systemAdminReadFaqPage(HttpSession session,Model model,int faqId) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		Map<String, Object> map = systemAdminService.getFaqData(faqId);
 		
 		FaqDto faqDto = (FaqDto)map.get("faqDto");
@@ -300,8 +324,8 @@ public class SystemAdminController {
 	
 	//faq글수정
 	@RequestMapping("systemAdminFaqUpdatePage")
-	public String systemAdminFaqUpdatePage(Model model ,@RequestParam("faqId")int faqId) {
-		
+	public String systemAdminFaqUpdatePage(HttpSession session, Model model ,@RequestParam("faqId")int faqId) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		systemAdminService.getFaqData(faqId);
 		Map<String, Object> map = systemAdminService.getFaqData(faqId);
 		
@@ -335,7 +359,11 @@ public class SystemAdminController {
 	
 	//입점사관리메인페이지(리스트)
 	@RequestMapping("companyManagement/companyManagementMainPage")
-	public String companyManagementMainPage(Model model) {
+	public String companyManagementMainPage(Model model, HttpSession session) {
+		
+		AdminDto systemaAdmin = (AdminDto) session.getAttribute("systemAdmin");
+		session.setAttribute("systemAdmin", systemaAdmin);
+		
 		
 		List<Map<String, Object>> bizList = systemAdminService.getBizDtoListContainCount();
 		model.addAttribute("bizList",bizList);
@@ -351,8 +379,8 @@ public class SystemAdminController {
 	
 	//입점사등록페이지
 	@RequestMapping("companyManagement/companyRegistrationPage")
-	public String companyRegistrationPage() {
-		
+	public String companyRegistrationPage(HttpSession session) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		return"systemadmin/companyManagement/companyRegistrationPage";
 	}
 	
@@ -389,8 +417,8 @@ public class SystemAdminController {
 	
 	//입점사 상세페이지
 	@RequestMapping("companyManagement/readCompanyPage")
-	public String readCompanyPage(Model model, int biz_id) {
-		
+	public String readCompanyPage(HttpSession session,Model model, int biz_id) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		BizDto bizData = systemAdminService.getBizData(biz_id); 
 		int adminCount = systemAdminService.getAdminCount(biz_id);
 		
@@ -407,8 +435,8 @@ public class SystemAdminController {
 	
 	//입점사 수정페이지
 	@RequestMapping("companyManagement/updateCompanyPage")
-	public String updateCompanyPage(Model model,int biz_id) {
-		
+	public String updateCompanyPage(HttpSession session,Model model,int biz_id) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		BizDto bizDto = systemAdminService.getBizData(biz_id);
 		
 		String biz_no=systemAdminService.getBizData(biz_id).getBiz_no();
@@ -486,8 +514,8 @@ public class SystemAdminController {
 	
 	//판매자메인페이지(전체리스트)
 	@RequestMapping("companyManagement/venderManagementMainPage")
-	public String venderManagementMainPage(Model model) {
-		
+	public String venderManagementMainPage(HttpSession session,Model model) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		List<Map<String, Object>> allAdminList= systemAdminService.getAllAdminList();
 		model.addAttribute("allAdminList",allAdminList);
 		
@@ -498,7 +526,8 @@ public class SystemAdminController {
 	
 	//판매자등록페이지
 	@RequestMapping("companyManagement/venderRegistrationPage")
-	public String venderRegistrationPage(Model model,@RequestParam(value = "biz_id", defaultValue = "0")int biz_id ) {
+	public String venderRegistrationPage(HttpSession session,Model model,@RequestParam(value = "biz_id", defaultValue = "0")int biz_id ) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		
 		//입점사관리 => 상세페이지=> 해당되는 판매자관리메인=>판매자등록으로 들어오는 경우 미리 회사명 입력받아서 화면에 출력(adminId넘겨받아서 조회하기)
 		
@@ -561,7 +590,8 @@ public class SystemAdminController {
 	
 	//회사번호에 따른 소속판매자리스트페이지
 	@RequestMapping("companyManagement/venderListOfCompanyNumberPage")
-	public String venderListOfCompanyNumberPage(Model model, int biz_id) {
+	public String venderListOfCompanyNumberPage(HttpSession session,Model model, int biz_id) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 
 		List<Map<String, Object>> adminDtoList = systemAdminService.getAdminDataByBizId(biz_id);
 		
@@ -590,7 +620,8 @@ public class SystemAdminController {
 	
 	//판매자상세페이지
 	@RequestMapping("companyManagement/readVenderPage")
-	public String readVenderPage(Model model, int admin_id) {
+	public String readVenderPage(HttpSession session,Model model, int admin_id) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		
 		Map<String, Object> adminDtoByAdminId = systemAdminService.getAdminData(admin_id);
 		
@@ -635,7 +666,8 @@ public class SystemAdminController {
 	
 	//펀딩관리사이트 승인관련
 	@RequestMapping("siteManagement/fundingManagementPage")
-	public String fundingManagementPage(Model model) {
+	public String fundingManagementPage(HttpSession session,Model model) {
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		
 		List<Map<String, Object>> unauthorizedFundingList = systemAdminService.getUnauthorizedFunding();
 				
@@ -662,7 +694,9 @@ public class SystemAdminController {
 	
 	//펀딩사이트 카테고리추가페이지
 	@RequestMapping("siteManagement/fundingCategoryAddPage")
-	public String fundingCategoryAddPage(Model model) {
+	public String fundingCategoryAddPage(Model model, HttpSession session) {
+		
+		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		
 		List<FundingCategoryDto>fundingCategoryList = systemAdminService.getFundingCategpryData();
 		
@@ -728,74 +762,6 @@ public class SystemAdminController {
 		return"redirect:./siteManagement/fundingCategoryAddPage";
 	}
 	
-	
-	
-	
-	
-	
-	//파일저장로직
-//	if(boardFiles != null) {
-//		
-//		for(MultipartFile multipartFile : boardFiles) {
-//			api다루는법임
-//			if(multipartFile.isEmpty()) {//비어있는 것, 무조건 한바퀴 돌기 때문에 예외처리 해줌
-//				continue;					
-//			}
-//			
-//			System.out.println("파일명: "+multipartFile.getOriginalFilename());
-//			
-//			
-//			String rootFolder ="C:/uploadFiles/";
-//			//충돌피하기 위해 날짜별 폴더 아래에 저장파일명 만들기.
-//			//날짜별 폴더 생성 로직.
-//			
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//			String today = sdf.format( new Date());
-//			
-//			
-//			
-//			
-//			File targetFolder = new File(rootFolder +today);
-//			
-//			if(!targetFolder.exists()) {//존재하지않으면 파일을 만들어라
-//				targetFolder.mkdirs();//여러개의 폴더 만들어줌
-//		
-//				
-//			}
-//			
-//			
-//			//저장파일명 만들기. 핵심은 파일명 충돌방지 = 랜덤+시간
-//			String fileName = UUID.randomUUID().toString();
-//			fileName+="_" + System.currentTimeMillis();
-//			
-//			//확장자 추출
-//			String originalFileName = multipartFile.getOriginalFilename();//사용가가 컴퓨터에 있는 파일 올릴때 확장자임
-//			
-//			String ext = originalFileName.substring(originalFileName.lastIndexOf("."));//글자의 마지막 뒤에서부터 . 위치를 잡아서 .의 위치를 숫자로 리턴해줌
-//			
-//			String saveFileName = today + "/" + fileName + ext;
-//			
-//			
-//			try {//try catch쓰는 이유는 문법적오류 피하기 위해     \\는 폴더구분자임 : uploadFiles폴더 밑에 이 파일명으로 저장해라 
-//				multipartFile.transferTo(new File(rootFolder + saveFileName));//try catch잡아주기, 서버폴더(uploadFiles)에 파일이 올라간다 
-//			}catch(Exception e) {
-//				e.printStackTrace();//에러찾기위해?
-//			}
-//			
-//			
-//			//파라미터로 받기 애매해서 (파일)  내부에서 dto만들어서 세팅해서 arraylist로 만들어서 서비스로
-//			BoardImageDto boardImageDto = new BoardImageDto();
-//			boardImageDto.setOriginal_filename(originalFileName);
-//			boardImageDto.setLink(saveFileName);
-//			
-//			boardImageDtoList.add(boardImageDto);//한바퀴돌때마다 파일을 저장하고 Dto를 두개씩 생성해서 서비스쪽으로 넘김 
-//		}
-//		
-//	}
-	
-	
-	
 
-	
 	
 }

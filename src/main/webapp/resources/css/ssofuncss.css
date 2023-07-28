@@ -57,3 +57,4 @@
     .readQnalink {color: #000000;text-decoration: none;}  
     .readFaqlink{color: #000000;text-decoration: none;}
     .qnaMainbutton{all: unset;}
+    .adminImage{background-image:url('/resources/companyManagement/adminimage.png'); background-repeat:no-repeat; background-size:100% 100%;}

@@ -24,15 +24,24 @@
 		
 
 	</style>
+	<script>
+		
+		function logout(){
+			alert("로그아웃되었습니다.")
+			
+		}
+
+	</script>
 
     <title>systemAdminNavi</title>
 </head>
 
 <body>
-	<div class="container">
+<div class="container">
 	<div class="row" style="background-color:#212529;  height: 100px; padding-left: 10px; padding-right: 10px;">
 		
 		<div class="col-2 mt-2">
+			<a href="../../systemadmin/systemAdminMainPage">
 			<div class="row">
 				
 				<div class="col"><p class="naviVarfont">SSOFUN</p></div>
@@ -41,11 +50,19 @@
 				
 				<div class="col"><p class="naviVarfont">Administration</p></div>
 			</div>
+			</a>
 		</div>
 		<div class="col-8"></div>
 		<div class="col-1" style="text-align: right;">
 			<div class="row" style="height: 40px;"></div>
-			<div class="row"><div class="col"><p class="naviVarfont-1"><a href="../login/adminLoginPage" class="loginfont" style="color: #f5f5f5;">로그인</a></p></div></div><!--로그아웃if문-->
+			<div class="row"><div class="col"><p class="naviVarfont-1">
+				<c:if test="${empty systemAdmin}">
+					<a href="../../systemadmin/login/adminLoginPage" class="loginfont" style="color: #f5f5f5;">로그인</a>
+				</c:if>
+				<c:if test="${!empty systemAdmin}">
+					<a href="systemAdminLogoutProcess" class="loginfont" style="color: #f5f5f5;" onclick="logout()">로그아웃</a>
+				</c:if>
+			</p></div></div><!--로그아웃if문-->
 			<div class="row"></div>
 		</div>
 		<div class="col">

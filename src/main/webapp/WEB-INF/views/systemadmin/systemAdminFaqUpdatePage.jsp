@@ -24,34 +24,29 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col"><!--상단 네비-->
-                <jsp:include page="../include/systemAdminNavi.jsp"></jsp:include>
-            </div>
-        </div>
-
 
 
 
 
         <!--고객센터 기본 틀 -->
-        <div class="container mt-4 container2">
-
+       <div class="container container2" style="margin-top: 0px;">
+        <div class="row">
+            <jsp:include page="../include/systemAdminNavi.jsp"></jsp:include>
+        </div>
             <div class="row">
-                <div class="col-2">
+             <div class="col-2">
                     <div class="row leftside1">
                         <div class="col">
                             <div class="row" style="height: 30px;"></div>
                             <div class="row" style="height: 100px;">
                                 <div class="col"></div>
                                 <div class="col">
-                                    <div class="box adminimagecol"><img class="adminimage"></div>
+                                     <div class="box adminimagecol" style="background-image:url('/resources/companyManagement/systemadmin.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
                                 </div>
                                 <div class="col"></div>
                             </div>
-                            <div class="row mt-1 adminid">
-                                <div class="col">관리자아이디</div>
+                            <div class="row mt-2 adminid">
+                                <div class="col">${systemAdmin.admin_nickname} 님 <span><i class="bi bi-circle-fill" style="color:green"></i></span></div>
                             </div>
                             <div class="row mb-3"></div>
                         </div>
@@ -62,37 +57,154 @@
                     <div class="row leftside3">
                         <div class="col-1"></div>
                         <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <i class="bi bi-building text-light" style="margin-right: 5px;"></i>
+                                            <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/companyManagementMainPage" style="font-size: 18px;">입점사관리</a>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/venderManagementMainPage">> 판매자관리</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-    
-                            <div class="row mt-3">
-                                <div class="col"><i class="bi bi-clipboard text-light" style="margin-right: 5px;"></i><a
-                                        class="leftsidepontstyle1"
-                                        href="#">공지사항관리</a></div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col"><i class="bi bi-patch-question text-light" style="margin-right: 5px;"></i><a
-                                        class="leftsidepontstyle1"
-                                        href="../systemadmin/systemAdminFaqMainPage">자주찾는질문관리</a></div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col"><i class="bi bi-book-half text-light" style="margin-right: 0px;">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <i class="bi bi-globe-americas text-light" style="margin-right: 5px;"></i>
+                                            <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage" style="font-size: 18px;">사이트관리</a>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage">펀딩</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-3"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage">> 승인관리</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-3"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingCategoryAddPage">> 카테고리관리</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                </i><a class="leftsidepontstyle1"
-                                        href="#">이용약관관리</a></div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="#"> 쇼핑몰</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-3"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="#">> 카테고리관리</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col"><i class="bi bi-send-check text-light" style="margin-right: 5px;"></i><a
-                                        class="leftsidepontstyle1"
-                                        href="../systemadmin/systemAdminQnaMainPage">1:1문의관리</a></div>
-                            </div>
-                            
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <i class="bi bi-send-check text-light" style="margin-right: 5px;"></i>
+                                            <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminFaqMainPage" style="font-size: 18px;">고객센터관리</a>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="#">> 공지사항</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminFaqMainPage">> 자주찾는 질문</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="#">> 이용약관</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminQnaMainPage">> 1:1문의</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                    
                         </div>
-
                     </div>
                 </div>
 
-
-                <div class="col">
+                <div class="col mt-3">
                     <div class="row mb-3">
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">

@@ -240,7 +240,7 @@
 	
 	<!--전체판매자목록가져오기(최근등록순) -->
 	<select id="selectAdminDtoList" resultType="com.ssofun.dto.AdminDto">
-		SELECT * FROM tb_admin ORDER BY admin_id DESC
+		SELECT * FROM tb_admin WHERE biz_id IS NOT NULL ORDER BY admin_id DESC
 	</select>
 	
 	
