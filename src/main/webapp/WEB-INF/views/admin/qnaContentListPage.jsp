@@ -34,7 +34,7 @@
 }
 
 .td_No{
-	font-weight: 700;
+	font-weight: 600;
 }
 
 /* 테이블UI */
@@ -297,12 +297,12 @@
 									        <thead>
 									            <tr>
 									            	<th class="c0" scope="col">#</th>
-									                <th class="c1" scope="col">문의번호</th>
-									                <th class="c2" scope="col">등록일</th>
-									                <th class="c3" scope="col">유저아이디</th>
-									                <th class="c4" scope="col">닉네임</th>
-									                <th class="c5" scope="col">제목</th>
-									                <th class="c6" scope="col">답변여부</th>
+									                <th class="c1 td_No" scope="col">문의번호</th>
+									                <th class="c2 td_No" scope="col">등록일</th>
+									                <th class="c3 td_No" scope="col">유저아이디</th>
+									                <th class="c4 td_No" scope="col">닉네임</th>
+									                <th class="c5 td_No" scope="col">제목</th>
+									                <th class="c6 td_No" scope="col">답변여부</th>
 									                <!-- <th class="c5" scope="col">문의내용</th> -->									               
 									            </tr>
 									        </thead>

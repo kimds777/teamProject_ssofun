@@ -48,6 +48,10 @@
     text-align: left;
 }
 
+.text_size{
+	font-weight: 600;
+}
+
 </style>
 <head>
     <meta charset="UTF-8" />
@@ -259,22 +263,22 @@
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">No</h3>
-                                                </div><span class="ul-widget__desc text-mute">No.&nbsp;${orderItemDetail.product_order_item_id}</span>
+                                                </div><span class="ul-widget__desc text-mute text_size">No.&nbsp;${orderItemDetail.product_order_item_id}</span>
                                             </div>
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">회사명</h3>
-                                                </div><span class="ul-widget__desc text-mute">${orderItemDetail.biz_name}</span>
+                                                </div><span class="ul-widget__desc text-mute text_size">${orderItemDetail.biz_name}</span>
                                             </div>
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">카테고리명</h3>
-                                                </div><span class="ul-widget__desc text-mute">${orderItemDetail.category_type_name}</span>
+                                                </div><span class="ul-widget__desc text-mute text_size">${orderItemDetail.category_type_name}</span>
                                             </div>
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">상품명</h3>
-                                                </div><span class="ul-widget__desc text-mute">${orderItemDetail.product_name}</span>
+                                                </div><span class="ul-widget__desc text-mute text_size">${orderItemDetail.product_name}</span>
                                             </div>
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
@@ -286,21 +290,21 @@
                                             </div>
 											<div class="ul-widget__item">
 											    <div class="ul-widget__info">
-											        <h3 class="ul-widget1__title">가격</h3>
+											        <h3 class="ul-widget1__title text_size">가격</h3>
 											    </div>
-											    <span class="ul-widget__desc text-mute">
+											    <span class="ul-widget__desc text-mute text_size">
 											        <fmt:formatNumber value="${orderItemDetail.price}" type="number" pattern="#,##0"/> 원
 											    </span>
 											</div>
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">수량</h3>
-                                                </div><span class="ul-widget__desc text-mute">${orderItemDetail.count}&nbsp;개</span>
+                                                </div><span class="ul-widget__desc text-mute text_size">${orderItemDetail.count}&nbsp;개</span>
                                             </div>
                                             <div class="ul-widget__item">
                                                 <div class="ul-widget__info">
                                                     <h3 class="ul-widget1__title">등록일</h3>
-                                                </div><span class="ul-widget__desc text-mute">
+                                                </div><span class="ul-widget__desc text-mute text_size">
                                                 <fmt:formatDate value="${orderItemDetail.created_at}" pattern="yyyy-MM-dd" />
                                                 </span>
                                             </div>
@@ -318,16 +322,16 @@
 												    </form>
 												    </c:when>
 												    <c:when test="${orderItemDetail.product_order_status_id == 4}">
-												    	<span class="ul-widget__desc text-mute text-primary">${orderItemDetail.order_status_name}</span>
+												    	<span class="ul-widget__desc text-mute text-success">${orderItemDetail.order_status_name}</span>
 												    </c:when>
 												    <c:when test="${orderItemDetail.product_order_status_id == 5}">
 												        <span class="ul-widget__desc text-mute text-warning">${orderItemDetail.order_status_name}</span>
 												    </c:when>
 												  	<c:when test="${orderItemDetail.product_order_status_id == 6}">
-												        <span class="ul-widget__desc text-mute text-dark">${orderItemDetail.order_status_name}</span>
+												        <span class="ul-widget__desc text-mute text-warning">${orderItemDetail.order_status_name}</span>
 												    </c:when>
 												    <c:otherwise>
-												        <span class="ul-widget__desc text-mute text-dark">${orderItemDetail.order_status_name}</span>
+												        <span class="ul-widget__desc text-mute text-warning">${orderItemDetail.order_status_name}</span>
 												    </c:otherwise>
 												</c:choose>    
 												</span>

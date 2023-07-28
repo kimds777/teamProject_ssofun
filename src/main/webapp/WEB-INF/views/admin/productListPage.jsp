@@ -34,7 +34,7 @@
 }
 
 .td_No{
-	font-weight: 700;
+	font-weight: 600;
 }
 
 /* 테이블UI */
@@ -63,11 +63,11 @@
 }
 
 .c6{
-	width: 100px;
+	width: 120px;
 }
 
 .c7{
-	width: 100px;
+	width: 120px;
 }
 
 .c9{
@@ -485,14 +485,14 @@ $(document).ready(function() {
                     "</label>" +
                     "</th>" +
                     "<td class='td_1'>No. " + productList[i].product_id + "</td>" +
-                    "<td>" + productList[i].biz_name + "</td>" +
-                    "<td>" + productList[i].category_type_name + "</td>" +
-                    "<td><a href='productDetailPage?product_id=" + productList[i].product_id + "'>" + productList[i].product_name + "</a></td>" +
-                    "<td><img class='img-fluid img-thumbnail' style='width:75px; height:75px;' src='/ssofunUploadFiles/" + productList[i].thumbnail_name + "'></td>" +
-                    "<td>" + formatNumber(productList[i].price) + " 원</td>" +
-                    "<td>" + formatNumber(productList[i].price_sale) + " 원</td>" +
-                    "<td>" + productList[i].contents + "</td>" +
-                    "<td>" + productList[i].created_at + "</td>" +
+                    "<td class='td_1'>" + productList[i].biz_name + "</td>" +
+                    "<td class='td_1'>" + productList[i].category_type_name + "</td>" +
+                    "<td class='td_1'><a href='productDetailPage?product_id=" + productList[i].product_id + "'>" + productList[i].product_name + "</a></td>" +
+                    "<td class='td_1'><img class='img-fluid img-thumbnail' style='width:75px; height:75px;' src='/ssofunUploadFiles/" + productList[i].thumbnail_name + "'></td>" +
+                    "<td class='td_1'>" + formatNumber(productList[i].price) + " 원</td>" +
+                    "<td class='td_1'>" + formatNumber(productList[i].price_sale) + " 원</td>" +
+                    "<td class='td_1'>" + productList[i].contents + "</td>" +
+                    "<td class='td_1'>" + productList[i].created_at + "</td>" +
                     "</tr>";
             }
             $('#product_list').append(res); // 'product_list' 요소의 내용을 변경하여 테이블을 갱신합니다.

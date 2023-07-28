@@ -31,7 +31,7 @@
 }
 
 .td_No{
-	font-weight: 700;
+	font-weight: 600;
 }
 
 /* 주문상태에 따른 글자 색상변화 */
@@ -70,6 +70,43 @@
 
 .pagination{
     justify-content: center;
+}
+
+.orderStatusClass{
+	font-weight: 700;
+}
+
+/* 테이블 간격 */
+.c0{
+	width: 55px;
+}
+
+.c1{
+	width: 90px;
+}
+
+.c2{
+	width: 120px;
+}
+
+.c3{
+	width: 120px;
+}
+
+.c4{
+	width: 120px;
+}
+
+.c6{
+	width: 120px;
+}
+
+.c7{
+	width: 120px;
+}
+
+.c8{
+	width: 120px;
 }
 </style>
 <head>
@@ -490,29 +527,28 @@ $(document).ready(function() {
             let res = "";
             for (let i = 0; i < orderItemList.length; i++) {
             	  let orderStatusClass = "";
-            	  if (orderItemList[i].product_order_status_id === "3" || 
-            	      orderItemList[i].product_order_status_id === "4" ||
-            	      orderItemList[i].product_order_status_id === "5" ||
-            	      orderItemList[i].product_order_status_id === "6" ||
-            	      orderItemList[i].product_order_status_id === "7") {
-            	    orderStatusClass = "text-danger"; // 상태가 3, 4, 5, 6, 7인 경우 텍스트 색상을 빨간색으로 설정
+            	  if (orderItemList[i].order_status_name === "판매자확인완료" ||
+            	      orderItemList[i].order_status_name === "배송중" ||
+            	      orderItemList[i].order_status_name === "배송완료" ||
+            	      orderItemList[i].order_status_name === "구매확정") {
+            	    orderStatusClass = "text-success"; // 상태가 3, 4, 5, 6, 7인 경우 텍스트 색상을 빨간색으로 설정
             	  } else {
-            	    orderStatusClass = "text-success"; // 기타 상태인 경우 텍스트 색상을 초록색으로 설정
+            	    orderStatusClass = "text-danger"; // 기타 상태인 경우 텍스트 색상을 초록색으로 설정
             	  }             	
                 res += "<tr>" +
-                    "<th scope='row'>" +
+                    "<th class='c0' scope='row'>" +
                     "<label class='checkbox checkbox-outline-info'>" +
                     "<input type='checkbox' checked=''><span class='checkmark'></span>" +
                     "</label>" +
                     "</th>" +
-                    "<td class='td_No'>No. " + orderItemList[i].product_order_item_id + "</td>" +
-                    "<td>" + orderItemList[i].created_at + "</td>" +
-                    "<td>" + orderItemList[i].recipient_name + " 님</td>" +
-                    "<td class='"+orderStatusClass+"'>" + orderItemList[i].order_status_name + "</td>" +
-                    "<td><a href='orderItemDetailPage?product_order_item_id=" + orderItemList[i].product_order_item_id + "'>" + orderItemList[i].product_name + "</a></td>" +
-                    "<td>" + orderItemList[i].count + " 개</td>" +
-                    "<td>" + formatNumber(orderItemList[i].price) + " 원</td>" +
-                    "<td>" + formatNumber(orderItemList[i].price_sale) + " 원</td>" +
+                    "<td class='td_No c1'>No. " + orderItemList[i].product_order_item_id + "</td>" +
+                    "<td class='td_No c2'>" + orderItemList[i].created_at + "</td>" +
+                    "<td class='td_No c3'>" + orderItemList[i].recipient_name + " 님</td>" +
+                    "<td class='td_No c4 " + orderStatusClass + "'>" + orderItemList[i].order_status_name + "</td>" +
+                    "<td class='td_No c5'><a href='orderItemDetailPage?product_order_item_id=" + orderItemList[i].product_order_item_id + "'>" + orderItemList[i].product_name + "</a></td>" +
+                    "<td class='td_No c6'>" + orderItemList[i].count + " 개</td>" +
+                    "<td class='td_No c7'>" + formatNumber(orderItemList[i].price) + " 원</td>" +
+                    "<td class='td_No c8'>" + formatNumber(orderItemList[i].price_sale) + " 원</td>" +
                     "</tr>";
             }
             $('#order_item_list').append(res);

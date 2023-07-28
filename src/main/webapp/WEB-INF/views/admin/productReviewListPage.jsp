@@ -30,7 +30,7 @@
 }
 
 .td_No{
-	font-weight: 700;
+	font-weight: 600;
 }
 
 </style>
@@ -426,9 +426,9 @@ $(document).ready(function() {
                     "</label>" +
                     "</th>" +
                     "<td class='td_No'>No. " + productReviewList[i].product_id + "</td>" +
-                    "<td><a href='productDetailReviewListPage?product_id=" + productReviewList[i].product_id + "'>" + productReviewList[i].name + "</a></td>" +
-                    "<td>" + productReviewList[i].review_cnt + " 개</td>" +
-                    "<td>" + productReviewList[i].review_avg_score + " 점</td>" +
+                    "<td class='td_No'><a href='productDetailReviewListPage?product_id=" + productReviewList[i].product_id + "'>" + productReviewList[i].name + "</a></td>" +
+                    "<td class='td_No'>" + productReviewList[i].review_cnt + " 개</td>" +
+                    "<td class='td_No'>" + productReviewList[i].review_avg_score + " 점</td>" +
                     "</tr>";
             }
             $('#product_review_list').append(res);

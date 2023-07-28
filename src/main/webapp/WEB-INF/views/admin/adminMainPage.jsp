@@ -32,6 +32,7 @@
 
 .List_td{
 	font-size: 10px;
+	font-weight: 700;
 }
 
 .List_th{	
@@ -39,13 +40,16 @@
 	font-weight: 750;
 }
 
-.List_productname{
-	font-size: 8px;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 1;
-	overflow: hidden;
+.List_productname {
+    font-size: 8px;
+    font-weight: 700;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 텍스트 공간이 넘칠 경우 "..."으로 표시 */
 }
+
 
 .td_No{
 	font-weight: 700;

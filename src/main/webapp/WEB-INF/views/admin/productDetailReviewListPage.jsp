@@ -31,7 +31,7 @@
 }
 
 .td_No{
-	font-weight: 700;
+	font-weight: 600;
 }
 
 /* 테이블 UI */
@@ -288,12 +288,12 @@
 										                </label>
 										            </th>
 										            <td><img class="img-fluid img-thumbnail" style="width:75px; height:75px;" src="/ssofunUploadFiles/${productReviewImage.url}"></td>
-										            <td>${productDetailReviewList[imageStatus.index].name}</td>
+										            <td class="td_No">${productDetailReviewList[imageStatus.index].name}</td>
 										            <td class="td_No">No.&nbsp;${productDetailReviewList[imageStatus.index].product_review_id}</td>
-										            <td>${productDetailReviewList[imageStatus.index].nickname}&nbsp;님</td>
-										            <td>${productDetailReviewList[imageStatus.index].rate}&nbsp;점</td>
-										            <td>${productDetailReviewList[imageStatus.index].contents}</td>
-										            <td><fmt:formatDate value="${productDetailReviewList[imageStatus.index].created_at}" pattern="yyyy-MM-dd" /></td>
+										            <td class="td_No">${productDetailReviewList[imageStatus.index].nickname}&nbsp;님</td>
+										            <td class="td_No">${productDetailReviewList[imageStatus.index].rate}&nbsp;점</td>
+										            <td class="td_No">${productDetailReviewList[imageStatus.index].contents}</td>
+										            <td class="td_No"><fmt:formatDate value="${productDetailReviewList[imageStatus.index].created_at}" pattern="yyyy-MM-dd" /></td>
 										        </tr>
 										    </c:forEach>
 										</tbody>
