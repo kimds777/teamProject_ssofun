@@ -61,26 +61,12 @@ public class SystemAdminController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //admin로그인처리
 	
 	//관리자 로그인
 	@RequestMapping("login/adminLoginPage")
-	public String adminLoginPage(HttpSession session) {
-		
-
-		 
-		
+	public String adminLoginPage(HttpSession session, AdminDto adminDto) {
+	
 		return "systemadmin/login/adminLoginPage";
 	}
 	
@@ -92,10 +78,17 @@ public class SystemAdminController {
 	@RequestMapping("adminLoginProcess")
 	public String loginProcess(HttpSession session, AdminDto adminDto) {
 		
+	    if (adminDto.getLogin_account() == null || adminDto.getLogin_password() == null) {
+	        // "login_account"와 "login_password"가 없는 경우, 로그인 실패 페이지로 이동
+	        return "redirect:./login/adminLoginFail";
+	    }
+		
+		
 		AdminDto adminData = systemAdminService.findAdminByIdAndPw(adminDto);
 		
 		
 		int bizid = adminData.getBiz_id();
+		
 		if (bizid == 0) {
 			
 			AdminDto systemAdmin = adminData;
@@ -115,11 +108,13 @@ public class SystemAdminController {
 			 return "redirect:../admin/adminMainPage";
 		}
 		
-		
 		return "redirect:./login/adminLoginFail";
 		
 		
 	}
+	
+	
+	
 	
 	@RequestMapping("systemAdminMainPage")
 	public String systemAdminMainPage() {
