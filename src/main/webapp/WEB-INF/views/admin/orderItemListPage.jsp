@@ -311,20 +311,6 @@
                                 <div class="d-flex row p-0">
 					                <div class="col title_box pt-3"><a href="./adminMainPage">주문리스트</a></div>
 					            </div>
-                                <%-- <div class="row">
-								    <div class="col-md-6 form-group mb-3">
-										<form id="myForm" action="orderItemCategoryListPage" method="post">
-										    <select name="product_order_status_id" class="form-control form-control-rounded">
-										        <option>카테고리선택</option>
-										        <c:forEach items="${orderStatusList}" var="orderStatus">
-										            <option value="${orderStatus.product_order_status_id}">${orderStatus.name}</option>
-										        </c:forEach>
-										    </select>
-										</form>
-										
-										<button id="submitButton" onclick="submitForm()" style="display: none;">Submit</button>
-								    </div>
-								</div> --%>
                                 <ul class="nav justify-content-end">
 									<li class="nav-item">
 									    <a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=3">결제완료</a>
@@ -358,26 +344,6 @@
 								            </tr>
 								        </thead>
 								        <tbody id="order_item_list">
- 								        	<%-- <c:forEach items="${orderItemList}" var="orderItem">
-								        		<tr>
-								        			<th scope="row">
-								        				<label class="checkbox checkbox-outline-info">
-								        					<input type="checkbox" checked="" /><span class="checkmark"></span>
-								        				</label>
-								        			</th>
-								        				<td class="td_No">No.&nbsp;${orderItem.product_order_item_id}</td>
-								        				<td><fmt:formatDate value="${orderItem.created_at}" pattern="yyyy-MM-dd" /></td>
-								                        <td class="text-success">${orderItem.recipient_name}&nbsp;님</td>
-								                        <td class="order-status ${getOrderStatusColor(orderItem.product_order_status_id)}">${orderItem.order_status_name}</td>
-								                        <td>${orderItem.order_status_name}</td>  							                        
-								                        <td>
-								                       		<a href="orderItemDetailPage?product_order_item_id=${orderItem.product_order_item_id}">${orderItem.product_name}</a>
-								                        </td>										                										      										    
-								                        <td>${orderItem.count}&nbsp;개</td>
-														<td><fmt:formatNumber value="${orderItem.price}" type="number" pattern="#,##0"/> 원</td>
-														<td><fmt:formatNumber value="${orderItem.price_sale}" type="number" pattern="#,##0"/> 원</td>								                        									                										                
-								              	</tr>
-								           	</c:forEach> --%>
 								     	</tbody>
 								     </table>									 
 								  </div>
@@ -423,28 +389,6 @@
                 <!-- end of main-content -->
             </div><!-- Footer Start -->
             <div class="flex-grow-1"></div>
-<!--             <div class="app-footer">
-                <div class="row">
-                    <div class="col-md-9">
-                        <p><strong>Gull - Laravel + Bootstrap 4 admin template</strong></p>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero quis beatae officia saepe perferendis voluptatum minima eveniet voluptates dolorum, temporibus nisi maxime nesciunt totam repudiandae commodi sequi dolor quibusdam
-                            <sunt></sunt>
-                        </p>
-                    </div>
-                </div>
-                <div class="footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center">
-                    <a class="btn btn-primary text-white btn-rounded" href="https://themeforest.net/item/gull-bootstrap-laravel-admin-dashboard-template/23101970" target="_blank">Buy Gull HTML</a>
-                    <span class="flex-grow-1"></span>
-                    <div class="d-flex align-items-center">
-                        <img class="logo" src="../resources/dist-assets/images/logo.png" alt="">
-                        <div>
-                            <p class="m-0">&copy; 2018 Gull HTML</p>
-                            <p class="m-0">All rights reserved</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- fotter end -->
         </div>
     </div><!-- ============ Search UI Start ============= -->
     <div class="search-ui">

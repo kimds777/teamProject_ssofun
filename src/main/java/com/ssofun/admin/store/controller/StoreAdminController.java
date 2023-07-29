@@ -299,23 +299,6 @@ public class StoreAdminController {
 	      return "admin/productDetailPage";
 	   }
 	   
-//	   // 상품상세보기
-//	   @ResponseBody
-//	   @RequestMapping("productDetailProcess")
-//	   public HyunMinProductJoinDto productDetail(@RequestParam("product_id") int product_id, HttpSession session) {
-//		   
-//		   AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
-//		   session.setAttribute("shopAdmin", shopAdmin);
-//		   
-//		   HyunMinProductJoinDto productDetail = storeAdminService.productDetail(product_id);
-//		   
-//		   System.out.println(productDetail.getProduct_id());
-//		   
-//		   return productDetail;
-//	   }
-	   
-	   // 상품상세보기
-	   
 	   // 상품카테고리 등록페이지
 	   @RequestMapping("productCategoryInsertPage")
 	   public String productcategoryInsertPage() {

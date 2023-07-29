@@ -24,7 +24,6 @@ import com.ssofun.dto.ProductThumbnailDto;
 public interface StoreAdminSqlMapper {
 			
 	   // 대시보드	
-	   // 맨위 
 	   // 총 매출
 	   public int selectTotalPrice(ProductDto productDto,@Param("adminId") int adminId);
 	   // 모든상품수
