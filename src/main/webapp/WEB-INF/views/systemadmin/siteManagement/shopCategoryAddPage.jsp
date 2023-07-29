@@ -10,32 +10,34 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">    
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/systemAdminMain.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminCompanyManagement.css">
     <!-- <script type="text/javascript"> </script>-->
+	<style>
+        .categoryaddbutton{ -webkit-appearance: none;  -moz-appearance: none;  appearance: none; border: none; border-radius: 3px; padding: 20px 20px 20px 20px; font-family: 'Noto Sans KR', sans-serif; font-weight:400; font-size: 13px; color:white; background-color: #FF6462;}
+	</style>
 
 
 
 
 
-
-    <title>venderListOfCompanyNumberPage</title>
+    <title>shopCategoryAddPage</title>
 </head>
 
 <body>
-
+  
 
 
 
 
         <!--고객센터 기본 틀 -->
-         <div class="container container2" style="margin-top: 0px;">
+        <div class="container container2" style="margin-top: 0px;">
         <div class="row">
             <jsp:include page="../../include/systemAdminNavi.jsp"></jsp:include>
         </div>
             <div class="row">
-                <div class="col-2">
+             <div class="col-2">
                     <div class="row leftside1">
                         <div class="col">
                             <div class="row" style="height: 30px;"></div>
@@ -46,7 +48,7 @@
                                 </div>
                                 <div class="col"></div>
                             </div>
-                           <div class="row mt-2 adminid">
+                         <div class="row mt-2 adminid">
                                 <div class="col">${systemAdmin.admin_nickname} 님 <span><i class="bi bi-circle-fill" style="color:green"></i></span></div>
                             </div>
                             <div class="row mb-3"></div>
@@ -205,6 +207,7 @@
                     </div>
                 </div>
 
+
                 <div class="col mt-3">
                     <div class="row mb-2">
                         <div class="col">
@@ -212,10 +215,11 @@
                                 <div class="container-fluid">
                                    
                                         <div class="col-2">
-                                            <a class="navbar-brand text-black">판매자목록</a>
+                                            <a class="navbar-brand text-black">카테고리관리</a>
                                         </div>
                                         <div class="col">
-                                            <p class="five-font mt-2">소속회사에 등록된 판매자전체목록입니다.</p>
+                                            <!--<p class="five-font mt-2">펀딩관리페이지입니다.</p>-->
+                                            
                                         </div>
                                         <div class="col-6 d-flex align-items-center justify-content-end">
                                             
@@ -230,110 +234,169 @@
                         </div>
                     </div>
 
-       
-
                     <!--안에 페이지 내용만 바꾸기-->
-                    <div class="row" style="margin-left: 12px; height:1000px">
+                    <div class="row" style="margin-left: 10px; height:1000px">
                     
-                        <div class="col" style="padding-left: 0px; padding-right: 12px;">
+                        <div class="col" style="padding-left: 0px;">
+		
+                            <form action="../shopCategoryAddProcess"  method="post" enctype="multipart/form-data">
 
                            	<div class="row" style="padding-left: 0px;">
-                                <div class="col-3" style="padding-left: 0px;"><p class="three-font mt-1" style="margin-left: 5px;">${bizDto.biz_name}판매자목록</p></div>
-                                
-                                <div class="col-7"></div>
-                                <div class="col-2" style="text-align:right;">
-                            		<button class="btn btn-outline-secondary" style="height:29.98px; padding:6px; font-family: 'Noto Sans KR', sans-serif;font-weight: 400; font-size: 12px;" type="submit">삭제</button>
-                                    <input type="button" style="border-radius: 5px;" class="writefaqbutton" value="판매자등록"  onclick="location.href='venderRegistrationPage?biz_id=${bizDto.biz_id }'">
-                                </div>
-                                
-                            </div>
+                                <div class="col-7" style="padding-left: 0px;"><!--<p class="three-font mt-1" style="margin-left: 5px;">미승인된 펀딩목록</p>--></div>
+                                <div class="col c-five-font"></div>
+                                <div class="col-2" style="text-align: right;"></div>
                             
-                          <div class="row mt-3">
-                            <table class="table table-bordered table-sm" style="padding: 12px;">
-                                <thead>
-                                  <tr  style="background-color: #f8f9fa;">
-                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><input type="checkbox"  name="admin_id" value="${allAdminList.adminDto.admin_id }"></p></th>
-                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">판매자번호</p></th>
-                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">회사번호</p></th>
-                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">소속회사명</p></th>
-                                    <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">계정명</p></th>
-                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">등록일</p></th>
-                                    <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">계정상태</p></th>
-                                    
-                                    
-                                  </tr>
-                                </thead>
-                                <c:forEach items="${adminDtoList}" var="adminDataList">
-                                    <tbody>
-                                      <tr>
-                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;"><input type="checkbox"  name="admin_id" value="${allAdminList.adminDto.admin_id }"></p></th>
-                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${adminDataList.adminDto.admin_id }</p></th>
-                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${adminDataList.bizDto.biz_id }</p></th>
-                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${adminDataList.bizDto.biz_name}</p></th>
-                                        <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./readVenderPage?admin_id=${adminDataList.adminDto.admin_id}">${adminDataList.adminDto.login_account}</a></p></td>
-                                        <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;"><fmt:formatDate pattern="yy. MM. dd. (E)" value="${adminDataList.adminDto.created_at }"/></p></td>
-                                        
-                                        <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">
-                                            <c:if test="${adminDataList.adminDto.used_fg ==1 }">
-                                                <i class="bi bi-check-circle-fill" style="color:green "></i>
-                                            </c:if>
-                                            <c:if test="${adminDataList.adminDto.used_fg == 0 }">
-                                                <i class="bi bi-check-circle-fill" style="color:#B3B8C3"></i>
-                                            </c:if>
-                                        </p></td>
-                                      </tr>
-                                    </tbody>
-                                  </c:forEach>
-                              </table> 
-                          </div>
-                          
-                        </div>
-                    </div>
-                    <div class="row mb-5">
-                        <div class="col"> </div>
-                    </div>
-                    
-                        <!-- 페이지네이션 -->
-			            <div class="row">
-			            	<div class="col"></div>
-			            	<div class="col">
-				            	<nav aria-label="Page navigation example">
-								  <ul class="pagination">
-								    <li class="page-item">
-								      <a class="page-link" href="#" aria-label="Previous">
-								        <span aria-hidden="true">&laquo;</span>
-								      </a>
-								    </li>
-								    <li class="page-item"><a class="page-link" href="#">1</a></li>
-								    <li class="page-item"><a class="page-link" href="#">2</a></li>
-								    <li class="page-item"><a class="page-link" href="#">3</a></li>
-								    <li class="page-item"><a class="page-link" href="#">4</a></li>
-								    <li class="page-item"><a class="page-link" href="#">5</a></li>
-								    <li class="page-item"><a class="page-link" href="#">6</a></li>
-								    <li class="page-item"><a class="page-link" href="#">7</a></li>
-								    <li class="page-item"><a class="page-link" href="#">8</a></li>
-								    <li class="page-item"><a class="page-link" href="#">9</a></li>
-								    <li class="page-item"><a class="page-link" href="#">10</a></li>
-								    <li class="page-item">
-								      <a class="page-link" href="#" aria-label="Next">
-								        <span aria-hidden="true">&raquo;</span>
-								      </a>
-								    </li>
-								  </ul>
-								</nav>
-							</div>
-							<div class="col"></div>
-			            </div>
-                    
-                </div>
-            </div>
+                            </div>
+                      
+                                <div class="row mt-2">
+                                    <div class="col"  style="background-color:#F8F9FA; height:110px; border-radius: 3%; margin-right: 5px;">
+                                        <div class="row mt-3" >
+                                            <div class="col-1"></div>
+                                            <div class="col">
+                                                <div class="row"><div class="col textcenter"><p class="categoryFont">대분류</p></div></div>
+                                                <div class="row"><div class="col textcenter"> <input type="text" name="name"> </div></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="row"><div class="col textcenter"><p class="categoryFont">중분류</p></div></div>
+                                                <div class="row"><div class="col textcenter"> <input type="text" name="name"> </div></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="row"><div class="col textcenter"><p class="categoryFont">소분류</p></div></div>
+                                                <div class="row"><div class="col textcenter"><input type="text" name="name"> </div></div>
+                                            </div>
+                                            <div class="col-1"></div>
 
+
+                                            <!-- <div class="col-1">
+                                                
+                                            </div>
+                                            <div class="col">
+                                             
+            
+                                                <div class="row mt-2">
+                                                   
+                                                    <div class="col-2 textcenter">
+                                                        <p class="companyfont">대분류</p>
+                                                    </div>
+                                                    <div class="col mt-2">
+                                                        <input type="file" name="fundingCategoryFiles"  accept="image/*">
+                                                    </div>
+                                                    <div class="col"></div>
+                                                    
+                                                </div>
+                                                      
+                                                <div class="row mt-2">
+                                                    
+                                                    <div class="col-2 textcenter">
+                                                        <p class="companyfont">아이콘명</p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" name="name" class="form-control"  aria-label="companyName">
+                                                    </div>
+                                                    
+                                                </div>
+            
+            
+                                            </div> -->
+                                            <div class="col-2 mt-4" style="text-align: right;">
+                                                <div class="row">
+                                                    
+                                                </div>
+                                                <input type="submit" class="categoryaddbutton" value="카테고리추가"   style="border-radius: 5px; size: 90px; ">
+                                            </div>
+                                        </div>
+                                    </div>
+                      
+                                </div>
+    
+                                </form>
+
+                                <div class="row">
+                                    <div class="col hr-col"><hr class="hr-1"></div>
+                                </div>
+
+                                <p>insert 한 foreach문으로 리스트 뽑아오기 </p>
+
+                                <div class="row mt-2">
+                                    <div class="row" style="padding-left: 0px;">
+                                        <div class="col-2" style="padding-left: 0px; margin-left: 10px;"><p class="three-font mt-1" style="margin-left: 5px;">카테고리목록</p></div>
+                                        <div class="col-7" style="padding-left: 0px;"><!--<p class="three-font mt-1" style="margin-left: 5px;">미승인된 펀딩목록</p>--></div>
+                                        <div class="col c-five-font"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1" style="margin-left: 10px;">
+                                    <!--이미지반복문돌리기-->
+									
+									<c:forEach items="${fundingCategoryList }" var="list">
+                                    <div class="col-2 mt-3 qnaImage">
+                                        <div class="row" style="text-align: center;">
+                                            <div class="col mt-3"><img src="/ssofunUploadFiles/${list.image_url}" width="65px" height="65px"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <hr class="hr hr-1">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mb-3" style="text-align: center;"><p class="companyfont" style="margin-top: 0px; font-size: 14px;">${list.name }</p></div>
+                                        </div>    
+                                    </div>
+                                    </c:forEach>
+
+                                </div>
+
+                            </div>
+
+
+                    
+		                    <div class="row mb-5">
+		                        <div class="col"> </div>
+		                    </div>
+	                    
+	                        <!-- 페이지네이션 -->
+				            <!--<div class="row">
+				            	<div class="col"></div>
+				            	<div class="col">
+					            	<nav aria-label="Page navigation example">
+									  <ul class="pagination">
+									    <li class="page-item">
+									      <a class="page-link" href="#" aria-label="Previous">
+									        <span aria-hidden="true">&laquo;</span>
+									      </a>
+									    </li>
+									    <li class="page-item"><a class="page-link" href="#">1</a></li>
+									    <li class="page-item"><a class="page-link" href="#">2</a></li>
+									    <li class="page-item"><a class="page-link" href="#">3</a></li>
+									    <li class="page-item"><a class="page-link" href="#">4</a></li>
+									    <li class="page-item"><a class="page-link" href="#">5</a></li>
+									    <li class="page-item"><a class="page-link" href="#">6</a></li>
+									    <li class="page-item"><a class="page-link" href="#">7</a></li>
+									    <li class="page-item"><a class="page-link" href="#">8</a></li>
+									    <li class="page-item"><a class="page-link" href="#">9</a></li>
+									    <li class="page-item"><a class="page-link" href="#">10</a></li>
+									    <li class="page-item">
+									      <a class="page-link" href="#" aria-label="Next">
+									        <span aria-hidden="true">&raquo;</span>
+									      </a>
+									    </li>
+									  </ul>
+									</nav>
+								</div>
+								<div class="col"></div>
+				            </div>-->
+	                    
+                    
+		            
+		                </div>
+		            </div>
+				</div>
             <div class="row mt-5">
                 <div class="col"> </div>
             </div>
         </div>
 
-
+    	</div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

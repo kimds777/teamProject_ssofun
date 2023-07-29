@@ -763,5 +763,23 @@ public class SystemAdminController {
 	}
 	
 
+
+	
+	
+	//쇼핑몰카테고리추가
+	@RequestMapping("siteManagement/shopCategoryAddPage")
+	public String shopCategoryAddPage() {
+		
+		return "systemadmin/siteManagement/shopCategoryAddPage";
+	}
+	
+	
+	@RequestMapping("shopCategoryAddProcess")
+	public String shopCategoryAddProcess() {
+		
+		
+		return"redirec:./siteManagement/shopCategoryAddPage";
+	}
+	
 	
 }

@@ -21,13 +21,54 @@
 
 
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // 파일 입력 요소 가져오기
+    var fileInput = document.getElementById("file_input_id");
+    // 썸네일 컨테이너 요소 가져오기
+    var thumbnailContainer = document.getElementById("thumbnail_container");
+
+    // 파일이 선택되었을 때 썸네일 생성 및 보여주기
+    fileInput.addEventListener("change", function (event) {
+      var file = event.target.files[0];
+
+      // FileReader를 사용하여 파일을 읽습니다.
+      var reader = new FileReader();
+
+      reader.onload = function (event) {
+        // 썸네일 이미지 요소 생성 및 설정
+        var thumbnailImage = document.createElement("img");
+        thumbnailImage.src = event.target.result;
+        thumbnailImage.classList.add("thumbnail"); // 썸네일에 스타일을 적용하려면 클래스를 추가할 수 있습니다.
+
+        var thumbnailDiv = document.createElement("div");
+        thumbnailDiv.style.width = "100px"; // 썸네일의 가로 크기
+        thumbnailDiv.style.height = "100px"; // 썸네일의 세로 크기
+       
+        thumbnailDiv.style.overflow = "hidden"; // 이미지를 넘치지 않도록 설정
+        
+        thumbnailImage.style.width = "100%";
+        thumbnailImage.style.height = "100%";
+        thumbnailImage.style.objectFit = "cover";
+        
+        thumbnailDiv.appendChild(thumbnailImage);
+  
+        // 썸네일을 썸네일 컨테이너에 추가합니다.
+        thumbnailContainer.innerHTML = ""; // 기존 썸네일 삭제
+        thumbnailContainer.appendChild(thumbnailDiv);
+  	
+        
+      };
+
+      // 파일을 Data URL로 변환하여 썸네일 생성
+      reader.readAsDataURL(file);
+    });
+  });
 
 
 
 
-
-
-
+</script>
 <title>venderRegistrationPage</title>
 </head>
 
@@ -147,7 +188,7 @@
                                                 <div class="col-3"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="#">> 카테고리관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/shopCategoryAddPage">> 카테고리관리</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -272,9 +313,12 @@
 		                            	<div class="col">
 		
 		                                    <div class="row mt-5">
-		                                        <div class="col-1"></div>
-		                                        <div class="col-3 mt-2 textcenter" >
-		                                            <img src="/resources/companyManagement/exDog.jpg" alt="대표자" width="100px" height="100px"  style=" border-radius: 30%;">
+		                                        <div class="col-2"></div>
+		                                        <div class="col-2 mt-2 textcenter" >
+		                                         <div class="row" id="thumbnail_container" >
+                                                  	<div id="thumbnailDiv"></div>
+                                                  </div>
+		                                            <!-- <img src="/resources/companyManagement/exDog.jpg" alt="대표자" width="100px" height="100px"  style=" border-radius: 30%;"> -->
 		                                        </div>
 		                                        <div class="col">
 		                                        	<div class="row mt-2">
@@ -284,7 +328,7 @@
 		                                        	</div>
 		                                        	<div class="row mt-2">
 		                                        		<div class="col">
-		                                           			 <input type="file" name="qnaFiles" id="qna_image_id" multiple accept="image/*">
+		                                           			 <input type="file" name="qnaFiles" id="file_input_id" multiple accept="image/*">
 		                            					</div>
 		                                        	</div>
 		                                        </div>

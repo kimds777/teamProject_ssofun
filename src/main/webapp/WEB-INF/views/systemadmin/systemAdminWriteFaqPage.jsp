@@ -136,7 +136,7 @@
                                                 <div class="col-3"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="#">> 카테고리관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/shopCategoryAddPage">> 카테고리관리</a>
                                                 </div>
                                             </div>
                                         </div>
