@@ -36,13 +36,14 @@
 
     <div class="section hide" id="addressSelectModal">
         <h6>배송지 변경</h6>
-        <div id="addressSection">
-            <ul class="basic">
+        <div id="addressSelectSection">
+            <!-- <ul class="basic">
                 <li>기본</li>
                 <li>김다슬</li>
                 <li>경기도 파주시 미래로 602 (와동동, 휴먼시아 가람마을)</li>
                 <li>상세주소 적어주시면 됩니다.</li>
                 <li>010-0000-0000</li>
+                <li>요청사항 적어주시면 됩니다.</li>
             </ul>
             
             <ul>
@@ -50,13 +51,8 @@
                 <li>경기도 파주시 미래로 602 (와동동, 휴먼시아 가람마을)</li>
                 <li>상세주소 적어주시면 됩니다.</li>
                 <li>010-0000-0000</li>
-            </ul>
-            <ul>
-                <li>김다슬</li>
-                <li>경기도 파주시 미래로 602 (와동동, 휴먼시아 가람마을)</li>
-                <li>상세주소 적어주시면 됩니다.</li>
-                <li>010-0000-0000</li>
-            </ul>
+                <li>요청사항 적어주시면 됩니다.</li>
+            </ul> -->
         </div>
 
         <p id="showAddressAddModalBtn">배송지 추가</p>
@@ -132,6 +128,7 @@
                     </li>
                     <li><span>상세주소</span>이편한세상 102동 1105호</li>
                     <li><span>요청사항</span>문 앞에 보관해주세요.</li>
+                    <input type="hidden" value="" id="delivery_recipient_id">
                 </ul>
             </div>
 

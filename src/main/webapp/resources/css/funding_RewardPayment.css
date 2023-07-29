@@ -107,13 +107,13 @@ i.activeCheckBox{color: #ff6462;}
 #deliveryInfo>#addressInputBtn{border: none; border-radius: 3px; padding: 2px 9px; font-size: 12px; line-height: 30px; position: absolute; right: 13px; top: 42px; background-color: #d8d8d8;}
 #deliveryInfo>ul{padding: 0; width: 100%; padding: 18px 20px;  background-color: #f7f7f7; border-radius: 5px;}
 #deliveryInfo>ul>li{font-size: 15px; height: 19px; line-height: 19px; margin-bottom: 12px; color: #555555;}
-#deliveryInfo>ul>li:last-child{margin-bottom: 0;}
 
 #deliveryInfo>ul>li>span{display: inline-block; width: 80px; text-align: left; margin-right: 27px; font-weight: bold;}
 #deliveryInfo>ul>li:nth-child(4){height: 47px; position: relative;}
 #deliveryInfo>ul>li:nth-child(4)>ul{padding: 0; margin: 0; position: absolute; top: 0; left: 107px;}
 #deliveryInfo>ul>li:nth-child(4)>ul>li:first-child{margin-bottom: 8px;}
 
+#deliveryInfo>ul>li:last-of-type{margin-bottom: 0;}
 
 
 

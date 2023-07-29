@@ -308,10 +308,19 @@ public class FundingController {
 		return fundingService.getPaymentBeforeFundingOrder(funding_order_id);
 	}
 	
+	//유저 배송지 리스트 출력
 	@ResponseBody
 	@RequestMapping("AJAXgetUserAddressList") 
 	public List<DeliveryRecipientDto> AJAXgetUserAddressList(long user_id) {
+//		System.out.println("유저 배송지 리스트: "+user_id);
 		return fundingService.getUserAddressList(user_id);
+	}
+	
+	// 유저 기본 배송지 출력
+	@ResponseBody
+	@RequestMapping("AJAXgetDefaultAddress")
+	public DeliveryRecipientDto AJAXgetDefaultAddress(long user_id) {
+		return fundingService.getDefaultAddress(user_id);
 	}
 
 	// 콜백 수신 처리
@@ -454,11 +463,22 @@ public class FundingController {
 		return fundingService.insertOrderPayment(payment_id,funding_order_id);
 	}
 	
+	// 배송지 등록
 	@ResponseBody 
 	@RequestMapping("AJAXinsertDeliveryRecipient")
 	public long AJAXinsertDeliveryRecipient(DeliveryRecipientDto params) {	
 		System.out.println(params.getName());
 		return fundingService.insertDeliveryRecipient(params);
+	}
+	
+	// 새로운 기본배송지 추가시 기존 기본배송지 default_fg 0으로 변경
+	@ResponseBody
+	@RequestMapping("AJAXupdateAddressDefaultFg")
+	public int AJAXupdateAddressDefaultFg(@RequestParam(value = "delivery_recipient_id") long delivery_recipient_id, 
+			@RequestBody DeliveryRecipientDto params) {
+//		System.out.println("delivery_recipient_id: "+delivery_recipient_id);
+//		System.out.println("default_fg: "+params.getDefault_fg());
+		return fundingService.updateAddressDefaultFg(delivery_recipient_id,params);
 	}
 	
 	@ResponseBody

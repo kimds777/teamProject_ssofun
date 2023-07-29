@@ -168,6 +168,11 @@ public interface FundingSqlMapper {
 	public long insertDeliveryRecipient(DeliveryRecipientDto deliveryRecipientDto);
 	//---배송지 리스트 출력
 	public List<DeliveryRecipientDto> selectUserAddressList(long user_id);
+	//---기존 기본배송지 default_fg 0으로 변경
+	public void updateAddressDefaultFg(@Param("delivery_recipient_id") long delivery_recipient_id, 
+			@Param("deliveryRecipientDto") DeliveryRecipientDto deliveryRecipientDto);
+	//--- 기본 배송지 출력
+	public DeliveryRecipientDto selectDefaultAddressByUserId(long user_id);
 
 
 

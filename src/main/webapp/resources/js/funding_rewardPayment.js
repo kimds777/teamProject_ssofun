@@ -4,6 +4,7 @@ $(document).ready(function(){
     var user_id = 1;  // 유저아이디 수정 필요 세션으로 받아야함
 
     getPaymentBeforeFundingOrder($funding_order_id);
+    getDefaultAddress(user_id);
     setEventListener($funding_order_id,user_id);
 });
 
@@ -12,6 +13,7 @@ function setEventListener($funding_order_id,user_id){
 
     $(document).on("click","#addressInputBtn",function(event){
         event.stopPropagation(); 
+
         getUserAddressList(user_id);
         $("#modalBack").removeClass("hide");
         $("#addressSelectModal").removeClass("hide");
@@ -72,8 +74,8 @@ function setEventListener($funding_order_id,user_id){
         if(address_detail == ""){
             return alert("상세주소를 입력해주세요.");
         }
-        
-        insertAddAddress(default_fg,name,phone,address_post,address_default,address_detail,request_message);
+
+        insertAddAddress(default_fg,user_id,name,phone,address_post,address_default,address_detail,request_message);
         $("#addressAddModal").addClass("hide");
     });
     
@@ -82,14 +84,76 @@ function setEventListener($funding_order_id,user_id){
         $("#addressAddModal").addClass("hide");
     });
 
+    $(document).on("click","#addressSelectSection>ul",function(e){
+        e.stopPropagation();
+
+        var delivery_recipient_id;
+        var name;
+        var address_post;
+        var address_extra;
+        var address_default;
+        var address_detail;
+        var phone;
+        var request_message;
+
+        var index = $(this).index();
+        if(index == 0){
+            delivery_recipient_id = $(this).children("input.delivery_recipient_id").val();
+            name = $(this).children("li:nth-child(3)").text();
+
+            var addressPostOrgin = $(this).children("li:nth-child(4)").text().match(/\[\d+\]/); // [00000]
+            address_post = addressPostOrgin[0].replace(/\[(\d+)\]/,"$1"); // 00
+
+            var addressExtraOrigin = $(this).children("li:nth-child(4)").text().match(/\(([^)]+)\)/); // (***),***
+            address_extra = addressExtraOrigin[0]; // (*
+
+            address_default = $(this).children("li:nth-child(4)").text().replace(addressPostOrgin[0],"").replace(address_extra,"").replace(/^\s+/,"");
+            address_detail = $(this).children("li:nth-child(5)").text();
+            phone = $(this).children("li:nth-child(6)").text();
+            request_message = $(this).children("li:nth-child(7)").text();
+        }else{
+            delivery_recipient_id = $(this).children("input.delivery_recipient_id").val();
+            name = $(this).children("li:nth-child(2)").text();
+
+            var addressPostOrgin = $(this).children("li:nth-child(3)").text().match(/\[\d+\]/); // [00000]
+            address_post = addressPostOrgin[0].replace(/\[(\d+)\]/,"$1"); // 00000
+
+            var addressExtraOrigin = $(this).children("li:nth-child(3)").text().match(/\(([^)]+)\)/); // (***),***
+            address_extra = addressExtraOrigin[0]; // (***)
+
+            address_default = $(this).children("li:nth-child(3)").text().replace(addressPostOrgin[0],"").replace(address_extra,"").replace(/^\s+/,"");
+            address_detail = $(this).children("li:nth-child(4)").text();
+            phone = $(this).children("li:nth-child(5)").text();
+            request_message = $(this).children("li:nth-child(6)").text();
+        }
+
+        $("#addressSection").empty();
+        $("<li><span>받는분</span>"+name+"</li>").appendTo("#addressSection");
+        $("<li><span>전화번호</span>"+phone+"</li>").appendTo("#addressSection");
+        $("<li><span>우편번호</span>"+address_post+"</li>").appendTo("#addressSection");
+        $("<li><span>기본주소지</span><ul><li>"+address_default+"</li><li>"+address_extra+"</li></ul></li>").appendTo("#addressSection");
+        $("<li><span>상세주소</span>"+address_detail+"</li>").appendTo("#addressSection");
+        $("<li><span>요청사항</span>"+request_message+"</li>").appendTo("#addressSection");
+        $("<input type='hidden' id='delivery_recipient_id' value='"+delivery_recipient_id+"'>").appendTo("#addressSection");
+        
+        $("#addressSelectModal").addClass("hide");
+        $("#modalBack").addClass("hide");
+
+    });
+
     $(document).on("click","input#paymentSubmit",function(event){
         event.stopPropagation();
         var totalAgreeChecked = $("#totalAgree.checked").length;
+        var delivery_recipient_id = $("#addressSection>input#delivery_recipient_id").val();
 
         if(totalAgreeChecked == 0){
             alert("전체 동의후 결제가 진행됩니다.");
         }else{
-            payment($funding_order_id);
+            if(delivery_recipient_id == ""){
+                alert("배송지 정보 등록후 결제가 진행됩니다.");
+            }else{
+                payment($funding_order_id,delivery_recipient_id);
+            }
         }
     });
     
@@ -168,8 +232,8 @@ function payment($funding_order_id,$delivery_recipient_id){ //$delivery_recipien
     var makeMerchantUid = hours +  minutes + seconds + milliseconds;
 
 
-    var rewardCount = $("#rewardGroup>ul").length;
-    var name = $("#rewardGroup>ul:first-of-type>li.title").text();
+    var rewardCount = $("#rewardGroups>ul").length;
+    var name = $("#rewardGroups>ul:first-of-type>li.title").text();
     var orderName;
     if(rewardCount>1){
         orderName = name+"외 "+rewardCount+"건";
@@ -238,45 +302,36 @@ function payment($funding_order_id,$delivery_recipient_id){ //$delivery_recipien
                                     success: function(res){
                                         alert("주문 결제 정보 입력 성공!!! 배송 수령인 정보 입력 실행!!");
                                         alert("name: "+buyerName+", phone: "+buyerTel+", address_post: "+buyerPostcode+", address_default: "+defaultAddr+", address_detail: "+detailAddr+", request_message: "+requestMessage);
+                                        
 
                                         $.ajax({
-                                            url: "./AJAXinsertDeliveryRecipient",
-                                            method: "POST",
-                                            data: {name:buyerName, phone: buyerTel, address_post:buyerPostcode, address_default:defaultAddr, address_detail:detailAddr, request_message:requestMessage},
+                                            url: "./AJAXupdateFundingRewardOrder?funding_order_id="+$funding_order_id,
+                                            method: "PATCH",
+                                            data: JSON.stringify({delivery_recipient_id:$delivery_recipient_id, used_fg: 1, status: 3 }), // JSON 문자열로 데이터 직렬화 //status:3 -> 3는 결제완료 의미
+                                            contentType: "application/json", // Content-Type 헤더 설정 
                                             success: function(res){
-                                                if(res != 0){
-                                                    alert("수령인 정보 입력 완료!!! 주문 확정 처리 진행!!");
-                                                    var $delivery_recipient_id = res;
-
+                                                if(res == 1){
+                                                    alert("리워드 주문 확정 완료!! 주문 확정 진행!!");
+                                                    
                                                     $.ajax({
-                                                        url: "./AJAXupdateFundingRewardOrder?funding_order_id="+$funding_order_id,
+                                                        url: "./AJAXupdateFundingOrder?funding_order_id="+$funding_order_id,
                                                         method: "PATCH",
-                                                        data: JSON.stringify({delivery_recipient_id:$delivery_recipient_id, used_fg: 1, status: 3 }), // JSON 문자열로 데이터 직렬화 //status:3 -> 3는 결제완료 의미
+                                                        data: JSON.stringify({ used_fg: 1, funding_order_status_id: 3 }), // JSON 문자열로 데이터 직렬화 //funding_order_status_id:3 -> 3는 결제완료 의미
                                                         contentType: "application/json", // Content-Type 헤더 설정 
                                                         success: function(res){
                                                             if(res == 1){
-                                                                alert("리워드 주문 확정 완료!! 주문 확정 진행!!");
-                                                                
-                                                                $.ajax({
-                                                                    url: "./AJAXupdateFundingOrder?funding_order_id="+$funding_order_id,
-                                                                    method: "PATCH",
-                                                                    data: JSON.stringify({ used_fg: 1, funding_order_status_id: 3 }), // JSON 문자열로 데이터 직렬화 //funding_order_status_id:3 -> 3는 결제완료 의미
-                                                                    contentType: "application/json", // Content-Type 헤더 설정 
-                                                                    success: function(res){
-                                                                        if(res == 1){
-                                                                            alert("주문 확정 완료!!");
-                                                                            location.href = "./fundingCompletePaymentPage?funding_order_id="+$funding_order_id;
-                                                                        }
-                                                                    }
-                                                                });
+                                                                alert("주문 확정 완료!!");
+                                                                location.href = "./fundingCompletePaymentPage?funding_order_id="+$funding_order_id;
                                                             }
                                                         }
                                                     });
-                    
-                    
                                                 }
                                             }
                                         });
+        
+                    
+                                          
+                                           
 
                                     }
                                 });
@@ -383,9 +438,81 @@ function addCommas(num){
     return str;
 };
 
+function getDefaultAddress(user_id){
+    $("#addressSection").empty();
+
+    $.ajax({
+        url: "./AJAXgetDefaultAddress",
+        method: "GET",
+        data: {user_id:user_id},
+        success: function(res){
+            if(res != ""){
+                var default_fg;
+                var delivery_recipient_id;
+                var name;
+                var phone;
+                var address_post;
+                var address_default;
+                var address_detail;
+                $.each(res,function(key,value){
+                    if(key == "default_fg"){
+                        default_fg = value;
+                    }
+
+                    if(key == "delivery_recipient_id"){
+                        delivery_recipient_id = value;
+                    }
+
+                    if(key == "name"){
+                        name = value;
+                    }
+
+                    if(key == "phone"){
+                        phone = value;
+                    }
+
+                    if(key == "address_post"){
+                        address_post = value;
+                    }
+
+                    if(key == "address_default"){
+                        address_default = value;
+                    }
+
+                    if(key == "address_detail"){
+                        address_detail = value;
+                    }
+
+                    if(key == "request_message"){
+                        var addressExtraOrigin = address_default.match(/\(([^)]+)\)/);
+                        var address_extra = addressExtraOrigin[0];
+                        address_default = address_default.replace(address_extra,"");
+
+                        $("<li><span>받는분</span>"+name+"</li>").appendTo("#addressSection");
+                        $("<li><span>전화번호</span>"+formatPhoneNumber(phone)+"</li>").appendTo("#addressSection");
+                        $("<li><span>우편번호</span>"+address_post+"</li>").appendTo("#addressSection");
+                        $("<li><span>기본주소지</span><ul><li>"+address_default+"</li><li>"+address_extra+"</li></ul></li>").appendTo("#addressSection");
+                        $("<li><span>상세주소</span>"+address_detail+"</li>").appendTo("#addressSection");
+                        $("<li><span>요청사항</span>"+value+"</li>").appendTo("#addressSection");
+                        $("<input type='hidden' class='delivery_recipient_id' value='"+delivery_recipient_id+"'>").appendTo("#addressSection");
+                    }
+                });
+                
+            }else{
+                $("<li><span>받는분</span>-</li>").appendTo("#addressSection");
+                $("<li><span>전화번호</span>-</li>").appendTo("#addressSection");
+                $("<li><span>우편번호</span>-</li>").appendTo("#addressSection");
+                $("<li><span>기본주소지</span><ul><li>-</li><li>-</li></ul></li>").appendTo("#addressSection");
+                $("<li><span>상세주소</span>-</li>").appendTo("#addressSection");
+                $("<li><span>요청사항</span>-</li>").appendTo("#addressSection");
+                $("<input type='hidden' class='delivery_recipient_id' value=''>").appendTo("#addressSection");
+        }
+        }
+    });
+}
 
 function getUserAddressList(user_id){
-    $("#addressSection").empty();
+    $("#addressSelectSection").empty();
     
 
     $.ajax({
@@ -408,7 +535,6 @@ function getUserAddressList(user_id){
                     $.each(item,function(key,value){
                         if(key == "default_fg"){
                             default_fg = value;
-
                         }
 
                         if(key == "delivery_recipient_id"){
@@ -444,7 +570,7 @@ function getUserAddressList(user_id){
                                 $("<li>"+address_detail+"</li>").appendTo(basic);
                                 $("<li>"+formatPhoneNumber(phone)+"</li>").appendTo(basic);
                                 $("<li>"+value+"</li>").appendTo(basic);
-                                basic.appendTo("#addressSection");
+                                basic.prependTo("#addressSelectSection");
                             }else{
                                 $("<input type='hidden' class='delivery_recipient_id' value='"+delivery_recipient_id+"'>").appendTo(ul);
                                 $("<li>"+name+"</li>").appendTo(ul);
@@ -452,13 +578,13 @@ function getUserAddressList(user_id){
                                 $("<li>"+address_detail+"</li>").appendTo(ul);
                                 $("<li>"+formatPhoneNumber(phone)+"</li>").appendTo(ul);
                                 $("<li>"+value+"</li>").appendTo(ul);
-                                ul.appendTo("#addressSection");
+                                ul.appendTo("#addressSelectSection");
                             }
                         }
                     });
                 });
             }else{
-                $("#addressSection").html("<p id='addressEmpty'>등록된 배송지가 없어요 :(<p>");
+                $("#addressSelectSection").html("<p id='addressEmpty'>등록된 배송지가 없어요 :(<p>");
             }
         }
     });
@@ -518,13 +644,55 @@ function getPostcode() {
     }).open();
 }
 
-function insertAddAddress(default_fg,name,phone,address_post,address_default,address_detail,request_message){
+
+
+function insertAddAddress(default_fg,$user_id,name,phone,address_post,address_default,address_detail,request_message){
     $.ajax({
         url: "./AJAXinsertDeliveryRecipient",
         method: "POST",
-        data: {default_fg:default_fg, name:name, phone: phone, address_post:address_post, address_default:address_default, address_detail:address_detail, request_message:request_message},
+        data: {default_fg:default_fg,user_id:$user_id, name:name, phone: phone, address_post:address_post, address_default:address_default, address_detail:address_detail, request_message:request_message},
         success: function(res){
+            // 새로 등록된 주소의 default_fg가 1인 경우 
+            // 기존 기본 주소의 default_fg를 0으로 수정한후 주소목록 불러오기
+            if(default_fg == 1){
+                updateAddressDefaultFg(res,$user_id);
+            }else{
+                $("#recipient_name").val("");
+                $("#address_phone").val("");
+                $("#address_post").val("");
+                $("#address_default").val("");
+                $("#address_detail").val("");
+                $("#request_message").val("");
 
+                getUserAddressList($user_id);
+            }
+
+        }
+    });
+}
+
+function updateAddressDefaultFg(delivery_recipient_id,$user_id){
+    $.ajax({
+        url: "./AJAXupdateAddressDefaultFg?delivery_recipient_id="+delivery_recipient_id,
+        method: "PATCH",
+        contentType: "application/json",
+        data: JSON.stringify({user_id:$user_id,default_fg:0}),
+        success: function(res){
+            if(res != 0){ //res가 0인 경우 실패, 1인 경우 성공
+                alert("기본 배송지 등록 성공!");
+
+                $("#addressAddModal>ul>li:first-child").removeClass("checked");
+                $("#recipient_name").val("");
+                $("#address_phone").val("");
+                $("#address_post").val("");
+                $("#address_default").val("");
+                $("#address_detail").val("");
+                $("#request_message").val("");
+
+                getUserAddressList($user_id);
+            }else{
+                alert("기본 배송지 변경에 실패했습니다. 다시 등록해주세요.");
+            }
         }
     });
 }
