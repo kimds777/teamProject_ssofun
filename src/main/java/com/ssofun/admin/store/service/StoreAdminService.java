@@ -151,7 +151,7 @@ public class StoreAdminService {
 		public void productUpdate(ProductDto productDto) {
 		    storeAdminSqlMapper.productUpdate(productDto);
 		}
-		// 상품Used_Fg 0 
+		// 상품삭제
 		public void productDelete(ProductDto productDto) {
 			storeAdminSqlMapper.productDelete(productDto);
 		}

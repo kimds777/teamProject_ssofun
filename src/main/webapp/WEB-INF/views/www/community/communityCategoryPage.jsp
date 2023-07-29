@@ -40,9 +40,13 @@
 					</c:if>
 <table class="table table-hover">
 		<!-- 사이드바 -->
-        <c:forEach items="${communityCategoryList}" var="communityCategoryList">
-			<div><a href="./communityCategoryPage?community_category_id=${communityCategoryList.community_category_id}">${communityCategoryList.name}</a></div>
-        </c:forEach>
+    <c:forEach items="${communityCategoryList}" var="communityCategory">
+        <div>
+            <a href="./communityCategoryPage?community_category_id=${communityCategory.community_category_id}">
+                ${communityCategory.name}
+            </a>
+        </div>
+    </c:forEach>
 
     <thead>
         <tr>
