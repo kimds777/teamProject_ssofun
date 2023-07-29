@@ -323,9 +323,9 @@
 		
 		                                    <div class="row mt-5">
 		                                        <div class="col-1" id="image_container"></div>
-		                                        <div class="col-3 mt-2 textcenter" id="thumbnail_container" >
+		                                        <div class="col-3 mt-2 textcenter"  >
                                                     <div class="row">
-                                                    	<div class="col-3" ></div>
+                                                    	<div class="col" ></div>
                                                     </div>
                                              
 		                                          <!--<img src="/resources/companyManagement/companyperson.jpg" alt="대표자" width="100px" height="100px"  style=" border-radius: 30%;">-->  
@@ -338,7 +338,7 @@
 		                                        	</div>
 		                                        	<div class="row mt-2">
 		                                        		<div class="col">
-		                                           			 <input type="file" id="file_input_id" multiple accept="image/*">
+		                                           			 <input type="file" id="qna_image_file" multiple accept="image/*">
 		                            					</div>
 		                                        	</div>
 		                                        </div>
@@ -359,7 +359,7 @@
 		                            		<div class="row mt-2">
 		                                        <div class="col-1"><p class="star"></p></div>
 		                            			<div class="col-3 textcenter">
-		                            				<p class="companyfont"><span class="star" style="color: ;">*</span> 대표자명</p>
+		                            				<p class="companyfont"><span class="star" >*</span> 대표자명</p>
 		                            			</div>
 		                            			<div class="col">
 		                                            <input type="text" name="biz_ceo"  class="form-control" placeholder="대표자명 입력해주세요." aria-label="companyName">

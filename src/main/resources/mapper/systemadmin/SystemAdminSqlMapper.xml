@@ -54,7 +54,7 @@
 	
 
 	<select id="selectQnaByNonAnswer" resultType="com.ssofun.dto.QnaDto">
-		select * from tb_qna where answer_contents is null order by qna_id
+		select * from tb_qna where answer_contents is null and biz_id is null order by qna_id
 	</select>
 	
 	

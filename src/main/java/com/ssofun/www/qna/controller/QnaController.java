@@ -162,7 +162,7 @@ public class QnaController {
 	@RequestMapping("qnaMain")
 	public String qnaMain(HttpSession session, Model model) {
 		UserDto sessionUser= (UserDto)session.getAttribute("user");
-		
+		session.setAttribute("user", sessionUser);
 	
 		List<QnaDto> qnaList = qnaListsProcess(model, session);
 		
