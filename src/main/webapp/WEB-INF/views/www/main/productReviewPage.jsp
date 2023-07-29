@@ -80,7 +80,7 @@
 				<div id="contents">
 					<div id="leftBorder">
 						<div id="subTitle">
-							<h5>리뷰관리</h5>
+							<h5>리뷰작성</h5>
 						</div>
 						<div id="list">
 							<!--리스트 영역-->

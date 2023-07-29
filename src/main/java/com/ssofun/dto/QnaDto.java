@@ -6,7 +6,7 @@ public class QnaDto {
 	private int qna_id;
 	private int admin_id;
 	private int user_id;
-	private int qna_category_id;
+	private int biz_id;
 	private String title;
 	private String contents;
 	private String answer_contents;
@@ -16,13 +16,13 @@ public class QnaDto {
 	public QnaDto() {
 		super();
 	}
-	public QnaDto(int qna_id, int admin_id, int user_id, int qna_category_id, String title, String contents,
+	public QnaDto(int qna_id, int admin_id, int user_id, int biz_id, String title, String contents,
 			String answer_contents, Date answer_created_at, Date created_at, int used_fg) {
 		super();
 		this.qna_id = qna_id;
 		this.admin_id = admin_id;
 		this.user_id = user_id;
-		this.qna_category_id = qna_category_id;
+		this.biz_id = biz_id;
 		this.title = title;
 		this.contents = contents;
 		this.answer_contents = answer_contents;
@@ -48,11 +48,11 @@ public class QnaDto {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public int getQna_category_id() {
-		return qna_category_id;
+	public int getBiz_id() {
+		return biz_id;
 	}
-	public void setQna_category_id(int qna_category_id) {
-		this.qna_category_id = qna_category_id;
+	public void setBiz_id(int biz_id) {
+		this.biz_id = biz_id;
 	}
 	public String getTitle() {
 		return title;
@@ -90,6 +90,7 @@ public class QnaDto {
 	public void setUsed_fg(int used_fg) {
 		this.used_fg = used_fg;
 	}
+	
 	
 
 }

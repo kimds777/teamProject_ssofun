@@ -62,7 +62,7 @@
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd>
-							<a href="">주문 / 배송조회</a><i class="bi bi-caret-right-fill"></i>
+							<a href="">주문문의</a><i class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 					</dl>
@@ -80,12 +80,12 @@
 				<div id="contents">
 					<div id="leftBorder">
 						<div id="subTitle">
-							<h5>리뷰관리</h5>
+							<h5>문의하기</h5>
 						</div>
 						<div id="list">
 							<!--리스트 영역-->
 
-							<form action="./productReviewProcess" class="mb-3" id="myform" method="post"
+							<form action="./productQnaProcess" class="mb-3" id="myform" method="post"
 								enctype="multipart/form-data">
 								<div class="my-review">
 									<div class="review-table">
@@ -94,28 +94,26 @@
 												style="width: 80px; height: 80px;">
 										</div>
 										<div class="pname">${rev.product_name }</div>
-										<div>
-
-											<fieldset>
-												<span class="text-bold">별점을 선택해주세요</span> 
-													<input type="radio" name="rate" value="5" id="rate1"><label for="rate1">★</label> 													
-													<input type="radio" name="rate" value="4" id="rate2"><label for="rate2">★</label> 
-													<input type="radio" name="rate" value="3" id="rate3"><label for="rate3">★</label> 
-													<input type="radio" name="rate"	value="2" id="rate4"><label for="rate4">★</label> 
-													<input type="radio" name="rate" value="1" id="rate5"><label for="rate5">★</label>
-											</fieldset>
-
-
+										
+									</div>
+									
+									<div class="detail-review">
+										<div class="review-table">
+											<div class="re-title">문의 제목</div>
+											<div class="re-content">
+												<textarea class="col-auto form-control" id="reviewtitle" name="title"
+												placeholder="제목을 입력해 주세요."	></textarea>
+											</div>
 										</div>
 									</div>
+									
 
 									<div class="detail-review">
 										<div class="review-table">
-											<div class="re-title">상세 리뷰</div>
+											<div class="re-title">문의 내용</div>
 											<div class="re-content">
 												<textarea class="col-auto form-control" id="reviewContents" name="contents"
-													placeholder="다른 고객님에게 도움이 되도록 상품에 대한 솔직한 평가를 남겨주세요.	
-(상품 품질과 관계 없는 배송, 포장, 질문 응대, 상품 가격 등은 판매자 서비스 평가에 남겨주세요.)"></textarea>
+												placeholder="내용을 입력해 주세요."	></textarea>
 											</div>
 										</div>
 									</div>
@@ -135,7 +133,9 @@
 									</div>
 									
 									<div class="review-register">
-										<input type="hidden" name="product_order_item_id" id="product_Order_Id" readonly/>
+									<input type="hidden" name="admin_id" value="${rev.admin_id }" readonly/>
+									<input type="hidden" name="biz_id" value="${rev.biz_id }" readonly/>
+										<input type="hidden" name="poiID" id="product_Order_Id" readonly/>
 										<a href="./orderListPage"><input type="button" class="cancel-button" value="취소하기"></a>
 										<button class="submit-button">등록하기</button>
 									</div>

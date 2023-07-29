@@ -1,6 +1,6 @@
 package com.ssofun.www.store.service;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -220,6 +220,11 @@ public class StoreServiceImpl {
 	public List<ProductReviewDto> getreview(ProductReviewDto prDto){
 		List<ProductReviewDto>review = storeSqlMapper.selectByReview(prDto);
 		return review;
+	}
+	
+	// 문의하기 입력
+	public void registQna(QnaDto qDto) {
+		storeSqlMapper.insertQna(qDto);
 	}
 	
 	// 장바구니 구매후 물품제거

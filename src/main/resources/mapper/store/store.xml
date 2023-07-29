@@ -254,18 +254,16 @@
 	<!-- 리뷰 -->
 	<select id="selectReview" resultType="com.ssofun.dto.ProductOrderItemDto">
 		SELECT   po.product_order_id, tu.user_id, tp.product_id, MIN(tpt.name) AS thumbnail_name, tp.name AS product_name, tp.price_sale,
-    	poi.count, poi.created_at, tpos.name AS order_status_name, tdr.name AS recipient_name,tdr.phone AS recipient_phone,
-    	tdr.address_post, tdr.address_default, tdr.address_detail, tdr.request_message
+    	poi.count, poi.created_at, ta.admin_id, tb.biz_id
 		FROM
 	    tb_product_order_item AS poi
 	    INNER JOIN tb_product_order AS po ON poi.product_order_id = po.product_order_id
 	    INNER JOIN tb_product AS tp ON poi.product_id = tp.product_id
 	    INNER JOIN tb_product_thumbnail AS tpt ON tp.product_id = tpt.product_id
 	    INNER JOIN tb_user AS tu ON po.user_id = tu.user_id
-	    INNER JOIN tb_product_order_status AS tpos ON poi.product_order_status_id = tpos.product_order_status_id
-	    INNER JOIN tb_delivery_recipient AS tdr ON poi.delivery_recipient_id = tdr.delivery_recipient_id
-		WHERE
-		    poi.used_fg=1 AND poi.product_order_item_id = #{product_order_item_id}
+        INNER JOIN tb_admin AS ta ON tp.admin_id= ta.admin_id
+        INNER JOIN tb_biz AS tb ON ta.biz_id= tb.biz_id
+		WHERE poi.used_fg=1 AND poi.product_order_item_id = #{product_order_item_id};
 	</select>
 	
 	<!-- 주소 출력 -->
@@ -333,6 +331,17 @@
 	<update id="reUpdate">
 		UPDATE tb_product_review SET used_fg=0 WHERE product_order_item_id=#{product_order_item_id}
 	</update>
+	
+	<!-- 문의하기 입력 -->
+	<insert id="insertQna">
+		insert into tb_qna(admin_id, user_id, biz_id, title, contents)values(
+			#{admin_id},
+			#{user_id},
+			#{biz_id},
+			#{title},
+			#{contents}
+			)
+	</insert>
 	<!-- 아래는 테스트 코드 -->
 	
 	<!-- <insert id="insert">

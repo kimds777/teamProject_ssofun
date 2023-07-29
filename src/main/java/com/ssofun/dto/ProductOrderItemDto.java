@@ -29,6 +29,7 @@ public class ProductOrderItemDto {
 	private String address_detail; // 상세주소
 	private String request_message; // 배송요청사항
 	private int admin_id; // 관리자ID
+	private int biz_id; // bizID 
 	private int delivery_id; // 발송ID
 	private String invoice_no; // 운송장번호
 	private Date delivery_created_at; // 발송일
@@ -43,7 +44,7 @@ public class ProductOrderItemDto {
 			int used_fg, String biz_name, String category_type_name, String product_name, String thumbnail_name,
 			int price, int price_sale, String order_status_name, String recipient_name, String recipient_phone,
 			String address_post, String address_default, String address_detail, String request_message, int admin_id,
-			int delivery_id, String invoice_no, Date delivery_created_at, String delivery_company_name) {
+			int biz_id, int delivery_id, String invoice_no, Date delivery_created_at, String delivery_company_name) {
 		super();
 		this.product_order_item_id = product_order_item_id;
 		this.product_order_id = product_order_id;
@@ -68,6 +69,7 @@ public class ProductOrderItemDto {
 		this.address_detail = address_detail;
 		this.request_message = request_message;
 		this.admin_id = admin_id;
+		this.biz_id = biz_id;
 		this.delivery_id = delivery_id;
 		this.invoice_no = invoice_no;
 		this.delivery_created_at = delivery_created_at;
@@ -258,6 +260,14 @@ public class ProductOrderItemDto {
 		this.admin_id = admin_id;
 	}
 
+	public int getBiz_id() {
+		return biz_id;
+	}
+
+	public void setBiz_id(int biz_id) {
+		this.biz_id = biz_id;
+	}
+
 	public int getDelivery_id() {
 		return delivery_id;
 	}
@@ -290,6 +300,7 @@ public class ProductOrderItemDto {
 		this.delivery_company_name = delivery_company_name;
 	}
 
+	
 	
 	
 	

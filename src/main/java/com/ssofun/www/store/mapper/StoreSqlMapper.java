@@ -1,5 +1,6 @@
 package com.ssofun.www.store.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -103,6 +104,9 @@ public interface StoreSqlMapper {
 	
 	// 리뷰 수정후 이전 리뷰 제거
 	public void reUpdate(ProductReviewDto prDto);
+	
+	// 문의하기 입력
+	public void insertQna(QnaDto qDto);
 	
 	//테스트상품등록
 	public void insertByItem(ProductDto productDto);

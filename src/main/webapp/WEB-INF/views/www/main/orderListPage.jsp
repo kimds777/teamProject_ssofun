@@ -55,7 +55,7 @@
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd class="click">
-							<a class="click" href="">주문 / 배송조회</a><i
+							<a class="click" href="">문의내역</a><i
 								class="bi bi-caret-right-fill click"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
@@ -157,7 +157,7 @@
 																							</c:otherwise>
 																						</c:choose>
 																						<button class="btn-qna" type="button"
-																									onclick="location.href='./productReviewPage?id=${innerItem.product_order_item_id }' ">
+																									onclick="location.href='./productQnaPage?id=${innerItem.product_order_item_id }' ">
 																									문의하기</button>
 
 																					</div>

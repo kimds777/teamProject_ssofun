@@ -340,7 +340,7 @@ public class StoreController {
 		storeService.reupdate(reDto);
 		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		int id = (int) sessionUser.getUser_id();
-		reDto.setUser_id(id);
+		reDto.setUser_id(id);	
 		
 		int totalFiles = imageFiles.length; // 등록된 이미지 파일의 총 개수
 
@@ -377,13 +377,30 @@ public class StoreController {
 		return "redirect:./orderListPage";
 	}
 	
-	//리뷰관리페이지
+	//문의하기
 	@RequestMapping("productQnaPage")
 	public String productQnaPage(Model model, int id) {
 		ProductOrderItemDto rev = storeService.getReview(id);
+
 		model.addAttribute("rev", rev);
 		return "www/main/productQnaPage";
 	}
+	
+	//문의하기 작성 처리
+	@RequestMapping("productQnaProcess")
+	public String productQnaProcess(Model model,HttpSession session,MultipartFile[] imageFiles, QnaDto qDto,int poiID) {
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
+
+		qDto.setUser_id(id);
+										
+		
+		storeService.registQna(qDto);
+		return "redirect:./orderListPage";
+	}
+	
+	
+	
 
 	@RequestMapping("userMyPage")
 	public String userMyPage() {
