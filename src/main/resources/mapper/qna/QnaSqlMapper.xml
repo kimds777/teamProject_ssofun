@@ -17,8 +17,8 @@
 
 <!-- qna유저글작성 -->
 	<insert id="insertQna">
-	 	INSERT INTO tb_qna(user_id ,qna_category_id ,title, contents,created_at,used_fg)
-		VALUES(#{user_id},1,#{title},#{contents}, now(),1)
+	 	INSERT INTO tb_qna(user_id ,title, contents,created_at,used_fg)
+		VALUES(#{user_id},#{title},#{contents}, now(),1)
 	</insert>
 	
 	

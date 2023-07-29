@@ -42,7 +42,7 @@ public class SystemAdminController {
 //		
 //		AdminDto sessionSystemAdmin= systemAdminService.getAdminByIdAndPw(adminDto);
 //	
-//		int user_id = sessionUser.getUser_id();
+//		int user_id = user.getUser_id();
 //	
 //		if (sessionSystemAdmin == null) {		
 //			return 0;

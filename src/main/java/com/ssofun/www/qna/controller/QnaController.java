@@ -40,8 +40,8 @@ public class QnaController {
 	@RequestMapping("loginProcess")
 	public int loginProcess(HttpSession session, UserDto userDto) {
 		
-		
-		UserDto sessionUser= qnaService.getUserByEmailAndPw(userDto);
+		UserDto user = (UserDto) session.getAttribute("user");
+		UserDto sessionUser= qnaService.getUserByEmailAndPw(user);
 	
 //		int user_id = sessionUser.getUser_id();
 	
@@ -62,14 +62,20 @@ public class QnaController {
 	@RequestMapping("customerServiceMainPage")
 	public String customerServiceMainPage(HttpSession session) {
 		
-		//로그인유지 UserDto userDto =(UserDto)session.getAttribute("sessionUser");
+		UserDto userDto =(UserDto)session.getAttribute("user");
+		session.setAttribute("userDto", userDto);
+		
+		System.out.println(session.getAttribute("userDto.user_id"));
+		
 		
 		return"www/qna/customerServiceMainPage";
 	}
 	
 
 	@RequestMapping("writeQnaPage")
-	public String writeQnaPage() {
+	public String writeQnaPage(HttpSession session) {
+		UserDto userDto =(UserDto)session.getAttribute("user");
+		session.setAttribute("userDto", userDto);
 		return "www/qna/writeQnaPage";
 	}
 
@@ -139,8 +145,8 @@ public class QnaController {
 	//
 	public List<QnaDto> qnaListsProcess(Model model, HttpSession session ) {
 		
-		session.getAttribute("sessionUser");
-		int userId = (int)((UserDto)session.getAttribute("sessionUser")).getUser_id();
+		session.getAttribute("user");
+		int userId = (int)((UserDto)session.getAttribute("user")).getUser_id();
 	
 			List<QnaDto> qnaList = qnaService.getQnaList(userId);
 			if(model != null) {
@@ -155,7 +161,7 @@ public class QnaController {
 	//login
 	@RequestMapping("qnaMain")
 	public String qnaMain(HttpSession session, Model model) {
-		UserDto sessionUser= (UserDto)session.getAttribute("sessionUser");
+		UserDto sessionUser= (UserDto)session.getAttribute("user");
 		
 	
 		List<QnaDto> qnaList = qnaListsProcess(model, session);

@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -19,16 +20,61 @@
 <style>
 
 
-
-
-
-
-
-
-
-
-
 </style>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 필요한 스타일시트와 스크립트를 추가하세요. -->
+</head>
+
+<body>
+    <!-- 파일 업로드 입력란 -->
+    <input type="file" id="file_input_id">
+    <!-- 썸네일을 보여줄 이미지 요소 -->
+    <div id="thumbnail_container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 파일 입력 요소 가져오기
+            var fileInput = document.getElementById("file_input_id");
+            // 썸네일 컨테이너 요소 가져오기
+            var thumbnailContainer = document.getElementById("thumbnail_container");
+
+            // 파일이 선택되었을 때 썸네일 생성 및 보여주기
+            fileInput.addEventListener("change", function (event) {
+                var file = event.target.files[0];
+
+                // FileReader를 사용하여 파일을 읽습니다.
+                var reader = new FileReader();
+
+                reader.onload = function (event) {
+                    // 썸네일 이미지 요소 생성 및 설정
+                    var thumbnailImage = document.createElement("img");
+                    thumbnailImage.src = event.target.result;
+                    thumbnailImage.classList.add("thumbnail"); // 썸네일에 스타일을 적용하려면 클래스를 추가할 수 있습니다.
+
+                    // 썸네일을 감싸는 div 요소 생성 및 스타일 설정
+                    var thumbnailDiv = document.createElement("div");
+                    thumbnailDiv.style.width = "100px"; // 썸네일의 가로 크기
+                    thumbnailDiv.style.height = "100px"; // 썸네일의 세로 크기
+                    thumbnailDiv.style.borderRadius = "30%"; // 원형으로 표현하기 위한 border-radius
+                    thumbnailDiv.style.overflow = "hidden"; // 이미지를 넘치지 않도록 설정
+                    thumbnailDiv.appendChild(thumbnailImage);
+
+                    // 썸네일을 썸네일 컨테이너에 추가합니다.
+                    thumbnailContainer.innerHTML = ""; // 기존 썸네일 삭제
+                    thumbnailContainer.appendChild(thumbnailDiv);
+                };
+
+                // 파일을 Data URL로 변환하여 썸네일 생성
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+</body>
+
+</html>
 
 
 
@@ -40,12 +86,7 @@
 </head>
 
 <body>
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col">상단 네비-->
-                <!-- <jsp:include page="../../include/systemAdminNavi.jsp"></jsp:include>
-            </div>
-        </div> --> 
+ 
 
 
 
@@ -281,9 +322,13 @@
 		                            	<div class="col">
 		
 		                                    <div class="row mt-5">
-		                                        <div class="col-1"></div>
-		                                        <div class="col-3 mt-2 textcenter" >
-		                                            <img src="/resources/companyManagement/companyperson.jpg" alt="대표자" width="100px" height="100px"  style=" border-radius: 30%;">
+		                                        <div class="col-1" id="image_container"></div>
+		                                        <div class="col-3 mt-2 textcenter" id="thumbnail_container" >
+                                                    <div class="row">
+                                                    	<div class="col-3" ></div>
+                                                    </div>
+                                             
+		                                          <!--<img src="/resources/companyManagement/companyperson.jpg" alt="대표자" width="100px" height="100px"  style=" border-radius: 30%;">-->  
 		                                        </div>
 		                                        <div class="col">
 		                                        	<div class="row mt-2">
@@ -293,7 +338,7 @@
 		                                        	</div>
 		                                        	<div class="row mt-2">
 		                                        		<div class="col">
-		                                           			 <input type="file" id="qna_image_id" multiple accept="image/*">
+		                                           			 <input type="file" id="file_input_id" multiple accept="image/*">
 		                            					</div>
 		                                        	</div>
 		                                        </div>
@@ -451,6 +496,8 @@
 
 
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
