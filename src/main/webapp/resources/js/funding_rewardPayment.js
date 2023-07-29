@@ -1,10 +1,9 @@
 $(document).ready(function(){
     var urlParams = new URLSearchParams(window.location.search);
     var $funding_order_id =  urlParams.get("funding_order_id");
-    var user_id = 2;
-    // var user_id = getUserSession();
+    var user_id = getUserSession();
 
-    // setUserSession();
+    setUserSession();
     getPaymentBeforeFundingOrder($funding_order_id);
     getDefaultAddress(user_id);
     setEventListener($funding_order_id,user_id);
