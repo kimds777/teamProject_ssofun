@@ -443,14 +443,6 @@
 								            </tr>
 								        </thead>
 								        <tbody id="dashboard_product_list">
-								        	<%-- <c:forEach items="${dashboardProductList}" var="dashboardProductList">
-								        		<tr>
-								        			<th scope="row" class="td_No List_td">No.&nbsp;${dashboardProductList.product_id}</th>
-								        			<td class="List_td">${dashboardProductList.name}</td>
-								        			<td class="List_td"><fmt:formatNumber value="${dashboardProductList.price}" type="number" pattern="#,##0"/> 원</td>
-								        			<td class="List_td"><fmt:formatDate value="${dashboardProductList.created_at}" pattern="yyyy-MM-dd" /></td>								                        				                         							                        									                										      										    								                										                
-								              	</tr>
-								           	</c:forEach> --%>
 								     	</tbody>
 								     </table>
 	                                <div class="d-flex row">
@@ -478,14 +470,6 @@
 								            </tr>
 								        </thead>
 								        <tbody id="dashboard_product_orderlist">
-								        	<%-- <c:forEach items="${dashboardProductOrderList}" var="dashboardProductOrderList">
-								        		<tr>
-								        			<th scope="row" class="td_No List_td">No.&nbsp;${dashboardProductOrderList.product_order_item_id}</th>
-								        			<td class="List_td"><fmt:formatDate value="${dashboardProductOrderList.order_created_at}" pattern="yyyy-MM-dd" /></td>
-								        			<td class="List_td">${dashboardProductOrderList.delivery_recipient_name}&nbsp;님</td>
-								        			<td class="List_td">${dashboardProductOrderList.product_name}</td>					                        				                         							                        									                										      										    								                										                
-								              	</tr>
-								           	</c:forEach> --%>
 								     	</tbody>
 								     </table>
 	                                <div class="d-flex row">
@@ -513,14 +497,6 @@
 								            </tr>
 								        </thead>
 								        <tbody id="dashboard_product_reviewList">
-								        	<%-- <c:forEach items="${dashboardproductReviewList}" var="dashboardproductReviewList">
-								        		<tr>
-								        			<th scope="row" class="td_No List_td">No.&nbsp;${dashboardproductReviewList.product_id}</th>
-								        			<td class="List_td">${dashboardproductReviewList.name}</td>
-								        			<td class="List_td">${dashboardproductReviewList.review_cnt}&nbsp;개</td>
-								        			<td class="List_td">${dashboardproductReviewList.review_avg_score}&nbsp;점</td>					                        				                         							                        									                										      										    								                										                
-								              	</tr>
-								           	</c:forEach> --%>
 								     	</tbody>
 								     </table>
 	                                <div class="d-flex row">
