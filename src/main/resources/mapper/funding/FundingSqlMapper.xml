@@ -204,7 +204,7 @@
 		SELECT fo.user_id FROM tb_funding_order fo, tb_funding_reward_order fro, tb_funding_reward fr, tb_funding f
 		WHERE fr.funding_reward_id = fro.funding_reward_id AND f.funding_id = fr.funding_id 
 		AND fro.funding_order_id = fo.funding_order_id AND f.funding_id = #{funding_id}
-		ORDER BY fo.created_at DESC)
+		ORDER BY fo.created_at DESC LIMIT 1)
 		ORDER BY fo.created_at DESC LIMIT 3
 	</select>
 	
