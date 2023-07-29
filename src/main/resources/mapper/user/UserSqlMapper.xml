@@ -122,8 +122,10 @@
 	</select>
 	
 	
-	
-	
+	<!-- 유저 핸드폰 번호 변경 -->
+	<update id="updateUserPhone">
+		UPDATE tb_user SET phone = #{userDto.phone} WHERE user_id = #{user_id}
+	</update>
 	
 	
 	

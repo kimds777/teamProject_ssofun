@@ -335,6 +335,16 @@ public class UserServiceImpl {
 		return userSqlMapper.selectDday(funding_id);
 	}
 
+	
+	// 핸드폰 번호 수정
+	public int updateUserPhone(long user_id, UserDto params) {
+		if(user_id != 0 && params != null) {
+			userSqlMapper.updateUserPhone(user_id,params);
+			return 1;
+		}
+		return 0;
+	}
+
 
 
 

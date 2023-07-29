@@ -1,15 +1,38 @@
 $(document).ready(function(){
     var urlParams = new URLSearchParams(window.location.search);
     var $funding_order_id =  urlParams.get("funding_order_id");
-    var user_id = 1;  // 유저아이디 수정 필요 세션으로 받아야함
+    var user_id = 2;
+    // var user_id = getUserSession();
 
+    // setUserSession();
     getPaymentBeforeFundingOrder($funding_order_id);
     getDefaultAddress(user_id);
     setEventListener($funding_order_id,user_id);
+    getUserInfo(user_id);
 });
 
 function setEventListener($funding_order_id,user_id){
 
+    $(document).on("click","#phoneAddBtn",function(e){
+        e.stopPropagation();
+        var userPhone = $("#userPhone").val();
+        var userPhoneLenght = userPhone.length;
+        var userPhoneMatch = userPhone.match(/[^0-9]/g);
+
+        if(userPhone == ""){
+            return alert("연락처를 입력해주세요.");
+        }
+
+        if(userPhoneLenght != 11){
+            return alert("연락처를 11자리로 입력해주세요.");
+        }
+
+        if(userPhoneMatch){
+            return alert("연락처에 숫자만 입력해주세요.");
+        }
+
+        updateUserPhone(user_id,userPhone);
+    });
 
     $(document).on("click","#addressInputBtn",function(event){
         event.stopPropagation(); 
@@ -692,6 +715,101 @@ function updateAddressDefaultFg(delivery_recipient_id,$user_id){
                 getUserAddressList($user_id);
             }else{
                 alert("기본 배송지 변경에 실패했습니다. 다시 등록해주세요.");
+            }
+        }
+    });
+}
+
+
+function setUserSession(){
+    $.ajax({
+        url: "../user/AJAXsetUserSession",
+        method: "GET",
+        success: function(res){
+            if(res == 0){
+                alert("세션이 종료되어 로그아웃되었습니다.");
+                window.location.href = "../user/userLoginPage";
+            }
+        }
+    });
+}
+
+
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        method: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+       return 0;
+    }
+}
+
+
+function getUserInfo(user_id){
+    $("#supporterInfo>ul").empty();
+
+    $.ajax({
+        url: "../user/AJAXgetUserInfo",
+        method: "GET",
+        data: {user_id:user_id},
+        success: function(res){
+            if(res != ""){
+                var ul = $("#supporterInfo>ul");
+                var name;
+                var phone;
+                $.each(res,function(key,value){
+                    if(key == "name"){
+                        name = value;
+                    }
+                    if(key == "phone"){
+                        phone = value;
+                    }
+
+                    if(key == "email"){
+                        if(phone != null){
+                            $("<li><span>이메일</span><span id='userEmail'>"+value+"</span></li>").appendTo(ul);
+                            $("<li><span>이름</span><span id='userName'>"+name+"</span></li>").appendTo(ul);
+                            $("<li><span>연락처</span><span id='userPhone'>"+formatPhoneNumber(phone)+"</span></li>").appendTo(ul);
+                        }else{
+                            $("<li><span>이메일</span><span id='userEmail'>"+value+"</span></li>").appendTo(ul);
+                            $("<li><span>이름</span><span id='userName'>"+name+"</span></li>").appendTo(ul);
+                            $("<li id='phoneInput'><span>연락처</span><input type='text' id='userPhone' placeholder='- 없이 입력해주세요.'><input type='button' id='phoneAddBtn' value='등록'></li>").appendTo(ul);
+                        }
+                    }
+                });
+            }
+        }
+    });
+}
+
+
+function updateUserPhone(user_id,phone){
+    $.ajax({
+        url: "../user/AJAXupdateUserPhone?user_id="+user_id,
+        method: "PATCH",
+        contentType: "application/json",
+        data: JSON.stringify({phone:phone}),
+        success: function(res){
+            if(res != 0){
+                alert("연락처가 등록되었습니다.");
+                getUserInfo(user_id);
+            }else{
+                alert("연락처 등록이 실패하였습니다. 다시 시도해주세요.")
             }
         }
     });

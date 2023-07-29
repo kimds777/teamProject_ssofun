@@ -67,6 +67,11 @@ public interface UserSqlMapper {
 	//---남은 펀딩기간 조회
 	public int selectDday(long funding_id);
 	
+	
+	
+	//---유저 핸드폰 번호 수정
+	public void updateUserPhone(@Param("user_id") long user_id, @Param("userDto") UserDto userDto);
+	
 
 
 }

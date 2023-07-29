@@ -103,9 +103,9 @@
                     <li><span>이메일</span><span id="userEmail">zoro030@naver.com</span></li>
                     <li><span>이름</span><span id="userName">김아무개</span></li>
                     <li><span>연락처</span><span id="userPhone">010-0000-0000</span></li>
+                    <li id="phoneInput"><span>연락처</span><input type="text" id="userPhone" placeholder="'-' 없이 입력해주세요."><input type="button" id="phoneAddBtn" value="등록"></li>
                     <!-- <li><span>이메일</span> zoro030@naver.com</li>
                     <li><span>이름</span><input type="text" name="name" id="name"></li>
-                    <li><span>연락처</span><input type="text" name="phone" id="phone "></li>
                     <li><input type="button" value="인증번호 전송" id="phoneAuthBtn"></li>
                     <li class="hide"><input type="text" name="phoneAuth" id="phoneAuth" placeholder="확인번호"></li>
                     <li class="hide"><input type="button" value="인증번호 확인" id="phoneAuthCheckBtn"><input type="button" value="재전송" id="authAgainBtn" class=""></li> -->
