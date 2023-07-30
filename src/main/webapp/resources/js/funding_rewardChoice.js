@@ -2,13 +2,14 @@ $(document).ready(function(){
     var urlParams = new URLSearchParams(window.location.search);
     var $funding_id =  urlParams.get("funding_id");
     var funding_reward_id =  urlParams.get("funding_reward_id");
+    var user_id = getUserSession();
     
+    setUserSession();
     getFundingDto($funding_id,funding_reward_id);
-    setEventListener($funding_id);
+    setEventListener($funding_id,user_id);
 });
 
-function setEventListener($funding_id){
-    var user_id = getUserSession();
+function setEventListener($funding_id,user_id){
 
     $(document).on("click","#rewardGroup>.reward>ul:first-of-type",function(e){
         e.stopPropagation(); 
@@ -108,13 +109,26 @@ function setEventListener($funding_id){
     
 }
 
+function setUserSession(){
+    $.ajax({
+        url: "../user/AJAXsetUserSession",
+        method: "GET",
+        success: function(res){
+            if(res == 0){
+                alert("세션이 종료되어 로그아웃되었습니다.");
+                window.location.href = "../user/userLoginPage";
+            }
+        }
+    });
+}
+
 
 function getUserSession(){
     var user_id;
 
     $.ajax({
         url: "../user/AJAXgetUserSession",
-        metho: "GET",
+        method: "GET",
         async: false,
         success: function(res){
             if(res != null){

@@ -249,7 +249,7 @@ public class MakerServiceImpl {
 	public long insertDelivery(long funding_order_id,DeliveryDto deliveryDto) {
 		long delivery_recipient_id = makerSqlMapper.selectDeliveryRecipientId(funding_order_id);
 
-		deliveryDto.setDelivery_recipient_id(delivery_recipient_id);		
+		deliveryDto.setDelivery_recipient_id((int)delivery_recipient_id);		
 		
 		return makerSqlMapper.insertDelivery(deliveryDto);
 	}

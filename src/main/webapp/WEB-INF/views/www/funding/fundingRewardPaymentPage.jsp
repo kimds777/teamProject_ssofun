@@ -36,13 +36,14 @@
 
     <div class="section hide" id="addressSelectModal">
         <h6>배송지 변경</h6>
-        <div id="addressSection">
-            <ul class="basic">
+        <div id="addressSelectSection">
+            <!-- <ul class="basic">
                 <li>기본</li>
                 <li>김다슬</li>
                 <li>경기도 파주시 미래로 602 (와동동, 휴먼시아 가람마을)</li>
                 <li>상세주소 적어주시면 됩니다.</li>
                 <li>010-0000-0000</li>
+                <li>요청사항 적어주시면 됩니다.</li>
             </ul>
             
             <ul>
@@ -50,13 +51,8 @@
                 <li>경기도 파주시 미래로 602 (와동동, 휴먼시아 가람마을)</li>
                 <li>상세주소 적어주시면 됩니다.</li>
                 <li>010-0000-0000</li>
-            </ul>
-            <ul>
-                <li>김다슬</li>
-                <li>경기도 파주시 미래로 602 (와동동, 휴먼시아 가람마을)</li>
-                <li>상세주소 적어주시면 됩니다.</li>
-                <li>010-0000-0000</li>
-            </ul>
+                <li>요청사항 적어주시면 됩니다.</li>
+            </ul> -->
         </div>
 
         <p id="showAddressAddModalBtn">배송지 추가</p>
@@ -107,9 +103,9 @@
                     <li><span>이메일</span><span id="userEmail">zoro030@naver.com</span></li>
                     <li><span>이름</span><span id="userName">김아무개</span></li>
                     <li><span>연락처</span><span id="userPhone">010-0000-0000</span></li>
+                    <li id="phoneInput"><span>연락처</span><input type="text" id="userPhone" placeholder="'-' 없이 입력해주세요."><input type="button" id="phoneAddBtn" value="등록"></li>
                     <!-- <li><span>이메일</span> zoro030@naver.com</li>
                     <li><span>이름</span><input type="text" name="name" id="name"></li>
-                    <li><span>연락처</span><input type="text" name="phone" id="phone "></li>
                     <li><input type="button" value="인증번호 전송" id="phoneAuthBtn"></li>
                     <li class="hide"><input type="text" name="phoneAuth" id="phoneAuth" placeholder="확인번호"></li>
                     <li class="hide"><input type="button" value="인증번호 확인" id="phoneAuthCheckBtn"><input type="button" value="재전송" id="authAgainBtn" class=""></li> -->
@@ -132,6 +128,7 @@
                     </li>
                     <li><span>상세주소</span>이편한세상 102동 1105호</li>
                     <li><span>요청사항</span>문 앞에 보관해주세요.</li>
+                    <input type="hidden" value="" id="delivery_recipient_id">
                 </ul>
             </div>
 

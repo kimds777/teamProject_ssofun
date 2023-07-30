@@ -29,15 +29,15 @@
                         <li class="firstText">덕질가방,</li>
                         <li class="lastText">이젠 크로스백으로!</li>
                     </ul>
-                    <img src="../../resources/img/bag.webp" alt="">
+                    <img src="../../resources/img/덕질가방_메인.png" alt="">
                 </a></li>
                 <li><a href="">
                     <ul class="bannerText">
-                        <li class="icon">NEW</li>
-                        <li class="firstText">덕질가방,</li>
-                        <li class="lastText">이젠 크로스백으로!</li>
+                        <li class="icon">HOT</li>
+                        <li class="firstText">그리므아 시리즈2</li>
+                        <li class="lastText">솔로몬의 열쇠</li>
                     </ul>
-                    <img src="../../resources/img/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/그라므아_메인.png" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
@@ -45,55 +45,55 @@
                         <li class="firstTextWhite">원석 마법 도감</li>
                         <li class="lastTextWhite">누구나 마법이 필요한 순간이 있다</li>
                     </ul>
-                    <img src="../../resources/img/원석마법도감_main.webp" alt="">
+                    <img src="../../resources/img/원석마법도감_메인.png" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="iconWhite">HOT</li>
+                        <li class="firstTextWhite">내 이야기에 살인 사건이!</li>
+                        <li class="lastTextWhite">범죄수사물 자료집</li>
+                    </ul>
+                    <img src="../../resources/img/범죄수사물_메인.png" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
                         <li class="icon">NEW</li>
-                        <li class="firstText">덕질가방,</li>
-                        <li class="lastText">이젠 크로스백으로!</li>
+                        <li class="firstText">당신에게 위로를</li>
+                        <li class="lastText">행운의 늘복이 머그잔</li>
                     </ul>
-                    <img src="../../resources/img/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/늘복이_메인.png" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="iconWhite">NEW</li>
+                        <li class="firstTextWhite">바다거북수프 조선 실화판</li>
+                        <li class="lastTextWhite">조선 검시관의 사건일지</li>
+                    </ul>
+                    <img src="../../resources/img/조선검시관_메인.png" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
                         <li class="icon">NEW</li>
-                        <li class="firstText">덕질가방,</li>
-                        <li class="lastText">이젠 크로스백으로!</li>
+                        <li class="firstText">시험인증원단</li>
+                        <li class="lastText">시원한 압박 손목 보호대</li>
                     </ul>
-                    <img src="../../resources/img/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/압박손목보호대_메인.png" alt="">
+                </a></li>         
+                <li><a href="">
+                    <ul class="bannerText">
+                        <li class="iconWhite">NEW</li>
+                        <li class="firstTextWhite">돌아온 신 사전 시리즈</li>
+                        <li class="lastTextWhite">그리스 로마 신 사전</li>
+                    </ul>
+                    <img src="../../resources/img/신사전_메인.png" alt="">
                 </a></li>         
                 <li><a href="">
                     <ul class="bannerText">
                         <li class="icon">NEW</li>
-                        <li class="firstText">덕질가방,</li>
-                        <li class="lastText">이젠 크로스백으로!</li>
+                        <li class="firstText">에로스와 프시케의 사랑을</li>
+                        <li class="lastText">담은 아이싱쿠키</li>
                     </ul>
-                    <img src="../../resources/img/덕질가방3.webp" alt="">
-                </a></li>         
-                <li><a href="">
-                    <ul class="bannerText">
-                        <li class="icon">NEW</li>
-                        <li class="firstText">덕질가방,</li>
-                        <li class="lastText">이젠 크로스백으로!</li>
-                    </ul>
-                    <img src="../../resources/img/덕질가방3.webp" alt="">
-                </a></li>         
-                <li><a href="">
-                    <ul class="bannerText">
-                        <li class="icon">NEW</li>
-                        <li class="firstText">덕질가방,</li>
-                        <li class="lastText">이젠 크로스백으로!</li>
-                    </ul>
-                    <img src="../../resources/img/덕질가방3.webp" alt="">
-                </a></li>         
-                <li><a href="">
-                    <ul class="bannerText">
-                        <li class="icon">NEW</li>
-                        <li class="firstText">덕질가방,</li>
-                        <li class="lastText">이젠 크로스백으로!</li>
-                    </ul>
-                    <img src="../../resources/img/덕질가방3.webp" alt="">
+                    <img src="../../resources/img/아이싱쿠키_메인.png" alt="">
                 </a></li>             
             </ul>
         </div>

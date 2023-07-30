@@ -90,11 +90,15 @@ i.activeCheckBox{color: #ff6462;}
 #supporterInfo>h6{width: 100%;  font-weight: bold; font-size: 16px; height: 30px; line-height: 19px; padding-bottom: 11px; margin-bottom: 0;}
 #supporterInfo>ul{padding: 0; margin-bottom: 60px; background-color: #f7f7f7; border-radius: 5px; padding: 18px 15px;}
 #supporterInfo>ul>li{color: #333333; width: 100%; height: 20px; line-height: 20px; margin-bottom: 12px;} 
+#supporterInfo>ul>li#phoneInput{height: 35px; line-height: 35px;}
+
 #supporterInfo>ul>li>span{display: inline-block; width: 85px; font-size: 15px; color: #555555; font-weight: bold;}
 #supporterInfo>ul>li:last-child{margin-bottom: 0;}
 
 #supporterInfo>ul>li>span#userEmail, #supporterInfo>ul>li>span#userName, #supporterInfo>ul>li>span#userPhone{width: 230px; font-weight: normal;}
-#supporterInfo>ul>li>input[type=text]{border-radius: 5px; border: 1px solid #bfbfbf; width: 200px; height: 35px; padding: 10px 20px 10px 20px; font-size: 12px;}
+#supporterInfo>ul>li>input[type=text]{border-radius: 5px; border: 1px solid #bfbfbf; width: 200px; height: 35px; padding: 10px; font-size: 14px;}
+#supporterInfo>ul>li#phoneInput>input[type=text]{width: 173px; margin-right: 7px;}
+#supporterInfo>ul>li#phoneInput>input[type=button]{font-size: 13px; width: 50px; height: 35px; border-radius: 5px; background-color: #d8d8d8; border: none;}
 /* #supporterInfo>ul>li:nth-child(4)>input{width: 115px; font-size: 12px; line-height: 35px; border: 1px solid #666666; color: #666666; background-color: white; border-radius: 5px;}
 #supporterInfo>ul>li:nth-child(4), #supporterInfo>ul>li:nth-child(5), #supporterInfo>ul>li:last-child{padding-left: 111px;}
 #supporterInfo>ul>li:last-child{margin: 0;}
@@ -107,13 +111,13 @@ i.activeCheckBox{color: #ff6462;}
 #deliveryInfo>#addressInputBtn{border: none; border-radius: 3px; padding: 2px 9px; font-size: 12px; line-height: 30px; position: absolute; right: 13px; top: 42px; background-color: #d8d8d8;}
 #deliveryInfo>ul{padding: 0; width: 100%; padding: 18px 20px;  background-color: #f7f7f7; border-radius: 5px;}
 #deliveryInfo>ul>li{font-size: 15px; height: 19px; line-height: 19px; margin-bottom: 12px; color: #555555;}
-#deliveryInfo>ul>li:last-child{margin-bottom: 0;}
 
 #deliveryInfo>ul>li>span{display: inline-block; width: 80px; text-align: left; margin-right: 27px; font-weight: bold;}
 #deliveryInfo>ul>li:nth-child(4){height: 47px; position: relative;}
 #deliveryInfo>ul>li:nth-child(4)>ul{padding: 0; margin: 0; position: absolute; top: 0; left: 107px;}
 #deliveryInfo>ul>li:nth-child(4)>ul>li:first-child{margin-bottom: 8px;}
 
+#deliveryInfo>ul>li:last-of-type{margin-bottom: 0;}
 
 
 

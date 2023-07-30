@@ -204,7 +204,7 @@
 		SELECT fo.user_id FROM tb_funding_order fo, tb_funding_reward_order fro, tb_funding_reward fr, tb_funding f
 		WHERE fr.funding_reward_id = fro.funding_reward_id AND f.funding_id = fr.funding_id 
 		AND fro.funding_order_id = fo.funding_order_id AND f.funding_id = #{funding_id}
-		ORDER BY fo.created_at DESC)
+		ORDER BY fo.created_at DESC LIMIT 1)
 		ORDER BY fo.created_at DESC LIMIT 3
 	</select>
 	
@@ -432,8 +432,8 @@
 	
 	<!-- 주문 결제건 택배 수령인 정보 입력 -->
 	<insert id="insertDeliveryRecipient" parameterType="com.ssofun.dto.DeliveryRecipientDto" keyProperty="delivery_recipient_id">
-		INSERT INTO tb_delivery_recipient(default_fg,name,phone,address_post,address_default,address_detail,request_message)
-		VALUE(#{default_fg},#{name},#{phone},#{address_post},#{address_default},#{address_detail},#{request_message})
+		INSERT INTO tb_delivery_recipient(default_fg,user_id,name,phone,address_post,address_default,address_detail,request_message)
+		VALUE(#{default_fg},#{user_id},#{name},#{phone},#{address_post},#{address_default},#{address_detail},#{request_message})
 		
 		<!-- PK 조회를 위한 selectKey -->
 		<selectKey keyProperty="delivery_recipient_id" resultType="java.lang.Long" order="AFTER">
@@ -443,9 +443,24 @@
 	
 	<!-- 배송지 리스트 출력 -->
 	<select id="selectUserAddressList" resultType="com.ssofun.dto.DeliveryRecipientDto">
+		SELECT * FROM tb_delivery_recipient
+		WHERE user_id = #{user_id} AND used_fg = 1
+	</select>
+	<!-- <select id="selectUserAddressList" resultType="com.ssofun.dto.DeliveryRecipientDto">
 		SELECT dr.* FROM tb_delivery_recipient dr, tb_funding_reward_order fro, tb_funding_order fo, tb_user u
 		WHERE dr.delivery_recipient_id = fro.delivery_recipient_id AND fro.funding_order_id = fo.funding_order_id
 		AND fo.user_id = u.user_id AND dr.used_fg = 1 AND u.user_id = #{user_id}
+	</select> -->
+	
+	<!-- 기존 기본 배송지 default_fg 수정 -->
+	<update id="updateAddressDefaultFg">
+		UPDATE tb_delivery_recipient SET default_fg = #{deliveryRecipientDto.default_fg}
+		WHERE delivery_recipient_id != #{delivery_recipient_id} AND default_fg = 1 AND user_id = #{deliveryRecipientDto.user_id}
+	</update>
+	
+	<!-- 기본 배송지 출력 -->
+	<select id="selectDefaultAddressByUserId" resultType="com.ssofun.dto.DeliveryRecipientDto">
+		SELECT * FROM tb_delivery_recipient
+		WHERE user_id = #{user_id} AND used_fg = 1 AND default_fg = 1
 	</select>
-
 </mapper>

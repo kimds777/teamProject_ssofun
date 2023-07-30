@@ -327,8 +327,12 @@ public class FundingServiceImpl {
 //	배송지 정보 리스트 출력
 	public List<DeliveryRecipientDto> getUserAddressList(long user_id) {
 		List<DeliveryRecipientDto> recipientList = fundingSqlMapper.selectUserAddressList(user_id);
-		
-		return null;
+		return recipientList;
+	}
+	
+//	기본 배송지 출력
+	public DeliveryRecipientDto getDefaultAddress(long user_id) {
+		return fundingSqlMapper.selectDefaultAddressByUserId(user_id);
 	}
 	
 //	펀딩 결제 진행전 주문 정보 입력 -> 리워드별 주문 정보도 같이 입력
@@ -416,6 +420,15 @@ public class FundingServiceImpl {
 		return deliveryRecipientDto.getDelivery_recipient_id();
 	}
 	
+//	배송지 default_fg 수정
+	public int updateAddressDefaultFg(long delivery_recipient_id, DeliveryRecipientDto params) {
+		if(delivery_recipient_id != 0) {
+			fundingSqlMapper.updateAddressDefaultFg(delivery_recipient_id,params);
+			return 1;			
+		}else {
+			return 0; 
+		}
+	}
 	
 //	펀딩 결제 완료된 주문 정보 조회 -> 리워드별 조회도 진행 -> 아이템 리스트도 조회
 	public FundingOrderDto selectFundingOrder(long funding_order_id) {
@@ -439,6 +452,10 @@ public class FundingServiceImpl {
 		
 		return fundingOrderDto;
 	}
+
+
+
+
 
 
 

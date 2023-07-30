@@ -95,6 +95,12 @@ public class UserController {
 		return userService.getUserByUserId(user_id);
 	}
 	
+	@ResponseBody
+	@RequestMapping("AJAXgetUserInfo")
+	public UserDto AJAXgetUserInfo(long user_id) {
+		return userService.getUserByUserId(user_id);
+	}
+	
 	//유저 이메일 변경
 	@ResponseBody
 	@RequestMapping("AJAXupdateEmail")
@@ -170,7 +176,7 @@ public class UserController {
 	
 //	세션 받아서 프론트로 보내기 ----------------------------------------------------------------------------------------------------------
 	
-	// 유저 세션 확인후 보내기
+	// 유저 세션 확인후 유저 아이디 보내기
 	@ResponseBody
 	@RequestMapping("AJAXgetUserSession")
 	public Long AJAXgetUserSession(HttpSession session) {
@@ -180,6 +186,18 @@ public class UserController {
 			return userDto.getUser_id();
 		}else {			
 			return null;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("AJAXsetUserSession")
+	public int AJAXsetUserSession(HttpSession session) {
+		UserDto userDto =  (UserDto) session.getAttribute("user");
+		if(userDto != null) {
+			session.setAttribute("user", userDto);
+			return 1;
+		}else {			
+			return 0;
 		}
 	}
 	
@@ -243,6 +261,13 @@ public class UserController {
 		return userService.getDday(funding_id);
 	}
 	
+	
+	// 연락처 수정
+	@ResponseBody
+	@RequestMapping("AJAXupdateUserPhone")
+	public int AJAXupdateUserPhone(@RequestParam("user_id") long user_id, @RequestBody UserDto params) {
+		return userService.updateUserPhone(user_id,params);
+	}
 
 	
 	

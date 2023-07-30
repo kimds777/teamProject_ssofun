@@ -7,6 +7,30 @@ $(document).ready(function(){
 
 });
 
+function setEventListener($funding_order_id,user_id){
+
+    $(document).on("click","#header>div>div>a#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+
+}
+
+function logout(){
+    $.ajax({
+        url: "../user/AJAXlogout",
+        method: "GET",
+        success: function(res){
+            if(res == 1){
+                alert("로그아웃 성공!");
+                window.location.href = "http://localhost:8181/www/www/funding/fundingMainPage";
+            }else{
+                alert("이미 로그아웃 되어있습니다.");
+            }
+        }
+    });
+}
+
 function moveLeft(){
     var banners = $("#bannerList>li");
     var bannerCount = banners.length-3; //배너 8개 보임 8개는 만들어야함

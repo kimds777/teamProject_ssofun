@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class UserDto {
 	private long user_id;
-	private long user_phone_auth_id;
+	private String phone;
+//	private long user_phone_auth_id;
 	private String name;
 	private String email;
 	private String password;
@@ -23,11 +24,14 @@ public class UserDto {
 	public UserDto() {
 	}
 
-	public UserDto(long user_id, long user_phone_auth_id, String name, String email, String password, String token,
-			int gender, Date birth, String nickname, int agree_sms) {
+
+
+
+	public UserDto(long user_id, String phone, String name, String email, String password, String token, int gender,
+			Date birth, String nickname, int agree_sms) {
 		super();
 		this.user_id = user_id;
-		this.user_phone_auth_id = user_phone_auth_id;
+		this.phone = phone;
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -39,15 +43,19 @@ public class UserDto {
 	}
 
 
-	public long getUser_phone_auth_id() {
-		return user_phone_auth_id;
+
+
+	public String getPhone() {
+		return phone;
 	}
 
 
 
-	public void setUser_phone_auth_id(long user_phone_auth_id) {
-		this.user_phone_auth_id = user_phone_auth_id;
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
+
 
 
 
@@ -143,12 +151,17 @@ public class UserDto {
 		this.nickname = nickname;
 	}
 
+
+
+
 	@Override
 	public String toString() {
-		return "UserDto [user_id=" + user_id + ", user_phone_auth_id=" + user_phone_auth_id + ", name=" + name
-				+ ", email=" + email + ", password=" + password + ", token=" + token + ", gender=" + gender + ", birth="
-				+ birth + ", nickname=" + nickname + ", agree_sms=" + agree_sms + "]";
+		return "UserDto [user_id=" + user_id + ", phone=" + phone + ", name=" + name + ", email=" + email
+				+ ", password=" + password + ", token=" + token + ", gender=" + gender + ", birth=" + birth
+				+ ", nickname=" + nickname + ", agree_sms=" + agree_sms + "]";
 	}
+
+
 	
 	
 	
