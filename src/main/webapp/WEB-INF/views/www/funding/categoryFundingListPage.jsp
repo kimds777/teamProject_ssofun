@@ -24,13 +24,12 @@
 
         <!--배너 영역-->
         <div class="row section" id="main-banner">
-            <div class="col fs-2">메인 배너 영역 1200 x 200</div>                
+            <img src="../../resources/img/ssofun_list_banner.png" alt="">                
         </div>
 
         <!--카테고리 영역-->
-        <ul class="row section d-flex justify-content-around p-0" id="category">
-<!--        <li class="col"><a href="#"><i class="bi bi-arrow-through-heart-fill"></i>카테고리</a></li>-->
-        </ul>
+        <div class="section" id="category">
+        </div>
         
         <!--활성화된 카테고리 리스트 영역-->
         <div class="row section" id="category-list">

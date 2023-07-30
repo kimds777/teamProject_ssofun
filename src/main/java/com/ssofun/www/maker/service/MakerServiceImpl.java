@@ -246,7 +246,7 @@ public class MakerServiceImpl {
 	}
 	
 //	배송 정보 입력
-	public long insertDelivery(long funding_order_id,DeliveryDto deliveryDto) {
+	public int insertDelivery(long funding_order_id,DeliveryDto deliveryDto) {
 		long delivery_recipient_id = makerSqlMapper.selectDeliveryRecipientId(funding_order_id);
 
 		deliveryDto.setDelivery_recipient_id((int)delivery_recipient_id);		

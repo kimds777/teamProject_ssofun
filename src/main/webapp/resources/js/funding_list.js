@@ -111,9 +111,7 @@ function getFundingList(pageNum,$funding_category_id){
         data: {pageNum:pageNum !== null ? pageNum : null,
             funding_category_id:$funding_category_id},
         success: function(res){
-            // if(res == null){
-            //     return $("#list").html("<div class='noFunding'>등록된 상품이 없습니다</div>");
-            // }
+
             $.each(res,function(index,item){
                 var $a;
                 var $achievementPrice;
@@ -200,31 +198,37 @@ function getCategoryList(clickCategory){
         url: "./getCategoryListAjax",
         method: "GET",
         success: function(res){
+            var ul = $("<ul></ul>");
             $.each(res,function(index,item){
-                var $li = $("<li></li>").addClass("col");
+                var $li = $("<li></li>");
                 var $cateId;
+                var image_url;
                 $.each(item, function(key,value){
                     if(key == "funding_category_id"){
-                        return $cateId = value;
+                        $cateId = value;
+                    }
+                    
+                    if(key == "image_url"){
+                        image_url = value;
                     }
                     if(key == "name"){
                         if($cateId == clickCategory){
                             $li.addClass('active-cate');
-                            return $("<a href='./categoryFundingListPage?funding_category_id="+$cateId+"'><i class='bi bi-arrow-through-heart-fill'></i>"+value+"</a>").appendTo($li);
-                        }
-                        if($cateId == 1 && clickCategory == null){
+                            $("<a href='./categoryFundingListPage?funding_category_id="+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            
+                        }else if($cateId == 1 && clickCategory == null){
                             $li.addClass('active-cate');
-                            return $("<a href='./fundingListPage'><i class='bi bi-arrow-through-heart-fill'></i>"+value+"</a>").appendTo($li);
+                            $("<a href='./fundingListPage'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            
+                        }else{
+                            $("<a href='./categoryFundingListPage?funding_category_id="+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
                         }
-                        // if($cateId == 1){
-                        //     return $("<a href='./fundingListPage'><i class='bi bi-arrow-through-heart-fill'></i>"+value+"</a>").appendTo($li);
-                        // }
-
-                        return $("<a href='./categoryFundingListPage?funding_category_id="+$cateId+"'><i class='bi bi-arrow-through-heart-fill'></i>"+value+"</a>").appendTo($li);
                     }
                 });
-                $('#category').append($li);
+                $li.appendTo(ul);
             });
+            $('#category').append(ul);
+            $("#category>ul").width((res.length*90));
         }
     });
 };

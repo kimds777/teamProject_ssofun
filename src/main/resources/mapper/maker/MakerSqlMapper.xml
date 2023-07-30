@@ -177,7 +177,7 @@
 		VALUES(#{delivery_company_id},#{delivery_status_id},#{delivery_recipient_id})
 		
 		<!-- PK 조회를 위한 selectKey-->
-		<selectKey keyProperty="delivery_id" resultType="java.lang.Long" order="AFTER">
+		<selectKey keyProperty="delivery_id" resultType="int" order="AFTER">
 		  SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>

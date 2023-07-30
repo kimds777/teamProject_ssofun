@@ -22,11 +22,14 @@
 
         <!--배너 영역-->
         <div class="row section" id="main-banner">
-            <div class="col fs-2">메인 배너 영역 1200 x 200</div>                
+            <img src="../../resources/img/ssofun_list_banner.png" alt="">                
         </div>
 
         <!--카테고리 영역-->
-        <ul class="row section d-flex justify-content-around p-0" id="category">
+        <div class="section" id="category">
+
+        </div>
+        <!-- <ul class="row section d-flex justify-content-around p-0" > -->
 <!--        <li class="col"><a href="#"><i class="bi bi-arrow-through-heart-fill"></i>카테고리</a></li>-->
         </ul>
         
@@ -48,7 +51,7 @@
                         <option value="76">75&#37; &#126; 100&#37;</option>
                         <option value="101">100&#37; 이상</option>
                     </select>
-                </div>
+                </div> 
 
                 <div class="row d-flex m-0" id="list">
                     <!-- <a href="#">

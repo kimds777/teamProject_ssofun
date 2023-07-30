@@ -92,7 +92,7 @@ public interface MakerSqlMapper {
 	//---배송사 리스트 조회
 	public List<DeliveryCompanyDto> selectDeliveryCompanyList();
 	//---배송 입력(배송사+배송주소+배송상태)
-	public long insertDelivery(DeliveryDto deliveryDto);
+	public int insertDelivery(DeliveryDto deliveryDto);
 	//---배송 상태 이름 출력
 	public DeliveryStatusDto selectDeliveryStatus(long delivery_recipient_id);
 	//---배송 상태 아이디 출력

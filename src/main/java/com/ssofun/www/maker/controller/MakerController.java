@@ -245,7 +245,7 @@ public class MakerController {
 	//주문 발주 버튼 클릭 -> 배송 정보 입력
 	@ResponseBody
 	@RequestMapping("AJAXinsertDelivery")
-	public long AJAXinsertDelivery(long funding_order_id, DeliveryDto params) {
+	public int AJAXinsertDelivery(long funding_order_id, DeliveryDto params) {
 		return makerService.insertDelivery(funding_order_id,params);
 	}
 	

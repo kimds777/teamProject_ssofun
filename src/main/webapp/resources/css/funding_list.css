@@ -12,12 +12,14 @@ a{text-decoration: none; color: black;}
 .logobox{width: 111px; margin-right: 30px;}
 #header>div>div>a{line-height: 100px;}*/
 
-#main-banner{height: 200px; overflow: hidden;}
-#main-banner>div{background-color: black; color: white; line-height: 200px;}
+#main-banner{height: 200px; overflow: hidden; position: relative;}
+#main-banner>img{width: 100%; position: absolute; top: 0; left: 0; padding: 0;}
 
-#category{margin-top: 28px; margin-bottom: 55px; overflow: hidden;}
-#category>li>a{font-size: 10px;}
-#category>li>a>i{display: block; font-size: 30px; margin: 0 auto;}
+#category{margin-top: 28px; margin-bottom: 55px; overflow: hidden; height: 60px;}
+#category>ul{padding: 0; width: 1300px; height: 60px;} 
+#category>ul>li{width: 90px; float: left; height: 60px; padding: 5px 0;}
+#category>ul>li>a{font-size: 10px;}
+#category>ul>li>a>img{display: block; width: 30px; height: 30px; margin: 0 auto;}
 
 #category-list{overflow: hidden;}
 #category-list>div>div>select{width: 81px; height: 25px; font-size: 5px; margin-bottom: 20px;border-radius: 3px;border: 1px solid #BFBFBF;}

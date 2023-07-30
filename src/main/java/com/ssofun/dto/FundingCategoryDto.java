@@ -2,8 +2,8 @@ package com.ssofun.dto;
 
 public class FundingCategoryDto {
 	private long funding_category_id;
-	private String name;
 	private String image_url;
+	private String name;
 	
 	public FundingCategoryDto() {
 		super();
