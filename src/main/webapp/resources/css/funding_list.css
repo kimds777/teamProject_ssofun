@@ -17,7 +17,7 @@ a{text-decoration: none; color: black;}
 
 #category{margin-top: 28px; margin-bottom: 55px; overflow: hidden; height: 60px;}
 #category>ul{padding: 0; width: 1300px; height: 60px;} 
-#category>ul>li{width: 90px; float: left; height: 60px; padding: 5px 0;}
+#category>ul>li{width: 90px; float: left; height: 60px; padding: 2px 0;}
 #category>ul>li>a{font-size: 10px;}
 #category>ul>li>a>img{display: block; width: 30px; height: 30px; margin: 0 auto;}
 

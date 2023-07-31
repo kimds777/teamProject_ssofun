@@ -167,6 +167,7 @@ function setEventListener($funding_order_id,user_id){
         event.stopPropagation();
         var totalAgreeChecked = $("#totalAgree.checked").length;
         var delivery_recipient_id = $("#addressSection>input#delivery_recipient_id").val();
+        alert("delivery_recipient_id: "+delivery_recipient_id);
 
         if(totalAgreeChecked == 0){
             alert("전체 동의후 결제가 진행됩니다.");
@@ -322,9 +323,6 @@ function payment($funding_order_id,$delivery_recipient_id){ //$delivery_recipien
                     alert("결제 성공!!! 결제 정보 입력 실행!"+JSON.stringify(data));
                     
                     var $token = "b068c276cfbaabb6a1020150348545ddb9cb4eab"; // 콜백용 token값 설정
-                    
-                    alert("token: "+$token+", amount: "+$amount);
-                    // var $token = data.token; // 웹훅용 model값 가져오기
 
                     $.ajax({
                         url: "./AJAXinsertPayment",
@@ -332,18 +330,15 @@ function payment($funding_order_id,$delivery_recipient_id){ //$delivery_recipien
                         data: {token:$token,amount:$amount},
                         success:function(res){
                             if(res != 0 ){
-                                console.log("결제 정보 입력 성공!! 펀딩 주문 결제 정보 입력 실행!");
-                                var payment_id = res; // model값 가져오기
-                                alert("payment_id: "+payment_id+", funding_order_id: "+$funding_order_id);
+
+                                var payment_id = res;
 
                                 $.ajax({
                                     url: "./AJAXinsertOrderPayment",
                                     method: "POST",
                                     data: {payment_id:payment_id, funding_order_id:$funding_order_id},
                                     success: function(res){
-                                        alert("주문 결제 정보 입력 성공!!! 배송 수령인 정보 입력 실행!!");
-                                        alert("name: "+buyerName+", phone: "+buyerTel+", address_post: "+buyerPostcode+", address_default: "+defaultAddr+", address_detail: "+detailAddr+", request_message: "+requestMessage);
-                                        
+
 
                                         $.ajax({
                                             url: "./AJAXupdateFundingRewardOrder?funding_order_id="+$funding_order_id,
@@ -352,7 +347,6 @@ function payment($funding_order_id,$delivery_recipient_id){ //$delivery_recipien
                                             contentType: "application/json", // Content-Type 헤더 설정 
                                             success: function(res){
                                                 if(res == 1){
-                                                    alert("리워드 주문 확정 완료!! 주문 확정 진행!!");
                                                     
                                                     $.ajax({
                                                         url: "./AJAXupdateFundingOrder?funding_order_id="+$funding_order_id,
@@ -535,7 +529,7 @@ function getDefaultAddress(user_id){
                         $("<li><span>기본주소지</span><ul><li>"+address_default+"</li><li>"+address_extra+"</li></ul></li>").appendTo("#addressSection");
                         $("<li><span>상세주소</span>"+address_detail+"</li>").appendTo("#addressSection");
                         $("<li><span>요청사항</span>"+value+"</li>").appendTo("#addressSection");
-                        $("<input type='hidden' class='delivery_recipient_id' value='"+delivery_recipient_id+"'>").appendTo("#addressSection");
+                        $("<input type='hidden' id='delivery_recipient_id' value='"+delivery_recipient_id+"'>").appendTo("#addressSection");
                     }
                 });
                 
@@ -546,7 +540,7 @@ function getDefaultAddress(user_id){
                 $("<li><span>기본주소지</span><ul><li>-</li><li>-</li></ul></li>").appendTo("#addressSection");
                 $("<li><span>상세주소</span>-</li>").appendTo("#addressSection");
                 $("<li><span>요청사항</span>-</li>").appendTo("#addressSection");
-                $("<input type='hidden' class='delivery_recipient_id' value=''>").appendTo("#addressSection");
+                $("<input type='hidden' id='delivery_recipient_id' value=''>").appendTo("#addressSection");
         }
         }
     });

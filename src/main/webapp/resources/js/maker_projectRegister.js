@@ -2,12 +2,10 @@
 $(document).ready(function(){
 
     var user_id = getUserSession(); 
-    alert("user_id: "+user_id);
     
     var user_creator_id = getUserCreatorIdSession();
 
     if(user_creator_id != 0){
-        alert("user_creator_id: "+user_creator_id);
         getCreatorInfo(user_creator_id);
     }
 
@@ -437,7 +435,8 @@ function getFunding(funding_id){
                                     if(value == 1){
                                         $("p#uploadMainThumb").removeClass("hide");
                                         $("<img src='/ssofunUploadFiles/"+url+"' alt=''><span id='mainThumbDelete'>X</span>").appendTo("p#uploadMainThumb");
-                                    }else{
+
+                                    }else{ // 상세 섬네일 어떻게 처리할지 고민중!------------------------
 
                                     }
                                 }
@@ -470,11 +469,12 @@ function getFunding(funding_id){
                         $("#description").val(value);
                     }
                     if(key == "contents"){
-                        $("#contents").html(value);
+                        alert(key+": "+value);
+                        tinymce.activeEditor.setContent(value);
+                        // $("#contents").html(value);
                     }
                     if(key == "rewardList"){
                         $.each(value,function(index,item){
-                            alert(index);
                             var funding_reward_id;
                             var rewardUl = $("<ul class='reward'></ul>");
                             var price;
@@ -673,11 +673,10 @@ function insertTag(user_creator_id){
          data: {name:tagName},
          success: function(res){
              if(res != 0){
-                 alert("태그 등록 성공! funding_tag_id: "+res);
                  funding_tag_id = res;
 
                  var funding_category_id = $("select#funding_category_id>option:selected").val();
-                 alert("funding_category_id: "+funding_category_id);
+
                  var funding_code = generateUniqueProductCode(10);
                  var title = $("#projectTitle").val();
                  var description = $("#description").val();
@@ -689,9 +688,6 @@ function insertTag(user_creator_id){
                      adult_fg = 0;
                  }
                  var delivery_from = $("#delivery_from").val();
-
- 
-                 alert("funding_category_id: "+funding_category_id+", contents: "+contents+", funding_tag_id: "+funding_tag_id+", target_price: "+target_price);
                  
                  $.ajax({
                      url: "./AJAXinsertFunding",
@@ -716,8 +712,6 @@ function insertTag(user_creator_id){
                              var formData = new FormData();
                              var funding_id = res;
                              var mainUrl = $("input#mainUrl")[0].files[0];
-
-                             alert("funding_id: "+funding_id+", mainUrl: "+mainUrl);
                              
                              formData.append("funding_id",funding_id);
                              formData.append("url",mainUrl);
@@ -744,8 +738,6 @@ function insertTag(user_creator_id){
                                  var fundingId = res;
                                  var formDataDetail = new FormData();
                                  var file = files[i]; // 파일에 대한 작업 수행
-
-                                 alert("funding_id: "+funding_id+", url: "+file);
                                  
                                  formDataDetail.append("funding_id",fundingId);
                                  formDataDetail.append("url",file);
@@ -774,6 +766,7 @@ function insertTag(user_creator_id){
                              var rewardLength = $("#rewardList>ul").length;
                              alert("rewardLength: "+rewardLength);             
                              
+                             // 리워드 입력 다시 수정해야함!! ------------------------------------------------------------------------------------
 
                              for(var i = 0; i<rewardLength; i++){
                                  var title = $("#rewardList>ul.reward").eq(i).children("li.rewardTitle").text();
@@ -796,7 +789,6 @@ function insertTag(user_creator_id){
 
                                  var close_at_origin = $("#rewardList>ul.reward").eq(i).children("li.closeDate").text().replace(/[^a-zA-Z0-9-]/g,"");
                                  var close_at = parseDate(close_at_origin);
-                                 // alert("delivery_from_origin: "+delivery_from_origin+", delivery_from: "+delivery_from);
 
                                  
                              
@@ -811,7 +803,6 @@ function insertTag(user_creator_id){
                                  //     buy_count:buy_count,
                                  //     delivery_from:delivery_from
                                  // };
-                                
                                  $.ajax({
                                      url: "./AJAXinsertFundingReward?delivery_from="+delivery_from+"&start_from="+start_from+"&close_at="+close_at,
                                      method: "POST",
@@ -825,47 +816,45 @@ function insertTag(user_creator_id){
                                          buy_count:buy_count
                                      }), // JSON 문자열로 데이터 직렬화 //funding_order_status_id:2 -> 2는 결제완료 의미
                                      contentType: "application/json",
+                                     async: false, //동기적으로 변경
                                      success: function(res){
                                         if(res != 0){
-                                            var r = 0;
-                                             alert("성공!!! funding_reward_id: "+res);
-                                             var funding_reward_id = res;
+                                            
+                                            alert("성공!!! funding_reward_id: "+res);
+                                            var funding_reward_id = res;
+                                               
+                                            var rewardLength = $("#rewardList>ul").length;
 
-                                                
-                                               //for(var k = 0; k<rewardLength; k++){ //이 부분 수정해야함!!!!!! 등록할때 아이템 갯수 오류남!-----------------------------------------------------------------------
-                                                //  var itemLength = $("#rewardList>ul.reward").eq(i).children("li.rewardItemList").children("ul").children("li").length;
-                                                 var itemLength = $("#rewardList>ul:nth-of-type("+(r+1)+")>li.rewardItemList>ul>li").length;
-                                                 alert("rewardLength: "+rewardLength+", itemLength: "+itemLength);
+                                                var itemLength = $("#rewardList>ul:nth-of-type("+(i+1)+")>li.rewardItemList>ul>li").length;
 
-                                                 for(var j = 0; j<itemLength; j++){
+                                                for(var j = 0; j<itemLength; j++){
 
-                                                     var $itemCount_orgin = $("div#rewardList").children("ul.reward").eq(r).children("li.rewardItemList").children("ul").children("li").eq(j).children("span").text();
+                                                    var $itemCount_orgin = $("div#rewardList").children("ul.reward").eq(i).children("li.rewardItemList").children("ul").children("li").eq(j).children("span").text();
+                                                    
+                                                    var itemCount = $itemCount_orgin.replace("개","");
+                                                    var itemName = $("#rewardList").children("ul.reward").eq(i).children("li.rewardItemList").children("ul").children("li").eq(j).text().replace($itemCount_orgin,"");
+                                                    var fundingItemDto = {funding_reward_id:funding_reward_id, name:itemName, count:itemCount};                                                
+                                                    
+
+                                                        $.ajax({
+                                                            url: "./AJAXinsertFundingRewardItem",
+                                                            method: "POST",
+                                                            data: JSON.stringify(fundingItemDto),
+                                                            contentType: "application/json",
+                                                            async: false,
+                                                            success: function(res){
+                                                                if(res == 1){
+                                                                    alert("리워드 아이템 등록 완료!!!");
+                                                                    window.location.href = "../maker/makerProjectRegisterPage?funding_id="+funding_id;
+                                                                    
+                                                                }
+                                                            }
+                                                        });
+
+                                                    
+                                                }
                                                      
-                                                     var itemCount = $itemCount_orgin.replace("개","");
-                                                     var itemName = $("#rewardList").children("ul.reward").eq(r).children("li.rewardItemList").children("ul").children("li").eq(j).text().replace($itemCount_orgin,"");
-
-                                                     // alert(k+"번째 reward의 "+j+"번째 itemCount: "+itemCount+", itemName: "+itemName);
-                                                     
-                                                     var fundingItemDto = {funding_reward_id:funding_reward_id, name:itemName, count:itemCount};
-                                                     alert(i+"번째 reward의 "+j+"번째 "+JSON.stringify(fundingItemDto));
-
- 
-                                                     $.ajax({
-                                                         url: "./AJAXinsertFundingRewardItem",
-                                                         method: "POST",
-                                                         data: JSON.stringify(fundingItemDto),
-                                                         contentType: "application/json",
-                                                         success: function(res){
-                                                             if(res == 1){
-                                                                 alert("리워드 아이템 등록 완료!!!");
-                                                                 r += 1;
-                                                                 window.location.href = "../maker/makerProjectRegisterPage?funding_id="+funding_id;
-                                                                 
-                                                             }
-                                                         }
-                                                     });
-                                                     
-                                                 }
+                                                 
                                              //};
                                          }
                                      }
