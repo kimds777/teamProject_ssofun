@@ -23,12 +23,12 @@ function setEventListener(user_id){
 
     $(document).on("click","#myPageTab>li:first-child",function(e){
         e.stopPropagation();
-        window.location.href = "../user/userMyPage";
+        window.location.href = "../store/userMyPage";
     });
 
     $(document).on("click","#myPageTab>li:first-child>a",function(e){
         e.stopPropagation();
-        window.location.href = "../user/userMyPage";
+        window.location.href = "../store/userMyPage";
     });
     
     $(document).on("click","#myPageTab>li:last-child",function(e){

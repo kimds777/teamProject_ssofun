@@ -34,7 +34,7 @@
             </ul>
             <ul id="userApiLogin">
                 <li id="kakao">
-                    <img src="../../resources/js/img/kimdaseul/user/kakao_logo.png" alt="">
+                    <img src="../../resources/img/kimdaseul/user/kakao_logo.png" alt="">
                 </li>
                 <li id="naver"></li>
                 <li id="google"></li>
