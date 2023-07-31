@@ -1,4 +1,5 @@
 
+
 $(document).ready(function(){
     var user_id = 1;
 
@@ -55,7 +56,7 @@ function getFundingOrderList(user_id){
                                             }
                                             if(key == "image_order"){
                                                 if(value == 1){
-                                                    $("<dt><img src='/ssofunUploadFiles/"+url+"' alt=''></dt>").appendTo(dl);
+                                                    $("<dt><img src='../../resources/img/kimdaseul/funding/"+url+"' alt=''></dt>").appendTo(dl);
                                                 }
                                             }
                                         });

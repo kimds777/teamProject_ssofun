@@ -318,7 +318,7 @@
 	<!-- 대시보드 일별 주문금액 출력 -->
 	<select id="selectDayChartData" resultType="com.ssofun.dto.FundingOrderDto">
 		WITH RECURSIVE date_range AS (
-			SELECT (SELECT DATE(start_from) FROM tb_funding_reward WHERE funding_id = #{funding_id}) AS date_value
+			SELECT (SELECT DATE(start_from) FROM tb_funding_reward WHERE funding_id = #{funding_id} ORDER BY start_from LIMIT 1) AS date_value
 		    UNION ALL
 		    SELECT date_value + INTERVAL 1 DAY
 		    FROM  date_range
@@ -327,8 +327,7 @@
 			]]>
 		)
 		
-		<!-- 결제 내역과 조인하여 결과 출력 // date_range.date_value + INTERVAL 1 DAY AS created_at 이부분 문제없나 확인필요
-		SELECT date_range.date_value + INTERVAL 1 DAY AS created_at, --> 
+		<!-- 결제 내역과 조인하여 결과 출력 // date_range.date_value + INTERVAL 1 DAY AS created_at 이부분 문제없나 확인필요 --> 
 		SELECT date_range.date_value AS created_at, 
 		COALESCE(SUM(tb_funding_order.total_price), 0) AS total_price
 		FROM date_range
@@ -339,7 +338,7 @@
 	<!-- 대시보드 일별 주문금액 누적 출력 -->
 	<select id="selectTotalChartData" resultType="com.ssofun.dto.FundingOrderDto">
 		WITH RECURSIVE date_range AS (
-			SELECT (SELECT DATE(start_from) FROM tb_funding_reward WHERE funding_id = #{funding_id}) AS date_value
+			SELECT (SELECT DATE(start_from) FROM tb_funding_reward WHERE funding_id = #{funding_id} ORDER BY start_from LIMIT 1) AS date_value
 		    UNION ALL
 		    SELECT date_value + INTERVAL 1 DAY
 		    FROM  date_range

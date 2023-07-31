@@ -263,7 +263,7 @@ function getFundingDto($funding_id,$funding_reward_id){
 
                             if(key == "image_order"){
                                 if(value == 1){
-                                    $("#fundingInfo>li:first-child").html("<img src='/ssofunUploadFiles/"+$url+"' alt='리스트 섬네일'>");
+                                    $("#fundingInfo>li:first-child").html("<img src='../../resources/img/kimdaseul/funding/"+$url+"' alt='리스트 섬네일'>");
                                 }
                             }
                         });

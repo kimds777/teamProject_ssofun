@@ -144,7 +144,8 @@ public class MakerServiceImpl {
 			
 			System.out.println("파일명: "+ url.getOriginalFilename());
 			
-			String rootFolder = "c:/ssofunUploadFiles/";
+//			String rootFolder = "c:/ssofunUploadFiles/";
+			String rootFolder = "../../resources/img/kimdaseul/funding/";
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			String today = sdf.format(new Date());
