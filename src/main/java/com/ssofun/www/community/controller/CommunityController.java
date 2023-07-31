@@ -127,6 +127,8 @@ public class CommunityController {
 			
 			Map<String,Object> map = communityService.getCommunity(community_id);
 			
+			List<CommunityCategoryDto> communityCategoryList = communityService.communityCategoryList();
+			
 
 //			// html escape 글 내용 
 //			CommunityDto communityDto = (CommunityDto)map.get("communityDto");
@@ -153,6 +155,7 @@ public class CommunityController {
 
 			model.addAttribute("Commentlist", Commentlist);
 			model.addAttribute("data", map);
+			model.addAttribute("communityCategoryList", communityCategoryList);
 			
 			
 			return "www/community/communityReadPage";
