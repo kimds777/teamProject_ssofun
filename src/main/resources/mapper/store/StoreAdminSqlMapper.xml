@@ -91,7 +91,7 @@
 		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId})
 	)
 	AND tp.used_fg = 1
-	ORDER BY poi.created_at DESC
+	ORDER BY poi.created_at DESC, poi.product_order_item_id DESC
 	LIMIT 5
 </select>
 <!-- 상품리스트(리뷰,평점) -->
