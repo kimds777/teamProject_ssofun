@@ -45,20 +45,20 @@
 			        
 			        
 			   <script>
-    $(document).ready(function() {
-        $('.summernote').summernote({
-            placeholder: '내용을 입력해주세요',
-            tabsize: 2,
-            height: 300
-        });
-
-        $('form').submit(function(event) {
-            // Summernote의 내용을 일반 텍스트로 변환하여 textarea의 값으로 설정
-            var summernoteContent = $('.summernote').summernote('code');
-            $('.summernote').val(summernoteContent);
-        });
-    });
-</script>
+				    $(document).ready(function() {
+				        $('.summernote').summernote({
+				            placeholder: '내용을 입력해주세요',
+				            tabsize: 2,
+				            height: 300
+				        });
+				
+				        $('form').submit(function(event) {
+				            // Summernote의 내용을 일반 텍스트로 변환하여 textarea의 값으로 설정
+				            var summernoteContent = $('.summernote').summernote('code');
+				            $('.summernote').val(summernoteContent);
+				        });
+				    });
+			</script>
 
 			        <div class="text-end">
 			          <button class="btn btn-success" type="submit" style="width: 10%; padding: 5px;">제출</button> 

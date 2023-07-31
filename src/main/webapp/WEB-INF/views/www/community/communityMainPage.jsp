@@ -79,6 +79,11 @@
 	.bi-bell-fill {
   	color: #FF6462;
 	}
+	
+	/*공지사항 리스트 뒷 배경 설정  */
+	.notice-row {
+        background-color: #f3f3f3;
+    }
 
 
 </style>
@@ -137,7 +142,7 @@
 			
 			    <tbody>
 			        <c:forEach items="${communityNoticeListLimit3}" var="notice">
-			            <tr>
+			            <tr class="notice-row">
 			                <td><i class="bi bi-bell-fill"></i></td>
 			                <td>공지사항</td>
 			                <td>
@@ -157,6 +162,7 @@
 			                <td>${notice.communityNoticeDto.read_count}</td>
 			            </tr>
 			        </c:forEach>
+			      
 			
 			        <c:forEach items="${list}" var="community">
 			            <tr>

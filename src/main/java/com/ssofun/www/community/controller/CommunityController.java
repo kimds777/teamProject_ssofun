@@ -128,17 +128,17 @@ public class CommunityController {
 			Map<String,Object> map = communityService.getCommunity(community_id);
 			
 
-			// html escape 글 내용 
-			CommunityDto communityDto = (CommunityDto)map.get("communityDto");
-			String contents = communityDto.getContents();
-			contents = StringEscapeUtils.escapeHtml4(contents);
-			contents = contents.replaceAll("\n", "<br>");
-			communityDto.setContents(contents);
-			
-			// html escape 제목
-			String title = communityDto.getTitle();
-			title = StringEscapeUtils.escapeHtml4(title);
-			communityDto.setTitle(title);
+//			// html escape 글 내용 
+//			CommunityDto communityDto = (CommunityDto)map.get("communityDto");
+//			String contents = communityDto.getContents();
+//			contents = StringEscapeUtils.escapeHtml4(contents);
+//			contents = contents.replaceAll("\n", "<br>");
+//			communityDto.setContents(contents);
+//			
+//			// html escape 제목
+//			String title = communityDto.getTitle();
+//			title = StringEscapeUtils.escapeHtml4(title);
+//			communityDto.setTitle(title);
 
 			// 댓글 리스트
 			List<Map<String, Object>> Commentlist = communityService.communitySelectCommentList(community_id);

@@ -18,16 +18,34 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
     
     <title>커뮤니티</title>
- 
- <style>
- 
- @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-*{margin: 0; padding: 0; list-style: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-weight: 400;}
-	body{position: relative;}
- 
- </style>   
-    
- 
+	
+		 <style>
+		 
+			 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+			*{margin: 0; padding: 0; list-style: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-weight: 400;}
+				body{position: relative;}
+			 
+			 .col-8 .title {
+			    border-top: 2px solid black;
+			    font-size: 1.5rem;
+			    font-weight: bold;
+			}
+			 
+			 .col-8 .read-count {
+			    border-bottom: 1px solid #ccc;
+			}
+			 
+			 
+			 .col-8 .contents {
+			    border-bottom: 1px solid black;
+			      height: 400px; 
+			}
+			 
+		 
+		 
+		 </style>   
+	  
+	 
 </head>
 
 <body>
@@ -54,13 +72,30 @@
 									</div>
 					
 					
+					<!-- 게시글 상세페이지  -->
+					
+					
+					
 					<div class="col-8">
-					제목: ${data.communityDto.title}<br>
+					
+					<p class="title">${data.communityDto.title}</p>
+				    <p class="author">${data.userDto.nickname}</p>
+				    
+				    <!-- 여기에 하단 테두리 추가 -->
+				    <p class="read-count"><fmt:formatDate value="${data.communityDto.created_at}" pattern="yyyy.MM.dd"/>
+					        <i class="bi bi-eye">${data.communityDto.read_count}</p></i>
+					        
+					<!-- 내용 -->
+					<p class="contents">${data.communityDto.contents}</p>
+					
+					
+					
+					<%-- 제목: ${data.communityDto.title}<br>
 					작성자: ${data.userDto.nickname}<br>
 					작성일: <fmt:formatDate value="${data.communityDto.created_at}" pattern="yy.MM.dd"/> <br>
 					조회수: ${data.communityDto.read_count}<br>
 					내용: <br>
-					${data.communityDto.contents}<br>
+					${data.communityDto.contents}<br> --%>
 					
 					<br><br>
 					<a href="./communityMainPage">목록으로</a>
