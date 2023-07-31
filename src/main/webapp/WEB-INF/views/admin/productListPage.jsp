@@ -307,7 +307,7 @@
 									                <th class="c5" scope="col">상품이미지</th>
 									                <th class="c6" scope="col">가격</th>
 									                <th class="c7" scope="col">할인가</th>
-									                <th class="c8" scope="col">상세설명</th>
+									                <!-- <th class="c8" scope="col">상세설명</th> -->
 									                <th class="c9" scope="col">등록일</th>
 									            </tr>
 									        </thead>
@@ -451,7 +451,7 @@ $(document).ready(function() {
                     "<td class='td_1'><img class='img-fluid img-thumbnail' style='width:75px; height:75px;' src='/ssofunUploadFiles/" + productList[i].thumbnail_name + "'></td>" +
                     "<td class='td_1'>" + formatNumber(productList[i].price) + " 원</td>" +
                     "<td class='td_1'>" + formatNumber(productList[i].price_sale) + " 원</td>" +
-                    "<td class='td_1'>" + productList[i].contents + "</td>" +
+                    /* "<td class='td_1'>" + productList[i].contents + "</td>" + */
                     "<td class='td_1'>" + productList[i].created_at + "</td>" +
                     "</tr>";
             }
