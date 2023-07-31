@@ -26,28 +26,40 @@
 				body{position: relative;}
 			 
 			 .col-8 .title {
-			    border-top: 2px solid black;
+			    border-top: 1px solid black;
 			    font-size: 1.5rem;
 			    font-weight: bold;
-			     background-color: #f3f3f3
+			    background-color: #f3f3f3;
+			    padding: 20px 0;
+			     padding-left: 10px;
 			}
 			 
+			 
+				.col-8 .author{
+				   	 background-color: #f3f3f3;
+				   	  padding: 5px 0;
+				   	  padding-left: 10px;
+				   } 
+		   
 			 .col-8 .read-count {
 			    border-bottom: 1px solid #ccc;
-			     background-color: #f3f3f3
+			     background-color: #f3f3f3;
+			     padding-left: 10px;
 			}
 			 
 			 	
-				.col-8 .author {
-		   	 background-color: #f3f3f3
-		   }
-			 
 			 .col-8 .contents {
 			    border-bottom: 1px solid black;
 			      height: 400px; 
+			       padding: 30px 0;
+			        padding-left: 10px;    
 			   
 		 }
 		 
+		 .back-list{
+		 
+		  padding: 30px 0;
+		 }
 		 
 		 </style>   
 	  
@@ -80,31 +92,20 @@
 					
 					<!-- 게시글 상세페이지  -->
 					
-					
-					
 					<div class="col-8">
 					
-					<p class="title">${data.communityDto.title}</p>
-				    <p class="author">${data.userDto.nickname}</p>
+					<div class="title">${data.communityDto.title}</div>
+				    <div class="author">${data.userDto.nickname}</div>
 				    
 				    <!-- 여기에 하단 테두리 추가 -->
-				    <p class="read-count"><fmt:formatDate value="${data.communityDto.created_at}" pattern="yyyy.MM.dd"/>
-					        <i class="bi bi-eye">${data.communityDto.read_count}</p></i>
+				    <div class="read-count"><fmt:formatDate value="${data.communityDto.created_at}" pattern="yyyy.MM.dd"/>
+					        <i class="bi bi-eye">${data.communityDto.read_count}</div></i>
 					        
 					<!-- 내용 -->
-					<p class="contents">${data.communityDto.contents}</p>
+					<div class="contents">${data.communityDto.contents}</div>
 					
-					
-					
-					<%-- 제목: ${data.communityDto.title}<br>
-					작성자: ${data.userDto.nickname}<br>
-					작성일: <fmt:formatDate value="${data.communityDto.created_at}" pattern="yy.MM.dd"/> <br>
-					조회수: ${data.communityDto.read_count}<br>
-					내용: <br>
-					${data.communityDto.contents}<br> --%>
-					
-					<br><br>
-					<a href="./communityMainPage">목록으로</a>
+	
+					<div class = "back-list"><a href="./communityMainPage">목록으로</a></div>
 					
 					<c:if test="${!empty user && user.user_id == data.userDto.user_id}">
 					    <a href="./communityUpdatePage?community_id=${data.communityDto.community_id}">수정</a>
