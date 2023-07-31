@@ -30,7 +30,7 @@
                 <div id="profile">
                     <ul id="first">
                         <li id="profileIcon"><span></span></li>
-                        <li id="makerName">김다슬님</li>
+                        <li id="makerName"></li>
                         <li id="logout">로그아웃</li>
                     </ul>
                     <dl>

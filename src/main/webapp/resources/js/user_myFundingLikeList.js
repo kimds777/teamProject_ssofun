@@ -1,10 +1,9 @@
-
 $(document).ready(function(){
-    var user_id = 1; // getsession function 가져오
-
+    var user_id = getUserSession();
 
     setEventListener();
     getLikeFundingList(user_id);
+    getUserName(user_id);
 
 });
 
@@ -29,7 +28,30 @@ function setEventListener(user_id){
         e.stopPropagation();
         window.location.href = "../maker/makerMyPage";
     });
+    
+    $(document).on("click","#header>div>div>a#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
 
+    $(document).on("click","#first>li#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+
+}
+
+function getUserName(user_id){
+    $.ajax({
+        url: "../user/AJAXgetUserName",
+        method: "GET",
+        data: {user_id:user_id},
+        success: function(res){
+            if(res != ""){
+                $("#makerName").text(res);
+            }
+        }
+    });
 }
 
 function getLikeFundingList(user_id){
@@ -38,7 +60,7 @@ function getLikeFundingList(user_id){
         method: "GET",
         data: {user_id:user_id},
         success: function(res){
-            if(res != null){
+            if(res != ""){
                 $.each(res,function(index,item){
                     var funding_id;
                     var a;
@@ -112,11 +134,37 @@ function getLikeFundingList(user_id){
                 });
                 divHeightSense();
 
+            }else{
+                $("<div id='fundingLikeListEmpty'>찜한 프로젝트가 없습니다 :(</div>").appendTo("#list");
+                divHeightSense();
             }
         }
     });
 }
 
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        metho: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+       return 0;
+    }
+}
 
 function divHeightSense(){
     var divHight =  $('div#myPageSection').height();
@@ -172,6 +220,21 @@ function getDday(funding_id,callback){
     });
 }
 
+
+function logout(){
+    $.ajax({
+        url: "../user/AJAXlogout",
+        method: "GET",
+        success: function(res){
+            if(res == 1){
+                alert("로그아웃 성공!");
+                window.location.href = "http://localhost:8181/www/funding/fundingMainPage";
+            }else{
+                alert("이미 로그아웃 되어있습니다.");
+            }
+        }
+    });
+}
 
 
 

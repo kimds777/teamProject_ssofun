@@ -128,5 +128,9 @@
 	</update>
 	
 	
+	<!-- 창작자 아이디 출력 -->
+	<select id="selectUserCreatorId" resultType="Long">
+		SELECT user_creator_id FROM tb_user_creator WHERE user_id = #{user_id}
+	</select>
 	
 </mapper>

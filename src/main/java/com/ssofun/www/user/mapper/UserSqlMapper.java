@@ -71,6 +71,8 @@ public interface UserSqlMapper {
 	
 	//---유저 핸드폰 번호 수정
 	public void updateUserPhone(@Param("user_id") long user_id, @Param("userDto") UserDto userDto);
+	//---창작자 아이디 출력
+	public Long selectUserCreatorId(long user_id);
 	
 
 

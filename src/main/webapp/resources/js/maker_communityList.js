@@ -1,8 +1,6 @@
 
 $(document).ready(function(){
-    var user_id = getUserSession(); 
-    alert("user_id: "+user_id);
-    
+    var user_id = getUserSession();
     var user_creator_id = getUserCreatorIdSession();
 
     var urlParams = new URLSearchParams(window.location.search);
@@ -15,6 +13,11 @@ $(document).ready(function(){
 });
 
 function setEventListener(user_creator_id,funding_id){
+    
+    $(document).on("click","p#goOut",function(event){
+        event.stopPropagation(); 
+        window.location.href = "../maker/makerMyPage";
+    });
 
     $(document).on("click","li#sidebarHide",function(event){
         event.stopPropagation(); 

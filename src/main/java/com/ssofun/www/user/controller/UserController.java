@@ -37,10 +37,10 @@ public class UserController {
 		return "www/user/userLoginPage";
 	}
 	
-	@RequestMapping("adminLoginPage")
-	public String adminLoginPage() {
-		return "www/user/adminLoginPage";
-	}
+//	@RequestMapping("adminLoginPage")
+//	public String adminLoginPage() {
+//		return "www/user/adminLoginPage";
+//	}
 	
 //	카카오 로그인 영역 -----------------------------------------------------------------------------------------------
 	
@@ -182,7 +182,6 @@ public class UserController {
 	public Long AJAXgetUserSession(HttpSession session) {
 		UserDto userDto =  (UserDto) session.getAttribute("user");
 		if(userDto != null) {
-			System.out.println("user_id: "+userDto.getUser_id());
 			return userDto.getUser_id();
 		}else {			
 			return null;
@@ -204,8 +203,8 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("AJAXgetUserCreatorIdSessoin")
 	public Long AJAXgetUserCreatorIdSessoin(HttpSession session) {
-		Long user_creator_id = (Long) session.getAttribute("user_creator_id");
-		return user_creator_id;
+		UserDto userDto =  (UserDto) session.getAttribute("user");
+		return userService.getUserCreatorId(userDto.getUser_id());
 	}
 	
 	

@@ -344,6 +344,13 @@ public class UserServiceImpl {
 		}
 		return 0;
 	}
+	
+	
+//	창작자 아이디 출력
+	public Long getUserCreatorId(long user_id) {
+		return userSqlMapper.selectUserCreatorId(user_id);
+	}
+
 
 
 

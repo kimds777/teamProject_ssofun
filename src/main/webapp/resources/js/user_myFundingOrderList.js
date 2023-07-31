@@ -1,10 +1,9 @@
-
-
 $(document).ready(function(){
-    var user_id = 1;
+    var user_id = getUserSession();
 
     getFundingOrderList(user_id);
     setEventListener(user_id);
+    getUserName(user_id);
     
 
 });
@@ -31,6 +30,69 @@ function setEventListener(user_id){
         window.location.href = "../maker/makerMyPage";
     });
 
+    $(document).on("click","#header>div>div>a#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+
+    $(document).on("click","#first>li#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+    
+
+
+}
+
+function getUserName(user_id){
+    $.ajax({
+        url: "../user/AJAXgetUserName",
+        method: "GET",
+        data: {user_id:user_id},
+        success: function(res){
+            if(res != ""){
+                $("#makerName").text(res);
+            }
+        }
+    });
+}
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        metho: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+       return 0;
+    }
+}
+
+function logout(){
+    $.ajax({
+        url: "../user/AJAXlogout",
+        method: "GET",
+        success: function(res){
+            if(res == 1){
+                alert("로그아웃 성공!");
+                window.location.href = "http://localhost:8181/www/funding/fundingMainPage";
+            }else{
+                alert("이미 로그아웃 되어있습니다.");
+            }
+        }
+    });
 }
 
 function getFundingOrderList(user_id){
@@ -39,7 +101,7 @@ function getFundingOrderList(user_id){
         method: "GET",
         data: {user_id:user_id},
         success: function(res){
-            if(res != null){
+            if(res != ""){
                 $.each(res,function(index,item){
                     var list = $("#list");
                     var funding = $("<div class='funding'></div>");
@@ -174,6 +236,9 @@ function getFundingOrderList(user_id){
                     });
                     funding.appendTo(list);
                 });
+                divHeightSense();
+            }else{
+                $("<div id='fundingOrderListEmpty'>후원한 프로젝트가 없습니다 :(</div>").appendTo("#list");
                 divHeightSense();
             }
         }

@@ -34,10 +34,14 @@
             </ul>
             <ul id="userApiLogin">
                 <li id="kakao">
-                    <img src="../../resources/img/kimdaseul/user/kakao_logo.png" alt="">
+                    <img src="../../resources/img/kimdaseul/user/kakao_logo.webp" alt="">
                 </li>
-                <li id="naver"></li>
-                <li id="google"></li>
+                <li id="naver">
+                    <img src="../../resources/img/kimdaseul/user/naver_logo.png" alt="">
+                </li>
+                <li id="google">
+                    <img src="../../resources/img/kimdaseul/user/google_logo.png" alt="">
+                </li>
             </ul>
             <p id="userJoin">아직 쏘펀 계정이 없나요? <a href="./userJoinPage">회원가입</a></p>
             <ul id="adminLogin" class="hide">

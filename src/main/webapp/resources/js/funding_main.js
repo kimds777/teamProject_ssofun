@@ -144,7 +144,7 @@ function getFundingOrderByAchievementRate(){
                                     }
                                     if(key == "image_order"){
                                         if(value == 1){
-                                            $("<li><img src='/ssofunUploadFiles/"+url+"' alt=''></li>").appendTo(ul);
+                                            $("<li><img src='../../resources/img/kimdaseul/funding/"+url+"' alt=''></li>").appendTo(ul);
                                         }
                                     }
                                 });

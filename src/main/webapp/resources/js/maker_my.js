@@ -1,20 +1,18 @@
 
 $(document).ready(function(){
-    var user_id = 1; //세션에서 받아와야함
-    var user_creator_id = 1; //세션에서 받아와야함
+    var user_id = getUserSession();
+    var user_creator_id = getUserCreatorIdSession();
     
     if(user_creator_id != null){
         getMakerFundingList(user_creator_id);
         getMakerProfile(user_creator_id);
     }
 
-    setEventListener(user_creator_id);
-
-
+    setEventListener();
 
 });
 
-function setEventListener(user_id){
+function setEventListener(){
 
     $(document).on("click","#projectBtn",function(e){
         e.stopPropagation();
@@ -47,6 +45,72 @@ function setEventListener(user_id){
       });
 
 
+      $(document).on("click","#header>div>div>a#logout",function(e){
+        e.stopPropagation();
+        logout();
+    });
+    
+
+
+}
+
+function getUserSession(){
+    var user_id;
+
+    $.ajax({
+        url: "../user/AJAXgetUserSession",
+        metho: "GET",
+        async: false,
+        success: function(res){
+            if(res != null){
+                user_id = res;
+            }else{
+                user_id = 0;
+            }
+        }
+    });
+
+    if(user_id != 0){
+        return user_id;
+    }else{
+       return 0;
+    }
+}
+
+
+function getUserCreatorIdSession(){
+    var user_creator_id;
+
+    $.ajax({
+        url : "../user/AJAXgetUserCreatorIdSessoin",
+        method: "GET",
+        async: false,
+        success: function(res){
+            alert("user_creator_id: "+res);
+            user_creator_id = res;
+        }
+    });
+
+    if(user_creator_id != null){
+        return user_creator_id;
+    }else{
+        return 0;
+    }
+}
+
+function logout(){
+    $.ajax({
+        url: "../user/AJAXlogout",
+        method: "GET",
+        success: function(res){
+            if(res == 1){
+                alert("로그아웃 성공!");
+                window.location.href = "http://localhost:8181/www/funding/fundingMainPage";
+            }else{
+                alert("이미 로그아웃 되어있습니다.");
+            }
+        }
+    });
 }
 
 function getMakerFundingList(user_creator_id){
@@ -79,7 +143,7 @@ function getMakerFundingList(user_creator_id){
 
                                     if(key == "image_order"){
                                         if(value == 1){
-                                            $("<li class='img'><img src='/ssofunUploadFiles/"+url+"' alt=''></li>").appendTo(ul);
+                                            $("<li class='img'><img src='../../resources/img/kimdaseul/funding/"+url+"' alt=''></li>").appendTo(ul);
                                         }
                                     }
                                 });

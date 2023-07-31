@@ -1,8 +1,7 @@
 
 $(document).ready(function(){
 
-    var user_id = getUserSession(); 
-    
+    var user_id = getUserSession();
     var user_creator_id = getUserCreatorIdSession();
 
     if(user_creator_id != 0){
@@ -87,8 +86,6 @@ $(document).ready(function(){
 });
 
 function setEventListener(user_id,funding_id,user_creator_id){
-
-
 
     $(document).on("click","p#goOut",function(event){
         event.stopPropagation(); 

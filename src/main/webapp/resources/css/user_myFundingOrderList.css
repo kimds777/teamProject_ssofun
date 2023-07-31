@@ -57,6 +57,7 @@ div.myPage{width: 100%; height: 800px; z-index: 10; position: absolute; top: 0; 
 #deliveryStatus>li.click{border-color: #FF6462; color: #FF6462; font-weight: bold;}
 
 #leftBorder>div#list{display: flex; flex-wrap: wrap; height: auto;}
+#leftBorder>div#list>div#fundingOrderListEmpty{text-align: center; width: 100%; color: #d9d9d9; height: 120px; line-height: 120px; font-size: 18px; }
 #leftBorder>div#list>div.funding{width: 100%; position: relative; margin-bottom: 15px;}
 #leftBorder>div#list>div.funding:last-of-type{margin-bottom: 0;}
 #leftBorder>div#list>div.funding>span.paymentDate{display: block; font-size: 14px; margin-bottom: 10px; width: 100%; height: 15px; line-height: 15px; font-weight: bold; color: #555555;}

@@ -121,10 +121,10 @@
 
     <div id="subBanner"><a>
         <ul id="subBannerText">
-            <li>검증된 상품만 모았어요!</li>
-            <li>이번주 신상 반짝 혜택</li>
+            <!-- <li>검증된 상품만 모았어요!</li>
+            <li>이번주 신상 반짝 혜택</li> -->
         </ul>
-        <img src="../../resources/img/메인서브배너2.jpg" alt="">
+        <img src="../../resources/img/kimdaseul/main/메인서브배너2.jpg" alt="">
     </a></div>
 
     <div class="section">
