@@ -39,11 +39,11 @@
 
 /* 테이블UI */
 .c0{
-	width: 55px;
+	width: 70px;
 }
 
 .c1{
-	width: 100px;
+	width: 120px;
 }
 
 .c2{
@@ -55,7 +55,7 @@
 }
 
 .c4{
-	width: 80px;
+	width: 120px;
 }
 
 .c6{
@@ -314,16 +314,16 @@
 											                </label>
 											            </th>
 											            <td class="td_1">No.&nbsp;${qnaContentsList.qna_id}</td>
-											            <td><fmt:formatDate value="${qnaContentsList.created_at}" pattern="yyyy-MM-dd" /></td>
-									                    <td>${qnaContentsList.email}</td>
-									                    <td>${qnaContentsList.nickname}</td>
-									                    <td><a href="qnaContentDetailPage?qna_id=${qnaContentsList.qna_id}">${qnaContentsList.title}</a></td>
+											            <td class="td_1"><fmt:formatDate value="${qnaContentsList.created_at}" pattern="yyyy-MM-dd" /></td>
+									                    <td class="td_1">${qnaContentsList.email}</td>
+									                    <td class="td_1">${qnaContentsList.nickname}</td>
+									                    <td class="td_1"><a href="qnaContentDetailPage?qna_id=${qnaContentsList.qna_id}">${qnaContentsList.title}</a></td>
 									                    <c:choose>
 									                    	<c:when test="${empty qnaContentsList.answer_contents}">
-									                    		<td class="qna_wait">답변대기</td>
+									                    		<td class="qna_wait td_1">답변대기</td>
 									                    	</c:when>
 									                    	<c:when test="${!empty qnaContentsList.answer_contents}">
-									                    		<td class="qna_finish">답변완료</td>
+									                    		<td class="qna_finish td_1">답변완료</td>
 									                    	</c:when>
 									                    </c:choose>							                    
 									                </tr>

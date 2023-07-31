@@ -78,35 +78,35 @@
 
 /* 테이블 간격 */
 .c0{
-	width: 55px;
+	width: 70px;
 }
 
 .c1{
-	width: 90px;
+	width: 110px;
 }
 
 .c2{
-	width: 120px;
+	width: 140px;
 }
 
 .c3{
-	width: 120px;
+	width: 140px;
 }
 
 .c4{
-	width: 120px;
+	width: 140px;
 }
 
 .c6{
-	width: 120px;
+	width: 140px;
 }
 
 .c7{
-	width: 120px;
+	width: 140px;
 }
 
 .c8{
-	width: 120px;
+	width: 140px;
 }
 </style>
 <head>

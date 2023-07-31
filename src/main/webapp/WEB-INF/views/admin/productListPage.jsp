@@ -39,7 +39,7 @@
 
 /* 테이블UI */
 .c0{
-	width: 55px;
+	width: 70px;
 }
 
 .c1{
@@ -449,7 +449,7 @@ $(document).ready(function() {
                     "<td class='td_1 c1'>" + productList[i].biz_name + "</td>" +
                     "<td class='td_1 c2'>" + productList[i].category_type_name + "</td>" +
                     "<td class='td_1 c3'><a href='productDetailPage?product_id=" + productList[i].product_id + "'>" + productList[i].product_name + "</a></td>" +
-                    "<td class='td_1 c4'><img class='img-fluid img-thumbnail' style='width:75px; height:75px;' src='/ssofunUploadFiles/" + productList[i].thumbnail_name + "'></td>" +
+                    "<td class='td_1 c4'><img class='img-fluid img-thumbnail' style='width:90px; height:90px;' src='/ssofunUploadFiles/" + productList[i].thumbnail_name + "'></td>" +
                     "<td class='td_1 c5'>" + formatNumber(productList[i].price) + " 원</td>" +
                     "<td class='td_1 c6'>" + formatNumber(productList[i].price_sale) + " 원</td>" +
                     /* "<td class='td_1'>" + productList[i].contents + "</td>" + */

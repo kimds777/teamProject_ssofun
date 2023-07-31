@@ -78,7 +78,8 @@
 	    dr.name AS delivery_recipient_name,
 	    tp.name AS product_name,
 	    poi.count,
-	    tp.price
+	    tp.price,
+	    tp.price_sale
 	from tb_product tp
 	INNER JOIN tb_product_order_item poi ON tp.product_id = poi.product_id
 	INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
@@ -332,6 +333,7 @@
 	    p.name AS product_name,
 	    poi.count,
 	    p.price,
+	    p.price_sale,
 	    dr.delivery_recipient_id
 	FROM tb_product_order_item poi
 		INNER JOIN tb_product_order_status pos ON poi.product_order_status_id = pos.product_order_status_id
@@ -353,7 +355,7 @@
 		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{adminId} AND ta.used_fg = 1)
 	) 
 	AND poi.used_fg = 1
-	ORDER BY poi.created_at DESC
+	ORDER BY poi.created_at DESC, product_order_item_id DESC
 	LIMIT 0,1000
 </select>
 <!-- N번 관리자가 판매하는 상품중 주문된 하나의 상품상세보기(오더리스트 상세보기) -->
@@ -495,7 +497,7 @@
 		from tb_admin ta2 
 		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{admin_id} AND ta.used_fg = 1)
 	)
-	ORDER BY tp.product_id
+	ORDER BY review_avg_score DESC
 </select>
 
 <!-- 상품하나에 대한 리뷰 리스트 -->
