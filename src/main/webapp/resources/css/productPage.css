@@ -382,12 +382,27 @@ i.bi-suit-heart-fill {
 }
 
 .scroll2 {
-	width: 100%;
-	margin-top: 50px;
+  white-space: nowrap;
+  max-height: 1000px;
+  overflow: hidden; /* 내용이 넘칠 경우 가려진 부분은 보이지 않도록 합니다. */
+  text-align:center;
+  transition: max-height 0.3s ease; /* 부드러운 높이 변화를 위한 트랜지션 설정 */
 }
 
 .detail-img {
-	text-align: center;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#showMoreBtn {
+  display: block;
+  margin: 20px auto;
+      background: #FF6462;
+    border-radius: 2%;
+    border: none;
+    color: #FFFFFF;
+    width: 200px;
+    height: 55px;
 }
 
 .scroll3 {
@@ -417,10 +432,10 @@ i.bi-suit-heart-fill {
 	border-right: 3px solid #eee;
 }
 
-.review_count{
+.review_count {
 	color: #666;
-    font-size: 15px;
-    text-align: center;
+	font-size: 15px;
+	text-align: center;
 }
 
 .preview2 {

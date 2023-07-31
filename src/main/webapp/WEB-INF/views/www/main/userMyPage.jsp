@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <link href="../../resources/css/user_my.css" rel="stylesheet" type="text/css">
-
+<link href="../../resources/css/orderListPage.css" rel="stylesheet"
+	type="text/css">
 
 </head>
 <body>
@@ -39,7 +42,7 @@
 				<div id="profile">
 					<ul id="first">
 						<li id="profileIcon"><span></span></li>
-						<li id="makerName">이지광님</li>
+						<li id="makerName">${sessionUser.name }님</li>
 						<li id="logoutUser">로그아웃</li>
 					</ul>
 					<dl>
@@ -51,7 +54,7 @@
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd class="click">
-							<a href="">주문 / 배송조회</a><i
+							<a href="./readQnaPage">문의내역</a><i
 								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
@@ -70,10 +73,126 @@
 				<div id="contents">
 					<div id="leftBorder">
 						<div id="subTitle">
-							<h5>주문 / 배송조회</h5>
+							<h5>주문 목록</h5>
 						</div>
 						<div id="list">
 							<!--리스트 영역-->
+							
+							<div class="row">
+								<div class="col p-0">
+									<div class="middle-contents">
+										<div class="row">
+											<div class="col">
+												<c:forEach items="${list}" var="item" varStatus="status">
+													<c:if
+														test="${status.index == 0 || item.product_order_id != list[status.index - 1].product_order_id}">
+														<div class="bigbox">
+															<div class="order-title">
+																<div class="create-date">
+																	<fmt:formatDate value="${item.created_at}"
+																		pattern="yyyy-MM-dd" />
+																	주문
+																</div>
+
+																<div class="order-detail">
+																	<a class="order-detail"
+																		href="./orderdetailPage?id=${item.product_order_id }">주문
+																		상세보기</a>
+																</div>
+															</div>
+															<c:forEach items="${list}" var="innerItem">
+																<c:if
+																	test="${item.product_order_id eq innerItem.product_order_id}">
+																	<div class="middlebox">
+																		<table>
+																			<colgroup>
+																				<col width="600">
+																				<col width="">
+																			</colgroup>
+																			<tr>
+																				<td class="pa">${innerItem.order_status_name }
+																					<div class="img-title">
+																						<div class="img">
+																							<img
+																								src="/ssofunUploadFiles/${innerItem.thumbnail_name}"
+																								style="width: 64px; height: 64px;">
+																						</div>
+																						<div class="npc">
+																							<span>${innerItem.product_name }</span>
+																							<div class="price-count">
+																								<span><fmt:formatNumber
+																										value="${innerItem.price_sale }"
+																										pattern="#,###원" /></span> <span>${innerItem.count }개</span>
+																							</div>
+																						</div>
+																					</div>
+																				</td>
+																				<td class="td-btn">
+																					<div class="btn-box">
+																						<c:set var="hasReview" value="false" />
+																						<c:forEach items="${review}" var="reviewItem">
+																							<c:if
+																								test="${reviewItem.product_order_item_id eq innerItem.product_order_item_id}">
+																								<c:set var="hasReview" value="true" />
+																							</c:if>
+																						</c:forEach>
+																						<c:choose>
+																							<c:when test="${hasReview}">
+																								<!-- Show "리뷰 수정하기" button if a review exists -->
+																								<button class="btn-review" type="button"
+																									onclick="location.href='./productReviewPage?id=${innerItem.product_order_item_id }' ">리뷰
+																									수정하기</button>
+																							</c:when>
+																							<c:otherwise>
+																								<!-- Show "리뷰 작성하기" button if no review exists -->
+																								<button class="btn-review" type="button"
+																									onclick="location.href='./productReviewPage?id=${innerItem.product_order_item_id }' ">리뷰
+																									작성하기</button>
+																							</c:otherwise>
+																						</c:choose>
+																						<button class="btn-qna" type="button"
+																									onclick="location.href='./productQnaPage?id=${innerItem.product_order_item_id }' ">
+																									문의하기</button>
+
+																					</div>
+
+																				</td>
+																			</tr>
+																		</table>
+																	</div>
+																</c:if>
+															</c:forEach>
+														</div>
+													</c:if>
+												</c:forEach>
+											</div>
+										</div>
+									</div>
+
+									<!-- 페이지네이션 부분 수정 -->
+									<div class="pagination jOhOoP">
+										<c:choose>
+											<c:when test="${currentPage > 1}">
+												<a href="?page=${currentPage - 1}" class="previous-button">이전</a>
+											</c:when>
+											<c:otherwise>
+												<span class="previous-button">이전</span>
+											</c:otherwise>
+										</c:choose>
+
+
+										<c:choose>
+											<c:when test="${currentPage < pageCount}">
+												<a href="?page=${currentPage + 1}" class="next-button">다음</a>
+											</c:when>
+											<c:otherwise>
+												<span class="next-button">다음</span>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+							</div>
+							
 
 						</div>
 					</div>

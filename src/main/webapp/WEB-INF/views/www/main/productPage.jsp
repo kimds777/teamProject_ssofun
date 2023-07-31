@@ -368,11 +368,13 @@ window.onload = function() {
 				<div class="scroll2" id="scroll2">
 					<c:forEach items="${deimglist }" var="deimglist">
 						<div class="detail-img">
-							<img src="/ssofunUploadFiles/${deimglist.name}"
-								style="width: 870px; height: 1300px;">
+							<img src="../../resources/img/parkhyunmin/detailImage/${deimglist.name}"
+								style="width: 870px; height: 0auto;">
+							
 						</div>
 					</c:forEach>
 				</div>
+				<button id="showMoreBtn" onclick="showAllImages()">상품 정보 더보기</button>
 
 				<div class="scroll3" id="scroll3">
 					<h3>상품리뷰</h3>
@@ -738,6 +740,16 @@ window.onload = function() {
 			}
 
 
+		function showAllImages() {
+			  const gallery = document.getElementById('scroll2');
+			  const button = document.getElementById('showMoreBtn');
+
+			  // 이미지 갤러리의 높이를 이미지 전체를 보여주는 높이로 조정
+			  gallery.style.maxHeight = gallery.scrollHeight + 'px';
+
+			  // 더 이상 "더보기" 버튼을 표시하지 않음
+			  button.style.display = 'none';
+			}
 
 </script>
 

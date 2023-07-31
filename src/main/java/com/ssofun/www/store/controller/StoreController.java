@@ -481,10 +481,31 @@ public class StoreController {
 
 	
 	
-
+	// 마이페이지 주문목록출력
 	@RequestMapping("userMyPage")
-	public String userMyPage() {
-
+	public String userMyPage(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session, ProductReviewDto prDto) {
+		int itemsPerPage = 5; // 페이지당 아이템 개수
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
+		prDto.setUser_id(id);
+		List<ProductReviewDto> review = storeService.getreview(prDto); // 상품마다 리뷰 비교
+		List<ProductOrderItemDto> fullList = storeService.getMypageList(id); // 전체 상품 목록 가져오기
+		
+		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		List<ProductOrderItemDto> paginatedList = new ArrayList<>();
+		int startIdx = (page - 1) * itemsPerPage;
+		int endIdx = Math.min(startIdx + itemsPerPage, fullList.size());
+		
+		for (int i = startIdx; i < endIdx; i++) {
+			paginatedList.add(fullList.get(i));
+		}
+		
+		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("sessionUser", sessionUser);
+		model.addAttribute("review", review);// 상품마다 리뷰 비교 
+		model.addAttribute("list", paginatedList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageCount", pageCount);
 		return "www/main/userMyPage";
 	}
 

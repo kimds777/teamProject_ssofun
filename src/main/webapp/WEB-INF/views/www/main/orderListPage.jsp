@@ -55,8 +55,8 @@
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd class="click">
-							<a class="click" href="./readQnaPage">문의내역</a><i
-								class="bi bi-caret-right-fill click"></i>
+							<a href="./readQnaPage">문의내역</a><i
+								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd>
@@ -67,12 +67,8 @@
 
 					<dl>
 						<dt>나의 펀딩 내역</dt>
-						<dd>
-							<a href="">후원한 프로젝트</a><i class="bi bi-caret-right-fill"></i>
-						</dd>
-						<dd>
-							<a href="">프로젝트 후기</a><i class="bi bi-caret-right-fill"></i>
-						</dd>
+						<dd><a href="../user/userMyFundingOrderListPage">후원한 프로젝트</a><i class="bi bi-caret-right-fill"></i></dd>
+                        <dd><a href="../user/userMyFundingLikeListPage">찜한 프로젝트</a><i class="bi bi-caret-right-fill"></i></dd>
 					</dl>
 				</div>
 				<div id="contents">
