@@ -65,7 +65,7 @@
 
 		<!-- 푸터 영역 -->
 			<jsp:include page="../../include/fundingFooter.jsp"/>
-			<script src="../../resources/js/funding_main.js"></script>
+		
 
 
 </body>

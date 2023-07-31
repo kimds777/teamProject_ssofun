@@ -29,18 +29,24 @@
 			    border-top: 2px solid black;
 			    font-size: 1.5rem;
 			    font-weight: bold;
+			     background-color: #f3f3f3
 			}
 			 
 			 .col-8 .read-count {
 			    border-bottom: 1px solid #ccc;
+			     background-color: #f3f3f3
 			}
 			 
+			 	
+				.col-8 .author {
+		   	 background-color: #f3f3f3
+		   }
 			 
 			 .col-8 .contents {
 			    border-bottom: 1px solid black;
 			      height: 400px; 
-			}
-			 
+			   
+		 }
 		 
 		 
 		 </style>   
@@ -143,7 +149,7 @@
 				
 		<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
-	<script src="../../resources/js/funding_main.js"></script>
+
 
 
 </body>
