@@ -16,6 +16,20 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
+
+
+
+<style>
+        .form-group {
+            margin-bottom: 20px; /* 제목과 내용 사이 간격 조정 */
+        }
+    </style>
+
+
+
+
+
+
 </head>
 
 <body>
@@ -26,7 +40,7 @@
 	<main role="main" class="container">
 	<form action="./communityupdateProcess" method="post">
 	
-	<div class="pt-1">
+	<div class="form-group">
 		 <input type="text" name="title" value="${data.communityDto.title}"style="border-radius:5px; width: 100%; padding:5px;">
 	</div>	
 		<div class="container">
@@ -48,21 +62,15 @@
 					        });
 					    });
 					</script>
+					
+			</main>
 			
 			<div class="text-end">
 			          <button class="btn btn-success" type="submit" style="width: 10%; padding: 5px;">수정</button> 
-			        </div>
-			      </form>
-		
-		<%-- 내용: <br>
-		<textarea rows="10" cols="60" name="contents">${data.communityDto.contents}</textarea>
-		<input type="hidden" name="community_id" value="${data.communityDto.community_id}">
+			 </div>
+		</form>
 		
 		
-		<br>
-		<button>글 수정</button>	
-	</form> --%>
-
 		<!-- 푸터 영역 -->
 			<jsp:include page="../../include/fundingFooter.jsp"/>
 		

@@ -45,14 +45,15 @@
 			    border-bottom: 1px solid #ccc;
 			     background-color: #f3f3f3;
 			     padding-left: 10px;
+			    display: flex;
 			}
 			 
 			 	
 			 .col-8 .contents {
 			    border-bottom: 1px solid black;
-			      height: 400px; 
-			       padding: 30px 0;
-			        padding-left: 10px;    
+			    height: 400px; 
+			    padding: 30px 0;
+			    padding-left: 10px;    
 			   
 		 }
 		 
@@ -99,7 +100,10 @@
 				    
 				    <!-- 여기에 하단 테두리 추가 -->
 				    <div class="read-count"><fmt:formatDate value="${data.communityDto.created_at}" pattern="yyyy.MM.dd"/>
-					        <i class="bi bi-eye">${data.communityDto.read_count}</div></i>
+				     <span style="margin-left: 20px;">
+					        <i class="bi bi-eye">${data.communityDto.read_count}</i>
+					   </span>   
+					 </div>
 					        
 					<!-- 내용 -->
 					<div class="contents">${data.communityDto.contents}</div>

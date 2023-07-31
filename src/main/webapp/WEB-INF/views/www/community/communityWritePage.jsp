@@ -17,28 +17,74 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
+
+
+	<style>
+	
+	
+	/* 페이지 전체 사이즈 설정  */
+	.section {
+	    width: 1200px;
+	    margin: 0 auto;
+	}
+	
+	  /* 제목과 내용 사이의 간격을 주기 위한 스타일 */
+	  .input-container {
+	    margin-bottom: 20px;
+	  }
+	
+	  .summernote-container {
+	    margin-bottom: 30px;
+	  }
+	  
+	
+	  /* 제출 버튼 아래 간격 추가 */
+  .submit-button-container {
+    margin-top: 20px;
+  }
+
+  /* 제출 버튼 스타일 변경 */
+  .submit-button {
+    width: 10%;
+    padding: 5px;
+  }
+  
+  .button-container{
+	 margin-top: 20px;  
+  margin-bottom: 70px;
+  
+  }
+		
+	</style>
+
+
 </head>
 
 
 <body>
-<jsp:include page="../../include/fundingHeader.jsp"/>
+	<jsp:include page="../../include/fundingHeader.jsp"/>
 		
+		
+		<div class ="section">
 			<main role="main" class="container">
 			  <c:choose>
 			    <c:when test="${!empty user.user_id}">
 			      <form action="./communityWriteProcess" method="post">
 			      
 			        <!-- 게시글 카테고리 선택 -->
+			         <div class="input-container">
 			        <select name="community_category_id">
-			          <option>카테고리타입아이디 선택</option>
+			          <option>카테고리 선택</option>
 			          <c:forEach items="${communityCategoryList}" var="communityCategoryList">
 			            <option value="${communityCategoryList.community_category_id}">${communityCategoryList.name}</option>
 			          </c:forEach>
 			        </select>
-			        <div class="pt-1">
+			       </div> 
+			        
+			         <div class="input-container">
 			          <input type="text" name="title" placeholder="제목을 입력하세요" style="border-radius:5px; width: 100%; padding:5px;">
 			        </div>
-			        <div class="container">
+			        <div class="summernote-container">
 			          <textarea class="summernote" name="contents"></textarea>
 			        </div>
 			        
@@ -60,9 +106,9 @@
 				    });
 			</script>
 
-			        <div class="text-end">
-			          <button class="btn btn-success" type="submit" style="width: 10%; padding: 5px;">제출</button> 
-			        </div>
+			          <div class="button-container text-end">
+			          	<button class="btn text-white" style="background-color: #FF6462;">등록</button>
+        			 </div>
 			      </form>
 			    </c:when>
 			    
@@ -78,8 +124,12 @@
 			    </c:when>
 			  </c:choose>
 			</main>
+		</div>
 			
 			
+				<!-- 푸터 영역 -->
+			<jsp:include page="../../include/fundingFooter.jsp"/>
+		
 			
 			</body>
 			</html>

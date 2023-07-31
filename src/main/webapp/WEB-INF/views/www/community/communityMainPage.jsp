@@ -25,6 +25,14 @@
 	body{position: relative;}
 	
 	
+	
+	/* 페이지 전체 사이즈 설정  */
+	.section {
+	    width: 1200px;
+	    margin: 0 auto;
+	}
+	
+	
 	/* 페이지네이션 회색으로 색상 변경 */
 	.page-link {
 	  color: #000; 
@@ -86,6 +94,12 @@
     }
 
 
+	/*리스트 위에 선 추가  */
+ 	.list-top{
+ 	 border-top: 1px solid black;
+ 	}
+
+
 </style>
 
 
@@ -93,31 +107,35 @@
 
 <body>
 	<jsp:include page="../../include/fundingHeader.jsp"/>
-		
 	
+
+
+	<div class ="section">
 	  <div class="container mb-5" >
 		
 			<div class ="row">
-			 	<div class="col"></div>
-			
-			<!--사이드 바-->
-				<div class="col-2" style="padding-right: 30px;">
-					<div class="card">
+				
+					<!--사이드 바-->
+						<div class="col-2" style="padding-right: 20px; padding-left: 0px;">
+			   				 <div class="card">
 			        	<div class="card-header">
-			          		커뮤니티
-			        	</div>
+			            커뮤니티
+			        </div>
 			        <ul class="list-group list-group-flush">
-			          <li class="list-group-item"> 
 			            <c:forEach items="${communityCategoryList}" var="communityCategoryList">
-			              <div><a href="./communityCategoryPage?community_category_id=${communityCategoryList.community_category_id}">${communityCategoryList.name}</a></div>
+			                <li class="list-group-item">
+			                    <a href="./communityCategoryPage?community_category_id=${communityCategoryList.community_category_id}" style="text-decoration: none; color: #333;">
+			                        ${communityCategoryList.name}
+			                    </a>
+			                </li>
 			            </c:forEach>
-			          </li>
 			        </ul>
-			      </div>
-				</div>
+	    		</div>
+			</div>
+			
 				
 				<!-- 게시판 리스트 -->
-				<div class="col-8" style="padding-left: 30px;">
+				<div class="col-10" style="padding-left: 30px;">
 				
 					<!-- 시간 계산 -->
 					<c:set var="now" value="<%=new java.util.Date()%>" />
@@ -129,7 +147,7 @@
 					
 		<table class="table table-hover">
 			
-			    <thead>
+			    <thead class ="list-top">
 			        <tr>
 			            <td>번호</td>
 			            <td>카테고리명</td>
@@ -184,7 +202,7 @@
 			                        
 			                        <!-- 등록된지 1일 이내일 때 new 나옴 -->
 			                        <c:if test="${community.daysDiff lt 1}">
-			                            <img src="../../resources/img/new.png" width="23px"/>
+			                            <img src="../../resources/img/jangsoyeon/new.png" width="23px"/>
 			                        </c:if>
 			                    </a>
 			                </td>
@@ -198,7 +216,6 @@
 			    </tbody>
 			</table>
 		</div>
-					<div class="col"></div>
 	</div>
 			
 			
@@ -255,6 +272,7 @@
 			   </div>
 		</div>
 
+</div>
 
 		<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
