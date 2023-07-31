@@ -27,6 +27,13 @@
             margin-bottom: 0;
             text-decoration: none;
         }
+        .leftsidepontstyleWhite {
+            color: #ffffff ;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+            margin-bottom: 0;
+            text-decoration: none;
+        }
         
         .companySideBarfontBig {
             color: #B3B8C3;

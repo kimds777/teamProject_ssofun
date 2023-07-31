@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -18,7 +19,7 @@
 
 	</style>
 
-
+	
 
 
 
@@ -55,7 +56,7 @@
                     <div class="row leftside2 ">
                         <div class="col leftsidefontstyle1">NAVIGATION</div>
                     </div>
-                    <div class="row leftside3">
+                      <div class="row leftside3">
                         <div class="col-1"></div>
                         <div class="col">
                             <div class="row">
@@ -63,7 +64,18 @@
                                     <div class="row mt-3">
                                         <div class="col">
                                             <i class="bi bi-building text-light" style="margin-right: 5px;"></i>
-                                            <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/companyManagementMainPage" style="font-size: 18px;">입점사관리</a>
+                                            <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/companyManagementMainPage" style="font-size: 18px;">업체관리관리</a>
+                                        </div>
+                                    </div>
+                                     <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyleWhite" href="../../systemadmin/companyManagement/companyManagementMainPage" style="color: #fff; font-weight: bold;"> 입점사관리</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mt-1">
@@ -72,7 +84,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/venderManagementMainPage">> 판매자관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/venderManagementMainPage" > 판매자관리</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +94,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="row mt-3">
+                                    <div class="row mt-5">
                                         <div class="col">
                                             <i class="bi bi-globe-americas text-light" style="margin-right: 5px;"></i>
                                             <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage" style="font-size: 18px;">사이트관리</a>
@@ -99,24 +111,24 @@
                                             </div>
                                         </div>
                                     </div>    
-                                    <div class="row mt-1">
+                                    <div class="row mt">
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col-3"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage">> 승인관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage"> 승인관리</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-1">
+                                    <div class="row mt">
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col-3"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingCategoryAddPage">> 카테고리관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingCategoryAddPage"> 카테고리관리</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,13 +145,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-1">
+                                    <div class="row mt">
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col-3"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/shopCategoryAddPage">> 카테고리관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/shopCategoryAddPage"> 카테고리관리</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -149,7 +161,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="row mt-3">
+                                    <div class="row mt-5">
                                         <div class="col">
                                             <i class="bi bi-send-check text-light" style="margin-right: 5px;"></i>
                                             <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminFaqMainPage" style="font-size: 18px;">고객센터관리</a>
@@ -161,7 +173,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="#">> 공지사항</a>
+                                                    <a class="leftsidepontstyle1" href="#"> 공지사항</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -172,7 +184,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminFaqMainPage">> 자주찾는 질문</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminFaqMainPage"> 자주찾는 질문</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -183,7 +195,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="#">> 이용약관</a>
+                                                    <a class="leftsidepontstyle1" href="#"> 이용약관</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,7 +206,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminQnaMainPage">> 1:1문의</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminQnaMainPage"> 1:1문의</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -298,11 +310,11 @@
 									    <li class="page-item"><a class="page-link" href="#">3</a></li>
 									    <li class="page-item"><a class="page-link" href="#">4</a></li>
 									    <li class="page-item"><a class="page-link" href="#">5</a></li>
-									    <li class="page-item"><a class="page-link" href="#">6</a></li>
+									<!-- <li class="page-item"><a class="page-link" href="#">6</a></li>
 									    <li class="page-item"><a class="page-link" href="#">7</a></li>
 									    <li class="page-item"><a class="page-link" href="#">8</a></li>
 									    <li class="page-item"><a class="page-link" href="#">9</a></li>
-									    <li class="page-item"><a class="page-link" href="#">10</a></li>
+									    <li class="page-item"><a class="page-link" href="#">10</a></li> -->  
 									    <li class="page-item">
 									      <a class="page-link" href="#" aria-label="Next">
 									        <span aria-hidden="true">&raquo;</span>

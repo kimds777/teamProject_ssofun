@@ -57,7 +57,7 @@
                     <div class="row leftside2 ">
                         <div class="col leftsidefontstyle1">NAVIGATION</div>
                     </div>
-                    <div class="row leftside3">
+                   	<div class="row leftside3">
                         <div class="col-1"></div>
                         <div class="col">
                             <div class="row">
@@ -65,7 +65,18 @@
                                     <div class="row mt-3">
                                         <div class="col">
                                             <i class="bi bi-building text-light" style="margin-right: 5px;"></i>
-                                            <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/companyManagementMainPage" style="font-size: 18px;">입점사관리</a>
+                                            <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/companyManagementMainPage">업체관리관리</a>
+                                        </div>
+                                    </div>
+                                     <div class="row mt-1">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col">
+                                                    <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/companyManagementMainPage" > 입점사관리</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mt-1">
@@ -74,7 +85,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/venderManagementMainPage">> 판매자관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/companyManagement/venderManagementMainPage"> 판매자관리</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -84,7 +95,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="row mt-3">
+                                    <div class="row mt-5">
                                         <div class="col">
                                             <i class="bi bi-globe-americas text-light" style="margin-right: 5px;"></i>
                                             <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage" style="font-size: 18px;">사이트관리</a>
@@ -101,24 +112,24 @@
                                             </div>
                                         </div>
                                     </div>    
-                                    <div class="row mt-1">
+                                    <div class="row mt">
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col-3"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage">> 승인관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingManagementPage"> 승인관리</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-1">
+                                    <div class="row mt">
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col-3"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingCategoryAddPage">> 카테고리관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/fundingCategoryAddPage"> 카테고리관리</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,13 +146,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-1">
+                                    <div class="row mt">
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col-3"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/shopCategoryAddPage">> 카테고리관리</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/siteManagement/shopCategoryAddPage" style="color: #fff; font-weight: bold;"> 카테고리관리</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +162,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <div class="row mt-3">
+                                    <div class="row mt-5">
                                         <div class="col">
                                             <i class="bi bi-send-check text-light" style="margin-right: 5px;"></i>
                                             <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminFaqMainPage" style="font-size: 18px;">고객센터관리</a>
@@ -163,7 +174,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="#">> 공지사항</a>
+                                                    <a class="leftsidepontstyle1" href="#"> 공지사항</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +185,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminFaqMainPage">> 자주찾는 질문</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminFaqMainPage"> 자주찾는 질문</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -185,7 +196,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="#">> 이용약관</a>
+                                                    <a class="leftsidepontstyle1" href="#"> 이용약관</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +207,7 @@
                                                 <div class="col-2"></div>
                                                 <div class="col">
                                                     <!--<i class="bi bi-building text-light" style="margin-right: 5px;"></i>-->
-                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminQnaMainPage">> 1:1문의</a>
+                                                    <a class="leftsidepontstyle1" href="../../systemadmin/systemAdminQnaMainPage"> 1:1문의</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -249,55 +260,46 @@
                             </div>
                       
                                 <div class="row mt-2">
-                                    <div class="col"  style="background-color:#F8F9FA; height:110px; border-radius: 3%; margin-right: 5px;">
+                                    <div class="col"  style="background-color:#F8F9FA; height:130px; border-radius: 3%; margin-right: 5px;">
                                         <div class="row mt-3" >
-                                            <div class="col-1"></div>
                                             <div class="col">
-                                                <div class="row"><div class="col textcenter"><p class="categoryFont">대분류</p></div></div>
-                                                <div class="row"><div class="col textcenter"> <input type="text" name="name"> </div></div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="row"><div class="col textcenter"><p class="categoryFont">중분류</p></div></div>
-                                                <div class="row"><div class="col textcenter"> <input type="text" name="name"> </div></div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="row"><div class="col textcenter"><p class="categoryFont">소분류</p></div></div>
-                                                <div class="row"><div class="col textcenter"><input type="text" name="name"> </div></div>
-                                            </div>
-                                            <div class="col-1"></div>
-
-
-                                            <!-- <div class="col-1">
-                                                
-                                            </div>
-                                            <div class="col">
-                                             
-            
-                                                <div class="row mt-2">
-                                                   
+                                                <div class="row">
                                                     <div class="col-2 textcenter">
-                                                        <p class="companyfont">대분류</p>
-                                                    </div>
-                                                    <div class="col mt-2">
-                                                        <input type="file" name="fundingCategoryFiles"  accept="image/*">
-                                                    </div>
-                                                    <div class="col"></div>
-                                                    
-                                                </div>
-                                                      
-                                                <div class="row mt-2">
-                                                    
-                                                    <div class="col-2 textcenter">
-                                                        <p class="companyfont">아이콘명</p>
+                                                        <p class="categoryFont">대분류</p>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" name="name" class="form-control"  aria-label="companyName">
+                                                        <input type="text" name="name">
                                                     </div>
-                                                    
                                                 </div>
-            
-            
-                                            </div> -->
+                                                <div class="row mt-2">
+                                                    <div class="col-2 textcenter">
+                                                        <p class="categoryFont">중분류</p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <select id="node">
+                                                            <option name="node" value="0">반복문</option>
+                                                            <option name="node" value="0">돌리기</option>
+                                                            <option name="node" value="0">1</option>
+                                                            <option name="node" value="0">2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" name="name">
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-2 textcenter">
+                                                        <p class="categoryFont">소분류</p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" name="name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                         
+                                            <div class="col-1"></div>
+
                                             <div class="col-2 mt-4" style="text-align: right;">
                                                 <div class="row">
                                                     

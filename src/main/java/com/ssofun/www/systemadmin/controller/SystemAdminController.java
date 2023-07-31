@@ -393,7 +393,8 @@ public class SystemAdminController {
 									@RequestParam("biz_no_3")String biz_no_3,
 									@RequestParam("biz_phone_1")String biz_phone_1,
 									@RequestParam("biz_phone_2")String biz_phone_2,
-									@RequestParam("biz_phone_3")String biz_phone_3) {
+									@RequestParam("biz_phone_3")String biz_phone_3,
+									@RequestParam("biz_place")String biz_place) {
 		
 		String combinedBizNo = biz_no_1+"-"+biz_no_2+"-"+biz_no_3;
 		String combinedBizPhone = biz_phone_1+"-"+biz_phone_2+"-"+biz_phone_3;
@@ -403,7 +404,7 @@ public class SystemAdminController {
 		bizDto.setBiz_ceo(biz_ceo);
 		bizDto.setBiz_no(combinedBizNo);
 		bizDto.setBiz_phone(combinedBizPhone);
-		
+		bizDto.setBiz_place(biz_place);
 		
 		systemAdminService.insertcreateCompanyAccount(bizDto);
 		
@@ -483,7 +484,8 @@ public class SystemAdminController {
 											@RequestParam("biz_no_3")String biz_no_3,
 											@RequestParam("biz_phone_1")String biz_phone_1,
 											@RequestParam("biz_phone_2")String biz_phone_2,
-											@RequestParam("biz_phone_3")String biz_phone_3) {
+											@RequestParam("biz_phone_3")String biz_phone_3,
+											@RequestParam("biz_place")String biz_place) {
 		
 		
 		String combinedBizNo = biz_no_1+"-"+biz_no_2+"-"+biz_no_3;
@@ -496,6 +498,7 @@ public class SystemAdminController {
 		bizDto.setBiz_ceo(biz_ceo);
 		bizDto.setBiz_no(combinedBizNo);
 		bizDto.setBiz_phone(combinedBizPhone);
+		bizDto.setBiz_place(biz_place);
 		
 		System.out.println(biz_name);
 		

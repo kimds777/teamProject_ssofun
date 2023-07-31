@@ -157,6 +157,7 @@
 	
 	<select id="selectFaqCustomerService" resultType="com.ssofun.dto.FaqDto">
 		SELECT * FROM tb_faq tf
+		WHERE tf.faq_category = 'categoryCustomerService'	
 	</select>
 	
 	

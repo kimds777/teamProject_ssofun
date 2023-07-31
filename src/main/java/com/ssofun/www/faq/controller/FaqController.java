@@ -3,6 +3,7 @@ package com.ssofun.www.faq.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ssofun.dto.AdminDto;
+import com.ssofun.dto.FaqDto;
 import com.ssofun.dto.FaqHelpStatusDto;
+import com.ssofun.dto.QnaDto;
 import com.ssofun.www.faq.service.FaqServiceImpl;
 import com.ssofun.www.systemadmin.service.SystemAdminServiceImpl;
 
@@ -52,7 +56,19 @@ public class FaqController {
 	@RequestMapping("faqFundingPage")
 	public String faqFundingPage(Model model) {
 		
-		model.addAttribute("faqList", faqService.selectFaqFunding());
+		List<FaqDto> faqList = faqService.selectFaqFunding();
+		
+		for(FaqDto faqDto:faqList) {
+			String contents = faqDto.getContents();
+			
+			contents =  StringEscapeUtils.escapeHtml4(contents);
+			contents = contents.replaceAll("\n", "<br>");
+			
+			faqDto.setContents(contents);
+		}
+		
+
+		model.addAttribute("faqList",faqList);
 		
 		
 		return"www/faq/faqFundingPage";
@@ -62,7 +78,20 @@ public class FaqController {
 	@RequestMapping("faqShippingPage")
 	public String faqShippingPage(Model model) {
 		
-		model.addAttribute("faqList", faqService.selectFaqShipping());
+		List<FaqDto> faqList = faqService.selectFaqShipping();
+			
+		for(FaqDto faqDto:faqList) {
+			String contents = faqDto.getContents();
+			
+			contents =  StringEscapeUtils.escapeHtml4(contents);
+			contents = contents.replaceAll("\n", "<br>");
+			
+			faqDto.setContents(contents);
+		}
+		
+		
+		
+		model.addAttribute("faqList", faqList);
 		
 		return"www/faq/faqShippingPage";
 	}
@@ -71,7 +100,21 @@ public class FaqController {
 	@RequestMapping("faqStorePage")
 	public String faqStorePage(Model model) {
 		
-		model.addAttribute("faqList", faqService.selectFaqStore());
+		List<FaqDto> faqList = faqService.selectFaqStore();
+		
+		for(FaqDto faqDto:faqList) {
+			String contents = faqDto.getContents();
+			
+			contents =  StringEscapeUtils.escapeHtml4(contents);
+			contents = contents.replaceAll("\n", "<br>");
+			
+			faqDto.setContents(contents);
+		}
+		
+		
+		
+		
+		model.addAttribute("faqList", faqList);
 		
 		return"www/faq/faqStorePage";
 	}
@@ -80,7 +123,20 @@ public class FaqController {
 	@RequestMapping("faqUserPage")
 	public String faqUserPage(Model model) {
 		
-		model.addAttribute("faqList", faqService.selectFaqUser());
+		
+		List<FaqDto> faqList = faqService.selectFaqUser();
+		
+		for(FaqDto faqDto:faqList) {
+			String contents = faqDto.getContents();
+			
+			contents =  StringEscapeUtils.escapeHtml4(contents);
+			contents = contents.replaceAll("\n", "<br>");
+			
+			faqDto.setContents(contents);
+		}
+		
+		
+		model.addAttribute("faqList", faqList);
 		
 		return"www/faq/faqUserPage";
 	}
@@ -88,7 +144,20 @@ public class FaqController {
 	@RequestMapping("faqCustomerServicePage")
 	public String faqCustomerServicePage(Model model) {
 		
-		model.addAttribute("faqList", faqService.selectFaqCustomerService());
+		
+		List<FaqDto> faqList = faqService.selectFaqCustomerService();
+		
+		for(FaqDto faqDto:faqList) {
+			String contents = faqDto.getContents();
+			
+			contents =  StringEscapeUtils.escapeHtml4(contents);
+			contents = contents.replaceAll("\n", "<br>");
+			
+			faqDto.setContents(contents);
+		}
+		
+		
+		model.addAttribute("faqList", faqList);
 		
 		return"www/faq/faqCustomerServicePage";
 	}
