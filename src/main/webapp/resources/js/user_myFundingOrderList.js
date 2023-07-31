@@ -66,6 +66,7 @@ function getUserSession(){
         async: false,
         success: function(res){
             if(res != null){
+                alert("user_id: "+res);
                 user_id = res;
             }else{
                 user_id = 0;

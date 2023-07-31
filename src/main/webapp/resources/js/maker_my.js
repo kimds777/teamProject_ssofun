@@ -1,11 +1,16 @@
-
 $(document).ready(function(){
     var user_id = getUserSession();
     var user_creator_id = getUserCreatorIdSession();
     
-    if(user_creator_id != null){
+    if(user_creator_id != ""){
         getMakerFundingList(user_creator_id);
         getMakerProfile(user_creator_id);
+    }else{
+        $("#makerName").html("미래 창작자님");
+        $("#biz").html("-");
+        $("#subTitle>h5>span").html("0");
+        $("<div id='fundingListEmpty'>등록된 펀딩이 없습니다 :(</div>").appendTo("#list");
+        divHeightSense();
     }
 
     setEventListener();
@@ -50,6 +55,10 @@ function setEventListener(){
         logout();
     });
     
+    $(document).on("click","#profile>ul>li#logout",function(e){
+      e.stopPropagation();
+      logout();
+  });
 
 
 }
@@ -63,6 +72,7 @@ function getUserSession(){
         async: false,
         success: function(res){
             if(res != null){
+                alert("user_id: "+res);
                 user_id = res;
             }else{
                 user_id = 0;
@@ -119,7 +129,7 @@ function getMakerFundingList(user_creator_id){
         method: "GET",
         data: {user_creator_id:user_creator_id},
         success: function(res){
-            if(res != null){
+            if(res != ""){
                 var length = res.length;
                 $("#subTitle>h5>span").html(length);
                 $.each(res,function(index,item){
@@ -167,6 +177,10 @@ function getMakerFundingList(user_creator_id){
                     a.appendTo(projectWrap);
                     projectWrap.appendTo("#list");
                 });
+                divHeightSense();
+            }else{
+                $("#subTitle>h5>span").html("0");
+                $("<div id='fundingListEmpty'>등록된 펀딩이 없습니다 :(</div>").appendTo("#list");
                 divHeightSense();
             }
 

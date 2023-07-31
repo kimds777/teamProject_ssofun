@@ -152,7 +152,6 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("AJAXloginWithEmail")
 	public UserDto AJAXloginWithEmail(HttpSession session ,UserDto params) {	
-		System.out.println(params.getEmail());
 		UserDto userDto = userService.loginWithEmail(params);
 		session.setAttribute("user", userDto);
 		
@@ -182,6 +181,7 @@ public class UserController {
 	public Long AJAXgetUserSession(HttpSession session) {
 		UserDto userDto =  (UserDto) session.getAttribute("user");
 		if(userDto != null) {
+			System.out.println("user_id: "+userDto.getUser_id());
 			return userDto.getUser_id();
 		}else {			
 			return null;
@@ -204,6 +204,7 @@ public class UserController {
 	@RequestMapping("AJAXgetUserCreatorIdSessoin")
 	public Long AJAXgetUserCreatorIdSessoin(HttpSession session) {
 		UserDto userDto =  (UserDto) session.getAttribute("user");
+		System.out.println("창작자 아이디 찾기 user_id: "+userDto.getUser_id());
 		return userService.getUserCreatorId(userDto.getUser_id());
 	}
 	

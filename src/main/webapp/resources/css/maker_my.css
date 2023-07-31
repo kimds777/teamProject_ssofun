@@ -52,6 +52,8 @@ div.myPage{width: 100%; height: 800px; z-index: 10; position: absolute; top: 0; 
 #leftBorder>#subTitle>input{border: none; padding: 0 20px; width: 160px; height: 40px; line-height: 35px; border-radius: 5px; font-size: 14px; color: white; font-weight: bold; background-color: #FF6462;}
 
 #leftBorder>div#list{display: flex; flex-wrap: wrap; }
+#leftBorder>div#list>div#fundingListEmpty{text-align: center; width: 100%; color: #d9d9d9; height: 120px; line-height: 120px; font-size: 18px; }
+
 #leftBorder>div#list>div.projectWrap{width: 210px; height: 253px; margin: 0 19.5px 35px 0; position: relative;}
 #leftBorder>div#list>div.projectWrap:nth-of-type(4n){margin: 0 0 35px 0;}
 
