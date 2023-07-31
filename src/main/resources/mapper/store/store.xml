@@ -138,7 +138,7 @@
 		group by tp.product_id DESC    
 	</select>
 	
-	<!-- 상품목록 출력 -->
+	<!-- 상품목록 최신 등록순출력 -->
 	<select id="selectProductList" resultType="com.ssofun.dto.ProductDto">
 		SELECT tb_product.name AS product_name,
        	tb_product_category_type.name AS category_type_name,
@@ -153,6 +153,40 @@
 		    ON tb_product.product_id = tb_product_thumbnail.product_id
 		    WHERE tb_product_thumbnail.order_list = 0
 		    ORDER BY tb_product_thumbnail.product_thumbnail_id DESC
+	</select>
+	
+	<!-- 상품목록 낮은 가격순출력 -->
+	<select id="selectPricelowList" resultType="com.ssofun.dto.ProductDto">
+		SELECT tb_product.name AS product_name,
+       	tb_product_category_type.name AS category_type_name,
+       	tb_product_thumbnail.name AS thumbnail_name,
+       	tb_product.price, tb_product.price_sale, tb_product.product_id
+		FROM tb_product
+		INNER JOIN tb_product_category
+		    ON tb_product.product_id = tb_product_category.product_id
+		INNER JOIN tb_product_category_type
+		    ON tb_product_category.product_category_type_id = tb_product_category_type.product_category_type_id
+		INNER JOIN tb_product_thumbnail
+		    ON tb_product.product_id = tb_product_thumbnail.product_id
+		    WHERE tb_product_thumbnail.order_list = 0
+		    ORDER BY tb_product.price_sale;
+	</select>
+	
+	<!-- 상품목록 높은 가격순출력 -->
+	<select id="selectPricehighList" resultType="com.ssofun.dto.ProductDto">
+		SELECT tb_product.name AS product_name,
+       	tb_product_category_type.name AS category_type_name,
+       	tb_product_thumbnail.name AS thumbnail_name,
+       	tb_product.price, tb_product.price_sale, tb_product.product_id
+		FROM tb_product
+		INNER JOIN tb_product_category
+		    ON tb_product.product_id = tb_product_category.product_id
+		INNER JOIN tb_product_category_type
+		    ON tb_product_category.product_category_type_id = tb_product_category_type.product_category_type_id
+		INNER JOIN tb_product_thumbnail
+		    ON tb_product.product_id = tb_product_thumbnail.product_id
+		    WHERE tb_product_thumbnail.order_list = 0
+		    ORDER BY tb_product.price_sale DESC;
 	</select>
 	
 	<!-- 카테고리 출력 -->
@@ -342,6 +376,11 @@
 			#{contents}
 			)
 	</insert>
+	
+	<!-- 문의내역 출력 -->
+	<select id="selectByQnalist" resultType="com.ssofun.dto.QnaDto">
+		SELECT * FROM tb_qna tq WHERE tq.user_id=#{user_id} AND tq.biz_id IS NOT NULL;
+	</select>
 	<!-- 아래는 테스트 코드 -->
 	
 	<!-- <insert id="insert">

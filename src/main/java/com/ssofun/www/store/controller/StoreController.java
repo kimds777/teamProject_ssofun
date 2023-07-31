@@ -68,9 +68,9 @@ public class StoreController {
 	
 	// =================
 
-	// 스토어 리스트 메인페이지
+	// 스토어 리스트 최신순 출력 메인페이지
 	@RequestMapping("storePage")
-	public String mainPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto, ProductFavoritCountDto pfDto, HttpSession session) {
+	public String storePage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto, ProductFavoritCountDto pfDto, HttpSession session) {
 		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
 		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
 		List<ProductDto> fullList = storeService.getItemList(producDto); // 전체 상품 목록 가져오기
@@ -98,7 +98,73 @@ public class StoreController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("pageCount", pageCount);
 
-		return "www/main/mainPage";
+		return "www/main/storePage";
+	}
+	
+	// 스토어 리스트 낮은 가격순 출력 메인페이지
+	@RequestMapping("storelowPage")
+	public String mainlowPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto, ProductFavoritCountDto pfDto, HttpSession session) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
+		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
+		List<ProductDto> fullList = storeService.getItemlowList(producDto); // 전체 상품 목록 가져오기
+		List<ProductFavoritCountDto>Likecount = storeService.getLikecount(pfDto); //상품별 좋아요 개수
+		for(ProductFavoritCountDto a : Likecount) {
+			int av =a.getProduct_id();
+			int b = a.getCount();
+		}
+		
+		
+		int itemsPerPage = 8; // 페이지당 아이템 개수
+		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		List<ProductDto> paginatedList = new ArrayList<>();
+		int startIdx = (page - 1) * itemsPerPage;
+		int endIdx = Math.min(startIdx + itemsPerPage, fullList.size());
+		for (int i = startIdx; i < endIdx; i++) {
+			paginatedList.add(fullList.get(i));
+		}
+
+		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("Recount", Recount); // 상품별 리뷰 개수
+		model.addAttribute("Likecount", Likecount); // 상품별 좋아요 개수
+		model.addAttribute("pctlist", pctlist);
+		model.addAttribute("list", paginatedList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageCount", pageCount);
+
+		return "www/main/storelowPage";
+	}
+		
+	// 스토어 리스트 높은 가격순 출력 메인페이지
+	@RequestMapping("storehighPage")
+	public String mainhighPage(@RequestParam(defaultValue = "1") int page, ProductDto producDto, Model model, ProductCategoryTypeDto pctDto, ProductFavoritCountDto pfDto, HttpSession session) {
+		List<ProductCategoryTypeDto> pctlist = storeService.getProductCT(pctDto);
+		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
+		List<ProductDto> fullList = storeService.getItemhighList(producDto); // 전체 상품 목록 가져오기
+		List<ProductFavoritCountDto>Likecount = storeService.getLikecount(pfDto); //상품별 좋아요 개수
+		for(ProductFavoritCountDto a : Likecount) {
+			int av =a.getProduct_id();
+			int b = a.getCount();
+		}
+		
+		
+		int itemsPerPage = 8; // 페이지당 아이템 개수
+		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
+		List<ProductDto> paginatedList = new ArrayList<>();
+		int startIdx = (page - 1) * itemsPerPage;
+		int endIdx = Math.min(startIdx + itemsPerPage, fullList.size());
+		for (int i = startIdx; i < endIdx; i++) {
+			paginatedList.add(fullList.get(i));
+		}
+
+		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("Recount", Recount); // 상품별 리뷰 개수
+		model.addAttribute("Likecount", Likecount); // 상품별 좋아요 개수
+		model.addAttribute("pctlist", pctlist);
+		model.addAttribute("list", paginatedList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageCount", pageCount);
+
+		return "www/main/storehighPage";
 	}
 	
 	//카테고리 선택 상품 출력
@@ -161,6 +227,7 @@ public class StoreController {
 		List<ProductReviewJiDto> relist = storeService.getProductReview(prjDto); //상품마다 리뷰 출력
 		List<ProductDetailImageDto>deimglist = storeService.getDetailImg(pdiDto); // 상품마다 상세이미지 출력
 		List<ProductReviewImageDto>reimgList = storeService.getReviewImg(priDto); // 상품마다 리뷰이미지 출력
+		
 		
 		model.addAttribute("deimglist", deimglist);
 		model.addAttribute("reimgList", reimgList);
@@ -393,12 +460,25 @@ public class StoreController {
 		int id = (int) sessionUser.getUser_id();
 
 		qDto.setUser_id(id);
-										
-		
 		storeService.registQna(qDto);
 		return "redirect:./orderListPage";
 	}
+	//문의내역확인
+	@RequestMapping("readQnaPage")
+	public String readQnaPage( Model model, HttpSession session,  QnaDto qDto) {
+
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
+		int id = (int) sessionUser.getUser_id();
 	
+		qDto.setUser_id(id);
+		List<QnaDto>qnalist = storeService.getQnalist(qDto); //QA내역 출력
+
+		model.addAttribute("qnalist", qnalist);// QA내역 출력
+		return "www/main/readQnaPage";
+	}
+	
+	
+
 	
 	
 

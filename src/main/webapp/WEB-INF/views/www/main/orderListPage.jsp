@@ -55,7 +55,7 @@
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd class="click">
-							<a class="click" href="">문의내역</a><i
+							<a class="click" href="./readQnaPage">문의내역</a><i
 								class="bi bi-caret-right-fill click"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
@@ -86,7 +86,6 @@
 							<div class="row">
 								<div class="col p-0">
 									<div class="middle-contents">
-
 										<div class="row">
 											<div class="col">
 												<c:forEach items="${list}" var="item" varStatus="status">

@@ -48,8 +48,14 @@ public interface StoreSqlMapper {
 	// Admin 관리자 테스트 로그인
 	public AdminDto selectByIdAndPass(AdminDto adminDto);
 	
-	// 상품출력
+	// 상품 최신순출력
 	public List<ProductDto> selectProductList(ProductDto productDto);
+	
+	// 상품 낮은 가격순출력
+	public List<ProductDto> selectPricelowList(ProductDto productDto);
+		
+	// 상품 높은가격순출력
+	public List<ProductDto> selectPricehighList(ProductDto productDto);
 	
 	// 카테고리 선택 상품 출력
 	public List<ProductDto> selectProductCTList(int pct);
@@ -107,6 +113,9 @@ public interface StoreSqlMapper {
 	
 	// 문의하기 입력
 	public void insertQna(QnaDto qDto);
+	
+	// 문의내역 출력
+	public List<QnaDto>selectByQnalist(QnaDto qDto);
 	
 	//테스트상품등록
 	public void insertByItem(ProductDto productDto);

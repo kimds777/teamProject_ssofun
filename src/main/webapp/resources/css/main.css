@@ -8,7 +8,11 @@ a {
 	text-decoration: none;
 	color: inherit; /* 링크의 색상 제거 */
 }
-
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
 .container{width:1224px; max-width:none!important;}
 .col-a:hover{
 	box-shadow: 0 2px 10px 0 rgba(0,0,0,0.2);
@@ -54,10 +58,10 @@ i.bi-chat-right{
 }
 .category-box{
 	width: 110px;
+	display: inline-block;
 }
 .category-head {
 	height: 40px;
-	background-color: #fafafa;
 	border-top: 1px solid #BFBFBF;
 	border-bottom: 1px solid #BFBFBF
 }
@@ -70,7 +74,7 @@ i.bi-chat-right{
 
 /* Show/hide the categories on hover */
 .category-box:hover .categories {
-	height: 300px;
+	height: 400px;
 	display: block;
 }
 
@@ -99,7 +103,7 @@ i.bi-chat-right{
 /* Style for the subcategories */
 .subcategories {
 	width: 150px;
-	height: 300px;
+	height: 400px;
 	display: none;
 	position: absolute;
 	left: 100%;
@@ -122,7 +126,7 @@ i.bi-chat-right{
 /* Style for the subsubcategories */
 .subsubcategories {
 	width: 150px;
-	height: 300px;
+	height: 400px;
 	display: none;
 	position: absolute;
 	left: 100%;
@@ -146,6 +150,38 @@ i.bi-chat-right{
 .subsubcategories li:hover {
 	background-color:  hsla(0,0%,96%,.9)
 }
+
+.menu-box {
+	width: 900px;
+	display: inline-block;
+}
+
+.menu-list {
+	width: 770px;
+	margin: 0px;
+	padding : 0px;
+	display: inline-block;
+}
+.li-best{
+	width: 95px;
+	display: inline-block;
+}
+.li-todaty{
+	width: 150px;
+	display: inline-block;
+}
+.search-size {
+	width: 300px;
+	display: inline-block;
+}
+
+.bnt-size {
+	width: 70px;
+	color: #FFFFFF;
+	background: #FF6462;
+	border-color: #FFFFFF
+}
+
 
 .shopping-menu-list{
 	padding: 8px 0 5px 0;
@@ -176,7 +212,7 @@ i.bi-chat-right{
 }
 
 .col-name {
-	width: 80px;
+	width: 120px;
 	height: 20px;
 	padding-top: 5px;
 }
@@ -224,7 +260,26 @@ i.bi-chat-right{
 	width: 1224px;
 	margin-bottom: 20px;
 }
+.ca-name{
+	width: 500px;
+	font-size: 1.75rem;
+	display:inline-block;
+}
+.araay-box{
+	float: right;
+}
+.option-box{
+	width: 450px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
+.option-li{
+	position: relative;
+    display: inline-block;
+    padding: 0 12px;
+    border-right: 1px solid #eee;
+}
 .Image {
 	margin-bottom: 44px;
 }
@@ -292,5 +347,5 @@ i.bi-chat-right{
 	color: #FFFFFF;
 	background: #FF6462;
 	border: 1px solid rgb(221, 221, 221);
-	ㅇ font-size: 0.875rem;
+	font-size: 0.875rem;
 }

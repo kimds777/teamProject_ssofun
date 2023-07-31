@@ -7,11 +7,8 @@
 <%
 // Jackson ObjectMapper를 사용하여 Java 객체를 JSON 형태로 변환합니다.
 ObjectMapper objectMapper = new ObjectMapper();
-String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctlist"));
+String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"));
 %>
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +22,12 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <title>Insert title here</title>
 
-<link href="../../resources/css/categories.css" rel="stylesheet"
+<link href="../../resources/css/main.css" rel="stylesheet"
 	type="text/css">
-
+<link href="../../resources/css/productOrder.css" rel="stylesheet"
+	type="text/css">
+<link href="../../resources/css/cartPage.css" rel="stylesheet"
+	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
@@ -76,28 +76,6 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 					</div>
 				</div>
 			</div>
-			<div class="" id="categoryname">
-				<%-- 대분류, 중분류, 소분류 이름 출력 --%>
-				<c:forEach items="${pctlist}" var="category">
-					<%-- 선택한 pct와 일치하는 카테고리를 찾음 --%>
-					<%-- 소분류 출력 --%>
-					<c:if test="${category.product_category_type_id eq param.pct}">
-						<%-- 중분류 출력 --%>
-						<c:forEach items="${pctlist}" var="parentCategory">
-							<c:if
-								test="${parentCategory.product_category_type_id eq category.this_parent_id}">
-								<%-- 대분류 출력 --%>
-								<c:forEach items="${pctlist}" var="grandParentCategory">
-									<c:if
-										test="${grandParentCategory.product_category_type_id eq parentCategory.this_parent_id}">
-						                            ${grandParentCategory.name}  &gt; ${parentCategory.name} &gt;  ${category.name}
-						                        </c:if>
-								</c:forEach>
-							</c:if>
-						</c:forEach>
-					</c:if>
-				</c:forEach>
-			</div>
 			
 			<div class="menu-box">
 				<ul class="menu-list">
@@ -120,21 +98,27 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 
 
 
+	<div class="banner-a">
+		<img class="banner-img" src="../../resources/img/banner.jpg">
+	</div>
 
-	<div class="container">
+	<div class="container ">
 		<div class="row">
 			<div class="col"></div>
 			<div class="col">
 
 
-
 				<div class="row">
 					<div class="col-ca">
-						<c:forEach items="${pctlist}" var="category">
-							<c:if test="${category.product_category_type_id eq param.pct}">
-								<h3>${category.name}</h3>
-							</c:if>
-						</c:forEach>
+						<div class="ca-name">최신상품</div>
+						<div class="araay-box">
+							<ul class="option-box">
+								<li class="option-li"><a href="./storePage">최신등록순</a></li>
+								<li class="option-li"><a href="./storelowPage">낮은 가격순</a></li>
+								<li class="option-li"><a href="./storehighPage">높은 가격순</a></li>
+								<li></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 
@@ -166,18 +150,19 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 													<span class="discount">${Math.floor((product.price - product.price_sale) / product.price * 100).intValue()}%</span>
 													<b><fmt:formatNumber value="${product.price_sale }"
 															pattern="#,###원" /></b>
-															
-													<del class="price"><fmt:formatNumber value="${product.price }"
+
+													<del class="price">
+														<fmt:formatNumber value="${product.price }"
 															pattern="#,###원" />
 													</del>
 												</div>
-												
+
 											</div>
 										</div>
 									</div>
 								</div>
+
 							</a>
-							
 							<div class="col-heart-review">
 								<i class="bi bi-suit-heart"></i>
 								<c:forEach items="${Likecount }" var="count">
@@ -194,7 +179,8 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 								</c:forEach>
 
 							</div>
-							
+							<!-- <hr> -->
+
 						</div>
 					</c:forEach>
 				</div>
@@ -206,14 +192,12 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 						<div class="pagination jOhOoP">
 							<c:choose>
 								<c:when test="${currentPage > 1}">
-									<a onclick="updatePaginationLink(this, ${currentPage - 1})"
-										class="previous-button">이전</a>
+									<a href="?page=${currentPage - 1}" class="previous-button">이전</a>
 								</c:when>
 								<c:otherwise>
 									<span class="previous-button">이전</span>
 								</c:otherwise>
 							</c:choose>
-
 							<c:forEach begin="1" end="${pageCount}" var="pageNum">
 								<c:url value="storePage" var="pageUrl">
 									<c:param name="page" value="${pageNum}" />
@@ -223,24 +207,19 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 										<span class="current-page">${pageNum}</span>
 									</c:when>
 									<c:otherwise>
-										<!-- 페이지 링크를 JavaScript 함수와 연결하여 페이지 번호가 바뀔 때 동적으로 변경되도록 합니다. -->
-										<a onclick="updatePaginationLink(this, ${pageNum})"
-											class="page-link">${pageNum}</a>
+										<a href="${pageUrl}" class="page-link">${pageNum}</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-
 							<c:choose>
 								<c:when test="${currentPage < pageCount}">
-									<a onclick="updatePaginationLink(this, ${currentPage + 1})"
-										class="next-button">다음</a>
+									<a href="?page=${currentPage + 1}" class="next-button">다음</a>
 								</c:when>
 								<c:otherwise>
 									<span class="next-button">다음</span>
 								</c:otherwise>
 							</c:choose>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -253,47 +232,34 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 	<jsp:include page="../../include/fundingFooter.jsp" />
 
 	<script>
-	//카테고리
-	$(document).ready(function() {
+		//카테고리
+		$(document).ready(function() {
 			// Show/hide the categories on hover for both the category button and menu items
 			$(".category-box").hover(function() {
 				$(".categories").css("display", "block");
 			}, function() {
 				$(".categories").css("display", "none");
 			});
-	
+
 			$(".shopping-menu-list li").hover(function() {
 				$(this).find(".subcategories").css("display", "block");
 			}, function() {
 				$(this).find(".subcategories").css("display", "none");
 			});
-	
+
 			$(".subcategories li").hover(function() {
 				$(this).find(".subsubcategories").css("display", "block");
 			}, function() {
 				$(this).find(".subsubcategories").css("display", "none");
 			});
-			
-			
 		});
-	
-	function updatePaginationLink(linkElement, pageNumber) {
-		  const url = new URL(window.location.href);
-		  const params = new URLSearchParams(url.search.slice(1));
+		
+		
 
-		  // 'page' 매개변수를 원하는 페이지 번호로 업데이트합니다.
-		  params.set('page', pageNumber);
-		  
-		  // 'pct' 매개변수가 있다면 유지합니다.
-		  const pctParam = url.searchParams.get('pct');
-		  if (pctParam) {
-		    params.set('pct', pctParam);
-		  }
-
-		  // 수정된 매개변수를 가진 URL로 페이지 이동합니다.
-		  url.search = '?' + params.toString();
-		  window.location.href = url.toString();
-		}
+		var subCategories =
+	<%=jsonPctList%>
+		;
+		console.log(subCategories)
 	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

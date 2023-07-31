@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +12,19 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
- <!-- Google Fonts를 통해 Material Icons 라이브러리를 불러옵니다. -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
- 
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<!-- Google Fonts를 통해 Material Icons 라이브러리를 불러옵니다. -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <link href="../../resources/css/productPage.css" rel="stylesheet"
 	type="text/css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<style>
-/* 버튼이 클릭된 상태의 CSS 스타일 */
-.nav li .scroll_move.clicked {
-	background-color: yellow;
-	color: white;
-}
-</style>
+
 <script>
 const ProductId = new URLSearchParams(location.search).get("id");
 //좋아요 관련
@@ -323,7 +320,6 @@ window.onload = function() {
 					<table class="prdc_detail_table">
 						<tbody>
 
-							<!-- general info table// -->
 							<tr>
 								<th scope="row">상품상태</th>
 								<td>상품 상세페이지 참조</td>
@@ -357,16 +353,17 @@ window.onload = function() {
 								<th scope="row">브랜드</th>
 								<td colspan="3">상품 상세페이지 참조</td>
 							</tr>
-							<!-- //general info table -->
 
 						</tbody>
 
 					</table>
 				</div>
+
 				<div class="scroll2" id="scroll2">
 					<c:forEach items="${deimglist }" var="deimglist">
 						<div class="detail-img">
-							<img src="/ssofunUploadFiles/${deimglist.name}"style="width: 870px; height: 1300px;">
+							<img src="/ssofunUploadFiles/${deimglist.name}"
+								style="width: 870px; height: 1300px;">
 						</div>
 					</c:forEach>
 				</div>
@@ -378,11 +375,11 @@ window.onload = function() {
 							<div class="product_review_rate1">
 								<strong class="guide">구매 만족도</strong>
 							</div>
-							
+
 							<div class="average_rating">
-						        <p class="average_Rate">${averageRatingFormatted}</p>
-						        <div class="star_rating">
-						            <script>
+								<p class="average_Rate">${averageRatingFormatted}</p>
+								<div class="star_rating">
+									<script>
 						                // JavaScript로 평균 별점을 받아옴 (여기에서는 3.7을 직접 지정함)
 						                const averageRating = ${averageRatingFormatted};
 						
@@ -406,19 +403,48 @@ window.onload = function() {
 						                // 별점을 표시할 요소에 HTML 추가
 						                document.write(starsHtml);
 						            </script>
+								</div>
+							</div>
+							<div class="review_count">${totalReviewCount}건</div>
+						</div>
+						
+						<!-- 상품 리뷰 별점 개수 표시 -->
+						<div class="preview2">
+						    <c:set var="starCounts" value="${fn:length(relist)}" />
+						    <c:forEach var="star" begin="1" end="5">
+						        <c:set var="starCount" value="0" />
+						        <c:forEach items="${relist}" var="review">
+						            <c:if test="${review.rate == star}">
+						                <c:set var="starCount" value="${starCount + 1}" />
+						            </c:if>
+						        </c:forEach>
+						        <div class="product_rate">
+						            <span>${star}점</span>
+						            <div class="graph">
+						                <span class="graph-num" style="background-color: #FEC541; width: ${starCount * 20}%;">
+						                    <!--${starCount}-->
+						                </span>
+						            </div>
+						            <span class="star_num">${starCount}</span>
 						        </div>
-						    </div>
-						</div>				
+						    </c:forEach>
+						</div>
+
 					</div>
 
 					<div class="product_review_title">
 						<div class="review-head">
-						<h3>전체리뷰</h3>
+							<h3>전체리뷰</h3>
 						</div>
 						<div class="product_review_list">
 
 							<c:forEach items="${relist }" var="review">
 								<div class="review_list_element">
+								<div class="list-elment-box">
+									<div class="product_reviewer">
+									</div>
+									
+									<div class="name-star-box">
 									<div class="review_name">${review.uname }</div>
 									<div class="rate">
 
@@ -426,31 +452,31 @@ window.onload = function() {
 											<c:when test="${review.rate == 1}">
 												<div class="star-rating">
 													<span class="star">★</span><span class="star-empty">★★★★</span>
-													<span class="start-num">${review.rate}</span>
+													<span class="start-num"> <fmt:formatDate value="${review.created_at}" pattern="yyyy. MM. dd"/></span>
 												</div>
 											</c:when>
 											<c:when test="${review.rate == 2}">
 												<div class="star-rating">
 													<span class="star">★★</span><span class="star-empty">★★★</span>
-													<span class="start-num">${review.rate}</span>
+													<span class="start-num"> <fmt:formatDate value="${review.created_at}" pattern="yyyy. MM. dd"/></span>
 												</div>
 											</c:when>
 											<c:when test="${review.rate == 3}">
 												<div class="star-rating">
 													<span class="star">★★★</span><span class="star-empty">★★</span>
-													<span class="start-num">${review.rate}</span>
+													<span class="start-num"> <fmt:formatDate value="${review.created_at}" pattern="yyyy. MM. dd"/></span>
 												</div>
 											</c:when>
 											<c:when test="${review.rate == 4}">
 												<div class="star-rating">
 													<span class="star">★★★★</span><span class="star-empty">★</span>
-													<span class="start-num">${review.rate}</span>
+													<span class="start-num"> <fmt:formatDate value="${review.created_at}" pattern="yyyy. MM. dd"/></span>
 												</div>
 											</c:when>
 											<c:when test="${review.rate == 5}">
 												<div class="star-rating">
 													<span class="star">★★★★★</span><span class="star-empty"></span>
-													<span>${review.rate}</span>
+													<span class="start-num"><fmt:formatDate value="${review.created_at}"/></span>													
 												</div>
 											</c:when>
 											<c:otherwise>
@@ -458,9 +484,10 @@ window.onload = function() {
 								             </c:otherwise>
 										</c:choose>
 									</div>
+									</div>
 									<div class="col-product-name">${detail[0].product_name}</div>
-
-									<div class="img-list">
+								</div>
+								<div class="img-list">
 										<c:forEach items="${reimgList }" var="reimg">
 											<c:if
 												test="${review.product_review_id eq reimg.product_review_id }">
@@ -471,15 +498,88 @@ window.onload = function() {
 											</c:if>
 										</c:forEach>
 									</div>
-
-									<div class="review_contents">${review.contents }</div>
-								</div>							
+								<div class="list-elment-box2">
+								<div class="review_contents">${review.contents }</div>
+								</div>									
+								</div>
 							</c:forEach>
 
 						</div>
 					</div>
 				</div>
-				<div class="scroll4" id="scroll4">scroll4</div>
+
+
+				<div class="scroll4" id="scroll4">
+					<div class="delivery-title">배송 정보</div>
+					<table class="prdc_delivery_table">
+						<tbody>
+
+							<tr>
+								<th scope="row">배송방법</th>
+								<td style="width: 330px">택배</td>
+								<th rowspan="2">배송비</th>
+								<td rowspan="2">무료배송<br>- 배송 상품 중 19,800원 이상 구매 시 무료배송<br>
+									-도서산간 지역 추가비용 없음
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">묶음배송 여부</th>
+								<td>가능</td>
+							</tr>
+
+							<tr>
+								<th>배송기간</th>
+								<td colspan="3">
+									<ul>
+										<li class="prod-delivery-period-contents etc-pdd-info"><span>ㆍSsofun
+												도심 지역 : 주문 및 결제 완료 후, 1-2일 이내 도착</span></li>
+										<li class="prod-delivery-period-contents">ㆍSsofun 시골 지역 :
+											주문 및 결제 완료 후, 2-3일 이내 도착
+											<p class="prod-delivery-period__notice">- 도서 산간 지역 등은 하루가
+												더 소요될 수 있습니다. 곧 고객님께도 쿠팡친구가 찾아갈 수 있도록 노력하겠습니다</p>
+										</li>
+										<li class="prod-delivery-period-contents">ㆍ천재지변, 물량 수급 변동
+											등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</li>
+									</ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="delivery-title">교환/반품 안내</div>
+				<ul class="prod-delivery-return">
+			        <li>
+			            ㆍ교환/반품에 관한 일반적인 사항은 판매자가 제시사항보다 관계법령이 우선합니다.
+			            <br>다만, 판매자의 제시사항이 관계법령보다 소비자에게 유리한 경우에는 판매자 제시사항이 적용됩니다.
+			        </li>
+			    </ul>
+			    
+			    <table class="prdc_delivery_table">
+				    <colgroup>
+				        <col width="160px">
+				        <col width="*">
+				    </colgroup>
+				    <tbody>
+				    <tr>
+				        <th>교환/반품 비용</th>
+				        <td>
+				            1) [총 주문금액] - [반품 상품금액] = 19,800원 미만인 경우 반품비 5,000원<br>2) [총 주문금액] - [반품 상품금액] = 19,800원 이상인 경우 반품비 2,500원
+				        </td>
+				    </tr>
+				    <tr>
+				        <th>교환/반품 신청 기준일</th>
+				            <td>
+				                <span>ㆍ단순변심에 의한 배송 상품의 교환/반품은 제품 수령 후 30일 이내까지, 교환/반품 제한사항에 해당하지 않는 경우에만 가능 (교환/반품 비용 고객부담)</span>
+				                <p>ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터<br>
+				                    <span >30일 이내에 청약철회 가능</span>
+				                </p>
+				            </td>
+				    </tr>
+				    </tbody>
+				</table>
+
 			</div>
 
 

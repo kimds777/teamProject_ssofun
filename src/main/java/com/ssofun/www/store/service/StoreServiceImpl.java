@@ -101,11 +101,25 @@ public class StoreServiceImpl {
 		}
 	}
 	
-	//상품출력
+	//상품 최신순출력
 	public List<ProductDto> getItemList( ProductDto producDto){
 		List<ProductDto> productList = storeSqlMapper.selectProductList(producDto);
 		
 		return productList;
+	}
+	
+	//상품 낮은가격순출력
+	public List<ProductDto> getItemlowList( ProductDto producDto){
+		List<ProductDto> productlowList = storeSqlMapper.selectPricelowList(producDto);
+			
+		return productlowList;
+	}
+		
+	//상품 높은 가격순출력
+	public List<ProductDto> getItemhighList( ProductDto producDto){
+		List<ProductDto> producthighList = storeSqlMapper.selectPricehighList(producDto);
+			
+		return producthighList;
 	}
 	
 	//카테고리 선택 상품 출력
@@ -225,6 +239,12 @@ public class StoreServiceImpl {
 	// 문의하기 입력
 	public void registQna(QnaDto qDto) {
 		storeSqlMapper.insertQna(qDto);
+	}
+	
+	// 문의내역 출력
+	public List<QnaDto> getQnalist(QnaDto qDto){
+		List<QnaDto>qna = storeSqlMapper.selectByQnalist(qDto);
+		return qna;
 	}
 	
 	// 장바구니 구매후 물품제거

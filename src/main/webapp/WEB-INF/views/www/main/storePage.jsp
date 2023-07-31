@@ -76,6 +76,23 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"
 					</div>
 				</div>
 			</div>
+			
+			<div class="menu-box">
+				<ul class="menu-list">
+					<li class="li-best">베스트👑</li>
+					<li class="li-best">MD추천👍</li>
+					<li class="li-best">여름 특가⛱️</li>
+					<li class="li-todaty">2시전 당일출고🚚</li>
+					<li class="search-size">
+						  <div class="container-fluid ">
+						    <form class="d-flex" role="search">
+						      <input class="form-control me-2" type="search" placeholder="상품을 검색해보세요!!" aria-label="Search">
+						      <button class="btn btn-outline-success bnt-size" type="submit">검색</button>
+						    </form>
+						  </div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
@@ -93,7 +110,15 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"
 
 				<div class="row">
 					<div class="col-ca">
-						<h3>최신상품</h3>
+						<div class="ca-name">최신상품</div>
+						<div class="araay-box">
+							<ul class="option-box">
+								<li class="option-li"><a href="./storePage">최신등록순</a></li>
+								<li class="option-li"><a href="./storelowPage">낮은 가격순</a></li>
+								<li class="option-li"><a href="./storehighPage">높은 가격순</a></li>
+								<li></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 
@@ -228,6 +253,8 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"
 				$(this).find(".subsubcategories").css("display", "none");
 			});
 		});
+		
+		
 
 		var subCategories =
 	<%=jsonPctList%>
