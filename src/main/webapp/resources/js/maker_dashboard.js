@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+    setUserSession();
     var user_id = getUserSession();
     var user_creator_id = getUserCreatorIdSession();
 
@@ -38,7 +39,18 @@ function setEventListener(user_id){
     });
 }
 
-
+function setUserSession(){
+    $.ajax({
+        url: "../user/AJAXsetUserSession",
+        method: "GET",
+        success: function(res){
+            if(res == 0){
+                alert("세션이 종료되어 로그아웃되었습니다.");
+                window.location.href = "../user/userLoginPage";
+            }
+        }
+    });
+}
 
 function getUserSession(){
     var user_id;

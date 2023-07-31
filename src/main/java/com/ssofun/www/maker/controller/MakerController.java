@@ -52,16 +52,7 @@ public class MakerController {
 	
 //	메이커 마이페이지
 	@RequestMapping("makerMyPage")
-	public String makerMyPage(HttpSession session,@RequestParam(defaultValue = "1", required = false) long user_id) { //user_id값 수정해야함
-		UserDto userDto = userService.getUserByUserId(user_id);
-		Long user_creator_id = makerService.getCreatorId(user_id);
-		if(user_creator_id != null) {
-			session.setAttribute("user_creator_id", user_creator_id);
-			session.setAttribute("user", userDto);
-		}else {
-			session.setAttribute("user", userDto);			
-		}
-		
+	public String makerMyPage() {
 		return "www/maker/makerMyPage";
 	}
 	

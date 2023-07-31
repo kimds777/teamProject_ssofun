@@ -68,7 +68,7 @@ function getUserSession(){
 
     $.ajax({
         url: "../user/AJAXgetUserSession",
-        metho: "GET",
+        method: "GET",
         async: false,
         success: function(res){
             if(res != null){
@@ -83,6 +83,7 @@ function getUserSession(){
     if(user_id != 0){
         return user_id;
     }else{
+        window.location.href = "../user/userLoginPage";
        return 0;
     }
 }

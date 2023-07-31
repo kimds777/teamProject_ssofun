@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
-
+    setUserSession();
+    
     var user_id = getUserSession();
     var user_creator_id = getUserCreatorIdSession();
 
@@ -108,6 +109,7 @@ function setEventListener(user_id,funding_id,user_creator_id){
 
     $(document).on("click","input#fundingRegisterSubmitBtn",function(event){
         event.stopPropagation();        
+
         if(user_creator_id != 0){
             insertTag(user_creator_id);
         }else{
@@ -360,7 +362,7 @@ function getUserSession(){
         return user_id;
     }else{
         alert("세션이 만료되어 로그아웃되었습니다.");
-        // window.location.href = "../user/userLoginPage";
+        window.location.href = "../user/userLoginPage";
     }
 }
 
@@ -672,7 +674,7 @@ function insertTag(user_creator_id){
              if(res != 0){
                  funding_tag_id = res;
 
-                 var funding_category_id = $("select#funding_category_id>option:selected").val();
+                 var $funding_category_id = $("select#funding_category_id>option:selected").val();
 
                  var funding_code = generateUniqueProductCode(10);
                  var title = $("#projectTitle").val();
@@ -686,10 +688,12 @@ function insertTag(user_creator_id){
                  }
                  var delivery_from = $("#delivery_from").val();
                  
+                 alert("funding_category_id: "+$funding_category_id);
+
                  $.ajax({
                      url: "./AJAXinsertFunding",
                      method: "POST",
-                     data: {funding_category_id:funding_category_id,
+                     data: {funding_category_id:$funding_category_id,
                              funding_tag_id:funding_tag_id,
                              user_creator_id:user_creator_id,
                              funding_code:funding_code,
@@ -1024,22 +1028,15 @@ function addCommas(num){
     return str;
 };
 
-// function getTemporarilyTag(res){
-//     $.ajax({
-//         url: "./AJAXgetTemporarilyTag",
-//         method: "GET",
-//         data: {funding_tag_id:res},
-//         success: function(res){
-//             var $funding_tag_id;
-//             $.each(res,function(key,value){
-//                 if(key == "funding_tag_id"){
-//                     $funding_tag_id = value;
-//                 }
-//                 if(key == "name"){
-//                     $("#insertTagList").append("<li>#"+value+"<span>X</span><input type='hidden' class='funding_tag_id' value='"+$funding_tag_id+"'></li>");
-//                 }
-//             });
-
-//         }
-//     });
-// }
+function setUserSession(){
+    $.ajax({
+        url: "../user/AJAXsetUserSession",
+        method: "GET",
+        success: function(res){
+            if(res == 0){
+                alert("세션이 종료되어 로그아웃되었습니다.");
+                window.location.href = "../user/userLoginPage";
+            }
+        }
+    });
+}

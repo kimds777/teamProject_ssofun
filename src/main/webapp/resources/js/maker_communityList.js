@@ -1,5 +1,7 @@
 
 $(document).ready(function(){
+    etUserSession();
+    
     var user_id = getUserSession();
     var user_creator_id = getUserCreatorIdSession();
 
@@ -283,6 +285,19 @@ function getCommunityReviewExistCreatorUserId(funding_review_id,user_creator_id,
         data: {funding_review_id:funding_review_id,user_creator_id:user_creator_id},
         success: function(res){
             callback(res);
+        }
+    });
+}
+
+function setUserSession(){
+    $.ajax({
+        url: "../user/AJAXsetUserSession",
+        method: "GET",
+        success: function(res){
+            if(res == 0){
+                alert("세션이 종료되어 로그아웃되었습니다.");
+                window.location.href = "../user/userLoginPage";
+            }
         }
     });
 }
