@@ -54,9 +54,6 @@
 	width: 100px;
 }
 
-.c4{
-	width: 170px;
-}
 
 .c5{
 	width: 110px;
@@ -67,6 +64,10 @@
 }
 
 .c7{
+	width: 120px;
+}
+
+.c8{
 	width: 120px;
 }
 
@@ -444,15 +445,15 @@ $(document).ready(function() {
                     "<input type='checkbox' checked=''/><span class='checkmark'></span>" +
                     "</label>" +
                     "</th>" +
-                    "<td class='td_1'>No. " + productList[i].product_id + "</td>" +
-                    "<td class='td_1'>" + productList[i].biz_name + "</td>" +
-                    "<td class='td_1'>" + productList[i].category_type_name + "</td>" +
-                    "<td class='td_1'><a href='productDetailPage?product_id=" + productList[i].product_id + "'>" + productList[i].product_name + "</a></td>" +
-                    "<td class='td_1'><img class='img-fluid img-thumbnail' style='width:75px; height:75px;' src='/ssofunUploadFiles/" + productList[i].thumbnail_name + "'></td>" +
-                    "<td class='td_1'>" + formatNumber(productList[i].price) + " 원</td>" +
-                    "<td class='td_1'>" + formatNumber(productList[i].price_sale) + " 원</td>" +
+                    "<td class='td_1 c0'>No. " + productList[i].product_id + "</td>" +
+                    "<td class='td_1 c1'>" + productList[i].biz_name + "</td>" +
+                    "<td class='td_1 c2'>" + productList[i].category_type_name + "</td>" +
+                    "<td class='td_1 c3'><a href='productDetailPage?product_id=" + productList[i].product_id + "'>" + productList[i].product_name + "</a></td>" +
+                    "<td class='td_1 c4'><img class='img-fluid img-thumbnail' style='width:75px; height:75px;' src='/ssofunUploadFiles/" + productList[i].thumbnail_name + "'></td>" +
+                    "<td class='td_1 c5'>" + formatNumber(productList[i].price) + " 원</td>" +
+                    "<td class='td_1 c6'>" + formatNumber(productList[i].price_sale) + " 원</td>" +
                     /* "<td class='td_1'>" + productList[i].contents + "</td>" + */
-                    "<td class='td_1'>" + productList[i].created_at + "</td>" +
+                    "<td class='td_1 c7'>" + productList[i].created_at + "</td>" +
                     "</tr>";
             }
             $('#product_list').append(res); // 'product_list' 요소의 내용을 변경하여 테이블을 갱신합니다.
