@@ -109,7 +109,7 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("pctli
 						  <div class="container-fluid ">
 						    <form class="d-flex" role="search">
 						      <input class="form-control me-2" type="search" placeholder="상품을 검색해보세요!!" aria-label="Search">
-						      <button class="btn btn-outline-success bnt-size" type="submit">검색</button>
+						      <button class="bnt-size" type="submit">검색</button>
 						    </form>
 						  </div>
 					</li>

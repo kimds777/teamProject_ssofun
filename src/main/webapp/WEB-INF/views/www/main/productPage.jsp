@@ -146,6 +146,8 @@ window.onload = function() {
   };
 </script>
 
+
+
 <%-- 전체 리뷰 개수와 총 별점 합계를 초기화합니다. --%>
 <c:set var="totalReviewCount" value="0" />
 <c:set var="totalRatingSum" value="0" />
@@ -158,10 +160,14 @@ window.onload = function() {
 
 <%-- 평균 별점을 계산합니다. 만약 전체 리뷰 개수가 0인 경우, 평균 별점은 0으로 처리합니다. --%>
 <c:set var="averageRating"
-	value="${totalReviewCount > 0 ? totalRatingSum / totalReviewCount : 0}" />
+	value="${totalReviewCount > 0 ?  totalRatingSum /  totalReviewCount : 0}" />
 
-<c:set var="averageRatingFormatted"
-	value="${String.format('%.1f', averageRating)}" />
+<c:if test="${not empty relist}">
+	<c:set var="averageRatingFormatted"
+		value="${String.format('%.1f', averageRating)}" />
+</c:if>
+
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -407,27 +413,28 @@ window.onload = function() {
 							</div>
 							<div class="review_count">${totalReviewCount}건</div>
 						</div>
-						
+
 						<!-- 상품 리뷰 별점 개수 표시 -->
 						<div class="preview2">
-						    <c:set var="starCounts" value="${fn:length(relist)}" />
-						    <c:forEach var="star" begin="1" end="5">
-						        <c:set var="starCount" value="0" />
-						        <c:forEach items="${relist}" var="review">
-						            <c:if test="${review.rate == star}">
-						                <c:set var="starCount" value="${starCount + 1}" />
-						            </c:if>
-						        </c:forEach>
-						        <div class="product_rate">
-						            <span>${star}점</span>
-						            <div class="graph">
-						                <span class="graph-num" style="background-color: #FEC541; width: ${starCount * 20}%;">
-						                    <!--${starCount}-->
-						                </span>
-						            </div>
-						            <span class="star_num">${starCount}</span>
-						        </div>
-						    </c:forEach>
+							<c:set var="starCounts" value="${fn:length(relist)}" />
+							<c:forEach var="star" begin="1" end="5">
+								<c:set var="starCount" value="0" />
+								<c:forEach items="${relist}" var="review">
+									<c:if test="${review.rate == star}">
+										<c:set var="starCount" value="${starCount + 1}" />
+									</c:if>
+								</c:forEach>
+								<div class="product_rate">
+									<span>${star}점</span>
+									<div class="graph">
+										<span class="graph-num"
+											style="background-color: #FFD700; width: ${starCount * 20}%;">
+											<!--${starCount}-->
+										</span>
+									</div>
+									<span class="star_num">${starCount}</span>
+								</div>
+							</c:forEach>
 						</div>
 
 					</div>
@@ -440,54 +447,58 @@ window.onload = function() {
 
 							<c:forEach items="${relist }" var="review">
 								<div class="review_list_element">
-								<div class="list-elment-box">
-									<div class="product_reviewer">
-									</div>
-									
-									<div class="name-star-box">
-									<div class="review_name">${review.uname }</div>
-									<div class="rate">
+									<div class="list-elment-box">
+										<div class="product_reviewer"></div>
 
-										<c:choose>
-											<c:when test="${review.rate == 1}">
-												<div class="star-rating">
-													<span class="star">★</span><span class="star-empty">★★★★</span>
-													<span class="start-num"> <fmt:formatDate value="${review.created_at}" pattern="yyyy. MM. dd"/></span>
-												</div>
-											</c:when>
-											<c:when test="${review.rate == 2}">
-												<div class="star-rating">
-													<span class="star">★★</span><span class="star-empty">★★★</span>
-													<span class="start-num"> <fmt:formatDate value="${review.created_at}" pattern="yyyy. MM. dd"/></span>
-												</div>
-											</c:when>
-											<c:when test="${review.rate == 3}">
-												<div class="star-rating">
-													<span class="star">★★★</span><span class="star-empty">★★</span>
-													<span class="start-num"> <fmt:formatDate value="${review.created_at}" pattern="yyyy. MM. dd"/></span>
-												</div>
-											</c:when>
-											<c:when test="${review.rate == 4}">
-												<div class="star-rating">
-													<span class="star">★★★★</span><span class="star-empty">★</span>
-													<span class="start-num"> <fmt:formatDate value="${review.created_at}" pattern="yyyy. MM. dd"/></span>
-												</div>
-											</c:when>
-											<c:when test="${review.rate == 5}">
-												<div class="star-rating">
-													<span class="star">★★★★★</span><span class="star-empty"></span>
-													<span class="start-num"><fmt:formatDate value="${review.created_at}"/></span>													
-												</div>
-											</c:when>
-											<c:otherwise>
+										<div class="name-star-box">
+											<div class="review_name">${review.uname }</div>
+											<div class="rate">
+
+												<c:choose>
+													<c:when test="${review.rate == 1}">
+														<div class="star-rating">
+															<span class="star">★</span><span class="star-empty">★★★★</span>
+															<span class="start-num"> <fmt:formatDate
+																	value="${review.created_at}" pattern="yyyy. MM. dd" /></span>
+														</div>
+													</c:when>
+													<c:when test="${review.rate == 2}">
+														<div class="star-rating">
+															<span class="star">★★</span><span class="star-empty">★★★</span>
+															<span class="start-num"> <fmt:formatDate
+																	value="${review.created_at}" pattern="yyyy. MM. dd" /></span>
+														</div>
+													</c:when>
+													<c:when test="${review.rate == 3}">
+														<div class="star-rating">
+															<span class="star">★★★</span><span class="star-empty">★★</span>
+															<span class="start-num"> <fmt:formatDate
+																	value="${review.created_at}" pattern="yyyy. MM. dd" /></span>
+														</div>
+													</c:when>
+													<c:when test="${review.rate == 4}">
+														<div class="star-rating">
+															<span class="star">★★★★</span><span class="star-empty">★</span>
+															<span class="start-num"> <fmt:formatDate
+																	value="${review.created_at}" pattern="yyyy. MM. dd" /></span>
+														</div>
+													</c:when>
+													<c:when test="${review.rate == 5}">
+														<div class="star-rating">
+															<span class="star">★★★★★</span><span class="star-empty"></span>
+															<span class="start-num"><fmt:formatDate
+																	value="${review.created_at}" /></span>
+														</div>
+													</c:when>
+													<c:otherwise>
 								                    (별점 없음)
 								             </c:otherwise>
-										</c:choose>
+												</c:choose>
+											</div>
+										</div>
+										<div class="col-product-name">${detail[0].product_name}</div>
 									</div>
-									</div>
-									<div class="col-product-name">${detail[0].product_name}</div>
-								</div>
-								<div class="img-list">
+									<div class="img-list">
 										<c:forEach items="${reimgList }" var="reimg">
 											<c:if
 												test="${review.product_review_id eq reimg.product_review_id }">
@@ -498,9 +509,9 @@ window.onload = function() {
 											</c:if>
 										</c:forEach>
 									</div>
-								<div class="list-elment-box2">
-								<div class="review_contents">${review.contents }</div>
-								</div>									
+									<div class="list-elment-box2">
+										<div class="review_contents">${review.contents }</div>
+									</div>
 								</div>
 							</c:forEach>
 
@@ -547,37 +558,36 @@ window.onload = function() {
 						</tbody>
 					</table>
 				</div>
-				
+
 				<div class="delivery-title">교환/반품 안내</div>
 				<ul class="prod-delivery-return">
-			        <li>
-			            ㆍ교환/반품에 관한 일반적인 사항은 판매자가 제시사항보다 관계법령이 우선합니다.
-			            <br>다만, 판매자의 제시사항이 관계법령보다 소비자에게 유리한 경우에는 판매자 제시사항이 적용됩니다.
-			        </li>
-			    </ul>
-			    
-			    <table class="prdc_delivery_table">
-				    <colgroup>
-				        <col width="160px">
-				        <col width="*">
-				    </colgroup>
-				    <tbody>
-				    <tr>
-				        <th>교환/반품 비용</th>
-				        <td>
-				            1) [총 주문금액] - [반품 상품금액] = 19,800원 미만인 경우 반품비 5,000원<br>2) [총 주문금액] - [반품 상품금액] = 19,800원 이상인 경우 반품비 2,500원
-				        </td>
-				    </tr>
-				    <tr>
-				        <th>교환/반품 신청 기준일</th>
-				            <td>
-				                <span>ㆍ단순변심에 의한 배송 상품의 교환/반품은 제품 수령 후 30일 이내까지, 교환/반품 제한사항에 해당하지 않는 경우에만 가능 (교환/반품 비용 고객부담)</span>
-				                <p>ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터<br>
-				                    <span >30일 이내에 청약철회 가능</span>
-				                </p>
-				            </td>
-				    </tr>
-				    </tbody>
+					<li>ㆍ교환/반품에 관한 일반적인 사항은 판매자가 제시사항보다 관계법령이 우선합니다. <br>다만,
+						판매자의 제시사항이 관계법령보다 소비자에게 유리한 경우에는 판매자 제시사항이 적용됩니다.
+					</li>
+				</ul>
+
+				<table class="prdc_delivery_table">
+					<colgroup>
+						<col width="160px">
+						<col width="*">
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>교환/반품 비용</th>
+							<td>1) [총 주문금액] - [반품 상품금액] = 19,800원 미만인 경우 반품비 5,000원<br>2)
+								[총 주문금액] - [반품 상품금액] = 19,800원 이상인 경우 반품비 2,500원
+							</td>
+						</tr>
+						<tr>
+							<th>교환/반품 신청 기준일</th>
+							<td><span>ㆍ단순변심에 의한 배송 상품의 교환/반품은 제품 수령 후 30일 이내까지,
+									교환/반품 제한사항에 해당하지 않는 경우에만 가능 (교환/반품 비용 고객부담)</span>
+								<p>
+									ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날 또는 알
+									수 있었던 날부터<br> <span>30일 이내에 청약철회 가능</span>
+								</p></td>
+						</tr>
+					</tbody>
 				</table>
 
 			</div>

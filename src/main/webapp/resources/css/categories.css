@@ -64,7 +64,8 @@ i.bi-chat-right {
 }
 
 .category-head {
-	height: 40px; border-top : 1px solid #BFBFBF;
+	height: 40px;
+	border-top: 1px solid #BFBFBF;
 	border-bottom: 1px solid #BFBFBF;
 	border-top: 1px solid #BFBFBF;
 }
@@ -158,7 +159,7 @@ i.bi-chat-right {
 }
 
 .menu-box {
-	width: 900px;
+	width: 750px;
 	float: right;
 	display: inline-block;
 }
@@ -166,17 +167,20 @@ i.bi-chat-right {
 .menu-list {
 	width: 770px;
 	margin: 0px;
-	padding : 0px;
+	padding: 0px;
 	display: inline-block;
 }
-.li-best{
+
+.li-best {
 	width: 95px;
 	display: inline-block;
 }
-.li-todaty{
+
+.li-todaty {
 	width: 150px;
 	display: inline-block;
 }
+
 .search-size {
 	width: 300px;
 	display: inline-block;
@@ -184,9 +188,11 @@ i.bi-chat-right {
 
 .bnt-size {
 	width: 70px;
+	height : 35px;
 	color: #FFFFFF;
 	background: #FF6462;
-	border-color: #FFFFFF
+	border-color: #FFFFFF;
+	 border-radius: 4px;
 }
 
 .shopping-menu-list {
