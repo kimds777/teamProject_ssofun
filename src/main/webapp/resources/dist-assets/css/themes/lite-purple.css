@@ -21851,7 +21851,7 @@ a.typo_link.text-gray-900:after {
   .navigation-left
   .nav-item.active
   .nav-item-hold {
-/*   color: #8b5cf6; */
+  color: #FF6462;
 }
 .layout-sidebar-large .sidebar-left .navigation-left .nav-item .nav-item-hold {
   display: block;
