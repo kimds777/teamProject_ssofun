@@ -177,7 +177,10 @@ public class CommunityController {
 		public String communityUpdatePage(Model model, int community_id) {
 			
 			Map<String, Object> map = communityService.getCommunity(community_id);
+			List<CommunityCategoryDto> communityCategoryList = communityService.communityCategoryList();
+			
 			model.addAttribute("data", map);
+			model.addAttribute("communityCategoryList", communityCategoryList);
 			
 			return "www/community/communityUpdatePage";
 		}

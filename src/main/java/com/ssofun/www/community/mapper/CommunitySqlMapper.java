@@ -62,6 +62,5 @@ public interface CommunitySqlMapper {
 	
 	// 공지사항 리스트
 	public List<CommunityNoticeDto> communityNoticeList();
-	
 
 }

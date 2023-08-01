@@ -125,9 +125,12 @@ public class CommunityService {
 		  Map<String,Object> map = new HashMap<>();
 		  CommunityDto communityDto = communitySqlMapper.selectByCommunityId(community_id);
 		  UserDto userDto = communitySqlMapper.selectByUserId(communityDto.getUser_id());
+		  CommunityCategoryDto communityCategoryDto = communitySqlMapper.selectByCommunityCategoryId(communityDto.getCommunity_category_id());
+		  
 		  
 		  map.put("communityDto", communityDto);
 		  map.put("userDto", userDto);
+		  map.put("communityCategoryDto", communityCategoryDto);
 		  
 		  return map;
 		  

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +87,7 @@
 	       <!-- 게시글 카테고리 선택 -->
 			         <div class="input-container">
 			        <select name="community_category_id">
-			          <option>카테고리 선택</option>
+			          <option>${data.communityCategoryDto.name}</option>
 			          <c:forEach items="${communityCategoryList}" var="communityCategoryList">
 			            <option value="${communityCategoryList.community_category_id}">${communityCategoryList.name}</option>
 			          </c:forEach>

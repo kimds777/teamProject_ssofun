@@ -314,9 +314,8 @@
 	                    </div>
 	                    <div class="row">
 	                        <div class="col-md-6 form-group mb-3">
-	                            <label for="picker1">카테고리타입아이디</label>
 	                            <select name="product_category_type_id" class="form-control form-control-rounded">
-	                                <option>카테고리타입아이디 선택</option>
+	                                <option>카테고리타입선택</option>
 	                                <c:forEach items="${categoryTypeList}" var="categoryType">
 	                                    <option value="${categoryType.product_category_type_id}">${categoryType.name}</option>
 	                                </c:forEach>
@@ -328,7 +327,7 @@
 	        </div>
 	    </div>
 		<div class="d-flex justify-content-end">
-		    <button id="submitAllBtn" class="btn btn-primary" onclick="submitForm()">상품등록</button>
+		    <button id="submitAllBtn" class="btn btn-primary mb-4" onclick="submitForm()">상품등록</button>
 		</div>
 	    </form>
 	    <!-- end of main-content -->
