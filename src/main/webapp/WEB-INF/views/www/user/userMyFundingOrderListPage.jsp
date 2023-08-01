@@ -37,6 +37,7 @@
                         <dt>나의 쇼핑 내역</dt><!--중분류명 넣으면 됩니다-->
                         <dd><a href="../store/orderListPage">주문목록</a><i class="bi bi-caret-right-fill "></i></dd><!--여기에 메뉴 넣으세요!-->
                         <dd><a href="../store/readQnaPage">문의내역</a><i class="bi bi-caret-right-fill"></i></dd><!--여기에 메뉴 넣으세요!-->
+                        <dd><a href="../store/cartPage">장바구니</a><i class="bi bi-caret-right-fill"></i></dd><!--여기에 메뉴 넣으세요!-->
                     </dl>  
                     <dl>
                         <dt>나의 펀딩 내역</dt>
