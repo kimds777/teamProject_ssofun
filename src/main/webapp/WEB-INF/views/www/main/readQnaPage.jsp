@@ -44,7 +44,7 @@
 					<ul id="first">
 						<li id="profileIcon"><span></span></li>
 						<li id="makerName">이지광님</li>
-						<li id="logout">로그아웃</li>
+						<li id="logoutUser">로그아웃</li>
 					</ul>
 					<dl>
 						<dt>나의 쇼핑 내역</dt>
