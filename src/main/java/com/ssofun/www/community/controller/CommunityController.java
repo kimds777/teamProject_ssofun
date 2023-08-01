@@ -218,9 +218,12 @@ public class CommunityController {
 		// 공지사항 상세보기 페이지
 		@RequestMapping("communityNoticeDetailPage")
 		public String communityNoticeDetailPage(Model model, HttpSession session, int community_notice_id) {
+			
+			
 			communityService.increaseNoticeReadCount(community_notice_id);
 			AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
 			
+			List<CommunityCategoryDto> communityCategoryList = communityService.communityCategoryList();
 			Map<String,Object> map = communityService.communityNoticeDetail(community_notice_id);
 			
 			
@@ -239,6 +242,7 @@ public class CommunityController {
 //			communityNoticeDto.setTitle(title);
 			
 			model.addAttribute("data", map);
+			model.addAttribute("communityCategoryList", communityCategoryList);
 			
 			return "www/community/communityNoticeDetailPage";
 		}
