@@ -60,7 +60,7 @@
 					<a href="../../systemadmin/login/adminLoginPage" class="loginfont" style="color: #f5f5f5;">로그인</a>
 				</c:if>
 				<c:if test="${!empty systemAdmin}">
-					<a href="systemAdminLogoutProcess" class="loginfont" style="color: #f5f5f5;" onclick="logout()">로그아웃</a>
+					<a href="../../systemadmin/systemAdminLogoutProcess" class="loginfont" style="color: #f5f5f5;" onclick="logout()">로그아웃</a>
 				</c:if>
 			</p></div></div><!--로그아웃if문-->
 			<div class="row"></div>
