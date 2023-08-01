@@ -78,35 +78,38 @@
 
 	
 	/* 글쓰기 버튼 설정  */
-	.btn {
-	border-radius: 5px; 
-	border-color : #BFBBB0;
-
-	}
+		.btn {
+		color:white;
+		border-radius: 5px; 
+	 	background-color: #FF6462;
+		border-radius: 5px; 
+		border-color : #FF6462;
+	
+		}
 
 	/*공지사항 아이콘 색 변경 */
-	.bi-bell-fill {
-  	color: #FF6462;
-	}
+		.bi-bell-fill {
+	  	color: #FF6462;
+		}
 	
 	/*공지사항 리스트 뒷 배경 설정  */
-	.notice-row {
-        background-color: #f3f3f3;
-    }
+		.notice-row {
+	        background-color: #f3f3f3;
+	    }
 
 
 	/*리스트 위에 선 추가  */
- 	.list-top{
- 	 border-top: 1px solid black;
- 	}
+	 	.list-top{
+	 	 border-top: 1px solid black;
+	 	}
  	
  	
 		  /*배너 설정  */
-		.img-fluid{
-		margin-bottom: 70px;	
-		width: 100%;
-		height: 100%; 
-		}
+			.img-fluid{
+			margin-bottom: 70px;	
+			width: 100%;
+			height: 100%; 
+			}
 
 
 </style>

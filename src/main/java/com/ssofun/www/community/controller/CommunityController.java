@@ -223,18 +223,20 @@ public class CommunityController {
 			
 			Map<String,Object> map = communityService.communityNoticeDetail(community_notice_id);
 			
-
-			// html escape 글 내용 
-			CommunityNoticeDto communityNoticeDto = (CommunityNoticeDto)map.get("communityNoticeDto");
-			String contents = communityNoticeDto.getContents();
-			contents = StringEscapeUtils.escapeHtml4(contents);
-			contents = contents.replaceAll("\n", "<br>");
-			communityNoticeDto.setContents(contents);
 			
-			// html escape 제목
-			String title = communityNoticeDto.getTitle();
-			title = StringEscapeUtils.escapeHtml4(title);
-			communityNoticeDto.setTitle(title);
+			
+//
+//			// html escape 글 내용 
+//			CommunityNoticeDto communityNoticeDto = (CommunityNoticeDto)map.get("communityNoticeDto");
+//			String contents = communityNoticeDto.getContents();
+//			contents = StringEscapeUtils.escapeHtml4(contents);
+//			contents = contents.replaceAll("\n", "<br>");
+//			communityNoticeDto.setContents(contents);
+//			
+//			// html escape 제목
+//			String title = communityNoticeDto.getTitle();
+//			title = StringEscapeUtils.escapeHtml4(title);
+//			communityNoticeDto.setTitle(title);
 			
 			model.addAttribute("data", map);
 			

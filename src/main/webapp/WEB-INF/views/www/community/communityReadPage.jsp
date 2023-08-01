@@ -79,9 +79,64 @@
 		  	padding: 30px 0;
 		 		}
 		 		
-		 	.modification{
+		 	/*댓글 닉네임-날짜 */
+		 	.comment-nickname{
+		 	margin-top: 20px;
+		 	font-weight: 550;
+		 	}
+		 	
+		 	/*댓글 간격 조정  */
+		 	.comment {
+		 	margin-top: 10px;
+		 	margin-bottom: 20px;
 		 	
 		 	}
+		 		
+		 	/*댓글 날짜  */
+		 	.comment-date{
+		 	color : #9e9e9e;
+		 	}	
+		 	
+		 	
+		 	/*댓글등록 버튼 설정 */
+		 	.comment-submit {
+			    display: flex;
+			    justify-content: center; /* 수평 가운데 정렬 */
+			    align-items: center; /* 수직 가운데 정렬 */
+			    height: 100%; /* Flex Container의 높이를 100%로 설정하여 부모 요소 높이에 맞춤 */
+			  
+			}
+		 	.btn-primary{
+		 	 margin-top : 45px;
+		 	 background-color: #FF6462;
+		 	border-radius: 5px; 
+			border-color : #FF6462;
+		 	 	 
+		 	}
+		 	
+		 	/*댓글 사이 선 넣기 */
+		 	.centered-line__line {
+		    height: 1px;
+		    background-color: #9e9e9e;
+		    width:760px;
+			}
+			
+		 	
+		 	/*하단의 여백 설정 */
+		 	.row-margin{
+		 		margin-bottom: 100px;
+		 	}
+		 	
+		 	
+		 	/*수정-삭제 간격 설정  */
+		 	.modification{
+		 	margin-left: 30px;
+		 	
+		 	}
+		 	.delete{
+		 		margin-left: 40px;
+		 	}
+		 	
 		 
 		 </style>   
 	  
@@ -89,8 +144,8 @@
 </head>
 
 <body>
-<jsp:include page="../../include/fundingHeader.jsp"/>
-<img src="../../resources/img/jangsoyeon/banner.jpg" class="img-fluid" alt="">	
+	<jsp:include page="../../include/fundingHeader.jsp"/>
+	<img src="../../resources/img/jangsoyeon/banner.jpg" class="img-fluid" alt="">	
 
 				<div class ="section">
 					<div class="container">
@@ -145,7 +200,7 @@
 							    	<a href="./communityUpdatePage?community_id=${data.communityDto.community_id}">수정</a>
 							    </span>
 							    <span class ="delete">
-							    	<a href="./deleteProcess?community_id=${data.communityDto.community_id}">삭제</a>
+							    	   <a href="./deleteProcess?community_id=${data.communityDto.community_id}">삭제</a>
 							    </span>
 							</c:if> 
 						</div>
@@ -154,41 +209,58 @@
 				
 					
 					
-					
-					<form action="./commentInsertProcess" method="post" class="row g-3">
-					    <div class="col-md-9 col-lg-8">
+			
+					<form action="./commentInsertProcess" method="post" class="row">
+					    <div class="col-10">
 					        <label for="articleComment" hidden>댓글</label>
-					        <textarea class="form-control" name="comment" placeholder="댓글을 남겨주세요" id="floatingTextarea" rows="3" required></textarea>
+					        <textarea class="form-control" name="comment" placeholder="댓글을 남겨주세요" class="floatingTextarea" rows="3" required></textarea>
 					        <input type="hidden" name="user_id" value="${data.userDto.user_id}">
 					        <input type="hidden" name="community_id" value="${data.communityDto.community_id}">
 					    </div>
-					    <div class="col-md-3 col-lg-4">
-					        <button class="btn btn-primary" id="comment-submit" type="submit">댓글 작성</button>
+					    <div class="col-2 comment-submit">
+					        <button class="btn btn-primary">댓글등록</button>
 					    </div>
 					</form>
 					
-					<ul id="article-comments" class="row col-md-10 col-lg-8 pt-3">
+					
+					
+					<div class="row">
+						<div class="col">
+							<ul id="article-comments" class=" pt-3">
 					               
 					                <!-- 댓글 리스트 출력 -->
 					                <c:forEach items="${Commentlist}" var="map">
 					                    <li>
 					                        <div class="row">
-					                            <div class="col-md-12">
+					                            <span class="col-md-12 comment-nickname">
 					                                ${map.userDto.nickname}
-					                            </div>
-					                            <div class="col-md-12">
-					                                <fmt:formatDate value="${map.communityDto.created_at}" pattern="yy.MM.dd hh:mm"/>
-					                            </div>
-					                            <div class="col-md-12">
+					                                   <span class = "comment-date">
+					                                   	| <fmt:formatDate value="${map.communityDto.created_at}" pattern="yy.MM.dd hh:mm"/>
+					                            	</span>
+					                            </span>
+					                           <div class="row">
+					                            <div class="col-md-12 comment">
 					                                ${map.communityCommentDto.comment}
 					                            </div>
+					                           </div>
 					                        </div>
 					                    </li>
+					                      <div class="centered-line__line"></div>
+					          
 					                </c:forEach>
-					            </ul>
+					          </ul>
+						</div>
+					</div>
+					        
 						</div>
 					</div>
 				</div>
+			</div>
+				
+			<div class = "row-margin">
+				<div class = "col"></div>
+			</div>	
+		
 				
 		<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
