@@ -128,6 +128,15 @@
     .searchform .form-control {
         width: 70%;
     }
+    
+    .search_c2{
+    	width: 120px;
+    }
+    
+    .search_c3{
+    	width: 5px;
+    	padding: 0px;
+    }
 
 </style>
 
@@ -246,7 +255,7 @@
 				<!--글쓰기 버튼  -->
 				
 				<div class = "row">
-					<div class = "col">
+					<div class = "col text-right d-flex justify-content-end">
 						<a href="./communityWritePage" class="btn btn-fit-text">글쓰기</a>
 					</div>
 				</div>
@@ -254,7 +263,7 @@
 				
 				<!--페이지네이션 -->
 				<div class="row">
-					<div class="col paginationpdl justify-content-center">
+					<div class="col d-flex justify-content-center">
 					    <ul class ="pagination">
 					      <li class="page-item">
 					        <a class="page-link" href="#" aria-label="Previous">
@@ -277,16 +286,17 @@
 			   <!--  -->
 			   
 				<!-- 검색 -->
-    <div class="row">
-    	<div class="col-2"></div>
-        <div class="col-md-6 col-5">
+    <div class="row d-flex justify-content-center">
+    	<div class="col-3"></div>
+        <div class="col-1 search_c2">
             <select name="searchType" class="form-select">
                 <option value="title" selected>제목</option>
                 <option value="content">내용</option>
                 <option value="nickname">작성자</option>
             </select>
         </div>
-        <div class="col-md-6 col-3 search">
+        <div class="col-1 search_c3"></div>
+                <div class="col-4 search">
             <div class="input-group">
                 <input name="searchWord" type="text" class="form-control" placeholder="검색어를 입력하세요">
                 <button type="button" class="search-icon">
@@ -294,7 +304,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-2"></div>
+        <div class="col-3"></div>
     </div>
 
 					<!--  -->			   				
