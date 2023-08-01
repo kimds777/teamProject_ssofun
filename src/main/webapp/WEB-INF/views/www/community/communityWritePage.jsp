@@ -160,7 +160,9 @@
 			    </c:when>
 			       </c:choose>
 			   </div> 
-			
+			</main>
+		</div>
+	
 			
 				<!-- 푸터 영역 -->
 			<jsp:include page="../../include/fundingFooter.jsp"/>

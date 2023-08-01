@@ -13,7 +13,6 @@
  	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.16.0/font/bootstrap-icons.css" rel="stylesheet">
  	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="../../resources/css/community_main.css">
 	<script src="../../resources/js/logout.js"></script>
 
 
@@ -31,6 +30,7 @@
 	.section {
 	    width: 1200px;
 	    margin: 0 auto;
+	    
 	}
 	
 	
@@ -52,7 +52,7 @@
 	
 	.page-link:focus, .page-link:hover {
 	  color: #000;
-	  background-color: #fafafa; 
+	  background-color: #FF6462; 
 	  border-color: #ccc;
 	} 
 
@@ -60,12 +60,10 @@
 	/*검색창 아이콘 설정  */
 		.search {
 	  position: relative;
-	  width: 300px;
-	  
+	  width: 300px; 
 	  
 	}
-	
-	.search-icon {
+		.search-icon {
 	      color: gray;
 	      background-color: transparent;
 	      border: none;
@@ -78,45 +76,82 @@
 
 	
 	/* 글쓰기 버튼 설정  */
-	.btn {
-	border-radius: 5px; 
-	border-color : #BFBBB0;
-
-	}
+		.btn {
+		color:white;
+		border-radius: 5px; 
+	 	background-color: #FF6462;
+		border-radius: 5px; 
+		border-color : #FF6462;
+		}
 
 	/*공지사항 아이콘 색 변경 */
-	.bi-bell-fill {
-  	color: #FF6462;
-	}
+		.bi-bell-fill {
+	  	color: #FF6462;
+		}
 	
 	/*공지사항 리스트 뒷 배경 설정  */
-	.notice-row {
-        background-color: #f3f3f3;
-    }
+		.notice-row {
+	        background-color: #f3f3f3;
+	    }
 
 
 	/*리스트 위에 선 추가  */
- 	.list-top{
- 	 border-top: 1px solid black;
- 	}
+	 	.list-top{
+	 	 border-top: 1px solid black;
+	 	}
+ 	
+ 	
+	/*배너 설정  */
+			.img-fluid{
+			margin-bottom: 70px;	
+			width: 100%;
+			height: 100%; 
+			}
+			
+	/*페이지네이션 */
+			.pagination{
+			margin-bottom: 60px;	
+			
+			}
+			
+  /*검색창 사이즈 조절  */
+	    .search_c2{
+	    	width: 120px;
+	    }
+	    .search_c3{
+	    
+	    	width: 5px;
+	    	padding: 0px;
+	    }
+    
+    
+    /*글쓰기 버튼 아래 간격 */
+    .write-btn{
+     margin-bottom: 40px;
+    }
+    
+    
+			
+	/*하단의 여백 설정 */
+	 	.row-margin{
+	 		margin-bottom: 100px;
+	 	}
+     
+   
 
-	  /*배너 설정  */
-		.img-fluid{
-		margin-bottom: 70px;	
-		width: 100%;
-		height: 100%; 
-		}
 
 </style>
 
+
 </head>
+
 <body>
 	<jsp:include page="../../include/fundingHeader.jsp"/>
+	
 	<img src="../../resources/img/jangsoyeon/banner.jpg" class="img-fluid" alt="">
 
 	<div class ="section">
 	  <div class="container mb-5" >
-		
 			<div class ="row">
 				
 					<!--사이드 바-->
@@ -173,7 +208,7 @@
 			                        
 			                        <!-- 등록된지 1일 이내일 때 new 나옴 -->
 			                        <c:if test="${notice.daysDiff lt 1}">
-			                            <img src="../../resources/img/new.png" width="23px"/>
+			                            <img src="../../resources/img/jangsoyeon/new.png" width="23px"/>
 			                        </c:if>
 			                    </a>
 			                </td>
@@ -219,20 +254,18 @@
 			        </c:forEach>
 			    </tbody>
 			</table>
-		</div>
-	</div>
-			
-			
-				<!--글쓰기 버튼  -->
-				<div class="col-2 ms-auto">
-						<a href="./communityWritePage" class="btn btn-fit-text">글쓰기</a>
-			 	</div>
-			
-				<!--페이지네이션 -->
 				
-				<div class="row mt-5 color: black!important;">
+				<!--글쓰기 버튼  -->
+				<div class = "row write-btn">
+					<div class = "col text-right d-flex justify-content-end">
+						<a href="./communityWritePage" class="btn btn-fit-text">글쓰기</a>
+					</div>
+				</div>
+				
+				<!--페이지네이션 -->
+				<div class="row">
 					<div class="col d-flex justify-content-center">
-					    <ul class="pagination mb-0">
+					    <ul class ="pagination">
 					      <li class="page-item">
 					        <a class="page-link" href="#" aria-label="Previous">
 					          <span aria-hidden="true">&laquo;</span>
@@ -252,34 +285,43 @@
 				  </div>
 			   </div>
 			   
-			   
 				<!-- 검색 -->
-		
-			    <div class="d-flex justify-content-center">
-				    <form action="./communityMainPage" method="get" class="row mt-5 justify-content-center"> 
-					      <div class="col-3">
-					        <select name="searchType" class="form-select">
-					          <option value="title" selected>제목</option>
-					          <option value="content">내용</option>
-					          <option value="nickname">작성자</option>
-					        </select>				
-					      </div>
-					      <div class="col-9 search">
-					      	<div class="input-group">
-					        	<input name="searchWord" type="text" class="form-control" placeholder="검색어를 입력하세요">
-									<button type="button" class="search-icon">
-					 					 <i class="fas fa-search"></i> <!-- 돋보기 아이콘 사용 -->
-				          			</button>
-				      		</div>
-				      	</div>
-					</form>
-			   </div>
-		</div>
+			    <div class="row d-flex justify-content-center">
+			    	<div class="col-3"></div>
+			        <div class="col-1 search_c2">
+			            <select name="searchType" class="form-select">
+			                <option value="title" selected>제목</option>
+			                <option value="content">내용</option>
+			                <option value="nickname">작성자</option>
+			            </select>
+			        </div>
+			        <div class="col-1 search_c3"></div>
+			                <div class="col-4 search">
+			            <div class="input-group">
+			                <input name="searchWord" type="text" class="form-control" placeholder="검색어를 입력하세요">
+			                <button type="button" class="search-icon">
+			                    <i class="fas fa-search"></i> <!-- 돋보기 아이콘 사용 -->
+			                </button>
+			            </div>
+			        </div>
+			        <div class="col-3"></div>
+			    </div>
 
+					<!--  -->	
+				
+			</div>
+		</div> 
+	</div>
 </div>
+
+
+		<div class = "row-margin">
+			<div class = "col"></div>
+		</div>
 
 		<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
+
 
 </body>
 </html>

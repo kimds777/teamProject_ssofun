@@ -110,33 +110,35 @@
 			
 	/*페이지네이션 */
 			.pagination{
-			margin-bottom: 100px;	
+			margin-bottom: 60px;	
 			
 			}
 			
+  /*검색창 사이즈 조절  */
+	    .search_c2{
+	    	width: 120px;
+	    }
+	    .search_c3{
+	    
+	    	width: 5px;
+	    	padding: 0px;
+	    }
+    
+    
+    /*글쓰기 버튼 아래 간격 */
+    .write-btn{
+     margin-bottom: 40px;
+    }
+    
+    
+			
 	/*하단의 여백 설정 */
-		 	.row-margin{
-		 		margin-bottom: 100px;
-		 	}
-		 	
-/* 		 	.paginationpdl{
-		 	 padding-left :58px;
-		 	}
- */
- 
- 	
-    .searchform .form-control {
-        width: 70%;
-    }
-    
-    .search_c2{
-    	width: 120px;
-    }
-    
-    .search_c3{
-    	width: 5px;
-    	padding: 0px;
-    }
+	 	.row-margin{
+	 		margin-bottom: 100px;
+	 	}
+     
+   
+
 
 </style>
 
@@ -179,7 +181,8 @@
 					<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="today" />
 
 					<c:if test="${!empty shopAdmin.admin_id}">
-						<a href="./communityNoticeManagePage">공지사항관리</a>
+						<a href="./communityNoticeManagePage"><i class="bi bi-clipboard2-check-fill"></i>
+						공지사항 관리</a>
 					</c:if>
 					
 		<table class="table table-hover">
@@ -252,14 +255,13 @@
 			        </c:forEach>
 			    </tbody>
 			</table>
-				<!--글쓰기 버튼  -->
 				
-				<div class = "row">
+				<!--글쓰기 버튼  -->
+				<div class = "row write-btn">
 					<div class = "col text-right d-flex justify-content-end">
 						<a href="./communityWritePage" class="btn btn-fit-text">글쓰기</a>
 					</div>
 				</div>
-				<!--  -->
 				
 				<!--페이지네이션 -->
 				<div class="row">
@@ -283,46 +285,35 @@
 				    </ul>
 				  </div>
 			   </div>
-			   <!--  -->
 			   
 				<!-- 검색 -->
-    <div class="row d-flex justify-content-center">
-    	<div class="col-3"></div>
-        <div class="col-1 search_c2">
-            <select name="searchType" class="form-select">
-                <option value="title" selected>제목</option>
-                <option value="content">내용</option>
-                <option value="nickname">작성자</option>
-            </select>
-        </div>
-        <div class="col-1 search_c3"></div>
-                <div class="col-4 search">
-            <div class="input-group">
-                <input name="searchWord" type="text" class="form-control" placeholder="검색어를 입력하세요">
-                <button type="button" class="search-icon">
-                    <i class="fas fa-search"></i> <!-- 돋보기 아이콘 사용 -->
-                </button>
-            </div>
-        </div>
-        <div class="col-3"></div>
-    </div>
+			    <div class="row d-flex justify-content-center">
+			    	<div class="col-3"></div>
+			        <div class="col-1 search_c2">
+			            <select name="searchType" class="form-select">
+			                <option value="title" selected>제목</option>
+			                <option value="content">내용</option>
+			                <option value="nickname">작성자</option>
+			            </select>
+			        </div>
+			        <div class="col-1 search_c3"></div>
+			                <div class="col-4 search">
+			            <div class="input-group">
+			                <input name="searchWord" type="text" class="form-control" placeholder="검색어를 입력하세요">
+			                <button type="button" class="search-icon">
+			                    <i class="fas fa-search"></i> <!-- 돋보기 아이콘 사용 -->
+			                </button>
+			            </div>
+			        </div>
+			        <div class="col-3"></div>
+			    </div>
 
-					<!--  -->			   				
-			
-			
-		</div>
+					<!--  -->	
+				
+			</div>
+		</div> 
 	</div>
-			
-			
-
-				
-				
-
-			   
-			   
-
-			   </div>
-		</div>
+</div>
 
 
 		<div class = "row-margin">
