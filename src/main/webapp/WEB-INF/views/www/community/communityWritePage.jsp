@@ -37,33 +37,36 @@
 	    margin-bottom: 30px;
 	  }
 	  
-	
-	  /* 제출 버튼 아래 간격 추가 */
-  .submit-button-container {
-    margin-top: 20px;
-  }
-
-  /* 제출 버튼 스타일 변경 */
-  .submit-button {
-    width: 10%;
-    padding: 5px;
-  }
-  
-  .button-container{
-	 margin-top: 20px;  
-  margin-bottom: 70px;
-  
-  }
 		
+		  /* 제출 버튼 아래 간격 추가 */
+	  .submit-button-container {
+	    margin-top: 20px;
+	  }
+	
+	  /* 제출 버튼 스타일 변경 */
+	  .submit-button {
+	    width: 10%;
+	    padding: 5px;
+	  }
+  
+	  .button-container{
+		 margin-top: 20px;  
+	  margin-bottom: 70px;
+	  
+	  }
+	  
+		  /*배너 설정  */
+		.img-fluid{
+		margin-bottom: 70px;
+		
+		}
 	</style>
-
-
 </head>
 
 
 <body>
 	<jsp:include page="../../include/fundingHeader.jsp"/>
-		
+		<img src="../../resources/img/jangsoyeon/banner.jpg" class="img-fluid" alt="">
 		
 		<div class ="section">
 			<main role="main" class="container">
@@ -111,20 +114,49 @@
         			 </div>
 			      </form>
 			    </c:when>
+			   </c:choose>
 			    
 			    
+			    
+			  <!--관리자 글쓰기 페이지-->  
+			    
+			   <div class ="container">
+			  <c:choose>
 			    <c:when test="${!empty shopAdmin.admin_id}">
 			      <form action="./communityWriteProcess" method="post">
-			        제목: <input type="text" name="title"><br>
-			        내용: <br>
-			        <textarea rows="10" cols="60" name="contents"></textarea>
-			        <br>
-			        <button>글쓰기</button>
+			         <div class="input-container">
+			          <input type="text" name="title" placeholder="제목을 입력하세요" style="border-radius:5px; width: 100%; padding:5px;">
+			        </div>
+			        <div class="summernote-container">
+			          <textarea class="summernote" name="contents"></textarea>
+			        </div>
+			        
+			        
+			        
+			   <script>
+				    $(document).ready(function() {
+				        $('.summernote').summernote({
+				            placeholder: '내용을 입력해주세요',
+				            tabsize: 2,
+				            height: 300
+				        });
+				
+				        $('form').submit(function(event) {
+				            // Summernote의 내용을 일반 텍스트로 변환하여 textarea의 값으로 설정
+				            var summernoteContent = $('.summernote').summernote('code');
+				            $('.summernote').val(summernoteContent);
+				        });
+				    });
+			</script>
+			
+
+			          <div class="button-container text-end">
+			          	<button class="btn text-white" style="background-color: #FF6462;">등록</button>
+        			 </div>
 			      </form>
 			    </c:when>
-			  </c:choose>
-			</main>
-		</div>
+			       </c:choose>
+			   </div> 
 			
 			
 				<!-- 푸터 영역 -->

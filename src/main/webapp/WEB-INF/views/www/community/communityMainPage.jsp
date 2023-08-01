@@ -30,6 +30,7 @@
 	.section {
 	    width: 1200px;
 	    margin: 0 auto;
+	    
 	}
 	
 	
@@ -51,7 +52,7 @@
 	
 	.page-link:focus, .page-link:hover {
 	  color: #000;
-	  background-color: #fafafa; 
+	  background-color: #FF6462; 
 	  border-color: #ccc;
 	} 
 
@@ -99,6 +100,11 @@
  	 border-top: 1px solid black;
  	}
 
+	/*배너 설정  */
+	.img-fluid{
+	margin-bottom: 70px;
+	
+	}
 
 </style>
 
@@ -108,11 +114,10 @@
 <body>
 	<jsp:include page="../../include/fundingHeader.jsp"/>
 	
-
+	<img src="../../resources/img/jangsoyeon/banner.jpg" class="img-fluid" alt="">
 
 	<div class ="section">
 	  <div class="container mb-5" >
-		
 			<div class ="row">
 				
 					<!--사이드 바-->
@@ -169,7 +174,7 @@
 			                        
 			                        <!-- 등록된지 1일 이내일 때 new 나옴 -->
 			                        <c:if test="${notice.daysDiff lt 1}">
-			                            <img src="../../resources/img/new.png" width="23px"/>
+			                            <img src="../../resources/img/jangsoyeon/new.png" width="23px"/>
 			                        </c:if>
 			                    </a>
 			                </td>

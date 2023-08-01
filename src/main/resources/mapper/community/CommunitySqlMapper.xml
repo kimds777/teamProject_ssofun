@@ -183,7 +183,7 @@
 	
 	<!-- 커뮤니티 카테고리별 리스트 -->
 	<select id="communityCategoryListById" resultType="com.ssofun.dto.CommunityDto">
-		select * from tb_community where community_category_id = #{community_category_id}
+		select * from tb_community where community_category_id = #{community_category_id} order by created_at desc
 	</select>
 	
 

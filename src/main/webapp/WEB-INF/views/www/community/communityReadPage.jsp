@@ -12,10 +12,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 	<script src="../../resources/js/logout.js"></script>
-	<!-- Summernote 라이브러리 추가 -->
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
+	
     
     <title>커뮤니티</title>
 	
@@ -24,43 +21,64 @@
 			 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 			*{margin: 0; padding: 0; list-style: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-weight: 400;}
 				body{position: relative;}
-			 
-			 .col-8 .title {
+			
+			/* 페이지 전체 사이즈 설정  */
+			.section {
+			    width: 1200px;
+			    margin: 0 auto;
+			    }
+		 
+			 /*게시물 설정  */
+			 .col-10 .title {
 			    border-top: 1px solid black;
 			    font-size: 1.5rem;
 			    font-weight: bold;
 			    background-color: #f3f3f3;
 			    padding: 20px 0;
 			     padding-left: 10px;
-			}
+				}
 			 
-			 
-				.col-8 .author{
-				   	 background-color: #f3f3f3;
-				   	  padding: 5px 0;
-				   	  padding-left: 10px;
-				   } 
+		 
+				.col-10 .author{
+			   	 background-color: #f3f3f3;
+			   	  padding: 5px 0;
+			   	  padding-left: 10px;
+			   } 
 		   
-			 .col-8 .read-count {
+			 .col-10 .read-count {
 			    border-bottom: 1px solid #ccc;
 			     background-color: #f3f3f3;
 			     padding-left: 10px;
 			    display: flex;
-			}
+				}
 			 
 			 	
-			 .col-8 .contents {
+			 .col-10 .contents {
 			    border-bottom: 1px solid black;
 			    height: 400px; 
 			    padding: 30px 0;
 			    padding-left: 10px;    
 			   
-		 }
+				 }
 		 
+		 /* 목록으로 돌아가기 버튼  */
 		 .back-list{
-		 
 		  padding: 30px 0;
 		 }
+		 
+			 /*배너 설정  */
+			.img-fluid{
+			margin-bottom: 70px;
+			
+			}
+			/*수정-삭제 버튼 설정  */
+			.modification-delete{
+		  	padding: 30px 0;
+		 		}
+		 		
+		 	.modification{
+		 	
+		 	}
 		 
 		 </style>   
 	  
@@ -69,31 +87,32 @@
 
 <body>
 <jsp:include page="../../include/fundingHeader.jsp"/>
+<img src="../../resources/img/jangsoyeon/banner.jpg" class="img-fluid" alt="">	
 
-
+				<div class ="section">
 					<div class="container">
 						<div class ="row">
 						
 			 				<!--사이드 바-->
-									<div class="col-2" style="padding-right: 30px;">
-										<div class="card">
-								        	<div class="card-header">
-								          		커뮤니티
-								        	</div>
-								        <ul class="list-group list-group-flush">
-								          <li class="list-group-item"> 
-								            <c:forEach items="${communityCategoryList}" var="communityCategoryList">
-								              <div><a href="./communityCategoryPage?community_category_id=${communityCategoryList.community_category_id}">${communityCategoryList.name}</a></div>
-								            </c:forEach>
-								          </li>
-								        </ul>
-								      </div>
-									</div>
+						<div class="col-2" style="padding-right: 30px; padding-left: 0px">
+							<div class="card">
+					        	<div class="card-header">
+					          		커뮤니티
+					        	</div>
+					        <ul class="list-group list-group-flush">
+					          <li class="list-group-item"> 
+					            <c:forEach items="${communityCategoryList}" var="communityCategoryList">
+					              <div><a href="./communityCategoryPage?community_category_id=${communityCategoryList.community_category_id}">${communityCategoryList.name}</a></div>
+					            </c:forEach>
+					          </li>
+					        </ul>
+					      </div>
+						</div>
 					
 					
 					<!-- 게시글 상세페이지  -->
 					
-					<div class="col-8">
+					<div class="col-10" style="padding-left: 30px;">
 					
 					<div class="title">${data.communityDto.title}</div>
 				    <div class="author">${data.userDto.nickname}</div>
@@ -108,13 +127,28 @@
 					<!-- 내용 -->
 					<div class="contents">${data.communityDto.contents}</div>
 					
-	
-					<div class = "back-list"><a href="./communityMainPage">목록으로</a></div>
+					<div class ="row">
+						<div class ="col-2">
+							<div class = "back-list"><a href="./communityMainPage">목록으로</a></div>
+						</div>
+						<div class ="col-2"></div>
+						<div class ="col-2"></div>
+						<div class ="col-2"></div>
+						<div class ="col-2"></div>
+						<div class ="col-2 modification-delete">
+						<c:if test="${!empty user && user.user_id == data.userDto.user_id}">
+								<span class ="modification">
+							    	<a href="./communityUpdatePage?community_id=${data.communityDto.community_id}">수정</a>
+							    </span>
+							    <span class ="delete">
+							    	<a href="./deleteProcess?community_id=${data.communityDto.community_id}">삭제</a>
+							    </span>
+							</c:if> 
+						</div>
+						
+		              </div>
+				
 					
-					<c:if test="${!empty user && user.user_id == data.userDto.user_id}">
-					    <a href="./communityUpdatePage?community_id=${data.communityDto.community_id}">수정</a>
-					    <a href="./deleteProcess?community_id=${data.communityDto.community_id}">삭제</a>
-					</c:if> 
 					
 					
 					<form action="./commentInsertProcess" method="post" class="row g-3">
