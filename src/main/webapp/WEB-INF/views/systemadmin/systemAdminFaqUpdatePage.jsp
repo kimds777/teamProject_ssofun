@@ -41,7 +41,7 @@
                             <div class="row" style="height: 100px;">
                                 <div class="col"></div>
                                 <div class="col">
-                                     <div class="box adminimagecol" style="background-image:url('/resources/companyManagement/systemadmin.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
+                                     <div class="box adminimagecol" style="background-image:url('/resources/img/kimhaneul/companyManagement/systemadmin1.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
                                 </div>
                                 <div class="col"></div>
                             </div>
@@ -266,14 +266,13 @@
 		                            <div class="col-10">
 					              		<div class="row">
 		                                    <div class="col">
-		                                        <select class="form-select" name="selectCategory" aria-label="Default select example">
+		                                        <select class="form-select" name="faq_category" aria-label="Default select example">
 		                                            <option class="eight-font" selected>문의 유형을 선택해주세요.</option>
-		                                            <option name="LargeCategory" value="LargeCategory_one">펀딩</option>
-		                                            <option name="LargeCategory" value="LargeCategory_two">스토어</option>
-		                                            <option name="LargeCategory" value="LargeCategory_three">배송</option>
-		                                            <option name="LargeCategory" value="LargeCategory_three">회원</option>
-		                                            <option name="LargeCategory" value="LargeCategory_three">고객센터</option>
-		                                 
+		                                            <option name="faq_category" value="categoryFunding">펀딩</option>
+		                                            <option name="faq_category" value="categoryStore">스토어</option>
+		                                            <option name="faq_category" value="categoryShipping">배송</option>
+		                                            <option name="faq_category" value="categoryUser">회원</option>
+		                                            <option name="faq_category" value="categoryCustomerService">고객센터</option>
 		                                        </select>
 		                                    </div>
 		                                   

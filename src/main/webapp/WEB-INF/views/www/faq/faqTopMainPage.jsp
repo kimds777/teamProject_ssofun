@@ -119,8 +119,8 @@
 
 <form>
 
-    <div class="backgroundcolor">
-        <div class="container mb-3">
+    <div class="backgroundcolor" id="searchBg">
+        <div class="container mb-3" id="searchBox">
             <div class="row">
                 <div class="col">
                     <div class="row"><div class="col"></div></div>
@@ -139,6 +139,7 @@
                 </div>
             </div>
         </div>
+        <img src="/resources/img/kimhaneul/customerserviceimg/finalbanner.webp" alt="">
     </div>
     <div class="container mt-4 container2">
         <div class="row">

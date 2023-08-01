@@ -40,7 +40,7 @@
                             <div class="row" style="height: 100px;">
                                 <div class="col"></div>
                                 <div class="col">
-                                     <div class="box adminimagecol" style="background-image:url('/resources/companyManagement/systemadmin.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
+                                     <div class="box adminimagecol" style="background-image:url('/resources/img/kimhaneul/companyManagement/systemadmin1.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
                                 </div>
                                 <div class="col"></div>
                             </div>

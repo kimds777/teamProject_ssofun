@@ -53,10 +53,10 @@
 
 <form>
 
-    <div class="backgroundcolor"   style="background-image:url('/resources/customerserviceimg/customerServiceMainShakeHand.jpg'); background-repeat:no-repeat; background-size:100% 100%;">
-        <div class="container mb-3">
+    <div class="backgroundcolor"  id="searchBg" >
+        <div class="container mb-3" id="searchBox">
             <div class="row">
-                <div class="col">
+                <div class="col ">
                     <div class="row"><div class="col"></div></div>
                     <div class="row mt-5"><div class="col"><p class="two_font mb-0">쏘펀 고객센터입니다.</p></div></div>
                     <div class="row mt-1"><div class="col"><p class="two_font mb-0">어떤 도움이 필요하세요?</p></div></div>
@@ -73,6 +73,7 @@
                 </div>
             </div>
         </div>
+        <img src="/resources/img/kimhaneul/customerserviceimg/finalbanner.webp" alt="">
     </div>
     <div class="container mt-4 container2">
         <div class="row">

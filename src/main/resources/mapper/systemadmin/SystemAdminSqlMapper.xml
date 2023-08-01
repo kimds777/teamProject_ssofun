@@ -189,14 +189,14 @@
 	
 	<!-- 업체등록 -->
 	<insert id="createCompanyAccount">
-		INSERT INTO tb_biz(biz_name,biz_no,biz_phone,biz_ceo, created_at,used_fg)
-		VALUES(#{biz_name},#{biz_no},#{biz_phone},#{biz_ceo}, now(),1)
+		INSERT INTO tb_biz(biz_name,biz_no,biz_phone,biz_ceo,biz_place ,created_at,used_fg)
+		VALUES(#{biz_name},#{biz_no},#{biz_phone},#{biz_ceo},#{biz_place} ,now(),1)
 	</insert>
 	
 	
 	<!-- 업체목록(등록일순) -->
 	<select id="bizDtoList" resultType="com.ssofun.dto.BizDto">
-		SELECT * FROM tb_biz ORDER BY biz_id ASC
+		SELECT * FROM tb_biz ORDER BY biz_id DESC
 	</select>
 	
 	<!-- bizid로 해당업체정보가져오기 -->
@@ -214,7 +214,7 @@
 	
 	<!-- 입점사정보수정 -->
 	<update id="updateCompanyData">
-		UPDATE tb_biz SET biz_name = #{biz_name}, biz_no = #{biz_no}, biz_phone=#{biz_phone}, biz_ceo=#{biz_ceo} WHERE biz_id = #{biz_id}
+		UPDATE tb_biz SET biz_name = #{biz_name}, biz_no = #{biz_no}, biz_phone=#{biz_phone}, biz_ceo=#{biz_ceo}, biz_place =#{biz_place} WHERE biz_id = #{biz_id}
 	</update>
 	
 	

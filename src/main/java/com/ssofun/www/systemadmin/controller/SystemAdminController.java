@@ -407,7 +407,7 @@ public class SystemAdminController {
 		bizDto.setBiz_place(biz_place);
 		
 		systemAdminService.insertcreateCompanyAccount(bizDto);
-		
+		System.out.println(biz_place);
 		System.out.println("controllerinsert"+bizDto.getBiz_ceo());
 		return"redirect:./companyManagement/companyManagementMainPage";
 	}
@@ -501,7 +501,7 @@ public class SystemAdminController {
 		bizDto.setBiz_place(biz_place);
 		
 		System.out.println(biz_name);
-		
+		System.out.println(biz_place);
 		systemAdminService.updateCompanyData(bizDto);
 		
 		

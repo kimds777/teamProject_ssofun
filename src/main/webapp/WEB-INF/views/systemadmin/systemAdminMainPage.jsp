@@ -43,7 +43,7 @@
                             <div class="row" style="height: 100px;">
                                 <div class="col"></div>
                                 <div class="col">
-                                    <div class="box adminimagecol" style="background-image:url('/resources/companyManagement/systemadmin.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
+                                    <div class="box adminimagecol" style="background-image:url('/resources/img/kimhaneul/companyManagement/systemadmin1.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
                                 </div>
                                 <div class="col"></div>
                             </div>
@@ -224,7 +224,7 @@
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
-                                    <a class="navbar-brand text-black">고객센터메인페이지</a>
+                                    <a class="navbar-brand text-black">관리자메인페이지</a>
                                     <form class="d-flex" role="search">
                                         <input class="form-control me-2" type="search" placeholder="Search"
                                             aria-label="Search">
@@ -238,8 +238,7 @@
 
                     <!--안에 페이지 내용만 바꾸기-->
                     <div class="row">
-                        <div class="col">밑에 내용옮겨오기
-                        sdfdf
+                        <div class="col">
                         
               
 

@@ -108,7 +108,7 @@
                             <div class="row" style="height: 100px;">
                                 <div class="col"></div>
                                 <div class="col">
-                                     <div class="box adminimagecol" style="background-image:url('/resources/companyManagement/systemadmin.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
+                                     <div class="box adminimagecol" style="background-image:url('/resources/img/kimhaneul/companyManagement/systemadmin1.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
                                 </div>
                                 <div class="col"></div>
                             </div>
@@ -448,7 +448,7 @@
 		                                            <p class="companyfont">회사위치</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <input type="text" name="biz_place"  class="form-control" placeholder="서울 강남 테헤란로" aria-label="companyName">                                            
+		                                            <input type="text" name="biz_place"  class="form-control" placeholder="서울 강남 테헤란로">                                            
 		                            			</div>
 		                            		</div>
 		                            		

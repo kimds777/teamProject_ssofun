@@ -58,7 +58,7 @@
                             <div class="row" style="height: 100px;">
                                 <div class="col"></div>
                                 <div class="col">
-                                     <div class="box adminimagecol" style="background-image:url('/resources/companyManagement/systemadmin.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
+                                     <div class="box adminimagecol" style="background-image:url('/resources/img/kimhaneul/companyManagement/systemadmin1.jpg'); background-repeat:no-repeat; background-size:100% 100%;"><img class="adminImage"></div>
                                 </div>
                                 <div class="col"></div>
                             </div>
@@ -288,7 +288,7 @@
 		                                    <div class="row mt-5">
 		                                        <div class="col-1"></div>
 		                                        <div class="col-3 mt-2 textcenter" >
-		                                            <img src="/resources/companyManagement/companyperson.jpg" alt="대표자" width="100px" height="100px"  style=" border-radius: 30%;">
+		                                            <img src="/resources/companyManagement/bizceo.jpg" alt="대표자" width="100px" height="100px"  style=" border-radius: 30%;">
 		                                        </div>
 		                                        <div class="col">
 		                                        	<div class="row mt-2">
@@ -393,7 +393,7 @@
 		                                            <p class="companyfont">회사위치</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <input type="text" name="biz_adress"  class="form-control" placeholder="서울 강남 테헤란로" aria-label="companyName">                                            
+		                                            <input type="text" name="biz_place"  class="form-control" value="${bizDto.biz_place }">                                            
 		                            			</div>
 		                            		</div>
 		                            		
