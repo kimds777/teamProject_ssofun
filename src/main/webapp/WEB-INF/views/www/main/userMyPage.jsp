@@ -58,8 +58,9 @@
 								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
-						<dd>
-							<a href="">주문 / 배송조회</a><i class="bi bi-caret-right-fill"></i>
+						<dd class="click">
+							<a href="./cartPage">장바구니</a><i
+								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 					</dl>

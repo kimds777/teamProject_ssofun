@@ -55,8 +55,8 @@
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd class="click">
-							<a class="click" href="">주문 / 배송조회</a><i
-								class="bi bi-caret-right-fill click"></i>
+							<a href="./readQnaPage">문의내역</a><i
+								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd>
@@ -104,7 +104,7 @@
 															<td class="pa">${item.order_status_name }
 																<div class="img-title">
 																	<div class="img">
-																		<img src="/ssofunUploadFiles/${item.thumbnail_name}"
+																		<img src="../../resources/img/parkhyunmin/thumbnail/${item.thumbnail_name}"
 																			style="width: 64px; height: 64px;">
 																	</div>
 																	<div class="npc">

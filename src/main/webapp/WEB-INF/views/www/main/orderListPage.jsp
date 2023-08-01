@@ -43,7 +43,11 @@
 				<div id="profile">
 					<ul id="first">
 						<li id="profileIcon"><span></span></li>
+<<<<<<< Updated upstream
 						<li id="makerName">이지광님</li>
+=======
+						<li id="makerName">${sessionUser.name }님</li>
+>>>>>>> Stashed changes
 						<li id="logoutUser">로그아웃</li>
 					</ul>
 					<dl>
@@ -59,8 +63,9 @@
 								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
-						<dd>
-							<a href="">주문 / 배송조회</a><i class="bi bi-caret-right-fill"></i>
+						<dd class="click">
+							<a href="./cartPage">장바구니</a><i
+								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 					</dl>
@@ -115,7 +120,7 @@
 																					<div class="img-title">
 																						<div class="img">
 																							<img
-																								src="/ssofunUploadFiles/${innerItem.thumbnail_name}"
+																								src="../../resources/img/parkhyunmin/thumbnail/${innerItem.thumbnail_name}"
 																								style="width: 64px; height: 64px;">
 																						</div>
 																						<div class="npc">

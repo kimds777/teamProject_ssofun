@@ -81,7 +81,7 @@ public class StoreController {
 		}
 		
 		
-		int itemsPerPage = 8; // 페이지당 아이템 개수
+		int itemsPerPage = 12; // 페이지당 아이템 개수
 		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
 		List<ProductDto> paginatedList = new ArrayList<>();
 		int startIdx = (page - 1) * itemsPerPage;
@@ -114,7 +114,7 @@ public class StoreController {
 		}
 		
 		
-		int itemsPerPage = 8; // 페이지당 아이템 개수
+		int itemsPerPage = 12; // 페이지당 아이템 개수
 		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
 		List<ProductDto> paginatedList = new ArrayList<>();
 		int startIdx = (page - 1) * itemsPerPage;
@@ -147,7 +147,7 @@ public class StoreController {
 		}
 		
 		
-		int itemsPerPage = 8; // 페이지당 아이템 개수
+		int itemsPerPage = 12; // 페이지당 아이템 개수
 		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
 		List<ProductDto> paginatedList = new ArrayList<>();
 		int startIdx = (page - 1) * itemsPerPage;
@@ -194,29 +194,7 @@ public class StoreController {
 		
 		return "www/main/categories";
 	}
-	
-	@RequestMapping("loginPage")
-	public String loginPage() {
-		return "www/main/loginPage";
-	}
-
-	@ResponseBody
-	@RequestMapping("loginProcess")
-	public String loginProcess(HttpSession session, ProductUserDto userDto) {
-		ProductUserDto sessionUser = storeService.login(userDto);
-		session.setAttribute("sessionUser", sessionUser);
-		if (sessionUser != null) {
-			return "1";
-		} else {
-			return "0";
-		}
-	}
-
-	@RequestMapping("logoutProcess")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:./mainPage";
-	}
+		
 
 	// 상품상세보기 페이지
 	@RequestMapping("productPage")
@@ -378,6 +356,7 @@ public class StoreController {
 		}
 		
 		int pageCount = (int) Math.ceil((double) fullList.size() / itemsPerPage); // 총 페이지 수 계산
+		model.addAttribute("sessionUser", sessionUser);
 		model.addAttribute("review", review);// 상품마다 리뷰 비교 
 		model.addAttribute("list", paginatedList);
 		model.addAttribute("currentPage", page);
@@ -472,7 +451,8 @@ public class StoreController {
 	
 		qDto.setUser_id(id);
 		List<QnaDto>qnalist = storeService.getQnalist(qDto); //QA내역 출력
-
+		
+		model.addAttribute("sessionUser", sessionUser);// QA내역 출력
 		model.addAttribute("qnalist", qnalist);// QA내역 출력
 		return "www/main/readQnaPage";
 	}
@@ -583,6 +563,29 @@ public class StoreController {
 	public String typeProcess(ProductCategoryTypeDto catyDto) {
 		storeService.registerType(catyDto);
 		return "www/main/mainPage";
+	}
+	
+	@RequestMapping("loginPage")
+	public String loginPage() {
+		return "www/main/loginPage";
+	}
+
+	@ResponseBody
+	@RequestMapping("loginProcess")
+	public String loginProcess(HttpSession session, ProductUserDto userDto) {
+		ProductUserDto sessionUser = storeService.login(userDto);
+		session.setAttribute("sessionUser", sessionUser);
+		if (sessionUser != null) {
+			return "1";
+		} else {
+			return "0";
+		}
+	}
+
+	@RequestMapping("logoutProcess")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:./mainPage";
 	}
 
 }

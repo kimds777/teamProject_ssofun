@@ -46,7 +46,7 @@ i.bi-suit-heart-fill {
 
 .zoomed-img {
 	float: left;
-	width: 550px;
+	width: 500px;
 	height: 500px;
 }
 
@@ -382,27 +382,27 @@ i.bi-suit-heart-fill {
 }
 
 .scroll2 {
-  white-space: nowrap;
-  max-height: 1000px;
-  overflow: hidden; /* 내용이 넘칠 경우 가려진 부분은 보이지 않도록 합니다. */
-  text-align:center;
-  transition: max-height 0.3s ease; /* 부드러운 높이 변화를 위한 트랜지션 설정 */
+	max-height: 1000px;
+	overflow: hidden; /* 내용이 넘칠 경우 가려진 부분은 보이지 않도록 합니다. */
+	text-align: center;
+	transition: max-height 0.3s ease; /* 부드러운 높이 변화를 위한 트랜지션 설정 */
 }
 
 .detail-img {
-  display: inline-block;
-  margin-right: 10px;
+	width : 870px;
+	display: inline-block;
+	margin-right: 10px;
 }
 
 #showMoreBtn {
-  display: block;
-  margin: 20px auto;
-      background: #FF6462;
-    border-radius: 2%;
-    border: none;
-    color: #FFFFFF;
-    width: 200px;
-    height: 55px;
+	display: block;
+	margin: 20px auto;
+	background: #FF6462;
+	border-radius: 2%;
+	border: none;
+	color: #FFFFFF;
+	width: 200px;
+	height: 55px;
 }
 
 .scroll3 {

@@ -182,7 +182,8 @@ window.onload = function() {
 							<c:forEach items="${detail }" var="list">
 								<div class="row">
 									<div class="col">
-										<img src="/ssofunUploadFiles/${list.thumbnail_name}"
+										
+										<img src="../../resources/img/parkhyunmin/thumbnail/${list.thumbnail_name}"
 											alt="thumb image" class="thumbnail-img"
 											style="width: 65px; height: 65px;">
 									</div>
@@ -297,7 +298,7 @@ window.onload = function() {
 			</div>
 
 			<div class="row">
-				<div class="col">zz</div>
+				<div class="col"></div>
 			</div>
 
 
@@ -366,13 +367,12 @@ window.onload = function() {
 				</div>
 
 				<div class="scroll2" id="scroll2">
+					<div class="detail-img">
 					<c:forEach items="${deimglist }" var="deimglist">
-						<div class="detail-img">
 							<img src="../../resources/img/parkhyunmin/detailImage/${deimglist.name}"
-								style="width: 870px; height: 0auto;">
-							
-						</div>
+								style="width: 870px;">
 					</c:forEach>
+					</div>
 				</div>
 				<button id="showMoreBtn" onclick="showAllImages()">상품 정보 더보기</button>
 
@@ -430,7 +430,7 @@ window.onload = function() {
 									<span>${star}점</span>
 									<div class="graph">
 										<span class="graph-num"
-											style="background-color: #FFD700; width: ${starCount * 20}%;">
+											style="background-color: #FFD700; width: ${starCount * 5}%;">
 											<!--${starCount}-->
 										</span>
 									</div>

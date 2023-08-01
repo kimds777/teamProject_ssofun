@@ -56,8 +56,8 @@ window.onload = function() {
 											<td class="event-check"><input type="checkbox"
 												class="itemCheck" onclick="toggleItemCheck()"></td>
 											<td class="td-image"><img
-												src="/ssofunUploadFiles/${item.thumbnail_name}"
-												style="width: 75px; height: 75px;"></td>
+												src="../../resources/img/parkhyunmin/thumbnail/${item.thumbnail_name}"
+												style="width: 75px; height: 75px;"></td>											
 											<td class="td-productInfo">
 												<div class="product-name">${item.product_name}</div>
 												<div class="cart-price">

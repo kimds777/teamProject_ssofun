@@ -130,7 +130,7 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"
 								href="./productPage?id=${product.product_id }">
 								<div class="row">
 									<div class="col text-center">
-										<img src="/ssofunUploadFiles/${product.thumbnail_name}"
+										<img  src="../../resources/img/parkhyunmin/thumbnail/${product.thumbnail_name}"
 											style="width: 280px; height: 280px;" class="img-rounded">
 									</div>
 								</div>

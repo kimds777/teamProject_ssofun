@@ -43,7 +43,11 @@
 				<div id="profile">
 					<ul id="first">
 						<li id="profileIcon"><span></span></li>
+<<<<<<< Updated upstream
 						<li id="makerName">이지광님</li>
+=======
+						<li id="makerName">${sessionUser.name }님</li>
+>>>>>>> Stashed changes
 						<li id="logoutUser">로그아웃</li>
 					</ul>
 					<dl>
@@ -59,16 +63,23 @@
 								class="bi bi-caret-right-fill click"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
-						<dd>
-							<a href="">주문 / 배송조회</a><i class="bi bi-caret-right-fill"></i>
+						<dd class="click">
+							<a href="./cartPage">장바구니</a><i
+								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 					</dl>
 
 					<dl>
 						<dt>나의 펀딩 내역</dt>
-						<dd><a href="../user/userMyFundingOrderListPage">후원한 프로젝트</a><i class="bi bi-caret-right-fill"></i></dd>
-                        <dd><a href="../user/userMyFundingLikeListPage">찜한 프로젝트</a><i class="bi bi-caret-right-fill"></i></dd>
+						<dd>
+							<a href="../user/userMyFundingOrderListPage">후원한 프로젝트</a><i
+								class="bi bi-caret-right-fill"></i>
+						</dd>
+						<dd>
+							<a href="../user/userMyFundingLikeListPage">찜한 프로젝트</a><i
+								class="bi bi-caret-right-fill"></i>
+						</dd>
 					</dl>
 				</div>
 				<div id="contents">
@@ -93,30 +104,44 @@
 																<th class="qna-th1">작성일</th>
 															</tr>
 														</thead>
-														
-														<tobody>
-														<c:forEach items="${qnalist }" var="list">
+
+														<tobody> <c:forEach items="${qnalist}" var="list">
 															<tr class="qa-list">
-																<c:if test="${empty list.answer_contents }">
-						                                    	<td class="qa-th1">미답변</td>
-						                                    	</c:if>
-						                                    	<c:if test="${!empty list.answer_contents}">
-						                                    	 <td class="qa-th1">답변완료</td>
-						                                    	</c:if>
-																
-																<td class="qa-th2">${list.title }</td>
-																<td class="qa-th1"><fmt:formatDate value="${list.created_at}"
-																		pattern="yyyy-MM-dd" /></td>
+																<c:if test="${empty list.answer_contents}">
+																	<td class="qa-th1">미답변</td>
+																	<td class="qa-th2">${list.title}</td>
+																	<td class="qa-th1"><fmt:formatDate
+																			value="${list.created_at}" pattern="yyyy-MM-dd" /></td>
+																</c:if>
+																<c:if test="${!empty list.answer_contents}">
+																	<td class="qa-th1">답변완료</td>
+																	<td class="qa-th2">
+																		 <a class="qna-title" data-toggle="collapse" data-target="#collapse_${list.qna_id}" aria-expanded="false" aria-controls="collapse_${list.qna_id}">
+													                        ${list.title}
+													                    </a>
+																	</td>
+																	<td class="qa-th1"><fmt:formatDate
+																			value="${list.created_at}" pattern="yyyy-MM-dd" /></td>
+																</c:if>
 															</tr>
-														</c:forEach>															
+															<tr class="collapse" id="collapse_${list.qna_id}">
+
+															
+																	<td class="qa-th1">답변내용</td>
+																	<td class="qa-th2">${list.answer_contents}</td>
+																	<td class="qa-th1"><fmt:formatDate
+																			value="${list.created_at}" pattern="yyyy-MM-dd" /></td>
+																
+
+															</tr>
+														</c:forEach> 
 														</tobody>
-														
 													</table>
 												</div>
 											</div>
 										</div>
 									</div>
-									
+
 									<!-- 페이지네이션 부분 수정 -->
 									<div class="pagination jOhOoP">
 										<c:choose>
@@ -150,7 +175,13 @@
 		</div>
 
 	</div>
-
+	<!-- 필요한 부트스트랩 자바스크립트 라이브러리 (CDN) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script src="../../resources/js/user_my.js"></script>
 </body>
 </html>
