@@ -121,19 +121,19 @@
 
 /* 주문리스트 UI */
 .review_list0{
-	width: 75px;
+	width: 80px;
 }
 
 .review_list1{
-	width: 100px;
+	width: 110px;
 }
 
 .review_list2{
-	width: 90px;
+	width: 120px;
 }
 
 .review_list3{
-
+	width: 100px;
 }
 
 /* 리뷰,평점리스트 UI */

@@ -497,7 +497,7 @@
 		from tb_admin ta2 
 		where ta2.biz_id = (select ta.biz_id from tb_admin ta where ta.admin_id = #{admin_id} AND ta.used_fg = 1)
 	)
-	ORDER BY review_avg_score DESC
+	ORDER BY review_cnt DESC
 </select>
 
 <!-- 상품하나에 대한 리뷰 리스트 -->
