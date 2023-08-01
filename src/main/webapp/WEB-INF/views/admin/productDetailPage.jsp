@@ -68,7 +68,9 @@
   object-fit: cover;
 }
 
-
+.text_size{
+	font-size: 16px;
+}
     
 </style>
 <head>
@@ -279,24 +281,24 @@
 								<table class="table table-striped">
 									<thead>
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">관리자아이디</th>
-									       	<th scope="col">${productDetail.admin_id}</th>
+									  		<th class="text-black-50 detail_th text_size" scope="row">관리자아이디</th>
+									       	<th class="text_size" scope="col">${productDetail.admin_id}</th>
 									  	</tr>									
 										<tr>
-									  		<th class="text-black-50 detail_th" scope="row">카테고리타입아이디</th>
-									       	<th scope="col">No.&nbsp;${productDetail.product_category_type_id}</th>
+									  		<th class="text-black-50 detail_th text_size" scope="row">카테고리타입아이디</th>
+									       	<th class="text_size" scope="col">No.&nbsp;${productDetail.product_category_type_id}</th>
 									  	</tr>
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">상품아이디</th>
-									       	<th scope="col">No.&nbsp;${productDetail.product_id}</th>
+									  		<th class="text-black-50 detail_th text_size" scope="row">상품아이디</th>
+									       	<th class="text_size" scope="col">No.&nbsp;${productDetail.product_id}</th>
 									  	</tr>									  	
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">회사명</th>
-									       	<th scope="col">${productDetail.biz_name}</th>
+									  		<th class="text-black-50 detail_th text_size" scope="row">회사명</th>
+									       	<th class="text_size" scope="col">${productDetail.biz_name}</th>
 									  	</tr>
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">카테고리명</th>
-									       	<th scope="col">${productDetail.category_type_name}</th>
+									  		<th class="text-black-50 detail_th text_size" scope="row">카테고리명</th>
+									       	<th class="text_size" scope="col">${productDetail.category_type_name}</th>
 									  	</tr>
 									</thead>
 								</table>
@@ -307,20 +309,20 @@
 									<table class="table table-striped">
 									<thead>
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">상품명</th>
-									       	<th scope="col">${productDetail.product_name}</th>
+									  		<th class="text-black-50 detail_th text_size" scope="row">상품명</th>
+									       	<th class="text_size" scope="col">${productDetail.product_name}</th>
 									  	</tr>
 										<tr>
-										    <th class="text-black-50 detail_th" scope="row">가격</th>
-										    <th scope="col"><fmt:formatNumber value="${productDetail.price}" type="number" pattern="#,##0"/> 원</th>
+										    <th class="text-black-50 detail_th text_size" scope="row">가격</th>
+										    <th class="text_size" scope="col"><fmt:formatNumber value="${productDetail.price}" type="number" pattern="#,##0"/> 원</th>
 										</tr>
 										<tr>
-										    <th class="text-black-50 detail_th" scope="row">할인가</th>
-										    <th scope="col"><fmt:formatNumber value="${productDetail.price_sale}" type="number" pattern="#,##0"/> 원</th>
+										    <th class="text-black-50 detail_th text_size" scope="row">할인가</th>
+										    <th class="text_size" scope="col"><fmt:formatNumber value="${productDetail.price_sale}" type="number" pattern="#,##0"/> 원</th>
 										</tr>
 									  	<tr>
-									  		<th class="text-black-50 detail_th" scope="row">등록일</th>
-									       	<th scope="col">
+									  		<th class="text-black-50 detail_th text_size" scope="row">등록일</th>
+									       	<th class="text_size" scope="col">
 									       		<fmt:formatDate value="${productDetail.created_at}" pattern="yyyy-MM-dd" />								       			
 									       	</th>
 									  	</tr>									  	
@@ -335,7 +337,7 @@
 						      <table class="table table-striped">
 						        <tbody>
 						          <tr>
-						            <th scope="row">상품이미지</th>
+						            <th class="text_size" scope="row">상품이미지</th>
 						            <c:forEach items="${productThumbnailDetail}" var="thumbnail">
 						              <td scope="col" class="thumbnail-cell">
 						                <!-- 수정된 클래스 img-with-border를 사용 -->
@@ -356,7 +358,7 @@
 						      <table class="table table-striped">
 						        <tbody>
 						          <tr>
-						            <th scope="row">상품상세이미지</th>
+						            <th class="text_size" scope="row">상품상세이미지</th>
 						            <c:forEach items="${productDetailImageList}" var="thumbnail">
 						              <td scope="col" class="thumbnail-cell">
 						                <!-- 수정된 클래스 img-with-border를 사용 -->
@@ -374,7 +376,7 @@
 						<!-- 버튼과 간격 조정 -->
 						<div class="row table-btn-spacing">
 						    <div class="col d-flex justify-content-end">
-						        <button class="btn btn-primary update_btn" onclick="window.location.href='./productUpdatePage?product_id=${productDetail.product_id}'">상품수정</button>
+						        <button class="btn-lg btn-primary update_btn" onclick="window.location.href='./productUpdatePage?product_id=${productDetail.product_id}'">상품수정</button>
 						    </div>
 						</div>
                 <!-- end of row-->
