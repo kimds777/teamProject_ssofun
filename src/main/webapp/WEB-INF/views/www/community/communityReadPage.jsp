@@ -66,11 +66,14 @@
 		  padding: 30px 0;
 		 }
 		 
-			 /*배너 설정  */
-			.img-fluid{
-			margin-bottom: 70px;
-			
-			}
+			 
+		  /*배너 설정  */
+		.img-fluid{
+		margin-bottom: 70px;	
+		width: 100%;
+		height: 100%; 
+		}
+
 			/*수정-삭제 버튼 설정  */
 			.modification-delete{
 		  	padding: 30px 0;

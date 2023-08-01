@@ -55,11 +55,14 @@
 	  
 	  }
 	  
+		 
 		  /*배너 설정  */
 		.img-fluid{
-		margin-bottom: 70px;
-		
+		margin-bottom: 70px;	
+		width: 100%;
+		height: 100%; 
 		}
+
 	</style>
 </head>
 

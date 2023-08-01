@@ -20,13 +20,6 @@
 
 
 <style>
-
-	
-		  /*배너 설정  */
-		.img-fluid{
-		margin-bottom: 70px;
-		width: 100%; 
-		}
 		
 
        /* 페이지 전체 사이즈 설정  */
@@ -61,6 +54,14 @@
 	  margin-bottom: 70px;
 	  
 	  }
+	  
+		  /*배너 설정  */
+		.img-fluid{
+		margin-bottom: 70px;	
+		width: 100%;
+		height: 100%; 
+		}
+	  
 	  
     </style>
 
