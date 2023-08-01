@@ -99,12 +99,14 @@
  	.list-top{
  	 border-top: 1px solid black;
  	}
+ 	
+ 	
+		  /*배너 설정  */
+		.img-fluid{
+		margin-bottom: 70px;
+		width: 100%; 
+		}
 
-	/*배너 설정  */
-	.img-fluid{
-	margin-bottom: 70px;
-	
-	}
 
 </style>
 

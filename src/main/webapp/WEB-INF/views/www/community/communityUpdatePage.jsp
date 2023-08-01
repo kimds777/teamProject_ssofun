@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>커뮤니티</title>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.16.0/font/bootstrap-icons.css" rel="stylesheet">
@@ -20,9 +20,48 @@
 
 
 <style>
-        .form-group {
-            margin-bottom: 20px; /* 제목과 내용 사이 간격 조정 */
-        }
+
+	
+		  /*배너 설정  */
+		.img-fluid{
+		margin-bottom: 70px;
+		width: 100%; 
+		}
+		
+
+       /* 페이지 전체 사이즈 설정  */
+	.section {
+	    width: 1200px;
+	    margin: 0 auto;
+	}
+	
+	  /* 제목과 내용 사이의 간격을 주기 위한 스타일 */
+	  .input-container {
+	    margin-bottom: 20px;
+	  }
+	
+	  .summernote-container {
+	    margin-bottom: 30px;
+	  }
+	  
+		
+		  /* 제출 버튼 아래 간격 추가 */
+	  .submit-button-container {
+	    margin-top: 20px;
+	  }
+	
+	  /* 제출 버튼 스타일 변경 */
+	  .submit-button {
+	    width: 10%;
+	    padding: 5px;
+	  }
+  
+	  .button-container{
+		 margin-top: 20px;  
+	  margin-bottom: 70px;
+	  
+	  }
+	  
     </style>
 
 
@@ -35,11 +74,23 @@
 <body>
 
 <jsp:include page="../../include/fundingHeader.jsp"/>
+	<img src="../../resources/img/jangsoyeon/banner.jpg" class="img-fluid" alt="">
 
-
+	<div class ="section">
 	<main role="main" class="container">
+	
 	<form action="./communityupdateProcess" method="post">
 	
+	<!-- 게시글 카테고리 선택 -->
+			         <div class="input-container">
+			        <select name="community_category_id">
+			          <option>카테고리 선택</option>
+			          <c:forEach items="${communityCategoryList}" var="communityCategoryList">
+			            <option value="${communityCategoryList.community_category_id}">${communityCategoryList.name}</option>
+			          </c:forEach>
+			        </select>
+			       </div>
+			       
 	<div class="form-group">
 		 <input type="text" name="title" value="${data.communityDto.title}"style="border-radius:5px; width: 100%; padding:5px;">
 	</div>	
@@ -65,11 +116,11 @@
 					
 			</main>
 			
-			<div class="text-end">
-			          <button class="btn btn-success" type="submit" style="width: 10%; padding: 5px;">수정</button> 
+			<div class="button-container text-end">
+			          <button class="btn text-white" style="background-color: #FF6462;">수정</button>
 			 </div>
 		</form>
-		
+	</div>
 		
 		<!-- 푸터 영역 -->
 			<jsp:include page="../../include/fundingFooter.jsp"/>
