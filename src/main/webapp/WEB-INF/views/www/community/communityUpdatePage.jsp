@@ -19,7 +19,7 @@
 
 
 
-<style>
+	<style>
 		
 
        /* 페이지 전체 사이즈 설정  */
@@ -82,7 +82,7 @@
 	
 	<form action="./communityupdateProcess" method="post">
 	
-	<!-- 게시글 카테고리 선택 -->
+	       <!-- 게시글 카테고리 선택 -->
 			         <div class="input-container">
 			        <select name="community_category_id">
 			          <option>카테고리 선택</option>
@@ -92,10 +92,10 @@
 			        </select>
 			       </div>
 			       
-	<div class="form-group">
+	<div class="input-container">
 		 <input type="text" name="title" value="${data.communityDto.title}"style="border-radius:5px; width: 100%; padding:5px;">
 	</div>	
-		<div class="container">
+		<div class="summernote-container">
 			          <textarea class="summernote" name="contents">${data.communityDto.contents}</textarea>
 			          <input type="hidden" name="community_id" value="${data.communityDto.community_id}">
 			        </div>

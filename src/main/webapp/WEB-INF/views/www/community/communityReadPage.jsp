@@ -96,22 +96,23 @@
 					<div class="container">
 						<div class ="row">
 						
-			 				<!--사이드 바-->
-						<div class="col-2" style="padding-right: 30px; padding-left: 0px">
-							<div class="card">
-					        	<div class="card-header">
-					          		커뮤니티
-					        	</div>
-					        <ul class="list-group list-group-flush">
-					          <li class="list-group-item"> 
-					            <c:forEach items="${communityCategoryList}" var="communityCategoryList">
-					              <div><a href="./communityCategoryPage?community_category_id=${communityCategoryList.community_category_id}">${communityCategoryList.name}</a></div>
-					            </c:forEach>
-					          </li>
-					        </ul>
-					      </div>
-						</div>
-					
+					<!--사이드 바-->
+						<div class="col-2" style="padding-right: 20px; padding-left: 0px;">
+			   				 <div class="card">
+			        	<div class="card-header">
+			            커뮤니티
+			        </div>
+			        <ul class="list-group list-group-flush">
+			            <c:forEach items="${communityCategoryList}" var="communityCategoryList">
+			                <li class="list-group-item">
+			                    <a href="./communityCategoryPage?community_category_id=${communityCategoryList.community_category_id}" style="text-decoration: none; color: #333;">
+			                        ${communityCategoryList.name}
+			                    </a>
+			                </li>
+			            </c:forEach>
+			        </ul>
+	    		</div>
+			</div>
 					
 					<!-- 게시글 상세페이지  -->
 					

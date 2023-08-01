@@ -100,11 +100,12 @@
  	 border-top: 1px solid black;
  	}
 
-	/*배너 설정  */
-	.img-fluid{
-	margin-bottom: 70px;
-	
-	}
+	  /*배너 설정  */
+		.img-fluid{
+		margin-bottom: 70px;	
+		width: 100%;
+		height: 100%; 
+		}
 
 </style>
 
