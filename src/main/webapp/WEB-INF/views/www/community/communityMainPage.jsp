@@ -60,12 +60,10 @@
 	/*검색창 아이콘 설정  */
 		.search {
 	  position: relative;
-	  width: 300px;
-	  
+	  width: 300px; 
 	  
 	}
-	
-	.search-icon {
+		.search-icon {
 	      color: gray;
 	      background-color: transparent;
 	      border: none;
@@ -84,7 +82,6 @@
 	 	background-color: #FF6462;
 		border-radius: 5px; 
 		border-color : #FF6462;
-	
 		}
 
 	/*공지사항 아이콘 색 변경 */
@@ -104,13 +101,33 @@
 	 	}
  	
  	
-		  /*배너 설정  */
+	/*배너 설정  */
 			.img-fluid{
 			margin-bottom: 70px;	
 			width: 100%;
 			height: 100%; 
 			}
-
+			
+	/*페이지네이션 */
+			.pagination{
+			margin-bottom: 100px;	
+			
+			}
+			
+	/*하단의 여백 설정 */
+		 	.row-margin{
+		 		margin-bottom: 100px;
+		 	}
+		 	
+/* 		 	.paginationpdl{
+		 	 padding-left :58px;
+		 	}
+ */
+ 
+ 	
+    .searchform .form-control {
+        width: 70%;
+    }
 
 </style>
 
@@ -226,20 +243,19 @@
 			        </c:forEach>
 			    </tbody>
 			</table>
-		</div>
-	</div>
-			
-			
 				<!--글쓰기 버튼  -->
-				<div class="col-2 ms-auto">
-						<a href="./communityWritePage" class="btn btn-fit-text">글쓰기</a>
-			 	</div>
-			
-				<!--페이지네이션 -->
 				
-				<div class="row mt-5 color: black!important;">
-					<div class="col d-flex justify-content-center">
-					    <ul class="pagination mb-0">
+				<div class = "row">
+					<div class = "col">
+						<a href="./communityWritePage" class="btn btn-fit-text">글쓰기</a>
+					</div>
+				</div>
+				<!--  -->
+				
+				<!--페이지네이션 -->
+				<div class="row">
+					<div class="col paginationpdl justify-content-center">
+					    <ul class ="pagination">
 					      <li class="page-item">
 					        <a class="page-link" href="#" aria-label="Previous">
 					          <span aria-hidden="true">&laquo;</span>
@@ -258,32 +274,50 @@
 				    </ul>
 				  </div>
 			   </div>
-			   
+			   <!--  -->
 			   
 				<!-- 검색 -->
-		
-			    <div class="d-flex justify-content-center">
-				    <form action="./communityMainPage" method="get" class="row mt-5 justify-content-center"> 
-					      <div class="col-3">
-					        <select name="searchType" class="form-select">
-					          <option value="title" selected>제목</option>
-					          <option value="content">내용</option>
-					          <option value="nickname">작성자</option>
-					        </select>				
-					      </div>
-					      <div class="col-9 search">
-					      	<div class="input-group">
-					        	<input name="searchWord" type="text" class="form-control" placeholder="검색어를 입력하세요">
-									<button type="button" class="search-icon">
-					 					 <i class="fas fa-search"></i> <!-- 돋보기 아이콘 사용 -->
-				          			</button>
-				      		</div>
-				      	</div>
-					</form>
+    <div class="row">
+    	<div class="col-2"></div>
+        <div class="col-md-6 col-5">
+            <select name="searchType" class="form-select">
+                <option value="title" selected>제목</option>
+                <option value="content">내용</option>
+                <option value="nickname">작성자</option>
+            </select>
+        </div>
+        <div class="col-md-6 col-3 search">
+            <div class="input-group">
+                <input name="searchWord" type="text" class="form-control" placeholder="검색어를 입력하세요">
+                <button type="button" class="search-icon">
+                    <i class="fas fa-search"></i> <!-- 돋보기 아이콘 사용 -->
+                </button>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+					<!--  -->			   				
+			
+			
+		</div>
+	</div>
+			
+			
+
+				
+				
+
+			   
+			   
+
 			   </div>
 		</div>
 
-</div>
+
+		<div class = "row-margin">
+			<div class = "col"></div>
+		</div>
 
 		<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>

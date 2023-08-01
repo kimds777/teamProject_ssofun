@@ -122,12 +122,6 @@
 			}
 			
 		 	
-		 	/*하단의 여백 설정 */
-		 	.row-margin{
-		 		margin-bottom: 100px;
-		 	}
-		 	
-		 	
 		 	/*수정-삭제 간격 설정  */
 		 	.modification{
 		 	margin-left: 30px;
@@ -135,6 +129,12 @@
 		 	}
 		 	.delete{
 		 		margin-left: 40px;
+		 	}
+		 	
+		 	
+		 	/*하단의 여백 설정 */
+		 	.row-margin{
+		 		margin-bottom: 100px;
 		 	}
 		 	
 		 
