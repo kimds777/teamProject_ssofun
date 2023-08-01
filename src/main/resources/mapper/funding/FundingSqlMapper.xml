@@ -31,7 +31,7 @@
 		LEFT JOIN tb_funding_reward fr ON f.funding_id = fr.funding_id
 		LEFT JOIN tb_funding_reward_order fro ON fr.funding_reward_id = fro.funding_reward_id
 		LEFT JOIN tb_funding_order fo ON fro.funding_order_id = fo.funding_order_id
-		WHERE f.funding_id = #{funding_id}
+		WHERE f.funding_id = #{funding_id} AND fo.used_fg = 1
 	</select>
 
 	<!-- 가장 최근에 등록된 PK 가져오기 -->
@@ -52,6 +52,13 @@
 	
 	<!-- 펀딩 리스트 출력 -->
 	<select id="selectAllFunding" resultType="com.ssofun.dto.FundingDto">
+		SELECT * FROM tb_funding WHERE used_fg = 1 AND confirm_fg = 1
+		<if test="funding_category_id != 1">
+			AND funding_category_id = #{funding_category_id}
+		</if>
+		ORDER BY funding_id DESC LIMIT #{startNum},12
+	</select>
+<!-- <select id="selectAllFunding" resultType="com.ssofun.dto.FundingDto">
 		SELECT f.funding_id, fc.name funding_category, ft.name funding_tag, uc.name, f.title, f.description, f.contents, f.delivery_from
 		FROM tb_funding f, tb_funding_category fc, tb_funding_tag ft, tb_user_creator uc
 		WHERE f.funding_category_id = fc.funding_category_id AND f.funding_tag_id = ft.funding_tag_id 
@@ -60,7 +67,7 @@
 			AND f.funding_category_id = #{funding_category_id}
 		</if>
 		ORDER BY f.funding_id DESC LIMIT #{startNum},12
-	</select>
+	</select> -->
 	
 	<!-- 펀딩 갯수 출력 -->
 	<select id="selectCountFunding" resultType="int">
@@ -86,10 +93,10 @@
 	</select>
 	
 	<!-- 펀딩 달성 금액 출력 -->
-	<select id="selectAchievementPrice" resultType="long">
+	<select id="selectFundingAchievement" resultType="long">
 		SELECT IFNULL(SUM(fo.total_price),0) FROM tb_funding f, tb_funding_reward fr, tb_funding_reward_order fro , tb_funding_order fo
 		WHERE f.funding_id = fr.funding_id AND fr.funding_reward_id = fro.funding_reward_id AND fro.funding_order_id = fo.funding_order_id
-		AND f.funding_id = #{funding_id}
+		AND f.funding_id = #{funding_id} AND fo.used_fg = 1
 	</select>
 	
 	<!-- 펀딩 목표 금액 출력 -->
@@ -107,11 +114,7 @@
 	
 	<!-- 펀딩 상세 정보 출력 -->
 	<select id="selectFunding" resultType="com.ssofun.dto.FundingDto">
-		SELECT f.funding_id, fc.name funding_category, ft.name funding_tag, uc.name creator_name, 
-		uc.email creator_email, f.title, f.description, f.contents, f.delivery_from
-		FROM tb_funding f, tb_funding_category fc, tb_funding_tag ft, tb_user_creator uc
-		WHERE f.funding_category_id = fc.funding_category_id AND f.funding_tag_id = ft.funding_tag_id 
-		AND f.user_creator_id = uc.user_creator_id AND f.used_fg = 1  AND f.funding_id = #{funding_id}
+		SELECT * FROM tb_funding WHERE used_fg = 1  AND funding_id = #{funding_id}
 	</select>
 	
 	<!-- 펀딩 좋아요 갯수 출력 -->

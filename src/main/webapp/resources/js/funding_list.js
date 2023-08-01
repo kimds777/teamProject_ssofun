@@ -117,12 +117,15 @@ function getFundingList(pageNum,$funding_category_id){
                 var $achievementPrice;
                 var $achievementRate;
                 var $addComma;
-                var $ul = $("<ul class='p-0'></ul>")
+                var $ul = $("<ul class='p-0'></ul>");
+                var funding_id;
                 $.each(item,function(key,value){
                     
                     if(key == "funding_id"){
-                        return $a = $("<a href='./fundingDetailPage?funding_id="+value+"'></a>");
+                        funding_id = value;
+                        $a = $("<a href='./fundingDetailPage?funding_id="+value+"'></a>");
                     }
+
                     if(key == "thumbnailList"){
                         $.each(value,function(index,item){
                             var $url;
@@ -133,46 +136,49 @@ function getFundingList(pageNum,$funding_category_id){
 
                                 if(key == "image_order"){
                                     if(value == 1){
-                                        $ul.append("<li><img src='../../resources/img/kimdaseul/funding/"+$url+"' alt='리스트 섬네일'></li>");
+                                        $ul.append("<li><img src='/resources/img/kimdaseul/funding/"+$url+"' alt='리스트 섬네일'></li>");
                                         // $ul.append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='리스트 섬네일'></li>");
                                     }
                                 }
                             });
                         });
                     }
-                    if(key == "funding_category" || key == "title" || key == "description"){
-                        return $("<li class='text-start'>"+value+"</li>").appendTo($ul);
+
+                    if(key == "funding_category_id"){
+                        $("<li class='text-start'>"+getFundingCategoryName(value)+"</li>").appendTo($ul);
                     }
 
-                    if(key == "achievementPrice"){
-                        return $achievementPrice = value;
+                    if(key == "title"){
+                        $("<li class='text-start'>"+value+"</li>").appendTo($ul);
+                    }
+                    if(key == "description"){
+                        $("<li class='text-start'>"+value+"</li>").appendTo($ul);
                     }
 
-                    if(key == "achievementRate"){
-                        return $achievementRate = value;
-                    }
 
-                    if(key == "d_day"){
-                        $addComma = addCommas($achievementPrice);
-                        if(value<0){
-                            return $("<li class='text-start'><b class='text-danger'>"+$achievementRate+"% 달성</b> "+$addComma+"원 <span class='float-end'>종료</span></li>").appendTo($ul);
+                    if(key == "target_price"){
+                        $achievementRate = getFundingAchievementRate(funding_id);
+                        var d_day = getDday(funding_id);
+                        var achievement = getfundingAchievement(funding_id);
+
+                        if(achievement != 0){
+                            achievement = addCommas(achievement);
+                        }
+                        if(d_day<0){
+                            $("<li class='text-start'><b class='text-danger'>"+$achievementRate+"% 달성</b> "+achievement+"원 <span class='float-end'>종료</span></li>").appendTo($ul);
                         }else{
-                           return $("<li class='text-start'><b class='text-danger'>"+$achievementRate+"% 달성</b> "+$addComma+"원 <span class='float-end'>"+value+"일 남음</span></li>").appendTo($ul);
-                       }
-                    }
+                            $("<li class='text-start'><b class='text-danger'>"+$achievementRate+"% 달성</b> "+achievement+"원 <span class='float-end'>"+d_day+"일 남음</span></li>").appendTo($ul);
+                        }
 
-                    if(key == "delivery_from"){
                         if($achievementRate>=100){
                             $achievementRate = 100;
                         }
                         var $li = $("<li></li>");
-                        var $span = $("<span></span>").css({"width": $achievementRate+"%"}).appendTo($li);
-                        return $($li).appendTo($ul);
+                        $("<span></span>").css({"width": $achievementRate+"%"}).appendTo($li);
+                        $($li).appendTo($ul);
                     }
+                    
 
-                    if(key == "funding_tag" || key == "name" || key == "contents"){
-                        return true;
-                    }
                 });
                 $a.append($ul);
                 $("#list").append($a);
@@ -181,6 +187,75 @@ function getFundingList(pageNum,$funding_category_id){
     });
 };
   
+
+function getDday(funding_id){
+    var dday;
+
+    $.ajax({
+        url: "../user/AJAXgetDday",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                dday = res;
+            }
+        }
+    });
+
+    return dday;
+}
+
+function getFundingAchievementRate(funding_id){
+    var respone;
+    $.ajax({
+        url: "./AJAXgetFundingAchievementRate",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                respone = res;
+            }
+        }
+    });
+    return respone;
+}
+
+
+function getfundingAchievement(funding_id){
+    var respone;
+    $.ajax({
+        url: "./AJAXgetFundingAchievement",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                respone = res;
+            }
+        }
+    });
+    return respone;
+}
+
+
+function getFundingCategoryName(funding_category_id){
+    var fundingCategoryName;
+    $.ajax({
+        url: "../user/AJAXgetFundingCategoryName",
+        method: "GET",
+        async : false,
+        data: {funding_category_id:funding_category_id},
+        success: function(res){
+            if(res !=  null){
+                fundingCategoryName = res;
+            }
+        }
+    });
+
+    return fundingCategoryName;
+}
 
 function addCommas(num){
     var str = num.toString();

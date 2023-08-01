@@ -210,8 +210,10 @@ function getOrderUserPickFunding(funding_id){
                                     }
                                     if(key == "image_order"){
                                         if(value == 1){
-                                            $("<li><img src='/ssofunUploadFiles/"+url+"' alt=''></li>").appendTo(ul);
+                                            $("<li><img src='/resources/img/kimdaseul/funding/"+url+"' alt=''></li>").appendTo(ul);
+                                            // $("<li><img src='/ssofunUploadFiles/"+url+"' alt=''></li>").appendTo(ul);
                                         }
+                                        // }
                                     }
                                 });
                             });
@@ -367,13 +369,13 @@ function getFundingDto($funding_id){
         method: "GET",
         data: {funding_id:$funding_id},
         success: function(res){
-            var $addComma;
-            var $d_day;
+            var funding_id;
             var $tabInfo = $("#tab>ul>li#info");
             var $tabNotice = $("#tab>ul>li#notice");
             var $tabCommunity = $("#tab>ul>li#community");
             $.each(res,function(key,value){
                     if(key == "funding_id"){
+                        funding_id = value;
                         $tabInfo.html("<a class='activeTab' href='./fundingDetailPage?funding_id="+value+"'>소개</a>");
                         $tabNotice.html("<a href='./fundingDetailNoticeListPage?funding_id="+value+"'>공지사항</a>");
                         $tabCommunity.html("<a href='./fundingDetailCommunityListPage?funding_id="+value+"'>커뮤니티</a>");
@@ -395,18 +397,21 @@ function getFundingDto($funding_id){
                                     if(value != 1){
                                         if(value == 2){
                                             $("ul#swiper").append("<li class='activeBtn'></li>");
-                                            $("ul#thumb").append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='상세 섬네일'></li>");
+                                            $("ul#thumb").append("<li><img src='/resources/img/kimdaseul/funding/"+$url+"' alt='상세 섬네일'></li>");
                                         }else{
-                                            $("ul#swiper").append("<li></li>");
-                                            $("ul#thumb").append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='상세 섬네일'></li>");
-                                        }
+                                                $("ul#swiper").append("<li></li>");
+                                                $("ul#thumb").append("<li><img src='/resources/img/kimdaseul/funding/"+$url+"' alt='상세 섬네일'></li>");
+                                            }
                                     }
                                 }
                             });
                         });
                     }
 
-                    if(key == "funding_category"){ $("#category-name>h6").text(value);}
+                    if(key == "funding_category_id"){ 
+                        var categoryName = getFundingCategoryName(value);
+                        $("#category-name>h6").text(categoryName);
+                    }
 
                     if(key == "title"){ $("#title>h3").text(value);}
 
@@ -414,27 +419,26 @@ function getFundingDto($funding_id){
                          $("#introduce").html("<span class='first'>펀딩소개</span>"+value);
                     }
 
-                    if(key == "achievementPrice"){ $addComma = addCommas(value);}
-                    if(key == "achievementRate"){
-                         $("#totalAmount").html("<span class='first'>모인금액</span>"+$addComma+"<b>원</b><span id='achieve'>"+value+"% 달성</span>");
-                    }
+                    if(key == "target_price"){
+                        $achievementRate = getFundingAchievementRate(funding_id);
+                        var $d_day = getDday(funding_id);
+                        var achievement = getfundingAchievement(funding_id);
+                        var closeAt = getFundingCloseAt(funding_id);
 
-                    
-                    if(key == "d_day"){ $d_day = value;}
-                    if(key == "close_at"){
+                        if(achievement != 0){
+                            achievement = addCommas(achievement);
+                        }
+
+                        $("#totalAmount").html("<span class='first'>모인금액</span>"+achievement+"<b>원</b><span id='achieve'>"+$achievementRate+"% 달성</span>");
+                        
                         if($d_day < 0){
-                            $("#endtime").html("<span class='first'>남은 시간</span>종료</b><span id='end'>"+value+" 종료</span>");
+                            $("#endtime").html("<span class='first'>남은 시간</span>종료</b><span id='end'>"+closeAt+" 종료</span>");
                             $("#supportBtn").addClass("hide");
                             $("#supportCloseBtn").removeClass("hide");
                         }else{
-                            $("#endtime").html("<span class='first'>남은 시간</span>"+$d_day+"<b>일</b><span id='end'>"+value+" 종료</span>");
+                            $("#endtime").html("<span class='first'>남은 시간</span>"+$d_day+"<b>일</b><span id='end'>"+closeAt+" 종료</span>");
                         }
                     }
-
-                    // if(key =="countSupporter"){
-                    //     alert(key+": "+value);
-                         
-                    // }
 
                     if(key == "delivery_from"){
                          $("#aside>ul>li>ul>li:first-child").html("<i class='bi bi-truck'></i> "+value+"에 발송됩니다.");
@@ -555,4 +559,89 @@ function addCommas(num){
     }
 
     return str;
+}
+
+function getFundingCategoryName(funding_category_id){
+    var fundingCategoryName;
+    $.ajax({
+        url: "../user/AJAXgetFundingCategoryName",
+        method: "GET",
+        async : false,
+        data: {funding_category_id:funding_category_id},
+        success: function(res){
+            if(res !=  null){
+                fundingCategoryName = res;
+            }
+        }
+    });
+
+    return fundingCategoryName;
+}
+
+function getFundingCloseAt(funding_id){
+    var closeAt;
+    $.ajax({
+        url: "./AJAXgetFundingCloseAt",
+        method: "GET",
+        async : false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res !=  null){
+                closeAt = res;
+            }
+        }
+    });
+
+    return closeAt;
+}
+
+function getDday(funding_id){
+    var dday;
+
+    $.ajax({
+        url: "../user/AJAXgetDday",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                dday = res;
+            }
+        }
+    });
+
+    return dday;
+}
+
+function getFundingAchievementRate(funding_id){
+    var respone;
+    $.ajax({
+        url: "./AJAXgetFundingAchievementRate",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                respone = res;
+            }
+        }
+    });
+    return respone;
+}
+
+
+function getfundingAchievement(funding_id){
+    var respone;
+    $.ajax({
+        url: "./AJAXgetFundingAchievement",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                respone = res;
+            }
+        }
+    });
+    return respone;
 }

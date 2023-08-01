@@ -32,7 +32,8 @@ public interface FundingSqlMapper {
 	public List<FundingDto> selectFundingOrderByCreatedAt();
 	//--- 펀딩 달성률 출력
 	public int selectFundingAchievementRate(long funding_id);
-	
+	//--- 펀딩 달성금액 출력
+	public long selectFundingAchievement(long funding_id);
 	
 	
 	
@@ -173,6 +174,9 @@ public interface FundingSqlMapper {
 			@Param("deliveryRecipientDto") DeliveryRecipientDto deliveryRecipientDto);
 	//--- 기본 배송지 출력
 	public DeliveryRecipientDto selectDefaultAddressByUserId(long user_id);
+	
+	
+
 
 
 

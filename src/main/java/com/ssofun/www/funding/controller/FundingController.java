@@ -1,6 +1,7 @@
 package com.ssofun.www.funding.controller;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -109,6 +110,12 @@ public class FundingController {
 	public List<FundingDto> getFundingListAjax(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "funding_category_id", defaultValue = "1") long funding_category_id) {
 		return fundingService.selectAllFunding(pageNum, funding_category_id);
+	}
+	
+	@ResponseBody
+	@RequestMapping("AJAXgetFundingAchievement")
+	public long AJAXgetFundingAchievement(long funding_id) {
+		return fundingService.getFundingAchievement(funding_id);
 	}
 
 	@ResponseBody
@@ -508,6 +515,13 @@ public class FundingController {
 		return fundingService.selectFundingOrder(funding_order_id);
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "AJAXgetFundingCloseAt", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	public String AJAXgetFundingCloseAt(long funding_id) {
+		
+		return fundingService.getFundingCloseAt(funding_id);
+	}
 
 
 }

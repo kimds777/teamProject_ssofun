@@ -1,5 +1,7 @@
 package com.ssofun.www.funding.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,16 +88,6 @@ public class FundingServiceImpl {
 			
 			fundingDto.setClose_at(fundingSqlMapper.selectFundingCloseAt(fundingDto.getFunding_id()));
 			
-			int Dday = fundingSqlMapper.selectDateDiff(fundingDto.getClose_at());
-			fundingDto.setD_day(Dday);
-			
-			long achievementPrice = fundingSqlMapper.selectAchievementPrice(fundingDto.getFunding_id());
-			fundingDto.setAchievementPrice(achievementPrice);
-
-			
-			long targetPrice = fundingSqlMapper.selectTargetPrice(fundingDto.getFunding_id());
-			int achievementRate = (int)(((double)achievementPrice/targetPrice)*100);
-			fundingDto.setAchievementRate(achievementRate);
 
 		}
 		
@@ -109,19 +101,6 @@ public class FundingServiceImpl {
 		fundingDto.setThumbnailList(fundingSqlMapper.selectThumbnailAll(funding_id));
 		
 		fundingDto.setFavorit(fundingSqlMapper.selectCountFavorit(funding_id));
-		
-		fundingDto.setClose_at(fundingSqlMapper.selectFundingCloseAt(funding_id));
-		
-		int Dday = fundingSqlMapper.selectDateDiff(fundingDto.getClose_at());
-		fundingDto.setD_day(Dday);
-		
-		long achievementPrice = fundingSqlMapper.selectAchievementPrice(fundingDto.getFunding_id());
-		fundingDto.setAchievementPrice(achievementPrice);
-
-		
-		long targetPrice = fundingSqlMapper.selectTargetPrice(fundingDto.getFunding_id());
-		int achievementRate = (int)(((double)achievementPrice/targetPrice)*100);
-		fundingDto.setAchievementRate(achievementRate);
 		
 		List<FundingRewardDto> rewardList = fundingSqlMapper.selectRewardList(funding_id);
 		for(FundingRewardDto fundingRewardDto : rewardList) {
@@ -451,6 +430,23 @@ public class FundingServiceImpl {
 		fundingOrderDto.setRewardList(rewardOrderList);
 		
 		return fundingOrderDto;
+	}
+
+	//펀딩 달성금액 출력
+	public long getFundingAchievement(long funding_id) {
+		return fundingSqlMapper.selectFundingAchievement(funding_id);
+	}
+
+
+	// 펀딩 종료일 출력
+	public String getFundingCloseAt(long funding_id) {
+		
+		Date closeAt = fundingSqlMapper.selectFundingCloseAt(funding_id);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd EEEE");
+        String formattedDate = dateFormat.format(closeAt);
+        
+		return formattedDate;
 	}
 
 
