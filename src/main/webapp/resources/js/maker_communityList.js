@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-    etUserSession();
+    setUserSession();
     
     var user_id = getUserSession();
     var user_creator_id = getUserCreatorIdSession();

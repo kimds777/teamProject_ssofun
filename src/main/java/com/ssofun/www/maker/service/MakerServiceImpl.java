@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ssofun.dto.DeliveryCompanyDto;
 import com.ssofun.dto.DeliveryDto;
@@ -144,8 +147,7 @@ public class MakerServiceImpl {
 			
 			System.out.println("파일명: "+ url.getOriginalFilename());
 			
-//			String rootFolder = "c:/ssofunUploadFiles/";
-			String rootFolder = "../../resources/img/kimdaseul/funding/";
+			String rootFolder = "c:/ssofunUploadFiles/";
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			String today = sdf.format(new Date());
