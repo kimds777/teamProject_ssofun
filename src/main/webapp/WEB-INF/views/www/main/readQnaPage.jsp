@@ -43,11 +43,9 @@
 				<div id="profile">
 					<ul id="first">
 						<li id="profileIcon"><span></span></li>
-<<<<<<< Updated upstream
-						<li id="makerName">이지광님</li>
-=======
+
 						<li id="makerName">${sessionUser.name }님</li>
->>>>>>> Stashed changes
+
 						<li id="logoutUser">로그아웃</li>
 					</ul>
 					<dl>
