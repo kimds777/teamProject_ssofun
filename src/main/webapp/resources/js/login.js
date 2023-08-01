@@ -24,6 +24,8 @@ function setEventListener(){
     
     $(document).on("click","#loginTab>li#user",function(e){
         e.stopPropagation();
+
+        window.location.href = "../../www/user/userLoginPage";
         $("#loginTab>li").removeClass("click");
         $(this).addClass("click");
 
