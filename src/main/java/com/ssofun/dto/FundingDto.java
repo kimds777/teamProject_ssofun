@@ -12,6 +12,8 @@ public class FundingDto {
 	private List<FundingThumbnailDto> thumbnailList; //섬네일 리스트
 	private long funding_category_id;
 	private long funding_tag_id;
+	private long user_creator_id;
+	private String funding_code;
 	private String funding_category; // 이거 삭제해야함 dto로 가져와야함...
 	private String funding_tag; // 이거 삭제해야함 dto로 가져와야함...
 	private String creator_name; //이거 삭제해야함
@@ -45,20 +47,19 @@ public class FundingDto {
 	}
 
 
-
-
-
 	public FundingDto(long funding_id, List<FundingThumbnailDto> thumbnailList, long funding_category_id,
-			long funding_tag_id, String funding_category, String funding_tag, String creator_name, String creator_email,
-			long achievementPrice, int achievementRate, String title, String description, String contents,
-			long target_price, int adult_fg, int confirm_fg, int favorit, List<FundingNewsDto> newsList,
-			List<FundingCommunityDto> reviewList, List<FundingRewardDto> rewardList, int d_day, Date start_from,
-			Date close_at, Date delivery_from) {
+			long funding_tag_id, long user_creator_id, String funding_code, String funding_category, String funding_tag,
+			String creator_name, String creator_email, long achievementPrice, int achievementRate, String title,
+			String description, String contents, long target_price, int adult_fg, int confirm_fg, int favorit,
+			List<FundingNewsDto> newsList, List<FundingCommunityDto> reviewList, List<FundingRewardDto> rewardList,
+			int d_day, Date start_from, Date close_at, Date delivery_from) {
 		super();
 		this.funding_id = funding_id;
 		this.thumbnailList = thumbnailList;
 		this.funding_category_id = funding_category_id;
 		this.funding_tag_id = funding_tag_id;
+		this.user_creator_id = user_creator_id;
+		this.funding_code = funding_code;
 		this.funding_category = funding_category;
 		this.funding_tag = funding_tag;
 		this.creator_name = creator_name;
@@ -82,7 +83,24 @@ public class FundingDto {
 	}
 
 
+	public long getUser_creator_id() {
+		return user_creator_id;
+	}
 
+
+	public void setUser_creator_id(long user_creator_id) {
+		this.user_creator_id = user_creator_id;
+	}
+
+
+	public String getFunding_code() {
+		return funding_code;
+	}
+
+
+	public void setFunding_code(String funding_code) {
+		this.funding_code = funding_code;
+	}
 
 
 	public long getFunding_tag_id() {

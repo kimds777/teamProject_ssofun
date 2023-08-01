@@ -72,7 +72,6 @@ function getUserSession(){
         async: false,
         success: function(res){
             if(res != null){
-                alert("user_id: "+res);
                 user_id = res;
             }else{
                 user_id = 0;
@@ -97,7 +96,6 @@ function getUserCreatorIdSession(){
         method: "GET",
         async: false,
         success: function(res){
-            alert("user_creator_id: "+res);
             user_creator_id = res;
         }
     });

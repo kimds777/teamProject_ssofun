@@ -114,15 +114,22 @@ public class MakerServiceImpl {
 	}
 	
 
-	public long insertFunding(long funding_category_id, long funding_tag_id, long user_creator_id, String funding_code,
-			String title, String contents, String description, long target_price, int adult_fg, LocalDate deliveryFrom) {
-		makerSqlMapper.insertFunding(funding_category_id,funding_tag_id,user_creator_id,funding_code,title,contents,description,
-				target_price,adult_fg,deliveryFrom);
-		
-		long funding_id = makerSqlMapper.selectFundingIdByCode(funding_code);
-		return funding_id;
-	}
+	//펀딩 등록
+//	public long insertFunding(long funding_category_id, long funding_tag_id, long user_creator_id, String funding_code,
+//			String title, String contents, String description, long target_price, int adult_fg, LocalDate deliveryFrom) {
+//		makerSqlMapper.insertFunding(funding_category_id,funding_tag_id,user_creator_id,funding_code,title,contents,description,
+//				target_price,adult_fg,deliveryFrom);
+//		
+//		long funding_id = makerSqlMapper.selectFundingIdByCode(funding_code);
+//		return funding_id;
+//	}
 
+	//펀딩등록 fundingDto 사용
+	public long insertFunding(FundingDto params) {
+//		LocalDate deliveryFrom = LocalDate.parse(par);
+		makerSqlMapper.insertFunding(params);
+		return params.getFunding_id();
+	}
 
 //	펀딩 등록시 pk받아서 리워드 및 아이템 입력
 	public long insertFundingReward(FundingRewardDto fundingRewardDto) {
@@ -506,6 +513,8 @@ public class MakerServiceImpl {
 		
 		return gender;
 	}
+
+
 
 
 

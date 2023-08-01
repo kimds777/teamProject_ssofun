@@ -143,14 +143,22 @@ public class MakerController {
 	}
 	
 	
+//	@ResponseBody
+//	@RequestMapping("AJAXinsertFunding")
+//	public long AJAXinsertFunding(@RequestParam("funding_category_id") long funding_category_id, long funding_tag_id, long user_creator_id, String funding_code,
+//			String title, String contents, String description, long target_price, int adult_fg, String delivery_from) {
+//		LocalDate deliveryFrom = LocalDate.parse(delivery_from);
+//		System.out.println("funding_category_id: "+funding_category_id);
+//		return makerService.insertFunding(funding_category_id,funding_tag_id,user_creator_id,funding_code,title,contents,description,
+//				target_price,adult_fg,deliveryFrom);
+//	}
+	
 	@ResponseBody
 	@RequestMapping("AJAXinsertFunding")
-	public long AJAXinsertFunding(@RequestParam("funding_category_id") long funding_category_id, long funding_tag_id, long user_creator_id, String funding_code,
-			String title, String contents, String description, long target_price, int adult_fg, String delivery_from) {
-		LocalDate deliveryFrom = LocalDate.parse(delivery_from);
-		System.out.println("funding_category_id: "+funding_category_id);
-		return makerService.insertFunding(funding_category_id,funding_tag_id,user_creator_id,funding_code,title,contents,description,
-				target_price,adult_fg,deliveryFrom);
+	public long AJAXinsertFunding(@RequestBody FundingDto params) {
+		
+//		System.out.println("funding_category_id: "+funding_category_id);
+		return makerService.insertFunding(params);
 	}
 	
 	

@@ -48,7 +48,7 @@ function getUserName(user_id){
         data: {user_id:user_id},
         success: function(res){
             if(res != ""){
-                $("#makerName").text(res);
+                $("#makerName").text(res+"님");
             }
         }
     });
@@ -162,7 +162,8 @@ function getUserSession(){
     if(user_id != 0){
         return user_id;
     }else{
-       return 0;
+        alert("세션이 만료되어 로그아웃되었습니다.");
+        window.location.href = "../user/userLoginPage";
     }
 }
 

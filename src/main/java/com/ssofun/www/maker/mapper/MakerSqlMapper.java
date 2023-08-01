@@ -56,9 +56,11 @@ public interface MakerSqlMapper {
 	//---태그 정보 입력
 	public long insertTag(FundingTagDto fundingTagDto);
 	//---펀딩 입력	
-	public long insertFunding(@Param("funding_category_id") long funding_category_id, @Param("funding_tag_id") long funding_tag_id, @Param("user_creator_id") long user_creator_id, 
-			@Param("funding_code") String funding_code, @Param("title") String title, @Param("contents") String contents, @Param("description") String description, @Param("target_price") long target_price, 
-			@Param("adult_fg") int adult_fg, @Param("deliveryFrom") LocalDate deliveryFrom);
+//	public long insertFunding(@Param("funding_category_id") long funding_category_id, @Param("funding_tag_id") long funding_tag_id, @Param("user_creator_id") long user_creator_id, 
+//			@Param("funding_code") String funding_code, @Param("title") String title, @Param("contents") String contents, @Param("description") String description, @Param("target_price") long target_price, 
+//			@Param("adult_fg") int adult_fg, @Param("deliveryFrom") LocalDate deliveryFrom);
+	//---펀딩 등록 fundingDto 사용
+	public long insertFunding(FundingDto params);
 	//---펀딩 코드로 펀딩 아이디 조회
 	public long selectFundingIdByCode(String funding_code);
 	//---리워드 등록
@@ -157,6 +159,7 @@ public interface MakerSqlMapper {
 	public List<Map<String, Long>> selectAgeChartData(long funding_id);
 	//--- 후원자 성별 리스트 조회
 	public int[] selectGenderChartData(long funding_id);
+
 
 
 

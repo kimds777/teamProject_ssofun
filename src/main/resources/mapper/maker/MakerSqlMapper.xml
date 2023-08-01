@@ -10,7 +10,7 @@
 	
 	<!-- 창작자 펀딩 리스트 조회 -->
 	<select id="selectMakerFundingList" resultType="com.ssofun.dto.FundingDto">
-		SELECT * FROM tb_funding WHERE user_creator_id = #{user_creator_id} 
+		SELECT * FROM tb_funding WHERE user_creator_id = #{user_creator_id} ORDER BY created_at DESC
 	</select>
 	
 	<!-- 창작자 펀딩 섬네일 리스트 조회 -->
@@ -79,10 +79,15 @@
 
 	
 	<!-- 펀딩 정보 입력 -->
-	<insert id="insertFunding">
+	<insert id="insertFunding" parameterType="com.ssofun.dto.FundingDto" keyProperty="funding_id">
 		INSERT INTO tb_funding(funding_category_id,funding_tag_id,user_creator_id,funding_code,title,contents,description,target_price,adult_fg,delivery_from) 
 		VALUES(#{funding_category_id},#{funding_tag_id},#{user_creator_id},#{funding_code},#{title},#{contents},#{description},
-			#{target_price},#{adult_fg},#{deliveryFrom})
+			#{target_price},#{adult_fg},#{delivery_from})
+			
+		<!-- PK 조회를 위한 selectKey -->
+		<selectKey keyProperty="funding_id" resultType="java.lang.Long" order="AFTER">
+		  SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	
 	<!-- 펀딩 코드로 아이디 조회 -->

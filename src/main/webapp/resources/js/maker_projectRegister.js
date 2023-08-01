@@ -108,7 +108,26 @@ function setEventListener(user_id,funding_id,user_creator_id){
     });
 
     $(document).on("click","input#fundingRegisterSubmitBtn",function(event){
-        event.stopPropagation();        
+        event.stopPropagation();  
+        // var itemCount = $("ul.reward>li.rewardItemList>ul>li:first-child>span").text();
+        // var itemName = $("ul.reward>li.rewardItemList>ul>li:first-child").text().replace(itemCount,"").replace("• ","");
+        // alert("itemName: "+itemName);
+
+        var creatorType = $("#creatorType>ul:first-child>li.checked").index();
+        var bizNo = $("#creatorType>ul:last-child>li:last-child>input#biz_no").val();
+
+        if(creatorType == ""){
+            return alert("창작자 유형을 선택헤주세요.");
+        }else if(creatorType == 1){
+            if(bizNo == ""){
+                return alert("법인사업자는 사업자 등록번호를 입력해주세요.");
+            }
+        }
+
+        var categoryId = $("select#funding_category_id>option:selected").val();
+        if(categoryId == "none"){
+            return alert("카테고리를 선택해주세요.");
+        }
 
         if(user_creator_id != 0){
             insertTag(user_creator_id);
@@ -119,7 +138,6 @@ function setEventListener(user_id,funding_id,user_creator_id){
 
     $(document).on("click","span#rewardAddBtn",function(event){
         event.stopPropagation();
-        alert("rewardAddBtn click!!");
         insertTemporarilyReward();
 
         var itemLength = $(this).closest("ul.reward").children("li.rewardItemList").children("ul").children("li").length;
@@ -302,7 +320,7 @@ function setEventListener(user_id,funding_id,user_creator_id){
         var itemNameList = [];
         var itemCountList = [];
         for(var i=0; i<itemLength; i++){
-            var itemCount = $(this).closest("ul.reward").children("li.rewardItemList").children("ul").children("li").eq(i).children("span").text();
+            var itemCount = $(this).closest("ul.reward").children("li.rewardItemList").children("ul").children("li").eq(i).children("span").text().replace(/[^0-9]/g,"");
             var itemName = $(this).closest("ul.reward").children("li.rewardItemList").children("ul").children("li").eq(i).text().replace(itemCount,"").replace("개","").replace(" ","").replace("•","");
             
             itemNameList.push(itemName);
@@ -468,7 +486,7 @@ function getFunding(funding_id){
                         $("#description").val(value);
                     }
                     if(key == "contents"){
-                        alert(key+": "+value);
+                    
                         tinymce.activeEditor.setContent(value);
                         // $("#contents").html(value);
                     }
@@ -637,7 +655,6 @@ function insertUserCreator(user_id){
         data: {user_id:user_id, name:name, email:email, phone:phone, creator_type:creator_type, biz_no:biz_no},
         success: function(res){
             if(res!=0){
-                alert("창작자 정보 입력 성공!!");
                 // ------ 창작자 은행 정보 입력 ------ 
                 var user_creator_id = res;
                 var bank_type = $("#bank_type>option:selected").val();
@@ -650,7 +667,6 @@ function insertUserCreator(user_id){
                     data: {user_creator_id:user_creator_id,bank_type:bank_type,account_no:account_no,account_name:account_name},
                     success: function(res){
                         if(res == 1){
-                            alert("창작자 은행 정보 입력 성공!!!")
                             insertTag(user_creator_id);
                            
                         }
@@ -686,14 +702,13 @@ function insertTag(user_creator_id){
                  if(adult_fg == null){
                      adult_fg = 0;
                  }
-                 var delivery_from = $("#delivery_from").val();
-                 
-                 alert("funding_category_id: "+$funding_category_id);
+                 var delivery_from = formatDateToKorean($("#delivery_from").val());
 
                  $.ajax({
                      url: "./AJAXinsertFunding",
                      method: "POST",
-                     data: {funding_category_id:$funding_category_id,
+                     contentType: "application/json",
+                     data: JSON.stringify({funding_category_id:$funding_category_id,
                              funding_tag_id:funding_tag_id,
                              user_creator_id:user_creator_id,
                              funding_code:funding_code,
@@ -704,11 +719,10 @@ function insertTag(user_creator_id){
                              //confirm_fg:1, //나중에 수정해야함
                              adult_fg:adult_fg,
                              delivery_from:delivery_from
-                         },
+                         }),
                      success: function(res){
 
                          if(res!=0){
-                             alert("펀딩 등록 성공! funding_id: "+res);
 
                              var formData = new FormData();
                              var funding_id = res;
@@ -725,8 +739,7 @@ function insertTag(user_creator_id){
                                  processData: false, // 데이터 처리 방지
                                  contentType: false, // 컨텐츠 타입 설정을 자동으로 처리
                                  success: function(res){
-                                     if(res == 1){
-                                         alert("리스트 섬네일 업로드 완료!!");                                                              
+                                     if(res == 1){                                                          
                                          
                                      }
                                  }
@@ -752,7 +765,6 @@ function insertTag(user_creator_id){
                                      contentType: false, // 컨텐츠 타입 설정을 자동으로 처리
                                      success: function(res){
                                          if(res == 1){
-                                             alert("상세 섬네일 업로드 완료!!");
                                              
                                          }
                                      }
@@ -764,8 +776,7 @@ function insertTag(user_creator_id){
 
                              var itemList = [];
                              var rewardList = [];
-                             var rewardLength = $("#rewardList>ul").length;
-                             alert("rewardLength: "+rewardLength);             
+                             var rewardLength = $("#rewardList>ul").length;         
                              
                              // 리워드 입력 다시 수정해야함!! ------------------------------------------------------------------------------------
 
@@ -821,7 +832,6 @@ function insertTag(user_creator_id){
                                      success: function(res){
                                         if(res != 0){
                                             
-                                            alert("성공!!! funding_reward_id: "+res);
                                             var funding_reward_id = res;
                                                
                                             var rewardLength = $("#rewardList>ul").length;
@@ -833,7 +843,7 @@ function insertTag(user_creator_id){
                                                     var $itemCount_orgin = $("div#rewardList").children("ul.reward").eq(i).children("li.rewardItemList").children("ul").children("li").eq(j).children("span").text();
                                                     
                                                     var itemCount = $itemCount_orgin.replace("개","");
-                                                    var itemName = $("#rewardList").children("ul.reward").eq(i).children("li.rewardItemList").children("ul").children("li").eq(j).text().replace($itemCount_orgin,"");
+                                                    var itemName = $("#rewardList").children("ul.reward").eq(i).children("li.rewardItemList").children("ul").children("li").eq(j).text().replace($itemCount_orgin,"").replace("• ","");
                                                     var fundingItemDto = {funding_reward_id:funding_reward_id, name:itemName, count:itemCount};                                                
                                                     
 
@@ -845,7 +855,9 @@ function insertTag(user_creator_id){
                                                             async: false,
                                                             success: function(res){
                                                                 if(res == 1){
-                                                                    alert("리워드 아이템 등록 완료!!!");
+                                                                    if(j == itemLength){
+                                                                        alert("펀딩이 등록되었습니다!");
+                                                                    }
                                                                     window.location.href = "../maker/makerProjectRegisterPage?funding_id="+funding_id;
                                                                     
                                                                 }
@@ -908,6 +920,15 @@ function parseDate(dateString) {
     return formattedDate;
   }
 
+//2023년 09월 01일 로 나옴
+  function formatDateToKorean(dateString) {
+    var dateObject = new Date(dateString);
+    var year = dateObject.getFullYear();
+    var month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    var day = dateObject.getDate().toString().padStart(2, '0');
+    var formattedDate = year + "년 " + month + "월 " + day + "일";
+    return formattedDate;
+  }
 
   
   function padZero(number) {
