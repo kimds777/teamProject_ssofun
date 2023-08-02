@@ -61,59 +61,59 @@ function getFundingOrder($funding_order_id){
         data: {funding_order_id:$funding_order_id},
         success: function(res){
             if(res != null){
+                var funding_id;
                 $.each(res, function(key,value){
-                    if(key == "funding_category"){
-                        $("#participation>#history>#project>li:first-child").html(value);
+                    
+                    if(key == "rewardList"){
+                        $.each(value,function(index,item){
+                            if(index == 0){ // 첫번째 리워드만 보여주기
+                                $.each(item,function(key,value){
+                                    if(key == "fundingRewardDto"){
+                                        $.each(value,function(key,value){
+                                            if(key == "funding_id"){
+                                                var category = getFundingCategoryNameByFundingId(value);
+                                                var title = getFundingTitle(value);
+                                                $("#participation>#history>#project>li:last-child").html(title);
+                                                $("#participation>#history>#project>li:first-child").html(category);
+                                            }
+                                            if(key == "title"){
+                                                $("#projectInfo>.reward>li.title").html(value);
+                                            }
+                                            if(key == "itemList"){
+                                                var $detailLi = $("#projectInfo>.reward>li.detail");
+                                                var $ul = $("<ul></ul>");
+                                                $.each(value,function(index,item){
+                                                    var name;
+                                                    $.each(item,function(key,value){
+                                                        if(key=="name"){
+                                                            name = value;
+                                                        }
+                                                        if(key == "count"){
+                                                            $("<li>&#8226; "+name+" "+value+"개</li>").appendTo($ul);
+                                                        }
+                                                    });
+                                                });
+                                                $detailLi.append($ul);
+                                            }
+                                        });
+                                    }
+
+                                    if(key == "count"){
+                                        var $totalLi = $("#projectInfo>.reward>li.total");
+                                        $("<span>수량 "+value+"개</span>").appendTo($totalLi);
+                                    }
+            
+                                    if(key =="amount"){
+                                        var $totalLi = $("#projectInfo>.reward>li.total");
+                                        var amountCommas = addCommas(value);
+                                        $("<b>"+amountCommas+"원</b>").appendTo($totalLi);
+                                    }
+
+
+                                });
+                            }
+                        });
                     }
-
-                    if(key == "title"){
-                        $("#participation>#history>#project>li:last-child").html(value);
-                    }
-
-                        if(key == "rewardList"){
-                            $.each(value,function(index,item){
-                                if(index == 0){ // 첫번째 리워드만 보여주기
-                                    $.each(item,function(key,value){
-                                        if(key == "fundingRewardDto"){
-                                            $.each(value,function(key,value){
-                                                    if(key == "title"){
-                                                        $("#projectInfo>.reward>li.title").html(value);
-                                                    }
-                                                    if(key == "itemList"){
-                                                        var $detailLi = $("#projectInfo>.reward>li.detail");
-                                                        var $ul = $("<ul></ul>");
-                                                        $.each(value,function(index,item){
-                                                            var name;
-                                                            $.each(item,function(key,value){
-                                                                if(key=="name"){
-                                                                    name = value;
-                                                                }
-                                                                if(key == "count"){
-                                                                    $("<li>&#8226; "+name+" "+value+"개</li>").appendTo($ul);
-                                                                }
-                                                            });
-                                                        });
-                                                        $detailLi.append($ul);
-                                                    }
-                                            });
-                                        }
-
-                                        if(key == "count"){
-                                            var $totalLi = $("#projectInfo>.reward>li.total");
-                                            $("<span>수량 "+value+"개</span>").appendTo($totalLi);
-                                        }
-                
-                                        if(key =="amount"){
-                                            var $totalLi = $("#projectInfo>.reward>li.total");
-                                            var amountCommas = addCommas(value);
-                                            $("<b>"+amountCommas+"원</b>").appendTo($totalLi);
-                                        }
-
-
-                                    });
-                                }
-                            });
-                        }
 
                     
                 });
@@ -122,6 +122,39 @@ function getFundingOrder($funding_order_id){
     });
 };
 
+function getFundingCategoryNameByFundingId(funding_id){
+    var fundingCategoryName;
+    $.ajax({
+        url: "./AJAXgetFundingCategoryNameByFundingId",
+        method: "GET",
+        async : false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res !=  null){
+                fundingCategoryName = res;
+            }
+        }
+    });
+
+    return fundingCategoryName;
+}
+
+function getFundingTitle(funding_id){
+    var fundingTitle;
+    $.ajax({
+        url: "./AJAXgetFundingTitle",
+        method: "GET",
+        async : false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res !=  null){
+                fundingTitle = res;
+            }
+        }
+    });
+
+    return fundingTitle;
+}
 
 function addCommas(num){
     var str = num.toString();

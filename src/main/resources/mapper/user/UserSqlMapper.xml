@@ -111,7 +111,7 @@
 	
 	<!-- 펀딩 달성액 조회 -->
 	<select id="selectAchievementPrice" resultType="long">
-		select SUM(fo.total_price) from tb_funding_reward_order fro, tb_funding_reward fr, tb_funding_order fo
+		select IFNULL(SUM(fo.total_price),0) from tb_funding_reward_order fro, tb_funding_reward fr, tb_funding_order fo
 		WHERE fro.funding_reward_id = fr.funding_reward_id AND fo.funding_order_id = fro.funding_order_id 
 		AND fo.used_fg = 1 AND fr.funding_id = #{funding_id}
 	</select>

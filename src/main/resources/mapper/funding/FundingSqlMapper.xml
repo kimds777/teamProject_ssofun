@@ -383,9 +383,8 @@
 	
 	<!-- 리워드 정보 리스트 출력 -->
 	 <select id="selectReward" resultType="com.ssofun.dto.FundingRewardDto">
-	 	SELECT funding_reward_id,funding_id,price,title,description,delivery_price,stock_max,buy_count
-	 	FROM tb_funding_reward 
-	 	WHERE funding_reward_id = #{funding_reward_id}
+	 	SELECT * FROM tb_funding_reward 
+	 	WHERE funding_reward_id = #{funding_reward_id} AND used_fg = 1
 	 </select>
 	
 	
@@ -406,8 +405,7 @@
 	
 	<!-- 펀딩 결제 완료된 주문 정보 출력 -->
 	 <select id="selectOrder" resultType="com.ssofun.dto.FundingOrderDto">
-	 	SELECT funding_order_id,user_id,funding_order_status_id,price_support,open_name_fg,open_amount_fg,
-	 	total_price,created_at  FROM tb_funding_order 
+	 	SELECT * FROM tb_funding_order 
 	 	WHERE funding_order_id = #{funding_order_id} AND used_fg = 1
 	 </select>
 	 
@@ -467,4 +465,29 @@
 		SELECT * FROM tb_delivery_recipient
 		WHERE user_id = #{user_id} AND used_fg = 1 AND default_fg = 1
 	</select>
+	
+	<!-- 카테고리명 펀딩 아이디로 출력 -->
+	<select id="selectFundingCategoryNameByFundingId" resultType="String">
+		SELECT name FROM tb_funding_category fc, tb_funding f
+		WHERE fc.funding_category_id = f.funding_category_id AND f.funding_id = #{funding_id}
+	</select>
+	
+	<!-- 펀딩 제목 출력 -->
+	<select id="selectFundingTitle" resultType="String">
+		SELECT title FROM tb_funding WHERE funding_id = #{funding_id}
+	</select>
+	
+	<!-- 창장자 정보 출력 -->
+	<select id="selectCreator" resultType="String">
+		SELECT name FROM tb_user_creator WHERE user_creator_id = #{user_creator_id} AND used_fg = 1
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

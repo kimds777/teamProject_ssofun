@@ -22,6 +22,7 @@ import com.ssofun.dto.FundingRewardOrderDto;
 import com.ssofun.dto.FundingTagDto;
 import com.ssofun.dto.FundingThumbnailDto;
 import com.ssofun.dto.PaymentDto;
+import com.ssofun.dto.UserCreatorDto;
 
 public interface FundingSqlMapper {
 
@@ -174,6 +175,15 @@ public interface FundingSqlMapper {
 			@Param("deliveryRecipientDto") DeliveryRecipientDto deliveryRecipientDto);
 	//--- 기본 배송지 출력
 	public DeliveryRecipientDto selectDefaultAddressByUserId(long user_id);
+	
+	
+	
+	//--- 펀딩 카테고리명 출력
+	public String selectFundingCategoryNameByFundingId(long funding_id);
+	//--- 펀딩 제목 출력
+	public String selectFundingTitle(long funding_id);
+	//--- 창작자 정보 출력
+	public String selectCreator(long user_creator_id);
 	
 	
 

@@ -24,6 +24,7 @@ import com.ssofun.dto.FundingRewardOrderDto;
 import com.ssofun.dto.FundingTagDto;
 import com.ssofun.dto.FundingThumbnailDto;
 import com.ssofun.dto.PaymentDto;
+import com.ssofun.dto.UserCreatorDto;
 import com.ssofun.www.funding.mapper.FundingSqlMapper;
 
 @Service
@@ -419,9 +420,8 @@ public class FundingServiceImpl {
 			List<FundingItemDto> itemList = fundingSqlMapper.selectItemList(fundingRewardDto.getFunding_id(), fundingRewardDto.getFunding_reward_id());
 			FundingDto FundingDto = selectFunding(fundingRewardDto.getFunding_id());
 			
-			fundingOrderDto.setCreator_name(FundingDto.getCreator_name());
+//			fundingOrderDto.setCreator_name(FundingDto.getCreator_name());
 			fundingOrderDto.setTitle(FundingDto.getTitle());
-			fundingOrderDto.setFunding_category(FundingDto.getFunding_category());
 			
 			fundingRewardDto.setItemList(itemList);
 			fundingRewardOrderDto.setFundingRewardDto(fundingRewardDto);
@@ -447,6 +447,21 @@ public class FundingServiceImpl {
         String formattedDate = dateFormat.format(closeAt);
         
 		return formattedDate;
+	}
+
+	//펀딩 카테고리명 출력
+	public String getFundingCategoryNameByFundingId(long funding_id) {
+		return fundingSqlMapper.selectFundingCategoryNameByFundingId(funding_id);
+	}
+
+	//펀딩 제목 출력
+	public String getFundingTitle(long funding_id) {
+		return fundingSqlMapper.selectFundingTitle(funding_id);
+	}
+
+	//창작자 정보 출력
+	public String getCreator(long user_creator_id) {
+		return fundingSqlMapper.selectCreator(user_creator_id);
 	}
 
 

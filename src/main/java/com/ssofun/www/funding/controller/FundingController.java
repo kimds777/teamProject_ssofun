@@ -36,6 +36,7 @@ import com.ssofun.dto.FundingNewsReviewDto;
 import com.ssofun.dto.FundingOrderDto;
 import com.ssofun.dto.FundingRewardOrderDto;
 import com.ssofun.dto.PaymentDto;
+import com.ssofun.dto.UserCreatorDto;
 import com.ssofun.www.funding.service.FundingServiceImpl;
 import com.ssofun.www.user.service.UserServiceImpl;
 
@@ -522,6 +523,32 @@ public class FundingController {
 		
 		return fundingService.getFundingCloseAt(funding_id);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "AJAXgetFundingCategoryNameByFundingId", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	public String AJAXgetFundingCategoryNameByFundingId(long funding_id) {
+		return fundingService.getFundingCategoryNameByFundingId(funding_id);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "AJAXgetFundingTitle", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	public String AJAXgetFundingTitle(long funding_id) {
+		return fundingService.getFundingTitle(funding_id);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "AJAXgetCreator", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	public String AJAXgetCreator(long user_creator_id) {
+		return fundingService.getCreator(user_creator_id);
+	}
 
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -250,7 +250,6 @@ function getFundingDto($funding_id,$funding_reward_id){
         method: "GET",
         data: {funding_id:$funding_id},
         success: function(res){
-            var achievementRate;
             $.each(res,function(key,value){
 
                 if(key == "thumbnailList"){
@@ -270,23 +269,25 @@ function getFundingDto($funding_id,$funding_reward_id){
                     });
                 }
 
-                if(key == "funding_category"){
-                    $("#fundingInfo>li:nth-child(2)").text(value);
+                if(key == "funding_category_id"){
+                    $("#fundingInfo>li:nth-child(2)").text(getFundingCategoryName(value));
                 }
                 if(key == "title"){
                     $("#fundingInfo>li:nth-child(3)").text(value);
                 }
-                if(key == "achievementPrice"){
-                    var commasValue = addCommas(value);
-                    $("#fundingInfo>li:nth-child(4)").html(commasValue+"원");
-                }
-                if(key == "achievementRate"){
-                    achievementRate = value;
-                }
-                if(key == "d_day"){
-                    $("#fundingInfo>li:last-child").html("<b>"+achievementRate+"% 달성</b> "+value+"일 남음");
-                }
 
+                if(key == "target_price"){
+                    var achievementRate = getFundingAchievementRate($funding_id);
+                    var $d_day = getDday($funding_id);
+                    var achievement = getfundingAchievement($funding_id);
+
+                    if(achievement != 0){
+                        achievement = addCommas(achievement);
+                    }
+                    $("#fundingInfo>li:nth-child(4)").html(achievement+"원");
+                    $("#fundingInfo>li:last-child").html("<b>"+achievementRate+"% 달성</b> "+$d_day+"일 남음");
+                }
+     
                 if(key == "rewardList"){
                     $.each(value,function(index,item){
                         var $rewardGroup = $("#rewardGroup");
@@ -407,6 +408,23 @@ function getFundingDto($funding_id,$funding_reward_id){
     
 };
 
+function getFundingCategoryName(funding_category_id){
+    var fundingCategoryName;
+    $.ajax({
+        url: "../user/AJAXgetFundingCategoryName",
+        method: "GET",
+        async : false,
+        data: {funding_category_id:funding_category_id},
+        success: function(res){
+            if(res !=  null){
+                fundingCategoryName = res;
+            }
+        }
+    });
+
+    return fundingCategoryName;
+}
+
 function getRewardPaymentCount(callback,funding_reward_id){
     $.ajax({
         url: "./AJAXgetRewardPaymentCount",
@@ -426,3 +444,55 @@ function addCommas(num){
 
     return str;
 };
+
+
+function getDday(funding_id){
+    var dday;
+
+    $.ajax({
+        url: "../user/AJAXgetDday",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                dday = res;
+            }
+        }
+    });
+
+    return dday;
+}
+
+function getFundingAchievementRate(funding_id){
+    var respone;
+    $.ajax({
+        url: "./AJAXgetFundingAchievementRate",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                respone = res;
+            }
+        }
+    });
+    return respone;
+}
+
+
+function getfundingAchievement(funding_id){
+    var respone;
+    $.ajax({
+        url: "./AJAXgetFundingAchievement",
+        method: "GET",
+        async: false,
+        data: {funding_id:funding_id},
+        success: function(res){
+            if(res != null){
+                respone = res;
+            }
+        }
+    });
+    return respone;
+}

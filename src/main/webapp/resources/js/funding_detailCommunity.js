@@ -262,12 +262,13 @@ function getFundingDto($funding_id){
         data: {funding_id:$funding_id},
         success: function(res){
             var $addComma;
-            var $d_day;
+            var $funding_id;
             var $tabInfo = $("#tab>ul>li#info");
             var $tabNotice = $("#tab>ul>li#notice");
             var $tabCommunity = $("#tab>ul>li#community");
             $.each(res,function(key,value){
                     if(key == "funding_id"){
+                        $funding_id = value;
                         $tabInfo.html("<a href='./fundingDetailPage?funding_id="+value+"'>소개</a>");
                         $tabNotice.html("<a href='./fundingDetailNoticeListPage?funding_id="+value+"'>공지사항</a>");
                         $tabCommunity.html("<a class='activeTab' href='./fundingDetailCommunityListPage?funding_id="+value+"'>커뮤니티</a>");
@@ -302,13 +303,6 @@ function getFundingDto($funding_id){
                         });
                     }
 
-
-                    if(key == "title"){return $("#title>h3").text(value);}
-
-                    if(key == "description"){
-                        return $("#introduce").html("<span class='first'>펀딩소개</span>"+value);
-                    }
-
                     if(key == "funding_category_id"){ 
                         var categoryName = getFundingCategoryName(value);
                         $("#category-name>h6").text(categoryName);
@@ -321,10 +315,10 @@ function getFundingDto($funding_id){
                     }
 
                     if(key == "target_price"){
-                        $achievementRate = getFundingAchievementRate(funding_id);
-                        var $d_day = getDday(funding_id);
-                        var achievement = getfundingAchievement(funding_id);
-                        var closeAt = getFundingCloseAt(funding_id);
+                        $achievementRate = getFundingAchievementRate($funding_id);
+                        var $d_day = getDday($funding_id);
+                        var achievement = getfundingAchievement($funding_id);
+                        var closeAt = getFundingCloseAt($funding_id);
 
                         if(achievement != 0){
                             achievement = addCommas(achievement);
