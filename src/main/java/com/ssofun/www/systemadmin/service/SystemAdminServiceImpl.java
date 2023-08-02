@@ -2,14 +2,22 @@ package com.ssofun.www.systemadmin.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssofun.dto.*;
+import com.ssofun.dto.AdminDto;
+import com.ssofun.dto.BizDto;
+import com.ssofun.dto.FaqDto;
+import com.ssofun.dto.FaqHelpStatusDto;
+import com.ssofun.dto.FundingCategoryDto;
+import com.ssofun.dto.FundingDto;
+import com.ssofun.dto.QnaDto;
+import com.ssofun.dto.Qna_ImageDto;
+import com.ssofun.dto.UserCreatorDto;
+import com.ssofun.dto.UserDto;
 import com.ssofun.www.systemadmin.mapper.SystemAdminSqlMapper;
 
 @Service
@@ -214,18 +222,19 @@ public class SystemAdminServiceImpl {
 	public List<Map<String, Object>> selectTop10HelpfulFaqList() {
 		
 		List<Map<String, Object>> topFaqlist = new ArrayList<>();
-		List<FaqHelpStatusDto>  faqHelpStatusDtoList = systemAdminSqlMapper.selectTop10HelpfulFaq();
+		List<FaqDto> faqHelpStatusDtoList = systemAdminSqlMapper.selectTop10HelpfulFaq();
 		
-		
-		for(FaqHelpStatusDto faqHelpStatusDto:faqHelpStatusDtoList) {
+		for(FaqDto faqHelpStatusDto:faqHelpStatusDtoList) {
 			
 			Map<String, Object> map = new HashMap<>();
 			int faqId = faqHelpStatusDto.getFaq_id();
 			
 			FaqDto faqDto = systemAdminSqlMapper.selectFaqDtoByfaqId(faqId);
-			
+			System.out.println(faqDto);
+			AdminDto adminDto = systemAdminSqlMapper.selectAdminDtoByAdminId(faqDto.getAdmin_id());
 			
 			map.put("faqDto",faqDto);
+			map.put("adminDto", adminDto);
 			map.put("faqHelpStatusDto", faqHelpStatusDto);
 					
 			topFaqlist.add(map);
@@ -439,7 +448,7 @@ public class SystemAdminServiceImpl {
 //사이트관리
 	
 	
-	//펀딩사이트관리
+	//펀딩사이트관리, 미승인 리스트
 	public List<Map<String, Object>> getUnauthorizedFunding(){
 		
 		List<Map<String, Object>> unauthorizedFundingList = new ArrayList<>();
@@ -448,7 +457,12 @@ public class SystemAdminServiceImpl {
 		for(FundingDto fundingDto : unauthorizedFundingDto) {
 			Map<String, Object> map = new HashMap<>();
 			 
+			int creatorId = (int) fundingDto.getUser_creator_id();
+			UserCreatorDto userCreatorDto = (UserCreatorDto) systemAdminSqlMapper.fundingCreatorBycreatorId(creatorId);
 			
+	
+			
+			map.put("userCreatorDto", userCreatorDto);
 			map.put("fundingDto", fundingDto);
 			
 			unauthorizedFundingList.add(map);
@@ -459,11 +473,61 @@ public class SystemAdminServiceImpl {
 	}
 
 	
+	
+	
+	
+	//펀딩사이트관리, 승인리스트
+	public List<Map<String, Object>> getauthorizedFunding(){
+		
+		List<Map<String, Object>> authorizedFundingList = new ArrayList<>();
+		List<FundingDto> authorizedFundingDto = systemAdminSqlMapper.getFundingData();
+		
+		for(FundingDto fundingDto : authorizedFundingDto) {
+			Map<String, Object> map = new HashMap<>();
+			 
+			int creatorId = (int) fundingDto.getUser_creator_id();
+			//UserCreatorDto userCreatorDto = (UserCreatorDto) systemAdminSqlMapper.fundingCreatorBycreatorId(creatorId);
+			
+			
+			
+			
+		//	map.put("userCreatorDto", userCreatorDto);
+			map.put("fundingDto", fundingDto);
+			
+			authorizedFundingList.add(map);
+		}
+		
+		
+		return authorizedFundingList;
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//펀딩승인
 	public void fundingApproval(int funding_id) {
 	
 		systemAdminSqlMapper.fundingApproval(funding_id);
 	}
+	
+	
+
+	
+	
+	
+	
 	
 	//펀딩카테고리추가
 	public void fundingCategoryAdd(FundingCategoryDto fundingCategoryDto) {

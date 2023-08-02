@@ -118,13 +118,11 @@
                         
                         
                         <div class="row mt-5">
-                            <div class="col"><p class="seven-font-1">작성한 1:1 문의 사항이 없습니다.</p></div>
+                            <div class="col" style="text-align: center;"><p class="two_font">작성한 1:1 문의 사항이 없습니다.</p></div>
                         </div>
                    
-                        
-
                         <div class="row">
-                            <div class="col"><p>페이지네이션</p></div>
+                           
                         </div>
                     </div>
                 </div>

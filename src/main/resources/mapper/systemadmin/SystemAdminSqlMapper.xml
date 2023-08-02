@@ -131,6 +131,10 @@
 	<delete id="deleteFaqDataByFaqId">
 		DELETE FROM tb_faq WHERE faq_id = #{faqId}
 	</delete>
+	
+
+	
+	
 
 
 
@@ -169,7 +173,7 @@
 	
 	
 	<!-- faq 도움되는글 상위10개 -->
-	<select id="selectTop10HelpfulFaq" resultType="com.ssofun.dto.FaqHelpStatusDto">
+	<select id="selectTop10HelpfulFaq" resultType="com.ssofun.dto.fDto">
 		  SELECT faq_id, COUNT(*) AS helpful_count
 		  FROM tb_faq_HelpStatus
 		  WHERE helpStatus = 'helpful'
@@ -272,10 +276,25 @@
 	
 <!-- 사이트관리 -->	
 	
+	<!--펀딩창작자정보가져옴 -->
+	<select id="fundingCreatorBycreatorId" resultType="com.ssofun.dto.UserCreatorDto">
+		select * from tb_user_creator where user_creator_id = #{creatorId};
+	</select>
+	
+	
+	
 	<!-- 미승인된 펀딩정보가져옴 -->
 	<select id="getUnauthorizedFunding" resultType="com.ssofun.dto.FundingDto">
 		SELECT * FROM tb_funding WHERE confirm_fg = 0
 	</select>
+	
+	
+	
+	<!-- 승인완료된 펀딩정보가져옴 -->
+	<select id="getFundingData" resultType="com.ssofun.dto.FundingDto">
+		SELECT * FROM tb_funding WHERE confirm_fg = 1
+	</select>
+	
 	
 	
 	<!-- 펀딩승인함 -->

@@ -300,7 +300,8 @@
                                                 <div class="row"></div>
                                                 <div class="row">
                                                     <div class="col textcenter">
-                                                        <img src="/resources/companyManagement/bizceo.jpg" alt="대표자" width="160px" height="160px"  style=" border-radius: 30%;">
+                                                    
+                                                        <img src="/resources/img/kimhaneul/companyManagement/bizceo.jpg" alt="대표자" width="160px" height="160px"  style=" border-radius: 30%;">
                                                     </div>
                                                     
                                                 </div>

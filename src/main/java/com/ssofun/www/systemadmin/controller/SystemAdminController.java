@@ -258,6 +258,9 @@ public class SystemAdminController {
 	public String systemAdminFaqMainPage(HttpSession session,Model model) {
 		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		List<Map<String, Object>> list = systemAdminService.getfaqList();
+		List<Map<String, Object>> faqlist = systemAdminService.selectTop10HelpfulFaqList();
+		
+		model.addAttribute("faqlist",faqlist);
 		model.addAttribute("list",list);//request에 담아서 jsp에서 꺼내쓸 수 있음 
 		
 		
@@ -285,7 +288,7 @@ public class SystemAdminController {
 		
 		systemAdminService.systemAdminCreateFaq(faqDto);
 		
-		System.out.println("컨트롤러"+faqDto.getTitle());
+	
 		
 		return "redirect:./systemAdminFaqMainPage";
 	}
@@ -690,6 +693,10 @@ public class SystemAdminController {
 		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		
 		List<Map<String, Object>> unauthorizedFundingList = systemAdminService.getUnauthorizedFunding();
+		List<Map<String, Object>> authorizedFundingList = systemAdminService.getauthorizedFunding();
+		
+		
+		model.addAttribute("authorizedFundingList",authorizedFundingList);
 				
 		model.addAttribute("fundingList",unauthorizedFundingList);
 		
@@ -712,6 +719,16 @@ public class SystemAdminController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//펀딩사이트 카테고리추가페이지
 	@RequestMapping("siteManagement/fundingCategoryAddPage")
 	public String fundingCategoryAddPage(Model model, HttpSession session) {
@@ -725,6 +742,7 @@ public class SystemAdminController {
 		
 		return"systemadmin/siteManagement/fundingCategoryAddPage";
 	}
+	
 	
 	//펀딩카테고리추가프로세스
 	@RequestMapping("fundingCategoryAddProcess")

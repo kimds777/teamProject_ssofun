@@ -320,7 +320,7 @@
                                                 <div class="row"></div>
                                                 <div class="row mt-4">
                                                     <div class="col textcenter">
-                                                        <img src="/resources/companyManagement/vender.jpg"  alt="vender" width="230px" height="230px"  style=" border-radius: 30%;">
+                                                        <img src="/resources/img/kimhaneul/companyManagement/vender.jpg"  alt="vender" width="230px" height="230px"  style=" border-radius: 30%;">
                                                     </div>
                                                     
                                                 </div>

@@ -372,8 +372,8 @@
                     </div>
                             <!-- 페이지네이션 -->
             <div class="row mt-1" style="text-align: center;">
-            	<div class="col-5"></div>
-            	<div class="col">
+            	<div class="col"></div>
+            	<div class="col" style="padding-left: 85px;">
 	            	<nav aria-label="Page navigation example">
 					  <ul class="pagination">
 					    <li class="page-item">

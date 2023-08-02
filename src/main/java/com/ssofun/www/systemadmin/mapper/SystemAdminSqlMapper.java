@@ -91,7 +91,7 @@ public interface SystemAdminSqlMapper {
 	
 	
 	//faq도움되는글 상위 10개 리스트 
-	public List<FaqHelpStatusDto> selectTop10HelpfulFaq();
+	public List<FaqDto> selectTop10HelpfulFaq();
 	
 	
 	
@@ -165,7 +165,18 @@ public interface SystemAdminSqlMapper {
 
 	//펀딩승인함
 	public void fundingApproval(int funding_id);
+	
+	
+	//승인완료된 펀딩가져옴
+	public List<FundingDto> getFundingData();
+	
+		
+	//펀딩창작자정보가져옴
+	 public UserCreatorDto fundingCreatorBycreatorId(int creatorId);
 
+	 
+	 
+	 
 	
 	//펀딩카테고리 추가
 	public void fundingCategoryAdd(FundingCategoryDto FundingCategoryDto);

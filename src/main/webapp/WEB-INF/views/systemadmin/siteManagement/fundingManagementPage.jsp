@@ -226,7 +226,7 @@
                                 <div class="container-fluid">
                                    
                                         <div class="col-2">
-                                            <a class="navbar-brand text-black">미승인펀딩</a>
+                                            <a class="navbar-brand text-black">펀딩승인관리</a>
                                         </div>
                                         <div class="col">
                                             <!--<p class="five-font mt-2">펀딩관리페이지입니다.</p>-->
@@ -259,7 +259,7 @@
                             
                             </div>
                       
-                            <div class="row mt-3">       
+                            <div class="row mt-3" style="height: 450px;">       
                                
                                 <div class="col">
 		              			<table class="table table-bordered table-sm">
@@ -279,7 +279,49 @@
 										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;"><input type="checkbox" name="funding_id" value="${fundingList.fundingDto.funding_id }"></p></th>
 										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.funding_id }</p></th>
 											  <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.title }</p></th>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.creator_name }</p></td>
+										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.userCreatorDto.name }</p></td>
+										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.confirm_fg }</p></td>
+									
+										    </tr>
+										  </tbody>
+										</c:forEach>
+								</table> 
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col hr-col"><hr class="hr-1"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-2" style="padding-left: 0px;"><p class="three-font mt-1" style="margin-left: 5px;">승인된 펀딩목록</p></div>
+                                <div class="col c-five-font"></div>
+                            </div>
+
+
+                            <div class="row mt-3" style="height: 450px;">       
+                                
+                               
+                                <div class="col">
+		              			<table class="table table-bordered table-sm">
+									  <thead>
+									    <tr  style="background-color: #f8f9fa;">
+									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><input type="checkbox"></p></th>
+									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">펀딩번호</p></th>
+									      <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">펀딩제목</p></th>
+									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">창작자</p></th>
+									      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">승인여부</p></th>
+								
+									    </tr>
+									  </thead>
+									  	<c:forEach items="${authorizedFundingList}" var="fundingList" >
+										  <tbody>
+										    <tr>
+										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;"><input type="checkbox" name="funding_id" value="${fundingList.fundingDto.funding_id }"></p></th>
+										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.funding_id }</p></th>
+											  <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.title }</p></th>
+										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.userCreatorDto.name }</p></td>
 										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.confirm_fg }</p></td>
 									
 										    </tr>
@@ -295,9 +337,9 @@
 		                    </div>
 	                    
 	                        <!-- 페이지네이션 -->
-				            <div class="row">
+				           <!--  <div class="row mb-3">
 				            	<div class="col"></div>
-				            	<div class="col">
+				            	<div class="col" style="padding-left: 85px;">
 					            	<nav aria-label="Page navigation example">
 									  <ul class="pagination">
 									    <li class="page-item">
@@ -310,11 +352,6 @@
 									    <li class="page-item"><a class="page-link" href="#">3</a></li>
 									    <li class="page-item"><a class="page-link" href="#">4</a></li>
 									    <li class="page-item"><a class="page-link" href="#">5</a></li>
-									    <li class="page-item"><a class="page-link" href="#">6</a></li>
-									    <li class="page-item"><a class="page-link" href="#">7</a></li>
-									    <li class="page-item"><a class="page-link" href="#">8</a></li>
-									    <li class="page-item"><a class="page-link" href="#">9</a></li>
-									    <li class="page-item"><a class="page-link" href="#">10</a></li>
 									    <li class="page-item">
 									      <a class="page-link" href="#" aria-label="Next">
 									        <span aria-hidden="true">&raquo;</span>
@@ -324,7 +361,7 @@
 									</nav>
 								</div>
 								<div class="col"></div>
-				            </div>
+				            </div>-->
 	                    
                     
 		                </form>

@@ -307,7 +307,7 @@
                         <!-- 페이지네이션 -->
 			            <div class="row">
 			            	<div class="col"></div>
-			            	<div class="col">
+			            	<div class="col" style="padding-left: 85px;">
 				            	<nav aria-label="Page navigation example">
 								  <ul class="pagination">
 								    <li class="page-item">

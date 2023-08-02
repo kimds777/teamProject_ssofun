@@ -224,7 +224,7 @@
                         <div class="col">
                             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                                 <div class="container-fluid">
-                                    <a class="navbar-brand text-black">관리자메인페이지</a>
+                                    <a class="navbar-brand text-black">시스템관리자메인페이지</a>
                                     <form class="d-flex" role="search">
                                         <input class="form-control me-2" type="search" placeholder="Search"
                                             aria-label="Search">
