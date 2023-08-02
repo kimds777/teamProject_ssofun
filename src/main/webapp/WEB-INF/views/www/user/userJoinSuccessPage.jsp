@@ -23,7 +23,7 @@
 
             <div id="welcome">
                 <img src="../../resources/img/kimdaseul/celebration.PNG" alt="" id="leftImg">
-                <img src="../../resources/img/kimdaseulcelebration.PNG" alt="" id="rightImg">
+                <img src="../../resources/img/kimdaseul/celebration.PNG" alt="" id="rightImg">
                 <ul class="notosanskr">
                     <li>000 서포터님</li>
                     <li>쏘펀 가입을 축하드려요</li>

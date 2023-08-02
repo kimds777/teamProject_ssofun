@@ -89,7 +89,7 @@ function loginWithKakao(){
             var popupOptions = "width=450,height=500,scrollbars=yes,resizable=no";
 
             // 팝업 창을 띄웁니다. (window.open() 메서드를 호출하여 새로운 창을 엽니다.)
-            popup = window.open("./kakaoOauthPage", "KakaoLoginPopup", popupOptions);
+            popup = window.open("../user/kakaoOauthPage", "KakaoLoginPopup", popupOptions);
 
             // popup.addressFromParent = res;
 

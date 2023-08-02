@@ -33,7 +33,7 @@ i.activeCheckBox{color: #ff6462;}
 #addressSelectModal>div>ul.basic>li:first-of-type{font-size: 12px; text-align: center; background-color: #FF6462; width: 40px; height: 20px; line-height: 20px; color: #ffffff; padding: 0 5px; border-radius: 3px; margin-bottom: 10px;}
 
 
-#addressSelectModal>div>ul>li{height: 17px; font-size: 14px; line-height: 17px; margin-bottom: 5px; color: #666666; }
+#addressSelectModal>div>ul>li{min-height: 17px; font-size: 14px; line-height: 17px; margin-bottom: 5px; color: #666666; }
 #addressSelectModal>div>ul.basic>li{font-weight: bold; color: #333333;}
 #addressSelectModal>div>ul>li:last-child{margin-bottom: 0;}
 

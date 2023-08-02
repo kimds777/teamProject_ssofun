@@ -70,7 +70,7 @@
 	
 	<!-- 펀딩 주문목록 조회 -->
 	<select id="selectFundingOrderList" resultType="com.ssofun.dto.FundingOrderDto">
-		SELECT * FROM tb_funding_order WHERE user_id = #{user_id} ORDER BY funding_order_id DESC
+		SELECT * FROM tb_funding_order WHERE user_id = #{user_id} AND used_fg = 1 ORDER BY funding_order_id DESC
 	</select>
 	
 	<!-- 펀딩 리워드 주문목록 조회 -->
