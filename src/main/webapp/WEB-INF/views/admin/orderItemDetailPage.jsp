@@ -285,7 +285,7 @@
                                                     <h3 class="ul-widget1__title">상품이미지</h3>
                                                 </div>
                                                 <span class="ul-widget__desc text-mute">
-                                                <img class="img-fluid img-thumbnail" style="width:100px; height:100px;" src="/ssofunUploadFiles/${orderItemDetail.thumbnail_name}">
+                                                <img class="img-fluid img-thumbnail" style="width:100px; height:100px;" src="../../resources/img/parkhyunmin/thumbnail/${orderItemDetail.thumbnail_name}">
                                                 </span>
                                             </div>
 											<div class="ul-widget__item">

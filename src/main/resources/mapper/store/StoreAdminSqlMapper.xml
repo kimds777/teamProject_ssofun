@@ -356,7 +356,7 @@
 	) 
 	AND poi.used_fg = 1
 	ORDER BY poi.created_at DESC, product_order_item_id DESC
-	LIMIT 0,1000
+	LIMIT 20
 </select>
 <!-- N번 관리자가 판매하는 상품중 주문된 하나의 상품상세보기(오더리스트 상세보기) -->
 <select id="orderItemDetail" resultType="com.ssofun.dto.ProductOrderItemDto">

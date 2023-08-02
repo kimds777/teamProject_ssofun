@@ -287,7 +287,7 @@
 										                    <input type="checkbox" checked="" /><span class="checkmark"></span>
 										                </label>
 										            </th>
-										            <td><img class="img-fluid img-thumbnail" style="width:75px; height:75px;" src="/ssofunUploadFiles/${productReviewImage.url}"></td>
+										            <td><img class="img-fluid img-thumbnail" style="width:75px; height:75px;" src="../../resources/img/parkhyunmin/thumbnail/${productReviewImage.url}"></td>
 										            <td class="td_No">${productDetailReviewList[imageStatus.index].name}</td>
 										            <td class="td_No">No.&nbsp;${productDetailReviewList[imageStatus.index].product_review_id}</td>
 										            <td class="td_No">${productDetailReviewList[imageStatus.index].nickname}&nbsp;님</td>

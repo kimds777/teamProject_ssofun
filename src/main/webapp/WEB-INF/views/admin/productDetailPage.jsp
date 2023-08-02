@@ -342,7 +342,7 @@
 						              <td scope="col" class="thumbnail-cell">
 						                <!-- 수정된 클래스 img-with-border를 사용 -->
 						                <div class="img-with-border">
-						                  <img src="/ssofunUploadFiles/${thumbnail.name}" alt="상품이미지">
+						                  <img src="../../resources/img/parkhyunmin/thumbnail/${thumbnail.name}" alt="상품이미지">
 						                </div>
 						              </td>
 						            </c:forEach>
@@ -363,7 +363,7 @@
 						              <td scope="col" class="thumbnail-cell">
 						                <!-- 수정된 클래스 img-with-border를 사용 -->
 						                <div class="img-with-border">
-						                  <img src="/ssofunUploadFiles/${thumbnail.name}" alt="상품상세이미지">
+						                  <img src="../../resources/img/parkhyunmin/detailImage/${thumbnail.name}" alt="상품상세이미지">
 						                </div>
 						              </td>
 						            </c:forEach>
