@@ -280,7 +280,12 @@
 										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.funding_id }</p></th>
 											  <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.title }</p></th>
 										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.userCreatorDto.name }</p></td>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.confirm_fg }</p></td>
+										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">
+										   
+										      <c:if test="${fundingList.fundingDto.confirm_fg == 0 }">
+												미승인
+											  </c:if>
+										      </p></td>
 									
 										    </tr>
 										  </tbody>
@@ -322,7 +327,11 @@
 										      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.funding_id }</p></th>
 											  <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${fundingList.fundingDto.title }</p></th>
 										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.userCreatorDto.name }</p></td>
-										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${fundingList.fundingDto.confirm_fg }</p></td>
+										      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">
+										      <c:if test="${fundingList.fundingDto.confirm_fg == 1 }">
+												승인완료
+											  </c:if>
+										      </p></td>
 									
 										    </tr>
 										  </tbody>

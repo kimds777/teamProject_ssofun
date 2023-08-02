@@ -486,12 +486,12 @@ public class SystemAdminServiceImpl {
 			Map<String, Object> map = new HashMap<>();
 			 
 			int creatorId = (int) fundingDto.getUser_creator_id();
-			//UserCreatorDto userCreatorDto = (UserCreatorDto) systemAdminSqlMapper.fundingCreatorBycreatorId(creatorId);
+			UserCreatorDto userCreatorDto = (UserCreatorDto) systemAdminSqlMapper.fundingCreatorBycreatorId(creatorId);
 			
 			
 			
 			
-		//	map.put("userCreatorDto", userCreatorDto);
+			map.put("userCreatorDto", userCreatorDto);
 			map.put("fundingDto", fundingDto);
 			
 			authorizedFundingList.add(map);

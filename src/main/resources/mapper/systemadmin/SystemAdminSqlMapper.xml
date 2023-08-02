@@ -282,14 +282,14 @@
 	
 	<!-- 미승인된 펀딩정보가져옴 -->
 	<select id="getUnauthorizedFunding" resultType="com.ssofun.dto.FundingDto">
-		SELECT * FROM tb_funding WHERE confirm_fg = 0
+		SELECT * FROM tb_funding WHERE confirm_fg = 0 
 	</select>
 	
 	
 	
 	<!-- 승인완료된 펀딩정보가져옴 -->
 	<select id="getFundingData" resultType="com.ssofun.dto.FundingDto">
-		SELECT * FROM tb_funding WHERE confirm_fg = 1
+		SELECT * FROM tb_funding WHERE confirm_fg = 1 ORDER BY funding_id DESC
 	</select>
 	
 	

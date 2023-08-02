@@ -267,7 +267,7 @@
                                                 <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">카테고리</p></th>
                                                 </tr>
                                             </thead>
-                                                <c:forEach items="${bizList}" var="bizList" >
+                                            <!--  <c:forEach items="${bizList}" var="bizList" >
                                                     <tbody>
                                                         <tr>
                                                         <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_id }</p></th>
@@ -276,7 +276,7 @@
                                                         <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_no }</p></td>
                                                         </tr>
                                                     </tbody>
-                                                    </c:forEach>
+                                                    </c:forEach> -->   
                                                 </table>
                                     	</div>
                                     </div>
@@ -298,21 +298,21 @@
 												  <thead>
 												    <tr  style="background-color: #f8f9fa;">
 												      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">번호</p></th>
-												      <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">제목</p></th>
+												     <!--  <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">제목</p></th> -->
 												      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">관리자</p></th>
 												      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">카테고리</p></th>
 												    </tr>
 												  </thead>
-												  	<c:forEach items="${bizList}" var="bizList" >
+												  	<c:forEach items="${topFaqlist}" var="topFaqlist" >
 														  <tbody>
 														    <tr>
-														      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_id }</p></th>
-														      <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./readCompanyPage?biz_id=${bizList.bizDto.biz_id }">${bizList.bizDto.biz_name }</a></p></td>
-														      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${bizList.bizDto.biz_ceo }</p></td>
-														      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_no }</p></td>
-														      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.adminCount } 명</p></td>
-														      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">
-									                            	<fmt:formatDate pattern="yy. MM. dd. (E)" value="${bizList.bizDto.created_at }"/>
+														      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${topFaqlist.faqHelpStatusDto.faq_id }</p></th>
+														      <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./systemAdminReadFaqPage?faq_id=${topFaqlist.faqHelpStatusDto.faq_id }">${topFaqlist.faqHelpStatusDto.title}</a></p></td>
+														      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${topFaqlist.adminDto.admin_nickname }</p></td>
+														      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${topFaqlist.faqHelpStatusDto.faq_category }</p></td>
+					
+					
+						
 									                            </p>
 									                          </td>
 														    </tr>

@@ -258,9 +258,9 @@ public class SystemAdminController {
 	public String systemAdminFaqMainPage(HttpSession session,Model model) {
 		AdminDto systemAdmin  = (AdminDto)session.getAttribute("systemAdmin");
 		List<Map<String, Object>> list = systemAdminService.getfaqList();
-		List<Map<String, Object>> faqlist = systemAdminService.selectTop10HelpfulFaqList();
+		//List<Map<String, Object>> faqlist = systemAdminService.selectTop10HelpfulFaqList();
 		
-		model.addAttribute("faqlist",faqlist);
+		//model.addAttribute("faqlist",faqlist);
 		model.addAttribute("list",list);//request에 담아서 jsp에서 꺼내쓸 수 있음 
 		
 		
