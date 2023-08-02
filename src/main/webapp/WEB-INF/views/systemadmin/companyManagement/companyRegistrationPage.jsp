@@ -448,7 +448,7 @@
 		                                            <p class="companyfont">회사위치</p>
 		                            			</div>
 		                            			<div class="col">
-		                                            <input type="text" name="biz_place"  class="form-control" placeholder="서울 강남 테헤란로">                                            
+		                                            <input type="text" name="biz_place"  class="form-control" placeholder="주소를 입력해주세요">                                            
 		                            			</div>
 		                            		</div>
 		                            		

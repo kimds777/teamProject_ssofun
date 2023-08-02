@@ -15,9 +15,28 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ssofuncss.css">
    
    
-   <script type="text/javascript">
-   
-   </script>
+<script>
+  function submitHelpStatus(faqId, helpStatus) {
+    var form = document.createElement('form');
+    form.method = 'post';
+    form.action = './updateHelpStatus'; // 업데이트를 처리하는 컨트롤러 메서드의 URL을 입력하세요.
+
+    var faqIdInput = document.createElement('input');
+    faqIdInput.type = 'hidden';
+    faqIdInput.name = 'faqId';
+    faqIdInput.value = faqId;
+    form.appendChild(faqIdInput);
+
+    var helpStatusInput = document.createElement('input');
+    helpStatusInput.type = 'hidden';
+    helpStatusInput.name = 'helpStatus';
+    helpStatusInput.value = helpStatus;
+    form.appendChild(helpStatusInput);
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+</script>
 
 <style>
     .checks {
@@ -233,7 +252,7 @@
                                                                 <div class="row mt-5" style="height: 110px; border-style: thin white; border-radius: 10px; background-color: white;">
                                                                     <div class="col">
                                                                     
-                                                                    <form action="./customerServiceHelpStatusProcess" method="post">
+                                                                    <form action="./updateHelpStatusProcess" method="post">
                                                                     
                                                                         <div class="row mt-2">
                                                                             <div class="col-1">설문</div>
@@ -242,14 +261,14 @@
                                                                                 <div class="row">
                                                                                     <div class="col-3">
                                                                                         <div class="checks" style="padding: 0;">
-                                                                                            <input type="radio" id="ex_rd" name="helpStatus" value="helpful">
-                                                                                            <label for="ex_rd">예</label>
+                                                                                            <input type="radio" id="helpfulRadio${faq.faq_id}" name="helpStatus${faq.faq_id }" id="helpfulRadio${faq.faq_id}" value="helpful" onclick="submitHelpStatus(${faq.faq_id}, 'helpful')">  
+                                                                                            <label for="helpfulRadio${faq.faq_id}">예</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-6">
                                                                                         <div class="checks" style="padding: 0;">
-                                                                                            <input type="radio" id="ex_rd2" name="helpStatus" value="unhelpful">
-                                                                                            <label for="ex_rd2">아니요</label>
+                                                                                            <input type="radio"  id="unhelpfulRadio${faq.faq_id}" name="helpStatusRadio${faq.faq_id}" value="unhelpful" onclick="submitHelpStatus(${faq.faq_id}, 'unhelpful')">
+                                                                                            <label for="unhelpfulRadio${faq.faq_id}">아니요</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     
@@ -270,6 +289,7 @@
                                                                             </div>
                                                                             <div class="col"></div>
                                                                         </div>
+                                                                        </form>
 
                                                                     </div>
                                                                 </div>

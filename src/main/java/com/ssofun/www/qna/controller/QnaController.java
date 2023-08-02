@@ -129,10 +129,10 @@ public class QnaController {
 		}
 		
 		
-		UserDto sessionUser= (UserDto)session.getAttribute("sessionUser");
+		UserDto user = (UserDto)session.getAttribute("user");
 		//String userEmail = sessionUser.getEmail();
-		long userId = sessionUser.getUser_id();
-		sessionUser.getUser_id();
+		long userId = user.getUser_id();
+		user.getUser_id();
 				
 		
 		qnaService.writeQna(qnacontents, tb_Qna_ImageDtoList);
@@ -142,7 +142,7 @@ public class QnaController {
  
 
 
-	//
+	
 	public List<QnaDto> qnaListsProcess(Model model, HttpSession session ) {
 		
 		session.getAttribute("user");

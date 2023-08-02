@@ -120,7 +120,7 @@
                             <div class="col-2"><p class="three-font mt-1">1:1 문의하기</p></div>
                             <div class="col c-five-font"><p class="five-font mt-2">답변까지 약 2~3일 정도가 소요될 수 있습니다.</p></div>
                             <div class="col-2">
-                            <c:if test="${!empty sessionUser }">
+                            <c:if test="${!empty user }">
                             	<input type="button" class="qnabutton" value="1:1문의"  onclick="location.href='writeQnaPage'" style="border-radius: 5px;">
                             </c:if>
                             </div>

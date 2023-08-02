@@ -24,7 +24,7 @@
                 <div class="col-1">
                 	<a href="../store/userMyPage">마이페이지</a>
                	</div>
-                <div class="col-1"><a href="../qna/customerServiceMainPage">고객센터</a></div>
+                <div class="col-1"><a href="../faq/faqShippingPage">고객센터</a></div>
             </div>
         </div>
 	</c:when>
@@ -37,7 +37,7 @@
                 <div class="col-1"><a href="../store/storePage">스토어</a></div>
                 <div class="col-1 me-auto"><a href="../community/communityMainPage">커뮤니티</a></div>
                 <div class="col-1"><a href="../user/userLoginPage">로그인</a></div>
-                <div class="col-1"><a href="../qna/customerServiceMainPage">고객센터</a></div>
+                <div class="col-1"><a href="../faq/faqShippingPage">고객센터</a></div>
             </div>
         </div>
 	</c:otherwise>

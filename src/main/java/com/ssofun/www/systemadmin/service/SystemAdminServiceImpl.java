@@ -194,6 +194,22 @@ public class SystemAdminServiceImpl {
 	}
 	
 
+	
+	public void FaqHelpStatus(FaqHelpStatusDto faqHelpStatusDto) {
+		
+		systemAdminSqlMapper.insertFaqHelpStatus(faqHelpStatusDto);
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	//faq도움 상위10개의 리스트 
 	public List<Map<String, Object>> selectTop10HelpfulFaqList() {
 		

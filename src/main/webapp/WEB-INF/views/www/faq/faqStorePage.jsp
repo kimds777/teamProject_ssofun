@@ -241,14 +241,14 @@
                                                                                 <div class="row">
                                                                                     <div class="col-3">
                                                                                         <div class="checks" style="padding: 0;">
-                                                                                             <input type="radio" id="ex_rd" name="helpStatus" value="helpful">
-                                                                                            <label for="ex_rd">예</label>
+                                                                                            <input type="radio"  id="helpfulRadio${faq.faq_id}" name="helpStatusRadio${faq.faq_id}" value="helpful" onclick="submitHelpStatus(${faq.faq_id}, 'helpful')">
+                                                                                            <label for="helpfulRadio${faq.faq_id}">예</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-6">
                                                                                         <div class="checks" style="padding: 0;">
-                                                                                            <input type="radio" id="ex_rd2" name="helpStatus" value="unhelpful">
-                                                                                            <label for="ex_rd2">아니요</label>
+                                                                                            <input type="radio" id="unhelpfulRadio${faq.faq_id}" name="helpStatusRadio${faq.faq_id}" value="unhelpful" onclick="submitHelpStatus(${faq.faq_id}, 'unhelpful')">
+                                                                                            <label for="unhelpfulRadio${faq.faq_id}">아니요</label>
                                                                                         </div>
                                                                                     </div>
                                                                                     

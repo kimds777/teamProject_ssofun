@@ -351,6 +351,23 @@ public class SystemAdminController {
 	
 	
 	
+	//faq 도움프로세스
+	@RequestMapping("updateHelpStatusProcess")
+	public String updateHelpStatusProcess(FaqHelpStatusDto faqHelpStatusDto) {
+		
+		systemAdminService.FaqHelpStatus(faqHelpStatusDto);
+		
+		return "redirect:../../faq/faqShippingPage";
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	
 	
 	
 	

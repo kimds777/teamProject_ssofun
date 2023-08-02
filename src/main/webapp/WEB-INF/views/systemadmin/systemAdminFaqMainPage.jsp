@@ -255,15 +255,74 @@
                                     <div class="row mt-1">
                                         <div class="col hr-col"><hr></div>
                                     </div>
+                                    <div class="row">
+                                    
+                                        <div class="col" style="margin-right: 1px;">
+	                                    <table class="table table-bordered table-sm" >
+                                            <thead>
+                                                <tr  style="background-color: #f8f9fa;">
+                                                <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">번호</p></th>
+                                                <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">제목</p></th>
+                                                <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">관리자</p></th>
+                                                <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">카테고리</p></th>
+                                                </tr>
+                                            </thead>
+                                                <c:forEach items="${bizList}" var="bizList" >
+                                                    <tbody>
+                                                        <tr>
+                                                        <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_id }</p></th>
+                                                        <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./readCompanyPage?biz_id=${bizList.bizDto.biz_id }">${bizList.bizDto.biz_name }</a></p></td>
+                                                        <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${bizList.bizDto.biz_ceo }</p></td>
+                                                        <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_no }</p></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    </c:forEach>
+                                                </table>
+                                    	</div>
+                                    </div>
                                 </div>
                                 
 
                                 <div class="col">
                                     <div class="row">
-                                        <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">Top10HelpfulFaq</p></div>
+                                        <div class="col-2"><p class="three-font mt-1" >Top10HelpfulFaq</p></div>
                                     </div>
                                     <div class="row mt-1">
                                         <div class="col hr-col"><hr></div>
+                                    </div>
+                                    <div class="row">
+                                    	<div class="col">
+                                    		<div class="row">
+                                                <div class="col" style="margin-left: 1px;">
+		                                    	<table class="table table-bordered table-sm">
+												  <thead>
+												    <tr  style="background-color: #f8f9fa;">
+												      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">번호</p></th>
+												      <th class="companyName" scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">제목</p></th>
+												      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">관리자</p></th>
+												      <th scope="col"><p class="companyfontTitle-1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">카테고리</p></th>
+												    </tr>
+												  </thead>
+												  	<c:forEach items="${bizList}" var="bizList" >
+														  <tbody>
+														    <tr>
+														      <th scope="row"><p class="center1" style="text-align: center; margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_id }</p></th>
+														      <td><p class="companyfontTitle" style="text-align: center;  margin-top:8px; margin-bottom: 8px;"><a class="readQnalink" href="./readCompanyPage?biz_id=${bizList.bizDto.biz_id }">${bizList.bizDto.biz_name }</a></p></td>
+														      <td><p class="center1" style="text-align: center;  margin-top:8px;  margin-bottom: 8px;">${bizList.bizDto.biz_ceo }</p></td>
+														      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.bizDto.biz_no }</p></td>
+														      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">${bizList.adminCount } 명</p></td>
+														      <td><p class="center1" style="text-align: center;  margin-top:8px; margin-bottom: 8px;">
+									                            	<fmt:formatDate pattern="yy. MM. dd. (E)" value="${bizList.bizDto.created_at }"/>
+									                            </p>
+									                          </td>
+														    </tr>
+														  </tbody>
+													</c:forEach>
+												</table>
+                                    		</div>
+                                        </div>
+                                    	</div>
+                                    	
                                     </div>
 
                                 </div>
@@ -275,7 +334,7 @@
                             </div>
                            	<div class="row">
                                 <div class="col-2"><p class="three-font mt-1" style="margin-left: 10px;">FAQ목록</p></div>
-                                <div class="col c-five-font"><p class="five-font mt-2">자주찾는질문 전체목록입니다.(글등록일순)</p></div>
+                                <div class="col c-five-font"><p class="five-font mt-2">자주찾는질문 전체목록입니다.</p></div>
                                 <div class="col-2"></div>
                                 <div class="col-2">
          
@@ -311,18 +370,9 @@
                         
                         </div>
                     </div>
-                    <div class="row mb-5">
-                        <div class="col"> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col"> </div>
-            </div>
-         
-            <!-- 페이지네이션 -->
-            <div class="row" style="text-align: center;">
-            	<div class="col-2"></div>
+                            <!-- 페이지네이션 -->
+            <div class="row mt-1" style="text-align: center;">
+            	<div class="col-5"></div>
             	<div class="col">
 	            	<nav aria-label="Page navigation example">
 					  <ul class="pagination">
@@ -351,10 +401,16 @@
 				</div>
 				<div class="col"></div>
             </div>
-                 
-            
-            
-            
+                    <div class="row mb-5">
+                        <div class="col"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col"> </div>
+            </div>
+         
+     
             
         </div>
 

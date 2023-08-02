@@ -281,6 +281,7 @@
                                                             <option name="node" value="0">돌리기</option>
                                                             <option name="node" value="0">1</option>
                                                             <option name="node" value="0">2</option>
+                                                            <option name="node" value="0">3</option>
                                                         </select>
                                                     </div>
                                                     <div class="col">
@@ -290,6 +291,15 @@
                                                 <div class="row mt-2">
                                                     <div class="col-2 textcenter">
                                                         <p class="categoryFont">소분류</p>
+                                                    </div>
+                                                    <div class="col">
+                                                    	   <select id="node">
+                                                            <option name="node" value="0">반복문</option>
+                                                            <option name="node" value="0">돌리기</option>
+                                                            <option name="node" value="0">1</option>
+                                                            <option name="node" value="0">2</option>
+                                                            <option name="node" value="0">3</option>
+                                                          </select>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" name="name">

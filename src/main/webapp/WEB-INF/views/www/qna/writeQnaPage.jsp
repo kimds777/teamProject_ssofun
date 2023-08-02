@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="row"></div>
                             </div>
-                            <div class="col-10"><p>${sessionUser.email }</p></div>
+                            <div class="col-10"><p>${user.name }</p></div>
                             <!-- <div class="col"></div> -->
                         </div>
     <!-- 카테고리주석                        
@@ -243,7 +243,7 @@
                             <div class="col"><p></p></div>
                             
                             
-                            <input type="hidden" name="user_id" id="user_id" value="${sessionUser.user_id }">
+                            <input type="hidden" name="user_id" id="user_id" value="${user.user_id }">
                             <div class="col divcenter"><input type="submit" id ="qnaUserSubmit" class="qnaUserSubmit" value="등록하기"></div>    
                             <div class="col"></div>
                         </div>

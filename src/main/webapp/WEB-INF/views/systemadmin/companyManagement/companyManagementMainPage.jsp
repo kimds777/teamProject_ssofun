@@ -258,7 +258,6 @@
                       
                             <div class="row mt-3">       
                                
-                            
 		              			<table class="table table-bordered table-sm">
 									  <thead>
 									    <tr  style="background-color: #f8f9fa;">
