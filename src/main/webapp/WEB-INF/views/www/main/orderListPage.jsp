@@ -117,12 +117,11 @@
 																				<td class="pa">${innerItem.order_status_name }
 																					<div class="img-title">
 																						<div class="img">
-																							<img
-																								src="../../resources/img/parkhyunmin/thumbnail/${innerItem.thumbnail_name}"
-																								style="width: 64px; height: 64px;">
+																							<img src="../../resources/img/parkhyunmin/thumbnail/${innerItem.thumbnail_name}"
+																								style="width: 64px; height: 64px;">																								
 																						</div>
 																						<div class="npc">
-																							<span>${innerItem.product_name }</span>
+																							<a 	href="./productPage?id=${innerItem.product_id }"><span>${innerItem.product_name }</span></a>
 																							<div class="price-count">
 																								<span><fmt:formatNumber
 																										value="${innerItem.price_sale }"

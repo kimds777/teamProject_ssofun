@@ -334,7 +334,7 @@
 	
 	<!-- 상품마다 좋아요 출력 -->
 	<select id="likeCountByProductId" resultType="com.ssofun.dto.ProductFavoritCountDto">
-		SELECT COUNT(*) AS count, product_id FROM tb_product_favorit
+		SELECT COUNT(*) AS count, product_id FROM tb_product_favorit where product_id =44
 	</select>	
 	
 	<!-- 상품마다 리뷰 출력 -->

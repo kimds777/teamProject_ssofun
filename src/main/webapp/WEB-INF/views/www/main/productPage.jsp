@@ -221,8 +221,8 @@ window.onload = function() {
 							</div>
 							<div class="col-heart">
 								<i id="heartBox" onclick="toggleLike()"
-									class="text-danger bi bi-suit-heart"></i><span
-									id="totalLikeCount"></span>
+									class="text-danger bi bi-suit-heart"></i>
+									<span id="totalLikeCount"></span>
 							</div>
 						</div>
 
@@ -505,7 +505,7 @@ window.onload = function() {
 											<c:if
 												test="${review.product_review_id eq reimg.product_review_id }">
 												<div class="p-img">
-													<img src="/ssofunUploadFiles/${reimg.url}"
+													<img src="../../resources/img/parkhyunmin/thumbnail/${reimg.url}"
 														style="width: 65px; height: 65px;">
 												</div>
 											</c:if>
@@ -739,7 +739,7 @@ window.onload = function() {
 		        }
 			}
 
-
+		// 상세 이미지 줄이기 버튼 추가
 		function showAllImages() {
 			  const gallery = document.getElementById('scroll2');
 			  const button = document.getElementById('showMoreBtn');

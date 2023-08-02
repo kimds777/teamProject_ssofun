@@ -45,8 +45,8 @@
 				<div id="profile">
 					<ul id="first">
 						<li id="profileIcon"><span></span></li>
-						<li id="makerName">이지광님</li>
-						<li id="logout">로그아웃</li>
+						<li id="makerName">${sessionUser.name }님</li>	
+						<li id="logoutUser">로그아웃</li>
 					</ul>
 					<dl>
 						<dt>나의 쇼핑 내역</dt>
@@ -57,12 +57,13 @@
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 						<dd class="click">
-							<a class="click" href="">주문 / 배송조회</a><i
-								class="bi bi-caret-right-fill click"></i>
+							<a href="./readQnaPage">문의내역</a><i
+								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
-						<dd>
-							<a href="">주문문의</a><i class="bi bi-caret-right-fill"></i>
+						<dd class="click">
+							<a href="./cartPage">장바구니</a><i
+								class="bi bi-caret-right-fill"></i>
 						</dd>
 						<!--여기에 메뉴 넣으세요!-->
 					</dl>
@@ -90,7 +91,7 @@
 								<div class="my-review">
 									<div class="review-table">
 										<div class="re-img">
-											<img src="/ssofunUploadFiles/${rev.thumbnail_name}"
+											<img src="../../resources/img/parkhyunmin/thumbnail/${rev.thumbnail_name}"
 												style="width: 80px; height: 80px;">
 										</div>
 										<div class="pname">${rev.product_name }</div>
@@ -118,19 +119,7 @@
 										</div>
 									</div>
 
-									<div class="img-send">
-										<div class="review-table">
-											<div class="re-img">사진 첨부</div>
-											<div class="re-imgsend">
-												<!-- HTML -->
-												<div class="custom-file-upload">
-													<input id="file-input" name="imageFiles" type="file"
-														multiple accept="image/*"> <span>파일 선택하기</span>
-												</div>
-												<div id="file-name-display"></div>
-											</div>
-										</div>
-									</div>
+									
 									
 									<div class="review-register">
 									<input type="hidden" name="admin_id" value="${rev.admin_id }" readonly/>

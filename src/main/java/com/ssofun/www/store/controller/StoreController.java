@@ -75,13 +75,17 @@ public class StoreController {
 		List<ProductDto> Recount = storeService.getRecount(producDto); // 상품별 리뷰 개수
 		List<ProductDto> fullList = storeService.getItemList(producDto); // 전체 상품 목록 가져오기
 		List<ProductFavoritCountDto>Likecount = storeService.getLikecount(pfDto); //상품별 좋아요 개수
-		for(ProductFavoritCountDto a : Likecount) {
-			int av =a.getProduct_id();
-			int b = a.getCount();
+		for(ProductDto a : fullList) {
+			int pid =a.getProduct_id();
+			for (ProductFavoritCountDto likeCountItem : Likecount) {
+	            likeCountItem.setProduct_id(pid);
+	            
+	        }
 		}
 		
 		
-		int itemsPerPage = 12; // 페이지당 아이템 개수
+		
+		int itemsPerPage = 8; // 페이지당 아이템 개수	
 		// 페이지 번호에 따라 상품 목록을 제한하여 새로운 리스트를 생성합니다.
 		List<ProductDto> paginatedList = new ArrayList<>();
 		int startIdx = (page - 1) * itemsPerPage;
@@ -291,6 +295,7 @@ public class StoreController {
 		int id = (int) sessionUser.getUser_id();
 		System.out.println(id);
 		List<ProductUserDto> list = storeService.getCartList(id);
+		model.addAttribute("sessionUser", sessionUser);
 		model.addAttribute("list", list);
 		return "www/main/cartOrderPage";
 	}
@@ -366,16 +371,20 @@ public class StoreController {
 
 	// 주문상세페이지
 	@RequestMapping("orderdetailPage")
-	public String orderdetailPage(Model model, int id) {
+	public String orderdetailPage(Model model, int id,HttpSession session) {
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		List<ProductOrderItemDto> list = storeService.getOrderDetailList(id);
+		model.addAttribute("sessionUser", sessionUser);
 		model.addAttribute("list", list);
 		return "www/main/orderdetailPage";
 	}
 	
 	//리뷰관리페이지
 	@RequestMapping("productReviewPage")
-	public String productReviewPage(Model model, int id) {
+	public String productReviewPage(Model model, int id,HttpSession session) {
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		ProductOrderItemDto rev = storeService.getReview(id);
+		model.addAttribute("sessionUser", sessionUser);
 		model.addAttribute("rev", rev);
 		return "www/main/productReviewPage";
 	}
@@ -425,16 +434,18 @@ public class StoreController {
 	
 	//문의하기
 	@RequestMapping("productQnaPage")
-	public String productQnaPage(Model model, int id) {
+	public String productQnaPage(Model model, int id, HttpSession session) {
+		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		ProductOrderItemDto rev = storeService.getReview(id);
 
+		model.addAttribute("sessionUser", sessionUser);
 		model.addAttribute("rev", rev);
 		return "www/main/productQnaPage";
 	}
 	
 	//문의하기 작성 처리
 	@RequestMapping("productQnaProcess")
-	public String productQnaProcess(Model model,HttpSession session,MultipartFile[] imageFiles, QnaDto qDto,int poiID) {
+	public String productQnaProcess(Model model, HttpSession session, MultipartFile[] imageFiles, QnaDto qDto,int poiID) {
 		UserDto sessionUser = (UserDto) session.getAttribute("user");
 		int id = (int) sessionUser.getUser_id();
 
@@ -452,14 +463,10 @@ public class StoreController {
 		qDto.setUser_id(id);
 		List<QnaDto>qnalist = storeService.getQnalist(qDto); //QA내역 출력
 		
-		model.addAttribute("sessionUser", sessionUser);// QA내역 출력
+		model.addAttribute("sessionUser", sessionUser);
 		model.addAttribute("qnalist", qnalist);// QA내역 출력
 		return "www/main/readQnaPage";
 	}
-	
-	
-
-	
 	
 	// 마이페이지 주문목록출력
 	@RequestMapping("userMyPage")

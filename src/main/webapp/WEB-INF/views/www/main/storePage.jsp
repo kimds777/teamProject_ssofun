@@ -165,9 +165,9 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"
 							</a>
 							<div class="col-heart-review">
 								<i class="bi bi-suit-heart"></i>
-								<c:forEach items="${Likecount }" var="count">
-									<c:if test="${product.product_id eq count.product_id }">
-											 ${count.count }
+								<c:forEach items="${Recount }" var="Recount">
+									<c:if test="${product.product_id eq Recount.product_id }">
+											${Recount.count }
 										</c:if>
 								</c:forEach>
 								
