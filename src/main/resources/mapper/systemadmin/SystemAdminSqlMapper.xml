@@ -173,7 +173,7 @@
 	
 	
 	<!-- faq 도움되는글 상위10개 -->
-	<select id="selectTop10HelpfulFaq" resultType="com.ssofun.dto.fDto">
+	<select id="selectTop10HelpfulFaq" resultType="com.ssofun.dto.FaqDto">
 		  SELECT faq_id, COUNT(*) AS helpful_count
 		  FROM tb_faq_HelpStatus
 		  WHERE helpStatus = 'helpful'
@@ -181,9 +181,6 @@
 		  ORDER BY helpful_count DESC
 		  LIMIT 10
 	</select>
-	
-	
-	
 	
 	
 	
