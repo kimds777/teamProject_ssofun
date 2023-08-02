@@ -284,7 +284,7 @@
                                 <c:forEach items="${data.Qna_ImageDtoList}" var="ImageDtoList">
                                     <div class="col-2 qnaImage">
                                         <div class="row">
-                                            <div class="col"><img src="/ssofunUploadFiles/${ImageDtoList.link}" width="100px" height="100px"></div>
+                                            <div class="col mt-3" style="text-align: center;"><img src="/ssofunUploadFiles/${ImageDtoList.link}" width="100px" height="100px"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
