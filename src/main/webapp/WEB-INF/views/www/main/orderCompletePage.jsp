@@ -60,8 +60,8 @@
 						<div class ="row">
 							<div class="col">
 							<div class="last_btn">
-							 <a href="./orderListPage" class="go-order btn btn-primary">주문 상세보기</a>
-							 <a href="./mainPage" class="go-store btn btn-secondary">쇼핑 홈 가기</a>
+							 <a href="./orderListPage" class="go-order btn btn-primary">주문 목록보기</a>
+							 <a href="./storePage" class="go-store btn btn-secondary">쇼핑 홈 가기</a>
 							</div>
 							</div>
 						</div>

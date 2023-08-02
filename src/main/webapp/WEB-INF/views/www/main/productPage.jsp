@@ -329,9 +329,9 @@ window.onload = function() {
 
 							<tr>
 								<th scope="row">상품상태</th>
-								<td>상품 상세페이지 참조</td>
+								<td>상품 상세설명 참조</td>
 								<th scope="row">상품번호</th>
-								<td>상품 상세페이지 참조</td>
+								<td>상품 상세설명 참조</td>
 							</tr>
 							<tr>
 								<th scope="row">배송방법</th>
@@ -341,24 +341,24 @@ window.onload = function() {
 							</tr>
 							<tr>
 								<th scope="row">영수증발행</th>
-								<td>상품 상세페이지 참조</td>
+								<td>상품 상세설명 참조</td>
 
 							</tr>
 							<tr>
 								<th scope="row">제조일자/유효기간</th>
-								<td colspan="3">상품 상세페이지 참조</td>
+								<td colspan="3">상품 상세설명 참조</td>
 							</tr>
 							<tr>
 								<th scope="row">A/S안내</th>
-								<td colspan="3">상품 상세페이지 참조</td>
+								<td colspan="3">상품 상세설명 참조</td>
 							</tr>
 							<tr>
 								<th scope="row">상품무게</th>
-								<td colspan="3">상품 상세페이지 참조</td>
+								<td colspan="3">상품 상세설명 참조</td>
 							</tr>
 							<tr>
 								<th scope="row">브랜드</th>
-								<td colspan="3">상품 상세페이지 참조</td>
+								<td colspan="3">상품 상세설명 참조</td>
 							</tr>
 
 						</tbody>
