@@ -31,36 +31,47 @@
 }
 
 .td_No{
-	font-weight: 600;
+	font-weight: 700;
 }
 
 /* 테이블 UI */
 .c0{
 	width: 55px;
+	font-size: 16px;
 }
 
 .c1{
 	width: 110px;
+	font-size: 16px;
 }
 
 .c2{
 	width: 170px;
+	font-size: 16px;
 }
 
 .c3{
-	width: 90px;
+	width: 130px;
+	font-size: 16px;
 }
 
 .c4{
 	width: 130px;
+	font-size: 16px;
 }
 
 .c5{
-	width: 55px;
+	width: 80px;
+	font-size: 16px;
+}
+
+.c6{
+	font-size: 16px;
 }
 
 .c7{
 	width: 110px;
+	font-size: 16px;
 }
 </style>
 <head>

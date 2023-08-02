@@ -31,6 +31,7 @@
 
 .td_No{
 	font-weight: 600;
+	font-size: 16px;
 }
 
 </style>
@@ -240,11 +241,11 @@
 								    <table class="table table-striped">
 								        <thead>
 								            <tr>
-								                <th scope="col">#</th>
-								                <th scope="col">상품번호</th>
-								                <th scope="col">상품명</th>
-								                <th scope="col">리뷰수</th>
-								                <th scope="col">상품평점</th>
+								                <th class="td_No" scope="col">#</th>
+								                <th class="td_No" scope="col">상품번호</th>
+								                <th class="td_No" scope="col">상품명</th>
+								                <th class="td_No" scope="col">리뷰수</th>
+								                <th class="td_No" scope="col">상품평점</th>
 								            </tr>
 								        </thead>
 								        	<tbody id="product_review_list">

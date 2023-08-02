@@ -40,30 +40,41 @@
 /* 테이블UI */
 .c0{
 	width: 70px;
+	font-size: 16px;
 }
 
 .c1{
 	width: 120px;
+	font-size: 16px;
 }
 
 .c2{
 	width: 130px;
+	font-size: 16px;
 }
 
 .c3{
 	width: 180px;
+	font-size: 16px;
 }
 
 .c4{
 	width: 120px;
+	font-size: 16px;
+}
+
+.c5{
+	font-size: 16px;
 }
 
 .c6{
 	width: 120px;
+	font-size: 16px;
 }
 
 .td_1{
 	font-weight: 700;
+	font-size: 16px;
 }
 
 .current-page{
