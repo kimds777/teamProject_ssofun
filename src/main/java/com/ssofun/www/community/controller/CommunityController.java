@@ -35,6 +35,7 @@ public class CommunityController {
 		UserDto user = (UserDto)session.getAttribute("user");
 		
 		AdminDto shopAdmin = (AdminDto) session.getAttribute("shopAdmin");
+		
 
 		
 		List<Map<String, Object>> list = communityService.communityList();

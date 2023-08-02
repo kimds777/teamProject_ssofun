@@ -77,36 +77,52 @@
 }
 
 /* 테이블 간격 */
+.table_th{
+	font-size: 16px;
+}
+
 .c0{
 	width: 70px;
+	font-size: 16px;
 }
 
 .c1{
 	width: 110px;
+	font-size: 16px;
 }
 
 .c2{
 	width: 140px;
+	font-size: 16px;
 }
 
 .c3{
 	width: 140px;
+	font-size: 16px;
 }
 
 .c4{
 	width: 140px;
+	font-size: 16px;
+}
+
+.c5{
+	font-size: 16px;
 }
 
 .c6{
 	width: 140px;
+	font-size: 16px;
 }
 
 .c7{
 	width: 140px;
+	font-size: 16px;
 }
 
 .c8{
 	width: 140px;
+	font-size: 16px;
 }
 </style>
 <head>
@@ -313,34 +329,34 @@
 					            </div>
                                 <ul class="nav justify-content-end">
 									<li class="nav-item">
-									    <a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=3">결제완료</a>
+									    <a class="nav-link table_th" href="./orderItemCategoryListPage?product_order_status_id=3">결제완료</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=4">판매자확인완료</a>
+										<a class="nav-link table_th" href="./orderItemCategoryListPage?product_order_status_id=4">판매자확인완료</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=5">배송중</a>
+										<a class="nav-link table_th" href="./orderItemCategoryListPage?product_order_status_id=5">배송중</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=6">배송완료</a>
+										<a class="nav-link table_th" href="./orderItemCategoryListPage?product_order_status_id=6">배송완료</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="./orderItemCategoryListPage?product_order_status_id=7">구매확정</a>
+										<a class="nav-link table_th" href="./orderItemCategoryListPage?product_order_status_id=7">구매확정</a>
 									</li>
 								</ul>
 								<div class="table-responsive">
 								    <table class="table table-striped">
 								        <thead>
 								            <tr>
-								                <th scope="col">#</th>
-								                <th scope="col">NO</th>
-								                <th scope="col">주문일</th>
-								                <th scope="col">고객명</th>
-								                <th scope="col">진행상태</th>
-								                <th scope="col">상품명</th>
-								                <th scope="col">수량</th>
-								                <th scope="col">가격</th>
-								                <th scope="col">할인가</th>
+								                <th class="table_th" scope="col">#</th>
+								                <th class="table_th" scope="col">NO</th>
+								                <th class="table_th" scope="col">주문일</th>
+								                <th class="table_th" scope="col">고객명</th>
+								                <th class="table_th" scope="col">진행상태</th>
+								                <th class="table_th" scope="col">상품명</th>
+								                <th class="table_th" scope="col">수량</th>
+								                <th class="table_th" scope="col">가격</th>
+								                <th class="table_th" scope="col">할인가</th>
 								            </tr>
 								        </thead>
 								        <tbody id="order_item_list">
