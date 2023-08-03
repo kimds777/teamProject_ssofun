@@ -190,7 +190,7 @@
 <insert id="productDetailImageInsert">
    INSERT INTO tb_product_detail_image(product_id,name,order_list) 
       VALUES(
-         (SELECT MAX(product_id) FROM tb_product),
+         (SELECT MAX(product_id) FROM tb_product),tb_product_review
          #{name},
          #{order_list}
          )
