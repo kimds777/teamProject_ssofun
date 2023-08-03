@@ -102,7 +102,7 @@ String jsonPctList = objectMapper.writeValueAsString(request.getAttribute("list"
 	<div class="container ">
 		<div class="row">
 			<div class="col">
-				<img class="banner-img" src="../../resources/img/mega-butty.jpg">
+				<img class="banner-img" src="../../resources/img/new1.jpg">
 			</div>
 			<div class="col">
 

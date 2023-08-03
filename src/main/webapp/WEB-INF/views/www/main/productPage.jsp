@@ -430,7 +430,7 @@ window.onload = function() {
 									<span>${star}점</span>
 									<div class="graph">
 										<span class="graph-num"
-											style="background-color: #FFD700; width: ${starCount * 5}%;">
+											style="background-color: #FFD700; width: ${starCount * 10}%;">
 											<!--${starCount}-->
 										</span>
 									</div>
