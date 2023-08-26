@@ -84,7 +84,7 @@ function getLikeFundingList(user_id){
                                     }
                                     if(key == "image_order"){
                                         if(value == 1){
-                                            return $("<li class='thumbnail'><img src='../../resources/img/kimdaseul/funding/"+url+"' alt=''></li>").appendTo(ul);
+                                            return $("<li class='thumbnail'><img src='/ssofunUploadFiles/"+url+"' alt=''></li>").appendTo(ul);
                                         }
                                     }
                                 });
