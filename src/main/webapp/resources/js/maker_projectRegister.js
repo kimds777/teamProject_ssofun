@@ -451,7 +451,7 @@ function getFunding(funding_id){
                                 if(key == "image_order"){
                                     if(value == 1){
                                         $("p#uploadMainThumb").removeClass("hide");
-                                        $("<img src='../../resources/img/kimdaseul/funding/"+url+"' alt=''><span id='mainThumbDelete'>X</span>").appendTo("p#uploadMainThumb");
+                                        $("<img src='/ssofunUploadFiles/"+url+"' alt=''><span id='mainThumbDelete'>X</span>").appendTo("p#uploadMainThumb");
 
                                     }else{ // 상세 섬네일 어떻게 처리할지 고민중!------------------------
 
