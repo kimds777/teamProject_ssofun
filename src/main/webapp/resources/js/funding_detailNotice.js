@@ -299,12 +299,12 @@ function getFundingDto($funding_id,$funding_notice_id){
                                     if(value != 1){
                                         if(value == 2){
                                             $("ul#swiper").append("<li class='activeBtn'></li>");
-                                            $("ul#thumb").append("<li><img src='../../resources/img/kimdaseul/funding/"+$url+"' alt='상세 섬네일'></li>");
-                                            // $("ul#thumb").append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='상세 섬네일'></li>");
+                                            // $("ul#thumb").append("<li><img src='../../resources/img/kimdaseul/funding/"+$url+"' alt='상세 섬네일'></li>");
+                                            $("ul#thumb").append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='상세 섬네일'></li>");
                                         }else{
                                             $("ul#swiper").append("<li></li>");
-                                            $("ul#thumb").append("<li><img src='../../resources/img/kimdaseul/funding/"+$url+"' alt='상세 섬네일'></li>");
-                                            // $("ul#thumb").append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='상세 섬네일'></li>");
+                                            // $("ul#thumb").append("<li><img src='../../resources/img/kimdaseul/funding/"+$url+"' alt='상세 섬네일'></li>");
+                                            $("ul#thumb").append("<li><img src='/ssofunUploadFiles/"+$url+"' alt='상세 섬네일'></li>");
                                         }
                                     }
                                 }

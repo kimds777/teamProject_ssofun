@@ -152,7 +152,7 @@ function getMakerFundingList(user_creator_id){
 
                                     if(key == "image_order"){
                                         if(value == 1){
-                                            $("<li class='img'><img src='../../resources/img/kimdaseul/funding/"+url+"' alt=''></li>").appendTo(ul);
+                                            $("<li class='img'><img src='/ssofunUploadFiles/"+url+"' alt=''></li>").appendTo(ul);
                                         }
                                     }
                                 });
