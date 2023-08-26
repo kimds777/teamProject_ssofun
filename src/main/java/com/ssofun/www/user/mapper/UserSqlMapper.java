@@ -40,6 +40,8 @@ public interface UserSqlMapper {
 	public long insertEmailJoin(UserDto params);
 	//---이메일 로그인
 	public UserDto selectUserByEmailPassword(UserDto params);
+	//--- 유저 계정 여부 조회
+	public UserDto selectUserByEmail(String email);
 	
 	
 	
@@ -73,6 +75,7 @@ public interface UserSqlMapper {
 	public void updateUserPhone(@Param("user_id") long user_id, @Param("userDto") UserDto userDto);
 	//---창작자 아이디 출력
 	public Long selectUserCreatorId(long user_id);
+
 	
 
 

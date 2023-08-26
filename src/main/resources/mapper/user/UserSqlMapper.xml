@@ -26,7 +26,12 @@
 	
 	<!-- 유저아이디로 유저정보 조회 -->
 	<select id="selectUserByUserId" resultType="com.ssofun.dto.UserDto">
-		SELECT * FROM tb_user WHERE user_id = #{user_id}
+		SELECT * FROM tb_user WHERE user_id = #{user_id} AND used_fg = 1
+	</select>
+	
+	<!-- 유저 이메일로 유저정보 조회 -->
+	<select id="selectUserByEmail" resultType="com.ssofun.dto.UserDto">
+		SELECT * FROM tb_user WHERE email = #{email} AND used_fg = 1
 	</select>
 	
 	<!-- 이메일 업데이트 -->
