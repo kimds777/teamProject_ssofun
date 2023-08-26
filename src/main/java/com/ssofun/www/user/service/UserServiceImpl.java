@@ -271,6 +271,17 @@ public class UserServiceImpl {
 		}
 	}
 
+//	유저 이메일 체크
+	public int emailCheck(String email) {
+		UserDto userDto = userSqlMapper.selectUserByEmail(email);
+		
+		if(userDto != null) {
+			return 2; //계정 존재
+		}else {			
+			return 1;
+		}
+	}
+
 	
 	
 	

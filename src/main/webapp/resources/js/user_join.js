@@ -18,6 +18,22 @@ function setEventListener(){
         $("#emailJoin>ul>li:nth-child(6)>span>input").removeClass("click");
         $(this).addClass("click");
     });
+
+    $(document).on("blur","input#email",function(e){
+        e.stopPropagation();
+
+        $("#emailJoin>ul>li:first-child>p").remove();
+
+        var email = $("input#email").val();
+        var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+        if (!emailRegex.test(email) && email != "") {
+            return alert("이메일 형식을 다시 확인해주세요.");
+        }else{
+            return emailCheck(email);
+        }
+
+    });
     
     
     $(document).on("click","input#userJoinSubmitBtn",function(e){
@@ -123,6 +139,23 @@ function insertEmailJoin(email,name,password,gender,birth,nickname,agree_sms){
         success: function(res){
             if(res != 0){
                 window.location.href = "http://localhost:8181/www/user/userJoinSuccessPage?user_id="+res;
+            }
+        }
+    });
+}
+
+function emailCheck(email){
+    $.ajax({
+        url: "./AJAXemailCheck",
+        method: "GET",
+        data: {email:email},
+        success: function(res){
+            if(res != null){
+                if(res == 1){
+                    $("#emailJoin>ul>li:first-child").append("<p class='available'>사용 가능한 이메일 입니다 :)</p>");
+                }else if(res == 2){
+                    $("#emailJoin>ul>li:first-child").append("<p class='impossibility'>사용 불가능한 이메일 입니다:(</p>");
+                }
             }
         }
     });

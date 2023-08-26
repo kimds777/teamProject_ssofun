@@ -146,6 +146,12 @@ public class UserController {
 		return userService.insertEmailJoin(params);
 	}
 	
+	@ResponseBody
+	@RequestMapping("AJAXemailCheck")
+	public int AJAXemailCheck(String email) {
+		return userService.emailCheck(email);
+	}
+	
 	
 //	이메일 로그인 페이지 -------------------------------------------------------------------------------------------
 	

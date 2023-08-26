@@ -33,7 +33,10 @@
             <div id="emailJoin">
                 <h5>이메일 간편가입</h5>
                 <ul>
-                    <li>이메일<span><input type="text" id="email" placeholder="이메일 계정"></span></li>
+                    <li>
+                        이메일
+                        <span><input type="text" id="email" placeholder="이메일 계정"></span>
+                    </li>
                     <li>이름<span><input type="text" id="name" placeholder="이름 입력"></span></li>
                     <li>
                         비밀번호
