@@ -24,7 +24,7 @@
 
         <!--배너 영역-->
         <div class="row section" id="main-banner">
-            <img src="../../resources/img/kimdaseul/ssofun_list_banner.png" alt="">                
+            <img src="/ssofunUploadFiles/ssofun_list_banner.png" alt="">                
         </div>
 
         <!--카테고리 영역-->
