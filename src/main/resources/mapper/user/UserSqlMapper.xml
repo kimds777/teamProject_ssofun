@@ -34,6 +34,11 @@
 		SELECT * FROM tb_user WHERE email = #{email} AND used_fg = 1
 	</select>
 	
+	<!-- 유저 닉네임으로 유저정보 조회 -->
+	<select id="selectUserByNickname" resultType="com.ssofun.dto.UserDto">
+		SELECT * FROM tb_user WHERE nickname = #{nickname} AND used_fg = 1
+	</select>
+	
 	<!-- 이메일 업데이트 -->
 	<update id="updateEmail">
 		UPDATE tb_user SET email = #{userDto.email}
