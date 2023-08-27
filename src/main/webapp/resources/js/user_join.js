@@ -34,6 +34,52 @@ function setEventListener(){
         }
 
     });
+
+    $(document).on("blur","input#password",function(e){
+        e.stopPropagation();
+
+        var passwordCheck = $("input#passwordCheck").val();
+        
+        if(passwordCheck != ""){
+
+            $("#emailJoin>ul>li:nth-child(3)>p").remove();
+    
+            var password = $("input#password").val();
+            var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+    
+            if(password != passwordCheck){
+                $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>비밀번호 불일치 :(</p>");
+            }else{
+                if(!passwordPattern.test(password)){
+                    $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>최소 8자 이상, 대문자, 소문자, 숫자, 특수문자 포함 필수</p>");
+                }else{
+                    $("#emailJoin>ul>li:nth-child(3)").append("<p class='available'>비밀번호 일치 :)</p>");
+                }
+            }
+        }
+    });
+
+    $(document).on("blur","input#passwordCheck",function(e){
+        e.stopPropagation();
+
+        $("#emailJoin>ul>li:nth-child(3)>p").remove();
+
+        var password = $("input#password").val();
+        var passwordCheck = $("input#passwordCheck").val();
+        var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+
+        if(password != passwordCheck){
+            $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>비밀번호 불일치 :(</p>");
+        }else{
+            if(!passwordPattern.test(password)){
+                $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>최소 8자 이상, 대문자, 소문자, 숫자, 특수문자 포함 필수</p>");
+            }else{
+                $("#emailJoin>ul>li:nth-child(3)").append("<p class='available'>비밀번호 일치 :)</p>");
+            }
+        }
+
+
+    });
     
     
     $(document).on("click","input#userJoinSubmitBtn",function(e){
@@ -43,6 +89,8 @@ function setEventListener(){
         var name = $("input#name").val();
         var password = $("input#password").val();
         var passwordCheck = $("input#passwordCheck").val();
+        var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+
         var birth = $("input#birth").val();
         var nickname = $("input#nickname").val();
         var gender = $("input.gender.click").index();
@@ -59,9 +107,12 @@ function setEventListener(){
         }
         if(passwordCheck == ""){
            return alert("비밀번호 확인을 입력해주세요.");
+        }        
+        if (!passwordPattern.test(password)) {
+            return alert("비밀번호는 최소 8자 이상, 대문자와 소문자, 숫자, 특수문자를 포함해야합니다.");
         }
         if(password != passwordCheck){
-            return alert("비밀번호가 다릅니다. 다시 확인해주세요");
+            return alert("비밀번호가 일치하지않습니다. 다시 확인해주세요.");
         }
         if(birth == ""){
            return alert("생년월일을 선택해주세요.");
