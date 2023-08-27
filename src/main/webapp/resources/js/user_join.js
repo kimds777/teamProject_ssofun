@@ -38,14 +38,18 @@ function setEventListener(){
     $(document).on("blur","input#password",function(e){
         e.stopPropagation();
 
+        var password = $("input#password").val();
+        var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
         var passwordCheck = $("input#passwordCheck").val();
         
-        if(passwordCheck != ""){
+        if(password != ""){
+            $("#emailJoin>ul>li:nth-child(3)>p").remove();
+            if(!passwordPattern.test(password)){
+                $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>최소 8자 이상, 대문자, 소문자, 숫자, 특수문자 포함 필수</p>");
+            }
+        }else if(password != "" && passwordCheck != ""){
 
             $("#emailJoin>ul>li:nth-child(3)>p").remove();
-    
-            var password = $("input#password").val();
-            var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
     
             if(password != passwordCheck){
                 $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>비밀번호 불일치 :(</p>");
@@ -62,24 +66,40 @@ function setEventListener(){
     $(document).on("blur","input#passwordCheck",function(e){
         e.stopPropagation();
 
-        $("#emailJoin>ul>li:nth-child(3)>p").remove();
-
+        
         var password = $("input#password").val();
         var passwordCheck = $("input#passwordCheck").val();
         var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+        
+        if(password != "" && passwordCheck != ""){
 
-        if(password != passwordCheck){
-            $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>비밀번호 불일치 :(</p>");
-        }else{
-            if(!passwordPattern.test(password)){
-                $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>최소 8자 이상, 대문자, 소문자, 숫자, 특수문자 포함 필수</p>");
+            $("#emailJoin>ul>li:nth-child(3)>p").remove();
+            
+            if(password != passwordCheck){
+                $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>비밀번호 불일치 :(</p>");
             }else{
-                $("#emailJoin>ul>li:nth-child(3)").append("<p class='available'>비밀번호 일치 :)</p>");
+                if(!passwordPattern.test(password)){
+                    $("#emailJoin>ul>li:nth-child(3)").append("<p class='impossibility'>최소 8자 이상, 대문자, 소문자, 숫자, 특수문자 포함 필수</p>");
+                }else{
+                    $("#emailJoin>ul>li:nth-child(3)").append("<p class='available'>비밀번호 일치 :)</p>");
+                }
             }
         }
 
 
     });
+
+    $(document).on("blur","input#nickname",function(e){
+        e.stopPropagation();
+
+        $("#emailJoin>ul>li:nth-child(5)>p").remove();
+
+        var nickname = $("input#nickname").val();
+
+        if(nickname != ""){
+            nicknameCheck(nickname);
+        }
+    })
     
     
     $(document).on("click","input#userJoinSubmitBtn",function(e){
@@ -203,9 +223,26 @@ function emailCheck(email){
         success: function(res){
             if(res != null){
                 if(res == 1){
-                    $("#emailJoin>ul>li:first-child").append("<p class='available'>사용 가능한 이메일 입니다 :)</p>");
+                    $("#emailJoin>ul>li:first-child").append("<p class='available'>사용 가능한 이메일입니다 :)</p>");
                 }else if(res == 2){
-                    $("#emailJoin>ul>li:first-child").append("<p class='impossibility'>사용 불가능한 이메일 입니다:(</p>");
+                    $("#emailJoin>ul>li:first-child").append("<p class='impossibility'>사용 불가능한 이메일입니다:(</p>");
+                }
+            }
+        }
+    });
+}
+
+function nicknameCheck(nickname){
+    $.ajax({
+        url: "./AJAXnicknameCheck",
+        method: "GET",
+        data: {nickname:nickname},
+        success: function(res){
+            if(res!=null){
+                if(res == 1){
+                    $("#emailJoin>ul>li:nth-child(5)").append("<p class='available'>사용 가능한 닉네임입니다 :)</p>");
+                }else if(res == 2){
+                    $("#emailJoin>ul>li:nth-child(5)").append("<p class='impossibility'>사용 불가능한 닉네임입니다:(</p>");
                 }
             }
         }

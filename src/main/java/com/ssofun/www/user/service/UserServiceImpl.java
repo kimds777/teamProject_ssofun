@@ -282,7 +282,16 @@ public class UserServiceImpl {
 		}
 	}
 
-	
+//	유저 닉네임 체크
+	public int nicknameCheck(String nickname) {
+		UserDto userDto = userSqlMapper.selectUserByNickname(nickname);
+		
+		if(userDto != null) {
+			return 2; //계정 존재
+		}else {			
+			return 1;
+		}
+	}
 	
 	
 	
@@ -361,6 +370,7 @@ public class UserServiceImpl {
 	public Long getUserCreatorId(long user_id) {
 		return userSqlMapper.selectUserCreatorId(user_id);
 	}
+
 
 
 

@@ -42,6 +42,8 @@ public interface UserSqlMapper {
 	public UserDto selectUserByEmailPassword(UserDto params);
 	//--- 유저 계정 여부 조회
 	public UserDto selectUserByEmail(String email);
+	//--- 유저 닉네임 존재 여부 조회
+	public UserDto selectUserByNickname(String nickname);
 	
 	
 	
@@ -75,6 +77,7 @@ public interface UserSqlMapper {
 	public void updateUserPhone(@Param("user_id") long user_id, @Param("userDto") UserDto userDto);
 	//---창작자 아이디 출력
 	public Long selectUserCreatorId(long user_id);
+
 
 	
 

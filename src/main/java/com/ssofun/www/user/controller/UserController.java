@@ -152,6 +152,12 @@ public class UserController {
 		return userService.emailCheck(email);
 	}
 	
+	@ResponseBody
+	@RequestMapping("AJAXnicknameCheck")
+	public int AJAXnicknameCheck(String nickname) {
+		return userService.nicknameCheck(nickname);
+	}
+	
 	
 //	이메일 로그인 페이지 -------------------------------------------------------------------------------------------
 	
