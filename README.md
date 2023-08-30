@@ -20,8 +20,10 @@
  * **Database** `MySql`
  * **ORM** `Mybatis`
 
-### ✨ 프론트 구현
-- HTML+CSS+jQuery+Javascript로 페이지 구현
+### ✨ SKILL
+- FE : HTML, CSS, jQuery, Javascript
+- BE : Java, Spring MVC, Git
+- DB : MySQL DB
 
 ## 📌 주요 기능
 #### [공통영역] 로그인
