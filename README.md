@@ -23,7 +23,7 @@
  * **Database** `MySql`
  * **ORM** `Mybatis`
 
-### ✨ SKILL
+### ✨ Skills
 - FE : HTML, CSS, jQuery, JavaScript
 - BE : Java, Spring MVC, Git
 - DB : MySQL DB
