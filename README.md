@@ -1,4 +1,4 @@
-# 📁 Spring_Project_ssofun 
+# 📁 Spring_Project_ssofun  
 스프링 + JSP 파싱_펀딩 사이트
 ## 💻 프로젝트 소개 
 펀딩과 쇼핑몰이 결합된 사이트로 회원이 프로젝트에 참여하거나 창작자로 전환하여 프로젝트를 진행할 수 있습니다. <br>
