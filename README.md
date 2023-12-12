@@ -1,14 +1,18 @@
 # 📁 Spring_Project_ssofun  
 스프링 + JSP 파싱_펀딩 사이트
+<br><br>
 ## 💻 프로젝트 소개 
 펀딩과 쇼핑몰이 결합된 사이트로 회원이 프로젝트에 참여하거나 창작자로 전환하여 프로젝트를 진행할 수 있습니다. <br>
 회원은 진행중인 펀딩 커뮤니티에 게시글과 댓글을 통해, 창작자는 펀딩 공지사항을 통해 회원과 소통할 수 있습니다. <br>
 또한 찜 기능을 사용하여 관심있는 펀딩을 저장할 수 있으며, 이는 회원 마이페이지에서 확인이 가능합니다.<br>
 회원은 마이페이지에서 창작자로 전환이 가능하며, 창작자는 진행중인 펀딩 등록 및 진행중인 펀딩 관리가 가능합니다.  
+<br><br>
 ## ERD 👉 https://www.erdcloud.com/d/ZnA5stiE3uMS7MMSe
+<br>
 <p align="center">
-  <img src="https://github.com/kimds777/teamProject_ssofun/assets/77198242/b3db3fa6-f4ca-4f6f-9a57-c7d3010efc3a">
+  <img width="800px" src="https://github.com/kimds777/teamProject_ssofun/assets/77198242/b3db3fa6-f4ca-4f6f-9a57-c7d3010efc3a">
 </p>
+<br><br>
 
 ## 📅 프로젝트 기간
 * 2023.06.19 - 08.03 👉 총 34일
@@ -32,6 +36,7 @@
 - FE : HTML, CSS, jQuery, JavaScript
 - BE : Java, Spring MVC, Git
 - DB : MySQL DB
+<br><br>
 
 ## 📌 주요 기능
 ### [공통영역] 로그인
