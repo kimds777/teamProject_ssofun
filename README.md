@@ -7,8 +7,8 @@
 <img width="800px" src="https://capsule-render.vercel.app/api?type=venom&color=eb412a&height=300&section=header&text=SSOFUN&fontSize=120&fontColor=ffffff&stroke=eb412a&strokeWidth=1.5" />
 </p>
 
-# 📁 Spring_Project_ssofun  
-스프링 + JSP 파싱_펀딩 사이트
+<!--# 📁 Spring_Project_ssofun  
+스프링 + JSP 파싱_펀딩 사이트-->
 <br><br>
 ## 💻 프로젝트 소개 
 펀딩과 쇼핑몰이 결합된 사이트로 회원이 프로젝트에 참여하거나 창작자로 전환하여 프로젝트를 진행할 수 있습니다. <br>
