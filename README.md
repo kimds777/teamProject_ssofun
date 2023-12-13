@@ -1,3 +1,12 @@
+
+
+<p align="center">
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fkimds777%2FteamProject_ssofun&count_bg=%23FF7C7C&title_bg=%23454545&icon=&icon_color=%23E5E5E5&title=hits&edge_flat=false"/></a>
+</p>
+<p align="center">
+<img width="800px" src="https://capsule-render.vercel.app/api?type=venom&color=eb412a&height=300&section=header&text=SSOFUN&fontSize=120&fontColor=ffffff&stroke=eb412a&strokeWidth=1.5" />
+</p>
+
 # 📁 Spring_Project_ssofun  
 스프링 + JSP 파싱_펀딩 사이트
 <br><br>
