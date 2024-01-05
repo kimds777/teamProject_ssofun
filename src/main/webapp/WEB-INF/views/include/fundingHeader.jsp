@@ -14,8 +14,8 @@
 	<c:when test="${user != null}">
         <div class="row section" id="header">
             <div class="d-flex col p-0">
-                <div class="col-1 logobox"><a href="../funding/fundingMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
-                <div class="col-1"><a href="../funding/fundingListPage">펀딩</a></div>
+                <div class="col-1 logobox"><a href="../funding/main" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
+                <div class="col-1"><a href="../funding/list">펀딩</a></div>
                 <div class="col-1"><a href="../store/storePage">스토어</a></div>
                 <div class="col-1 me-auto"><a href="../community/communityMainPage">커뮤니티</a></div>
                 <div class="col-1">
@@ -32,11 +32,11 @@
         <!--헤더 영역-->
         <div class="row section" id="header">
             <div class="d-flex col p-0">
-                <div class="col-1 logobox"><a href="../funding/fundingMainPage" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
-                <div class="col-1"><a href="../funding/fundingListPage">펀딩</a></div>
+                <div class="col-1 logobox"><a href="../funding/main" id="logo" class="fs-3 fw-bold">SSOFUN</a></div>
+                <div class="col-1"><a href="../funding/list">펀딩</a></div>
                 <div class="col-1"><a href="../store/storePage">스토어</a></div>
                 <div class="col-1 me-auto"><a href="../community/communityMainPage">커뮤니티</a></div>
-                <div class="col-1"><a href="../user/userLoginPage">로그인</a></div>
+                <div class="col-1"><a href="../user/login">로그인</a></div>
                 <div class="col-1"><a href="../faq/faqShippingPage">고객센터</a></div>
             </div>
         </div>

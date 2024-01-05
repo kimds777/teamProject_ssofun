@@ -59,7 +59,7 @@ public class FundingController {
 //		return "www/funding/fundingMainPage";
 //	}
 	
-	@RequestMapping("fundingMainPage")
+	@RequestMapping("main")
 	public String fundingMainPage() {
 		return "www/funding/fundingMainPage";
 	}
@@ -89,12 +89,12 @@ public class FundingController {
 
 //	펀딩 리스트 페이지 ----------------------------------------------------------------------------------------
 
-	@RequestMapping("fundingListPage")
+	@RequestMapping("list")
 	public String fundingListPage() {
 		return "www/funding/fundingListPage";
 	}
 
-	@RequestMapping("categoryFundingListPage")
+	@RequestMapping("category")
 	public String categoryFundingListPage(Model model, int funding_category_id) {
 		model.addAttribute("funding_category_id", funding_category_id);
 		return "www/funding/categoryFundingListPage";
