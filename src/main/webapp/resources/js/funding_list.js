@@ -290,17 +290,16 @@ function getCategoryList(clickCategory){
                     if(key == "name"){
                         if($cateId == clickCategory){
                             $li.addClass('active-cate');
-                            // $("<a href='./categoryFundingListPage?funding_category_id="+$cateId+"'><img src='../../resources/img/kimdaseul/category/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
-                            $("<a href='./category?funding_category_id="+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            // $("<a href='./category?funding_category_id="+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            $("<a href='./category?"+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
                             
                         }else if($cateId == 1 && clickCategory == null){
                             $li.addClass('active-cate');
-                            // $("<a href='./fundingListPage'><img src='../../resources/img/kimdaseul/category/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
                             $("<a href='./list'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
                             
                         }else{
-                            // $("<a href='./categoryFundingListPage?funding_category_id="+$cateId+"'><img src='../../resources/img/kimdaseul/category/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
-                            $("<a href='./category?funding_category_id="+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            // $("<a href='./category?funding_category_id="+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            $("<a href='./category?"+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
                         }
                     }
                 });

@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -94,8 +96,8 @@ public class FundingController {
 		return "www/funding/fundingListPage";
 	}
 
-	@RequestMapping("category")
-	public String categoryFundingListPage(Model model, int funding_category_id) {
+	@GetMapping("category/{funding_category_id}")
+	public String categoryFundingListPage(Model model, @PathVariable int funding_category_id) {
 		model.addAttribute("funding_category_id", funding_category_id);
 		return "www/funding/categoryFundingListPage";
 	}
