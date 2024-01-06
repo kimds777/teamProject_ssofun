@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 function getPageName($funding_category_id){
     $.ajax({
-        url: "./getPageNameAjax",
+        url: "/www/funding/getPageNameAjax",
         method: "GET",
         //contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         data: {funding_category_id:$funding_category_id},
@@ -65,7 +65,7 @@ function getPageName($funding_category_id){
 
 function getMaxPageNum(callback,$funding_category_id){
     $.ajax({
-        url: "./getMaxPageNumAjax",
+        url: "/www/funding/getMaxPageNumAjax",
         method: "GET",
         data: {funding_category_id:$funding_category_id},
         success: function(res){
@@ -78,7 +78,7 @@ function getPageList(clickNum,$funding_category_id){
 	$("#paging ul").empty();
     
     $.ajax({
-        url: "./getPageListAjax",
+        url: "/www/funding/getPageListAjax",
         method: "GET",
         data: {clickNum:clickNum !== null ? clickNum : null,
             funding_category_id:$funding_category_id},
@@ -106,7 +106,7 @@ function getFundingList(pageNum,$funding_category_id){
 
 
     $.ajax({
-        url: "./getFundingListAjax",
+        url: "/www/funding/getFundingListAjax",
         method: "GET",
         data: {pageNum:pageNum !== null ? pageNum : null,
             funding_category_id:$funding_category_id},
@@ -192,7 +192,7 @@ function getDday(funding_id){
     var dday;
 
     $.ajax({
-        url: "../user/AJAXgetDday",
+        url: "/www/user/AJAXgetDday",
         method: "GET",
         async: false,
         data: {funding_id:funding_id},
@@ -209,7 +209,7 @@ function getDday(funding_id){
 function getFundingAchievementRate(funding_id){
     var respone;
     $.ajax({
-        url: "./AJAXgetFundingAchievementRate",
+        url: "/www/funding/AJAXgetFundingAchievementRate",
         method: "GET",
         async: false,
         data: {funding_id:funding_id},
@@ -226,7 +226,7 @@ function getFundingAchievementRate(funding_id){
 function getfundingAchievement(funding_id){
     var respone;
     $.ajax({
-        url: "./AJAXgetFundingAchievement",
+        url: "/www/funding/AJAXgetFundingAchievement",
         method: "GET",
         async: false,
         data: {funding_id:funding_id},
@@ -243,7 +243,7 @@ function getfundingAchievement(funding_id){
 function getFundingCategoryName(funding_category_id){
     var fundingCategoryName;
     $.ajax({
-        url: "../user/AJAXgetFundingCategoryName",
+        url: "/www/user/AJAXgetFundingCategoryName",
         method: "GET",
         async : false,
         data: {funding_category_id:funding_category_id},
@@ -269,9 +269,10 @@ function addCommas(num){
 
 function getCategoryList(clickCategory){
     $("#category").empty();
-
+    
+    
     $.ajax({
-        url: "./getCategoryListAjax",
+        url: "/www/funding/getCategoryListAjax",
         method: "GET",
         success: function(res){
             var ul = $("<ul></ul>");
@@ -291,15 +292,15 @@ function getCategoryList(clickCategory){
                         if($cateId == clickCategory){
                             $li.addClass('active-cate');
                             // $("<a href='./category?funding_category_id="+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
-                            $("<a href='./category/"+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            $("<a href='/www/funding/category/"+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
                             
                         }else if($cateId == 1 && clickCategory == null){
                             $li.addClass('active-cate');
-                            $("<a href='./list'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            $("<a href='/www/funding/list'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
                             
                         }else{
                             // $("<a href='./category?funding_category_id="+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
-                            $("<a href='./category/"+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
+                            $("<a href='/www/funding/category/"+$cateId+"'><img src='/ssofunUploadFiles/"+image_url+"' alt='"+value+"'>"+value+"</a>").appendTo($li);
                         }
                     }
                 });

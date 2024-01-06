@@ -19,12 +19,12 @@ function setEventListener(){
 
 function logout(){
     $.ajax({
-        url: "../user/AJAXlogout",
+        url: "/www/user/AJAXlogout",
         method: "GET",
         success: function(res){
             if(res == 1){
                 alert("로그아웃 성공!");
-                window.location.href = "http://localhost:8181/www/funding/fundingMainPage";
+                window.location.href = "/www/funding/main";
             }else{
                 alert("이미 로그아웃 되어있습니다.");
             }
@@ -68,7 +68,7 @@ function moveLeft(){
 
 function getFundingOrderByCreatedAt(){
     $.ajax({
-        url: "./AJAXgetFundingOrderByCreatedAt",
+        url: "/www/funding/AJAXgetFundingOrderByCreatedAt",
         method: "GET",
         success: function(res){
             if(res != null){
@@ -79,7 +79,7 @@ function getFundingOrderByCreatedAt(){
                     $.each(item,function(key,value){
                         if(key == "funding_id"){
                             funding_id = value;
-                            a = $("<a href='../funding/fundingDetailPage?funding_id="+value+"'></a>");
+                            a = $("<a href='/www/funding/fundingDetailPage?funding_id="+value+"'></a>");
                         }
 
                         if(key == "thumbnailList"){
@@ -121,7 +121,7 @@ function getFundingOrderByCreatedAt(){
 
 function getFundingOrderByAchievementRate(){
     $.ajax({
-        url: "./AJAXgetFundingOrderByAchievementRate",
+        url: "/www/funding/main/order-by-achievement-rate",
         method: "GET",
         success: function(res){
             if(res != null){
@@ -132,7 +132,7 @@ function getFundingOrderByAchievementRate(){
                     $.each(item,function(key,value){
                         if(key == "funding_id"){
                             funding_id = value;
-                            a = $("<a href='../funding/fundingDetailPage?funding_id="+value+"'></a>");
+                            a = $("<a href='/www/funding/fundingDetailPage?funding_id="+value+"'></a>");
                         }
 
                         if(key == "thumbnailList"){
@@ -176,7 +176,7 @@ function getDday(funding_id){
     var dday;
 
     $.ajax({
-        url: "../user/AJAXgetDday",
+        url: "/www/user/AJAXgetDday",
         method: "GET",
         async: false,
         data: {funding_id:funding_id},
@@ -193,7 +193,7 @@ function getDday(funding_id){
 function getFundingAchievementRate(funding_id){
     var respone;
     $.ajax({
-        url: "./AJAXgetFundingAchievementRate",
+        url: "/www/funding/AJAXgetFundingAchievementRate",
         method: "GET",
         async: false,
         data: {funding_id:funding_id},
@@ -209,7 +209,7 @@ function getFundingAchievementRate(funding_id){
 function getFundingCategoryName(funding_category_id){
     var fundingCategoryName;
     $.ajax({
-        url: "../user/AJAXgetFundingCategoryName",
+        url: "/www/user/AJAXgetFundingCategoryName",
         method: "GET",
         async : false,
         data: {funding_category_id:funding_category_id},
