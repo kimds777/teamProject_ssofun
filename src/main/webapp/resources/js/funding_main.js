@@ -68,7 +68,7 @@ function moveLeft(){
 
 function getFundingOrderByCreatedAt(){
     $.ajax({
-        url: "/www/funding/AJAXgetFundingOrderByCreatedAt",
+        url: "/www/funding/main/order-by-created-at",
         method: "GET",
         success: function(res){
             if(res != null){
@@ -193,7 +193,7 @@ function getDday(funding_id){
 function getFundingAchievementRate(funding_id){
     var respone;
     $.ajax({
-        url: "/www/funding/AJAXgetFundingAchievementRate",
+        url: "/www/funding/achievement-rate",
         method: "GET",
         async: false,
         data: {funding_id:funding_id},

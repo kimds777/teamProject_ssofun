@@ -68,20 +68,20 @@ public class FundingController {
 	
 	//펀딩 메인페이지 달성률 높은순으로 8개 출력
 	@ResponseBody
-	@RequestMapping("AJAXgetFundingOrderByAchievementRate")
+	@GetMapping("main/order-by-achievement-rate")
 	public List<FundingDto> AJAXgetFundingOrderByAchievementRate(){
 		return fundingService.getFundingOrderByAchievementRate();
 	}
 
 
 	@ResponseBody
-	@RequestMapping("AJAXgetFundingAchievementRate")
+	@GetMapping("achievement-rate")
 	public int AJAXgetFundingAchievementRate(long funding_id) {
 		return fundingService.getFundingAchievementRate(funding_id);
 	}
 	
 	@ResponseBody
-	@RequestMapping("AJAXgetFundingOrderByCreatedAt")
+	@GetMapping("main/order-by-created-at")
 	public List<FundingDto> AJAXgetFundingOrderByCreatedAt() {
 		return fundingService.getFundingOrderByCreatedAt();
 	}
@@ -103,7 +103,7 @@ public class FundingController {
 	}
 
 	@ResponseBody
-	@RequestMapping("getCategoryListAjax")
+	@GetMapping("getCategoryListAjax")
 	public List<FundingCategoryDto> getCategoryListAjax() {
 		return fundingService.selectAllFundingCategory();
 	}
@@ -139,8 +139,8 @@ public class FundingController {
 	@ResponseBody
 	@RequestMapping(value = "getPageNameAjax", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	public String getPageNameAjax(
-			@RequestParam(value = "funding_category_id", defaultValue = "1") long funding_category_id) {
-		System.out.println(fundingService.selectCategoryNameByCateId(funding_category_id));
+			@RequestParam(value = "funding_category_id", defaultValue = "1") int funding_category_id) {
+		System.out.println("실행확인!");
 		return fundingService.selectCategoryNameByCateId(funding_category_id);
 	}
 
