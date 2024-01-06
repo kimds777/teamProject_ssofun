@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired UserServiceImpl userService;
 	
 //	로그인 페이지
-	@RequestMapping("userLoginPage")
+	@RequestMapping("login")
 	public String userLoginPage(){
 
 		return "www/user/userLoginPage";

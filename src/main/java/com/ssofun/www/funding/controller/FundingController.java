@@ -1,11 +1,8 @@
 package com.ssofun.www.funding.controller;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,9 +36,7 @@ import com.ssofun.dto.FundingNewsReviewDto;
 import com.ssofun.dto.FundingOrderDto;
 import com.ssofun.dto.FundingRewardOrderDto;
 import com.ssofun.dto.PaymentDto;
-import com.ssofun.dto.UserCreatorDto;
 import com.ssofun.www.funding.service.FundingServiceImpl;
-import com.ssofun.www.user.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("www/funding/*")
@@ -47,39 +45,27 @@ public class FundingController {
 	@Autowired
 	private FundingServiceImpl fundingService;
 	
-//	@Autowired 
-//	private UserServiceImpl userService;
-//
-//	@RequestMapping("fundingMainPage")
-//	public String fundingMainPage(HttpSession session, @RequestParam(value = "user_id", required = false, defaultValue = "0") long user_id) {
-//		if(user_id != 0) {		
-//			System.out.println("user_id: "+user_id);
-//			session.setAttribute("user", userService.getUserByUserId(user_id));
-//		}
-//		return "www/funding/fundingMainPage";
-//	}
-	
-	@RequestMapping("fundingMainPage")
+	@GetMapping("main")
 	public String fundingMainPage() {
 		return "www/funding/fundingMainPage";
 	}
 	
 	//펀딩 메인페이지 달성률 높은순으로 8개 출력
 	@ResponseBody
-	@RequestMapping("AJAXgetFundingOrderByAchievementRate")
+	@GetMapping("main/order-by-achievement-rate")
 	public List<FundingDto> AJAXgetFundingOrderByAchievementRate(){
 		return fundingService.getFundingOrderByAchievementRate();
 	}
 
 
 	@ResponseBody
-	@RequestMapping("AJAXgetFundingAchievementRate")
+	@GetMapping("achievement-rate")
 	public int AJAXgetFundingAchievementRate(long funding_id) {
 		return fundingService.getFundingAchievementRate(funding_id);
 	}
 	
 	@ResponseBody
-	@RequestMapping("AJAXgetFundingOrderByCreatedAt")
+	@GetMapping("main/order-by-created-at")
 	public List<FundingDto> AJAXgetFundingOrderByCreatedAt() {
 		return fundingService.getFundingOrderByCreatedAt();
 	}
@@ -89,38 +75,38 @@ public class FundingController {
 
 //	펀딩 리스트 페이지 ----------------------------------------------------------------------------------------
 
-	@RequestMapping("fundingListPage")
+	@RequestMapping("list")
 	public String fundingListPage() {
 		return "www/funding/fundingListPage";
 	}
 
-	@RequestMapping("categoryFundingListPage")
-	public String categoryFundingListPage(Model model, int funding_category_id) {
+	@GetMapping("category/{funding_category_id}")
+	public String categoryFundingListPage(Model model, @PathVariable int funding_category_id) {
 		model.addAttribute("funding_category_id", funding_category_id);
 		return "www/funding/categoryFundingListPage";
 	}
 
 	@ResponseBody
-	@RequestMapping("getCategoryListAjax")
+	@GetMapping("category-list")
 	public List<FundingCategoryDto> getCategoryListAjax() {
 		return fundingService.selectAllFundingCategory();
 	}
 
 	@ResponseBody
-	@RequestMapping("getFundingListAjax")
+	@GetMapping("getFundingListAjax")
 	public List<FundingDto> getFundingListAjax(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "funding_category_id", defaultValue = "1") long funding_category_id) {
 		return fundingService.selectAllFunding(pageNum, funding_category_id);
 	}
 	
 	@ResponseBody
-	@RequestMapping("AJAXgetFundingAchievement")
+	@GetMapping("AJAXgetFundingAchievement")
 	public long AJAXgetFundingAchievement(long funding_id) {
 		return fundingService.getFundingAchievement(funding_id);
 	}
 
 	@ResponseBody
-	@RequestMapping("getPageListAjax")
+	@GetMapping("getPageListAjax")
 	public int[] getPageListAjax(@RequestParam(value = "clickNum", defaultValue = "1") int clickNum,
 			@RequestParam(value = "funding_category_id", defaultValue = "1") long funding_category_id) {
 		int[] pageList = fundingService.selectPageNumList(clickNum, funding_category_id);
@@ -128,23 +114,23 @@ public class FundingController {
 	}
 
 	@ResponseBody
-	@RequestMapping("getMaxPageNumAjax")
+	@GetMapping("getMaxPageNumAjax")
 	public int getMaxPageNumAjax(
 			@RequestParam(value = "funding_category_id", defaultValue = "1") long funding_category_id) {
 		return fundingService.selectCountPage(funding_category_id);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "getPageNameAjax", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@GetMapping("getPageNameAjax")
 	public String getPageNameAjax(
-			@RequestParam(value = "funding_category_id", defaultValue = "1") long funding_category_id) {
-		System.out.println(fundingService.selectCategoryNameByCateId(funding_category_id));
+			@RequestParam(value = "funding_category_id", defaultValue = "1") int funding_category_id) {
+		System.out.println("실행확인!");
 		return fundingService.selectCategoryNameByCateId(funding_category_id);
 	}
 
 //	상세 소개 페이지 ----------------------------------------------------------------------------------------
 
-	@RequestMapping("fundingDetailPage")
+	@GetMapping("fundingDetailPage")
 	public String fundingDetailPage(Model model, long funding_id) {
 		model.addAttribute("funding_id", funding_id);
 		return "www/funding/fundingDetailPage";
@@ -152,7 +138,7 @@ public class FundingController {
 
 	//펀딩 상세 정보 조회
 	@ResponseBody
-	@RequestMapping("getFundingDtoAjax")
+	@GetMapping("getFundingDtoAjax")
 	public FundingDto getFundingDtoAjax(long funding_id) {
 		FundingDto fundingDto = fundingService.selectFunding(funding_id);
 		
@@ -161,14 +147,14 @@ public class FundingController {
 	
 	//섬네일 갯수 조회
 	@ResponseBody
-	@RequestMapping("AJAXgetDetailThumbnailCount")
+	@GetMapping("AJAXgetDetailThumbnailCount")
 	public int AJAXgetDetailThumbnailCount(@RequestParam("funding_id") long funding_id) {
 		return fundingService.getDetailThumbnailCount(funding_id);
 	}
 	
 	//후원자 수 조회
 	@ResponseBody
-	@RequestMapping("AJAXgetSupportCount")
+	@GetMapping("AJAXgetSupportCount")
 	public int AJAXgetSupportCount(long funding_id) {
 
 		return fundingService.getSupportCount(funding_id);
@@ -176,14 +162,14 @@ public class FundingController {
 
 	//같은 카테고리 펀딩 추천 리스트 3개 출력
 	@ResponseBody
-	@RequestMapping("AJAXgetSameCategoryFunding")
+	@GetMapping("AJAXgetSameCategoryFunding")
 	public List<FundingDto> AJAXgetSameCategoryFunding(long funding_id) {
 		return fundingService.getSameCategoryFunding(funding_id);
 	}
 	
 	//가장 최근 펀딩을 후원한 유저가 후원한 펀딩 리스트 3개 출력
 	@ResponseBody
-	@RequestMapping("AJAXgetOrderUserPickFunding")
+	@GetMapping("AJAXgetOrderUserPickFunding")
 	public List<FundingDto> AJAXgetOrderUserPickFunding(long funding_id) {
 		return fundingService.getOrderUserPickFunding(funding_id);
 	}
@@ -191,13 +177,13 @@ public class FundingController {
 	
 //	상세 상세 공지 페이지 -----------------------------------------------------------------------------------------------------
 
-	@RequestMapping("fundingDetailNoticeListPage")
+	@GetMapping("fundingDetailNoticeListPage")
 	public String fundingDetailNoticeListPage(Model model, long funding_id) {
 		model.addAttribute("funding_id", funding_id);
 		return "www/funding/fundingDetailNoticeListPage";
 	}
 
-	@RequestMapping("fundingDetailNoticePage")
+	@GetMapping("fundingDetailNoticePage")
 	public String fundingDetailNoticePage(Model model, long funding_notice_id, long funding_id) {
 		model.addAttribute("funding_id", funding_id);
 		model.addAttribute("funding_notice_id", funding_notice_id);
@@ -205,20 +191,20 @@ public class FundingController {
 	}
 
 	@ResponseBody
-	@RequestMapping("getFundingNewsDtoAjax")
+	@GetMapping("getFundingNewsDtoAjax")
 	public FundingNewsDto getFundingNewsDtoAjax(Model model, long funding_notice_id) {
 		model.addAttribute("funding_notice_id", funding_notice_id);
 		return fundingService.selectFundingNews(funding_notice_id);
 	}
 
 	@ResponseBody
-	@RequestMapping("insertNewsCommentAjax")
+	@PostMapping("insertNewsCommentAjax")
 	public int insertNewsCommentAjax(FundingNewsReviewDto params, long user_id) {
 		return fundingService.insertNewsComment(params, user_id);
 	}
 
 	@ResponseBody
-	@RequestMapping("insertNewsCommentReplyAjax")
+	@PostMapping("insertNewsCommentReplyAjax")
 	public int insertNewsCommentReplyAjax(FundingNewsReviewAnswerDto params, long user_id, long funding_notice_id) {
 		System.out.println(params.getThis_answer_id());
 		System.out.println(funding_notice_id);
@@ -228,14 +214,14 @@ public class FundingController {
 
 //	상세 커뮤니티 페이지
 
-	@RequestMapping("fundingDetailCommunityPage")
+	@GetMapping("fundingDetailCommunityPage")
 	public String fundingDetailCommunityPage(Model model, long funding_id, long funding_review_id) {
 		model.addAttribute("funding_id", funding_id);
 		model.addAttribute("funding_review_id", funding_review_id);
 		return "www/funding/fundingDetailCommunityPage";
 	}
 
-	@RequestMapping("fundingDetailCommunityListPage")
+	@GetMapping("fundingDetailCommunityListPage")
 	public String fundingDetailCommunityListPage(Model model, long funding_id) {
 		model.addAttribute("funding_id", funding_id);
 		return "www/funding/fundingDetailCommunityListPage";
@@ -243,74 +229,74 @@ public class FundingController {
 
 	// 커뮤니티 상세
 	@ResponseBody
-	@RequestMapping("getFundingCommunityAjax")
+	@GetMapping("getFundingCommunityAjax")
 	public FundingCommunityDto getFundingCommunityAjax(long funding_review_id) {
 
 		return fundingService.selectCommunity(funding_review_id);
 	}
 
 	@ResponseBody
-	@RequestMapping("insertReviewAjax")
+	@PostMapping("insertReviewAjax")
 	public int insertReviewAjax(long funding_id, long user_id, String contents) {
 		return fundingService.insertReview(funding_id, user_id, contents);
 	}
 
 	@ResponseBody
-	@RequestMapping("AJAXinsertCommunityComment")
+	@PostMapping("AJAXinsertCommunityComment")
 	public int AJAXinsertCommunityComment(long funding_id, FundingCommunityReviewDto params, long user_id) {
 		return fundingService.insertCommunityComment(funding_id, params, user_id);
 	}
 
 	@ResponseBody
-	@RequestMapping("AJAXinsertCommunityCommentReply")
+	@PostMapping("AJAXinsertCommunityCommentReply")
 	public int AJAXinsertCommunityCommentReply(long funding_id, FundingCommunityReviewAnswerDto params, long user_id) {
 		return fundingService.insertCommunityCommentReply(funding_id, params, user_id);
 	}
 
 	@ResponseBody
-	@RequestMapping("AJAXinsertFavorit")
+	@PostMapping("AJAXinsertFavorit")
 	public int AJAXinsertFavorit(FundingFavoritDto params) {
 		return fundingService.insertFavorit(params);
 	}
 
 	@ResponseBody
-	@RequestMapping("AJAXgetCountFavorit")
+	@GetMapping("AJAXgetCountFavorit")
 	public int AJAXgetCountFavorit(long funding_id) {
 		return fundingService.selectCountFavorit(funding_id);
 	}
 
 	@ResponseBody
-	@RequestMapping("AJAXdeleteFavorit")
+	@PatchMapping("AJAXdeleteFavorit")
 	public int AJAXdeleteFavorit(FundingFavoritDto params) {
 		return fundingService.deleteFavorit(params);
 	}
 
 //	결제 페이지  ----------------------------------------------------------------------------------------
 
-	@RequestMapping("fundingRewardChoicePage")
+	@GetMapping("fundingRewardChoicePage")
 	public String fundingRewardChoicePage() {
 		return "www/funding/fundingRewardChoicePage";
 	}
 
-	@RequestMapping("fundingRewardPaymentPage")
+	@GetMapping("fundingRewardPaymentPage")
 	public String fundingRewardPaymentPage() {
 		return "www/funding/fundingRewardPaymentPage";
 	}
 	
 	@ResponseBody
-	@RequestMapping("AJAXgetRewardPaymentCount")
+	@GetMapping("AJAXgetRewardPaymentCount")
 	public int AJAXgetRewardPaymentCount(long funding_reward_id) {
 		return fundingService.getRewardPaymentCount(funding_reward_id);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "AJAXinsertFundingOrder", method = RequestMethod.POST, consumes = "application/json;")
+	@PostMapping("AJAXinsertFundingOrder")
 	public long AJAXinsertFundingOrder(@RequestBody FundingOrderDto fundingOrderDto) {
 		return fundingService.insertOrder(fundingOrderDto);
 	}
 
 	@ResponseBody
-	@RequestMapping("AJAXgetPaymentBeforeFundingOrder")
+	@GetMapping("AJAXgetPaymentBeforeFundingOrder")
 	public FundingOrderDto AJAXgetPaymentBeforeFundingOrder(long funding_order_id) {
 
 		return fundingService.getPaymentBeforeFundingOrder(funding_order_id);
@@ -318,7 +304,7 @@ public class FundingController {
 	
 	//유저 배송지 리스트 출력
 	@ResponseBody
-	@RequestMapping("AJAXgetUserAddressList") 
+	@GetMapping("AJAXgetUserAddressList") 
 	public List<DeliveryRecipientDto> AJAXgetUserAddressList(long user_id) {
 //		System.out.println("유저 배송지 리스트: "+user_id);
 		return fundingService.getUserAddressList(user_id);
@@ -326,13 +312,13 @@ public class FundingController {
 	
 	// 유저 기본 배송지 출력
 	@ResponseBody
-	@RequestMapping("AJAXgetDefaultAddress")
+	@GetMapping("AJAXgetDefaultAddress")
 	public DeliveryRecipientDto AJAXgetDefaultAddress(long user_id) {
 		return fundingService.getDefaultAddress(user_id);
 	}
 
 	// 콜백 수신 처리
-	@RequestMapping("AJAXcallback_receive")
+	@GetMapping("AJAXcallback_receive")
 	public ResponseEntity<?> AJAXcallback_receive(@RequestBody Map<String, Object> model) {
 
 		String process_result = "결제성공!";
@@ -377,7 +363,7 @@ public class FundingController {
 	}
 
 	// 웹혹 수신 처리
-//	@RequestMapping("AJAXwebhook_receive")
+//	@GetMapping("AJAXwebhook_receive")
 //	public ResponseEntity<?> AJAXwebhook_receive(Model respone, @RequestBody Map<String, Object> model) throws Exception {
 //
 //		//service로 옮겨놓기
@@ -458,7 +444,7 @@ public class FundingController {
 //	}
 	
 	@ResponseBody
-	@RequestMapping("AJAXinsertPayment")
+	@PostMapping("AJAXinsertPayment")
 	public long AJAXinsertPayment(PaymentDto params) { //PaymentDto에 담아도됨	
 		long payment_id = fundingService.insertPayment(params); 
 
@@ -466,14 +452,14 @@ public class FundingController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("AJAXinsertOrderPayment")
+	@PostMapping("AJAXinsertOrderPayment")
 	public int AJAXinsertOrderPayment(long payment_id, long funding_order_id) {
 		return fundingService.insertOrderPayment(payment_id,funding_order_id);
 	}
 	
 	// 배송지 등록
 	@ResponseBody 
-	@RequestMapping("AJAXinsertDeliveryRecipient")
+	@PostMapping("AJAXinsertDeliveryRecipient")
 	public long AJAXinsertDeliveryRecipient(DeliveryRecipientDto params) {	
 		System.out.println(params.getName());
 		return fundingService.insertDeliveryRecipient(params);
@@ -481,7 +467,7 @@ public class FundingController {
 	
 	// 새로운 기본배송지 추가시 기존 기본배송지 default_fg 0으로 변경
 	@ResponseBody
-	@RequestMapping("AJAXupdateAddressDefaultFg")
+	@PatchMapping("AJAXupdateAddressDefaultFg")
 	public int AJAXupdateAddressDefaultFg(@RequestParam(value = "delivery_recipient_id") long delivery_recipient_id, 
 			@RequestBody DeliveryRecipientDto params) {
 //		System.out.println("delivery_recipient_id: "+delivery_recipient_id);
@@ -490,14 +476,14 @@ public class FundingController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("AJAXupdateFundingRewardOrder")
+	@PatchMapping("AJAXupdateFundingRewardOrder")
 	public int AJAXupdateFundingRewardOrder(@RequestParam(value = "funding_order_id") long funding_order_id,
 			@RequestBody FundingRewardOrderDto params) {
 		return fundingService.updateFundingRewardOrder(funding_order_id, params);
 	}
 
 	@ResponseBody
-	@RequestMapping("AJAXupdateFundingOrder")
+	@PatchMapping("AJAXupdateFundingOrder")
 	public int AJAXupdateFundingOrder(@RequestParam(value = "funding_order_id") long funding_order_id,
 			@RequestBody FundingOrderDto params) {
 
@@ -505,39 +491,39 @@ public class FundingController {
 		return fundingService.updateFundingOrder(funding_order_id, params);
 	}
 
-	@RequestMapping("fundingCompletePaymentPage")
+	@GetMapping("fundingCompletePaymentPage")
 	public String fundingCompletePaymentPage() {
 		return "www/funding/fundingCompletePaymentPage";
 	}
 
 	@ResponseBody
-	@RequestMapping("AJAXgetFundingOrder")
+	@GetMapping("AJAXgetFundingOrder")
 	public FundingOrderDto AJAXgetFundingOrder(long funding_order_id) {
 		return fundingService.selectFundingOrder(funding_order_id);
 	}
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "AJAXgetFundingCloseAt", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@GetMapping("AJAXgetFundingCloseAt")
 	public String AJAXgetFundingCloseAt(long funding_id) {
 		
 		return fundingService.getFundingCloseAt(funding_id);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "AJAXgetFundingCategoryNameByFundingId", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@GetMapping("AJAXgetFundingCategoryNameByFundingId")
 	public String AJAXgetFundingCategoryNameByFundingId(long funding_id) {
 		return fundingService.getFundingCategoryNameByFundingId(funding_id);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "AJAXgetFundingTitle", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@GetMapping("AJAXgetFundingTitle")
 	public String AJAXgetFundingTitle(long funding_id) {
 		return fundingService.getFundingTitle(funding_id);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "AJAXgetCreator", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@GetMapping("AJAXgetCreator")
 	public String AJAXgetCreator(long user_creator_id) {
 		return fundingService.getCreator(user_creator_id);
 	}

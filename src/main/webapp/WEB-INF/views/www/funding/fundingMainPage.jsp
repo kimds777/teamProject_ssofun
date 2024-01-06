@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../resources/css/funding_Main.css">
+<link rel="stylesheet" href="/resources/css/funding_Main.css">
 
 </head>
 <body>
@@ -149,7 +149,7 @@
 
 	<!-- 푸터 영역 -->
 	<jsp:include page="../../include/fundingFooter.jsp"/>
-	<script src="../../resources/js/funding_main.js"></script>
+	<script src="/resources/js/funding_main.js"></script>
     
 </body>
 </html>
