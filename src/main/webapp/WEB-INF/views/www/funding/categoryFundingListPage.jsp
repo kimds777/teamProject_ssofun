@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../resources/css/funding_list.css">
-<script src="../../resources/js/funding_list.js"></script>
+<link rel="stylesheet" href="/resources/css/funding_list.css">
+<script src="/resources/js/funding_list.js"></script>
 </head>
 <body>
 	<input type="hidden" id="funding_category_id" value="${funding_category_id}">
