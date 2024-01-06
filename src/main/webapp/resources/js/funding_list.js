@@ -272,7 +272,7 @@ function getCategoryList(clickCategory){
     
     
     $.ajax({
-        url: "/www/funding/getCategoryListAjax",
+        url: "/www/funding/category-list",
         method: "GET",
         success: function(res){
             var ul = $("<ul></ul>");
