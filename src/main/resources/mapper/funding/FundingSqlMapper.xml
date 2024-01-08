@@ -3,6 +3,35 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssofun.www.funding.mapper.FundingSqlMapper">
 
+	<!-- 모든 펀딩 아이디 출력 -->
+	<select id="selectAllFudingId" resultType="long">
+		SELECT funding_id 
+		FROM tb_funding 
+		WHERE used_fg = 1
+	</select>
+	
+	
+	<!-- 펀딩 달성 금액 출력 -->
+	<select id="selectFundingAchievement" resultType="long">
+		SELECT IFNULL(SUM(fo.total_price),0) 
+		FROM tb_funding f, tb_funding_reward fr, tb_funding_reward_order fro , tb_funding_order fo
+		WHERE f.funding_id = fr.funding_id 
+			AND fr.funding_reward_id = fro.funding_reward_id 
+			AND fro.funding_order_id = fo.funding_order_id
+			AND f.funding_id = #{funding_id} 
+			AND fo.used_fg = 1 
+		    AND fro.used_fg = 1 
+		    AND fr.used_fg = 1
+	</select>
+	
+	
+	<!-- 펀딩 목표 금액 출력 -->
+	<select id="selectTargetPrice" resultType="long">
+		SELECT target_price FROM tb_funding
+		WHERE funding_id = #{funding_id}
+	</select>
+	
+	
 	<!-- 달성률 높은 순서대로 펀딩 리스트 8개 가져오기 -->
 	<select id="selectFundingOrderByAchievementRate" resultType="com.ssofun.dto.FundingDto">
 		SELECT fd.* FROM tb_funding fd
@@ -93,18 +122,7 @@
 		SELECT IFNULL(DATEDIFF(#{close_at},SYSDATE()),0)
 	</select>
 	
-	<!-- 펀딩 달성 금액 출력 -->
-	<select id="selectFundingAchievement" resultType="long">
-		SELECT IFNULL(SUM(fo.total_price),0) FROM tb_funding f, tb_funding_reward fr, tb_funding_reward_order fro , tb_funding_order fo
-		WHERE f.funding_id = fr.funding_id AND fr.funding_reward_id = fro.funding_reward_id AND fro.funding_order_id = fo.funding_order_id
-		AND f.funding_id = #{funding_id} AND fo.used_fg = 1
-	</select>
 	
-	<!-- 펀딩 목표 금액 출력 -->
-	<select id="selectTargetPrice" resultType="long">
-		SELECT target_price FROM tb_funding
-		WHERE funding_id = #{funding_id}
-	</select>
 	
 	
 	

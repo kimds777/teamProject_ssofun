@@ -26,7 +26,8 @@ import com.ssofun.dto.UserCreatorDto;
 
 public interface FundingSqlMapper {
 
-	
+	//--- 모든 펀딩 아이디 출력
+	public List<Long> selectAllFudingId();
 	//---달성률 높은 순서대로 펀딩리스트 출력
 	public List<FundingDto> selectFundingOrderByAchievementRate();
 	//---새로 등록한 펀딩 순서대로 리스트 출력
@@ -184,6 +185,7 @@ public interface FundingSqlMapper {
 	public String selectFundingTitle(long funding_id);
 	//--- 창작자 정보 출력
 	public String selectCreator(long user_creator_id);
+
 	
 	
 
