@@ -54,7 +54,11 @@ public class FundingController {
 	@ResponseBody
 	@GetMapping("main/order-by-achievement-rate")
 	public List<FundingDto> AJAXgetFundingOrderByAchievementRate(){
-		return fundingService.getFundingOrderByAchievementRate();
+		long startTime = System.currentTimeMillis();
+		List<FundingDto> fundingList= fundingService.getFundingOrderByAchievementRate();
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println("성능테스트 결과: "+estimatedTime);
+		return fundingList;
 	}
 
 
