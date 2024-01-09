@@ -26,8 +26,12 @@ import com.ssofun.dto.UserCreatorDto;
 
 public interface FundingSqlMapper {
 
-	//--- 모든 펀딩 아이디 출력
-	public List<Long> selectAllFudingId();
+	//--- 달성률 높은 펀딩 아이디와 달성금액 8개 출력
+	public List<FundingDto> selectFudingOrderByAchievementRateLimit();
+	//--- 모든 펀딩 아이디 & 목표금액 출력
+	public List<FundingDto> selectAllFudingIdAndTargetPrice();
+	//---첫번재 섬네일리스트 출력
+	public List<FundingThumbnailDto> selectFirstThumbnailAll(long funding_id);	
 	//---달성률 높은 순서대로 펀딩리스트 출력
 	public List<FundingDto> selectFundingOrderByAchievementRate();
 	//---새로 등록한 펀딩 순서대로 리스트 출력
