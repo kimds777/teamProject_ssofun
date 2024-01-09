@@ -53,8 +53,12 @@ public class FundingController {
 	//펀딩 메인페이지 달성률 높은순으로 8개 출력
 	@ResponseBody
 	@GetMapping("main/order-by-achievement-rate")
-	public List<FundingDto> AJAXgetFundingOrderByAchievementRate(){
-		return fundingService.getFundingOrderByAchievementRate();
+	public List<FundingDto> fundingOrderByAchievementRate(){
+		long startTime = System.currentTimeMillis();
+		List<FundingDto> fundingList= fundingService.getFundingOrderByAchievementRate();
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println("성능테스트 결과: " + estimatedTime);
+		return fundingList;
 	}
 
 
