@@ -3,6 +3,65 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssofun.www.funding.mapper.FundingSqlMapper">
 
+	<!-- 모든 펀딩 아이디 출력 -->
+	<select id="selectAllFudingIdAndTargetPrice" resultType="com.ssofun.dto.FundingDto">
+		SELECT funding_id, target_price
+		FROM tb_funding 
+		WHERE used_fg = 1
+	</select>
+	
+	
+	<!-- 달성률 높은 펀딩정보와 달성률 favorit에 임시로 담아 8개 출력 -->
+	<select id="selectFudingOrderByAchievementRateLimit" resultType="com.ssofun.dto.FundingDto">
+		SELECT f.funding_id, (SUM(fo.total_price)/target_price) favorit, f.title, f.funding_category_id, f.target_price
+		FROM tb_funding f, tb_funding_reward fr, tb_funding_reward_order fro, tb_funding_order fo
+		WHERE f.funding_id = fr.funding_id 
+			AND fr.funding_reward_id = fro.funding_reward_id 
+		    AND fro.funding_order_id = fo.funding_order_id
+		    AND fo.used_fg = 1 
+		    AND fro.used_fg = 1 
+		    AND fr.used_fg = 1
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 8;
+	</select>
+	
+	
+	<!-- 펀딩 달성 금액 출력 -->
+	<select id="selectFundingAchievement" resultType="long">
+		SELECT IFNULL(SUM(fo.total_price),0) 
+		FROM tb_funding f, tb_funding_reward fr, tb_funding_reward_order fro , tb_funding_order fo
+		WHERE f.funding_id = fr.funding_id 
+			AND fr.funding_reward_id = fro.funding_reward_id 
+			AND fro.funding_order_id = fo.funding_order_id
+			AND f.funding_id = #{funding_id} 
+			AND fo.used_fg = 1 
+		    AND fro.used_fg = 1 
+		    AND fr.used_fg = 1
+	</select>
+	
+	
+	<!-- 펀딩 목표 금액 출력 -->
+	<select id="selectTargetPrice" resultType="long">
+		SELECT target_price FROM tb_funding
+		WHERE funding_id = #{funding_id}
+			AND used_fg = 1
+	</select>
+	
+	<!-- 펀딩 첫번째 섬네일 리스트 출력 -->
+	<select id="selectFirstThumbnailAll" resultType="com.ssofun.dto.FundingThumbnailDto">
+		SELECT funding_thumbnail_id, funding_id, url, image_order FROM tb_funding_thumbnail
+		WHERE funding_id = #{funding_id} AND used_fg = 1 AND image_order = 1
+	</select>
+	
+		
+	<!-- 펀딩 섬네일 리스트 출력 -->
+	<select id="selectThumbnailAll" resultType="com.ssofun.dto.FundingThumbnailDto">
+		SELECT funding_thumbnail_id, funding_id, url, image_order FROM tb_funding_thumbnail
+		WHERE funding_id = #{funding_id} AND used_fg = 1
+	</select>
+	
+	
 	<!-- 달성률 높은 순서대로 펀딩 리스트 8개 가져오기 -->
 	<select id="selectFundingOrderByAchievementRate" resultType="com.ssofun.dto.FundingDto">
 		SELECT fd.* FROM tb_funding fd
@@ -93,18 +152,7 @@
 		SELECT IFNULL(DATEDIFF(#{close_at},SYSDATE()),0)
 	</select>
 	
-	<!-- 펀딩 달성 금액 출력 -->
-	<select id="selectFundingAchievement" resultType="long">
-		SELECT IFNULL(SUM(fo.total_price),0) FROM tb_funding f, tb_funding_reward fr, tb_funding_reward_order fro , tb_funding_order fo
-		WHERE f.funding_id = fr.funding_id AND fr.funding_reward_id = fro.funding_reward_id AND fro.funding_order_id = fo.funding_order_id
-		AND f.funding_id = #{funding_id} AND fo.used_fg = 1
-	</select>
 	
-	<!-- 펀딩 목표 금액 출력 -->
-	<select id="selectTargetPrice" resultType="long">
-		SELECT target_price FROM tb_funding
-		WHERE funding_id = #{funding_id}
-	</select>
 	
 	
 	
@@ -162,12 +210,7 @@
 			AND f.funding_id = #{funding_id} 	
 		</if>
 	</select>
-	
-	<!-- 펀딩 섬네일 리스트 출력 -->
-	<select id="selectThumbnailAll" resultType="com.ssofun.dto.FundingThumbnailDto">
-		SELECT funding_thumbnail_id,funding_id,url,image_order FROM tb_funding_thumbnail
-		WHERE funding_id = #{funding_id}
-	</select>
+
 	
 		
 	<!-- 펀딩 상세 섬네일 갯수 출력 -->
