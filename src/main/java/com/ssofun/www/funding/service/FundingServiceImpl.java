@@ -1,14 +1,11 @@
 package com.ssofun.www.funding.service;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,53 +35,21 @@ public class FundingServiceImpl {
 	private FundingSqlMapper fundingSqlMapper;
 
 //	펀딩 메인페이지 ------------------------------------------------------------------------------------------
-	public List<FundingDto> getFundingOrderByAchievementRate() {
-		List<Long> fundingIdList = fundingSqlMapper.selectAllFudingId();
+	// 펀딩 메인 달성률 높은 펀딩 8개 리스트에 담아 출력
+	public List<FundingDto> getFundingOrderByAchievementRate() {		
+		List<FundingDto> fundingList = fundingSqlMapper.selectFudingOrderByAchievementRateLimit();
 
-		Map<Long, Integer> fundingIdAndAchievementRate = new HashMap<>();
-		for (long f : fundingIdList) {
-			long achievementAmount = fundingSqlMapper.selectFundingAchievement(f);
-//			if (achievementAmount == 0) {
-//				continue;
-//			}
-
-			long targetPrice = fundingSqlMapper.selectTargetPrice(f);
-			double achievementRate = (achievementAmount / targetPrice) * 100.0;
-
-			fundingIdAndAchievementRate.put(f, (int)achievementRate);
-		}
-		
-		List<Map.Entry<Long, Integer>> entryList = new LinkedList<>(fundingIdAndAchievementRate.entrySet());
-		entryList.sort(new Comparator<Map.Entry<Long, Integer>>() {
-
+		Collections.sort(fundingList, new Comparator<FundingDto>() {
 			@Override
-			public int compare(Map.Entry<Long, Integer> o1, Map.Entry<Long, Integer> o2) {
-				if(o2.getValue() == o1.getValue()) {
-					return 0;
-				}
-				return o2.getValue() - o1.getValue();
+			public int compare(FundingDto o1, FundingDto o2) {				
+				return o2.getFavorit() - o1.getFavorit();
 			}
 		});
 		
-		List<FundingDto> fundingList = new ArrayList<>();
-		int i = 0;
-		for(Map.Entry<Long, Integer> e : entryList) {
-			if(i>7) {
-				break;
-			}
-			fundingList.add(fundingSqlMapper.selectFunding(e.getKey()));
-			i++;
-		}
-		
-		getFundingThumbnail(fundingList);
-		
-		return fundingList;
-	}
-	
-	public List<FundingDto> getFundingThumbnail(List<FundingDto> fundingList){
 		for (FundingDto fundingDto : fundingList) {
-			fundingDto.setThumbnailList(fundingSqlMapper.selectThumbnailAll(fundingDto.getFunding_id()));
+			fundingDto.setThumbnailList(fundingSqlMapper.selectFirstThumbnailAll(fundingDto.getFunding_id()));
 		}
+		
 		return fundingList;
 	}
 
