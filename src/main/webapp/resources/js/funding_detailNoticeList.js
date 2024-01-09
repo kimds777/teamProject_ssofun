@@ -489,7 +489,7 @@ function getDday(funding_id){
 function getFundingAchievementRate(funding_id){
     var respone;
     $.ajax({
-        url: "./AJAXgetFundingAchievementRate",
+        url: "/www/funding/achievement-rate",
         method: "GET",
         async: false,
         data: {funding_id:funding_id},
