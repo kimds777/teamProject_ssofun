@@ -9,6 +9,6 @@
 </head>
 <body>
 
-<script src="../../resources/js/kakao_login2.js"></script>
+<script src="/resources/js/kakao_login2.js"></script>
 </body>
 </html>
