@@ -57,7 +57,7 @@ public class FundingController {
 		long startTime = System.currentTimeMillis();
 		List<FundingDto> fundingList= fundingService.getFundingOrderByAchievementRate();
 		long estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println("성능테스트 결과: " + estimatedTime);
+		System.out.println("달성률 높은 펀딩 성능테스트 결과: " + estimatedTime);
 		return fundingList;
 	}
 

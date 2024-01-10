@@ -56,7 +56,7 @@ function getUserName(user_id){
 
 function getLikeFundingList(user_id){
     $.ajax({
-        url: "./AJAXgetLikeFundingList",
+        url: "/www/user/AJAXgetLikeFundingList",
         method: "GET",
         data: {user_id:user_id},
         success: function(res){

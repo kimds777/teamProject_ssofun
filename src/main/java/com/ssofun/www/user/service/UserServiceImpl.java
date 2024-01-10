@@ -200,7 +200,7 @@ public class UserServiceImpl {
 	    	   map.put("url", reloadUrl);
 	    	   
 	       }else {
-	    	   reloadUrl = "http://localhost:8181/www/funding/fundingMainPage";
+	    	   reloadUrl = "http://localhost:8181/www/funding/main";
 	    	   map.put("user", userDto);
 	    	   map.put("url", reloadUrl);
     	   

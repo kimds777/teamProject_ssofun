@@ -25,7 +25,7 @@ function setEventListener(){
     $(document).on("click","#loginTab>li#user",function(e){
         e.stopPropagation();
 
-        window.location.href = "../../www/user/userLoginPage";
+        window.location.href = "/www/www/user/userLoginPage";
         $("#loginTab>li").removeClass("click");
         $(this).addClass("click");
 
@@ -81,7 +81,7 @@ var popup;
 function loginWithKakao(){
 
     $.ajax({
-        url: "./AJAXkakaoLogin",
+        url: "/www/user/AJAXkakaoLogin",
         method: "GET",
         success: function(res) {
 
@@ -89,7 +89,7 @@ function loginWithKakao(){
             var popupOptions = "width=450,height=500,scrollbars=yes,resizable=no";
 
             // 팝업 창을 띄웁니다. (window.open() 메서드를 호출하여 새로운 창을 엽니다.)
-            popup = window.open("../user/kakaoOauthPage", "KakaoLoginPopup", popupOptions);
+            popup = window.open("/www/user/kakaoOauthPage", "KakaoLoginPopup", popupOptions);
 
             // popup.addressFromParent = res;
 
@@ -108,7 +108,7 @@ function checkKakaoUser(access_token){
     popup.close();
 
     $.ajax({
-        url: "./AJAXcheckKakaoUser",
+        url: "/www/user/AJAXcheckKakaoUser",
         method: "GET",
         data: {access_token:access_token},
         success: function(res){

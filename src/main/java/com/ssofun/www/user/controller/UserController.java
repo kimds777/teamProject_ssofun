@@ -43,11 +43,14 @@ public class UserController {
 //	}
 	
 //	카카오 로그인 영역 -----------------------------------------------------------------------------------------------
+	private long startTime;
+	private long estimatedTime;
 	
 //	카카오 rest_api_key
 	@ResponseBody
 	@RequestMapping("AJAXkakaoLogin")
 	public String AJAXkakaoLogin(){
+		
 		String kakaoApiUrl = userService.getKakaoApiUrl();
 		return kakaoApiUrl;
 	}
@@ -55,12 +58,14 @@ public class UserController {
 //	카카오 로그인 인증
 	@RequestMapping("kakaoOauthPage")
 	public String kakaoOauthPage(@RequestParam(required = false, defaultValue = "") String code) throws Exception{
-
+		startTime = System.currentTimeMillis();
 		if(!code.equals("")) {
 			String access_token = userService.getKakaoAccessToken(code);					
 			System.out.println("access_token: "+access_token);
-			return "redirect:../user/accessTokenPage?access_token="+access_token;
+			return "redirect:/www/user/accessTokenPage?access_token="+access_token;
 		}		
+		
+		
 		return "";
 	}
 	
@@ -74,10 +79,13 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("AJAXcheckKakaoUser")
 	public String AJAXcheckKakaoUser(HttpSession session ,@RequestParam String access_token) throws Exception {		
+		
 		System.out.println(access_token);
 		Map<String, Object> map = userService.checkKakaoUser(access_token);	
 		session.setAttribute("user", (UserDto) map.get("user"));
-		String url = (String) map.get("url");
+		String url = (String) map.get("url");		
+		estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println("카카오 로그인 성능테스트 결과: " + estimatedTime);
 		return url;
 	}
 	
@@ -164,8 +172,10 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("AJAXloginWithEmail")
 	public UserDto AJAXloginWithEmail(HttpSession session ,UserDto params) {	
+		
 		UserDto userDto = userService.loginWithEmail(params);
 		session.setAttribute("user", userDto);
+		
 		
 		return userDto;
 	}
@@ -250,7 +260,11 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("AJAXgetLikeFundingList")
 	public List<FundingDto> AJAXgetLikeFundingList(long user_id){
-		return userService.getLikeFundingList(user_id);
+		long startTime = System.currentTimeMillis();
+		List<FundingDto> fundingList = userService.getLikeFundingList(user_id);
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println("찜한 펀딩 성능테스트 결과: " + estimatedTime);
+		return fundingList;
 	}
 	
 	@ResponseBody

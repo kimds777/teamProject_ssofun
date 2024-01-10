@@ -43,12 +43,12 @@ function setEventListener(){
 
 function logout(){
     $.ajax({
-        url: "../user/AJAXlogout",
+        url: "/www/user/AJAXlogout",
         method: "GET",
         success: function(res){
             if(res == 1){
                 alert("로그아웃 성공!");
-                window.location.href = "http://localhost:8181/www/funding/fundingMainPage";
+                window.location.href = "/www/funding/main";
             }else{
                 alert("이미 로그아웃 되어있습니다.");
             }
