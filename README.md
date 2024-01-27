@@ -16,7 +16,7 @@
 또한 찜 기능을 사용하여 관심있는 펀딩을 저장할 수 있으며, 이는 회원 마이페이지에서 확인이 가능합니다.<br>
 회원은 마이페이지에서 창작자로 전환이 가능하며, 창작자는 진행중인 펀딩 등록 및 진행중인 펀딩 관리가 가능합니다.  
 <br><br>
-## ERD 👉 https://www.erdcloud.com/d/ZnA5stiE3uMS7MMSe
+## ERD 👉 https://www.erdcloud.com/d/PKWS9RjckaTMbHAE9
 <br>
 <p align="center">
   <img width="800px" src="https://github.com/kimds777/teamProject_ssofun/assets/77198242/b3db3fa6-f4ca-4f6f-9a57-c7d3010efc3a">
